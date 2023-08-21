@@ -23,7 +23,7 @@
     "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",
     "fs": "^0.0.1-security",
-    "lottie-ios": "^4.2.0",
+    "lottie-ios": "3.2.3",
     "lottie-react-native": "^6.2.0",
     "os": "^0.1.2",
     "path": "^0.12.7",

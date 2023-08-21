@@ -18,7 +18,6 @@ const LobbyScreen: React.FunctionComponent = () => {
     dispatch(
       AuthActions.handleLoginGoogle({
         device_token: '1234567890',
-     
       }),
     );
   };
