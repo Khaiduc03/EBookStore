@@ -27,7 +27,7 @@ const LobbyScreen: React.FunctionComponent = () => {
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.container}>
         <View style={styles.header}>
-          <LottieView style={styles.headerIMage} source={images.logo} autoPlay/>
+          <LottieView style={styles.headerIMage} source={images.logo} autoPlay loop ={false} />
         </View>
         <View style={styles.body}>
           <View style={styles.viewTitle}>
