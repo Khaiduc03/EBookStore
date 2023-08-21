@@ -4,7 +4,7 @@ import { images } from '../../../assets';
 export default [
   {
     id: 1,
-    img: images.news1,
+    img: images.onboard1,
     title: 'NewsWave: Your Personal English Newsstand',
     description:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',

@@ -15,7 +15,7 @@ const SlideItem:React.FunctionComponent<any> = ({item}) => {
   return (
     <View style={styles.container}>
       {/* <Image source={item.img} resizeMode="contain" style={[styles.image]}  srcSet=''/> */}
-      <LottieView source={item.img} autoPlay speed={2} loop style={[styles.image]} />
+      <LottieView source={item.img} autoPlay  style={[styles.image]} />
       <View style={styles.content}>
         <Text style={styles.title}>{item.title}</Text>
         <Text style={styles.description}>{item.description}</Text>

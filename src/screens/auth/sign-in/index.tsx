@@ -75,7 +75,7 @@ const SignIn: FunctionComponent = () => {
       }),
     );
 
-    // dispatch(LoadingActions.showLoading());
+    
   };
 
   return (
@@ -140,6 +140,7 @@ const SignIn: FunctionComponent = () => {
                 nameIcon="logo-facebook"
                 typeIcon="ionicon"
                 isIonicons
+                colorIcon='#2079FF'
                 onPressButton={() => {
                   showToast();
                 }}

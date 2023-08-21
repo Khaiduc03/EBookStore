@@ -17,7 +17,8 @@ const useStyles = makeStyles(({colors}) => ({
   },
   image: {
     flex: 0.6,
-    width: width * 0.7,
+    width: width *0.9,
+   
   },
   content: {
     flex: 0.4,
