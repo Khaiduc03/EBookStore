@@ -19,11 +19,25 @@ import {format} from 'date-fns';
 import AvatarComponets from '../../../components/customs/Avatar';
 import {Gender} from '../../../types';
 import useStyles from './styles';
+import {useAppDispatch} from '../../../hooks';
+import {AuthActions} from '../../../redux';
 
 const UpdateProfile: FunctionComponent = () => {
   const styles = useStyles();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const dispatch = useAppDispatch();
+
+  const handleUpdateProfile = () => {
+    dispatch(
+      AuthActions.handleUpdateUserProfile({
+        phoneNumber: credentials.phone_number,
+        dob: credentials.dob,
+        fullname: credentials.fullname,
+        gender: credentials.gender,
+      }),
+    );
+  };
 
   const [credentials, setCredentials] = React.useState<{
     fullname: string;
@@ -46,16 +60,13 @@ const UpdateProfile: FunctionComponent = () => {
       setSelectedDate(selected);
       setCredentials({
         ...credentials,
-        dob: format(selected, 'dd/MM/yyyy'), // Định dạng ngày tháng
+        dob: format(selected, 'yyyy-MM-dd'), // Định dạng ngày tháng
       });
     }
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      //  behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
+    <KeyboardAvoidingView style={styles.container}>
       <ScrollView style={styles.container}>
         <TouchableWithoutFeedback
           style={styles.wrapper}
@@ -102,7 +113,7 @@ const UpdateProfile: FunctionComponent = () => {
 
               <Text style={styles.titleInput}>Date of Birth</Text>
               <InputCustom
-                placeholder="dd/MM/yy"
+                placeholder="yy-MM-dd"
                 rightIcon={
                   <Icon
                     type="ionicon"
@@ -155,7 +166,12 @@ const UpdateProfile: FunctionComponent = () => {
               </View>
             </View>
             <View style={styles.bottom}>
-              <BigButton textButton="Sign up" onPressButton={() => {}} />
+              <BigButton
+                textButton="Continue"
+                onPressButton={() => {
+                  handleUpdateProfile();
+                }}
+              />
             </View>
           </View>
         </TouchableWithoutFeedback>

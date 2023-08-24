@@ -12,5 +12,7 @@ export enum routes {
     PROFILE = 'PROFILE',
     BOOKMARK = 'BOOKMARK',
     EXPLORE = 'EXPLORE',
+    
+
 
 }

@@ -26,8 +26,8 @@ const AuthNavigator = () => {
   return (
     <AuthStack.Navigator
       screenOptions={screenOptions}
-      initialRouteName={!isReady ? routes.ONBOARD : routes.LOBBY}
-      //initialRouteName={routes.ONBOARD}
+      initialRouteName={routes.LOBBY}
+      // initialRouteName={routes.}
     >
       {authScreenapp.map(screen => {
         return (
