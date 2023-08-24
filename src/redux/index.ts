@@ -4,6 +4,4 @@ export * from './sagas';
 export * from './services';
 export * from './selectors';
 export * from './types';
-
-
-
+export * from './dto';

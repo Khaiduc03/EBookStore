@@ -2,11 +2,11 @@ import {Avatar, Timestamp, uuid} from '../../types';
 
 export type AppStatus = {
   isReady: boolean;
+  isLoading: boolean;
 };
 
 export type AuthState = {
   enableSignIn: boolean;
- 
   accessToken: string;
   refreshToken: string;
   user: Partial<User>;
@@ -27,7 +27,7 @@ export type RefreshToken = {
 
 export type User = uuid &
   Timestamp & {
-    full_name: string;
+    fullname: string;
     phone_number: string;
     dob: string;
     email: string;
