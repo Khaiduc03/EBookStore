@@ -1,8 +1,9 @@
 import apiService from './api.service';
 
-import { User } from '../types';
-import { Endpoints } from '../../environment';
-import { configFormData } from './config.service';
+import {Endpoints} from '../../environment';
+import {Http} from '../../types';
+import {UpdateProfileDto} from '../dto';
+import {configFormData} from './config.service';
 
 export class UserService {
   static async getUserById(action: string) {
@@ -12,18 +13,23 @@ export class UserService {
     return await apiService.get(`${Endpoints.GET_PROFILE_ENDPOINT}`);
   }
 
-
   static async updateUserAvatar(action: FormData) {
-    console.log(action)
+    console.log(action);
     return await apiService.put(
       `${Endpoints.UPLOAD_USER_AVATAR_ENDPOINT}`,
       action,
-      configFormData
+      configFormData,
     );
   }
-  static async updateUserProfile(action: User) {
-    return await apiService.put(`${Endpoints.UPDATE_USER_PROFILE_ENDPOINT}`, {
-      ...action,
+
+  static async deleteUserAvatar(): Promise<Http> {
+    return await apiService.delete(`${Endpoints.UPLOAD_USER_AVATAR_ENDPOINT}`);
+  }
+
+  static async updateUserProfile(payload: UpdateProfileDto) {
+    console.log(payload)
+    return await apiService.put(`${Endpoints.GET_PROFILE_ENDPOINT}`, {
+      ...payload,
     });
   }
 }
