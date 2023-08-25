@@ -1,10 +1,13 @@
+import {View, Text} from 'react-native';
 import React from 'react';
-import {Text, View} from 'react-native';
-import useStyles from './styles';
 
 const Topics: React.FunctionComponent = () => {
-  const styles = useStyles();
-  return <View style={styles.container}></View>;
+  return (
+    <View>
+      <Text>index</Text>
+      <Text style={{fontFamily: 'Urbanist-Bold'}}>index</Text>
+    </View>
+  );
 };
 
 export default Topics;
