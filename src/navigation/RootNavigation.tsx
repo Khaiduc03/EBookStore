@@ -3,16 +3,16 @@ import React from 'react';
 import {navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
-import { useAppSelector } from '../hooks';
-import { getAuthEnableSignIn } from '../redux/selectors/auth.selector';
+import {useAppSelector} from '../hooks';
+import {getAuthEnableSignIn} from '../redux/selectors/auth.selector';
 
 const RootNavigation = () => {
-
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
-  console.log(enableSignIn)
+  console.log(enableSignIn);
   return (
     <NavigationContainer ref={navigationRef}>
-          {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
+      {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
+      <AppNavigator />
     </NavigationContainer>
   );
 };
