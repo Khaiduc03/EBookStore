@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from 'react';
+import React, {FunctionComponent} from 'react';
 
-import { Input, InputProps as BaseIPProps } from '@rneui/themed';
+import {Input, InputProps as BaseIPProps} from '@rneui/themed';
 import {
   Keyboard,
   TouchableNativeFeedback,
@@ -9,13 +9,12 @@ import {
 } from 'react-native';
 
 import useStyles from './styles';
-import { InputProps } from './types';
-import { EyeOffIcon, EyeOnIcon, LockIcon } from '../../../assets/icons';
-
+import {InputProps} from './types';
+import {EyeOffIcon, EyeOnIcon, LockIcon} from '../../../assets/icons';
 
 const InputCustom: FunctionComponent<
   InputProps & TextInputProps & BaseIPProps
-> = (props) => {
+> = props => {
   const styles = useStyles();
   const [secure, setSecure] = React.useState<boolean>(true);
   const _renderSecure = () => {
@@ -32,7 +31,7 @@ const InputCustom: FunctionComponent<
         secureTextEntry={props.secure && secure}
         inputContainerStyle={[styles.inputContainer, props.style]}
         placeholder={props.placeholder}
-       // leftIcon={(props.secure && <LockIcon />) || props.leftIcon}
+        // leftIcon={(props.secure && <LockIcon />) || props.leftIcon}
         leftIconContainerStyle={[styles.icon, styles.iconLeft]}
         rightIconContainerStyle={styles.icon}
         rightIcon={props.secure && _renderSecure()}
@@ -42,8 +41,7 @@ const InputCustom: FunctionComponent<
         onChangeText={props.onChangeText}
         renderErrorMessage={false}
         placeholderTextColor={styles.placeHolder.color}
-        
-
+        keyboardType={props.keyboardType}
         {...props}
       />
     </TouchableNativeFeedback>

@@ -17,18 +17,18 @@ import {
   useAppSelector,
   usePermission,
 } from '../../../hooks';
+import {AuthActions, getAuthUserProfile} from '../../../redux';
 import {showToastError} from '../../../utils';
 import ModalWrapContent from '../ModalWrapContent';
 import useStyles from './styles';
 import {AvatarProps} from './type';
-import {AuthActions, getAuthUserProfile} from '../../../redux';
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
 const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
   const styles = useStyles();
-
   const user = useAppSelector(getAuthUserProfile);
+
   const dispatch = useAppDispatch();
 
   const [isZoomed, setIsZoomed] = useState(false);
@@ -78,9 +78,6 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
   const [isShow, setIsShow] = useState<boolean>(false);
   const toggleShow = () => setIsShow(!isShow);
   //image picker
-  const [captureImage, setCaptureImage] = React.useState<ImagePicker.Asset[]>([
-    {},
-  ]);
 
   const optionsCamera: ImagePicker.CameraOptions = {
     quality: 1,
@@ -114,8 +111,13 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
         } else if (result.errorMessage) {
           showToastError('Có lỗi xảy ra khi mở camera');
         } else if (result.assets) {
-          setCaptureImage(result.assets);
-          await handleUploadImage();
+          const formdata = new FormData();
+          formdata.append('image', {
+            uri: result.assets[0].uri,
+            name: result.assets[0].fileName,
+            type: result.assets[0].type,
+          });
+          await handleUploadImage(formdata);
         }
       }
     });
@@ -140,111 +142,104 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
         } else if (result.errorMessage) {
           showToastError('Something wrong!!');
         } else if (result.assets) {
-          setCaptureImage(result.assets);
-          await handleUploadImage();
+          const formdata = new FormData();
+          formdata.append('image', {
+            uri: result.assets[0].uri,
+            name: result.assets[0].fileName,
+            type: result.assets[0].type,
+          });
+          await handleUploadImage(formdata);
         }
       }
     });
     setIsShow(false);
   };
 
-  const formdata = new FormData();
-  // React.useEffect(() => {
-  //   formdata.append('image', {
-  //     uri: captureImage[0].uri,
-  //     name: captureImage[0].fileName,
-  //     type: captureImage[0].type,
-  //   });
-  // }, [captureImage]);
-
-  const handleUploadImage = async () => {
-    // if (captureImage[0]?.uri) {
-    //   dispatch(AuthActions.handleUpdateAvatar(formdata));
-    // }
-    // React.useEffect(() => {
-    //   formdata.append('file', {
-    //     uri: captureImage[0].uri,
-    //     name: captureImage[0].fileName,
-    //     type: captureImage[0].type,
-    //   });
-    // }, [captureImage]);
-    formdata.append('file', {
-      uri: captureImage[0].uri,
-      name: captureImage[0].fileName,
-      type: captureImage[0].type,
-    });
-
-    if (captureImage[0]?.uri) {
-      dispatch(AuthActions.handleUpdateAvatar(formdata));
-    }
+  const handleUploadImage = async (formdata: any) => {
+    dispatch(AuthActions.handleUpdateAvatar(formdata));
   };
 
-  // if isShow = false => not show anything
+  const handleDeleteImage = async () => {
+    setIsShow(false);
+    dispatch(AuthActions.handleDeleteAvatar());
+  };
+
   if (!isZoomed) {
     return (
       <View style={styles.container}>
-        <View>
-          <TouchableOpacity onPress={toggleZoom}>
-            <Avatar
-              size={70}
-              rounded
-              source={{
-                uri:
-                  user.avatar?.url ||
-                  'https://res.cloudinary.com/dohynhgvm/image/upload/f_auto,q_auto/cld-sample',
-              }}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={toggleShow}>
-            <Avatar
-              size={24}
-              rounded
-              icon={{name: 'pencil', type: 'font-awesome'}}
-              containerStyle={styles.pencilStyle}
-            />
-            {isShow && (
-              <ModalWrapContent
-                isVisible={isShow}
-                onBackdropPress={() => setIsShow(false)}
-                contentStyle={styles.contentStyle}>
-                <TouchableOpacity
-                  style={styles.modalItem}
-                  onPress={() => showCamera()}>
-                  <Icon
-                    type="ionicon"
-                    name={'camera-outline'}
-                    color={'black'}
-                    size={28}
-                    containerStyle={styles.iconStyle}
-                  />
-                  <Text style={styles.textStyle}>Take a photo</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.modalItem}
-                  onPress={() => showGallery()}>
-                  <Icon
-                    type="ionicon"
-                    name={'images-outline'}
-                    color={'black'}
-                    size={28}
-                    containerStyle={styles.iconStyle}
-                  />
-                  <Text style={styles.textStyle}>Select a photo</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.modalItem}>
-                  <Icon
-                    type="ionicon"
-                    name={'trash-outline'}
-                    color={'black'}
-                    size={28}
-                    containerStyle={styles.iconStyle}
-                  />
-                  <Text style={styles.textStyle}>Remove photo</Text>
-                </TouchableOpacity>
-              </ModalWrapContent>
-            )}
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={toggleShow}>
+          <Avatar
+            size={70}
+            rounded
+            source={{
+              uri:
+                user.avatar?.url ||
+                'https://res.cloudinary.com/dohynhgvm/image/upload/f_auto,q_auto/cld-sample',
+            }}
+          />
+
+          <Avatar
+            size={24}
+            rounded
+            icon={{name: 'pencil', type: 'font-awesome'}}
+            containerStyle={styles.pencilStyle}
+          />
+          {isShow && (
+            <ModalWrapContent
+              isVisible={isShow}
+              onBackdropPress={() => setIsShow(false)}
+              contentStyle={styles.contentStyle}>
+              <TouchableOpacity
+                style={styles.modalItem}
+                onPress={() => toggleZoom()}>
+                <Icon
+                  type="ionicon"
+                  name={'person-circle-outline'}
+                  color={'black'}
+                  size={28}
+                  containerStyle={styles.iconStyle}
+                />
+                <Text style={styles.textStyle}>See your images</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.modalItem}
+                onPress={() => showCamera()}>
+                <Icon
+                  type="ionicon"
+                  name={'camera-outline'}
+                  color={'black'}
+                  size={28}
+                  containerStyle={styles.iconStyle}
+                />
+                <Text style={styles.textStyle}>Take a photo</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.modalItem}
+                onPress={() => showGallery()}>
+                <Icon
+                  type="ionicon"
+                  name={'images-outline'}
+                  color={'black'}
+                  size={28}
+                  containerStyle={styles.iconStyle}
+                />
+                <Text style={styles.textStyle}>Select a photo</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.modalItem}
+                onPress={handleDeleteImage}>
+                <Icon
+                  type="ionicon"
+                  name={'trash-outline'}
+                  color={'black'}
+                  size={28}
+                  containerStyle={styles.iconStyle}
+                />
+                <Text style={styles.textStyle}>Remove photo</Text>
+              </TouchableOpacity>
+            </ModalWrapContent>
+          )}
+        </TouchableOpacity>
       </View>
     );
   }
