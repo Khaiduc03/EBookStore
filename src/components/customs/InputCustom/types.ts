@@ -1,10 +1,17 @@
-import { ReactElement } from 'react';
-import { ViewProps } from 'react-native';
+import {ReactElement} from 'react';
+import {ViewProps} from 'react-native';
 
 export type InputProps = {
   placeholder?: string;
   leftIcon?: ReactElement;
-  rightIcon?: ReactElement ;
+  rightIcon?: ReactElement;
   secure?: boolean;
   style?: ViewProps['style'];
+  keyboardType?:
+    | 'default'
+    | 'number-pad'
+    | 'decimal-pad'
+    | 'numeric'
+    | 'email-address'
+    | 'phone-pad';
 };

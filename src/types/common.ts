@@ -60,8 +60,8 @@ export enum Role {
 }
 
 export enum Gender {
-  FAMALE = 'FAMALE',
-  MALE = 'MALE',
+  FAMALE = 'famale',
+  MALE = 'male',
 }
 
 export type Onboard = {
@@ -75,4 +75,18 @@ interface Action {
   title: string;
   type: 'capture' | 'library';
   options: ImagePicker.CameraOptions | ImagePicker.ImageLibraryOptions;
+}
+interface PayloadHttp {
+  code: number;
+  message: string;
+  data?: any | undefined;
+}
+
+export class Http {
+  code: number;
+  message: string;
+  constructor({code, message}: PayloadHttp) {
+    this.code = code;
+    this.message = message;
+  }
 }

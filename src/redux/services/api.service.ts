@@ -33,7 +33,7 @@ apiService.interceptors.response.use(
     return response;
   },
   async error => {
-    showToastError(`Please check your connection  ${error.request.responseURL}`);
+
     const originalRequest = error.config;
     const refreshToken = store.getState().auth.refreshToken;
 
