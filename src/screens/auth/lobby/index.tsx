@@ -26,7 +26,7 @@ const LobbyScreen: React.FunctionComponent = () => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.container}>
-        <Headers rightIcon={true}  leftIcon title='khai'/>
+      
         <View style={styles.header}>
           <LottieView
             style={styles.headerIMage}

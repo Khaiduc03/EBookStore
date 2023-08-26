@@ -1,7 +1,5 @@
-import {View, Text} from 'react-native';
 import React from 'react';
-import {fontFamilySetup} from '../../../../../utils/font';
-import styles from './styles';
+import { Text, View } from 'react-native';
 
 const Topics: React.FunctionComponent = () => {
   return (
