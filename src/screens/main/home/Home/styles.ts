@@ -1,6 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {fontFamilySetup} from '../../../../utils/font';
-import {makeStyles} from '@rneui/themed';
+
+import { makeStyles } from '@rneui/themed';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
