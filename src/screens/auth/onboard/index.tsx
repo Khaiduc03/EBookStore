@@ -20,7 +20,7 @@ const Slider = () => {
   const styles = useStyles();
 
   const handleReady = () => {
-    dispatch(AppActions.handleReady(true));
+    dispatch(AppActions.handleReady());
     NavigationService.navigate(routes.LOBBY);
   };
   const handleNextButton = () => {
@@ -84,8 +84,7 @@ const Slider = () => {
           <BigButton textButton="Next" onPressButton={handleNextButton} />
         </View>
         {index > 0 && (
-          <View
-            style={styles.backButton}>
+          <View style={styles.backButton}>
             <TouchableOpacity onPress={handlebackButton}>
               <Text>Back</Text>
             </TouchableOpacity>

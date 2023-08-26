@@ -11,8 +11,7 @@ const RootNavigation = () => {
   console.log(enableSignIn);
   return (
     <NavigationContainer ref={navigationRef}>
-      {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      <AppNavigator />
+      {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 };
