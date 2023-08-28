@@ -8,6 +8,7 @@ export enum routes {
 
   BOTTOM_TAB = 'BOTTOM_TAB',
   HOME = 'HOME',
+
   TOPICS = 'TOPICS',
 
   PROFILE = 'PROFILE',

@@ -9,9 +9,8 @@ export const theme = createTheme({
     grey4: '#727272',
     divider: '#e3f3ff',
     grey1: '#F5F5F5',
-    black:'#000',
-    grey0:'#FFFFFF',
-    
+    black: '#000',
+    grey0: '#FFFFFF',
   },
   darkColors: {
     primary: '#F89300',
@@ -21,14 +20,8 @@ export const theme = createTheme({
     grey4: '#f1f1f4',
     divider: '#e3f3ff',
     grey1: '#1f222a',
-    black:'#E4E6EB',
-    grey0:'#FFFFFF'
+    black: '#E4E6EB',
+    grey0: '#FFFFFF',
   },
   mode: 'light',
-  components:{
-    
-  }
- 
-  
-   
 });

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import {Text, View} from 'react-native';
+import useStyles from './styles';
 
 const Topics: React.FunctionComponent = () => {
+  const styles = useStyles();
   return (
-    <View>
-      <Text style={{fontSize: 16}}>index</Text>
-      <Text style={{fontSize: 16, fontFamily: 'Urbanist-Bold'}}>index2</Text>
+    <View style={styles.container}>
+      <Text style={styles.text}>Topic</Text>
     </View>
   );
 };
