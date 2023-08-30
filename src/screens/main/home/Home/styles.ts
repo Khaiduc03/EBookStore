@@ -6,6 +6,20 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    ic_book: {
+        width:24,
+        height:24,
+    },
+
+    view_ic: {
+
+    },
+    ic_search: {
+
+    },
+    ic_notification: {
+
+    },
 });
 
 export default styles;

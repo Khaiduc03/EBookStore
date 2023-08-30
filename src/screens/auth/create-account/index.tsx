@@ -1,28 +1,16 @@
-import React, {FunctionComponent} from 'react';
+import React, { FunctionComponent } from 'react';
 
-import {Text} from '@rneui/base';
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-
-import {CheckBox} from '@rneui/themed';
-import {AuthHeader, BigButton, InputCustom} from '../../../components';
+import { Text } from '@rneui/base';
+import {Keyboard,KeyboardAvoidingView,TouchableWithoutFeedback,View} from 'react-native';
+import { CheckBox } from '@rneui/themed';
+import { AuthHeader, BigButton, InputCustom } from '../../../components';
 import Header from '../../../components/customs/Headers';
-import {routes} from '../../../constants';
-import {NavigationService} from '../../../navigation';
-import {
-  comparePassword,
-  isValidEmail,
-  isValidPassword,
-  showToastError,
-} from '../../../utils';
+import { routes } from '../../../constants';
+import { NavigationService } from '../../../navigation';
+import {comparePassword,isValidEmail,isValidPassword,showToastError,} from '../../../utils';
 import useStyles from './styles';
-
-import {useAppDispatch} from '../../../hooks';
-import {AuthActions} from '../../../redux/reducer';
+import { useAppDispatch } from '../../../hooks';
+import { AuthActions } from '../../../redux/reducer';
 
 const CreateAccount: FunctionComponent = () => {
   const styles = useStyles();
@@ -122,7 +110,7 @@ const CreateAccount: FunctionComponent = () => {
                 placeholder="Enter your email"
                 value={credentials.email}
                 onChangeText={text =>
-                  setCredentials({...credentials, email: text})
+                  setCredentials({ ...credentials, email: text })
                 }
                 style={inputErrors.email ? styles.errorInput : null}
               />
@@ -132,7 +120,7 @@ const CreateAccount: FunctionComponent = () => {
                 secure={true}
                 value={credentials.password}
                 onChangeText={text =>
-                  setCredentials({...credentials, password: text})
+                  setCredentials({ ...credentials, password: text })
                 }
                 style={inputErrors.password ? styles.errorInput : null}
               />
@@ -142,7 +130,7 @@ const CreateAccount: FunctionComponent = () => {
                 secure={true}
                 value={credentials.comfirmPassword}
                 onChangeText={text =>
-                  setCredentials({...credentials, comfirmPassword: text})
+                  setCredentials({ ...credentials, comfirmPassword: text })
                 }
               />
               <View style={styles.checkbox}>

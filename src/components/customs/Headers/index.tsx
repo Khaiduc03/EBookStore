@@ -1,12 +1,15 @@
 import React from 'react';
 
-import {TouchableOpacity, View} from 'react-native';
+import { TouchableOpacity, View, Text, Image } from 'react-native';
 
-import {Icon} from '@rneui/themed';
+import { Icon } from '@rneui/themed';
 import useStyles from './styles';
-import {HeaderProps} from './types';
+import { HeaderProps } from './types';
 
-import {CaseIcon} from '../../../assets/icons';
+import { CaseIcon } from '../../../assets/icons';
+//import { Image } from 'react-native-svg';
+import { images } from '../../../assets/images/png';
+
 // import StyledText from '../StyledText';
 
 const Header: React.FunctionComponent<HeaderProps> = props => {
@@ -18,6 +21,11 @@ const Header: React.FunctionComponent<HeaderProps> = props => {
     style,
     logo,
     iconColor,
+    menu,
+    title,
+    istitle,
+    logobook,
+    ic_Add,
   } = props;
   const styles = useStyles();
   const leftPress = () => {
@@ -45,9 +53,21 @@ const Header: React.FunctionComponent<HeaderProps> = props => {
         </TouchableOpacity>
       )}
 
-      <View style={styles.caseIcon}>
-        {logo && <CaseIcon colors={props.iconColor}  />}
-      </View>
+
+      {logo && <View style={styles.caseIcon}>
+        <CaseIcon colors={props.iconColor} />
+      </View>}
+      {istitle && <View style={styles.NameProfile}>
+        <Text style={styles.Title}>{title}</Text>
+      </View>}
+      {menu && <TouchableOpacity style={styles.iconRight}>
+        <Image source={images.ic_Menu} />
+      </TouchableOpacity>}
+      {ic_Add && <TouchableOpacity style={styles.iconRight}>
+        <Image source={images.ic_Add} />
+      </TouchableOpacity>}
+
+
 
       {rightIcon && (
         <TouchableOpacity onPress={rightPress} style={styles.iconRight}>

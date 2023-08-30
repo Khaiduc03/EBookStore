@@ -1,20 +1,20 @@
 /* eslint-disable import/order */
-import {PayloadAction} from '@reduxjs/toolkit';
-import {ToastAndroid} from 'react-native';
-import {call, put, takeLatest} from 'redux-saga/effects';
-import {AuthActions} from '../reducer';
-import {AuthService, UserService} from '../services';
-import {LoginPayload} from '../types';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { ToastAndroid } from 'react-native';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { AuthActions } from '../reducer';
+import { AuthService, UserService } from '../services';
+import { LoginPayload } from '../types';
 
-import {routes} from '../../constants';
-import {NavigationService} from '../../navigation';
-import {showToastError, showToastSuccess} from '../../utils';
-import {GoogleService} from '../../utils/google';
+import { routes } from '../../constants';
+import { NavigationService } from '../../navigation';
+import { showToastError, showToastSuccess } from '../../utils';
+import { GoogleService } from '../../utils/google';
 
 //login
 function* loginSaga(action: PayloadAction<LoginPayload>): Generator {
   try {
-    const {data}: any = yield call(AuthService.handleLogin, action.payload);
+    const { data }: any = yield call(AuthService.handleLogin, action.payload);
 
     if (data.code === 200) {
       yield put(
@@ -55,9 +55,9 @@ function* loginGoogleSaga(
     yield GoogleService.logout();
     const checkLogin = yield GoogleService.checkSignIn();
     if (!checkLogin) {
-      const {idToken}: any = yield GoogleService.login();
+      const { idToken }: any = yield GoogleService.login();
       console.log(idToken)
-      const {data}: any = yield call(AuthService.hanleGGLogin, {
+      const { data }: any = yield call(AuthService.hanleGGLogin, {
         device_token: action.payload.device_token,
         idToken,
       });
@@ -85,7 +85,7 @@ function* createAccountSaga(
   action: PayloadAction<Omit<LoginPayload, 'idToken' | 'device_token'>>,
 ): Generator {
   try {
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       AuthService.handleCreateAccount,
       action.payload,
     );
@@ -111,7 +111,7 @@ function* createAccountSaga(
 //get profile user
 function* getProfileUserSaga(): Generator {
   try {
-    const {data}: any = yield call(UserService.getUserProfile);
+    const { data }: any = yield call(UserService.getUserProfile);
     if (data.code === 200) {
       yield put(
         AuthActions.getUserInfoSuccess({
@@ -129,11 +129,11 @@ function* getProfileUserSaga(): Generator {
 //update avatar user
 function* updateAvatarUser(action: PayloadAction<FormData>): Generator {
   try {
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       UserService.updateUserAvatar,
       action.payload,
     );
-    
+
     if (data.code === 200) {
       yield put(
         AuthActions.getUserInfoSuccess({

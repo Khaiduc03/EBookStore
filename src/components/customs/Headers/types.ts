@@ -1,6 +1,6 @@
-import {ReactElement} from 'react';
+import { ReactElement } from 'react';
 
-import {TextStyle, ViewProps} from 'react-native';
+import { TextStyle, ViewProps } from 'react-native';
 
 export type HeaderProps = {
   title?: string;
@@ -11,5 +11,9 @@ export type HeaderProps = {
   style?: ViewProps['style'];
   titleStyle?: TextStyle;
   logo?: boolean;
-  iconColor?: string[]
+  iconColor?: string[],
+  menu?: boolean,
+  istitle?: boolean,
+  logobook?: boolean,
+  ic_Add?: boolean,
 };

@@ -1,14 +1,17 @@
-import {View} from 'react-native';
-import {Button, Text} from '@rneui/base';
+import { View } from 'react-native';
+import { Button, Text, Image } from '@rneui/base';
 
-import React, {FunctionComponent} from 'react';
+import React, { FunctionComponent } from 'react';
 
 import styles from './styles';
+import { images } from '../../../../assets/images/png/index';
 
 const Home: FunctionComponent = () => {
   return (
     <View style={styles.container}>
-      <Text>HI</Text>
+      
+    <Text>Comic Verse</Text>
+
     </View>
   );
 };

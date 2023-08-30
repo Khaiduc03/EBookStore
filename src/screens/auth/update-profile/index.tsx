@@ -1,8 +1,8 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, { FunctionComponent, useState } from 'react';
 
 import DatePicker from '@react-native-community/datetimepicker';
-import {Text} from '@rneui/base';
-import {CheckBox, Icon} from '@rneui/themed';
+import { Text } from '@rneui/base';
+import { CheckBox, Icon } from '@rneui/themed';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -10,14 +10,14 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {AuthHeader, BigButton, InputCustom} from '../../../components';
+import { AuthHeader, BigButton, InputCustom } from '../../../components';
 import Header from '../../../components/customs/Headers';
-import {routes} from '../../../constants';
-import {NavigationService} from '../../../navigation';
+import { routes } from '../../../constants';
+import { NavigationService } from '../../../navigation';
 
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 import AvatarComponets from '../../../components/customs/Avatar';
-import {Gender} from '../../../types';
+import { Gender } from '../../../types';
 import useStyles from './styles';
 
 const UpdateProfile: FunctionComponent = () => {
@@ -54,14 +54,14 @@ const UpdateProfile: FunctionComponent = () => {
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      //  behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    //  behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView style={styles.container}>
         <TouchableWithoutFeedback
           style={styles.wrapper}
           onPress={() => Keyboard.dismiss()}>
           <View style={styles.body}>
-            <Header
+            <Header logo
               leftIcon={true}
               onPressLeftIcon={() => {
                 Keyboard.dismiss();
@@ -88,7 +88,7 @@ const UpdateProfile: FunctionComponent = () => {
                 placeholder="Enter your full name"
                 value={credentials.fullname}
                 onChangeText={text =>
-                  setCredentials({...credentials, fullname: text})
+                  setCredentials({ ...credentials, fullname: text })
                 }
               />
               <Text style={styles.titleInput}>Phone number</Text>
@@ -96,7 +96,7 @@ const UpdateProfile: FunctionComponent = () => {
                 placeholder="Enter your phone number"
                 value={credentials.phone_number}
                 onChangeText={text =>
-                  setCredentials({...credentials, phone_number: text})
+                  setCredentials({ ...credentials, phone_number: text })
                 }
               />
 
@@ -116,7 +116,7 @@ const UpdateProfile: FunctionComponent = () => {
                 }
                 value={credentials.dob}
                 onChangeText={text =>
-                  setCredentials({...credentials, dob: text})
+                  setCredentials({ ...credentials, dob: text })
                 }
               />
               {showDatePicker && (
@@ -134,7 +134,7 @@ const UpdateProfile: FunctionComponent = () => {
                   <CheckBox
                     checked={credentials.gender === Gender.MALE}
                     onPress={() =>
-                      setCredentials({...credentials, gender: Gender.MALE})
+                      setCredentials({ ...credentials, gender: Gender.MALE })
                     }
                     checkedIcon="dot-circle-o"
                     uncheckedIcon="circle-o"
@@ -145,7 +145,7 @@ const UpdateProfile: FunctionComponent = () => {
                   <CheckBox
                     checked={credentials.gender === Gender.FAMALE}
                     onPress={() =>
-                      setCredentials({...credentials, gender: Gender.FAMALE})
+                      setCredentials({ ...credentials, gender: Gender.FAMALE })
                     }
                     checkedIcon="dot-circle-o"
                     uncheckedIcon="circle-o"
@@ -155,7 +155,7 @@ const UpdateProfile: FunctionComponent = () => {
               </View>
             </View>
             <View style={styles.bottom}>
-              <BigButton textButton="Sign up" onPressButton={() => {}} />
+              <BigButton textButton="Sign up" onPressButton={() => { }} />
             </View>
           </View>
         </TouchableWithoutFeedback>
