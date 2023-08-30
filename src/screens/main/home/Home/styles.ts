@@ -7,14 +7,6 @@ const useStyles = makeStyles(({colors}) => ({
     flex: 1,
     backgroundColor: colors.background,
   },
-  text: {
-    fontSize: 26,
-    fontFamily: fontFamilySetup.bold,
-    color: colors.divider,
-  },
-  textTopics: {
-    color: colors.black,
-  },
 }));
 
 export default useStyles;

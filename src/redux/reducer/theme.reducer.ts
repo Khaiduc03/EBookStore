@@ -1,6 +1,7 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 
 import {ThemeMode, Redux} from '../types';
+
 const initialState: ThemeMode = {
   mode: 'light',
 };

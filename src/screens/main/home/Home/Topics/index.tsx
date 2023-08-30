@@ -4,11 +4,7 @@ import useStyles from './styles';
 
 const Topics: React.FunctionComponent = () => {
   const styles = useStyles();
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Topic</Text>
-    </View>
-  );
+  return <View style={styles.container}></View>;
 };
 
 export default Topics;
