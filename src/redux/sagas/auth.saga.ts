@@ -1,12 +1,12 @@
-import { PayloadAction } from '@reduxjs/toolkit';
-import { call, put, takeLatest } from 'redux-saga/effects';
-import { routes } from '../../constants';
-import { NavigationService } from '../../navigation';
-import { showToastError, showToastSuccess } from '../../utils';
-import { GoogleService } from '../../utils/google';
-import { AppActions, AuthActions } from '../reducer';
-import { AuthService, UserService } from '../services';
-import { LoginPayload } from '../types';
+import {PayloadAction} from '@reduxjs/toolkit';
+import {call, put, takeLatest} from 'redux-saga/effects';
+import {routes} from '../../constants';
+import {NavigationService} from '../../navigation';
+import {showToastError, showToastSuccess} from '../../utils';
+import {GoogleService} from '../../utils/google';
+import {AppActions, AuthActions} from '../reducer';
+import {AuthService, UserService} from '../services';
+import {LoginPayload} from '../types';
 
 //login
 function* loginSaga(action: PayloadAction<LoginPayload>): Generator {
@@ -68,16 +68,19 @@ function* loginGoogleSaga(
             enableSignIn: true,
           }),
         );
+      //  yield call(getProfileUserSaga);
         showToastSuccess(data.message);
       } else if (data.code === 400) {
-        showToastError(data.message);
+        showToastError(
+          'This service is not available at this time, please try again later!!',
+        );
       } else {
         showToastError('Pless check your connection');
         yield call(cleanUser);
       }
     }
   } catch (error: any) {
-    console.log(error.message);
+    console.log('Have error at login google saga: ' + error.message);
   } finally {
     yield put(AppActions.handleHideLoading());
   }

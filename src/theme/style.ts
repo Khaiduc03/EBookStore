@@ -1,4 +1,8 @@
 import {createTheme} from '@rneui/themed';
+import {useAppSelector} from '../hooks';
+import {getMode} from '../redux/selectors/thems.selector';
+
+const mode = useAppSelector(getMode);
 
 export const theme = createTheme({
   lightColors: {
@@ -12,6 +16,7 @@ export const theme = createTheme({
     black: '#212121',
     grey0: '#FFFFFF',
     grey2: '#90939B',
+    white: '#FFFFFF',
   },
   darkColors: {
     primary: '#F89300',
@@ -22,8 +27,10 @@ export const theme = createTheme({
     divider: '#e3f3ff',
     grey1: '#1f222a',
     black: '#FAFAFA',
-    grey0: '#FFFFFF',
+    grey0: '#181A20',
     grey2: '#90939B',
+    white: '#FFFFFF',
+    background: '#181A20',
   },
-  mode: 'light',
+  mode: mode,
 });

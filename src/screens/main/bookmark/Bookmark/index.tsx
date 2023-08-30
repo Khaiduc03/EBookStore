@@ -12,7 +12,7 @@ const Bookmark: FunctionComponent = () => {
   const styles = useStyles();
   const dispatch = useAppDispatch();
   const mode = useAppSelector(getMode);
-  console.log('mode:', mode);
+ 
 
   const handleTheme = () => {
     if (mode === 'dark') {

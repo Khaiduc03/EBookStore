@@ -47,7 +47,7 @@ const LobbyScreen: React.FunctionComponent = () => {
             Newsly is a social network that allows you to connect with friends
           </Text>
           <View style={styles.bottom}>
-            <TouchableOpacity style={styles.button} onPress={handleGoogle}>
+            <TouchableOpacity style={[styles.button,styles.backgroundColorsWhite]} onPress={handleGoogle}>
               <GoogleIcon />
               <Text style={styles.buttonText}> Continue with Google</Text>
             </TouchableOpacity>
