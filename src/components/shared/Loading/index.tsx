@@ -15,8 +15,8 @@ import LottieView from 'lottie-react-native';
 import {useAppSelector} from '../../../hooks';
 
 import useStyles from './styles';
-import { getAppIsLoading } from '../../../redux/selectors/app.selector';
-import { jsonFiles } from '../../../assets/json';
+import {getAppIsLoading} from '../../../redux/selectors/app.selector';
+import {JsonImages} from '../../../assets/json';
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
@@ -62,7 +62,7 @@ const Loading: FunctionComponent = () => {
       <AnimatedView style={[styles.container, containerStyle]}>
         <LottieView
           style={styles.lottieView}
-          source={jsonFiles.loading}
+          source={JsonImages.loading}
           autoPlay
           loop
         />

@@ -25,7 +25,7 @@ import {AuthActions} from '../../../redux/reducer';
 import useStyles from './styles';
 import {Toast} from 'react-native-toast-message/lib/src/Toast';
 import {AlertActions} from '../../../redux/reducer/alert.reducer';
-import {images} from '../../../assets';
+import {JsonImages} from '../../../assets';
 
 const SignIn: FunctionComponent = () => {
   const styles = useStyles();
@@ -65,7 +65,7 @@ const SignIn: FunctionComponent = () => {
       AlertActions.setDataAlert({
         title: 'LOGIN SUCCESS',
         description: 'Are you sure you want to logout? ',
-        imageTitle: images.cat,
+        imageTitle: JsonImages.cat,
         isAccept: true,
         isCancel: true,
 
@@ -74,16 +74,13 @@ const SignIn: FunctionComponent = () => {
         },
       }),
     );
-
-    
   };
 
   return (
     <KeyboardAvoidingView
       style={styles.wrapper}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -250}
-      >
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -250}>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.body}>
           <Header
@@ -140,7 +137,7 @@ const SignIn: FunctionComponent = () => {
                 nameIcon="logo-facebook"
                 typeIcon="ionicon"
                 isIonicons
-                colorIcon='#2079FF'
+                colorIcon="#2079FF"
                 onPressButton={() => {
                   showToast();
                 }}
