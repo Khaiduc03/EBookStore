@@ -1,9 +1,9 @@
-import {combineReducers, configureStore} from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import EncryptedStorage from 'react-native-encrypted-storage';
-import {PersistConfig, persistStore} from 'redux-persist';
+import { PersistConfig, persistStore } from 'redux-persist';
 import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
-import {Redux} from '../types/redux.type';
-import {AppReducer, AuthReducer, LoadingReducer} from '../reducer';
+import { Redux } from '../types/redux.type';
+import { AppReducer, AuthReducer, LoadingReducer } from '../reducer';
 import persistReducer from 'redux-persist/es/persistReducer';
 import createSagaMiddleware from 'redux-saga';
 import RootSaga from '../sagas';

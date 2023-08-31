@@ -1,14 +1,14 @@
-import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {AlertState} from '../types/alert.type';
-import {Redux} from '../types';
-import {images} from '../../assets';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { AlertState } from '../types/alert.type';
+import { Redux } from '../types';
+import { images } from '../../assets';
 
 const initialState: AlertState = {
   isShow: false,
   title: 'Notification',
   description: 'Can you accept this message?',
-  onAccept: () => {},
-  onCancel: () => {},
+  onAccept: () => { },
+  onCancel: () => { },
   imageTitle: images.success,
   isAccept: false,
   isCancel: false,
@@ -31,15 +31,15 @@ const reducer = createSlice({
       (state.description =
         action.payload.description ||
         'Please insert description for this alert !!! 😡️'),
-        (state.onAccept = action.payload.onAccept || (() => {}));
-      state.onCancel = action.payload.onCancel || (() => {});
+        (state.onAccept = action.payload.onAccept || (() => { }));
+      state.onCancel = action.payload.onCancel || (() => { });
     },
     cleanDataAlert: (state: AlertState) => {
       state.isShow = false;
       state.title = '';
       state.description = '';
-      state.onAccept = () => {};
-      state.onCancel = () => {};
+      state.onAccept = () => { };
+      state.onCancel = () => { };
       state.imageTitle = undefined;
       state.isAccept = false;
       state.isCancel = false;

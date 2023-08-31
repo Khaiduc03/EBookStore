@@ -1,8 +1,8 @@
-import {Avatar, Icon, Text} from '@rneui/themed';
-import React, {useEffect, useState} from 'react';
-import {Platform, TouchableOpacity, View} from 'react-native';
+import { Avatar, Icon, Text } from '@rneui/themed';
+import React, { useEffect, useState } from 'react';
+import { Platform, TouchableOpacity, View } from 'react-native';
 import * as ImagePicker from 'react-native-image-picker';
-import {PERMISSIONS, RESULTS, request} from 'react-native-permissions';
+import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -17,11 +17,11 @@ import {
   useAppSelector,
   usePermission,
 } from '../../../hooks';
-import {showToastError} from '../../../utils';
+import { showToastError } from '../../../utils';
 import ModalWrapContent from '../ModalWrapContent';
 import useStyles from './styles';
-import {AvatarProps} from './type';
-import {AuthActions, getAuthUserProfile} from '../../../redux';
+import { AvatarProps } from './type';
+import { AuthActions, getAuthUserProfile } from '../../../redux';
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
@@ -70,7 +70,7 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
     );
 
     return {
-      transform: [{scale: scale}],
+      transform: [{ scale: scale }],
     };
   }, []);
 
@@ -199,7 +199,7 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
             <Avatar
               size={24}
               rounded
-              icon={{name: 'pencil', type: 'font-awesome'}}
+              icon={{ name: 'pencil', type: 'font-awesome' }}
               containerStyle={styles.pencilStyle}
             />
             {isShow && (

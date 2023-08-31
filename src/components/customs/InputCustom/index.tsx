@@ -32,7 +32,7 @@ const InputCustom: FunctionComponent<
         secureTextEntry={props.secure && secure}
         inputContainerStyle={[styles.inputContainer, props.style]}
         placeholder={props.placeholder}
-       // leftIcon={(props.secure && <LockIcon />) || props.leftIcon}
+        // leftIcon={(props.secure && <LockIcon />) || props.leftIcon}
         leftIconContainerStyle={[styles.icon, styles.iconLeft]}
         rightIconContainerStyle={styles.icon}
         rightIcon={props.secure && _renderSecure()}
@@ -42,7 +42,7 @@ const InputCustom: FunctionComponent<
         onChangeText={props.onChangeText}
         renderErrorMessage={false}
         placeholderTextColor={styles.placeHolder.color}
-        
+
 
         {...props}
       />

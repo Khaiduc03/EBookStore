@@ -1,8 +1,8 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, { FunctionComponent, useState } from 'react';
 
 import DatePicker from '@react-native-community/datetimepicker';
-import {Text} from '@rneui/base';
-import {CheckBox, Icon} from '@rneui/themed';
+import { Text } from '@rneui/base';
+import { CheckBox, Icon } from '@rneui/themed';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -10,14 +10,14 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {AuthHeader, BigButton, InputCustom} from '../../../components';
+import { AuthHeader, BigButton, InputCustom } from '../../../components';
 import Header from '../../../components/customs/Headers';
-import {routes} from '../../../constants';
-import {NavigationService} from '../../../navigation';
+import { routes } from '../../../constants';
+import { NavigationService } from '../../../navigation';
 
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 import AvatarComponets from '../../../components/customs/Avatar';
-import {Gender} from '../../../types';
+import { Gender } from '../../../types';
 import useStyles from './styles';
 
 const UpdateProfile: FunctionComponent = () => {
@@ -27,11 +27,13 @@ const UpdateProfile: FunctionComponent = () => {
 
   const [credentials, setCredentials] = React.useState<{
     fullname: string;
+    email: string;
     phone_number: string;
     dob: string;
     gender: Gender;
   }>({
     fullname: '',
+    email: '',
     phone_number: '',
     dob: '',
     gender: Gender.MALE,
@@ -50,11 +52,16 @@ const UpdateProfile: FunctionComponent = () => {
       });
     }
   };
+  const isEmailValid = (email: string) => {
+    // Sử dụng biểu thức chính quy để kiểm tra định dạng email
+    const emailPattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
+    return emailPattern.test(email);
+  };
 
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      //  behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    //  behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <ScrollView style={styles.container}>
         <TouchableWithoutFeedback
@@ -74,33 +81,42 @@ const UpdateProfile: FunctionComponent = () => {
             />
 
             <AuthHeader
-              title="Complete Your Profile 🔐"
-              subTitle="Don’t worry, only you can see your personal
-              data. No one else will be able to see it.
-              "
+              title="Hoàn thành hồ sơ của bạn 🔐"
+              subTitle="Đừng lo lắng, chỉ bạn mới có thể xem dữ liệu cá nhân của mình. Sẽ không có ai khác có thể nhìn thấy nó."
             />
 
             <AvatarComponets />
 
             <View style={styles.formContainer}>
-              <Text style={styles.titleInput}>Full name</Text>
+              <Text style={styles.titleInput}>Họ và tên</Text>
               <InputCustom
-                placeholder="Enter your full name"
+                placeholder="Vui lòng nhập họ và tên"
                 value={credentials.fullname}
                 onChangeText={text =>
-                  setCredentials({...credentials, fullname: text})
+                  setCredentials({ ...credentials, fullname: text })
                 }
               />
-              <Text style={styles.titleInput}>Phone number</Text>
+              <Text style={styles.titleInput}>Email</Text>
               <InputCustom
-                placeholder="Enter your phone number"
+                placeholder="Vui lòng nhập Email"
+                value={credentials.email}
+                onChangeText={text =>
+                  setCredentials({ ...credentials, email: text })
+                }
+              />
+              {!isEmailValid(credentials.email) && credentials.email !== '' && (
+                <Text style={styles.error}>Email không hợp lệ. Vui lòng sử dụng định dạng example@gmail.com</Text>
+              )}
+              <Text style={styles.titleInput}>Số điện thoại</Text>
+              <InputCustom
+                placeholder="Vui lòng nhập số điện thoạir"
                 value={credentials.phone_number}
                 onChangeText={text =>
-                  setCredentials({...credentials, phone_number: text})
+                  setCredentials({ ...credentials, phone_number: text })
                 }
               />
 
-              <Text style={styles.titleInput}>Date of Birth</Text>
+              <Text style={styles.titleInput}>Ngày sinh</Text>
               <InputCustom
                 placeholder="dd/MM/yy"
                 rightIcon={
@@ -116,7 +132,7 @@ const UpdateProfile: FunctionComponent = () => {
                 }
                 value={credentials.dob}
                 onChangeText={text =>
-                  setCredentials({...credentials, dob: text})
+                  setCredentials({ ...credentials, dob: text })
                 }
               />
               {showDatePicker && (
@@ -134,7 +150,7 @@ const UpdateProfile: FunctionComponent = () => {
                   <CheckBox
                     checked={credentials.gender === Gender.MALE}
                     onPress={() =>
-                      setCredentials({...credentials, gender: Gender.MALE})
+                      setCredentials({ ...credentials, gender: Gender.MALE })
                     }
                     checkedIcon="dot-circle-o"
                     uncheckedIcon="circle-o"
@@ -145,7 +161,7 @@ const UpdateProfile: FunctionComponent = () => {
                   <CheckBox
                     checked={credentials.gender === Gender.FAMALE}
                     onPress={() =>
-                      setCredentials({...credentials, gender: Gender.FAMALE})
+                      setCredentials({ ...credentials, gender: Gender.FAMALE })
                     }
                     checkedIcon="dot-circle-o"
                     uncheckedIcon="circle-o"
@@ -155,7 +171,7 @@ const UpdateProfile: FunctionComponent = () => {
               </View>
             </View>
             <View style={styles.bottom}>
-              <BigButton textButton="Sign up" onPressButton={() => {}} />
+              <BigButton textButton="Sign up" onPressButton={() => { }} />
             </View>
           </View>
         </TouchableWithoutFeedback>

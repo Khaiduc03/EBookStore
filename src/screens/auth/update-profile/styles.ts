@@ -1,8 +1,8 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {StyleSheet} from 'react-native';
-import {Device} from '../../../utils';
+import { makeStyles, normalize } from '@rneui/themed';
+import { StyleSheet } from 'react-native';
+import { Device } from '../../../utils';
 
-const useStyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({ colors }) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
@@ -87,6 +87,10 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  error: {
+    color: 'red',
+    marginTop: 5,
   },
 }));
 export default useStyles;

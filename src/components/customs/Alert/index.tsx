@@ -1,7 +1,7 @@
-import React, {FunctionComponent, useCallback, useEffect} from 'react';
+import React, { FunctionComponent, useCallback, useEffect } from 'react';
 
-import {Text} from '@rneui/themed';
-import {TouchableOpacity, View} from 'react-native';
+import { Text } from '@rneui/themed';
+import { TouchableOpacity, View } from 'react-native';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -12,9 +12,9 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import LottieView from 'lottie-react-native';
-import {useAppDispatch, useAppSelector, useBackHandler} from '../../../hooks';
-import {AlertActions} from '../../../redux/reducer/alert.reducer';
-import {getAlertState} from '../../../redux/selectors/alert.selector';
+import { useAppDispatch, useAppSelector, useBackHandler } from '../../../hooks';
+import { AlertActions } from '../../../redux/reducer/alert.reducer';
+import { getAlertState } from '../../../redux/selectors/alert.selector';
 import useStyles from './styles';
 
 const AnimatedView = Animated.createAnimatedComponent(View);
@@ -28,7 +28,7 @@ const Alert: FunctionComponent = () => {
     title,
     description,
     onAccept,
-    onCancel = () => {},
+    onCancel = () => { },
     isAccept,
     isCancel,
   } = useAppSelector(getAlertState);
@@ -78,7 +78,7 @@ const Alert: FunctionComponent = () => {
     );
 
     return {
-      transform: [{scale: scale}],
+      transform: [{ scale: scale }],
     };
   }, []);
 
