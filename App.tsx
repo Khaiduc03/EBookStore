@@ -2,11 +2,12 @@ import {FunctionComponent, useEffect} from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import {RootNavigation, ThemeContext} from './src';
+import {RootNavigation, ThemeContext, TopNavigator} from './src';
 import Toast from 'react-native-toast-message';
 import {toastConfig} from './src/utils/toastConfig';
 import SplashScreen from 'react-native-lottie-splash-screen';
 import Alert from './src/components/customs/Alert';
+
 
 const App: FunctionComponent = () => {
   useEffect(() => {
@@ -26,7 +27,7 @@ const App: FunctionComponent = () => {
 
           {/* MAIN APP */}
           <RootNavigation />
-          <Toast config={toastConfig} topOffset={20}  visibilityTime={2500} />
+          <Toast config={toastConfig} topOffset={20}  visibilityTime={3000} />
 
           {/* Modal progressing when upgrade version of app */}
         </GestureHandlerRootView>

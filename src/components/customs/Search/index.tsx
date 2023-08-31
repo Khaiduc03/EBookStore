@@ -6,7 +6,6 @@ import { images } from '../../../assets/images/png';
 
 
 export const Search: React.FC<Searchpros> = props => {
-
     const [text, setText] = useState('');
 
     const handleTextChange = (inputText: string) => {
@@ -29,7 +28,6 @@ export const Search: React.FC<Searchpros> = props => {
                     <Image source={images.ic_Classify} />
                 </TouchableOpacity>
             </View>
-
         </View>
 
 

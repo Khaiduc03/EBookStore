@@ -32,4 +32,3 @@ export const Toggleable: React.FC<ToggleableViewProps> = ({ title, content }) =>
 }
 
 
-

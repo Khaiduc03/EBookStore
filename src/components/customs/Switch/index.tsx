@@ -39,5 +39,4 @@ export const Switch_: React.FC<SwitchCustomProps> = props => {
   );
 };
 
-
 export default Switch_custom

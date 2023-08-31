@@ -8,14 +8,16 @@ import {
 
 import BottomNavigator from './BottomNavigator';
 
-import {routes} from '../../constants';
-import {Screen} from '../../types';
+import { routes } from '../../constants';
+import { Screen } from '../../types';
 import {
   bookmarkScreens,
   exploreScreens,
   homeScreens,
   profileScreens,
 } from '../../screens/main';
+import UpdateProfile from '../../screens/auth/update-profile';
+import { authScreen } from '../../screens/auth';
 
 const AppStack = createStackNavigator();
 
@@ -25,6 +27,7 @@ const screenOption: StackNavigationOptions = {
 };
 
 const mainScreens: Screen[] = [
+
   {
     name: routes.BOTTOM_TAB,
     component: BottomNavigator,
@@ -33,6 +36,7 @@ const mainScreens: Screen[] = [
   ...profileScreens,
   ...bookmarkScreens,
   ...exploreScreens,
+  ...authScreen,
 ];
 
 const AppNavigator = () => {

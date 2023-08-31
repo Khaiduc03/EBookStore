@@ -68,7 +68,7 @@ const UpdateProfile: FunctionComponent = () => {
           style={styles.wrapper}
           onPress={() => Keyboard.dismiss()}>
           <View style={styles.body}>
-            <Header
+            <Header logo
               leftIcon={true}
               onPressLeftIcon={() => {
                 Keyboard.dismiss();
