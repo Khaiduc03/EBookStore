@@ -1,5 +1,5 @@
-import {StatusBar, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {Text, color} from '@rneui/base';
+import {StatusBar, TouchableOpacity, View} from 'react-native';
+import {Text} from '@rneui/base';
 import React from 'react';
 import {Headers} from '../../../../components';
 import useStyles from '../styles';
@@ -18,7 +18,7 @@ const ForgotPassword = () => {
           onPressLeftIcon={() => NavigationService.navigate(routes.SIGN_IN)}
           style={styles.marginHeader}
         />
-        <Text style={styles.textTitle}>Forgot Password 🔐</Text>
+        <Text style={styles.textTitleFP}>Forgot Password 🔐</Text>
         <Text style={styles.text1}>
           Enter your email address .We will send an OTP code for verification in
           the next step.
@@ -28,7 +28,9 @@ const ForgotPassword = () => {
           <TextInput style={styles.textInput} />
         </View>
         <View style={styles.viewBottom}>
-          <TouchableOpacity style={styles.btnContinue}>
+          <TouchableOpacity
+            style={styles.btnContinue}
+            onPress={() => NavigationService.navigate(routes.SEND_OTP)}>
             <Text style={styles.textContinue}>Continue</Text>
           </TouchableOpacity>
         </View>
