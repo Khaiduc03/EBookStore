@@ -7,6 +7,7 @@ import Slider from './onboard';
 import SignIn from './sign-in';
 import ForgotPassword from './forgot-password';
 import SendOTP from './send-otp';
+import CreateNewPassword from './create-new-password';
 import UpdateProfile from './update-profile';
 
 export const authScreen: Screen[] = [
@@ -37,5 +38,9 @@ export const authScreen: Screen[] = [
   {
     name: routes.SEND_OTP,
     component: SendOTP,
+  },
+  {
+    name: routes.CREATE_NEW_PASSWORD,
+    component: CreateNewPassword,
   },
 ];
