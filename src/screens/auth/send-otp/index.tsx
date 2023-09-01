@@ -1,10 +1,10 @@
 import {StatusBar, TouchableOpacity, View} from 'react-native';
 import {Text} from '@rneui/base';
 import React from 'react';
-import {Headers} from '../../../../components';
-import useStyles from '../styles';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
+import {Headers} from '../../../components';
+import useStyles from './styles';
+import {NavigationService} from '../../../navigation';
+import {routes} from '../../../constants';
 import {TextInput} from 'react-native-gesture-handler';
 
 const SendOTP = () => {
@@ -35,7 +35,7 @@ const SendOTP = () => {
             <TextInput style={styles.textOTP} keyboardType="number-pad" />
           </View>
           <Text style={styles.text3}>Didn’t receive email?</Text>
-          <Text>
+          <Text style={styles.text4}>
             You can resend code in <Text style={styles.text5}>55</Text> s
           </Text>
         </View>

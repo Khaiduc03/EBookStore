@@ -1,10 +1,10 @@
 import {StatusBar, TouchableOpacity, View} from 'react-native';
 import {Text} from '@rneui/base';
 import React from 'react';
-import {Headers} from '../../../../components';
-import useStyles from '../styles';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
+import {Headers} from '../../../components';
+import useStyles from './styles';
+import {NavigationService} from '../../../navigation';
+import {routes} from '../../../constants';
 import {TextInput} from 'react-native-gesture-handler';
 
 const ForgotPassword = () => {
@@ -20,7 +20,7 @@ const ForgotPassword = () => {
         />
         <Text style={styles.textTitleFP}>Forgot Password 🔐</Text>
         <Text style={styles.text1}>
-          Enter your email address .We will send an OTP code for verification in
+          Enter your email address. We will send an OTP code for verification in
           the next step.
         </Text>
         <View>
