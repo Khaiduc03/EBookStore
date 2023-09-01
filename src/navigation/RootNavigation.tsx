@@ -8,7 +8,7 @@ import {getAuthEnableSignIn} from '../redux/selectors/auth.selector';
 import {getMode} from '../redux/selectors/thems.selector';
 import {makeStyles, useThemeMode} from '@rneui/themed';
 import {StatusBar} from 'react-native';
-import {set} from 'date-fns';
+
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);

@@ -10,6 +10,8 @@ export enum routes {
   HOME = 'HOME',
 
   TOPICS = 'TOPICS',
+  FORGOT_PASSWORD = 'FORGOT_PASSWORD',
+
 
   PROFILE = 'PROFILE',
   BOOKMARK = 'BOOKMARK',

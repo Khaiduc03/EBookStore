@@ -5,6 +5,7 @@ import CreateAccount from './create-account';
 import LobbyScreen from './lobby';
 import Slider from './onboard';
 import SignIn from './sign-in';
+import ForgotPassword from './sign-in/forgot-password/ForgotPassword';
 import UpdateProfile from './update-profile';
 
 export const authScreen: Screen[] = [
@@ -27,5 +28,9 @@ export const authScreen: Screen[] = [
   {
     name: routes.ONBOARD,
     component: Slider,
+  },
+  {
+    name: routes.FORGOT_PASSWORD,
+    component: ForgotPassword,
   },
 ];
