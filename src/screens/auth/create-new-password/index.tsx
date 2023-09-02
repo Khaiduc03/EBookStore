@@ -19,7 +19,7 @@ const CreateNewPassword = () => {
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
-        <StatusBar />
+
         <Headers
           leftIcon={true}
           onPressLeftIcon={() =>

@@ -1,4 +1,10 @@
-import {StatusBar, TouchableOpacity, View} from 'react-native';
+import {
+  Keyboard,
+  StatusBar,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import {Text} from '@rneui/base';
 import React from 'react';
 import {Headers} from '../../../components';
@@ -7,10 +13,12 @@ import {NavigationService} from '../../../navigation';
 import {routes} from '../../../constants';
 import {TextInput} from 'react-native-gesture-handler';
 
-const ForgotPassword = () => {
+const ForgotPassword: React.FC = () => {
   const styles = useStyles();
   return (
-    <View style={styles.container}>
+    <TouchableWithoutFeedback
+      onPress={() => Keyboard.dismiss()}
+      style={styles.container}>
       <View style={styles.wrapper}>
         <StatusBar />
         <Headers
@@ -35,7 +43,7 @@ const ForgotPassword = () => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

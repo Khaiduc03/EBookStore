@@ -26,7 +26,7 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: 'Urbanist',
     fontWeight: '700',
     fontStyle: 'normal',
-    fontSize: 32,
+    fontSize: normalize(24),
     color: '#212121',
     marginTop: 34,
     lineHeight: 48,
@@ -76,7 +76,7 @@ const useStyles = makeStyles(({colors}) => ({
     letterSpacing: 0.12,
   },
   text5: {
-    color: '#F89300',
+    color: colors.primary,
     fontFamily: 'Urbanist',
     fontSize: 18,
     fontStyle: 'normal',

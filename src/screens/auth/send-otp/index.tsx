@@ -1,4 +1,10 @@
-import {StatusBar, TouchableOpacity, View} from 'react-native';
+import {
+  Keyboard,
+  StatusBar,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import {Text} from '@rneui/base';
 import React from 'react';
 import {Headers} from '../../../components';
@@ -10,9 +16,10 @@ import {TextInput} from 'react-native-gesture-handler';
 const SendOTP = () => {
   const styles = useStyles();
   return (
-    <View style={styles.container}>
+    <TouchableWithoutFeedback
+      onPress={() => Keyboard.dismiss()}
+      style={styles.container}>
       <View style={styles.wrapper}>
-        <StatusBar />
         <Headers
           leftIcon={true}
           onPressLeftIcon={() =>
@@ -45,7 +52,7 @@ const SendOTP = () => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
