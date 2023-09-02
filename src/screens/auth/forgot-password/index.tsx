@@ -1,6 +1,6 @@
 import {
+  Alert,
   Keyboard,
-  StatusBar,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
@@ -14,13 +14,20 @@ import {routes} from '../../../constants';
 import {TextInput} from 'react-native-gesture-handler';
 
 const ForgotPassword: React.FC = () => {
+  const [email, setEmail] = React.useState('');
+
+  const isEmailValid = () => {
+    // Kiểm tra xem giá trị nhập vào có phải là một địa chỉ email hợp lệ hay không
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const styles = useStyles();
+
   return (
     <TouchableWithoutFeedback
       onPress={() => Keyboard.dismiss()}
       style={styles.container}>
       <View style={styles.wrapper}>
-        <StatusBar />
         <Headers
           leftIcon={true}
           onPressLeftIcon={() => NavigationService.navigate(routes.SIGN_IN)}
@@ -33,12 +40,23 @@ const ForgotPassword: React.FC = () => {
         </Text>
         <View>
           <Text style={styles.text2}>Email</Text>
-          <TextInput style={styles.textInput} />
+          <TextInput
+            style={styles.textInput}
+            onChangeText={text => setEmail(text)}
+            value={email}
+          />
         </View>
         <View style={styles.viewBottom}>
           <TouchableOpacity
             style={styles.btnContinue}
-            onPress={() => NavigationService.navigate(routes.SEND_OTP)}>
+            onPress={() => {
+              if (isEmailValid()) {
+                NavigationService.navigate(routes.SEND_OTP);
+              } else {
+                // Hiển thị thông báo lỗi nếu email không hợp lệ
+                Alert.alert('Error', 'Please enter a valid email address');
+              }
+            }}>
             <Text style={styles.textContinue}>Continue</Text>
           </TouchableOpacity>
         </View>

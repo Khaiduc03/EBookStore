@@ -8,7 +8,6 @@ import {getAuthEnableSignIn} from '../redux/selectors/auth.selector';
 import {getMode} from '../redux/selectors/thems.selector';
 import {makeStyles, useThemeMode} from '@rneui/themed';
 import {StatusBar} from 'react-native';
-import ForgotPassword from '../screens/auth/forgot-password';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -38,10 +37,7 @@ const RootNavigation = () => {
         backgroundColor={usestyles().Mode.backgroundColor}
         barStyle={themeMode}
       />
-
       {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      {/* <AppNavigator /> */}
-      {/* <ForgotPassword /> */}
       <AuthNavigator />
     </NavigationContainer>
   );
