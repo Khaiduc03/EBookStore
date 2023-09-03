@@ -1,18 +1,20 @@
-import {Alert, TouchableOpacity, View} from 'react-native';
+import {
+  Keyboard,
+  TouchableOpacity,
+  View,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import {Text} from '@rneui/base';
 import React from 'react';
-import {Headers} from '../../../components';
+import {AuthHeader, Headers, InputCustom} from '../../../components';
 import useStyles from './styles';
 import {NavigationService} from '../../../navigation';
 import {routes} from '../../../constants';
-import {TextInput} from 'react-native-gesture-handler';
+import {showToastError, showToastSuccess} from '../../../utils';
+import {CheckBoxIcon} from '@rneui/base/dist/CheckBox/components/CheckBoxIcon';
 import {CheckBox} from '@rneui/themed';
-import {Eye_avatar} from '../../../assets';
 
 const CreateNewPassword: React.FC = () => {
-  const [isPasswordHidden, setIsPasswordHidden] = React.useState(true);
-  const [isPasswordConfirmHidden, setIsPasswordConfirmHidden] =
-    React.useState(true);
   const [password, setPassword] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
 
@@ -27,73 +29,60 @@ const CreateNewPassword: React.FC = () => {
   const styles = useStyles();
 
   return (
-    <View style={styles.container}>
+    <TouchableWithoutFeedback
+      onPress={() => Keyboard.dismiss()}
+      style={styles.container}>
       <View style={styles.wrapper}>
-        <Headers
-          leftIcon={true}
-          onPressLeftIcon={() =>
-            NavigationService.navigate(routes.FORGOT_PASSWORD)
-          }
-          style={styles.marginHeader}
-        />
-        <Text style={styles.textTitleFP}>Create New Password 🔐</Text>
-        <Text style={styles.text1}>
-          Enter your new password. If you forget it, then you have to do forgot
-          password.
-        </Text>
-        <View>
-          <Text style={styles.text2}>Password</Text>
-          <TextInput
-            style={styles.textInput}
-            secureTextEntry={isPasswordHidden}
-            onChangeText={text => setPassword(text)}
-            value={password}
+        <View style={styles.body}>
+          <Headers
+            leftIcon={true}
+            onPressLeftIcon={() =>
+              NavigationService.navigate(routes.FORGOT_PASSWORD)
+            }
           />
-          <TouchableOpacity
-            onPress={() => setIsPasswordHidden(!isPasswordHidden)}
-            style={styles.eye}>
-            <Eye_avatar />
-          </TouchableOpacity>
-        </View>
-        <View>
-          <Text style={styles.text2}>Confirm Password</Text>
-          <TextInput
-            style={styles.textInput}
-            secureTextEntry={isPasswordConfirmHidden}
-            onChangeText={text => setConfirmPassword(text)}
-            value={confirmPassword}
+          <AuthHeader
+            title="Create New Password 🔐"
+            subTitle="Enter your new password. If you forget it, then you have to do forgot password."
           />
-          <TouchableOpacity
-            onPress={() => setIsPasswordConfirmHidden(!isPasswordConfirmHidden)}
-            style={styles.eye}>
-            <Eye_avatar />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.viewRow}>
-          <View style={styles.viewCB}>
-            <CheckBox
-              style={styles.checkBox}
-              checked={checked}
-              onPress={toggleCheckbox}
+          <View>
+            <Text style={styles.text2}>Password</Text>
+            <InputCustom
+              onChangeText={text => setPassword(text)}
+              value={password}
+              secure
             />
           </View>
-          <Text style={styles.textRM}>Remember me</Text>
-        </View>
-        <View style={styles.viewBottom}>
-          <TouchableOpacity
-            style={styles.btnContinue}
-            onPress={() => {
-              if (isPasswordMatch()) {
-                Alert.alert('Success', 'Account created successfully!');
-              } else {
-                Alert.alert('Error', 'Passwords do not match!');
-              }
-            }}>
-            <Text style={styles.textContinue}>Continue</Text>
-          </TouchableOpacity>
+          <View>
+            <Text style={styles.text2}>Confirm Password</Text>
+            <InputCustom
+              onChangeText={text => setConfirmPassword(text)}
+              value={confirmPassword}
+              secure
+            />
+          </View>
+          <View style={styles.viewRow}>
+            <View style={styles.checkBox}>
+              <CheckBox checked={checked} onIconPress={toggleCheckbox} />
+            </View>
+
+            <Text style={styles.textRM}>Remember me</Text>
+          </View>
+          <View style={styles.viewBottom}>
+            <TouchableOpacity
+              style={styles.btnContinue}
+              onPress={() => {
+                if (isPasswordMatch()) {
+                  showToastSuccess('Success, Account created successfully!');
+                } else {
+                  showToastError('Error, Passwords do not match!');
+                }
+              }}>
+              <Text style={styles.textContinue}>Continue</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

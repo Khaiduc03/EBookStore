@@ -7,7 +7,6 @@ const useStyles = makeStyles(({colors}) => ({
   container: {
     backgroundColor: colors.background,
   },
-
   header: {
     backgroundColor: 'blue',
   },

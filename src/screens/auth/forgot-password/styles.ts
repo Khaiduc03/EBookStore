@@ -9,40 +9,12 @@ const useStyles = makeStyles(({colors}) => ({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.background,
   },
-
   body: {
     flex: 1,
     padding: normalize(24),
   },
-  marginHeader: {
-    marginHorizontal: normalize(24),
-    marginTop: normalize(26),
-  },
-  textTitleFP: {
-    fontFamily: 'Urbanist',
-    fontWeight: '700',
-    fontStyle: 'normal',
-    fontSize: normalize(32),
-    color: colors.black,
-    marginTop: normalize(34),
-    marginHorizontal: normalize(24),
-    lineHeight: normalize(51.2),
-  },
-  text1: {
-    marginTop: normalize(12),
-    marginBottom: normalize(32),
-    marginHorizontal: normalize(24),
-    color: colors.black,
-    fontFamily: 'Urbanist',
-    fontSize: normalize(18),
-    fontStyle: 'normal',
-    fontWeight: '400',
-    lineHeight: normalize(25.2),
-    letterSpacing: normalize(0.2),
-  },
-  text2: {
+  textEmail: {
     marginTop: normalize(16),
-    marginHorizontal: normalize(24),
     color: colors.black,
     fontFamily: 'Urbanist',
     fontSize: normalize(16),
@@ -52,7 +24,6 @@ const useStyles = makeStyles(({colors}) => ({
     letterSpacing: normalize(0.2),
   },
   textInput: {
-    marginHorizontal: normalize(24),
     borderBottomWidth: normalize(1),
     borderColor: colors.primary,
   },
@@ -62,7 +33,6 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
   },
   btnContinue: {
-    marginHorizontal: normalize(24),
     paddingHorizontal: normalize(16),
     paddingVertical: normalize(18),
     backgroundColor: colors.primary,
