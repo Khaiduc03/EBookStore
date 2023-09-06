@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 const Circle: React.FunctionComponent<Circleprops> = props => {
     const styles = usestyles();
-    const { title, icEdit, style, ic_Wallet, circleColor, icContinue, ic_Notification, ic_Security, ic_VIP, ic_HelpCenter, ic_AboutApp, ic_LogOut } = props;
+    const { title, icEdit, style, ic_Wallet, circleColor, icContinue, ic_Notification, ic_Security, ic_VIP, ic_HelpCenter, ic_AboutApp, ic_LogOut, avatarDummy } = props;
     const circleStyle: ViewStyle = {
         backgroundColor: circleColor || '#000000', // Màu mặc định
         width: 64,
@@ -23,6 +23,7 @@ const Circle: React.FunctionComponent<Circleprops> = props => {
     return (
         <View style={style ? style : styles.ViewCircle}>
             <View style={circleStyle}>
+                {avatarDummy && <Image source={images.avata} style={styles.avatarDummy} />}
                 {ic_Wallet && <Icon
                     name={'wallet'}
                     type="ionicon"
@@ -36,6 +37,7 @@ const Circle: React.FunctionComponent<Circleprops> = props => {
                     color={'#EC7982'}
                 />}
                 {ic_Security && <Image source={images.ic_Security} />}
+
                 {ic_VIP && <Image source={images.ic_VIP} />}
                 {ic_HelpCenter && <Image source={images.ic_HelpCenter} />}
                 {ic_AboutApp && <Icon

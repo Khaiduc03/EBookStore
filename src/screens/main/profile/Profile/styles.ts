@@ -5,10 +5,19 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     viewCircle: {
-        flexDirection:'row',
-        paddingVertical:20,
+        flexDirection: 'row',
+        paddingVertical: 20,
     },
-    
+    viewAvatar: {
+        paddingVertical: 20,
+        flexDirection: 'row',
+    },
+    viewText: {
+        width: '100%',
+        right: 45,
+        top: 10
+    }
+
 
 });
 

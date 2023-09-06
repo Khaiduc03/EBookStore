@@ -10,6 +10,7 @@ import { images } from '../../../../assets/images/png/index';
 import AvatarComponets from '../../../../components/customs/Avatar';
 import { Icon } from '@rneui/themed';
 import { Circle } from '../../../../components';
+import TextCustom from '../../../../components/customs/Text';
 
 
 
@@ -28,28 +29,39 @@ const Profile: FunctionComponent = () => {
         title='Hồ sơ của bạn'
         istitle
         menu />
-    <Avatar />
-      <TouchableOpacity style={styles.viewCircle}>
-        <Circle circleColor='#D1F1E4' ic_Wallet title='Phương thức thanh toán' icEdit />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.viewCircle}>
-        <Circle circleColor='#FFF2F3' ic_Notification title='Thông báo' icContinue />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.viewCircle}>
-        <Circle circleColor='#EDF9F1' ic_Security title='Bảo mật' icContinue />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.viewCircle}>
-        <Circle circleColor='#EDF9F1' ic_VIP title='Trở thành VIP' icContinue />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.viewCircle}>
-        <Circle circleColor='#EDF9F1' ic_HelpCenter title='Trung tâm trợ giúp' icContinue />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.viewCircle}>
-        <Circle circleColor='#FFF7EB' ic_AboutApp title='Thông tin về App' icContinue />
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => { handleLogout() }}>
-        <Circle circleColor='#FFF2F3' ic_LogOut title={enableSignIn ? 'Logout' : 'Login'} />
-      </TouchableOpacity>
+      <View style={styles.viewAvatar}>
+        <Circle circleColor='white' avatarDummy />
+        <TouchableOpacity style={styles.viewText}>
+          <TextCustom textBold title='Drake Kun' />
+          <TextCustom textLight title='drake@gmail.com'/>
+        </TouchableOpacity>
+      </View>
+      <ScrollView>
+        <View>
+          <TouchableOpacity style={styles.viewCircle}>
+            <Circle circleColor='#D1F1E4' ic_Wallet title='Payment methods' icEdit />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.viewCircle}>
+            <Circle circleColor='#FFF2F3' ic_Notification title='Notification' icContinue />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.viewCircle}>
+            <Circle circleColor='#EDF9F1' ic_Security title='Security' icContinue />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.viewCircle}>
+            <Circle circleColor='#FFFDEA' ic_VIP title='Become a VIP member' icContinue />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.viewCircle}>
+            <Circle circleColor='#EDF9F1' ic_HelpCenter title='Help Center' icContinue />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.viewCircle}>
+            <Circle circleColor='#FFF7EB' ic_AboutApp title='About the App' icContinue />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => { handleLogout() }}>
+            <Circle circleColor='#FFF2F3' ic_LogOut title={enableSignIn ? 'Logout' : 'Login'} />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+
 
 
     </View>

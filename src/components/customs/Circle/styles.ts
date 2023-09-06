@@ -29,6 +29,11 @@ const usestyles = makeStyles(({ colors }) => ({
         left: 270,
         position: 'absolute',
     },
+    avatarDummy:{
+        width:64,
+        height:64,
+        borderRadius:50,
+    }
 }));
 export default usestyles;
 

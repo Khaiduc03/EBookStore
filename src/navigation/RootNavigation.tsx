@@ -26,7 +26,7 @@ const RootNavigation = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      <Update_Profile />
+      <AppNavigator />
     </NavigationContainer>
   );
 };

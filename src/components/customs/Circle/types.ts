@@ -8,7 +8,7 @@ export type Circleprops = {
     style?: StyleProp<ViewStyle>;
     icContinue?: boolean;
     circleColor?: string; // Thêm prop cho màu của vòng tròn
-
+    avatarDummy?: boolean; // avatar mẫu 
 
     ic_Wallet?: boolean;
     ic_Notification?: boolean;
