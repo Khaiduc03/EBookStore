@@ -1,153 +1,68 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleProp, ViewStyle } from 'react-native';
 import React from 'react';
-import styles from '../Circle/styles';
-import { Circlepros } from '../Circle/types';
+import usestyles from '../Circle/styles';
+import { Circleprops } from '../Circle/types';
 import { images } from '../../../assets/images/png';
+import { Icon, normalize } from '@rneui/themed';
+import PropTypes from 'prop-types';
 
 
-export const Circle_Wallet: React.FC<Circlepros> = props => {
-    const { istitle, title, icEdit } = props;
+
+const Circle: React.FunctionComponent<Circleprops> = props => {
+    const styles = usestyles();
+    const { title, icEdit, style, ic_Wallet, circleColor, icContinue, ic_Notification, ic_Security, ic_VIP, ic_HelpCenter, ic_AboutApp, ic_LogOut } = props;
+    const circleStyle: ViewStyle = {
+        backgroundColor: circleColor || '#000000', // Màu mặc định
+        width: 64,
+        height: 64,
+        borderRadius: normalize(50),
+        alignItems: 'center',
+        justifyContent: 'center',
+
+    };
     return (
-        <View style={styles.container}>
-            <View style={styles.ViewCircle}>
-                <View style={styles.Circle_Wallet}>
-                    <Image source={images.ic_Wallet} />
-                </View>
-                <Text style={styles.txtCircle}>{title}</Text>
+        <View style={style ? style : styles.ViewCircle}>
+            <View style={circleStyle}>
+                {ic_Wallet && <Icon
+                    name={'wallet'}
+                    type="ionicon"
+                    size={24}
+                    color={'#6AF6BD'}
+                />}
+                {ic_Notification && <Icon
+                    name={'bell'}
+                    type="font-awesome"
+                    size={24}
+                    color={'#EC7982'}
+                />}
+                {ic_Security && <Image source={images.ic_Security} />}
+                {ic_VIP && <Image source={images.ic_VIP} />}
+                {ic_HelpCenter && <Image source={images.ic_HelpCenter} />}
+                {ic_AboutApp && <Icon
+                    name={'info'}
+                    type="font-awesome"
+                    size={24}
+                    color={'#F2AC9D'}
+                />}
+                {ic_LogOut && <Image source={images.ic_Logout} />}
             </View>
-            {istitle && <Text style={styles.txtCircle}>{title}</Text>}
-            {icEdit && <Image source={images.ic_Edit2} style={styles.ic_Edit} />}
-        </View>
-
-    );
-};
-export const Circle_Notification: React.FC<Circlepros> = props => {
-    const { istitle, title, icContinue } = props;
-    return (
-        <View style={styles.container}>
-
-            <View style={styles.ViewCircle}>
-                <View style={styles.Circle_Notification}>
-                    <Image source={images.ic_Notification2} />
-                </View>
-
-                <Text style={styles.txtCircle}>{title}</Text>
-
-            </View>
-            {istitle && <Text style={styles.txtCircle}>{title}</Text>}
-            {icContinue &&
-                <Image source={images.ic_Continue} style={styles.ic_Edit} />
-            }
-        </View>
-    );
-};
-export const Circle_Security: React.FC<Circlepros> = props => {
-    const { istitle, title, icContinue } = props;
-    return (
-        <View style={styles.container}>
-            <View style={styles.ViewCircle}>
-                <View style={styles.Circle_Security}>
-                    <Image source={images.ic_Security} />
-                </View>
-
-                <Text style={styles.txtCircle}>{title}</Text>
-
-            </View>
-            {istitle && <Text style={styles.txtCircle}>{title}</Text>}
-            {icContinue &&
-                <Image source={images.ic_Continue} style={styles.ic_Edit} />
-            }
-        </View>
-    );
-};
-export const Circle_VIP: React.FC<Circlepros> = props => {
-    const { istitle, title, icContinue } = props;
-    return (
-        <View style={styles.container}>
-            <View style={styles.ViewCircle}>
-                <View style={styles.Circle_VIP}>
-                    <Image source={images.ic_VIP} />
+            <TouchableOpacity style={styles.ViewCircleText}>
+                <Text style={[styles.txtCircle, style]}>{title}</Text>
+                <View style={styles.viewIcon}>
+                    {icEdit && <View ><Image source={images.ic_Edit2} /></View>}
+                    {icContinue && <View><Image source={images.ic_Continue} /></View>}
                 </View>
 
-                <Text style={styles.txtCircle}>{title}</Text>
+            </TouchableOpacity>
 
-            </View>
-            {istitle && <Text style={styles.txtCircle}>{title}</Text>}
-            {icContinue &&
-                <Image source={images.ic_Continue} style={styles.ic_Edit} />
-            }
         </View>
     );
 };
-export const Circle_HelpCenter: React.FC<Circlepros> = props => {
-    const { istitle, title, icContinue } = props;
-    return (
-        <View style={styles.container}>
-            <View style={styles.ViewCircle}>
-                <View style={styles.Circle_HelpCenter}>
-                    <Image source={images.ic_HelpCenter} />
-                </View>
-
-                <Text style={styles.txtCircle}>{title}</Text>
-
-            </View>
-            {istitle && <Text style={styles.txtCircle}>{title}</Text>}
-            {icContinue &&
-                <Image source={images.ic_Continue} style={styles.ic_Edit} />
-            }
-        </View>
-    );
-};
-export const Circle_AboutApp: React.FC<Circlepros> = props => {
-    const { istitle, title, icContinue } = props;
-    return (
-        <View style={styles.container}>
-            <View style={styles.ViewCircle}>
-                <View style={styles.Circle_AboutApp}>
-                    <Image source={images.ic_AboutApp} />
-                </View>
-
-                <Text style={styles.txtCircle}>{title}</Text>
-
-            </View>
-            {istitle && <Text style={styles.txtCircle}>{title}</Text>}
-            {icContinue &&
-                <Image source={images.ic_Continue} style={styles.ic_Edit} />
-            }
-        </View>
-    );
-};
-export const Circle_Logout: React.FC<Circlepros> = props => {
-    const { istitle, title } = props;
-    return (
-        <View style={styles.container}>
-            <View style={styles.ViewCircle}>
-                <View style={styles.Circle_Logout}>
-                    <Image source={images.ic_Logout} />
-                </View>
-
-                <Text style={styles.txtCircle}>{title}</Text>
-
-            </View>
-            {istitle && <Text style={styles.txtCircle}>{title}</Text>}
-        </View>
-    );
-};
-export const Circle_Avatar: React.FC<Circlepros> = props => {
-    const { istitle, user, email } = props;
-    return (
-        <View style={styles.View_Avatarcontainer}>
-            <View style={styles.view_Avatar}>
-                <Image style={styles.Avatar}
-                    source={images.avata} />
-                <TouchableOpacity style={styles.viewtxt_Avatar} >
-                    <Text style={styles.nameUser}>{user}</Text>
-                    <Text style={styles.EmailUser}>{email}</Text>
-                </TouchableOpacity>
-
-            </View>
-            {istitle && <Text>{user}</Text>}
-            {istitle && <Text>{email}</Text>}
-        </View>
-    );
-};
+Circle.propTypes = {
+    title: PropTypes.string,
+    icEdit: PropTypes.bool,
+    style: PropTypes.any, // PropTypes.any cho phép sử dụng bất kỳ kiểu dữ liệu nào cho style
+    ic_Wallet: PropTypes.bool,
+    circleColor: PropTypes.string,
+}
+export default Circle;

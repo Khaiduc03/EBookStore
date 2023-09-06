@@ -71,9 +71,8 @@ const useStyles = makeStyles(({ colors }) => ({
     },
     bottom: {
         flex: 1,
-
         justifyContent: 'flex-end',
-        marginBottom: normalize(10),
+        marginBottom: normalize(50),
     },
     checkBoxContainer: {
         flexDirection: 'row',

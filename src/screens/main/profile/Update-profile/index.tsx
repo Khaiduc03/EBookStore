@@ -44,8 +44,8 @@ const Update_Profile: FunctionComponent = () => {
     const handleInputChange = (text: string) => {
         if (!isSelectingDate && text.length <= 10) {
             let formattedDate = text;
-            if (text.length === 2 || text.length === 5) {
-                formattedDate += '/';
+            if (text.length === 4 || text.length === 7) {
+                formattedDate += '-';
             }
             setCredentials({ ...credentials, dob: formattedDate });
         }
@@ -61,26 +61,26 @@ const Update_Profile: FunctionComponent = () => {
             setShowDatePicker(false);
             setSelectedDate(selected);
 
-            const formattedDate = format(selected, 'dd/MM/yyyy');
-            const dateParts = formattedDate.split('/');
+            const formattedDate = format(selected, 'yyyy-MM-dd');
+            const dateParts = formattedDate.split('-');
 
             if (dateParts.length === 3) {
-                const [day, month, year] = dateParts;
+                const [year, month, day] = dateParts;
 
                 if (
-                    /^\d{2}$/.test(day) &&
+                    /^\d{4}$/.test(year) &&
                     /^\d{2}$/.test(month) &&
-                    /^\d{4}$/.test(year)
+                    /^\d{2}$/.test(day)
                 ) {
                     setCredentials({
                         ...credentials,
-                        dob: day + '/' + month + '/' + year,
+                        dob: year + '-' + month + '-' + day
                     });
                     setIsSelectingDate(false);
                 } else if (/^\d{2}$/.test(day) && /^\d{2}$/.test(month)) {
                     setCredentials({
                         ...credentials,
-                        dob: day + '/' + month,
+                        dob: day + '-' + month,
                     });
                     setIsSelectingDate(true);
                 } else {
@@ -95,7 +95,6 @@ const Update_Profile: FunctionComponent = () => {
         setIsSelectingDate(false);
     };
     const isEmailValid = (email: string) => {
-        // Sử dụng biểu thức chính quy để kiểm tra định dạng email
         const emailPattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
         return emailPattern.test(email);
     };
@@ -150,14 +149,14 @@ const Update_Profile: FunctionComponent = () => {
 
                             <Text style={styles.titleInput}>Date of birth</Text>
                             <InputCustom
-                                placeholder="dd/MM/yyyy"
+                                placeholder="yyyy/MM/dd"
                                 value={credentials.dob}
                                 onChangeText={handleInputChange}
                                 rightIcon={
                                     <Icon
                                         type="ionicon"
                                         name={'calendar-outline'}
-                                        color={'black'}
+                                        color={'#f89300'}
                                         size={24}
                                         onPress={handleDatePickerPress}
                                     />
