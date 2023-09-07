@@ -8,7 +8,7 @@ import {getAuthEnableSignIn} from '../redux/selectors/auth.selector';
 import {getMode} from '../redux/selectors/thems.selector';
 import {makeStyles, useThemeMode} from '@rneui/themed';
 import {StatusBar} from 'react-native';
-import { theme } from '../theme';
+import {theme} from '../theme';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -21,25 +21,23 @@ const RootNavigation = () => {
 
   return (
     <NavigationContainer ref={navigationRef}>
+      <StatusBar
+        animated={true}
+        showHideTransition={'slide'}
+        backgroundColor={usestyles().Mode.backgroundColor}
+        barStyle={'light-content'}
+      />
 
-        <StatusBar
-          animated={true}
-          showHideTransition={'slide'}
-          backgroundColor={usestyles().Mode.backgroundColor}
-          barStyle={'light-content'}
-        />
-   
-      {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
-      {/* <AppNavigator /> */}
+      {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
+      <AppNavigator />
     </NavigationContainer>
   );
 };
 
 export default RootNavigation;
 
-
-const usestyles = makeStyles(({colors}) => ({ 
-  Mode:{
-    backgroundColor:colors.background,
-  }
+const usestyles = makeStyles(({colors}) => ({
+  Mode: {
+    backgroundColor: colors.background,
+  },
 }));

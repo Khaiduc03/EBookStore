@@ -1,4 +1,4 @@
-import {fontFamilySetup} from '../../../../../utils/font';
+import {fontFamilySetup} from '../../../../utils/font';
 import {makeStyles, normalize} from '@rneui/themed';
 
 const useStyles = makeStyles(({colors}) => ({
