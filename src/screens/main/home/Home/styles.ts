@@ -6,7 +6,6 @@ const useStyles = makeStyles(({colors}) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    paddingHorizontal: normalize(19),
   },
   textTitle: {
     fontSize: normalize(20),

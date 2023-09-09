@@ -10,7 +10,6 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 0,
-    paddingHorizontal: 0,
   },
   textTitle: {
     fontSize: normalize(22),

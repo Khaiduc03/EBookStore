@@ -4,14 +4,18 @@ import useStyles from './styles';
 import {Icon} from '@rneui/themed';
 import {CustomComicProps} from './type';
 
-const img = {
-  uri: 'https://i.pinimg.com/originals/4e/d0/58/4ed058f5713dddec9c1bd68a106a22c5.jpg',
-};
-
 const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
   return (
-    <TouchableOpacity style={props.viewStyle || styles.container}>
+    <TouchableOpacity
+      style={[
+        props.viewStyle
+          ? props.viewStyle
+          : props.index % 2 !== 0
+          ? {marginLeft: 15}
+          : {marginLeft: 0} || styles.container,
+        ,
+      ]}>
       <Image
         style={props.imageStyle || styles.imgComic}
         source={{uri: props.image}}

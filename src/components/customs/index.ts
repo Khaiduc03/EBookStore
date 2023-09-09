@@ -8,4 +8,4 @@ export {default as BigButton} from './BigButton';
 export {default as HeaderCustom} from './HeaderCustom';
 export {default as TopicItem} from './TopicItem';
 export {default as ComicItem} from './ComicItem';
-export {default as Search} from './Search';
+export {default as SearchCustom} from './Search';

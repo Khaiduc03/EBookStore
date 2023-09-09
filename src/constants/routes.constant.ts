@@ -10,6 +10,7 @@ export enum routes {
   HOME = 'HOME',
 
   TOPICS = 'TOPICS',
+  SEARCH = 'SEARCH',
 
   PROFILE = 'PROFILE',
   BOOKMARK = 'BOOKMARK',

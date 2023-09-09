@@ -9,4 +9,6 @@ export type CustomComicProps = {
   imageStyle?: ImageStyle | null;
   viewStyle?: ViewStyle | null;
   contentStyle?: ViewStyle | null;
+  onPress?: () => void;
+  index: number;
 };

@@ -1,41 +1,52 @@
 import React, {useState} from 'react';
 import {SearchBar} from '@rneui/themed';
-import {View, Text, StyleSheet} from 'react-native';
-import {Icon} from '@rneui/themed';
+import {View, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Icon} from '@rneui/base';
+import {TouchableOpacity} from 'react-native';
+import useStyles from './styles';
+import {SearchBarComponentProps} from './types';
 
-type SearchBarComponentProps = {};
-
-const Search: React.FunctionComponent<SearchBarComponentProps> = () => {
+const SearchCustom: React.FunctionComponent<
+  SearchBarComponentProps
+> = props => {
+  const styles = useStyles();
   const [search, setSearch] = useState('');
+  const [inputFocused, setInputFocused] = useState(false);
+
+  const handleKeyPress = () => {
+    console.log(search);
+  };
+
+  const handleInputFocus = () => {
+    setInputFocused(true);
+  };
+
+  const handleInputBlur = () => {
+    setInputFocused(false);
+  };
+
   return (
-    <View style={styles.view}>
-      <SearchBar
-        placeholder="Type Here..."
-        onChangeText={setSearch}
-        value={search}
-        platform="android"
-        leftIcon
-        containerStyle={{
-          borderStyle: 'solid',
-          borderWidth: 1,
-          borderColor: '#F89300',
-          height: 56,
-          width: 300,
-          borderRadius: 16,
-          justifyContent: 'center',
-          backgroundColor: '#FEF4E6',
-        }}
-        inputStyle={{padding: 0}}
-        cancelIcon={false}
-      />
-    </View>
+    <SearchBar
+      onChangeText={props.setValue}
+      placeholder="Search..."
+      value={props.value}
+      platform="android"
+      containerStyle={[
+        props.containerStyle || styles.container,
+        inputFocused
+          ? styles.backGroundInputFocus
+          : styles.backGroundInputNoFocus,
+      ]}
+      cancelIcon={{}}
+      autoFocus={true}
+      returnKeyType="search"
+      inputStyle={props.inputStyle || styles.inputStyle}
+      onSubmitEditing={props.onPress}
+      onBlur={handleInputBlur}
+      onFocus={handleInputFocus}
+      clearIcon={styles.clearIcon}
+    />
   );
 };
 
-const styles = StyleSheet.create({
-  view: {
-    margin: 10,
-  },
-});
-
-export default Search;
+export default SearchCustom;

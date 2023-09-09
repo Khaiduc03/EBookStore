@@ -6,9 +6,8 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 const useStyles = makeStyles(({colors}) => ({
   container: {
     height: Device.getDeviceHeight() * 0.45,
-    width: Device.getDeviceWidth() * 0.45,
-    marginRight: Device.getDeviceWidth() * 0.018,
-    marginBottom: Device.getDeviceWidth() * 0.018,
+    width: Device.getDeviceWidth() * 0.432,
+    marginBottom: normalize(5),
   },
   imgComic: {
     height: Device.getDeviceHeight() * 0.306,
@@ -17,11 +16,12 @@ const useStyles = makeStyles(({colors}) => ({
   },
   content: {
     width: '100%',
+    height: Device.getDeviceHeight() * 0.144,
   },
   nameTopic: {
     color: colors.grey4,
     fontSize: normalize(13),
-    lineHeight: normalize(23),
+    lineHeight: normalize(20),
     fontFamily: fontFamilySetup.medium,
   },
   nameComic: {

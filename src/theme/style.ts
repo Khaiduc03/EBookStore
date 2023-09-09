@@ -7,8 +7,9 @@ const mode = useAppSelector(getMode);
 export const theme = createTheme({
   lightColors: {
     primary: '#F89300',
-    secondary: '#FEF4E6',
+    secondary: '#FFF7EB',
     greyOutline: '#F9f9f9',
+    background: '#FFFFFF',
     grey5: '#B0B3B8',
     grey4: '#727272',
     divider: '#e3f3ff',
@@ -17,10 +18,12 @@ export const theme = createTheme({
     grey0: '#FFFFFF',
     grey2: '#90939B',
     white: '#FFFFFF',
+    input1: '#F2F2F2',
+    input2: '#FFF7EB',
   },
   darkColors: {
     primary: '#F89300',
-    secondary: '#FEF4E6',
+    secondary: '#FFF7EB',
     greyOutline: '#F9f9f9',
     grey5: '#B0B3B8',
     grey4: '#f1f1f4',
@@ -31,6 +34,8 @@ export const theme = createTheme({
     grey2: '#90939B',
     white: '#FFFFFF',
     background: '#181A20',
+    input1: '#1F222A',
+    input2: '#2A241D',
   },
   mode: mode,
 });

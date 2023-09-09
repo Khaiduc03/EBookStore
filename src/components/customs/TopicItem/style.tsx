@@ -3,6 +3,9 @@ import {Device} from '../../../utils';
 import {fontFamilySetup} from '../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
+  container: {
+    marginLeft: normalize(15),
+  },
   imgBackground: {
     justifyContent: 'flex-end',
   },

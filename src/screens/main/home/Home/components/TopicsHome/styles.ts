@@ -7,7 +7,8 @@ const useStyles = makeStyles(({colors}) => ({
   itemTopic: {
     height: Device.getDeviceHeight() * 0.11,
     width: Device.getDeviceWidth() * 0.45,
-    marginRight: normalize(10),
+    // marginRight: normalize(10),
+    // paddingLeft: 10,
   },
 }));
 

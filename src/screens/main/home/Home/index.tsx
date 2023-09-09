@@ -12,23 +12,22 @@ import {TopicsHome, ComicsNew} from './components';
 const Home: FunctionComponent = () => {
   const styles = useStyles();
   const [numCols, setNumCols] = useState(2);
-  const [leftIconPressed, setLeftIconPressed] = useState(false);
-  const [rightIconPressed, setRightIconPressed] = useState(false);
 
   const handleListIconPress = () => {
-    setNumCols(2);
-    setLeftIconPressed(!leftIconPressed);
-    setRightIconPressed(false);
+    setNumCols(1);
   };
   const handleGridIconPress = () => {
-    setNumCols(1);
-    setRightIconPressed(!rightIconPressed);
-    setLeftIconPressed(false);
+    setNumCols(2);
+  };
+
+  const handlePressSearch = () => {
+    NavigationService.navigate(routes.SEARCH);
   };
 
   return (
     <View style={styles.container}>
       <HeaderCustom
+        onPressRightIconLeft={handlePressSearch}
         leftIcon={createIcon({name: 'book', type: 'font-awesome'})}
         title="ComicVerse"
         rightIconleft={createIcon({name: 'search'})}
@@ -39,7 +38,6 @@ const Home: FunctionComponent = () => {
       />
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* <HeaderCustom title="Continue reading" onPressLeftIcon={handleIcon} /> */}
         <HeaderCustom
           title="Explore by Genre"
           rightIconRight={createIcon({
@@ -50,19 +48,19 @@ const Home: FunctionComponent = () => {
 
         <TopicsHome />
         <HeaderCustom
-          title="Explore by Genre"
+          title="Comics New"
           rightIconleft={createIcon({
             name: 'grid-outline',
             type: 'ionicon',
-            color: leftIconPressed ? 'red' : '',
+            color: numCols === 2 ? '#F89300' : '',
           })}
           rightIconRight={createIcon({
             name: 'list-circle-outline',
             type: 'ionicon',
-            color: rightIconPressed ? 'red' : '',
+            color: numCols === 1 ? '#F89300' : '',
           })}
-          onPressRightIconLeft={handleListIconPress}
-          onPressRightIconRight={handleGridIconPress}
+          onPressRightIconLeft={handleGridIconPress}
+          onPressRightIconRight={handleListIconPress}
         />
         <ComicsNew numCols={numCols} />
       </ScrollView>
