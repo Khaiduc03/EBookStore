@@ -16,6 +16,10 @@ const useStyles = makeStyles(({colors}) => ({
     fontStyle: 'normal',
     lineHeight: normalize(25.6),
   },
+  containerProps: {
+    marginLeft: normalize(15),
+    marginBottom: normalize(15),
+  },
 }));
 
 export default useStyles;

@@ -12,7 +12,6 @@ const useStyles = makeStyles(({colors}) => ({
   imgComic: {
     height: Device.getDeviceHeight() * 0.306,
     width: Device.getDeviceWidth() * 0.432,
-    borderRadius: 10,
   },
   content: {
     width: '100%',

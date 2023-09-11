@@ -11,6 +11,7 @@ export enum routes {
 
   TOPICS = 'TOPICS',
   SEARCH = 'SEARCH',
+  COMICBYTOPIC = 'COMICBYTOPIC',
 
   PROFILE = 'PROFILE',
   BOOKMARK = 'BOOKMARK',

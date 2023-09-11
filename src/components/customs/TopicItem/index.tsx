@@ -8,7 +8,11 @@ const TopicItem: React.FunctionComponent<CustomTopicsProps> = props => {
   const styles = useStyles();
 
   return (
-    <TouchableOpacity onPress={props.onPress} style={styles.container}>
+    <TouchableOpacity
+      onPress={props.onPress}
+      style={
+        props.index % 2 !== 0 ? styles.containerProps : {} || styles.container
+      }>
       <ImageBackground
         borderRadius={10}
         resizeMode="cover"

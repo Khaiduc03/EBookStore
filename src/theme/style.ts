@@ -4,6 +4,10 @@ import {getMode} from '../redux/selectors/thems.selector';
 
 const mode = useAppSelector(getMode);
 
+declare module '@rneui/themed' {
+  export interface Colors {}
+}
+
 export const theme = createTheme({
   lightColors: {
     primary: '#F89300',
@@ -37,5 +41,6 @@ export const theme = createTheme({
     input1: '#1F222A',
     input2: '#2A241D',
   },
+
   mode: mode,
 });

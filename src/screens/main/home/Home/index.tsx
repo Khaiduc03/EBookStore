@@ -23,14 +23,17 @@ const Home: FunctionComponent = () => {
   const handlePressSearch = () => {
     NavigationService.navigate(routes.SEARCH);
   };
+  const handlePressTopics = () => {
+    NavigationService.navigate(routes.TOPICS);
+  };
 
   return (
     <View style={styles.container}>
       <HeaderCustom
         onPressRightIconLeft={handlePressSearch}
-        leftIcon={createIcon({name: 'book', type: 'font-awesome'})}
+        leftIcon={{name: 'book', type: 'font-awesome'}}
         title="ComicVerse"
-        rightIconleft={createIcon({name: 'search'})}
+        rightIconleft={{name: 'search', type: 'ionicon'}}
         rightIconRight={createIcon({
           name: 'notifications-outline',
           type: 'ionicon',
@@ -40,25 +43,26 @@ const Home: FunctionComponent = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <HeaderCustom
           title="Explore by Genre"
-          rightIconRight={createIcon({
+          rightIconRight={{
             name: 'arrow-forward-outline',
             type: 'ionicon',
-          })}
+          }}
+          onPressRightIconRight={handlePressTopics}
         />
 
         <TopicsHome />
         <HeaderCustom
           title="Comics New"
-          rightIconleft={createIcon({
+          rightIconleft={{
             name: 'grid-outline',
             type: 'ionicon',
             color: numCols === 2 ? '#F89300' : '',
-          })}
-          rightIconRight={createIcon({
+          }}
+          rightIconRight={{
             name: 'list-circle-outline',
             type: 'ionicon',
             color: numCols === 1 ? '#F89300' : '',
-          })}
+          }}
           onPressRightIconLeft={handleGridIconPress}
           onPressRightIconRight={handleListIconPress}
         />

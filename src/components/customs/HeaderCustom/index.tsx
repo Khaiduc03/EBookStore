@@ -25,7 +25,7 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
               type={props.leftIcon.type}
               name={props.leftIcon.name}
               size={30}
-              color={styles.leftIcon.color}
+              color={props.leftIcon.color || styles.leftIcon.color}
             />
           )}
         </TouchableOpacity>
