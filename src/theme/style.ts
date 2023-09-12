@@ -41,6 +41,17 @@ export const theme = createTheme({
     input1: '#1F222A',
     input2: '#2A241D',
   },
-
+  components: {
+    Button: (props, theme) => ({
+      containerStyle: {
+        backgroundColor: theme.colors.background,
+        height: 100,
+        width: 100,
+      },
+      titleStyle: {
+        fontSize: 20,
+      },
+    }),
+  },
   mode: mode,
 });

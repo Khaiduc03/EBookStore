@@ -26,23 +26,17 @@ const App: FunctionComponent = () => {
           insets: {top: 0, left: 0, right: 0, bottom: 0},
         }}>
         <ThemeContext>
-          <ThemeProvider theme={theme}>
-            <GestureHandlerRootView style={{flex: 1}}>
-              {/* ALERT */}
-              <Alert />
-              {/* LOADING API */}
-              <Loading />
-              {/* MAIN APP */}
-              <RootNavigation />
-              <Toast
-                config={toastConfig}
-                topOffset={20}
-                visibilityTime={2500}
-              />
+          <GestureHandlerRootView style={{flex: 1}}>
+            {/* ALERT */}
+            <Alert />
+            {/* LOADING API */}
+            <Loading />
+            {/* MAIN APP */}
+            <RootNavigation />
+            <Toast config={toastConfig} topOffset={20} visibilityTime={2500} />
 
-              {/* Modal progressing when upgrade version of app */}
-            </GestureHandlerRootView>
-          </ThemeProvider>
+            {/* Modal progressing when upgrade version of app */}
+          </GestureHandlerRootView>
         </ThemeContext>
       </SafeAreaProvider>
     </Provider>
