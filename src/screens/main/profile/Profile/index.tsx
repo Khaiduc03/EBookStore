@@ -11,6 +11,8 @@ import AvatarComponets from '../../../../components/customs/Avatar';
 import { Icon } from '@rneui/themed';
 import { Circle } from '../../../../components';
 import TextCustom from '../../../../components/customs/Text';
+import { NavigationService } from '../../../../navigation';
+import { routes } from '../../../../constants';
 
 
 
@@ -21,7 +23,9 @@ const Profile: FunctionComponent = () => {
   const handleLogout = () => {
     dispatch(AuthActions.handleLogout());
   };
-
+  const Navigate = () => {
+    NavigationService.navigate(routes.SECURITY);
+  }
   return (
     <View style={styles.container}>
       <Header

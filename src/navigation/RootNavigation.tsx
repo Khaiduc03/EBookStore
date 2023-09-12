@@ -5,6 +5,7 @@ import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
 import { useAppSelector } from '../hooks';
 import { getAuthEnableSignIn } from '../redux/selectors/auth.selector';
+import MyProfile from '../screens/main/profile/MyProfile';
 
 
 

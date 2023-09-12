@@ -15,4 +15,7 @@ export enum routes {
     // Profile Click 
     NOTIFICATION = 'NOTIFICATION',
     SECURITY = 'SECURITY',
+    HELPCENTER = 'HELPCENTER',
+    MYPROFILE = 'MYPROFILE',
+    
 }
