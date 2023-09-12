@@ -4,22 +4,34 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    Avatar:{
-        width:64,
-        height:64,
-        borderRadius:50,
+    Avatar: {
+        width: 64,
+        height: 64,
+        borderRadius: 50,
     },
-    View:{
-        paddingHorizontal:24,
-        paddingVertical:24,
-        flexDirection:'row'
+    View: {
+        paddingVertical: 24,
+        flexDirection: 'row'
+    },
+    viewFollow: {
+        width: '25%',
+        right: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    NameUser:{
+        paddingHorizontal:24
+    },
+    ViewExplore:{
+        padding:24,
+        flexDirection:'row',
+        justifyContent:'space-between'
 
     },
-    viewFollow:{
-      width:'90%',
-      flexDirection:'row',
-      alignItems:'center',
-      
+    ViewSquares:{
+        paddingHorizontal:24,
+        flexDirection:'row',
+        gap:20
     }
 })
 export default styles;

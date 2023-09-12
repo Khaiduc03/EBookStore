@@ -33,7 +33,7 @@ const Profile: FunctionComponent = () => {
         <Circle circleColor='white' avatarDummy />
         <TouchableOpacity style={styles.viewText}>
           <TextCustom textBold title='Drake Kun' />
-          <TextCustom textLight title='drake@gmail.com'/>
+          <TextCustom textLight title='drake@gmail.com' />
         </TouchableOpacity>
       </View>
       <ScrollView>

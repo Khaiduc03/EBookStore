@@ -21,6 +21,14 @@ const useStyles = makeStyles(({ colors }) => ({
         fontStyle: 'normal',
         fontFamily: 'Urbanist-Regular',
         color: colors.black,
+    },
+    Primarytext: {
+        fontSize: normalize(HEIGHT * 0.02),
+        fontWeight: '700',
+        letterSpacing: normalize(0.2),
+        fontStyle: 'normal',
+        fontFamily: 'Urbanist-Regular',
+        color: colors.primary,
     }
 }));
 export default useStyles
