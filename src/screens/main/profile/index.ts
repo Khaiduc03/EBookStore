@@ -5,6 +5,9 @@ import HelpCenter from './HelpCenter';
 import MyProfile from './MyProfile';
 import Notification from './Notification';
 import Security from './Security';
+import Payments_method from './Payment-method';
+import BecomeVIP from './BecomeVIP';
+import AboutApp from './AboutApp';
 
 export { default as Profile } from './Profile';
 
@@ -24,5 +27,17 @@ export const profileScreens: Screen[] = [
     {
         name: routes.NOTIFICATION,
         component: Notification
+    },
+    {
+        name: routes.PAYMENTSMETHOD,
+        component: Payments_method
+    },
+    {
+        name: routes.BECOMEVIP,
+        component: BecomeVIP
+    },
+    {
+        name: routes.ABOUTAPP,
+        component: AboutApp
     },
 ];

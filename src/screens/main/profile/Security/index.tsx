@@ -7,15 +7,15 @@ import { ButtonBig } from '../../../../components/customs/Button/index';
 const Security: React.FC = () => {
     return (
         <View>
-            <Header leftIcon title='Bảo mật' istitle />
+            <Header leftIcon title='Security' istitle />
             <View style={styles.view_switch}>
-                <Switch_ title='Lưu mật khẩu' />
-                <Switch_ title='Đăng nhập bằng vân tay' />
-                <Switch_ title='Trình xác thực SMS' />
-                <Switch_ title='Trình xác thực Google' />
+                <Switch_ title='Save Password' />
+                <Switch_ title='Log in with fingerprint' />
+                <Switch_ title='SMS authenticator' />
+                <Switch_ title='Google Authenticator' />
             </View>
             <View style={styles.viewButton}>
-                <ButtonBig title='Đổi mật khẩu' />
+                <ButtonBig title='Change Password' />
 
             </View>
         </View>

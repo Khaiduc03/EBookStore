@@ -4,7 +4,8 @@ import usestyles from './styles'
 import Header from '../../../../components/customs/Headers'
 import { images } from '../../../../assets'
 import { ImageSourcePropType } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
+import Profile from '../Profile'
 // Định nghĩa kiểu dữ liệu cho các dịch vụ thanh toán
 type ServiceType = 'Google Pay' | 'Zalo Pay' | 'PayPal';
 
@@ -35,6 +36,7 @@ const Payments_method: React.FC = () => {
             </TouchableOpacity>
         </View>
     );
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
             <Header leftIcon title='Payments method' istitle />

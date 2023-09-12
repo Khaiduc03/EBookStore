@@ -9,14 +9,7 @@ const usestyles = makeStyles(({ colors }) => ({
     container: {
         flex: 1,
     },
-    txt: {
-        fontSize: normalize(HEIGHT * 0.02),
-        fontWeight: '700',
-        letterSpacing: normalize(0.2),
-        fontStyle: 'normal',
-        fontFamily: 'Urbanist-Regular',
-        color: colors.black,
-        padding: 24
-    },
+    
+  
 }));
 export default usestyles;

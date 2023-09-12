@@ -6,7 +6,7 @@ import { TopNavigator } from '../../../../navigation/navigators/TopNavigator';
 const HelpCenter: React.FC = () => {
     return (
         <View>
-            <Header leftIcon title='Trung tâm trợ giúp' istitle />
+            <Header leftIcon title='Help center' istitle />
             <View>
                 <TopNavigator />
             </View>

@@ -42,22 +42,22 @@ const Profile: FunctionComponent = () => {
       </View>
       <ScrollView>
         <View>
-          <TouchableOpacity style={styles.viewCircle} onPress={Navigate}>
+          <TouchableOpacity style={styles.viewCircle} onPress={() => NavigationService.navigate(routes.PAYMENTSMETHOD)}>
             <Circle circleColor='#D1F1E4' ic_Wallet title='Payment methods' icEdit />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.viewCircle} onPress={Navigate}>
+          <TouchableOpacity style={styles.viewCircle} onPress={() => NavigationService.navigate(routes.NOTIFICATION)}>
             <Circle circleColor='#FFF2F3' ic_Notification title='Notification' icContinue />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.viewCircle} onPress={Navigate}>
+          <TouchableOpacity style={styles.viewCircle} onPress={() => NavigationService.navigate(routes.SECURITY)}>
             <Circle circleColor='#EDF9F1' ic_Security title='Security' icContinue />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.viewCircle}>
+          <TouchableOpacity style={styles.viewCircle} onPress={() => NavigationService.navigate(routes.BECOMEVIP)}>
             <Circle circleColor='#FFFDEA' ic_VIP title='Become a VIP member' icContinue />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.viewCircle}>
+          <TouchableOpacity style={styles.viewCircle} onPress={() => NavigationService.navigate(routes.HELPCENTER)}>
             <Circle circleColor='#EDF9F1' ic_HelpCenter title='Help Center' icContinue />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.viewCircle}>
+          <TouchableOpacity style={styles.viewCircle} onPress={() => NavigationService.navigate(routes.ABOUTAPP)}>
             <Circle circleColor='#FFF7EB' ic_AboutApp title='About the App' icContinue />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => { handleLogout() }}>
