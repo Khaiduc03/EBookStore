@@ -12,5 +12,17 @@ export const profileScreens: Screen[] = [
     {
         name: routes.HELPCENTER,
         component: HelpCenter
-    }
+    },
+    {
+        name: routes.SECURITY,
+        component: Security
+    },
+    {
+        name: routes.MYPROFILE,
+        component: MyProfile
+    },
+    {
+        name: routes.NOTIFICATION,
+        component: Notification
+    },
 ];

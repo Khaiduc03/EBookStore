@@ -10,7 +10,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 
 
-const MyProfile = () => {
+const MyProfile: React.FC = () => {
     return (
         <View style={styles.container}>
             <Header leftIcon title='My Profile' istitle ic_Add ic_Edit />
@@ -41,7 +41,7 @@ const MyProfile = () => {
             </View>
             <ScrollView horizontal showsHorizontalScrollIndicator>
                 <View style={styles.ViewSquares}>
-                    <Squares avatarDummy name='Peter'/>
+                    <Squares avatarDummy name='Peter' />
                     <Squares avatarDummy />
                     <Squares avatarDummy />
                     <Squares avatarDummy />

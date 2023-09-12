@@ -42,13 +42,13 @@ const Profile: FunctionComponent = () => {
       </View>
       <ScrollView>
         <View>
-          <TouchableOpacity style={styles.viewCircle}>
+          <TouchableOpacity style={styles.viewCircle} onPress={Navigate}>
             <Circle circleColor='#D1F1E4' ic_Wallet title='Payment methods' icEdit />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.viewCircle}>
+          <TouchableOpacity style={styles.viewCircle} onPress={Navigate}>
             <Circle circleColor='#FFF2F3' ic_Notification title='Notification' icContinue />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.viewCircle}>
+          <TouchableOpacity style={styles.viewCircle} onPress={Navigate}>
             <Circle circleColor='#EDF9F1' ic_Security title='Security' icContinue />
           </TouchableOpacity>
           <TouchableOpacity style={styles.viewCircle}>
@@ -65,9 +65,6 @@ const Profile: FunctionComponent = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-
-
-
     </View>
   );
 };

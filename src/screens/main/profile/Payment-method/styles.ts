@@ -9,13 +9,32 @@ const usestyles = makeStyles(({ colors }) => ({
     container: {
         flex: 1,
     },
-    txt: {
-        fontSize: normalize(HEIGHT * 0.02),
+    Payment: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 24
+    },
+    Icon: {
+        width: 64,
+        height: 64,
+        borderRadius:50,
+    },
+    TextName: {
+        fontSize: normalize(HEIGHT * 0.021),
         fontWeight: '700',
         letterSpacing: normalize(0.2),
         fontStyle: 'normal',
         fontFamily: 'Urbanist-Regular',
         color: colors.black,
     },
+    TextConnect: {
+        fontSize: normalize(HEIGHT * 0.021),
+        fontWeight: '700',
+        letterSpacing: normalize(0.2),
+        fontStyle: 'normal',
+        fontFamily: 'Urbanist-Regular',
+
+    }
 }));
 export default usestyles;

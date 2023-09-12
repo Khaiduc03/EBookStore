@@ -4,7 +4,7 @@ import Header from '../../../../components/customs/Headers';
 import styles from '../Security/styles';
 import { Switch_ } from '../../../../components/customs/Switch/index';
 import { ButtonBig } from '../../../../components/customs/Button/index';
-const Security = () => {
+const Security: React.FC = () => {
     return (
         <View>
             <Header leftIcon title='Bảo mật' istitle />

@@ -6,6 +6,7 @@ import AuthNavigator from './navigators/AuthNavigator';
 import { useAppSelector } from '../hooks';
 import { getAuthEnableSignIn } from '../redux/selectors/auth.selector';
 import MyProfile from '../screens/main/profile/MyProfile';
+import Payments_method from '../screens/main/profile/Payment-method';
 
 
 
@@ -18,7 +19,7 @@ const RootNavigation = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      <AppNavigator />
+      <Payments_method />
     </NavigationContainer>
   );
 };
