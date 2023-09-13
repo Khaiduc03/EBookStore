@@ -46,14 +46,7 @@ const InputCustom: FunctionComponent<
         rightIconContainerStyle={styles.icon}
         rightIcon={props.secure && _renderSecure()}
         inputStyle={styles.input}
-        style={[
-          styles.input,
-          {
-            borderBottomColor: isFocused
-              ? '#F89300'
-              : props.borderBottomColor || '#727272',
-          },
-        ]}
+        style={[(styles.input.borderBottomColor = 'red')]}
         value={props.value}
         onChangeText={props.onChangeText}
         renderErrorMessage={false}
