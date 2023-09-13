@@ -6,7 +6,6 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: colors.white,
     // borderRadius: normalize(8),
     // borderWidth: 1,
-
     width: Device.getDeviceWidth() - normalize(48),
     marginLeft: normalize(-10),
     marginVertical: normalize(12),
@@ -22,6 +21,18 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
     letterSpacing: normalize(0.2),
     // paddingStart: normalize(10),
+    paddingHorizontal: 0,
+  },
+  input2: {
+    borderBottomWidth: 1,
+    borderBottomColor: colors.primary,
+    fontSize: normalize(16),
+    fontWeight: '400',
+    fontFamily: 'Urbanist-Regular',
+    color: colors.black,
+    letterSpacing: normalize(0.2),
+    // paddingStart: normalize(10),
+    paddingHorizontal: 0,
   },
   placeHolder: {
     color: colors.grey5,

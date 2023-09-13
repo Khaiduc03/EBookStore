@@ -13,14 +13,6 @@ import {AuthHeader, BigButton, InputCustom} from '../../../components';
 import Header from '../../../components/customs/Headers';
 import {routes} from '../../../constants';
 import {NavigationService} from '../../../navigation';
-// import {
-//   checked,
-//   toggleCheckbox,
-//   credentials,
-//   setCredentials,
-//   inputErrors,
-//   handleCreateAccount,
-// } from '../../../utils/validate';
 import useStyles from './styles';
 import {
   comparePassword,
@@ -131,6 +123,7 @@ const CreateAccount: FunctionComponent = () => {
                 onChangeText={text =>
                   setCredentials({...credentials, email: text})
                 }
+                style={inputErrors.email ? styles.errorInput : null}
               />
               <Text style={styles.titleInput}>Password</Text>
               <InputCustom
