@@ -4,11 +4,11 @@ import usestyles from './styles';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { getAuthEnableSignIn } from '../../../../redux/selectors/auth.selector';
 import { AuthActions } from '../../../../redux/reducer';
-import Header from '../../../../components/customs/Headers';
 import { Circle } from '../../../../components';
 import TextCustom from '../../../../components/customs/Text';
 import { NavigationService } from '../../../../navigation';
 import { routes } from '../../../../constants';
+import HeaderCustom from '../../../../components/customs/HeaderCustom';
 
 
 const Profile: FunctionComponent = () => {
@@ -20,11 +20,7 @@ const Profile: FunctionComponent = () => {
   const styles = usestyles();
   return (
     <View style={styles.container}>
-      <Header
-        logobook
-        title='My Profile'
-        istitle
-        menu />
+      <HeaderCustom leftIcon={{ name: 'user', type: 'font-awesome' }} title="My profile" />
       <View style={styles.viewAvatar}>
         <Circle circleColor='white' avatarDummy />
         <TouchableOpacity style={styles.viewText} onPress={() => NavigationService.navigate(routes.MYPROFILE)}>
@@ -35,7 +31,7 @@ const Profile: FunctionComponent = () => {
       <ScrollView>
         <View>
           <TouchableOpacity style={styles.viewCircle} onPress={() => NavigationService.navigate(routes.PAYMENTSMETHOD)}>
-            <Circle circleColor='#D1F1E4' ic_Wallet title='Payment methods' icEdit />
+            <Circle circleColor='#D1F1E4' ic_Wallet title='Payment methods' icContinue />
           </TouchableOpacity>
           <TouchableOpacity style={styles.viewCircle} onPress={() => NavigationService.navigate(routes.NOTIFICATION)}>
             <Circle circleColor='#FFF2F3' ic_Notification title='Notification' icContinue />

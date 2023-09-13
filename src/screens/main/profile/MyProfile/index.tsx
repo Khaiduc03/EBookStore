@@ -1,6 +1,6 @@
 import { View, TouchableOpacity } from 'react-native'
 import React from 'react'
-import styles from '../MyProfile/styles'
+import useStyles from '../MyProfile/styles'
 import Header from '../../../../components/customs/Headers';
 import { images } from '../../../../assets';
 import TextCustom from '../../../../components/customs/Text';
@@ -11,6 +11,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 
 const MyProfile: React.FC = () => {
+    const styles = useStyles();
     return (
         <View style={styles.container}>
             <Header leftIcon title='My Profile' istitle ic_Add ic_Edit />
