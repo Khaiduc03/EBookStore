@@ -74,6 +74,10 @@ const usestyles = makeStyles(({colors}) => ({
   backgroundColors: {
     backgroundColor: colors.primary,
   },
+
+  backgroundColorsWhite: {
+    backgroundColor: colors.grey0,
+  },
   colorWhite: {
     color: colors.grey0,
   },

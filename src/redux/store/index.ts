@@ -1,13 +1,18 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import EncryptedStorage from 'react-native-encrypted-storage';
-import { PersistConfig, persistStore } from 'redux-persist';
-import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
-import { Redux } from '../types/redux.type';
-import { AppReducer, AuthReducer, LoadingReducer } from '../reducer';
+import {PersistConfig, persistStore} from 'redux-persist';
 import persistReducer from 'redux-persist/es/persistReducer';
+import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2';
 import createSagaMiddleware from 'redux-saga';
+import {
+  AppReducer,
+  AuthReducer,
+  LoadingReducer,
+  ThemeReducer,
+} from '../reducer';
+import {AlertReducer} from '../reducer/alert.reducer';
 import RootSaga from '../sagas';
-import { AlertReducer } from '../reducer/alert.reducer';
+import {Redux} from '../types/redux.type';
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
@@ -16,8 +21,8 @@ const persistConfig: PersistConfig<RootState> = {
   version: 1, // version - defaults to 1
   debug: true, // enable logs - default is false
   stateReconciler: autoMergeLevel2,
-  whitelist: [Redux.auth, Redux.app],
-  blacklist: [Redux.loading],
+  whitelist: [Redux.auth, Redux.theme],
+  blacklist: [Redux.loading, Redux.app],
 };
 
 const rootReducers = combineReducers({
@@ -25,6 +30,7 @@ const rootReducers = combineReducers({
   loading: LoadingReducer,
   app: AppReducer,
   alert: AlertReducer,
+  theme: ThemeReducer,
 });
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducers);
 

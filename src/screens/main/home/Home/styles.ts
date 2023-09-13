@@ -1,25 +1,19 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
+import {fontFamilySetup} from '../../../../utils/font';
+import {makeStyles, normalize} from '@rneui/themed';
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    ic_book: {
-        width:24,
-        height:24,
-    },
+const useStyles = makeStyles(({colors}) => ({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  textTitle: {
+    fontSize: normalize(20),
+    fontFamily: fontFamilySetup.bold,
 
-    view_ic: {
+    lineHeight: normalize(35.2),
+    color: colors.black,
+  },
+}));
 
-    },
-    ic_search: {
-
-    },
-    ic_notification: {
-
-    },
-});
-
-export default styles;
+export default useStyles;

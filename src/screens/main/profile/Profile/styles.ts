@@ -1,24 +1,16 @@
-import { StyleSheet } from 'react-native';
+import { makeStyles } from '@rneui/themed';
+import { fontFamilySetup } from '../../../../utils/font';
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    viewCircle: {
-        flexDirection: 'row',
-        paddingVertical: 20,
-    },
-    viewAvatar: {
-        paddingVertical: 20,
-        flexDirection: 'row',
-    },
-    viewText: {
-        width: '100%',
-        right: 45,
-        top: 10
-    }
+const useStyles = makeStyles(({colors}) => ({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  text: {
+    fontSize: 26,
+    fontFamily: fontFamilySetup.bold,
+    color: colors.primary,
+  },
+}));
 
-
-});
-
-export default styles;
+export default useStyles;

@@ -87,6 +87,8 @@ const Header: React.FunctionComponent<HeaderProps> = props => {
           />
         </TouchableOpacity>
       )}
+
+     
     </View>
   );
 };

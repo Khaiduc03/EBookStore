@@ -4,8 +4,7 @@
 // dotenv.config();
 
 // //URL
-export const BASE_URL =
-  'https://e69c-2402-800-63a8-b4b3-dd6-2d00-27a2-1424.ngrok-free.app';
+export const BASE_URL = 'https://comicverse.onrender.com';
 
 export enum Endpoints {
   //AUTH
@@ -14,14 +13,22 @@ export enum Endpoints {
   CREATE_ACCOUNT_ENDPOINT = '/auth/register',
   REFRESH_TOKEN_ENDPOINT = '/auth/refresh-token',
   SIGN_IN_GOOGLE = '/auth/google-login',
+  UPDATE_PASSWORD_ENDPOINT = '/auth/update-password',
+
   //USER
   GET_ALL_USER_ENDPOINT = '/user',
-  UPLOAD_USER_AVATAR_ENDPOINT = '/user/avatar', //put,remove: avatar
-  UPDATE_USER_PROFILE_ENDPOINT = '/user/update-user',
-  GET_PROFILE_ENDPOINT = '/user/profile', //update profile and get info user
+  UPLOAD_USER_AVATAR_ENDPOINT = '/user/avatar', //PUT, DELETE
+  GET_PROFILE_ENDPOINT = '/user/profile', //GET, PUT
+  GET_USER_BY_UUID_ENDPOINT = '/user/uuid', //GET
+  
   //TOPIC
-  GET_ALL_TOPIC_ENDPOINT = '/topic', //get all topic and create topic
-  UPDATE_TOPIC_ENDPOINT = '/topic/update', //update topic
-  DELETE_TOPIC_ENDPOINT = '/topic/delete', //delete topic
+  GET_ALL_TOPIC_ENDPOINT = '/topic', //GET, POST
+  UPDATE_TOPIC_ENDPOINT = '/topic/update', //PUT
+  DELETE_TOPIC_ENDPOINT = '/topic/delete', //DELETE
+  GET_TOPIC_BY_UUID_ENDPOINT = '/topic/uuid', //GET
+
+  //COMIC
+  GET_ALL_COMIC_ENDPOINT = '/comic', //GET, POST
+  GET_COMIC_BY_UUID_ENDPOINT = '/comic/uuid', //GET
 
 }

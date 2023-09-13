@@ -1,11 +1,12 @@
 import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React, { useState } from 'react'
 import styles from '../Search/styles';
-import { Searchpros } from '../Search/types';
+
 import { images } from '../../../assets/images/png';
+import { SearchBarComponentProps } from './types';
 
 
-export const Search: React.FC<Searchpros> = props => {
+export const Search: React.FC<SearchBarComponentProps> = props => {
     const [text, setText] = useState('');
 
     const handleTextChange = (inputText: string) => {
