@@ -1,8 +1,9 @@
 import {TextStyle, ViewProps} from 'react-native';
 
-type HeaderIcon = {
+export type HeaderIcon = {
   name?: string;
   type?: string;
+  color?: string;
 };
 
 export type CustomHeaderProps = {

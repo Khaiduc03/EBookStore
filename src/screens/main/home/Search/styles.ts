@@ -1,4 +1,3 @@
-import {StyleSheet} from 'react-native';
 import {fontFamilySetup} from '../../../../utils/font';
 import {makeStyles, normalize} from '@rneui/themed';
 
@@ -7,12 +6,10 @@ const useStyles = makeStyles(({colors}) => ({
     flex: 1,
     backgroundColor: colors.background,
   },
-  textTitle: {
-    fontSize: normalize(20),
+  text: {
+    fontSize: 26,
     fontFamily: fontFamilySetup.bold,
-
-    lineHeight: normalize(35.2),
-    color: colors.black,
+    color: colors.primary,
   },
 }));
 

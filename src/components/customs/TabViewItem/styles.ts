@@ -1,15 +1,17 @@
-import {fontFamilySetup} from '../../../../../utils/font';
 import {makeStyles, normalize} from '@rneui/themed';
+import {Device} from '../../../utils';
+import {fontFamilySetup} from '../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
-  container: {
+  container: {},
+  containerTabView: {
     flex: 1,
     backgroundColor: colors.background,
   },
-  text: {
-    fontSize: 26,
+  titleStyle: {
+    color: colors.grey1,
+    fontSize: normalize(12),
     fontFamily: fontFamilySetup.bold,
-    color: colors.primary,
   },
 }));
 

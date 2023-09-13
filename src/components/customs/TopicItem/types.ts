@@ -4,5 +4,7 @@ export type CustomTopicsProps = {
   image?: string;
   titleStyle?: TextStyle;
   viewStyle?: ViewStyle;
-  onPress?: () => void;
+  containerStyle?: ViewStyle;
+
+  index: number;
 };

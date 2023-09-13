@@ -11,6 +11,8 @@ import Alert from './src/components/customs/Alert';
 import Loading from './src/components/shared/Loading';
 import {Provider} from 'react-redux';
 import {store} from './src/redux';
+import {ThemeProvider} from '@rneui/themed';
+import {theme} from './src/theme';
 
 const App: FunctionComponent = () => {
   useEffect(() => {

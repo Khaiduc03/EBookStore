@@ -1,60 +1,73 @@
-import {View} from 'react-native';
-import {Button, Text} from '@rneui/base';
+import {View, ScrollView} from 'react-native';
 
-import React, {FunctionComponent} from 'react';
-
-import styles from './styles';
+import React, {FunctionComponent, useState} from 'react';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import useStyles from './styles';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Icon} from '@rneui/themed';
-import {HeaderCustom, TopicItem} from '../../../../components';
-import TopicsHome from './components/TopicsHome';
+import {ComicItem, HeaderCustom, TopicItem} from '../../../../components';
+
+import {createIcon} from '../../../../utils';
+import {TopicsHome, ComicsNew} from './components';
 
 const Home: FunctionComponent = () => {
   const styles = useStyles();
-  const leftIcon = {
-    name: 'book',
-    type: 'font-awesome',
+  const [numCols, setNumCols] = useState(2);
+
+  const handleListIconPress = () => {
+    setNumCols(1);
   };
-  const rightIconLeft = {
-    name: 'search',
-  };
-  const rightIconRight = {
-    name: 'notifications-outline',
-    type: 'ionicon',
-  };
-  const iconRightTitleList = {
-    name: 'arrow-forward-outline',
-    type: 'ionicon',
+  const handleGridIconPress = () => {
+    setNumCols(2);
   };
 
-  const handleIcon = () => {
-    console.log('Hello');
+  const handlePressSearch = () => {
+    NavigationService.navigate(routes.SEARCH);
   };
+  const handlePressTopics = () => {
+    NavigationService.navigate(routes.TOPICS);
+  };
+
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={leftIcon}
+        onPressRightIconLeft={handlePressSearch}
+        leftIcon={{name: 'book', type: 'font-awesome'}}
         title="ComicVerse"
-        rightIconleft={rightIconLeft}
-        rightIconRight={rightIconRight}
-        onPressLeftIcon={handleIcon}
+        rightIconleft={{name: 'search', type: 'ionicon'}}
+        rightIconRight={createIcon({
+          name: 'notifications-outline',
+          type: 'ionicon',
+        })}
       />
 
-      <HeaderCustom
-        title="Explore by Genre"
-        rightIconRight={iconRightTitleList}
-        onPressLeftIcon={handleIcon}
-      />
-      <TouchableOpacity
-        onPress={() => {
-          NavigationService.navigate(routes.TOPICS);
-        }}>
-        <Text>TOPiC</Text>
-      </TouchableOpacity>
-      <TopicsHome />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <HeaderCustom
+          title="Explore by Genre"
+          rightIconRight={{
+            name: 'arrow-forward-outline',
+            type: 'ionicon',
+          }}
+          onPressRightIconRight={handlePressTopics}
+        />
+
+        <TopicsHome />
+        <HeaderCustom
+          title="Comics New"
+          rightIconleft={{
+            name: 'grid-outline',
+            type: 'ionicon',
+            color: numCols === 2 ? '#F89300' : '',
+          }}
+          rightIconRight={{
+            name: 'list-circle-outline',
+            type: 'ionicon',
+            color: numCols === 1 ? '#F89300' : '',
+          }}
+          onPressRightIconLeft={handleGridIconPress}
+          onPressRightIconRight={handleListIconPress}
+        />
+        <ComicsNew numCols={numCols} />
+      </ScrollView>
     </View>
   );
 };

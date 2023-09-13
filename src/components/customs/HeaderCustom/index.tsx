@@ -11,9 +11,12 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
     <Header
       barStyle="dark-content"
       centerComponent={
-        <Text style={[props.titleStyle, styles.textTitle]}>{props.title}</Text>
+        <Text style={props.titleStyle || styles.textTitle}>{props.title}</Text>
       }
-      centerContainerStyle={{justifyContent: 'center'}}
+      centerContainerStyle={{
+        justifyContent: 'center',
+        paddingHorizontal: 0,
+      }}
       containerStyle={styles.container}
       leftComponent={
         <TouchableOpacity onPress={props.onPressLeftIcon}>
@@ -22,7 +25,7 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
               type={props.leftIcon.type}
               name={props.leftIcon.name}
               size={30}
-              color={styles.leftIcon.color}
+              color={props.leftIcon.color || styles.leftIcon.color}
             />
           )}
         </TouchableOpacity>
@@ -32,21 +35,23 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
       placement="left"
       rightComponent={
         <View style={styles.rightContainer}>
-          <TouchableOpacity style={styles.rightIconLeft}>
+          <TouchableOpacity
+            style={styles.rightIconLeft}
+            onPress={props.onPressRightIconLeft}>
             {props.rightIconleft?.name && (
               <Icon
                 type={props.rightIconleft?.type}
                 size={24}
                 name={props.rightIconleft?.name}
-                color={styles.rightIcon.color}
+                color={props.rightIconleft?.color || styles.rightIcon.color}
               />
             )}
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={props.onPressRightIconRight}>
             {props.rightIconRight?.name && (
               <Icon
                 type={props.rightIconRight?.type}
-                color={styles.rightIcon.color}
+                color={props.rightIconRight.color || styles.rightIcon.color}
                 size={24}
                 name={props.rightIconRight?.name}
               />

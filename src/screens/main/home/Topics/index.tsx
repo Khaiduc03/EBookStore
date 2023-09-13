@@ -1,36 +1,56 @@
-import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
-import React, {useState, useCallback} from 'react';
+import React from 'react';
+import {Text, View, FlatList} from 'react-native';
 import useStyles from './styles';
-import {Topic} from '../../../../../../types/TopicType';
-import {TopicItem} from '../../../../../../components';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
+import {Skeleton} from '@rneui/themed';
+import {HeaderCustom, TopicItem} from '../../../../components';
+import {NavigationService} from '../../../../navigation';
+import {routes} from '../../../../constants';
+import {ScrollView} from 'react-native-gesture-handler';
 
-const TopicsHome = () => {
+const Topics: React.FunctionComponent = () => {
+  const handlePressSearch = () => {
+    NavigationService.navigate(routes.SEARCH);
+  };
+  const handlePressBack = () => {
+    NavigationService.goBack();
+  };
   const styles = useStyles();
 
   const RenderItem = ({item, index}: any) => (
     <TopicItem
       title={item.title}
-      viewStyle={styles.itemTopic}
+      viewStyle={styles.imgContainer}
       image={item.image}
-      index={1.5}
+      containerStyle={styles.itemContainer}
+      index={index}
     />
   );
   return (
     <View style={styles.container}>
-      <FlatList
-        data={data}
-        renderItem={RenderItem}
-        keyExtractor={item => item.id.toString()}
-        showsHorizontalScrollIndicator={false}
-        horizontal
+      <HeaderCustom
+        leftIcon={{name: 'arrow-back'}}
+        title="Explore by Genre"
+        rightIconleft={{name: 'search'}}
+        onPressLeftIcon={handlePressBack}
+        onPressRightIconLeft={handlePressSearch}
       />
+      <ScrollView>
+        <View style={{width: '100%', alignItems: 'center', marginTop: 10}}>
+          <FlatList
+            data={data}
+            renderItem={RenderItem}
+            keyExtractor={item => item.id.toString()}
+            showsVerticalScrollIndicator={false}
+            numColumns={2}
+            scrollEnabled={false}
+          />
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
-export default TopicsHome;
+export default Topics;
 const data = [
   {
     id: 1,
