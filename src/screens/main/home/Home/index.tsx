@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { Button, Text, Image } from '@rneui/base';
 
 import React, { FunctionComponent, useState } from 'react';
@@ -7,6 +7,9 @@ import useStyles from './styles';
 import { images } from '../../../../assets/images/png/index';
 import { NavigationService } from '../../../../navigation';
 import { routes } from '../../../../constants';
+import HeaderCustom from '../../../../components/customs/HeaderCustom';
+import { createIcon } from '../../../../utils';
+import { ComicsNew, TopicsHome } from './components';
 
 const Home: FunctionComponent = () => {
   const styles = useStyles();
@@ -28,9 +31,45 @@ const Home: FunctionComponent = () => {
 
   return (
     <View style={styles.container}>
+      <HeaderCustom
+        onPressRightIconLeft={handlePressSearch}
+        leftIcon={{name: 'book', type: 'font-awesome'}}
+        title="ComicVerse"
+        rightIconleft={{name: 'search', type: 'ionicon'}}
+        rightIconRight={createIcon({
+          name: 'notifications-outline',
+          type: 'ionicon',
+        })}
+      />
 
-      <Text>Comic Verse</Text>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <HeaderCustom
+          title="Explore by Genre"
+          rightIconRight={{
+            name: 'arrow-forward-outline',
+            type: 'ionicon',
+          }}
+          onPressRightIconRight={handlePressTopics}
+        />
 
+        <TopicsHome />
+        <HeaderCustom
+          title="Comics New"
+          rightIconleft={{
+            name: 'grid-outline',
+            type: 'ionicon',
+            color: numCols === 2 ? '#F89300' : '',
+          }}
+          rightIconRight={{
+            name: 'list-circle-outline',
+            type: 'ionicon',
+            color: numCols === 1 ? '#F89300' : '',
+          }}
+          onPressRightIconLeft={handleGridIconPress}
+          onPressRightIconRight={handleListIconPress}
+        />
+        <ComicsNew numCols={numCols} />
+      </ScrollView>
     </View>
   );
 };

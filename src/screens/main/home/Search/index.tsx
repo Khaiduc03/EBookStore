@@ -1,13 +1,13 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
-import {SearchCustom} from '../../../../components';
+import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
 
 import useStyles from './styles';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Button} from '@rneui/themed';
-import {Icon} from '@rneui/base';
+import { NavigationService } from '../../../../navigation';
+import { routes } from '../../../../constants';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Button } from '@rneui/themed';
+import { Icon } from '@rneui/base';
+import SearchCustom from '../../../../components/customs/Search';
 
 const Search = () => {
   const styles = useStyles();

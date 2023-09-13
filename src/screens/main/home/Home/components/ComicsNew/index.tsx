@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View, FlatList} from 'react-native';
 import React from 'react';
 import useStyles from './style';
-import {ComicItem} from '../../../../../../components';
+import ComicItem from '../../../../../../components/customs/ComicItem';
 
 const ComicsNew = ({numCols}: {numCols: number}) => {
   const number = numCols;

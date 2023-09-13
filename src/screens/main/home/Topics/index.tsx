@@ -1,11 +1,12 @@
 import React from 'react';
-import {Text, View, FlatList} from 'react-native';
+import { Text, View, FlatList } from 'react-native';
 import useStyles from './styles';
-import {Skeleton} from '@rneui/themed';
-import {HeaderCustom, TopicItem} from '../../../../components';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
-import {ScrollView} from 'react-native-gesture-handler';
+import { Skeleton } from '@rneui/themed';
+import { NavigationService } from '../../../../navigation';
+import { routes } from '../../../../constants';
+import { ScrollView } from 'react-native-gesture-handler';
+import HeaderCustom from '../../../../components/customs/HeaderCustom';
+import TopicItem from '../../../../components/customs/TopicItem';
 
 const Topics: React.FunctionComponent = () => {
   const handlePressSearch = () => {
@@ -16,7 +17,7 @@ const Topics: React.FunctionComponent = () => {
   };
   const styles = useStyles();
 
-  const RenderItem = ({item, index}: any) => (
+  const RenderItem = ({ item, index }: any) => (
     <TopicItem
       title={item.title}
       viewStyle={styles.imgContainer}
@@ -28,14 +29,14 @@ const Topics: React.FunctionComponent = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-back'}}
+        leftIcon={{ name: 'arrow-back' }}
         title="Explore by Genre"
-        rightIconleft={{name: 'search'}}
+        rightIconleft={{ name: 'search' }}
         onPressLeftIcon={handlePressBack}
         onPressRightIconLeft={handlePressSearch}
       />
       <ScrollView>
-        <View style={{width: '100%', alignItems: 'center', marginTop: 10}}>
+        <View style={{ width: '100%', alignItems: 'center', marginTop: 10 }}>
           <FlatList
             data={data}
             renderItem={RenderItem}

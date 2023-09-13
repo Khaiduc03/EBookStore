@@ -1,16 +1,29 @@
-import { makeStyles } from '@rneui/themed';
-import { fontFamilySetup } from '../../../../utils/font';
+import { makeStyles, normalize } from '@rneui/themed';
+import { Device } from '../../../../utils';
+import { StyleSheet } from 'react-native';
 
-const useStyles = makeStyles(({colors}) => ({
+const WIDTH = Device.getDeviceWidth();
+const HEIGHT = Device.getDeviceHeight();
+
+const usestyles = makeStyles(({ colors }) => ({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
   },
-  text: {
-    fontSize: 26,
-    fontFamily: fontFamilySetup.bold,
-    color: colors.primary,
+  viewCircle: {
+    flexDirection: 'row',
+    paddingVertical: 20,
   },
+  viewAvatar: {
+    paddingVertical: 20,
+    flexDirection: 'row',
+  },
+  viewText: {
+    width: '100%',
+    right: 45,
+    top: 10
+  }
+
+
 }));
 
-export default useStyles;
+export default usestyles;

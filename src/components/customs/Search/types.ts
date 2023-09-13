@@ -1,5 +1,7 @@
+import {ReactElement} from 'react';
 
-import { ViewStyle } from 'react-native';
+
+import {TextStyle, ViewProps, ViewStyle} from 'react-native';
 export type SearchBarComponentProps = {
   containerStyle?: ViewStyle;
   inputStyle?: ViewStyle;
@@ -7,4 +9,3 @@ export type SearchBarComponentProps = {
   value?: string;
   setValue?: (value: string) => void;
 };
-

@@ -3,19 +3,19 @@ import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import {Icon, Text, makeStyles, normalize} from '@rneui/themed';
-import React, {FunctionComponent, useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { Icon, Text, makeStyles, normalize } from '@rneui/themed';
+import React, { FunctionComponent, useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
 
-import {routes} from '../../constants';
-import {Device} from '../../utils';
-import {Bookmark, Explore, Home, Profile} from '../../screens/main';
+import { routes } from '../../constants';
+import { Device } from '../../utils';
+import { Bookmark, Explore, Home, Profile } from '../../screens/main';
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -41,7 +41,7 @@ const choseIcon = (route: routes) => {
   }
 };
 
-const useStyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({ colors }) => ({
   container: {
     flexDirection: 'row',
     height: normalize(56),
@@ -66,7 +66,7 @@ const AnimatedTouch = Animated.createAnimatedComponent(TouchableOpacity);
 
 const BottomNavigator: FunctionComponent = () => {
   const styles = useStyles();
-  const Tab = ({navigation, descriptors, state}: BottomTabBarProps) => {
+  const Tab = ({ navigation, descriptors, state }: BottomTabBarProps) => {
     const progressGrowth = useSharedValue(0);
 
     //use effect will call when change tab
@@ -85,7 +85,7 @@ const BottomNavigator: FunctionComponent = () => {
     return (
       <View style={styles.container}>
         {state.routes.map((route, index) => {
-          const {options} = descriptors[route.key];
+          const { options } = descriptors[route.key];
           const isFocused = state.index === index;
 
           const onPress = () => {
@@ -112,7 +112,7 @@ const BottomNavigator: FunctionComponent = () => {
           const animatedStyle = useAnimatedStyle(() => {
             const translateY = isFocused ? progressGrowth.value : 0;
             return {
-              transform: [{translateY: translateY}],
+              transform: [{ translateY: translateY }],
             };
           }, []);
 
@@ -120,7 +120,7 @@ const BottomNavigator: FunctionComponent = () => {
             <AnimatedTouch
               key={index}
               accessibilityRole="button"
-              accessibilityState={isFocused ? {selected: true} : {}}
+              accessibilityState={isFocused ? { selected: true } : {}}
               accessibilityLabel={options.tabBarAccessibilityLabel}
               testID={options.tabBarTestID}
               onPress={onPress}

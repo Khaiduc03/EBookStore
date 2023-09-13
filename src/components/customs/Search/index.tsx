@@ -1,37 +1,52 @@
-import { View, Text, Image, TextInput, TouchableOpacity, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native'
-import React, { useState } from 'react'
-import styles from '../Search/styles';
-
-import { images } from '../../../assets/images/png';
+import React, { useState } from 'react';
+import { SearchBar } from '@rneui/themed';
+import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { Icon } from '@rneui/base';
+import { TouchableOpacity } from 'react-native';
+import useStyles from './styles';
 import { SearchBarComponentProps } from './types';
 
+const SearchCustom: React.FunctionComponent<
+  SearchBarComponentProps
+> = props => {
+  const styles = useStyles();
+  const [search, setSearch] = useState('');
+  const [inputFocused, setInputFocused] = useState(false);
 
-export const Search: React.FC<SearchBarComponentProps> = props => {
-    const [text, setText] = useState('');
+  const handleKeyPress = () => {
+    console.log(search);
+  };
 
-    const handleTextChange = (inputText: string) => {
-        if (inputText.length <= 250) {
-            setText(inputText);
-        }
-    };
-    return (
-        <View style={styles.container}>
-            <View style={styles.Search}>
-                <View style={styles.view}>
-                    <Image source={images.ic_search} />
-                    <TextInput style={styles.textInput}
-                        placeholder='Search .....'
-                        multiline
-                        value={text}
-                        onChangeText={handleTextChange} />
-                </View>
-                <TouchableOpacity>
-                    <Image source={images.ic_Classify} />
-                </TouchableOpacity>
-            </View>
-        </View>
+  const handleInputFocus = () => {
+    setInputFocused(true);
+  };
 
+  const handleInputBlur = () => {
+    setInputFocused(false);
+  };
 
-    )
-}
+  return (
+    <SearchBar
+      onChangeText={props.setValue}
+      placeholder="Search..."
+      value={props.value}
+      platform="android"
+      containerStyle={[
+        props.containerStyle || styles.container,
+        inputFocused
+          ? styles.backGroundInputFocus
+          : styles.backGroundInputNoFocus,
+      ]}
+      cancelIcon={{}}
+      autoFocus={true}
+      returnKeyType="search"
+      inputStyle={props.inputStyle || styles.inputStyle}
+      onSubmitEditing={props.onPress}
+      onBlur={handleInputBlur}
+      onFocus={handleInputFocus}
+      clearIcon={styles.clearIcon}
+    />
+  );
+};
 
+export default SearchCustom;
