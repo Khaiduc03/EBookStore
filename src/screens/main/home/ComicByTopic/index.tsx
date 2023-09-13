@@ -1,6 +1,6 @@
 import {StyleSheet, Text, FlatList, View} from 'react-native';
 import React, {useState} from 'react';
-import {HeaderCustom} from '../../../../components';
+import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import useStyles from './styles';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';

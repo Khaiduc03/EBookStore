@@ -8,6 +8,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { Button } from '@rneui/themed';
 import { Icon } from '@rneui/base';
 import SearchCustom from '../../../../components/customs/Search';
+import HeaderCustom from '../../../../components/customs/HeaderCustom';
 
 const Search = () => {
   const styles = useStyles();
@@ -24,9 +25,12 @@ const Search = () => {
         value={search}
         onPress={handlePressSearch}
       />
+      
       {/* 
       <Button icon={<Icon name="search" />} title={'hello'}></Button> */}
+       <HeaderCustom title='Detail' titleStyle={{fontSize:10}} rightIconRight={{name:'book',color:'green'}} rightIconleft={{name:'book',color:'green'}}/>
     </View>
+   
   );
 };
 

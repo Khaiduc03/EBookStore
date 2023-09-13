@@ -14,9 +14,6 @@ import DatePicker from '@react-native-community/datetimepicker';
 import { CheckBox, Icon, Text } from '@rneui/themed';
 import { Gender } from '../../../../types';
 import { format } from 'date-fns';
-import { NavigationService } from '../../../../navigation';
-import { AuthHeader, BigButton } from '../../../../components'
-import { routes } from '../../../../constants'
 import { ButtonBig } from '../../../../components/customs/Button'
 
 
@@ -95,9 +92,10 @@ const Update_Profile: FunctionComponent = () => {
         setIsSelectingDate(false);
     };
     const isEmailValid = (email: string) => {
-        const emailPattern = /^[a-zA-Z0-9._-]+@gmail\.com$/;
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         return emailPattern.test(email);
     };
+    
 
     return (
         <KeyboardAvoidingView style={styles.container}
@@ -130,7 +128,7 @@ const Update_Profile: FunctionComponent = () => {
                                 }
                             />
                             {!isEmailValid(credentials.email) && credentials.email !== '' && (
-                                <Text style={styles.error}>Invalid email. Please use the @gmail.com domain.</Text>
+                                <Text style={styles.error}>Invalid email. Please use a valid email format.</Text>
                             )}
                             <Text style={styles.titleInput}>Phone</Text>
                             <InputCustom

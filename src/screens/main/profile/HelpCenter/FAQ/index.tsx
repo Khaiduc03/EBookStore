@@ -1,13 +1,14 @@
 import { View, Text, ScrollView, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import React from 'react'
-import styles from './styles';
+import useStyles from './styles';
 import Header from '../../../../../components/customs/Headers/index';
 import { Toggleable } from '../../../../../components/customs/Toggleable/index';
 import { images } from '../../../../../assets/images/png/index';
 import { ButtonSmall } from '../../../../../components/customs/Button/index';
-import { Search } from '../../../../../components/customs/Search/index';
+import SearchCustom from '../../../../../components/customs/Search';
 
 const FAQ: React.FC = () => {
+  const styles = useStyles();
   return (
     <KeyboardAvoidingView style={styles.container}
       behavior={Platform.OS === 'android' ? 'padding' : 'height'}>
@@ -29,7 +30,7 @@ const FAQ: React.FC = () => {
             </View>
           </ScrollView>
           <View style={styles.viewSearch}>
-            <Search />
+            <SearchCustom />
           </View>
           <View style={styles.Toggleable}>
             <View style={styles.viewToggleable}>

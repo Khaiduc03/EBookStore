@@ -6,6 +6,7 @@ import { getAuthEnableSignIn } from '../redux/selectors/auth.selector';
 import { getMode } from '../redux/selectors/thems.selector';
 import { navigationRef } from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
+import Update_Profile from '../screens/main/profile/Update-profile';
 
 
 
