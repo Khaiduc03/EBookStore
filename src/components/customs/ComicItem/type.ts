@@ -1,14 +1,10 @@
 import {ImageStyle, ViewStyle} from 'react-native';
+import {Comic} from '../../../types';
 
 export type CustomComicProps = {
-  id?: string;
-  name?: string;
-  topic?: string;
-  rate?: string;
-  image?: string;
+  data: Comic;
   imageStyle?: ImageStyle | null;
   viewStyle?: ViewStyle | null;
   contentStyle?: ViewStyle | null;
-  onPress?: () => void;
   index: number;
 };

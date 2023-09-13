@@ -9,3 +9,4 @@ export {default as HeaderCustom} from './HeaderCustom';
 export {default as TopicItem} from './TopicItem';
 export {default as ComicItem} from './ComicItem';
 export {default as SearchCustom} from './Search';
+export {default as TabViewItem} from './TabViewItem';

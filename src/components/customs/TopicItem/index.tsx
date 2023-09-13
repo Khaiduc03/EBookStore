@@ -3,13 +3,15 @@ import React from 'react';
 import useStyles from './style';
 import {CustomTopicsProps} from './types';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {NavigationService} from '../../../navigation';
+import {routes} from '../../../constants';
 
 const TopicItem: React.FunctionComponent<CustomTopicsProps> = props => {
   const styles = useStyles();
 
   return (
     <TouchableOpacity
-      onPress={props.onPress}
+      onPress={() => NavigationService.navigate(routes.COMICBYTOPIC)}
       style={
         props.index % 2 !== 0 ? styles.containerProps : {} || styles.container
       }>

@@ -5,7 +5,10 @@ import {getMode} from '../redux/selectors/thems.selector';
 const mode = useAppSelector(getMode);
 
 declare module '@rneui/themed' {
-  export interface Colors {}
+  export interface Colors {
+    input1: string;
+    input2: string;
+  }
 }
 
 export const theme = createTheme({
@@ -17,7 +20,7 @@ export const theme = createTheme({
     grey5: '#B0B3B8',
     grey4: '#727272',
     divider: '#e3f3ff',
-    grey1: '#F5F5F5',
+    grey1: '#212121',
     black: '#212121',
     grey0: '#FFFFFF',
     grey2: '#90939B',
@@ -32,7 +35,7 @@ export const theme = createTheme({
     grey5: '#B0B3B8',
     grey4: '#f1f1f4',
     divider: '#e3f3ff',
-    grey1: '#1f222a',
+    grey1: '#212121',
     black: '#FAFAFA',
     grey0: '#181A20',
     grey2: '#90939B',
