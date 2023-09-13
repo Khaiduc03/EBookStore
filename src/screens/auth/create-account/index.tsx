@@ -14,85 +14,82 @@ import Header from '../../../components/customs/Headers';
 import {routes} from '../../../constants';
 import {NavigationService} from '../../../navigation';
 import {
-  comparePassword,
-  isValidEmail,
-  isValidPassword,
-  showToastError,
-} from '../../../utils';
+  checked,
+  toggleCheckbox,
+  credentials,
+  setCredentials,
+  inputErrors,
+  handleCreateAccount,
+} from '../../../utils/validate';
 import useStyles from './styles';
-
-import {useAppDispatch} from '../../../hooks';
-import {AuthActions} from '../../../redux/reducer';
 
 const CreateAccount: FunctionComponent = () => {
   const styles = useStyles();
 
-  const toggleCheckbox = () => setChecked(!checked);
-  const dispatch = useAppDispatch();
-  const [credentials, setCredentials] = React.useState<{
-    email: string;
-    password: string;
-    comfirmPassword: string;
-  }>({
-    email: '',
-    password: '123456',
-    comfirmPassword: '123456',
-  });
+  // const toggleCheckbox = () => setChecked(!checked);
+  // const dispatch = useAppDispatch();
+  // const [credentials, setCredentials] = React.useState<{
+  //   email: string;
+  //   password: string;
+  //   comfirmPassword: string;
+  // }>({
+  //   email: '',
+  //   password: '123456',
+  //   comfirmPassword: '123456',
+  // });
 
-  const [inputErrors, setInputErrors] = React.useState<{
-    email: boolean;
-    password: boolean;
-    comfirmPassword: boolean;
-  }>({
-    email: false,
-    password: false,
-    comfirmPassword: false,
-  });
+  // const [inputErrors, setInputErrors] = React.useState<{
+  //   email: boolean;
+  //   password: boolean;
+  //   comfirmPassword: boolean;
+  // }>({
+  //   email: false,
+  //   password: false,
+  //   comfirmPassword: false,
+  // });
 
-  const handleCreateAccount = async () => {
-    const emailIsValid = isValidEmail(credentials.email);
-    const passwordIsValid = isValidPassword(credentials.password);
-    const comfirmPasswordIsValid = comparePassword(
-      credentials.password,
-      credentials.comfirmPassword,
-    );
-    setInputErrors({
-      email: !emailIsValid,
-      password: !passwordIsValid,
-      comfirmPassword: !comfirmPasswordIsValid,
-    });
-    if (
-      credentials.email.length === 0 ||
-      credentials.password.length === 0 ||
-      credentials.comfirmPassword.length === 0
-    ) {
-      showToastError('Please enter full information');
+  // const handleCreateAccount = async () => {
+  //   const emailIsValid = isValidEmail(credentials.email);
+  //   const passwordIsValid = isValidPassword(credentials.password);
+  //   const comfirmPasswordIsValid = comparePassword(
+  //     credentials.password,
+  //     credentials.comfirmPassword,
+  //   );
+  //   setInputErrors({
+  //     email: !emailIsValid,
+  //     password: !passwordIsValid,
+  //     comfirmPassword: !comfirmPasswordIsValid,
+  //   });
+  //   if (
+  //     credentials.email.length === 0 ||
+  //     credentials.password.length === 0 ||
+  //     credentials.comfirmPassword.length === 0
+  //   ) {
+  //     showToastError('Please enter full information');
 
-      return;
-    }
+  //     return;
+  //   }
 
-    if (!emailIsValid) {
-      showToastError('Please enter the correct email format');
-      return;
-    }
-    if (!comfirmPasswordIsValid) {
-      showToastError('Password must be more than 6 characters');
-      return;
-    }
-    if (!passwordIsValid) {
-      showToastError('Confirm password does not match');
-      return;
-    }
+  //   if (!emailIsValid) {
+  //     showToastError('Please enter the correct email format');
+  //     return;
+  //   }
+  //   if (!comfirmPasswordIsValid) {
+  //     showToastError('Password must be more than 6 characters');
+  //     return;
+  //   }
+  //   if (!passwordIsValid) {
+  //     showToastError('Confirm password does not match');
+  //     return;
+  //   }
 
-    dispatch(
-      AuthActions.handleCreateAccount({
-        email: credentials.email,
-        password: credentials.password,
-      }),
-    );
-  };
-
-  const [checked, setChecked] = React.useState<boolean>(false);
+  //   dispatch(
+  //     AuthActions.handleCreateAccount({
+  //       email: credentials.email,
+  //       password: credentials.password,
+  //     }),
+  //   );
+  // };
 
   return (
     <View style={styles.container}>
@@ -117,7 +114,7 @@ const CreateAccount: FunctionComponent = () => {
             />
 
             <View style={styles.formContainer}>
-              <Text style={styles.titleInput}>email</Text>
+              <Text style={styles.titleInput}>Email</Text>
               <InputCustom
                 placeholder="Enter your email"
                 value={credentials.email}
@@ -138,12 +135,13 @@ const CreateAccount: FunctionComponent = () => {
               />
               <Text style={styles.titleInput}>Confirm Password</Text>
               <InputCustom
-                placeholder="Enter your password"
+                placeholder="Enter your confirm password"
                 secure={true}
                 value={credentials.comfirmPassword}
                 onChangeText={text =>
                   setCredentials({...credentials, comfirmPassword: text})
                 }
+                style={inputErrors.comfirmPassword ? styles.errorInput : null}
               />
               <View style={styles.checkbox}>
                 <CheckBox
