@@ -8,6 +8,8 @@ import Security from './Security';
 import Payments_method from './Payment-method';
 import BecomeVIP from './BecomeVIP';
 import AboutApp from './AboutApp';
+import FAQ from './HelpCenter/FAQ';
+import Contact_us from './HelpCenter/Contact_us';
 
 export { default as Profile } from './Profile';
 
@@ -39,5 +41,13 @@ export const profileScreens: Screen[] = [
     {
         name: routes.ABOUTAPP,
         component: AboutApp
+    },
+    {
+        name: routes.FAQ,
+        component: FAQ
+    },
+    {
+        name: routes.CONTACTUS,
+        component: Contact_us
     },
 ];

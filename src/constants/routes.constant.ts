@@ -20,5 +20,6 @@ export enum routes {
     PAYMENTSMETHOD = 'PAYMENTSMETHOD',
     BECOMEVIP = 'BECOMEVIP',
     ABOUTAPP = 'ABOUTAPP',
-    
+    FAQ = 'FAQ',
+    CONTACTUS = 'CONTACTUS',
 }

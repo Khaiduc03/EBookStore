@@ -1,20 +1,14 @@
-import React, { FunctionComponent, useState } from 'react';
-import { View, ScrollView, Text, Image, TouchableOpacity } from 'react-native';
+import React, { FunctionComponent } from 'react';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
 import styles from './styles';
-import { Avatar, Button, Switch } from '@rneui/base';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { getAuthEnableSignIn } from '../../../../redux/selectors/auth.selector';
 import { AuthActions } from '../../../../redux/reducer';
 import Header from '../../../../components/customs/Headers';
-import { images } from '../../../../assets/images/png/index';
-import AvatarComponets from '../../../../components/customs/Avatar';
-import { Icon } from '@rneui/themed';
 import { Circle } from '../../../../components';
 import TextCustom from '../../../../components/customs/Text';
 import { NavigationService } from '../../../../navigation';
 import { routes } from '../../../../constants';
-
-
 
 
 const Profile: FunctionComponent = () => {
@@ -23,19 +17,16 @@ const Profile: FunctionComponent = () => {
   const handleLogout = () => {
     dispatch(AuthActions.handleLogout());
   };
-  const Navigate = () => {
-    NavigationService.navigate(routes.SECURITY);
-  }
   return (
     <View style={styles.container}>
       <Header
         logobook
-        title='Hồ sơ của bạn'
+        title='My Profile'
         istitle
         menu />
       <View style={styles.viewAvatar}>
         <Circle circleColor='white' avatarDummy />
-        <TouchableOpacity style={styles.viewText}>
+        <TouchableOpacity style={styles.viewText} onPress={() => NavigationService.navigate(routes.MYPROFILE)}>
           <TextCustom textBold title='Drake Kun' />
           <TextCustom textLight title='drake@gmail.com' />
         </TouchableOpacity>
