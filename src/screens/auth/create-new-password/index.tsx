@@ -11,7 +11,6 @@ import useStyles from './styles';
 import {NavigationService} from '../../../navigation';
 import {routes} from '../../../constants';
 import {showToastError, showToastSuccess} from '../../../utils';
-import {CheckBoxIcon} from '@rneui/base/dist/CheckBox/components/CheckBoxIcon';
 import {CheckBox} from '@rneui/themed';
 
 const CreateNewPassword: React.FC = () => {

@@ -1,4 +1,3 @@
-import {color} from '@rneui/base';
 import {makeStyles, normalize} from '@rneui/themed';
 import {StyleSheet} from 'react-native';
 
@@ -10,7 +9,6 @@ const useStyles = makeStyles(({colors}) => ({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.background,
   },
-
   body: {
     flex: 1,
     padding: normalize(24),
