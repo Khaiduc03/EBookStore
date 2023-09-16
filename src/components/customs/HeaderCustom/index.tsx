@@ -1,8 +1,8 @@
-import {View, Text} from 'react-native';
-import {Header, Icon} from '@rneui/base';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {TouchableOpacity} from 'react-native';
-import {CustomHeaderProps} from './types';
+import { View, Text } from 'react-native';
+import { Header, Icon } from '@rneui/base';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { TouchableOpacity } from 'react-native';
+import { CustomHeaderProps } from './types';
 import useStyles from './styles';
 
 const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
@@ -30,7 +30,7 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
           )}
         </TouchableOpacity>
       }
-      leftContainerStyle={{justifyContent: 'center'}}
+      leftContainerStyle={{ justifyContent: 'center' }}
       linearGradientProps={{}}
       placement="left"
       rightComponent={
@@ -59,7 +59,7 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
           </TouchableOpacity>
         </View>
       }
-      rightContainerStyle={{justifyContent: 'center'}}
+      rightContainerStyle={{ justifyContent: 'center' }}
       hideStatusBar={true}
       backgroundColor="transparent"
     />

@@ -22,6 +22,6 @@ const useStyles = makeStyles(({ colors }) => ({
     viewButton: {
         paddingVertical: 40
     }
-    
+
 }));
 export default useStyles;

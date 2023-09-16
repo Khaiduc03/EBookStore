@@ -16,7 +16,7 @@ const MyProfile: React.FC = () => {
         <View style={styles.container}>
             <Header leftIcon title='My Profile' istitle ic_Add ic_Edit />
             <View style={styles.View}>
-                <Circle avatarDummy />
+                {/* <Circle avatarDummy /> */}
                 <TouchableOpacity style={styles.viewFollow}>
                     <TextCustom number={100} />
                     <TextCustom textLight title='Follower' />

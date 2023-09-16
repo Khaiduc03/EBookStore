@@ -9,7 +9,7 @@ export const ButtonBig: React.FC<ButtonBigpros> = props => {
 
     return (
         <View style={styles.containerButtonBig}>
-            <TouchableOpacity style={styles.ButtonBig}>
+            <TouchableOpacity style={styles.ButtonBig} >
                 <Text style={styles.txtButtonBig}>{title}</Text>
             </TouchableOpacity>
             {istitle && <Text>{title}</Text>}

@@ -12,7 +12,6 @@ const initialState: AlertState = {
   imageTitle: images.success,
   isAccept: false,
   isCancel: false,
-
 };
 
 const reducer = createSlice({

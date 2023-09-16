@@ -1,6 +1,10 @@
+import { makeStyles, normalize } from '@rneui/themed';
+import { Device } from '../../../../utils';
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const WIDTH = Device.getDeviceWidth();
+const HEIGHT = Device.getDeviceHeight();
+const useStyles = makeStyles(({ colors }) => ({
     container: {
         flex: 1,
     },
@@ -19,19 +23,19 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    NameUser:{
-        paddingHorizontal:24
+    NameUser: {
+        paddingHorizontal: 24
     },
-    ViewExplore:{
-        padding:24,
-        flexDirection:'row',
-        justifyContent:'space-between'
+    ViewExplore: {
+        padding: 24,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
 
     },
-    ViewSquares:{
-        paddingHorizontal:24,
-        flexDirection:'row',
-        gap:20
+    ViewSquares: {
+        paddingHorizontal: 24,
+        flexDirection: 'row',
+        gap: 20
     }
-})
-export default styles;
+}));
+export default useStyles;

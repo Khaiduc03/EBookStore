@@ -1,12 +1,12 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Header from '../../../../../components/customs/Headers/index';
-import { images } from '../../../../../assets/images/png/index';
 import { ButtonLong } from '../../../../../components/customs/Button';
-import styles from '../Contact_us/styles';
+import useStyles from './styles';
 
 
 const Contact_us: React.FC = () => {
+  const styles = useStyles();
   return (
     <View style={styles.container}>
       <Header

@@ -73,6 +73,7 @@ const useStyles = makeStyles(({ colors }) => ({
         flex: 1,
         justifyContent: 'flex-end',
         marginBottom: normalize(50),
+
     },
     checkBoxContainer: {
         flexDirection: 'row',
@@ -88,6 +89,11 @@ const useStyles = makeStyles(({ colors }) => ({
         color: 'red',
         fontWeight: 'bold',
     },
+    Buttoncolor:{
+        backgroundColor:'red',
+        width: '100%',
+        height: 56,
+    }
 }));
 
 export default useStyles;

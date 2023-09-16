@@ -13,8 +13,10 @@ import React from 'react';
 AppRegistry.registerComponent(appName, () => () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <App />
-      {/* <TopNavigator /> */}
+      <>
+        <App />
+        {/* <TopNavigator /> */}
+      </>
     </PersistGate>
   </Provider>
   // <Provider store={store}>

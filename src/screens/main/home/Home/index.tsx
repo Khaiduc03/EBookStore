@@ -1,10 +1,6 @@
 import { View, ScrollView } from 'react-native';
-import { Button, Text, Image } from '@rneui/base';
-
 import React, { FunctionComponent, useState } from 'react';
-
 import useStyles from './styles';
-import { images } from '../../../../assets/images/png/index';
 import { NavigationService } from '../../../../navigation';
 import { routes } from '../../../../constants';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
@@ -33,9 +29,9 @@ const Home: FunctionComponent = () => {
     <View style={styles.container}>
       <HeaderCustom
         onPressRightIconLeft={handlePressSearch}
-        leftIcon={{name: 'book', type: 'font-awesome'}}
+        leftIcon={{ name: 'book', type: 'font-awesome' }}
         title="ComicVerse"
-        rightIconleft={{name: 'search', type: 'ionicon'}}
+        rightIconleft={{ name: 'search', type: 'ionicon' }}
         rightIconRight={createIcon({
           name: 'notifications-outline',
           type: 'ionicon',

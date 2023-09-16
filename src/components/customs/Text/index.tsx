@@ -12,6 +12,7 @@ const TextCustom: React.FunctionComponent<TextCustomProps> = props => {
             {textBold && <Text style={styles.Boldtext}>{title}</Text>}
             {textPrimary && <Text style={styles.Primarytext}>{title}</Text>}
             {number && <Text style={styles.Boldtext}>{number}</Text>}
+            
         </View>
     )
 }

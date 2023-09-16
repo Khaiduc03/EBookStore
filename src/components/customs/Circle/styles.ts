@@ -1,6 +1,6 @@
 import { makeStyles, normalize } from '@rneui/themed';
 import { Device } from '../../../utils';
-import { StyleSheet } from 'react-native';
+import { fontFamilySetup } from '../../../utils/font';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
@@ -8,32 +8,27 @@ const HEIGHT = Device.getDeviceHeight();
 
 const usestyles = makeStyles(({ colors }) => ({
     ViewCircle: {
-        flexDirection: 'row',
+        borderRadius: 50,
+        width: 64,
+        height: 64,
         alignItems: 'center',
-        paddingHorizontal: 24,
+        justifyContent: 'center',
 
     },
     txtCircle: {
-        fontSize: normalize(HEIGHT * 0.02),
+        fontSize: normalize(20),
         fontWeight: '700',
         letterSpacing: normalize(0.2),
         fontStyle: 'normal',
-        fontFamily: 'Urbanist-Regular',
+        fontFamily: fontFamilySetup.bold,
         color: colors.black,
-        paddingHorizontal: 24,
+        lineHeight: normalize(35.2),
+        marginStart: normalize(20)
+
     },
-    ViewCircleText: {
-        flexDirection: 'row',
+    rightIcon: {
+        color: colors.black,
     },
-    viewIcon: {
-        left: 270,
-        position: 'absolute',
-    },
-    avatarDummy:{
-        width:64,
-        height:64,
-        borderRadius:50,
-    }
 }));
 export default usestyles;
 
