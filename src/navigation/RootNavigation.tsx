@@ -1,12 +1,13 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { makeStyles, useThemeMode } from '@rneui/themed';
+import {NavigationContainer} from '@react-navigation/native';
+import {makeStyles, useThemeMode} from '@rneui/themed';
 import React from 'react';
-import { StatusBar } from 'react-native';
-import { useAppSelector } from '../hooks';
-import { getAuthEnableSignIn } from '../redux/selectors/auth.selector';
-import { getMode } from '../redux/selectors/thems.selector';
-import { navigationRef } from './NavigationService';
+import {StatusBar} from 'react-native';
+import {useAppSelector} from '../hooks';
+import {getAuthEnableSignIn} from '../redux/selectors/auth.selector';
+import {getMode} from '../redux/selectors/thems.selector';
+import {navigationRef} from './NavigationService';
 import AuthNavigator from './navigators/AuthNavigator';
+import AppNavigator from './navigators/AppNavigator';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -37,7 +38,7 @@ const RootNavigation = () => {
         barStyle={themeMode}
       />
       {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      <AuthNavigator />
+      <AppNavigator />
     </NavigationContainer>
   );
 };
