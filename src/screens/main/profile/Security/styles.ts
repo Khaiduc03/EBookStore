@@ -1,6 +1,5 @@
 import { makeStyles, normalize } from '@rneui/themed';
 import { Device } from '../../../../utils';
-import { StyleSheet } from 'react-native';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
@@ -17,7 +16,10 @@ const useStyles = makeStyles(({ colors }) => ({
         color: colors.black,
     },
     view_switch: {
-        paddingVertical: 15
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: normalize(20),
+        paddingVertical: normalize(20)
     },
     viewButton: {
         paddingVertical: 40
