@@ -6,6 +6,7 @@ import { getAuthEnableSignIn } from '../redux/selectors/auth.selector';
 import { getMode } from '../redux/selectors/thems.selector';
 import { navigationRef } from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
+import Notification from '../screens/main/profile/Notification';
 
 
 
@@ -24,7 +25,7 @@ const RootNavigation = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      <AppNavigator />
+      <Notification />
     </NavigationContainer>
   );
 };

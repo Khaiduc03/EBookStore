@@ -9,10 +9,6 @@ const usestyles = makeStyles(({ colors }) => ({
   container: {
     flex: 1,
   },
-  viewCircle: {
-    flexDirection: 'row',
-    paddingVertical: 20,
-  },
   viewAvatar: {
     paddingHorizontal: normalize(10),
     paddingVertical: normalize(10),

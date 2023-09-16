@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
-import styles from '../Switch/styles';
+import useStyles from '../Switch/styles';
 import { SwitchCustomProps } from '../Switch/types';
 import { images } from '../../../assets/images/png';
 
@@ -8,7 +8,8 @@ import { Switch } from '@rneui/themed';
 
 
 
-const Switch_custom: React.FunctionComponent<SwitchCustomProps> = () => {
+export const Switch_custom: React.FunctionComponent<SwitchCustomProps> = () => {
+  const styles = useStyles();
   const [checked, setChecked] = useState(false);
 
   const toggleSwitch = () => {
@@ -27,16 +28,16 @@ const Switch_custom: React.FunctionComponent<SwitchCustomProps> = () => {
     </View>
   );
 };
-export const Switch_: React.FC<SwitchCustomProps> = props => {
-  const { istitle, title } = props;
+// export const Switch_: React.FC<SwitchCustomProps> = props => {
+//   const { istitle, title } = props;
 
-  return (
-    <View style={styles.view}>
-      <Text style={styles.txt}>{title}</Text>
-      <Switch_custom />
-      {istitle && <Text style={styles.txt}>{title}</Text>}
-    </View>
-  );
-};
+//   return (
+//     <View style={styles.view}>
+//       <Text style={styles.txt}>{title}</Text>
+//       <Switch_custom />
+//       {istitle && <Text style={styles.txt}>{title}</Text>}
+//     </View>
+//   );
+// };
 
 export default Switch_custom

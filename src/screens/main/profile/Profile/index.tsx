@@ -18,7 +18,6 @@ const Profile: FunctionComponent = () => {
   const handleLogout = () => {
     dispatch(AuthActions.handleLogout());
   };
-  // onPress={() => NavigationService.navigate(routes.MYPROFILE)}
   const styles = usestyles();
   return (
     <View style={styles.container}>

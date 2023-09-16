@@ -1,23 +1,23 @@
-import { StyleSheet } from 'react-native';
+import { makeStyles, normalize } from '@rneui/themed';
+import { Device } from '../../../utils';
+import { fontFamilySetup } from '../../../utils/font';
 
-const styles = StyleSheet.create({
+Device.getDeviceWidth();
+const useStyles = makeStyles(({ colors }) => ({
     container: {
         alignItems: 'center',
         justifyContent: 'center',
     },
     txt: {
-        color: '#000000',
-        fontFamily: 'Urbanist',
-        fontSize: 20,
-        fontWeight: '500',
-        lineHeight: 21,
-        letterSpacing: 0.12,
-        paddingVertical: 22,
-        paddingHorizontal: 24,
+        fontSize: normalize(22),
+        fontFamily: fontFamilySetup.bold,
+
+        lineHeight: normalize(35.2),
+        color: colors.black,
     },
     view: {
         flexDirection: 'row',
         justifyContent: 'space-between',
     }
-})
-export default styles
+}));
+export default useStyles
