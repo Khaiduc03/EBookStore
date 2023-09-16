@@ -8,6 +8,7 @@ declare module '@rneui/themed' {
   export interface Colors {
     input1: string;
     input2: string;
+    backgrounDetai: string;
   }
 }
 
@@ -27,6 +28,7 @@ export const theme = createTheme({
     white: '#FFFFFF',
     input1: '#F2F2F2',
     input2: '#FFF7EB',
+    backgrounDetai: '#F5C38B',
   },
   darkColors: {
     primary: '#F89300',
@@ -43,6 +45,7 @@ export const theme = createTheme({
     background: '#181A20',
     input1: '#1F222A',
     input2: '#2A241D',
+    backgrounDetai: '#212121',
   },
   components: {
     Button: (props, theme) => ({

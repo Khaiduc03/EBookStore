@@ -1,6 +1,7 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {Device} from '../../../utils';
 import {fontFamilySetup} from '../../../utils/font';
+import {color} from '@rneui/base';
 
 Device.getDeviceWidth();
 
