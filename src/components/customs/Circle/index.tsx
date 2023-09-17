@@ -1,8 +1,8 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import React from 'react';
 import usestyles from '../Circle/styles';
 import { CustomCirclerProps } from '../Circle/types';
-import { Icon, normalize, Avatar } from '@rneui/themed';
+import { Icon, Avatar } from '@rneui/themed';
 
 
 const Circle: React.FC<CustomCirclerProps> = props => {

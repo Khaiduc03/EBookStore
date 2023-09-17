@@ -7,8 +7,7 @@ import { getMode } from '../redux/selectors/thems.selector';
 import { navigationRef } from './NavigationService';
 
 import Security from '../screens/main/profile/Security';
-
-
+import AppNavigator from './navigators/AppNavigator';
 
 
 
@@ -25,14 +24,14 @@ const RootNavigation = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      <Security />
+      <AppNavigator />
     </NavigationContainer>
   );
 };
 
 export default RootNavigation;
 
-const usestyles = makeStyles(({ colors }) => ({
+const useStyles = makeStyles(({ colors }) => ({
   Mode: {
     backgroundColor: colors.background,
   },

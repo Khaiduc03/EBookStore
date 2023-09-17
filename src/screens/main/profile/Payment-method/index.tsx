@@ -6,11 +6,18 @@ import { images } from '../../../../assets'
 import { ImageSourcePropType } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Profile from '../Profile'
+import { routes } from '../../../../constants'
+import { NavigationService } from '../../../../navigation'
+import { profileScreens } from '..'
+import HeaderCustom from '../../../../components/customs/HeaderCustom'
 // Định nghĩa kiểu dữ liệu cho các dịch vụ thanh toán
 type ServiceType = 'Google Pay' | 'Zalo Pay' | 'PayPal';
 
 const Payments_method: React.FC = () => {
     const styles = usestyles();
+    const handlePressGoback = () => {
+        NavigationService.navigate(routes.PROFILE);
+    };
     const initialStates: Record<ServiceType, boolean> = {
         'Google Pay': true,
         'Zalo Pay': true,
@@ -39,7 +46,7 @@ const Payments_method: React.FC = () => {
     const navigation = useNavigation();
     return (
         <View style={styles.container}>
-            <Header leftIcon title='Payments method' istitle />
+            <Header leftIcon onPressLeftIcon={handlePressGoback} title='Payments method' istitle />
             {renderPaymentRow('Google Pay', images.ic_Google)}
             {renderPaymentRow('Zalo Pay', images.ic_ZaloPay)}
             {renderPaymentRow('PayPal', images.ic_Paypal)}

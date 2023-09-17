@@ -7,14 +7,19 @@ import TextCustom from '../../../../components/customs/Text';
 import { Circle } from '../../../../components';
 import Squares from '../../../../components/customs/Squares';
 import { ScrollView } from 'react-native-gesture-handler';
+import { NavigationService } from '../../../../navigation';
+import { routes } from '../../../../constants';
 
 
 
 const MyProfile: React.FC = () => {
     const styles = useStyles();
+    const handlePressGoback = () => {
+        NavigationService.navigate(routes.PROFILE);
+    };
     return (
         <View style={styles.container}>
-            <Header leftIcon title='My Profile' istitle ic_Add ic_Edit />
+            <Header leftIcon onPressLeftIcon={handlePressGoback} title='My Profile' istitle ic_Add ic_Edit />
             <View style={styles.View}>
                 {/* <Circle avatarDummy /> */}
                 <TouchableOpacity style={styles.viewFollow}>

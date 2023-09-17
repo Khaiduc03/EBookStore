@@ -1,23 +1,12 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import styles from '../Button/styles';
-import { ButtonBigpros, ButtonSmallpros, ButtonLongpros } from '../Button/types';
+import { ButtonSmallpros, ButtonLongpros } from '../Button/types';
 import { images } from '../../../assets';
 
-export const ButtonBig: React.FC<ButtonBigpros> = props => {
-    const { title, istitle, } = props;
 
-    return (
-        <View style={styles.containerButtonBig}>
-            <TouchableOpacity style={styles.ButtonBig} >
-                <Text style={styles.txtButtonBig}>{title}</Text>
-            </TouchableOpacity>
-            {istitle && <Text>{title}</Text>}
-        </View>
-    )
-};
 export const ButtonSmall: React.FC<ButtonSmallpros> = props => {
-    const { title, istitle, } = props;
+    const { title, } = props;
     const [isButton, setIsButton] = useState(true);
     const [buttonTextColor, setButtonTextColor] = useState('#f89300');
     const toggleButton = () => {
@@ -32,11 +21,10 @@ export const ButtonSmall: React.FC<ButtonSmallpros> = props => {
                 <Text style={[styles.txtButtonSmall, { color: buttonTextColor }]}>{title}</Text>
             </TouchableOpacity >
         </View>
-
     )
 };
 export const ButtonLong: React.FC<ButtonLongpros> = props => {
-    const { icon_Service, title, istitle, icon_Facebook, icon_Website } = props;
+    const { icon_Service, title, icon_Facebook, icon_Website } = props;
 
     return (
         <View style={styles.container}>

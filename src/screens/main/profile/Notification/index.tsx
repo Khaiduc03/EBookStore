@@ -3,13 +3,18 @@ import React from 'react'
 import Header from '../../../../components/customs/Headers';
 import useStyles from '../Notification/styles';
 import Switch_ from '../../../../components/customs/Switch/index';
+import { routes } from '../../../../constants';
+import { NavigationService } from '../../../../navigation';
 
 
 const Notification: React.FC = () => {
   const styles = useStyles();
+  const handlePressGoback = () => {
+    NavigationService.navigate(routes.PROFILE);
+  };
   return (
     <View style={styles.container}>
-      <Header leftIcon title='Notification' istitle />
+      <Header leftIcon onPressLeftIcon={handlePressGoback} title='Notification' istitle />
       <Text style={styles.txt}>Notify me when...</Text>
       <View style={styles.View}>
         <Text style={styles.Text}>There is a new recommendation</Text>

@@ -4,14 +4,19 @@ import usestyles from './styles'
 import Header from '../../../../components/customs/Headers';
 import { images } from '../../../../assets';
 import { Icon } from '@rneui/themed';
+import { NavigationService } from '../../../../navigation';
+import { routes } from '../../../../constants';
 const AboutApp: React.FC = () => {
     const styles = usestyles();
+    const handlePressGoback = () => {
+        NavigationService.navigate(routes.PROFILE);
+    };
     return (
         <View style={styles.container}>
-            <Header leftIcon istitle title='About The App' />
-            <TouchableOpacity style={styles.View}>
+            <Header leftIcon onPressLeftIcon={handlePressGoback} istitle title='About The App' />
+            <View style={styles.View}>
                 <Text style={styles.Name}>Comic Verse V9.9.9</Text>
-            </TouchableOpacity>
+            </View>
             <TouchableOpacity style={styles.ViewTiltle}>
                 <Text style={styles.Text}>Vacancies</Text>
                 <Icon
