@@ -31,12 +31,7 @@ const useStyles = makeStyles(({ colors }) => ({
         padding: 24,
         flexDirection: 'row',
         justifyContent: 'space-between'
-
     },
-    ViewSquares: {
-        paddingHorizontal: 24,
-        flexDirection: 'row',
-        gap: 20,
-    }
+   
 }));
 export default useStyles;

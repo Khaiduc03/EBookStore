@@ -12,9 +12,10 @@ const useStyles = makeStyles(({ colors }) => ({
         width: normalize(135),
         height: normalize(130),
         borderRadius: 10,
-        borderWidth: 1,
+        borderWidth: 0.8,
         borderColor: '#D6D3D3',
         alignItems: 'center',
+        marginStart: 20
     },
     Avatar: {
         width: normalize(64),

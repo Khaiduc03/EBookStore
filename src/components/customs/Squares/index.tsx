@@ -14,7 +14,7 @@ const Squares: React.FunctionComponent<SquaresCustomProps> = props => {
         setIsFollowing(!isFollowing);
     };
     return (
-        <View style={styles.Squares}>
+        <TouchableOpacity style={styles.Squares}>
             {avatarDummy && <Image style={styles.Avatar} source={images.avata} />}
             {name && <Text style={styles.name}>{name}</Text>}
             {title && <Text style={styles.title}>{title}</Text>}
@@ -26,7 +26,7 @@ const Squares: React.FunctionComponent<SquaresCustomProps> = props => {
                     <Text style={styles.TextButton}>{isFollowing ? 'Unfollow' : textButton}</Text>
                 </TouchableOpacity>
             )}
-        </View>
+        </TouchableOpacity>
     )
 }
 
