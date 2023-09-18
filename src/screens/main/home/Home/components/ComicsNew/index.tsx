@@ -1,17 +1,15 @@
 import {StyleSheet, Text, View, FlatList} from 'react-native';
 import React from 'react';
 import useStyles from './style';
-import ComicItem from '../../../../../../components/customs/ComicItem';
+import {ComicItem} from '../../../../../../components';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
 
 const ComicsNew = ({numCols}: {numCols: number}) => {
   const number = numCols;
   const RenderItem = ({item, index}: any) => (
     <ComicItem
-      name={item.name}
-      image={item.image}
-      rate={item.rate}
-      id={item.id}
-      topic={item.topic}
+      data={item}
       viewStyle={number == 1 ? styles.comicItem : null}
       imageStyle={number == 1 ? styles.imgComic : null}
       contentStyle={number == 1 ? styles.content : null}

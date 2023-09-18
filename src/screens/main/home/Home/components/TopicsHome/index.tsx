@@ -9,16 +9,11 @@ import TopicItem from '../../../../../../components/customs/TopicItem';
 const TopicsHome = () => {
   const styles = useStyles();
 
-  const handlePressImage = () => {
-    NavigationService.navigate(routes.COMICBYTOPIC);
-  };
-
   const RenderItem = ({item, index}: any) => (
     <TopicItem
       title={item.title}
       viewStyle={styles.itemTopic}
       image={item.image}
-      onPress={handlePressImage}
       index={1.5}
     />
   );

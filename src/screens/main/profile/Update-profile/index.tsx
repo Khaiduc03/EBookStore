@@ -7,7 +7,6 @@ import {
 } from 'react-native'
 import React, { FunctionComponent, useState } from 'react'
 import useStyles from '../Update-profile/styles'
-import Header from '../../../../components/customs/Headers'
 import AvatarComponets from '../../../../components/customs/Avatar'
 import InputCustom from '../../../../components/customs/InputCustom/index'
 import DatePicker from '@react-native-community/datetimepicker';

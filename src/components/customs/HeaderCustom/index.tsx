@@ -17,7 +17,7 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
         justifyContent: 'center',
         paddingHorizontal: 0,
       }}
-      containerStyle={styles.container}
+      containerStyle={[styles.container, props.viewStyle]}
       leftComponent={
         <TouchableOpacity onPress={props.onPressLeftIcon}>
           {props.leftIcon?.name && (
@@ -30,8 +30,7 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
           )}
         </TouchableOpacity>
       }
-      leftContainerStyle={{ justifyContent: 'center' }}
-      linearGradientProps={{}}
+      leftContainerStyle={{justifyContent: 'center'}}
       placement="left"
       rightComponent={
         <View style={styles.rightContainer}>
@@ -44,6 +43,18 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
                 size={24}
                 name={props.rightIconleft?.name}
                 color={props.rightIconleft?.color || styles.rightIcon.color}
+              />
+            )}
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.rightIconLeft}
+            onPress={props.onPressRightIconMiddle}>
+            {props.rightIconMiddle?.name && (
+              <Icon
+                type={props.rightIconMiddle?.type}
+                size={24}
+                name={props.rightIconMiddle?.name}
+                color={props.rightIconMiddle?.color || styles.rightIcon.color}
               />
             )}
           </TouchableOpacity>

@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     },
     contentContainer: {
         flex: 1,
-        paddingVertical:10
+        paddingVertical: 10
     },
     icon: {
         width: 24,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     },
     line: {
         borderBottomWidth: 0.8,
-        width: 300,
+        width: 255,
         alignItems: 'center',
         borderColor: 'gray',
         paddingVertical: 5

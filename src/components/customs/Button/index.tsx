@@ -1,12 +1,13 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
-import styles from '../Button/styles';
+import useStyles from '../Button/styles';
 import { ButtonSmallpros, ButtonLongpros } from '../Button/types';
 import { images } from '../../../assets';
 
 
 export const ButtonSmall: React.FC<ButtonSmallpros> = props => {
     const { title, } = props;
+    const styles = useStyles();
     const [isButton, setIsButton] = useState(true);
     const [buttonTextColor, setButtonTextColor] = useState('#f89300');
     const toggleButton = () => {
@@ -25,6 +26,7 @@ export const ButtonSmall: React.FC<ButtonSmallpros> = props => {
 };
 export const ButtonLong: React.FC<ButtonLongpros> = props => {
     const { icon_Service, title, icon_Facebook, icon_Website } = props;
+    const styles = useStyles();
 
     return (
         <View style={styles.container}>

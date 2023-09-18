@@ -1,6 +1,7 @@
-import { StyleSheet } from 'react-native';
+import { makeStyles, normalize } from '@rneui/themed';
+import { Device } from '../../../utils';
 
-const styles = StyleSheet.create({
+const useStyles = makeStyles(({ colors }) => ({
     container: {
         flex: 1,
     },
@@ -24,10 +25,12 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: '900',
         letterSpacing: 0.12,
+        // fontFamily: 'Urbanist-Regular',
+        // color: colors.black,
     },
     ButtonSmall: {
-        width: 100,
-        height: 45,
+        width: normalize(100),
+        height: normalize(45),
         borderRadius: 10,
         backgroundColor: '#f89300',
         justifyContent: 'center',
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
     },
     txtButtonSmall: {
         textAlign: 'center',
-        fontFamily: 'Urbanist',
+        fontFamily: 'Urbanist-Regular',
         fontSize: 15,
         fontWeight: '700',
         lineHeight: 21,
@@ -49,8 +52,8 @@ const styles = StyleSheet.create({
         marginStart: 10,
     },
     ButtonService: {
-        width: 360,
-        height: 55,
+        width: normalize(300),
+        height: normalize(50),
         borderRadius: 15,
         alignItems: 'center',
         flexDirection: 'row',
@@ -68,8 +71,8 @@ const styles = StyleSheet.create({
         marginStart: 20,
     },
     ButtonMeta: {
-        width: 360,
-        height: 55,
+        width: normalize(300),
+        height: normalize(50),
         borderRadius: 15,
         alignItems: 'center',
         flexDirection: 'row',
@@ -79,8 +82,8 @@ const styles = StyleSheet.create({
 
     },
     ButtonGoogle: {
-        width: 360,
-        height: 55,
+        width: normalize(300),
+        height: normalize(50),
         borderRadius: 15,
         alignItems: 'center',
         flexDirection: 'row',
@@ -89,5 +92,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF2F3'
     },
 
-})
-export default styles;
+}))
+export default useStyles;

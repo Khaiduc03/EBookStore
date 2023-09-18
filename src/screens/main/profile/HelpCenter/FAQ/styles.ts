@@ -12,16 +12,16 @@ const useStyles = makeStyles(({ colors }) => ({
     ScrollView: {
         maxWidth: '100%',
         maxHeight: 70,
-        marginTop: 100
+        padding: normalize(10)
     },
     viewConten: {
         flexDirection: 'row',
     },
     viewSearch: {
-
+        paddingHorizontal: normalize(20)
     },
     Toggleable: {
-        paddingVertical: 80,
+        paddingVertical: 10,
         paddingHorizontal: 24,
 
     },

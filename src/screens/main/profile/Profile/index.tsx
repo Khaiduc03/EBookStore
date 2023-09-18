@@ -4,12 +4,12 @@ import usestyles from './styles';
 import { useAppDispatch, useAppSelector } from '../../../../hooks';
 import { getAuthEnableSignIn } from '../../../../redux/selectors/auth.selector';
 import { AuthActions } from '../../../../redux/reducer';
-import { Circle } from '../../../../components';
 import TextCustom from '../../../../components/customs/Text';
 import { NavigationService } from '../../../../navigation';
 import { routes } from '../../../../constants';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import { images } from '../../../../assets';
+import Circle from '../../../../components/customs/Circle';
 
 
 const Profile: FunctionComponent = () => {

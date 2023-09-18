@@ -14,10 +14,6 @@ const FAQ: React.FC = () => {
       behavior={Platform.OS === 'android' ? 'padding' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
-          <Header
-            leftIcon
-            title='Trung tâm hỗ trợ'
-            istitle />
           <ScrollView horizontal showsHorizontalScrollIndicator={false}
             style={styles.ScrollView}>
             <View style={styles.viewConten}>

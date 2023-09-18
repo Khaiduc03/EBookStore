@@ -5,6 +5,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
@@ -129,9 +130,14 @@ const SignIn: FunctionComponent = () => {
               />
             </View>
             <View style={styles.textView}>
-              <Text style={[styles.titleInput, styles.color]}>
-                Forgot Password
-              </Text>
+              <TouchableOpacity
+                onPress={() =>
+                  NavigationService.navigate(routes.FORGOT_PASSWORD)
+                }>
+                <Text style={[styles.titleInput, styles.color]}>
+                  Forgot Password
+                </Text>
+              </TouchableOpacity>
               <Text style={styles.textNor}>or continue with</Text>
             </View>
             <View style={styles.optionView}>
