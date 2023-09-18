@@ -6,9 +6,7 @@ import { TouchableOpacity } from 'react-native';
 import useStyles from './styles';
 import { SearchBarComponentProps } from './types';
 
-const SearchCustom: React.FunctionComponent<
-  SearchBarComponentProps
-> = props => {
+const SearchCustom: React.FunctionComponent<SearchBarComponentProps> = props => {
   const styles = useStyles();
   const [search, setSearch] = useState('');
   const [inputFocused, setInputFocused] = useState(false);

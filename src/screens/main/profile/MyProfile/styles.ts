@@ -15,13 +15,14 @@ const useStyles = makeStyles(({ colors }) => ({
     },
     View: {
         paddingVertical: 24,
-        flexDirection: 'row'
+        paddingHorizontal: 15,
+        flexDirection: 'row',
     },
     viewFollow: {
         width: '25%',
-        right: 50,
         alignItems: 'center',
         justifyContent: 'center',
+        marginStart: 10
     },
     NameUser: {
         paddingHorizontal: 24
@@ -35,7 +36,7 @@ const useStyles = makeStyles(({ colors }) => ({
     ViewSquares: {
         paddingHorizontal: 24,
         flexDirection: 'row',
-        gap: 20
+        gap: 20,
     }
 }));
 export default useStyles;
