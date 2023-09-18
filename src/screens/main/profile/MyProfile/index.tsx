@@ -1,12 +1,10 @@
-import { View, TouchableOpacity, Image, Text, FlatList, Dimensions } from 'react-native'
+import { View, TouchableOpacity, Image, FlatList } from 'react-native'
 import React from 'react'
 import useStyles from '../MyProfile/styles'
 import Header from '../../../../components/customs/Headers';
 import { images } from '../../../../assets';
 import TextCustom from '../../../../components/customs/Text';
-import { Circle } from '../../../../components';
 import Squares from '../../../../components/customs/Squares';
-import { ScrollView } from 'react-native-gesture-handler';
 import { NavigationService } from '../../../../navigation';
 import { routes } from '../../../../constants';
 import ItemPost from './ItemPost/ItemPost';
@@ -15,16 +13,12 @@ import ItemPost from './ItemPost/ItemPost';
 
 const MyProfile: React.FC = (props) => {
   const styles = useStyles();
-  const itemWidth = Dimensions.get('window').width / 3;
 
   const handlePressGoback = () => {
     NavigationService.navigate(routes.PROFILE);
   };
   const renderItem = ({ item }: { item: typeof data[0] }) => (
     <Squares {...item} />
-  );
-  const renderItemPost = ({ item }: { item: typeof data2[0] }) => (
-    <Image style={{ width: itemWidth, height: itemWidth }} source={images.avata} />
   );
 
   return (

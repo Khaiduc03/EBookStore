@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Image } from 'react-native'
+import { Dimensions, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 
 type Props = {
@@ -26,4 +26,3 @@ const ItemPost: React.FC<Props> = (props) => {
 
 export default ItemPost
 
-const styles = StyleSheet.create({})
