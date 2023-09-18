@@ -14,7 +14,10 @@ import DatePicker from '@react-native-community/datetimepicker';
 import { CheckBox, Icon, Text } from '@rneui/themed';
 import { Gender } from '../../../../types';
 import { format } from 'date-fns';
-import { ButtonBig } from '../../../../components/customs/Button'
+import { BigButton } from '../../../../components'
+import { NavigationService } from '../../../../navigation'
+import { routes } from '../../../../constants'
+import HeaderCustom from '../../../../components/customs/HeaderCustom'
 
 
 const Update_Profile: FunctionComponent = () => {
@@ -22,7 +25,6 @@ const Update_Profile: FunctionComponent = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [isSelectingDate, setIsSelectingDate] = useState(false);
-
     const [credentials, setCredentials] = React.useState<{
         fullname: string;
         email: string;
@@ -38,6 +40,9 @@ const Update_Profile: FunctionComponent = () => {
         gender: Gender.MALE,
         biography: '',
     });
+    const handlePressGoback = () => {
+        NavigationService.navigate(routes.MYPROFILE);
+    };
     const handleInputChange = (text: string) => {
         if (!isSelectingDate && text.length <= 10) {
             let formattedDate = text;
@@ -95,13 +100,15 @@ const Update_Profile: FunctionComponent = () => {
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         return emailPattern.test(email);
     };
-    
+
 
     return (
         <KeyboardAvoidingView style={styles.container}
         //  behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         >
-            <Header leftIcon title='Update Profile' istitle />
+            <HeaderCustom leftIcon={{ name: 'arrow-left', type: 'font-awesome-5' }} title='Update Profile'
+                onPressLeftIcon={handlePressGoback}
+            />
             <ScrollView style={styles.container}>
                 <TouchableWithoutFeedback
                     style={styles.wrapper}
@@ -206,8 +213,8 @@ const Update_Profile: FunctionComponent = () => {
 
                         </View>
                         <View style={styles.bottom}>
-                            {/* <BigButton textButton="Lưu" onPressButton={() => { }} /> */}
-                            <ButtonBig title='Save' />
+                            <BigButton textButton="Save" onPressButton={() => { }} />
+                            {/* <ButtonBig title='Save' /> */}
                         </View>
                     </View>
                 </TouchableWithoutFeedback>

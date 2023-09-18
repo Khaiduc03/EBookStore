@@ -10,6 +10,7 @@ import BecomeVIP from './BecomeVIP';
 import AboutApp from './AboutApp';
 import FAQ from './HelpCenter/FAQ';
 import Contact_us from './HelpCenter/Contact_us';
+import Update_Profile from './Update-profile';
 
 export { default as Profile } from './Profile';
 
@@ -49,5 +50,9 @@ export const profileScreens: Screen[] = [
     {
         name: routes.CONTACTUS,
         component: Contact_us
+    },
+    {
+        name: routes.UPDATE_PROFILE2,
+        component: Update_Profile
     },
 ];

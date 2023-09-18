@@ -68,7 +68,7 @@ const Header: React.FunctionComponent<HeaderProps> = props => {
       {menu && <TouchableOpacity style={styles.iconRight}>
         <Image source={images.ic_Menu} />
       </TouchableOpacity>}
-      {ic_Add && <TouchableOpacity style={styles.iconAdd}>
+      {ic_Add && <TouchableOpacity style={styles.iconAdd} >
         <Image source={images.ic_Add} />
       </TouchableOpacity>}
       {ic_Edit && <TouchableOpacity style={styles.iconRight}>

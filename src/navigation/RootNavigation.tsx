@@ -9,6 +9,8 @@ import { navigationRef } from './NavigationService';
 import Security from '../screens/main/profile/Security';
 import AppNavigator from './navigators/AppNavigator';
 import MyProfile from '../screens/main/profile/MyProfile';
+import PostDetail from '../screens/main/profile/PostDetail';
+import Update_Profile from '../screens/main/profile/Update-profile';
 
 
 
@@ -25,7 +27,7 @@ const RootNavigation = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      <MyProfile />
+      <AppNavigator />
     </NavigationContainer>
   );
 };

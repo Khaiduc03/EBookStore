@@ -1,21 +1,23 @@
-import { View, TouchableOpacity, Image, FlatList } from 'react-native'
+import { View, TouchableOpacity, Image, FlatList, Text } from 'react-native'
 import React from 'react'
 import useStyles from '../MyProfile/styles'
-import Header from '../../../../components/customs/Headers';
 import { images } from '../../../../assets';
 import TextCustom from '../../../../components/customs/Text';
 import Squares from '../../../../components/customs/Squares';
 import { NavigationService } from '../../../../navigation';
 import { routes } from '../../../../constants';
 import ItemPost from './ItemPost/ItemPost';
+import HeaderCustom from '../../../../components/customs/HeaderCustom';
 
 
 
 const MyProfile: React.FC = (props) => {
   const styles = useStyles();
-
   const handlePressGoback = () => {
     NavigationService.navigate(routes.PROFILE);
+  };
+  const handlePressGoScreen = () => {
+    NavigationService.navigate(routes.UPDATE_PROFILE2);
   };
   const renderItem = ({ item }: { item: typeof data[0] }) => (
     <Squares {...item} />
@@ -23,7 +25,12 @@ const MyProfile: React.FC = (props) => {
 
   return (
     <View style={styles.container}>
-      <Header leftIcon onPressLeftIcon={handlePressGoback} title='My Profile' istitle ic_Add ic_Edit />
+      <HeaderCustom leftIcon={{ name: 'arrow-left', type: 'font-awesome' }} title='My Profile'
+        onPressLeftIcon={handlePressGoback}
+        rightIconleft={{ name: 'plus', type: 'font-awesome-5' }}
+        rightIconRight={{ name: 'pen', type: 'font-awesome-5' }}
+        onPressRightIconRight={handlePressGoScreen}
+      />
       <View style={styles.View}>
         <Image style={styles.Avatar} source={images.avata} />
         <TouchableOpacity style={styles.viewFollow}>
@@ -62,7 +69,7 @@ const MyProfile: React.FC = (props) => {
         />
       </View>
       <View style={{ alignItems: 'center', borderBottomWidth: 0.5, borderColor: '#8a8a8a', marginTop: 15 }}>
-        <TextCustom textBold title='MY POST' />
+        <Text style={styles.TextPost}>MY POST</Text>
       </View>
       <View style={{ flex: 1 }}>
         <FlatList
