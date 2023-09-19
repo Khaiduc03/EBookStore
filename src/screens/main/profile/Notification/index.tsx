@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import Header from '../../../../components/customs/Headers';
 import useStyles from '../Notification/styles';
 import Switch_ from '../../../../components/customs/Switch/index';
 import { routes } from '../../../../constants';
 import { NavigationService } from '../../../../navigation';
+import { HeaderCustom } from '../../../../components';
 
 
 const Notification: React.FC = () => {
@@ -14,7 +14,8 @@ const Notification: React.FC = () => {
   };
   return (
     <View style={styles.container}>
-      <Header leftIcon onPressLeftIcon={handlePressGoback} title='Notification' istitle />
+      <HeaderCustom leftIcon={{ name: 'arrow-left', type: 'font-awesome-5' }} title='Notification'
+        onPressLeftIcon={handlePressGoback}/>
       <Text style={styles.txt}>Notify me when...</Text>
       <View style={styles.View}>
         <Text style={styles.Text}>There is a new recommendation</Text>

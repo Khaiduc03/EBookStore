@@ -1,9 +1,9 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import usestyles from './styles'
-import Header from '../../../../components/customs/Headers';
 import { NavigationService } from '../../../../navigation';
 import { routes } from '../../../../constants';
+import { HeaderCustom } from '../../../../components';
 
 const BecomeVIP: React.FC = () => {
     const styles = usestyles();
@@ -12,7 +12,8 @@ const BecomeVIP: React.FC = () => {
     };
     return (
         <View style={styles.container}>
-            <Header leftIcon onPressLeftIcon={handlePressGoback} title='Become Member VIP' istitle />
+            <HeaderCustom leftIcon={{ name: 'arrow-left', type: 'font-awesome-5' }} title='Become Member VIP'
+                onPressLeftIcon={handlePressGoback} />
             <Text style={{ fontSize: 50 }}>Screen Member VIP this here!!!!!!</Text>
         </View>
     )

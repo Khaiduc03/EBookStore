@@ -1,9 +1,8 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import Header from '../../../../components/customs/Headers';
 import Switch_ from '../../../../components/customs/Switch/index';
 import useStyles from './styles';
-import { BigButton } from '../../../../components';
+import { BigButton, HeaderCustom } from '../../../../components';
 import { NavigationService } from '../../../../navigation';
 import { routes } from '../../../../constants';
 const Security: React.FC = () => {
@@ -13,7 +12,9 @@ const Security: React.FC = () => {
     };
     return (
         <View style={styles.container}>
-            <Header leftIcon onPressLeftIcon={handlePressGoback} title='Security' istitle />
+
+            <HeaderCustom leftIcon={{ name: 'arrow-left', type: 'font-awesome-5' }} title='Security'
+                onPressLeftIcon={handlePressGoback} />
             <View style={styles.view_switch}>
                 <Text style={styles.txt}>Save Password</Text>
                 <Switch_ />

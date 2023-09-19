@@ -1,19 +1,18 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {makeStyles, useThemeMode} from '@rneui/themed';
+import { NavigationContainer } from '@react-navigation/native';
+import { makeStyles, useThemeMode } from '@rneui/themed';
 import React from 'react';
-import {StatusBar} from 'react-native';
-import {useAppSelector} from '../hooks';
-import {getAuthEnableSignIn} from '../redux/selectors/auth.selector';
-import {getMode} from '../redux/selectors/thems.selector';
-import {navigationRef} from './NavigationService';
-import AuthNavigator from './navigators/AuthNavigator';
+import { StatusBar } from 'react-native';
+import { useAppSelector } from '../hooks';
+import { getAuthEnableSignIn } from '../redux/selectors/auth.selector';
+import { getMode } from '../redux/selectors/thems.selector';
+import { navigationRef } from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
   //theme
   const mode = useAppSelector(getMode);
-  const {setMode} = useThemeMode();
+  const { setMode } = useThemeMode();
   const [themeMode, setThemeMode] = React.useState<
     'dark-content' | 'light-content'
   >(() => {
@@ -45,7 +44,7 @@ const RootNavigation = () => {
 
 export default RootNavigation;
 
-const usestyles = makeStyles(({colors}) => ({
+const usestyles = makeStyles(({ colors }) => ({
   Mode: {
     backgroundColor: colors.background,
   },

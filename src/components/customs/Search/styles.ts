@@ -1,8 +1,8 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../utils';
-import {fontFamilySetup} from '../../../utils/font';
+import { makeStyles, normalize } from '@rneui/themed';
+import { Device } from '../../../utils';
+import { fontFamilySetup } from '../../../utils/font';
 
-const useStyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({ colors }) => ({
   container: {
     width: '100%',
     borderStyle: 'solid',

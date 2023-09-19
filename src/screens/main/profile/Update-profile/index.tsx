@@ -4,6 +4,7 @@ import {
     ScrollView,
     TouchableWithoutFeedback,
     View,
+    Alert,
 } from 'react-native'
 import React, { FunctionComponent, useState } from 'react'
 import useStyles from '../Update-profile/styles'
@@ -24,6 +25,7 @@ const Update_Profile: FunctionComponent = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [isSelectingDate, setIsSelectingDate] = useState(false);
+    const [error, setError] = useState('');
     const [credentials, setCredentials] = React.useState<{
         fullname: string;
         email: string;
@@ -99,7 +101,64 @@ const Update_Profile: FunctionComponent = () => {
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         return emailPattern.test(email);
     };
+    const handlePhoneNumberChange = (text: string) => {
+        if (/^\d+$/.test(text) || text === '') {
+            if (text.length <= 12) {
+                setCredentials({ ...credentials, phone_number: text });
+                setError('');
+            } else {
+                setError('Please enter only phone numbers, no more than 12 numbers.');
+            }
+        } else {
+            setError('Please enter numbers only.');
+        }
+    };
+    const validateInputs = () => {
+        const errors = [];
 
+        if (!credentials.fullname) {
+            errors.push('Full Name is required');
+        }
+
+        if (!credentials.email || !isEmailValid(credentials.email)) {
+            errors.push('Invalid email. Please use a valid email format.');
+        }
+
+        if (!credentials.phone_number) {
+            errors.push('Phone number is required');
+        }
+
+        if (!credentials.dob) {
+            errors.push('Date of birth is required');
+        }
+
+        return errors;
+    };
+    const handleSaveButtonPress = () => {
+        const validationErrors = validateInputs();
+
+        if (validationErrors.length > 0) {
+            // Hiển thị cảnh báo với các lỗi
+            const errorMessages = validationErrors.join('\n');
+            Alert.alert(errorMessages);
+        } else {
+            // Lưu thông tin nếu không có lỗi
+            // Thực hiện lưu thông tin ở đây (ví dụ: gửi dữ liệu đến máy chủ)
+            Alert.alert(
+                'Update successful',
+                'Your information has been successfully updated. 🥰',
+                [
+                    {
+                        text: 'OK',
+                        onPress: () => {
+                            // Xử lí sau khi người dùng nhấn OK 
+                        },
+                    },
+                ],
+                { cancelable: false }
+            );
+        }
+    };
 
     return (
         <KeyboardAvoidingView style={styles.container}
@@ -141,19 +200,15 @@ const Update_Profile: FunctionComponent = () => {
                                 placeholder="Enter your phone number"
                                 keyboardType="numeric"
                                 value={credentials.phone_number}
-                                onChangeText={text => {
-                                    // Bắt buộc người dùng phải nhập số và không quá 15 ký tự
-                                    if (/^\d+$/.test(text) || text === '') {
-                                        if (text.length <= 15) {
-                                            setCredentials({ ...credentials, phone_number: text });
-                                        }
-                                    }
-                                }}
+                                onChangeText={handlePhoneNumberChange}
                             />
+                            {error !== '' && (
+                                <Text style={styles.error}>{error}</Text>
+                            )}
 
                             <Text style={styles.titleInput}>Date of birth</Text>
                             <InputCustom
-                                placeholder="yyyy/MM/dd"
+                                placeholder="YYYY/MM/dd"
                                 value={credentials.dob}
                                 onChangeText={handleInputChange}
                                 rightIcon={
@@ -212,7 +267,7 @@ const Update_Profile: FunctionComponent = () => {
 
                         </View>
                         <View style={styles.bottom}>
-                            <BigButton textButton="Save" onPressButton={() => { }} />
+                            <BigButton textButton="Save" onPressButton={handleSaveButtonPress} />
                             {/* <ButtonBig title='Save' /> */}
                         </View>
                     </View>

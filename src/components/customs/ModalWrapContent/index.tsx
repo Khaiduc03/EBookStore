@@ -16,7 +16,7 @@ interface ModalProps extends Partial<RNModalProps> {
 const ModalWrapContent: FunctionComponent<ModalProps> = (props) => {
   const {
     isVisible,
-    onRequestClose = () => {},
+    onRequestClose = () => { },
     children,
     contentStyle,
     style,
