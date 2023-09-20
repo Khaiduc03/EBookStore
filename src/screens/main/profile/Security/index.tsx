@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import Switch_ from '../../../../components/customs/Switch/index';
 import useStyles from './styles';
 import { BigButton, HeaderCustom } from '../../../../components';
 import { NavigationService } from '../../../../navigation';
 import { routes } from '../../../../constants';
+import Switch_custom from '../../../../components/customs/Switch';
 const Security: React.FC = () => {
     const styles = useStyles();
     const handlePressGoback = () => {
@@ -17,19 +17,19 @@ const Security: React.FC = () => {
                 onPressLeftIcon={handlePressGoback} />
             <View style={styles.view_switch}>
                 <Text style={styles.txt}>Save Password</Text>
-                <Switch_ />
+                <Switch_custom />
             </View>
             <View style={styles.view_switch}>
                 <Text style={styles.txt}>Log in with fingerprint</Text>
-                <Switch_ />
+                <Switch_custom />
             </View>
             <View style={styles.view_switch}>
                 <Text style={styles.txt}>SMS authenticator</Text>
-                <Switch_ />
+                <Switch_custom />
             </View>
             <View style={styles.view_switch}>
                 <Text style={styles.txt}>Google Authenticator</Text>
-                <Switch_ />
+                <Switch_custom />
             </View>
             <View style={styles.viewButton}>
                 <BigButton textButton='Change Password' />

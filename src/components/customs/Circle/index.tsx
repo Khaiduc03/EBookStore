@@ -12,7 +12,7 @@ const Circle: React.FC<CustomCirclerProps> = props => {
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Avatar
-                    size={64}
+                    size={50}
                     rounded
                     icon={{ name: name, type: type, color: color }}
                     containerStyle={{ backgroundColor: colorBackground }}

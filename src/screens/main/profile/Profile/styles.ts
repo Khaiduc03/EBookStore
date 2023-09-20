@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native';
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
-const usestyles = makeStyles(({ colors }) => ({
+const useStyles = makeStyles(({ colors }) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
@@ -31,4 +31,4 @@ const usestyles = makeStyles(({ colors }) => ({
   }
 }));
 
-export default usestyles;
+export default useStyles;

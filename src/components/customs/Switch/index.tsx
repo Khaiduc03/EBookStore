@@ -28,16 +28,6 @@ export const Switch_custom: React.FunctionComponent<SwitchCustomProps> = () => {
     </View>
   );
 };
-// export const Switch_: React.FC<SwitchCustomProps> = props => {
-//   const { istitle, title } = props;
 
-//   return (
-//     <View style={styles.view}>
-//       <Text style={styles.txt}>{title}</Text>
-//       <Switch_custom />
-//       {istitle && <Text style={styles.txt}>{title}</Text>}
-//     </View>
-//   );
-// };
 
 export default Switch_custom

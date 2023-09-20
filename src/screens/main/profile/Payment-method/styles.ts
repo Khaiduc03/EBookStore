@@ -18,8 +18,8 @@ const useStyles = makeStyles(({ colors }) => ({
         padding: 24
     },
     Icon: {
-        width: 64,
-        height: 64,
+        width: normalize(64),
+        height: normalize(64),
         borderRadius: 50,
     },
     TextName: {

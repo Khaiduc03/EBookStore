@@ -16,7 +16,7 @@ const usestyles = makeStyles(({ colors }) => ({
 
     },
     txtCircle: {
-        fontSize: normalize(20),
+        fontSize: normalize(18),
         fontWeight: '700',
         letterSpacing: normalize(0.2),
         fontStyle: 'normal',
