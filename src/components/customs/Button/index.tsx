@@ -6,19 +6,22 @@ import { images } from '../../../assets';
 
 
 export const ButtonSmall: React.FC<ButtonSmallpros> = props => {
-    const { title, } = props;
+    const { title } = props
+    const [isButtonPressed, setIsButtonPressed] = useState(false);
     const styles = useStyles();
-    const [isButton, setIsButton] = useState(true);
-    const [buttonTextColor, setButtonTextColor] = useState('#f89300');
     const toggleButton = () => {
-        setIsButton(!isButton);
-        setButtonTextColor(isButton ? '#ffffff' : '#f89300');
+        setIsButtonPressed(!isButtonPressed);
     };
+
+    const buttonBackgroundColor = isButtonPressed ? '#ffffff' : '#F89300';
+    const buttonTextColor = isButtonPressed ? '#F89300' : '#ffffff';
+
     return (
         <View style={styles.viewButtonSmall}>
             <TouchableOpacity
-                style={[styles.ButtonSmall,
-                { backgroundColor: isButton ? '#ffffff' : '#F89300', borderColor: '#F89300' }]} onPress={toggleButton}>
+                style={[styles.ButtonSmall, { backgroundColor: buttonBackgroundColor, borderColor: '#F89300' }]}
+                onPress={toggleButton}
+            >
                 <Text style={[styles.txtButtonSmall, { color: buttonTextColor }]}>{title}</Text>
             </TouchableOpacity>
         </View>

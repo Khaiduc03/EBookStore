@@ -7,19 +7,6 @@ const useStyles = makeStyles(({ colors }) => ({
     container: {
         flex: 1,
     },
-    titleText: {
-        fontSize: 25,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        paddingVertical: 5,
-        fontFamily: Platform.OS === 'ios' ? 'Menlo-Bold' : '',
-        color: '#27ae60',
-    },
-
-
-
-
-
 }));
 
 export default useStyles;

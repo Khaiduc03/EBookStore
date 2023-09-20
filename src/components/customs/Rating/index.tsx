@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Platform, ScrollView } from 'react-native';
 import { Rating } from '@rneui/themed';
 import useStyles from './styles';
+import { RatingsComponentProps } from './types';
 
 
 

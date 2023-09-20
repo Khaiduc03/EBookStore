@@ -7,8 +7,8 @@ import { useNavigation } from '@react-navigation/native';
 import { routes } from '../../../../constants'
 import { NavigationService } from '../../../../navigation'
 import HeaderCustom from '../../../../components/customs/HeaderCustom'
-// Định nghĩa kiểu dữ liệu cho các dịch vụ thanh toán
-type ServiceType = 'Google Pay' | 'Zalo Pay' | 'PayPal';
+import { ServiceType } from './types';
+
 
 const Payments_method: React.FC = () => {
     const styles = useStyles();
@@ -20,9 +20,7 @@ const Payments_method: React.FC = () => {
         'Zalo Pay': true,
         'PayPal': true,
     };
-    // theo dõi trạng thái của các dịch vụ 
     const [connected, setConnected] = useState(initialStates);
-    // bấm vào nút để chuyển đổi trạng thái
     const toggleConnection = (service: ServiceType) => {
         setConnected({
             ...connected,
@@ -40,7 +38,6 @@ const Payments_method: React.FC = () => {
             </TouchableOpacity>
         </View>
     );
-    const navigation = useNavigation();
     return (
         <View style={styles.container}>
             <HeaderCustom leftIcon={{ name: 'arrow-left', type: 'font-awesome-5' }} title='Payments Method'
@@ -48,6 +45,8 @@ const Payments_method: React.FC = () => {
             {renderPaymentRow('Google Pay', images.ic_Google)}
             {renderPaymentRow('Zalo Pay', images.ic_ZaloPay)}
             {renderPaymentRow('PayPal', images.ic_Paypal)}
+
+
         </View>
     )
 }
