@@ -3,8 +3,8 @@ import {Device} from '../../../utils';
 
 const useStyles = makeStyles(({colors}) => ({
   inputContainer: {
-    backgroundColor: colors.white,
-    // borderRadius: normalize(8),
+    backgroundColor: colors.background,
+    borderRadius: normalize(8),
     // borderWidth: 1,
 
     width: Device.getDeviceWidth() - normalize(48),

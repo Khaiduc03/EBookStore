@@ -1,5 +1,5 @@
-import {ReactElement} from 'react';
-import {ViewProps} from 'react-native';
+import { ReactElement } from 'react';
+import { ViewProps } from 'react-native';
 
 export type InputProps = {
   borderBottomColor?: string;
@@ -9,10 +9,10 @@ export type InputProps = {
   secure?: boolean;
   style?: ViewProps['style'];
   keyboardType?:
-    | 'default'
-    | 'number-pad'
-    | 'decimal-pad'
-    | 'numeric'
-    | 'email-address'
-    | 'phone-pad';
+  | 'default'
+  | 'number-pad'
+  | 'decimal-pad'
+  | 'numeric'
+  | 'email-address'
+  | 'phone-pad';
 };

@@ -29,10 +29,10 @@ export const images = {
     ic_Classify: require('./ic_Classify.png'),
     ic_Service: require('./ic_Service.png'),
     ic_Meta: require('./ic_Meta.png'),
-    ic_Google: require('./ic_google.png'),
     ic_Website: require('./ic_Website.png'),
     ic_Facebook: require('./ic_Facebook.png'),
     ic_Add: require('./ic_Add.png'),
     ic_ZaloPay: require('./ic_Zalopay.png'),
     ic_Paypal: require('./ic_Paypal.png'),
+    ic_Google: require('./ic_Google.png'),
 }

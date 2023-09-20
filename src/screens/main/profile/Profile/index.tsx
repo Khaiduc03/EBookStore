@@ -9,16 +9,10 @@ import { NavigationService } from '../../../../navigation';
 import { routes } from '../../../../constants';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import { images } from '../../../../assets';
-import Circle from '../../../../components/customs/Circle';
 import TableofContent from './Components/Table-of-contents';
 
 
 const Profile: FunctionComponent = () => {
-  const dispatch = useAppDispatch();
-  const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
-  const handleLogout = () => {
-    dispatch(AuthActions.handleLogout());
-  };
   const styles = useStyles();
   return (
     <View style={styles.container}>

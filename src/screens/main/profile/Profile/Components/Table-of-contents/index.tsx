@@ -1,14 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { View, ScrollView, TouchableOpacity, Image, FlatList } from 'react-native';
+import { View, TouchableOpacity, FlatList } from 'react-native';
 import useStyles from '../../styles';
 import { useAppDispatch, useAppSelector } from '../../../../../../hooks';
 import { getAuthEnableSignIn } from '../../../../../../redux/selectors/auth.selector';
 import { AuthActions } from '../../../../../../redux/reducer';
-import TextCustom from '../../../../../../components/customs/Text';
 import { NavigationService } from '../../../../../../navigation';
 import { routes } from '../../../../../../constants';
-import HeaderCustom from '../../../../../../components/customs/HeaderCustom';
-import { images } from '../../../../../../assets';
 import Circle from '../../../../../../components/customs/Circle';
 
 const TableofContent: FunctionComponent = (props) => {
@@ -40,8 +37,7 @@ const TableofContent: FunctionComponent = (props) => {
                             } else {
                                 handleLogout();
                             }
-                        }}
-                    >
+                        }}>
                         <Circle
                             title={item.title}
                             colorBackground={item.colorBackground}

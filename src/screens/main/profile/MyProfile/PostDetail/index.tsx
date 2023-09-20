@@ -1,12 +1,12 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
-import { HeaderCustom } from '../../../../components'
-import { images } from '../../../../assets'
+import { HeaderCustom } from '../../../../../components'
+import { images } from '../../../../../assets'
 import useStyles from './styles'
-import TextCustom from '../../../../components/customs/Text'
+import TextCustom from '../../../../../components/customs/Text'
 import { Icon } from '@rneui/themed'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import ModalWrapContent from '../../../../components/customs/ModalWrapContent'
+import ModalWrapContent from '../../../../../components/customs/ModalWrapContent'
 
 const PostDetail: React.FC = () => {
     const styles = useStyles();

@@ -1,6 +1,7 @@
 import { makeStyles, normalize } from '@rneui/themed';
 import { StyleSheet } from 'react-native';
 import { Device } from '../../../../utils';
+import { fontFamilySetup } from '../../../../utils/font';
 
 const useStyles = makeStyles(({ colors }) => ({
     container: {
@@ -24,10 +25,10 @@ const useStyles = makeStyles(({ colors }) => ({
     },
     titleInput: {
         fontSize: normalize(15),
-        fontWeight: '500',
-        fontFamily: 'Urbanist-Bold',
         color: colors.black,
         letterSpacing: normalize(0.2),
+        fontFamily: fontFamilySetup.bold,
+
     },
 
     checkbox: {
@@ -38,10 +39,10 @@ const useStyles = makeStyles(({ colors }) => ({
         justifyContent: 'center',
     },
     textCheckbox: {
-        fontFamily: 'Urbanist-Regular',
         fontSize: normalize(14),
-        fontWeight: '600',
         color: colors.black,
+        fontFamily: fontFamilySetup.regular,
+
     },
     color: {
         color: colors.primary,

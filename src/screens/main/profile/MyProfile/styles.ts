@@ -31,7 +31,8 @@ const useStyles = makeStyles(({ colors }) => ({
         paddingHorizontal: 24
     },
     ViewExplore: {
-        padding: 24,
+        paddingHorizontal: 24,
+        paddingVertical: 13,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
@@ -40,6 +41,12 @@ const useStyles = makeStyles(({ colors }) => ({
         fontFamily: fontFamilySetup.bold,
         lineHeight: normalize(20),
         color: colors.black,
+    },
+    ViewMyPost: {
+        alignItems: 'center',
+        borderBottomWidth: 0.6,
+        borderColor: '#8a8a8a',
+        marginTop: 15,
     }
 
 }));

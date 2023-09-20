@@ -9,16 +9,15 @@ const Contact_us: React.FC = () => {
   const styles = useStyles();
   return (
     <View style={styles.container}>
-
-      <TouchableOpacity style={styles.Button_Service}>
+      <View style={styles.Button_Service}>
         <ButtonLong icon_Service title='Dịch vụ khách hàng' />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.Button_Facebook}>
+      </View>
+      <View style={styles.Button_Facebook}>
         <ButtonLong icon_Facebook title='Facebook' />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.Button_Website}>
+      </View>
+      <View style={styles.Button_Website}>
         <ButtonLong icon_Website title='Website' />
-      </TouchableOpacity>
+      </View>
     </View>
   )
 }

@@ -68,7 +68,7 @@ const MyProfile: React.FC = (props) => {
           decelerationRate={0.5} // Điều chỉnh tốc độ giảm dần của cuộn
         />
       </View>
-      <View style={{ alignItems: 'center', borderBottomWidth: 0.5, borderColor: '#8a8a8a', marginTop: 15 }}>
+      <View style={styles.ViewMyPost}>
         <Text style={styles.TextPost}>MY POST</Text>
       </View>
       <View style={{ flex: 1 }}>
