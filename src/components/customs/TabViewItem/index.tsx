@@ -10,7 +10,7 @@ const TabViewItem: React.FunctionComponent<CustomTabViewItemProps> = props => {
   const [index, setIndex] = React.useState(0);
   const styles = useStyles();
   return (
-    <ScrollView stickyHeaderIndices={[1]}>
+    <ScrollView stickyHeaderIndices={[1]} showsVerticalScrollIndicator={false}>
       {props.headerDetail}
       <Tab
         containerStyle={styles.container}
