@@ -103,7 +103,7 @@ const Update_Profile: FunctionComponent = () => {
     };
     const handlePhoneNumberChange = (text: string) => {
         if (/^\d+$/.test(text) || text === '') {
-            if (text.length <= 12) {
+            if (text.length <= 13) {
                 setCredentials({ ...credentials, phone_number: text });
                 setError('');
             } else {
@@ -117,33 +117,31 @@ const Update_Profile: FunctionComponent = () => {
         const errors = [];
 
         if (!credentials.fullname) {
-            errors.push('Full Name is required');
+            errors.push('Full Name is required 😅 \n');
         }
 
         if (!credentials.email || !isEmailValid(credentials.email)) {
-            errors.push('Invalid email. Please use a valid email format.');
+            errors.push('Please use a valid email format\nInvalid email.😅 ');
         }
 
         if (!credentials.phone_number) {
-            errors.push('Phone number is required');
+            errors.push('Phone number is required 😅 \n');
         }
 
         if (!credentials.dob) {
-            errors.push('Date of birth is required');
+            errors.push('Date of birth is required 😅 \n');
         }
 
         return errors;
     };
     const handleSaveButtonPress = () => {
         const validationErrors = validateInputs();
-
         if (validationErrors.length > 0) {
             // Hiển thị cảnh báo với các lỗi
             const errorMessages = validationErrors.join('\n');
             Alert.alert(errorMessages);
-        } else {
-            // Lưu thông tin nếu không có lỗi
-            // Thực hiện lưu thông tin ở đây (ví dụ: gửi dữ liệu đến máy chủ)
+        }
+        else {
             Alert.alert(
                 'Update successful',
                 'Your information has been successfully updated. 🥰',
@@ -208,7 +206,7 @@ const Update_Profile: FunctionComponent = () => {
 
                             <Text style={styles.titleInput}>Date of birth</Text>
                             <InputCustom
-                                placeholder="YYYY/MM/dd"
+                                placeholder="YYYY-MM-dd"
                                 value={credentials.dob}
                                 onChangeText={handleInputChange}
                                 rightIcon={
@@ -268,7 +266,6 @@ const Update_Profile: FunctionComponent = () => {
                         </View>
                         <View style={styles.bottom}>
                             <BigButton textButton="Save" onPressButton={handleSaveButtonPress} />
-                            {/* <ButtonBig title='Save' /> */}
                         </View>
                     </View>
                 </TouchableWithoutFeedback>

@@ -8,6 +8,8 @@ const HEIGHT = Device.getDeviceHeight();
 const useStyles = makeStyles(({ colors }) => ({
     container: {
         flex: 1,
+        backgroundColor: colors.background,
+
     },
     Payment: {
         flexDirection: 'row',
@@ -18,7 +20,7 @@ const useStyles = makeStyles(({ colors }) => ({
     Icon: {
         width: 64,
         height: 64,
-        borderRadius:50,
+        borderRadius: 50,
     },
     TextName: {
         fontSize: normalize(HEIGHT * 0.021),

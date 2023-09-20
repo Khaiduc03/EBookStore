@@ -45,7 +45,7 @@ const Profile: FunctionComponent = () => {
           <Circle title='Notification'
             colorBackground='#FFF2F3'
             name='bell'
-            type='evilicon'
+            type='font-awesome-5'
             color='#F2AC9D'
             rightIcon />
         </TouchableOpacity>

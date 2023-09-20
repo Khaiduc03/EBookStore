@@ -8,6 +8,8 @@ const HEIGHT = Device.getDeviceHeight();
 const useStyles = makeStyles(({ colors }) => ({
     container: {
         flex: 1,
+        backgroundColor: colors.background,
+
     },
     Avatar: {
         width: 64,

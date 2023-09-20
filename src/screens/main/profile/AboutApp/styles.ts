@@ -8,6 +8,8 @@ const HEIGHT = Device.getDeviceHeight();
 const usestyles = makeStyles(({ colors }) => ({
     container: {
         flex: 1,
+        backgroundColor: colors.background,
+
     },
     View: {
         width: '90%',

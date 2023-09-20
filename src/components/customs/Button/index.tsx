@@ -20,7 +20,7 @@ export const ButtonSmall: React.FC<ButtonSmallpros> = props => {
                 style={[styles.ButtonSmall,
                 { backgroundColor: isButton ? '#ffffff' : '#F89300', borderColor: '#F89300' }]} onPress={toggleButton}>
                 <Text style={[styles.txtButtonSmall, { color: buttonTextColor }]}>{title}</Text>
-            </TouchableOpacity >
+            </TouchableOpacity>
         </View>
     )
 };

@@ -7,7 +7,8 @@ const HEIGHT = Device.getDeviceHeight();
 const useStyles = makeStyles(({ colors }) => ({
     container: {
         flex: 1,
+        backgroundColor: colors.background,
     },
-   
+
 }));
 export default useStyles;

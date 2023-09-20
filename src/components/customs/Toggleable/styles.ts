@@ -1,6 +1,11 @@
+import { makeStyles, normalize } from '@rneui/themed';
+import { Device } from '../../../utils';
 import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+const WIDTH = Device.getDeviceWidth();
+const HEIGHT = Device.getDeviceHeight();
+
+const useStyles = makeStyles(({ colors }) => ({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -8,8 +13,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#ccc',
         borderRadius: 10,
-
-
     },
     iconContainer: {
         marginRight: 10,
@@ -23,12 +26,12 @@ const styles = StyleSheet.create({
         height: 24,
     },
     Name: {
-        color: '#000000',
-        fontFamily: 'Urbanist',
-        fontSize: 18,
-        fontWeight: 'bold',
-        lineHeight: 21,
-        letterSpacing: 0.12,
+        fontSize: normalize(HEIGHT * 0.02),
+        fontWeight: '700',
+        letterSpacing: normalize(0.2),
+        fontStyle: 'normal',
+        fontFamily: 'Urbanist-Regular',
+        color: colors.black,
     },
     content: {
         color: '#000000',
@@ -46,5 +49,5 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         paddingVertical: 5
     },
-})
-export default styles
+}))
+export default useStyles

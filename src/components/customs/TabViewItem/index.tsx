@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import { Tab, Text, TabView } from '@rneui/themed';
+import { Tab, TabView } from '@rneui/themed';
 import React from 'react';
 import { CustomTabViewItemProps } from './types';
 import useStyles from './styles';
@@ -7,7 +7,7 @@ import useStyles from './styles';
 const TabViewItem: React.FunctionComponent<CustomTabViewItemProps> = props => {
   const [index, setIndex] = React.useState(0);
   const styles = useStyles();
-  const { nameTabView } = props;
+  // const { nameTabView } = props;
   return (
     <>
       <Tab
@@ -23,6 +23,7 @@ const TabViewItem: React.FunctionComponent<CustomTabViewItemProps> = props => {
         titleStyle={styles.titleStyleProfile}>
         <Tab.Item title="FAQ" />
         <Tab.Item title="Contact US" />
+
       </Tab>
 
       <TabView value={index} onChange={setIndex} animationType="spring">

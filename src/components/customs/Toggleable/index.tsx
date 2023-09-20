@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
-import styles from '../Toggleable/styles'
+import useStyles from '../Toggleable/styles'
 import { ToggleableViewProps } from '../Toggleable/types'
 import { images } from '../../../assets/images/png';
 
@@ -8,6 +8,7 @@ import { images } from '../../../assets/images/png';
 
 export const Toggleable: React.FC<ToggleableViewProps> = ({ title, content }) => {
     const [isContentVisible, setIsContentVisible] = useState(false);
+    const styles = useStyles();
 
     const toggleContent = () => {
         setIsContentVisible(!isContentVisible);

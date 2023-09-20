@@ -1,6 +1,6 @@
-import React, {FunctionComponent} from 'react';
+import React, { FunctionComponent } from 'react';
 
-import {Text} from '@rneui/base';
+import { Text } from '@rneui/base';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -10,8 +10,8 @@ import {
   View,
 } from 'react-native';
 
-import {CheckBox} from '@rneui/themed';
-import {GoogleIcon} from '../../../assets/icons';
+import { CheckBox } from '@rneui/themed';
+import { GoogleIcon } from '../../../assets/icons';
 import {
   AuthHeader,
   BigButton,
@@ -19,14 +19,14 @@ import {
   SmallButton,
 } from '../../../components';
 import Header from '../../../components/customs/Headers';
-import {routes} from '../../../constants';
-import {useAppDispatch} from '../../../hooks';
-import {NavigationService} from '../../../navigation';
-import {AuthActions} from '../../../redux/reducer';
+import { routes } from '../../../constants';
+import { useAppDispatch } from '../../../hooks';
+import { NavigationService } from '../../../navigation';
+import { AuthActions } from '../../../redux/reducer';
 import useStyles from './styles';
-import {Toast} from 'react-native-toast-message/lib/src/Toast';
-import {AlertActions} from '../../../redux/reducer/alert.reducer';
-import {images} from '../../../assets';
+import { Toast } from 'react-native-toast-message/lib/src/Toast';
+import { AlertActions } from '../../../redux/reducer/alert.reducer';
+import { images } from '../../../assets';
 
 const SignIn: FunctionComponent = () => {
   const styles = useStyles();
@@ -76,7 +76,7 @@ const SignIn: FunctionComponent = () => {
       }),
     );
 
-    
+
   };
 
   return (
@@ -84,7 +84,7 @@ const SignIn: FunctionComponent = () => {
       style={styles.wrapper}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -250}
-      >
+    >
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.body}>
           <Header
@@ -109,7 +109,7 @@ const SignIn: FunctionComponent = () => {
               placeholder="Enter your email"
               value={credentials.email}
               onChangeText={text =>
-                setCredentials({...credentials, email: text})
+                setCredentials({ ...credentials, email: text })
               }
             />
             <Text style={styles.titleInput}>Password</Text>
@@ -118,7 +118,7 @@ const SignIn: FunctionComponent = () => {
               secure={true}
               value={credentials.password}
               onChangeText={text =>
-                setCredentials({...credentials, password: text})
+                setCredentials({ ...credentials, password: text })
               }
             />
             <View style={styles.checkbox}>
