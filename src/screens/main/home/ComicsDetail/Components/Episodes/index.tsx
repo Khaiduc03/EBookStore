@@ -16,6 +16,7 @@ const Episodes = () => {
       </TouchableOpacity>
     );
   };
+
   return (
     <View style={styles.container}>
       <View style={styles.headerChapter}>
@@ -177,6 +178,24 @@ const data = [
   {
     id: 24,
     chapterNumber: 24,
+    dayUpdate: '5/13/2024',
+    view: 20,
+  },
+  {
+    id: 25,
+    chapterNumber: 25,
+    dayUpdate: '5/13/2024',
+    view: 20,
+  },
+  {
+    id: 26,
+    chapterNumber: 26,
+    dayUpdate: '5/13/2024',
+    view: 20,
+  },
+  {
+    id: 28,
+    chapterNumber: 27,
     dayUpdate: '5/13/2024',
     view: 20,
   },

@@ -26,7 +26,7 @@ const ComicsDetail = () => {
         title2={'EPISODES'}
         screen1={<Preview />}
         screen2={<Episodes />}
-        viewStyle={{height: 1000}}
+        viewStyle={{height: 1500}}
         headerDetail={<HeaderDetail />}
       />
     </View>
