@@ -23,6 +23,15 @@ const Episodes = () => {
       <Text style={{fontSize: 40, color: '#000'}}>Episodes</Text>
       <Text style={{fontSize: 40, color: '#000'}}>Episodes</Text>
       <Text style={{fontSize: 40, color: '#000'}}>Episodes</Text>
+      <Text style={{fontSize: 40, color: '#000'}}>Episodes</Text>
+      <Text style={{fontSize: 40, color: '#000'}}>Episodes</Text>
+      <Text style={{fontSize: 40, color: '#000'}}>Episodes</Text>
+      <Text style={{fontSize: 40, color: '#000'}}>Episodes</Text>
+      <Text style={{fontSize: 40, color: '#000'}}>Episodes</Text>
+      <Text style={{fontSize: 40, color: '#000'}}>Episodes</Text>
+      <Text style={{fontSize: 40, color: '#000'}}>Episodes</Text>
+      <Text style={{fontSize: 40, color: '#000'}}>Episodes</Text>
+      <Text style={{fontSize: 40, color: '#000'}}>Episodes</Text>
     </View>
   );
 };

@@ -3,12 +3,15 @@ import {Tab, Text, TabView} from '@rneui/themed';
 import React from 'react';
 import {CustomTabViewItemProps} from './types';
 import useStyles from './styles';
+import {ScrollView} from 'react-native-gesture-handler';
+import {HeaderDetail} from '../../../screens/main/home/ComicsDetail/Components';
 
 const TabViewItem: React.FunctionComponent<CustomTabViewItemProps> = props => {
   const [index, setIndex] = React.useState(0);
   const styles = useStyles();
   return (
-    <>
+    <ScrollView stickyHeaderIndices={[1]}>
+      {props.headerDetail}
       <Tab
         containerStyle={styles.container}
         buttonStyle={{backgroundColor: '#fff'}}
@@ -28,7 +31,7 @@ const TabViewItem: React.FunctionComponent<CustomTabViewItemProps> = props => {
         containerStyle={props.viewStyle}
         value={index}
         onChange={setIndex}
-        animationType="spring">
+        animationType="timing">
         <TabView.Item style={styles.containerTabView}>
           {props.screen1}
         </TabView.Item>
@@ -36,7 +39,7 @@ const TabViewItem: React.FunctionComponent<CustomTabViewItemProps> = props => {
           {props.screen2}
         </TabView.Item>
       </TabView>
-    </>
+    </ScrollView>
   );
 };
 

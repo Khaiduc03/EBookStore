@@ -6,4 +6,5 @@ export type CustomTabViewItemProps = {
   title1?: string;
   title2?: string;
   viewStyle?: ViewStyle;
+  headerDetail?: any;
 };
