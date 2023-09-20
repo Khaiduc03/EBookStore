@@ -8,15 +8,16 @@ import { Switch } from '@rneui/themed';
 
 
 
-export const Switch_custom: React.FunctionComponent<SwitchCustomProps> = () => {
+export const Switch_custom: React.FunctionComponent<SwitchCustomProps> = (props) => {
   const styles = useStyles();
   const [checked, setChecked] = useState(false);
-
+  const { title } = props;
   const toggleSwitch = () => {
     setChecked(!checked);
   };
   return (
     <View style={styles.container}>
+      {title && <Text style={styles.txt}>{title}</Text>}
       <Switch
         trackColor={{ false: '#F4DDBD', true: '#F89300' }}
         thumbColor={checked ? '#ffffff' : '#ffffff'}

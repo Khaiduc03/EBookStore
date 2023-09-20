@@ -15,22 +15,12 @@ const Security: React.FC = () => {
 
             <HeaderCustom leftIcon={{ name: 'arrow-left', type: 'font-awesome-5' }} title='Security'
                 onPressLeftIcon={handlePressGoback} />
-            <View style={styles.view_switch}>
-                <Text style={styles.txt}>Save Password</Text>
-                <Switch_custom />
-            </View>
-            <View style={styles.view_switch}>
-                <Text style={styles.txt}>Log in with fingerprint</Text>
-                <Switch_custom />
-            </View>
-            <View style={styles.view_switch}>
-                <Text style={styles.txt}>SMS authenticator</Text>
-                <Switch_custom />
-            </View>
-            <View style={styles.view_switch}>
-                <Text style={styles.txt}>Google Authenticator</Text>
-                <Switch_custom />
-            </View>
+
+            <Switch_custom title='Save Password' />
+            <Switch_custom title='Log in with fingerprint' />
+            <Switch_custom title='SMS authenticator' />
+            <Switch_custom title='Google Authenticator' />
+
             <View style={styles.viewButton}>
                 <BigButton textButton='Change Password' />
             </View>
