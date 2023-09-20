@@ -5,15 +5,22 @@ import {Keyboard,KeyboardAvoidingView,TouchableWithoutFeedback,View} from 'react
 import { CheckBox } from '@rneui/themed';
 import { AuthHeader, BigButton, InputCustom } from '../../../components';
 import Header from '../../../components/customs/Headers';
-import { routes } from '../../../constants';
-import { NavigationService } from '../../../navigation';
-import {comparePassword,isValidEmail,isValidPassword,showToastError,} from '../../../utils';
+import {routes} from '../../../constants';
+import {NavigationService} from '../../../navigation';
 import useStyles from './styles';
-import { useAppDispatch } from '../../../hooks';
-import { AuthActions } from '../../../redux/reducer';
+import {
+  comparePassword,
+  isValidEmail,
+  isValidPassword,
+  showToastError,
+} from '../../../utils';
+import {AuthActions} from '../../../redux';
+import {useAppDispatch} from '../../../hooks';
 
 const CreateAccount: FunctionComponent = () => {
   const styles = useStyles();
+
+  const [checked, setChecked] = React.useState<boolean>(false);
 
   const toggleCheckbox = () => setChecked(!checked);
   const dispatch = useAppDispatch();
@@ -80,8 +87,6 @@ const CreateAccount: FunctionComponent = () => {
     );
   };
 
-  const [checked, setChecked] = React.useState<boolean>(false);
-
   return (
     <View style={styles.container}>
       <KeyboardAvoidingView style={styles.wrapper}>
@@ -105,7 +110,7 @@ const CreateAccount: FunctionComponent = () => {
             />
 
             <View style={styles.formContainer}>
-              <Text style={styles.titleInput}>email</Text>
+              <Text style={styles.titleInput}>Email</Text>
               <InputCustom
                 placeholder="Enter your email"
                 value={credentials.email}
@@ -126,12 +131,13 @@ const CreateAccount: FunctionComponent = () => {
               />
               <Text style={styles.titleInput}>Confirm Password</Text>
               <InputCustom
-                placeholder="Enter your password"
+                placeholder="Enter your confirm password"
                 secure={true}
                 value={credentials.comfirmPassword}
                 onChangeText={text =>
                   setCredentials({ ...credentials, comfirmPassword: text })
                 }
+                style={inputErrors.comfirmPassword ? styles.errorInput : null}
               />
               <View style={styles.checkbox}>
                 <CheckBox

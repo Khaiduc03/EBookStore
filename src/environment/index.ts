@@ -4,7 +4,7 @@
 // dotenv.config();
 
 // //URL
-export const BASE_URL = 'https://comicverse.onrender.com';
+export const BASE_URL = 'http://54.208.247.115';
 
 export enum Endpoints {
   //AUTH

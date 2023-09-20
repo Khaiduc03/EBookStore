@@ -2,7 +2,6 @@ import { ReactElement } from 'react';
 import { ViewProps } from 'react-native';
 
 export type InputProps = {
-  borderBottomColor?: string;
   placeholder?: string;
   leftIcon?: ReactElement;
   rightIcon?: ReactElement;

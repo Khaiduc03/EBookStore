@@ -7,6 +7,7 @@ import { routes } from '../../../../constants';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import useStyles from './styles';
 import ItemPostUser from './ItemPostUser/ItemPostUser';
+import { Icon } from '@rneui/themed';
 
 
 
@@ -18,7 +19,7 @@ const ProfileUser: React.FC = (props) => {
   const handlePressGoScreen = () => {
     NavigationService.navigate(routes.UPDATE_PROFILE2);
   };
-  const [isFollowed, setIsFollowed] = useState(false);
+  const [isFollowed, setIsFollowed] = useState(true);
   const handleFollowButtonClick = () => {
     setIsFollowed(!isFollowed);
   };
@@ -60,6 +61,9 @@ const ProfileUser: React.FC = (props) => {
         </TouchableOpacity>
         <TouchableOpacity style={styles.ButtonFollow}>
           <Text style={styles.TextFollow}>Messenger</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.ButtonAddUser}>
+          <Icon name='user-plus' type='font-awesome-5' size={18} color={'white'}/>
         </TouchableOpacity>
       </View>
 

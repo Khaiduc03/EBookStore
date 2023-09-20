@@ -51,20 +51,32 @@ const useStyles = makeStyles(({ colors }) => ({
         justifyContent: 'center',
         borderWidth: 0.5,
         borderColor: 'white',
-        backgroundColor:'gray',
+        backgroundColor: 'gray',
 
     },
     ViewButtonFollow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal: 30,
-        paddingVertical: 15
+        paddingHorizontal: normalize(24),
+        paddingVertical: normalize(15),
+        gap: normalize(10)
     },
-    TextFollow:{
+    TextFollow: {
         fontSize: normalize(15),
         fontFamily: fontFamilySetup.bold,
         lineHeight: normalize(20),
         color: colors.white,
+    },
+    ButtonAddUser: {
+        width: normalize(45),
+        height: normalize(25),
+        borderRadius: normalize(8),
+        top: normalize(10),
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 0.5,
+        borderColor: 'white',
+        backgroundColor: 'gray',
     }
 
 }));

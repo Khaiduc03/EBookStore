@@ -25,6 +25,7 @@ export const theme = createTheme({
     black: '#212121',
     grey0: '#FFFFFF',
     grey2: '#90939B',
+    grey3: '#667085',
     white: '#FFFFFF',
     input1: '#F2F2F2',
     input2: '#FFF7EB',

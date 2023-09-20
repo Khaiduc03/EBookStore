@@ -1,5 +1,5 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { makeStyles, useThemeMode } from '@rneui/themed';
+import {NavigationContainer} from '@react-navigation/native';
+import {makeStyles, useThemeMode} from '@rneui/themed';
 import React from 'react';
 import { StatusBar } from 'react-native';
 import { useAppSelector } from '../hooks';

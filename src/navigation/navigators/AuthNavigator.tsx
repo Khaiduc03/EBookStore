@@ -26,7 +26,7 @@ const AuthNavigator = () => {
   return (
     <AuthStack.Navigator
       screenOptions={screenOptions}
-      initialRouteName={routes.CREATE_NEW_PASSWORD}>
+      initialRouteName={routes.LOBBY}>
       {authScreenapp.map(screen => {
         return (
           <AuthStack.Screen
