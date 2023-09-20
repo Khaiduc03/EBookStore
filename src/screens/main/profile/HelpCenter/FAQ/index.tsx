@@ -1,5 +1,5 @@
 import { View, Text, ScrollView, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import useStyles from './styles';
 import Header from '../../../../../components/customs/Headers/index';
 import { Toggleable } from '../../../../../components/customs/Toggleable/index';
@@ -9,20 +9,24 @@ import SearchCustom from '../../../../../components/customs/Search';
 
 const FAQ: React.FC = () => {
   const styles = useStyles();
+  const [selectedButton, setSelectedButton] = useState('');
+
+  const handleButtonPress = (title: string) => {
+    setSelectedButton(title);
+  };
   return (
     <KeyboardAvoidingView style={styles.container}
       behavior={Platform.OS === 'android' ? 'padding' : 'height'}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}
-            style={styles.ScrollView}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.ScrollView}>
             <View style={styles.viewConten}>
-              <ButtonSmall title='Tổng quan' />
-              <ButtonSmall title='Tài khoản' />
-              <ButtonSmall title='Dịch vụ' />
-              <ButtonSmall title='App' />
-              <ButtonSmall title='App' />
-              <ButtonSmall title='App' />
+              <ButtonSmall title='Tổng quan' onPress={() => handleButtonPress('Tổng quan')} isSelected={selectedButton === 'Tổng quan'} />
+              <ButtonSmall title='Tài khoản' onPress={() => handleButtonPress('Tài khoản')} isSelected={selectedButton === 'Tài khoản'} />
+              <ButtonSmall title='Dịch vụ' onPress={() => handleButtonPress('Dịch vụ')} isSelected={selectedButton === 'Dịch vụ'} />
+              <ButtonSmall title='App' onPress={() => handleButtonPress('App')} isSelected={selectedButton === 'App'} />
+              <ButtonSmall title='App' onPress={() => handleButtonPress('App')} isSelected={selectedButton === 'App'} />
+              <ButtonSmall title='App' onPress={() => handleButtonPress('App')} isSelected={selectedButton === 'App'} />
             </View>
           </ScrollView>
           <View style={styles.viewSearch}>

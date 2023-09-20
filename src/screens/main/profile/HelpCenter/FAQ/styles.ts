@@ -18,6 +18,7 @@ const useStyles = makeStyles(({ colors }) => ({
     },
     viewConten: {
         flexDirection: 'row',
+        gap: normalize(10)
     },
     viewSearch: {
         paddingHorizontal: normalize(20)
@@ -29,6 +30,7 @@ const useStyles = makeStyles(({ colors }) => ({
     },
     viewToggleable: {
         paddingVertical: 15
-    }
+    },
+
 }));
 export default useStyles;

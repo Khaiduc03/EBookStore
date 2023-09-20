@@ -20,8 +20,13 @@ const HelpCenter: React.FC = () => {
                 onPressLeftIcon={handlePressGoback}
             />
             <TabViewItem
+                title1={'FAQ'}
+                title2={'Contact US'}
                 screen1={<FAQ />}
-                screen2={<Contact_us />} />
+                screen2={<Contact_us />}
+                viewStyle={{ height: 1000 }}
+
+            />
         </View>
     )
 }

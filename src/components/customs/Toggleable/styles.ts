@@ -22,29 +22,27 @@ const useStyles = makeStyles(({ colors }) => ({
         paddingVertical: 10
     },
     icon: {
-        width: 24,
-        height: 24,
+        width: normalize(24),
+        height: normalize(24),
     },
     Name: {
         fontSize: normalize(HEIGHT * 0.02),
-        fontWeight: '700',
         letterSpacing: normalize(0.2),
         fontStyle: 'normal',
         fontFamily: 'Urbanist-Regular',
         color: colors.black,
     },
     content: {
-        color: '#000000',
-        fontFamily: 'Urbanist',
-        fontSize: 15,
-        fontWeight: '700',
-        lineHeight: 21,
-        letterSpacing: 0.12,
+        fontSize: normalize(HEIGHT * 0.02),
+        letterSpacing: normalize(0.2),
+        fontStyle: 'normal',
+        fontFamily: 'Urbanist-Regular',
+        color: colors.black,
         paddingVertical: 10
     },
     line: {
-        borderBottomWidth: 0.8,
-        width: 255,
+        borderBottomWidth: 0.3,
+        width: normalize(250),
         alignItems: 'center',
         borderColor: 'gray',
         paddingVertical: 5

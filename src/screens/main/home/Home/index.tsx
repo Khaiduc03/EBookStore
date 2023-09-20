@@ -17,7 +17,6 @@ const Home: FunctionComponent = () => {
   const handleGridIconPress = () => {
     setNumCols(2);
   };
-
   const handlePressSearch = () => {
     NavigationService.navigate(routes.SEARCH);
   };
@@ -50,7 +49,7 @@ const Home: FunctionComponent = () => {
 
         <TopicsHome />
         <HeaderCustom
-          title="Comics New"
+          title="New Comics"
           rightIconleft={{
             name: 'grid-outline',
             type: 'ionicon',

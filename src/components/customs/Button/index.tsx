@@ -4,28 +4,22 @@ import useStyles from '../Button/styles';
 import { ButtonSmallpros, ButtonLongpros } from '../Button/types';
 import { images } from '../../../assets';
 
-
 export const ButtonSmall: React.FC<ButtonSmallpros> = props => {
-    const { title } = props
-    const [isButtonPressed, setIsButtonPressed] = useState(false);
+    const { title, onPress, isSelected } = props;
     const styles = useStyles();
-    const toggleButton = () => {
-        setIsButtonPressed(!isButtonPressed);
-    };
 
-    const buttonBackgroundColor = isButtonPressed ? '#ffffff' : '#F89300';
-    const buttonTextColor = isButtonPressed ? '#F89300' : '#ffffff';
+    const buttonBackgroundColor = isSelected ? '#ffffff' : '#F89300';
+    const buttonTextColor = isSelected ? '#F89300' : '#ffffff';
 
     return (
-        <View style={styles.viewButtonSmall}>
-            <TouchableOpacity
-                style={[styles.ButtonSmall, { backgroundColor: buttonBackgroundColor, borderColor: '#F89300' }]}
-                onPress={toggleButton}
-            >
-                <Text style={[styles.txtButtonSmall, { color: buttonTextColor }]}>{title}</Text>
-            </TouchableOpacity>
-        </View>
-    )
+        <TouchableOpacity
+            style={[styles.ButtonSmall, { backgroundColor: buttonBackgroundColor, borderColor: '#F89300' }]}
+            onPress={onPress}
+            disabled={isSelected}
+        >
+            <Text style={[styles.txtButtonSmall, { color: buttonTextColor }]}>{title}</Text>
+        </TouchableOpacity>
+    );
 };
 export const ButtonLong: React.FC<ButtonLongpros> = props => {
     const { icon_Service, title, icon_Facebook, icon_Website } = props;

@@ -1,8 +1,5 @@
 import React from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
-
-import { ComicsNew } from '../Home/components';
-import Search from '../Search';
 import { HeaderCustom, TabViewItem } from '../../../../components';
 import useStyles from './styles';
 import { Episodes, HeaderDetail, Preview } from './Components';
@@ -24,8 +21,14 @@ const ComicsDetail = () => {
         rightIconRight={{ name: 'paper-plane-outline', type: 'ionicon' }}
       />
 
-      <HeaderDetail />
-      <TabViewItem screen1={<Episodes />} screen2={<Preview />} />
+      <TabViewItem
+        title1={'PREVIEW'}
+        title2={'EPISODES'}
+        screen1={<Preview />}
+        screen2={<Episodes />}
+        viewStyle={{ height: 1000 }}
+        headerDetail={<HeaderDetail />}
+      />
     </View>
   );
 };
