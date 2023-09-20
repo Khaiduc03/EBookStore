@@ -24,8 +24,16 @@ const ComicsDetail = () => {
         rightIconRight={{name: 'paper-plane-outline', type: 'ionicon'}}
       />
 
-      <HeaderDetail />
-      <TabViewItem screen1={<Episodes />} screen2={<Preview />} />
+      <ScrollView>
+        <HeaderDetail />
+        <TabViewItem
+          title1={'PREVIEW'}
+          title2={'EPISODES'}
+          screen1={<Episodes />}
+          screen2={<Preview />}
+          viewStyle={{height: 2000}}
+        />
+      </ScrollView>
     </View>
   );
 };
