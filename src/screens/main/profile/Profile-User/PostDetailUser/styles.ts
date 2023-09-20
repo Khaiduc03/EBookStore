@@ -30,6 +30,7 @@ const useStyles = makeStyles(({ colors }) => ({
         fontFamily: fontFamilySetup.regular,
         color: colors.black,
         paddingVertical:4
-    }
+    },
+    
 }))
 export default useStyles

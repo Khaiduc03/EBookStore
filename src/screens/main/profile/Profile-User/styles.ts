@@ -12,8 +12,8 @@ const useStyles = makeStyles(({ colors }) => ({
 
     },
     Avatar: {
-        width: normalize (60),
-        height: normalize (60),
+        width: normalize(60),
+        height: normalize(60),
         borderRadius: 50,
     },
     View: {
@@ -30,12 +30,6 @@ const useStyles = makeStyles(({ colors }) => ({
     NameUser: {
         paddingHorizontal: 24
     },
-    ViewExplore: {
-        paddingHorizontal: 24,
-        paddingVertical: 13,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
     TextPost: {
         fontSize: normalize(20),
         fontFamily: fontFamilySetup.bold,
@@ -46,7 +40,31 @@ const useStyles = makeStyles(({ colors }) => ({
         alignItems: 'center',
         borderBottomWidth: 0.6,
         borderColor: '#8a8a8a',
-        marginTop: 15,
+        marginTop: normalize(25),
+    },
+    ButtonFollow: {
+        width: normalize(130),
+        height: normalize(25),
+        borderRadius: normalize(8),
+        top: normalize(10),
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 0.5,
+        borderColor: 'white',
+        backgroundColor:'gray',
+
+    },
+    ViewButtonFollow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 30,
+        paddingVertical: 15
+    },
+    TextFollow:{
+        fontSize: normalize(15),
+        fontFamily: fontFamilySetup.bold,
+        lineHeight: normalize(20),
+        color: colors.white,
     }
 
 }));

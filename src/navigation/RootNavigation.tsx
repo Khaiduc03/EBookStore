@@ -7,6 +7,7 @@ import { getAuthEnableSignIn } from '../redux/selectors/auth.selector';
 import { getMode } from '../redux/selectors/thems.selector';
 import { navigationRef } from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
+import ProfileUser from '../screens/main/profile/Profile-User';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);

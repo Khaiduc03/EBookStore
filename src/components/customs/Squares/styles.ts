@@ -10,16 +10,19 @@ const HEIGHT = Device.getDeviceHeight();
 const useStyles = makeStyles(({ colors }) => ({
     Squares: {
         width: normalize(135),
-        height: normalize(140),
+        height: normalize(145),
         borderRadius: normalize(10),
         borderWidth: 0.8,
         borderColor: '#D6D3D3',
         alignItems: 'center',
         marginStart: normalize(20)
     },
+    ViewTop:{
+        paddingVertical: normalize(8)
+    },
     Avatar: {
-        width: normalize(60),
-        height: normalize(60),
+        width: normalize(50),
+        height: normalize(50),
         borderRadius: normalize(50),
     },
     Button: {

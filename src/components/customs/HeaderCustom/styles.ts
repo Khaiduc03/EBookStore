@@ -33,6 +33,9 @@ const useStyles = makeStyles(({ colors }) => ({
   rightIconLeft: {
     marginRight: normalize(10),
   },
+  button:{
+    color: colors.primary,
+  }
 }));
 
 export default useStyles;

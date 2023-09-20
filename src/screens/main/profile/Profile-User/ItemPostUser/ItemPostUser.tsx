@@ -6,11 +6,11 @@ import { routes } from '../../../../../constants';
 type Props = {
     data?: any;
 };
-const ItemPost: React.FC<Props> = (props) => {
+const ItemPostUser: React.FC<Props> = (props) => {
     const { data } = props;
     const itemWidth = Dimensions.get('window').width / 3;
     const handleDetailClick = () => {
-        NavigationService.navigate(routes.POSTDETAIL);
+        NavigationService.navigate(routes.POSTDETAILUSERS);
 
     };
     return (
@@ -30,5 +30,5 @@ const ItemPost: React.FC<Props> = (props) => {
     )
 }
 
-export default ItemPost
+export default ItemPostUser
 

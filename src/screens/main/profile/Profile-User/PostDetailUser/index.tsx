@@ -1,20 +1,18 @@
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-import { HeaderCustom } from '../../../../../components'
-import { images } from '../../../../../assets'
-import useStyles from './styles'
-import TextCustom from '../../../../../components/customs/Text'
-import { Icon } from '@rneui/themed'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import ModalWrapContent from '../../../../../components/customs/ModalWrapContent'
-import { NavigationService } from '../../../../../navigation'
-import { routes } from '../../../../../constants'
-import Icon_Comment from './Icon-Comment'
+import Icon_Comment from '../../MyProfile/PostDetail/Icon-Comment';
+import { HeaderCustom } from '../../../../../components';
+import { NavigationService } from '../../../../../navigation';
+import { routes } from '../../../../../constants';
+import TextCustom from '../../../../../components/customs/Text';
+import { Icon } from '@rneui/themed';
+import useStyles from './styles';
+import { images } from '../../../../../assets';
 
-const PostDetail: React.FC = () => {
+const PostDetailUser: React.FC = (props) => {
     const styles = useStyles();
     const handlePressGoback = () => {
-        NavigationService.navigate(routes.MYPROFILE);
+        NavigationService.navigate(routes.PROFILEUSER);
     };
 
     const [selectedIcon, setSelectedIcon] = useState('');
@@ -25,9 +23,13 @@ const PostDetail: React.FC = () => {
 
     return (
         <View style={styles.container}>
-            <HeaderCustom leftIcon={{ name: 'arrow-left', type: 'font-awesome-5' }} title='Post Details'
-                onPressLeftIcon={handlePressGoback}
+
+            <HeaderCustom leftIcon={{ name: 'arrow-left', type: 'font-awesome-5' }} title='Post by User'
+                onPressLeftIcon={handlePressGoback} 
             />
+
+
+
             <View style={{ paddingHorizontal: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderWidth: 0.5, borderColor: '#ffffff' }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 20 }}>
                     <Image style={{ width: 32, height: 32, borderRadius: 99 }} source={images.avata} />
@@ -51,4 +53,4 @@ const PostDetail: React.FC = () => {
     )
 }
 
-export default PostDetail
+export default PostDetailUser

@@ -30,7 +30,7 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
           )}
         </TouchableOpacity>
       }
-      leftContainerStyle={{justifyContent: 'center'}}
+      leftContainerStyle={{ justifyContent: 'center' }}
       placement="left"
       rightComponent={
         <View style={styles.rightContainer}>
@@ -67,7 +67,31 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
                 name={props.rightIconRight?.name}
               />
             )}
+
+            {props.buttonProps && (
+              <TouchableOpacity onPress={props.buttonProps.onPress}>
+                {props.buttonProps.icon && (
+                  <Icon
+                    type={props.buttonProps.icon.type}
+                    name={props.buttonProps.icon.name}
+                    size={props.buttonProps.icon.size || 24}
+                    color={props.buttonProps.icon.color || styles.button.color}
+                  />
+                )}
+                {props.buttonProps.title && (
+                  <Text
+                    style={{
+                      fontSize: props.buttonProps.title.size || 16,
+                      color: props.buttonProps.title.color || styles.button.color,
+                    }}
+                  >
+                    {props.buttonProps.title.text}
+                  </Text>
+                )}
+              </TouchableOpacity>
+            )}
           </TouchableOpacity>
+
         </View>
       }
       rightContainerStyle={{ justifyContent: 'center' }}

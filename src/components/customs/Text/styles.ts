@@ -11,7 +11,7 @@ const useStyles = makeStyles(({ colors }) => ({
         fontSize: normalize(HEIGHT * 0.016),
         letterSpacing: normalize(0.2),
         fontStyle: 'normal',
-        color: colors.grey3,
+        color: colors.grey5,
         fontFamily: fontFamilySetup.regular,
 
     },
