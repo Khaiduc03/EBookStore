@@ -20,17 +20,26 @@ const PostDetailUser: React.FC = (props) => {
     const handleIconClick = (iconName: string) => {
         setSelectedIcon(iconName);
     };
+    const [isPressed, setIsPressed] = useState(false);
+    const [buttonText, setButtonText] = useState('Follow');
 
     return (
         <View style={styles.container}>
 
             <HeaderCustom leftIcon={{ name: 'arrow-left', type: 'font-awesome-5' }} title='Post by User'
-                onPressLeftIcon={handlePressGoback} 
+                onPressLeftIcon={handlePressGoback}
+                buttonProps={{
+                    onPress: () => {
+                        setIsPressed(!isPressed);
+                        setButtonText(isPressed ? 'Follow' : 'unFollow');
+                    },
+                    title: {
+                        text: buttonText,
+                        size: 16,
+                    },
+                }}
             />
-
-
-
-            <View style={{ paddingHorizontal: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderWidth: 0.5, borderColor: '#ffffff' }}>
+            <View style={{ paddingHorizontal: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderWidth: 0.3, borderColor: '#ffffff', borderRadius: 9 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 20 }}>
                     <Image style={{ width: 32, height: 32, borderRadius: 99 }} source={images.avata} />
                     <TextCustom textBold title='Drake Kun' />

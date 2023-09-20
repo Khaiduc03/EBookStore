@@ -4,9 +4,13 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { TouchableOpacity } from 'react-native';
 import { CustomHeaderProps } from './types';
 import useStyles from './styles';
+import { useState } from 'react';
+import { normalize } from 'path';
 
 const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
   const styles = useStyles();
+  const [isPressed, setIsPressed] = useState(false);
+  const [buttonText, setButtonText] = useState('Follow');
   return (
     <Header
       barStyle="dark-content"
@@ -69,25 +73,26 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
             )}
 
             {props.buttonProps && (
-              <TouchableOpacity onPress={props.buttonProps.onPress}>
-                {props.buttonProps.icon && (
-                  <Icon
-                    type={props.buttonProps.icon.type}
-                    name={props.buttonProps.icon.name}
-                    size={props.buttonProps.icon.size || 24}
-                    color={props.buttonProps.icon.color || styles.button.color}
-                  />
-                )}
-                {props.buttonProps.title && (
-                  <Text
-                    style={{
-                      fontSize: props.buttonProps.title.size || 16,
-                      color: props.buttonProps.title.color || styles.button.color,
-                    }}
-                  >
-                    {props.buttonProps.title.text}
-                  </Text>
-                )}
+              <TouchableOpacity
+                onPress={() => {
+                  setIsPressed(!isPressed);
+                  setButtonText(isPressed ? 'Follow' : 'unFollow');
+                }}
+                style={{
+                  backgroundColor: isPressed ? 'gray' : '#0075FF',
+                  borderRadius: 10,
+                  width: 78,
+                  alignItems: 'center'
+                }}
+              >
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: 16,
+                  }}
+                >
+                  {buttonText}
+                </Text>
               </TouchableOpacity>
             )}
           </TouchableOpacity>

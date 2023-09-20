@@ -28,9 +28,7 @@ const ProfileUser: React.FC = (props) => {
     <View style={styles.container}>
       <HeaderCustom leftIcon={{ name: 'arrow-left', type: 'font-awesome' }} title='Profile User'
         onPressLeftIcon={handlePressGoback}
-        rightIconleft={{ name: 'plus', type: 'font-awesome-5' }}
-        rightIconRight={{ name: 'pen', type: 'font-awesome-5' }}
-        onPressRightIconRight={handlePressGoScreen}
+        rightIconRight={{ name: 'ellipsis-vertical', type: 'ionicon' }}
       />
       <View style={styles.View}>
         <Image style={styles.Avatar} source={images.avata} />
@@ -58,7 +56,6 @@ const ProfileUser: React.FC = (props) => {
             backgroundColor: isFollowed ? '#0075FF' : 'gray',
           },
           ]} onPress={handleFollowButtonClick}>
-          {/* <TextCustom textBold title={isFollowed ? 'Follow' : 'unFollow'} /> */}
           <Text style={styles.TextFollow}>{isFollowed ? 'Follow' : 'unFollow'}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.ButtonFollow}>

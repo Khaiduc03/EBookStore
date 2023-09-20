@@ -25,15 +25,13 @@ const useStyles = makeStyles(({ colors }) => ({
     },
     TextName: {
         fontSize: normalize(HEIGHT * 0.021),
-        fontWeight: '700',
         letterSpacing: normalize(0.2),
         fontStyle: 'normal',
-        fontFamily: 'Urbanist-Regular',
+        fontFamily: fontFamilySetup.bold,
         color: colors.black,
     },
     TextConnect: {
         fontSize: normalize(HEIGHT * 0.021),
-        fontWeight: '700',
         letterSpacing: normalize(0.2),
         fontStyle: 'normal',
         fontFamily: fontFamilySetup.bold,
