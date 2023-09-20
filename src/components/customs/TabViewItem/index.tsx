@@ -20,11 +20,15 @@ const TabViewItem: React.FunctionComponent<CustomTabViewItemProps> = props => {
         }}
         variant="default"
         titleStyle={styles.titleStyle}>
-        <Tab.Item title="PREVIEW" />
-        <Tab.Item title="EPISODES" />
+        <Tab.Item title={props.title1} />
+        <Tab.Item title={props.title2} />
       </Tab>
 
-      <TabView value={index} onChange={setIndex} animationType="spring">
+      <TabView
+        containerStyle={props.viewStyle}
+        value={index}
+        onChange={setIndex}
+        animationType="spring">
         <TabView.Item style={styles.containerTabView}>
           {props.screen1}
         </TabView.Item>
