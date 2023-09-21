@@ -8,6 +8,7 @@ import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
 import Circle from '../../../../../../components/customs/Circle';
 import {Avatar} from '@rneui/themed';
+import Switch_custom from '../../../../../../components/customs/Switch';
 
 const TableofContent: FunctionComponent = props => {
   const dispatch = useAppDispatch();
@@ -75,6 +76,14 @@ const TableofContent: FunctionComponent = props => {
             rightIcon: true,
           },
           {
+            title: 'Dark Mode',
+            colorBackground: '#EEF4FF',
+            name: 'eye',
+            type: 'font-awesome-5',
+            color: '#007BE5',
+            switchRight: true,
+          },
+          {
             title: enableSignIn ? 'Logout' : 'Login',
             colorBackground: '#FFF2F3',
             name: enableSignIn ? 'door-open' : 'door-closed',
@@ -101,6 +110,7 @@ const TableofContent: FunctionComponent = props => {
               type={item.type}
               color={item.color}
               rightIcon={item.rightIcon}
+              switchRight={item.switchRight}
             />
           </TouchableOpacity>
         )}

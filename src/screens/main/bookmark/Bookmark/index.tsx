@@ -13,18 +13,6 @@ import {images} from '../../../../assets';
 
 const Bookmark: FunctionComponent = () => {
   const styles = useStyles();
-  const dispatch = useAppDispatch();
-  const mode = useAppSelector(getMode);
-
-  const handleTheme = () => {
-    if (mode === 'dark') {
-      dispatch(ThemeActions.setTheme('light'));
-    } else {
-      dispatch(ThemeActions.setTheme('dark'));
-    }
-  };
-  {
-  }
   return (
     <View style={styles.container}>
       <HeaderCustom
@@ -32,11 +20,6 @@ const Bookmark: FunctionComponent = () => {
         title="Favorite"
         rightIconleft={{name: 'magnifying-glass', type: 'entypo'}}
         rightIconRight={{name: 'sliders', type: 'font-awesome'}}
-      />
-      <Switch
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={handleTheme}
-        value={mode === 'dark' ? true : false}
       />
       <ComicFavorite data={data} />
     </View>

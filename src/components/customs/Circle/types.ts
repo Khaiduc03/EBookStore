@@ -1,13 +1,12 @@
-import { TextStyle, ViewProps } from 'react-native';
-
-
+import {TextStyle, ViewProps} from 'react-native';
 
 export type CustomCirclerProps = {
-    title?: string; // Tiêu đề
-    // onPressRightIconRight?: () => void;
-    colorBackground?: string;
-    name?: string;
-    type?: string;
-    rightIcon?:boolean;
-    color?:string;
+  title?: string; // Tiêu đề
+  // onPressRightIconRight?: () => void;
+  colorBackground?: string;
+  name?: string;
+  type?: string;
+  rightIcon?: boolean;
+  color?: string;
+  switchRight?: boolean;
 };

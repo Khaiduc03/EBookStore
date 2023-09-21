@@ -1,8 +1,8 @@
-import { Avatar, Icon, Text } from '@rneui/themed';
-import React, { useEffect, useState } from 'react';
-import { Platform, TouchableOpacity, View } from 'react-native';
+import {Avatar, Icon, Text} from '@rneui/themed';
+import React, {useEffect, useState} from 'react';
+import {Platform, TouchableOpacity, View} from 'react-native';
 import * as ImagePicker from 'react-native-image-picker';
-import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
+import {PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -70,7 +70,7 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
     );
 
     return {
-      transform: [{ scale: scale }],
+      transform: [{scale: scale}],
     };
   }, []);
 

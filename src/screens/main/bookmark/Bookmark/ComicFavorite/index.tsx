@@ -46,7 +46,10 @@ const renderItem = ({item}: {item: Item}) => (
             <Icon name="ellipsis-vertical" type="ionicon" size={27} />
           </TouchableOpacity>
         </View>
-        <TextCustom title={item.price} textBold />
+        <View style={{flexDirection: 'row', gap: 10}}>
+          <Icon name="dollar-sign" type="font-awesome-5" size={20} />
+          <TextCustom title={item.price} textBold />
+        </View>
       </View>
     </View>
   </View>
@@ -73,42 +76,42 @@ const data: Item[] = [
     image: images.avata,
     name: 'Doraemon',
     rating: '4.5',
-    price: '$  10.99',
+    price: '10.99',
   },
   {
     id: '2',
     image: images.avata,
     name: 'Item 2',
     rating: '3.5',
-    price: '$  8.99',
+    price: '8.99',
   },
   {
     id: '3',
     image: images.avata,
     name: 'Item 3',
     rating: '3.4',
-    price: '$  8.99',
+    price: '8.99',
   },
   {
     id: '4',
     image: images.avata,
     name: 'Item 4',
     rating: '3.8',
-    price: '$  8.99',
+    price: '8.99',
   },
   {
     id: '5',
     image: images.avata,
     name: 'Item 5',
     rating: '3.9',
-    price: '$  8.99',
+    price: '8.99',
   },
   {
     id: '6',
     image: images.avata,
     name: 'Item 6',
     rating: '4.9',
-    price: '$  8.99',
+    price: '8.99',
   },
 ];
 
