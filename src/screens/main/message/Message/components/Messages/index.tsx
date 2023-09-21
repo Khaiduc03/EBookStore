@@ -7,13 +7,13 @@ import {
   Image,
   TouchableWithoutFeedback,
 } from 'react-native';
-import {Text} from '@rneui/base';
+import { Text } from '@rneui/base';
 import React from 'react';
 import useStyles from './styles';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
-import {Headers} from '../../../../../../components';
-import {Icon} from '@rneui/themed';
+import { NavigationService } from '../../../../../../navigation';
+import { routes } from '../../../../../../constants';
+import { Headers } from '../../../../../../components';
+import { Icon } from '@rneui/themed';
 
 interface IMessage {
   isUser: boolean;
@@ -43,7 +43,7 @@ const Header: React.FC = () => {
       <TouchableOpacity
         style={[
           styles.btnCall,
-          {backgroundColor: isPressedCall ? '#999999' : 'transparent'},
+          { backgroundColor: isPressedCall ? '#999999' : 'transparent' },
         ]}
         onPressIn={() => setIsPressedCall(true)}
         onPressOut={() => setIsPressedCall(false)}>
@@ -52,7 +52,7 @@ const Header: React.FC = () => {
       <TouchableOpacity
         style={[
           styles.btnCallVideo,
-          {backgroundColor: isPressedVideoCam ? '#999999' : 'transparent'},
+          { backgroundColor: isPressedVideoCam ? '#999999' : 'transparent' },
         ]}
         onPressIn={() => setIsPressedVideoCam(true)}
         onPressOut={() => setIsPressedVideoCam(false)}>
@@ -62,7 +62,7 @@ const Header: React.FC = () => {
   );
 };
 
-const ChatBubble: React.FC<IMessage> = ({isUser, text, time}) => {
+const ChatBubble: React.FC<IMessage> = ({ isUser, text, time }) => {
   const styles = useStyles();
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -83,8 +83,8 @@ const ChatBubble: React.FC<IMessage> = ({isUser, text, time}) => {
             <View
               style={[
                 styles.bubble,
-                {backgroundColor: isUser ? '#20A090' : '#d9d9d9'},
-                isUser ? {borderTopRightRadius: 0} : {borderTopLeftRadius: 0},
+                { backgroundColor: isUser ? '#20A090' : '#d9d9d9' },
+                isUser ? { borderTopRightRadius: 0 } : { borderTopLeftRadius: 0 },
               ]}>
               <Text style={styles.textM}>{text}</Text>
             </View>
@@ -113,7 +113,7 @@ const Footer: React.FC = () => {
       <TouchableOpacity
         style={[
           styles.btnAttach,
-          {backgroundColor: isPressedPaperClip ? '#999999' : 'transparent'},
+          { backgroundColor: isPressedPaperClip ? '#999999' : 'transparent' },
         ]}
         onPressIn={() => setIsPressedPaperClip(true)}
         onPressOut={() => setIsPressedPaperClip(false)}>
@@ -123,7 +123,7 @@ const Footer: React.FC = () => {
       <TouchableOpacity
         style={[
           styles.btnCopy,
-          {backgroundColor: isPressedCopy ? '#999999' : 'transparent'},
+          { backgroundColor: isPressedCopy ? '#999999' : 'transparent' },
         ]}
         onPressIn={() => setIsPressedCopy(true)}
         onPressOut={() => setIsPressedCopy(false)}>
@@ -132,7 +132,7 @@ const Footer: React.FC = () => {
       <TouchableOpacity
         style={[
           styles.btnCamera,
-          {backgroundColor: isPressedCamera ? '#999999' : 'transparent'},
+          { backgroundColor: isPressedCamera ? '#999999' : 'transparent' },
         ]}
         onPressIn={() => setIsPressedCamera(true)}
         onPressOut={() => setIsPressedCamera(false)}>
@@ -141,7 +141,7 @@ const Footer: React.FC = () => {
       <TouchableOpacity
         style={[
           styles.btnMic,
-          {backgroundColor: isPressedMic ? '#999999' : 'transparent'},
+          { backgroundColor: isPressedMic ? '#999999' : 'transparent' },
         ]}
         onPressIn={() => setIsPressedMic(true)}
         onPressOut={() => setIsPressedMic(false)}>
@@ -154,14 +154,14 @@ const Footer: React.FC = () => {
 const Message: React.FC = () => {
   const styles = useStyles();
   const messages: IMessage[] = [
-    {isUser: false, text: 'Hello! Jhon Abraham', time: '9:00 AM'},
-    {isUser: true, text: 'Hi! Your profile looks great.', time: '9:01 AM'},
+    { isUser: false, text: 'Hello! Jhon Abraham', time: '9:00 AM' },
+    { isUser: true, text: 'Hi! Your profile looks great.', time: '9:01 AM' },
     {
       isUser: false,
       text: 'Thank you! I hope you find it helpful.',
       time: '9:02 AM',
     },
-    {isUser: true, text: 'Yes, it is. Thanks!', time: '9:03 AM'},
+    { isUser: true, text: 'Yes, it is. Thanks!', time: '9:03 AM' },
   ];
 
   return (

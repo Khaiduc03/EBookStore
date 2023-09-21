@@ -82,6 +82,7 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
                   backgroundColor: isPressed ? 'gray' : '#0075FF',
                   borderRadius: 10,
                   width: 78,
+                  height:27,
                   alignItems: 'center'
                 }}
               >

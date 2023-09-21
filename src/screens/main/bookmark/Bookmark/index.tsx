@@ -7,12 +7,14 @@ import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {getMode} from '../../../../redux/selectors/thems.selector';
 import {ThemeActions} from '../../../../redux';
 import useStyles from './styles';
+import {HeaderCustom} from '../../../../components';
+import ComicFavorite, {data} from './ComicFavorite';
+import {images} from '../../../../assets';
 
 const Bookmark: FunctionComponent = () => {
   const styles = useStyles();
   const dispatch = useAppDispatch();
   const mode = useAppSelector(getMode);
- 
 
   const handleTheme = () => {
     if (mode === 'dark') {
@@ -21,15 +23,22 @@ const Bookmark: FunctionComponent = () => {
       dispatch(ThemeActions.setTheme('dark'));
     }
   };
-
+  {
+  }
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Bookmark</Text>
+      <HeaderCustom
+        leftIcon={{name: 'book', type: 'font-awesome'}}
+        title="Favorite"
+        rightIconleft={{name: 'magnifying-glass', type: 'entypo'}}
+        rightIconRight={{name: 'sliders', type: 'font-awesome'}}
+      />
       <Switch
         ios_backgroundColor="#3e3e3e"
         onValueChange={handleTheme}
         value={mode === 'dark' ? true : false}
       />
+      <ComicFavorite data={data} />
     </View>
   );
 };

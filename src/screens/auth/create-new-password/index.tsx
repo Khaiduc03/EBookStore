@@ -4,14 +4,14 @@ import {
   View,
   TouchableWithoutFeedback,
 } from 'react-native';
-import {Text} from '@rneui/base';
+import { Text } from '@rneui/base';
 import React from 'react';
-import {AuthHeader, Headers, InputCustom} from '../../../components';
+import { AuthHeader, Headers, InputCustom } from '../../../components';
 import useStyles from './styles';
-import {NavigationService} from '../../../navigation';
-import {routes} from '../../../constants';
-import {showToastError, showToastSuccess} from '../../../utils';
-import {CheckBox} from '@rneui/themed';
+import { NavigationService } from '../../../navigation';
+import { routes } from '../../../constants';
+import { showToastError, showToastSuccess } from '../../../utils';
+import { CheckBox } from '@rneui/themed';
 
 const CreateNewPassword: React.FC = () => {
   const [password, setPassword] = React.useState('');

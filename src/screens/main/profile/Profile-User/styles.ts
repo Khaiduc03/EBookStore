@@ -9,7 +9,6 @@ const useStyles = makeStyles(({ colors }) => ({
     container: {
         flex: 1,
         backgroundColor: colors.background,
-
     },
     Avatar: {
         width: normalize(60),
@@ -44,7 +43,7 @@ const useStyles = makeStyles(({ colors }) => ({
     },
     ButtonFollow: {
         width: normalize(130),
-        height: normalize(25),
+        height: normalize(30),
         borderRadius: normalize(8),
         top: normalize(10),
         alignItems: 'center',
@@ -69,7 +68,7 @@ const useStyles = makeStyles(({ colors }) => ({
     },
     ButtonAddUser: {
         width: normalize(45),
-        height: normalize(25),
+        height: normalize(30),
         borderRadius: normalize(8),
         top: normalize(10),
         alignItems: 'center',
