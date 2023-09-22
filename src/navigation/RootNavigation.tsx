@@ -42,8 +42,8 @@ const RootNavigation = () => {
       {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
       {/* <AppNavigator /> */}
       {/* <AuthNavigator /> */}
-      {/* <Chat /> */}
-      <Message />
+      <Chat />
+      {/* <Message /> */}
     </NavigationContainer>
   );
 };

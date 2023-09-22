@@ -1,7 +1,7 @@
 import {View, Text} from 'react-native';
 import {Header, Icon} from '@rneui/base';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {TouchableOpacity} from 'react-native';
+import {TouchableOpacity, Image} from 'react-native';
 import {CustomHeaderProps} from './types';
 import useStyles from './styles';
 
@@ -19,16 +19,30 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
       }}
       containerStyle={styles.container}
       leftComponent={
-        <TouchableOpacity onPress={props.onPressLeftIcon}>
-          {props.leftIcon?.name && (
-            <Icon
-              type={props.leftIcon.type}
-              name={props.leftIcon.name}
-              size={30}
-              color={props.leftIcon.color || styles.leftIcon.color}
+        <View style={styles.viewRow}>
+          <TouchableOpacity
+            style={styles.viewCenter}
+            onPress={props.onPressLeftIcon}>
+            {props.leftIcon?.name && (
+              <Icon
+                type={props.leftIcon.type}
+                name={props.leftIcon.name}
+                size={30}
+                color={props.leftIcon.color || styles.leftIcon.color}
+              />
+            )}
+          </TouchableOpacity>
+          {props.imageUri?.uri && (
+            <Image
+              style={styles.profileImage}
+              source={{uri: `${props.imageUri.uri}`}}
             />
           )}
-        </TouchableOpacity>
+          <View style={styles.viewTextLeft}>
+            <Text style={styles.textFullName}>{props.fullName}</Text>
+            <Text style={styles.textUserStatus}>{props.userStatus}</Text>
+          </View>
+        </View>
       }
       leftContainerStyle={{justifyContent: 'center'}}
       linearGradientProps={{}}
@@ -47,7 +61,9 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
               />
             )}
           </TouchableOpacity>
-          <TouchableOpacity onPress={props.onPressRightIconRight}>
+          <TouchableOpacity
+            style={styles.rightIconRight}
+            onPress={props.onPressRightIconRight}>
             {props.rightIconRight?.name && (
               <Icon
                 type={props.rightIconRight?.type}

@@ -111,7 +111,7 @@ const CreateAccount: FunctionComponent = () => {
             />
 
             <AuthHeader
-              title="Create an Account 🔐"
+              title="Create an account 🔐"
               subTitle="Enter your  username, email & password. If you forget it, then you have to do forgot password."
             />
 

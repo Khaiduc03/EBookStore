@@ -2,8 +2,6 @@ import {
   Keyboard,
   View,
   TouchableOpacity,
-  TextInput,
-  FlatList,
   Image,
   TouchableWithoutFeedback,
 } from 'react-native';
@@ -12,53 +10,31 @@ import React from 'react';
 import useStyles from './styles';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
-import {Headers} from '../../../../../../components';
+import {HeaderCustom, InputCustom} from '../../../../../../components';
 import {Icon} from '@rneui/themed';
-
-interface IMessage {
-  isUser: boolean;
-  text: string;
-  time: string;
-}
+import {IMessage} from './types';
+import {ScrollView} from 'react-native';
 
 const Header: React.FC = () => {
-  const styles = useStyles();
-  const [isPressedCall, setIsPressedCall] = React.useState(false);
-  const [isPressedVideoCam, setIsPressedVideoCam] = React.useState(false);
   return (
-    <View style={styles.header}>
-      <TouchableOpacity>
-        <Icon name="arrow-back" />
-      </TouchableOpacity>
-      <Image
-        style={styles.profileImage}
-        source={{
-          uri: 'https://yt3.googleusercontent.com/ytc/AOPolaQ8qd9YUFBorodGktxw_--6xfk2EscQ-aT2v-dC6w=s900-c-k-c0x00ffffff-no-rj',
-        }}
-      />
-      <View style={styles.viewText}>
-        <Text style={styles.text}>Jhon Abraham</Text>
-        <Text style={styles.text1}>Active now</Text>
-      </View>
-      <TouchableOpacity
-        style={[
-          styles.btnCall,
-          {backgroundColor: isPressedCall ? '#999999' : 'transparent'},
-        ]}
-        onPressIn={() => setIsPressedCall(true)}
-        onPressOut={() => setIsPressedCall(false)}>
-        <Icon name="call-outline" type="ionicon" size={24} />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={[
-          styles.btnCallVideo,
-          {backgroundColor: isPressedVideoCam ? '#999999' : 'transparent'},
-        ]}
-        onPressIn={() => setIsPressedVideoCam(true)}
-        onPressOut={() => setIsPressedVideoCam(false)}>
-        <Icon name="videocam-outline" type="ionicon" size={24} />
-      </TouchableOpacity>
-    </View>
+    <HeaderCustom
+      leftIcon={{name: 'arrow-back-outline', type: 'ionicon', color: '#000'}}
+      imageUri={{
+        uri: 'https://yt3.googleusercontent.com/ytc/AOPolaQ8qd9YUFBorodGktxw_--6xfk2EscQ-aT2v-dC6w=s900-c-k-c0x00ffffff-no-rj',
+      }}
+      fullName="Jhon Abraham"
+      userStatus="Active now"
+      rightIconleft={{
+        name: 'call-outline',
+        type: 'ionicon',
+        color: '#000',
+      }}
+      rightIconRight={{
+        name: 'videocam-outline',
+        type: 'ionicon',
+        color: '#000',
+      }}
+    />
   );
 };
 
@@ -70,15 +46,21 @@ const ChatBubble: React.FC<IMessage> = ({isUser, text, time}) => {
         style={{
           alignItems: isUser ? 'flex-end' : 'flex-start',
         }}>
-        <View style={styles.viewRow}>
+        <View>
           {!isUser && (
-            <Image
-              style={styles.profileImage}
-              source={{
-                uri: 'https://yt3.googleusercontent.com/ytc/AOPolaQ8qd9YUFBorodGktxw_--6xfk2EscQ-aT2v-dC6w=s900-c-k-c0x00ffffff-no-rj',
-              }}
-            />
+            <View style={styles.viewRow}>
+              <View style={styles.viewImageTextChat}>
+                <Image
+                  style={styles.profileImage}
+                  source={{
+                    uri: 'https://yt3.googleusercontent.com/ytc/AOPolaQ8qd9YUFBorodGktxw_--6xfk2EscQ-aT2v-dC6w=s900-c-k-c0x00ffffff-no-rj',
+                  }}
+                />
+                <Text style={styles.text}>Jhon Abraham</Text>
+              </View>
+            </View>
           )}
+
           <View>
             <View
               style={[
@@ -104,47 +86,23 @@ const ChatBubble: React.FC<IMessage> = ({isUser, text, time}) => {
 
 const Footer: React.FC = () => {
   const styles = useStyles();
-  const [isPressedPaperClip, setIsPressedPaperClip] = React.useState(false);
-  const [isPressedCopy, setIsPressedCopy] = React.useState(false);
-  const [isPressedCamera, setIsPressedCamera] = React.useState(false);
-  const [isPressedMic, setIsPressedMic] = React.useState(false);
+
   return (
     <View style={styles.footer}>
-      <TouchableOpacity
-        style={[
-          styles.btnAttach,
-          {backgroundColor: isPressedPaperClip ? '#999999' : 'transparent'},
-        ]}
-        onPressIn={() => setIsPressedPaperClip(true)}
-        onPressOut={() => setIsPressedPaperClip(false)}>
+      <InputCustom
+        placeholder="Write your message"
+        inputContainerStyle={styles.input}
+      />
+      <TouchableOpacity style={styles.btnAttach}>
         <Icon name="attach-outline" type="ionicon" size={30} />
       </TouchableOpacity>
-      <TextInput placeholder="Write your message" style={styles.input} />
-      <TouchableOpacity
-        style={[
-          styles.btnCopy,
-          {backgroundColor: isPressedCopy ? '#999999' : 'transparent'},
-        ]}
-        onPressIn={() => setIsPressedCopy(true)}
-        onPressOut={() => setIsPressedCopy(false)}>
-        <Icon name="copy-outline" type="ionicon" />
+      <TouchableOpacity style={styles.btnCopy}>
+        <Icon name="copy-outline" type="ionicon" size={30} />
       </TouchableOpacity>
-      <TouchableOpacity
-        style={[
-          styles.btnCamera,
-          {backgroundColor: isPressedCamera ? '#999999' : 'transparent'},
-        ]}
-        onPressIn={() => setIsPressedCamera(true)}
-        onPressOut={() => setIsPressedCamera(false)}>
+      <TouchableOpacity style={styles.btnCamera}>
         <Icon name="camera-outline" type="ionicon" size={30} />
       </TouchableOpacity>
-      <TouchableOpacity
-        style={[
-          styles.btnMic,
-          {backgroundColor: isPressedMic ? '#999999' : 'transparent'},
-        ]}
-        onPressIn={() => setIsPressedMic(true)}
-        onPressOut={() => setIsPressedMic(false)}>
+      <TouchableOpacity style={styles.btnMic}>
         <Icon name="mic-outline" type="ionicon" size={30} />
       </TouchableOpacity>
     </View>
@@ -154,28 +112,44 @@ const Footer: React.FC = () => {
 const Message: React.FC = () => {
   const styles = useStyles();
   const messages: IMessage[] = [
-    {isUser: false, text: 'Hello! Jhon Abraham', time: '9:00 AM'},
-    {isUser: true, text: 'Hi! Your profile looks great.', time: '9:01 AM'},
+    {isUser: false, text: 'Hello! David Beckham', time: '9:00 AM'},
     {
       isUser: false,
-      text: 'Thank you! I hope you find it helpful.',
-      time: '9:02 AM',
+      text: 'I hope you are doing well. I am writing to check in and see how you are feeling. I am always thinking of you, and I hope you are healthy and happy. If there is anything I can do to help, please do not hesitate to reach out.',
+      time: '9:06 AM',
     },
-    {isUser: true, text: 'Yes, it is. Thanks!', time: '9:03 AM'},
+    {isUser: true, text: "Hi! I'm fine.", time: '9:07 AM'},
+    {
+      isUser: true,
+      text: 'Thank you for asking about my health these days. How are you doing? Where are you living?',
+      time: '9:10 AM',
+    },
+    {
+      isUser: false,
+      text: "Sorry, I'm busy right now and can't reply to you later",
+      time: '9:16 AM',
+    },
+    {
+      isUser: true,
+      text: "When you have free time, let's meet for coffee.",
+      time: '9:20 AM',
+    },
   ];
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <View style={styles.container}>
-        <View style={styles.wrapper}>
-          <Header />
-          <View style={styles.body}>
+    <TouchableWithoutFeedback
+      style={styles.container}
+      onPress={() => Keyboard.dismiss()}>
+      <View style={styles.wrapper}>
+        <Header />
+        <View style={styles.body}>
+          <ScrollView showsVerticalScrollIndicator={false}>
             {messages.map((message, index) => (
               <ChatBubble key={index} {...message} />
             ))}
-          </View>
-          <Footer />
+          </ScrollView>
         </View>
+        <Footer />
       </View>
     </TouchableWithoutFeedback>
   );

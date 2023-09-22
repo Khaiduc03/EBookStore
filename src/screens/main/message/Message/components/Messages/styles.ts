@@ -1,6 +1,7 @@
 import {color} from '@rneui/base';
 import {makeStyles, normalize} from '@rneui/themed';
 import {StyleSheet} from 'react-native';
+import {fontFamilySetup} from '../../../../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
@@ -20,12 +21,12 @@ const useStyles = makeStyles(({colors}) => ({
     borderRadius: normalize(22),
   },
   bubble: {
-    borderRadius: normalize(20),
-    marginHorizontal: normalize(10),
+    borderRadius: normalize(15),
     marginVertical: normalize(5),
-    paddingVertical: normalize(10),
+    paddingVertical: normalize(16),
     paddingHorizontal: normalize(15),
-    maxWidth: normalize(250),
+    width: '100%',
+    flexWrap: 'wrap',
   },
   viewText: {
     left: normalize(-14),
@@ -33,9 +34,16 @@ const useStyles = makeStyles(({colors}) => ({
   viewRow: {
     flexDirection: 'row',
   },
+  viewImageTextChat: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   text: {
     color: colors.black,
-    fontWeight: 'bold',
+    fontFamily: fontFamilySetup.bold,
+    fontSize: normalize(19),
+    left: normalize(10),
   },
   text1: {
     color: colors.grey4,
@@ -44,8 +52,10 @@ const useStyles = makeStyles(({colors}) => ({
   },
   textM: {
     color: colors.black,
-    fontWeight: '400',
-    fontSize: normalize(15),
+    fontFamily: fontFamilySetup.medium,
+    fontSize: normalize(16),
+    maxWidth: '100%',
+    flexWrap: 'wrap',
   },
   viewTime: {
     alignSelf: 'flex-end',
@@ -54,81 +64,44 @@ const useStyles = makeStyles(({colors}) => ({
   time: {
     fontSize: normalize(10),
     color: colors.grey4,
-    top: 3,
-    right: normalize(12),
-  },
-  header: {
-    width: '100%',
-    height: normalize(60),
-    paddingStart: normalize(20),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: 'white',
+    top: normalize(3),
   },
   footer: {
+    width: '100%',
+    height: '9%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     padding: normalize(10),
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
   },
   input: {
     flex: 1,
-    width: '50%',
-    height: normalize(40),
-    backgroundColor: '#f2f2f2',
+    width: '60%',
+    height: '8%',
+    backgroundColor: colors.input1,
     borderColor: colors.grey4,
     borderWidth: normalize(1),
     borderRadius: normalize(20),
-    marginHorizontal: normalize(10),
-    paddingStart: normalize(10),
-  },
-  btnCall: {
-    width: normalize(44),
-    height: normalize(44),
-    borderRadius: normalize(100),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  btnCallVideo: {
-    width: normalize(44),
-    height: normalize(44),
-    right: normalize(16),
-    borderRadius: normalize(100),
-    justifyContent: 'center',
-    alignItems: 'center',
+    left: normalize(40),
+    paddingLeft: normalize(5),
   },
   btnAttach: {
-    width: normalize(44),
-    height: normalize(44),
-    borderRadius: normalize(100),
-    justifyContent: 'center',
-    alignItems: 'center',
     transform: [{rotate: '44deg'}],
+    position: 'absolute',
+    left: normalize(16),
   },
   btnCopy: {
-    width: normalize(44),
-    height: normalize(44),
-    borderRadius: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
     position: 'absolute',
-    right: normalize(110),
+    right: normalize(124),
   },
   btnCamera: {
-    width: normalize(44),
-    height: normalize(44),
-    borderRadius: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: 'absolute',
+    right: normalize(60),
   },
   btnMic: {
-    width: normalize(44),
-    height: normalize(44),
-    borderRadius: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
+    position: 'absolute',
+    right: normalize(12),
   },
 }));
 

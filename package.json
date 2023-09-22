@@ -11,6 +11,7 @@
     "link": "react-native-asset"
   },
   "dependencies": {
+    "@react-hook/debounce": "^4.0.0",
     "@react-native-community/datetimepicker": "^7.4.1",
     "@react-native-firebase/app": "^18.3.0",
     "@react-native-google-signin/google-signin": "^10.0.1",
