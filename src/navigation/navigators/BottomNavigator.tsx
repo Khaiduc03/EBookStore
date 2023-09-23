@@ -7,11 +7,6 @@ import {Icon, Text, makeStyles, normalize} from '@rneui/themed';
 import React, {FunctionComponent, useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from 'react-native-reanimated';
 
 import {routes} from '../../constants';
 import {Device} from '../../utils';
@@ -45,9 +40,16 @@ const useStyles = makeStyles(({colors}) => ({
   container: {
     flexDirection: 'row',
     height: normalize(56),
-    borderTopWidth: normalize(0.5),
     backgroundColor: colors.background,
     justifyContent: 'space-around',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 5,
   },
   box: {
     flex: 1,
@@ -57,31 +59,11 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
     borderRadius: 10,
   },
-  focused: {
-    backgroundColor: colors.white,
-  },
 }));
-
-const AnimatedTouch = Animated.createAnimatedComponent(TouchableOpacity);
 
 const BottomNavigator: FunctionComponent = () => {
   const styles = useStyles();
   const Tab = ({navigation, descriptors, state}: BottomTabBarProps) => {
-    const progressGrowth = useSharedValue(0);
-
-    //use effect will call when change tab
-    useEffect(() => {
-      progressGrowth.value = withSpring(-20, {
-        damping: 200,
-        stiffness: 400,
-      });
-
-      // before change tab, reset progressGrowth
-      return () => {
-        progressGrowth.value = 0;
-      };
-    }, [state.index]);
-
     return (
       <View style={styles.container}>
         {state.routes.map((route, index) => {
@@ -109,15 +91,8 @@ const BottomNavigator: FunctionComponent = () => {
             });
           };
 
-          const animatedStyle = useAnimatedStyle(() => {
-            const translateY = isFocused ? progressGrowth.value : 0;
-            return {
-              transform: [{translateY: translateY}],
-            };
-          }, []);
-
           return (
-            <AnimatedTouch
+            <TouchableOpacity
               key={index}
               accessibilityRole="button"
               accessibilityState={isFocused ? {selected: true} : {}}
@@ -125,31 +100,23 @@ const BottomNavigator: FunctionComponent = () => {
               testID={options.tabBarTestID}
               onPress={onPress}
               onLongPress={onLongPress}
-              style={[
-                styles.box,
-                animatedStyle,
-                {
-                  backgroundColor: isFocused
-                    ? '#F89300'
-                    : styles.focused.backgroundColor,
-                },
-              ]}>
+              style={styles.box}>
               <Icon
                 name={choseIcon(route.name as routes)}
                 type="ionicon"
-                color={isFocused ? 'white' : '#F89300'}
+                color={isFocused ? '#F89300' : 'gray'}
                 size={24}
               />
 
               <Text
                 style={{
-                  color: isFocused ? 'white' : '#F89300',
+                  color: isFocused ? '#F89300' : 'gray',
                   fontSize: 10,
                   marginTop: 1,
                 }}>
                 {route.name.toLowerCase()}
               </Text>
-            </AnimatedTouch>
+            </TouchableOpacity>
           );
         })}
       </View>

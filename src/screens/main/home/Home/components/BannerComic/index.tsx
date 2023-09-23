@@ -10,6 +10,7 @@ import {
 
 import useStyles from './styles';
 import {Device} from '../../../../../../utils';
+
 interface CarouselDataItem {
   id: string;
   image: string;
