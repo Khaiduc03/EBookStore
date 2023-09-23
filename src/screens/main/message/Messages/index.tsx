@@ -1,19 +1,18 @@
-import {
-  Keyboard,
-  View,
-  TouchableOpacity,
-  Image,
-  TouchableWithoutFeedback,
-} from 'react-native';
 import {Text} from '@rneui/base';
 import React from 'react';
+import {
+  Image,
+  Keyboard,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import useStyles from './styles';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
-import {HeaderCustom, InputCustom} from '../../../../../../components';
+
 import {Icon} from '@rneui/themed';
-import {IMessage} from './types';
 import {ScrollView} from 'react-native';
+import {IMessage} from './types';
+import {HeaderCustom, InputCustom} from '../../../../components';
 
 const Header: React.FC = () => {
   return (

@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {makeStyles, normalize} from '@rneui/themed';
-import {fontFamilySetup} from '../../../../../../utils/font';
+import {fontFamilySetup} from '../../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
@@ -48,17 +48,35 @@ const useStyles = makeStyles(({colors}) => ({
     borderColor: colors.black,
     justifyContent: 'center',
   },
+  item1: {
+    backgroundColor: colors.primary,
+  },
+  item2: {
+    backgroundColor: colors.white,
+  },
   textName: {
     marginStart: normalize(10),
     color: colors.black,
     fontSize: normalize(19),
     fontFamily: fontFamilySetup.bold,
   },
+  textName1: {
+    color: colors.white,
+  },
+  textName2: {
+    color: colors.black,
+  },
   textAuthor: {
     marginStart: normalize(10),
     color: colors.grey3,
     fontFamily: fontFamilySetup.bold,
     fontSize: normalize(16),
+  },
+  textAuthor1: {
+    color: colors.input1,
+  },
+  textAuthor2: {
+    color: colors.grey3,
   },
 }));
 
