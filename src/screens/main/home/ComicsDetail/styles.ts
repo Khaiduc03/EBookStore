@@ -3,7 +3,7 @@ import {makeStyles, normalize} from '@rneui/themed';
 const useStyles = makeStyles(({colors}) => ({
   container: {
     flex: 1,
-    backgroundColor: colors.backgrounDetai,
+    backgroundColor: colors.background,
   },
   iconLeftStyle: {
     color: colors.black,

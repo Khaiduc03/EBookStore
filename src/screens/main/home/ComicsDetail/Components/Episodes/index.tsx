@@ -1,8 +1,13 @@
-import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native'; // Thêm ScrollView vào danh sách import
 import React from 'react';
 
 import useStyles from './styles';
-import {ScrollView} from 'react-native-gesture-handler';
 
 const Episodes = () => {
   const styles = useStyles();
@@ -24,18 +29,22 @@ const Episodes = () => {
         <Text style={styles.textHeader}>Update</Text>
         <Text style={styles.textHeader}>Views</Text>
       </View>
-      <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
-        showsVerticalScrollIndicator={false}
-        scrollEnabled={false}
-      />
+
+      <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
+        {data.map(item => (
+          <TouchableOpacity key={item.id} style={styles.chapterContainer}>
+            <Text style={styles.textChapter}>Chapter {item.chapterNumber}</Text>
+            <Text style={styles.textChapter}>{item.dayUpdate}</Text>
+            <Text style={styles.textChapter}>{item.view}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
     </View>
   );
 };
 
 export default Episodes;
+
 const data = [
   {
     id: 1,
@@ -196,6 +205,36 @@ const data = [
   {
     id: 28,
     chapterNumber: 27,
+    dayUpdate: '5/13/2024',
+    view: 20,
+  },
+  {
+    id: 29,
+    chapterNumber: 29,
+    dayUpdate: '5/13/2024',
+    view: 20,
+  },
+  {
+    id: 30,
+    chapterNumber: 30,
+    dayUpdate: '5/13/2024',
+    view: 20,
+  },
+  {
+    id: 31,
+    chapterNumber: 31,
+    dayUpdate: '5/13/2024',
+    view: 20,
+  },
+  {
+    id: 32,
+    chapterNumber: 32,
+    dayUpdate: '5/13/2024',
+    view: 20,
+  },
+  {
+    id: 33,
+    chapterNumber: 33,
     dayUpdate: '5/13/2024',
     view: 20,
   },

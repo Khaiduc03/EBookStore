@@ -1,7 +1,7 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, Image} from 'react-native';
 import React from 'react';
 import useStyles from './styles';
-import {Icon, Image, Divider} from '@rneui/themed';
+import {Icon, Divider} from '@rneui/themed';
 
 const HeaderDetail = () => {
   const styles = useStyles();
