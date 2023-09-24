@@ -7,25 +7,25 @@ const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
-  Payment: {
+  payment: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 24,
   },
-  Icon: {
+  icon: {
     width: normalize(64),
     height: normalize(64),
     borderRadius: 50,
   },
-  TextName: {
+  textName: {
     fontSize: normalize(HEIGHT * 0.023),
     letterSpacing: normalize(0.2),
     fontStyle: 'normal',
     fontFamily: fontFamilySetup.bold,
     color: colors.black,
   },
-  TextConnect: {
+  textConnect: {
     fontSize: normalize(HEIGHT * 0.021),
     letterSpacing: normalize(0.2),
     fontStyle: 'normal',

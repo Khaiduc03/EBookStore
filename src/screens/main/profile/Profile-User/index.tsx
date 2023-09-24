@@ -30,42 +30,42 @@ const ProfileUser: React.FC = props => {
         onPressLeftIcon={handlePressGoback}
         rightIconRight={{name: 'ellipsis-vertical', type: 'ionicon'}}
       />
-      <View style={styles.View}>
-        <Image style={styles.Avatar} source={images.avata} />
-        <TouchableOpacity style={styles.viewFollow}>
+      <View style={styles.viewFollow}>
+        <Image style={styles.avatar} source={images.avata} />
+        <TouchableOpacity style={styles.viewTextFollow}>
           <TextCustom number={100} />
           <TextCustom textLight title="Follower" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.viewFollow}>
+        <TouchableOpacity style={styles.viewTextFollow}>
           <TextCustom number={100} />
           <TextCustom textLight title="Follow" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.viewFollow}>
+        <TouchableOpacity style={styles.viewTextFollow}>
           <TextCustom number={100} />
           <TextCustom textLight title="Post" />
         </TouchableOpacity>
       </View>
-      <View style={styles.NameUser}>
+      <View style={styles.nameUser}>
         <TextCustom textBold title="Drake Kun" />
         <TextCustom textLight title="Biographic this here !!!!! 😎" />
       </View>
-      <View style={styles.ViewButtonFollow}>
+      <View style={styles.viewbtnFollow}>
         <TouchableOpacity
           style={[
-            styles.ButtonFollow,
+            styles.btnFollow,
             {
               backgroundColor: isFollowed ? '#0075FF' : 'gray',
             },
           ]}
           onPress={handleFollowButtonClick}>
-          <Text style={styles.TextFollow}>
+          <Text style={styles.textFollow}>
             {isFollowed ? 'Follow' : 'unFollow'}
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.ButtonFollow}>
-          <Text style={styles.TextFollow}>Messenger</Text>
+        <TouchableOpacity style={styles.btnFollow}>
+          <Text style={styles.textFollow}>Messenger</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.ButtonAddUser}>
+        <TouchableOpacity style={styles.btnAddUser}>
           <Icon
             name="user-plus"
             type="font-awesome-5"
@@ -75,8 +75,8 @@ const ProfileUser: React.FC = props => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.ViewMyPost}>
-        <Text style={styles.TextPost}>Post by User</Text>
+      <View style={styles.viewMyPost}>
+        <Text style={styles.textPost}>Post by User</Text>
       </View>
       <View style={{flex: 1}}>
         <FlatList

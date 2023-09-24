@@ -11,7 +11,6 @@ const useStyles = makeStyles(({ colors }) => ({
     fontSize: normalize(20),
     fontFamily: fontFamilySetup.bold,
 
-    lineHeight: normalize(35.2),
     color: colors.black,
   },
 }));

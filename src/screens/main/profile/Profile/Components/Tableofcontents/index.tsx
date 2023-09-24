@@ -1,14 +1,12 @@
 import React, {FunctionComponent} from 'react';
 import {View, TouchableOpacity, FlatList} from 'react-native';
-import useStyles from '../../styles';
+import useStyles from './styles';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {getAuthEnableSignIn} from '../../../../../../redux/selectors/auth.selector';
 import {AuthActions} from '../../../../../../redux/reducer';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
-import Circle from '../../../../../../components/customs/Circle';
-import {Avatar} from '@rneui/themed';
-import Switch_custom from '../../../../../../components/customs/Switch';
+import ItemListProfile from '../../../../../../components/customs/ItemListProfile';
 
 const TableofContent: FunctionComponent = props => {
   const dispatch = useAppDispatch();
@@ -95,7 +93,7 @@ const TableofContent: FunctionComponent = props => {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({item}) => (
           <TouchableOpacity
-            style={styles.ViewClick}
+            style={styles.viewClick}
             onPress={() => {
               if (item.route) {
                 NavigationService.navigate(item.route);
@@ -103,7 +101,7 @@ const TableofContent: FunctionComponent = props => {
                 handleLogout();
               }
             }}>
-            <Circle
+            <ItemListProfile
               title={item.title}
               colorBackground={item.colorBackground}
               name={item.name}

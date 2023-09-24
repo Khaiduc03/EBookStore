@@ -11,12 +11,12 @@ const useStyles = makeStyles(({ colors }) => ({
         backgroundColor: colors.background,
 
     },
-    Avatar: {
+    avatar: {
         width: normalize (60),
         height: normalize (60),
         borderRadius: 50,
     },
-    View: {
+    viewAvatarFollow: {
         paddingVertical: 24,
         paddingHorizontal: 15,
         flexDirection: 'row',
@@ -27,22 +27,22 @@ const useStyles = makeStyles(({ colors }) => ({
         justifyContent: 'center',
         marginStart: 10
     },
-    NameUser: {
+    nameUser: {
         paddingHorizontal: 24
     },
-    ViewExplore: {
+    viewExplore: {
         paddingHorizontal: 24,
         paddingVertical: 13,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
-    TextPost: {
+    textPost: {
         fontSize: normalize(20),
         fontFamily: fontFamilySetup.bold,
         lineHeight: normalize(20),
         color: colors.black,
     },
-    ViewMyPost: {
+    viewMyPost: {
         alignItems: 'center',
         borderBottomWidth: 0.6,
         borderColor: '#8a8a8a',

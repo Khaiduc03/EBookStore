@@ -21,7 +21,7 @@ const renderItem = ({item}: {item: Item}) => (
       <TouchableOpacity>
         <Image
           style={{
-            width: normalize(120),
+            width: normalize(100),
             height: normalize(150),
             borderRadius: 15,
           }}

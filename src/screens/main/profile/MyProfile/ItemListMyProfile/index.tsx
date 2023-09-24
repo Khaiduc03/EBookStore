@@ -1,13 +1,13 @@
 import { View, Text, Image } from 'react-native'
 import React, { useState } from 'react'
 import useStyles from './styles'
-import { images } from '../../../assets/images/png';
+import { images } from '../../../../../assets/images/png';
 import { SquaresCustomProps } from './types';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { NavigationService } from '../../../navigation';
-import { routes } from '../../../constants';
+import { NavigationService } from '../../../../../navigation';
+import { routes } from '../../../../../constants';
 
-const Squares: React.FunctionComponent<SquaresCustomProps> = props => {
+const ItemListMyProfile: React.FunctionComponent<SquaresCustomProps> = props => {
     const { avatarDummy, name, title, button, textButton } = props;
     const styles = useStyles();
     const [isFollowing, setIsFollowing] = useState(false);
@@ -38,4 +38,4 @@ const Squares: React.FunctionComponent<SquaresCustomProps> = props => {
     )
 }
 
-export default Squares
+export default ItemListMyProfile

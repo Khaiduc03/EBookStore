@@ -1,14 +1,14 @@
 import {View, Text} from 'react-native';
 import React from 'react';
-import usestyles from '../Circle/styles';
-import {CustomCirclerProps} from '../Circle/types';
+import usestyles from './styles';
+import {CustomCirclerProps} from './types';
 import {Icon, Avatar, Switch} from '@rneui/themed';
 import Switch_custom from '../Switch';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {getMode} from '../../../redux/selectors/thems.selector';
 import {ThemeActions} from '../../../redux';
 
-const Circle: React.FC<CustomCirclerProps> = props => {
+const ItemListProfile: React.FC<CustomCirclerProps> = props => {
   const {colorBackground, title, name, type, rightIcon, color, switchRight} =
     props;
   const styles = usestyles();
@@ -52,4 +52,4 @@ const Circle: React.FC<CustomCirclerProps> = props => {
   );
 };
 
-export default Circle;
+export default ItemListProfile;

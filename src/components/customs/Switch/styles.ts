@@ -1,5 +1,6 @@
 import { makeStyles, normalize } from '@rneui/themed';
 import { Device } from '../../../utils';
+import { fontFamilySetup } from '../../../utils/font';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
@@ -11,12 +12,11 @@ const useStyles = makeStyles(({ colors }) => ({
         paddingHorizontal: normalize(24),
         paddingVertical: normalize (15),
     },
-    txt: {
-        fontSize: normalize(HEIGHT * 0.019),
-        fontWeight: '700',
+    text: {
+        fontSize: normalize(15),
         letterSpacing: normalize(0.2),
         fontStyle: 'normal',
-        fontFamily: 'Urbanist-Regular',
+        fontFamily: fontFamilySetup.bold,
         color: colors.black,
     },
     view: {

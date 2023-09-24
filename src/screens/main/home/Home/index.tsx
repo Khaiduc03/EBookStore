@@ -1,11 +1,13 @@
-import { View, ScrollView } from 'react-native';
-import React, { FunctionComponent, useState } from 'react';
+import {View, ScrollView, Image} from 'react-native';
+
+import React, {FunctionComponent, useState} from 'react';
+import {NavigationService} from '../../../../navigation';
+import {routes} from '../../../../constants';
 import useStyles from './styles';
-import { NavigationService } from '../../../../navigation';
-import { routes } from '../../../../constants';
-import HeaderCustom from '../../../../components/customs/HeaderCustom';
-import { createIcon } from '../../../../utils';
-import { ComicsNew, TopicsHome } from './components';
+import {ComicItem, HeaderCustom, TopicItem} from '../../../../components';
+
+import {createIcon} from '../../../../utils';
+import {TopicsHome, ComicsNew, BannerComic} from './components';
 
 const Home: FunctionComponent = () => {
   const styles = useStyles();
@@ -38,7 +40,9 @@ const Home: FunctionComponent = () => {
       />
 
       <ScrollView showsVerticalScrollIndicator={false}>
+        <BannerComic />
         <HeaderCustom
+          titleStyle={styles.textTitle}
           title="Explore by Genre"
           rightIconRight={{
             name: 'arrow-forward-outline',
@@ -48,7 +52,9 @@ const Home: FunctionComponent = () => {
         />
 
         <TopicsHome />
+
         <HeaderCustom
+          titleStyle={styles.textTitle}
           title="New Comics"
           rightIconleft={{
             name: 'grid-outline',

@@ -25,17 +25,17 @@ const Profile: FunctionComponent = () => {
         leftIcon={{name: 'user', type: 'font-awesome'}}
         title="My profile"
       />
+
       <View style={styles.viewAvatar}>
-        <View style={styles.viewAvatar}>
-          <Image source={images.avata} style={styles.avatar} />
-          <TouchableOpacity
-            style={styles.ViewText}
-            onPress={() => NavigationService.navigate(routes.MYPROFILE)}>
-            <TextCustom textBold title="Drake Kun" />
-            <TextCustom textLight title="drake@gmail.com" />
-          </TouchableOpacity>
-        </View>
+        <Image source={images.avata} style={styles.avatar} />
+        <TouchableOpacity
+          style={styles.btnMyProfile}
+          onPress={() => NavigationService.navigate(routes.MYPROFILE)}>
+          <TextCustom textBold title="Drake Kun" />
+          <TextCustom textLight title="drake@gmail.com" />
+        </TouchableOpacity>
       </View>
+
       <View style={{flex: 1}}>
         <TableofContent />
       </View>

@@ -9,6 +9,9 @@ import {navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import ProfileUser from '../screens/main/profile/Profile-User';
 import ComicFavorite from '../screens/main/bookmark/Bookmark/ComicFavorite';
+import ItemListBtnSmall from '../screens/main/profile/HelpCenter/FAQ/itemListBtnSmall';
+import ItemListToggleable from '../screens/main/profile/HelpCenter/FAQ/ItemListToggleable';
+import ItemListAbout from '../screens/main/profile/AboutApp/ItemListAbout';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);

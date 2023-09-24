@@ -4,6 +4,7 @@ import useStyles from './style';
 import {CustomTopicsProps} from './types';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {NavigationService} from '../../../navigation';
+
 import {routes} from '../../../constants';
 
 const TopicItem: React.FunctionComponent<CustomTopicsProps> = props => {

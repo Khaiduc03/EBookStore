@@ -1,17 +1,15 @@
-import { View, TouchableOpacity, Image, FlatList, Text } from 'react-native'
-import React from 'react'
-import useStyles from '../MyProfile/styles'
-import { images } from '../../../../assets';
+import {View, TouchableOpacity, Image, FlatList, Text} from 'react-native';
+import React from 'react';
+import useStyles from '../MyProfile/styles';
+import {images} from '../../../../assets';
 import TextCustom from '../../../../components/customs/Text';
-import Squares from '../../../../components/customs/Squares';
-import { NavigationService } from '../../../../navigation';
-import { routes } from '../../../../constants';
+import ItemListMyProfile from './ItemListMyProfile';
+import {NavigationService} from '../../../../navigation';
+import {routes} from '../../../../constants';
 import ItemPost from './ItemPost/ItemPost';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
 
-
-
-const MyProfile: React.FC = (props) => {
+const MyProfile: React.FC = props => {
   const styles = useStyles();
   const handlePressGoback = () => {
     NavigationService.navigate(routes.PROFILE);
@@ -19,41 +17,43 @@ const MyProfile: React.FC = (props) => {
   const handlePressGoScreen = () => {
     NavigationService.navigate(routes.UPDATE_PROFILE2);
   };
-  const renderItem = ({ item }: { item: typeof data[0] }) => (
-    <Squares {...item} />
+  const renderItem = ({item}: {item: (typeof data)[0]}) => (
+    <ItemListMyProfile {...item} />
   );
 
   return (
     <View style={styles.container}>
-      <HeaderCustom leftIcon={{ name: 'arrow-left', type: 'font-awesome' }} title='My Profile'
+      <HeaderCustom
+        leftIcon={{name: 'arrow-left', type: 'font-awesome'}}
+        title="My Profile"
         onPressLeftIcon={handlePressGoback}
-        rightIconleft={{ name: 'plus', type: 'font-awesome-5' }}
-        rightIconRight={{ name: 'pen', type: 'font-awesome-5' }}
+        rightIconleft={{name: 'plus', type: 'font-awesome-5'}}
+        rightIconRight={{name: 'pen', type: 'font-awesome-5'}}
         onPressRightIconRight={handlePressGoScreen}
       />
-      <View style={styles.View}>
-        <Image style={styles.Avatar} source={images.avata} />
+      <View style={styles.viewAvatarFollow}>
+        <Image style={styles.avatar} source={images.avata} />
         <TouchableOpacity style={styles.viewFollow}>
           <TextCustom number={100} />
-          <TextCustom textLight title='Follower' />
+          <TextCustom textLight title="Follower" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.viewFollow}>
           <TextCustom number={100} />
-          <TextCustom textLight title='Follow' />
+          <TextCustom textLight title="Follow" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.viewFollow}>
           <TextCustom number={100} />
-          <TextCustom textLight title='Post' />
+          <TextCustom textLight title="Post" />
         </TouchableOpacity>
       </View>
-      <View style={styles.NameUser}>
-        <TextCustom textBold title='Drake Kun' />
-        <TextCustom textLight title='Biographic this here !!!!! 😎' />
+      <View style={styles.nameUser}>
+        <TextCustom textBold title="Drake Kun" />
+        <TextCustom textLight title="Biographic this here !!!!! 😎" />
       </View>
-      <View style={styles.ViewExplore}>
-        <TextCustom textBold title='Explore everyone' />
+      <View style={styles.viewExplore}>
+        <TextCustom textBold title="Explore everyone" />
         <TouchableOpacity>
-          <TextCustom textPrimary title='See all' />
+          <TextCustom textPrimary title="See all" />
         </TouchableOpacity>
       </View>
       <View>
@@ -64,33 +64,68 @@ const MyProfile: React.FC = (props) => {
           horizontal
           showsHorizontalScrollIndicator={false}
           snapToAlignment="start" // Snap tới phần tử gần nhất khi cuộn
-          snapToInterval={10} // Đặt khoảng cách giữa các phần tử 
+          snapToInterval={10} // Đặt khoảng cách giữa các phần tử
           decelerationRate={0.5} // Điều chỉnh tốc độ giảm dần của cuộn
         />
       </View>
-      <View style={styles.ViewMyPost}>
-        <Text style={styles.TextPost}>MY POST</Text>
+      <View style={styles.viewMyPost}>
+        <Text style={styles.textPost}>MY POST</Text>
       </View>
-      <View style={{ flex: 1 }}>
+      <View style={{flex: 1}}>
         <FlatList
           data={data2}
-          renderItem={({ item }) => <ItemPost data={item} />}
+          renderItem={({item}) => <ItemPost data={item} />}
           numColumns={3}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator
         />
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default MyProfile
+export default MyProfile;
 const data = [
-  { id: '1', avatarDummy: true, name: 'Peter 1', title: 'Suggestions for you', button: true, textButton: 'Follow' },
-  { id: '2', avatarDummy: true, name: 'Peter 2', title: 'Suggestions for you', button: true, textButton: 'Follow' },
-  { id: '3', avatarDummy: true, name: 'Peter 3', title: 'Suggestions for you', button: true, textButton: 'Follow' },
-  { id: '4', avatarDummy: true, name: 'Peter 4', title: 'Suggestions for you', button: true, textButton: 'Follow' },
-  { id: '5', avatarDummy: true, name: 'Peter 5', title: 'Suggestions for you', button: true, textButton: 'Follow' },
+  {
+    id: '1',
+    avatarDummy: true,
+    name: 'Peter 1',
+    title: 'Suggestions for you',
+    button: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '2',
+    avatarDummy: true,
+    name: 'Peter 2',
+    title: 'Suggestions for you',
+    button: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '3',
+    avatarDummy: true,
+    name: 'Peter 3',
+    title: 'Suggestions for you',
+    button: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '4',
+    avatarDummy: true,
+    name: 'Peter 4',
+    title: 'Suggestions for you',
+    button: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '5',
+    avatarDummy: true,
+    name: 'Peter 5',
+    title: 'Suggestions for you',
+    button: true,
+    textButton: 'Follow',
+  },
 ];
 
 const data2 = [
@@ -101,13 +136,16 @@ const data2 = [
   {
     id: '2',
     images: require('../../../../assets/images/png/avatar.jpg'),
-  }, {
+  },
+  {
     id: '3',
     images: require('../../../../assets/images/png/avatar.jpg'),
-  }, {
+  },
+  {
     id: '4',
     images: require('../../../../assets/images/png/avatar.jpg'),
-  }, {
+  },
+  {
     id: '5',
     images: require('../../../../assets/images/png/avatar.jpg'),
   },

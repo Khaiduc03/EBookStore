@@ -7,13 +7,9 @@ const Contact_us: React.FC = () => {
   const styles = useStyles();
   return (
     <View style={styles.container}>
-      <View style={styles.Button_Service}>
+      <View style={styles.viewButton}>
         <ButtonLong icon_Service title="Customer Service" />
-      </View>
-      <View style={styles.Button_Facebook}>
         <ButtonLong icon_Facebook title="Facebook" />
-      </View>
-      <View style={styles.Button_Website}>
         <ButtonLong icon_Website title="Website" />
       </View>
     </View>

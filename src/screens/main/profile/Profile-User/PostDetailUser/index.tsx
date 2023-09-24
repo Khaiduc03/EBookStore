@@ -63,12 +63,12 @@ const PostDetailUser: React.FC = props => {
       </View>
       <View>
         <Icon_Comment />
-        <View style={styles.Test1}>
-          <Text style={styles.txt}>44 Like</Text>
-          <Text style={styles.txt}>
+        <View style={styles.test1}>
+          <Text style={styles.text}>44 Like</Text>
+          <Text style={styles.text}>
             DraKe Kun Phim này đỉnh cao lắm anh em à 😎😎
           </Text>
-          <Text style={styles.txt}>3 day ago</Text>
+          <Text style={styles.text}>3 day ago</Text>
         </View>
       </View>
     </View>
