@@ -1,28 +1,11 @@
-import {
-  Keyboard,
-  View,
-  TouchableOpacity,
-  TextInput,
-  FlatList,
-  Image,
-  TouchableWithoutFeedback,
-} from 'react-native';
-import {Text} from '@rneui/base';
-import React from 'react';
-import useStyles from './styles';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
-import {Headers} from '../../../../../../components';
-import {Icon} from '@rneui/themed';
-
-type ItemData = {
+export type ItemData = {
   id: number;
   image: string;
   name: string;
   author: string;
 };
 
-const data: ItemData[] = [
+export const data: ItemData[] = [
   {
     id: 1,
     image:
@@ -235,162 +218,11 @@ const data: ItemData[] = [
   },
 ];
 
-type ItemProps = {
+export type ItemProps = {
   item: ItemData;
   onPress: () => void;
   backgroundColor: string;
   textColor1: string;
   textColor2: string;
-  iconSel: React.ReactNode;
+  isSelected: boolean;
 };
-
-const Item = ({
-  item,
-  onPress,
-  backgroundColor,
-  textColor1,
-  textColor2,
-  iconSel,
-}: ItemProps) => {
-  const styles = useStyles();
-  return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[styles.item, {backgroundColor}]}>
-      <View style={styles.view0}>
-        <View style={styles.view1}>
-          <View style={styles.viewJA}>
-            <Image source={{uri: item.image}} style={styles.viewImage} />
-          </View>
-          <View>
-            <Text style={[styles.textName, {color: textColor1}]}>
-              {item.name}
-            </Text>
-            <Text style={[styles.textAuthor, {color: textColor2}]}>
-              {item.author}
-            </Text>
-            <View style={styles.view2}>{iconSel}</View>
-          </View>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-};
-
-const Chat: React.FC = () => {
-  const styles = useStyles();
-
-  const [isPressedComment, setIsPressedComment] = React.useState(false);
-  const [isPressedSearch, setIsPressedSearch] = React.useState(false);
-  const [isPressedNotifications, setIsPressedNotifications] =
-    React.useState(false);
-  const [selectedId, setSelectedId] = React.useState<string>();
-
-  const renderItem = ({item}: {item: ItemData}) => {
-    const backgroundColor =
-      item.id.toString() === selectedId ? '#F89300' : '#fff';
-    const backgroundColorIcon =
-      item.id.toString() !== selectedId ? '#F89300' : '#fff';
-    const color1 = item.id.toString() === selectedId ? 'white' : 'black';
-    const color2 = item.id.toString() === selectedId ? '#e6e6e6' : 'gray';
-
-    const iconColor = (
-      <>
-        {Array(5)
-          .fill(0)
-          .map((_, index) => (
-            <Icon
-              key={index}
-              name="star"
-              color={backgroundColorIcon}
-              size={18}
-              type="font-awesome"
-              style={{marginEnd: 6}}
-            />
-          ))}
-      </>
-    );
-
-    return (
-      <Item
-        item={item}
-        onPress={() => setSelectedId(item.id.toString())}
-        backgroundColor={backgroundColor}
-        textColor1={color1}
-        textColor2={color2}
-        iconSel={iconColor}
-      />
-    );
-  };
-
-  return (
-    <TouchableWithoutFeedback
-      onPress={() => Keyboard.dismiss()}
-      style={styles.container}>
-      <View style={styles.wrapper}>
-        <View style={styles.header}>
-          <TouchableOpacity
-            style={[
-              styles.btnComment,
-              {
-                backgroundColor: isPressedComment ? '#999999' : 'transparent',
-              },
-            ]}
-            onPressIn={() => setIsPressedComment(true)}
-            onPressOut={() => setIsPressedComment(false)}>
-            <Icon name="comment" type="font-awesome" color={'#F89300'} />
-          </TouchableOpacity>
-          <View style={styles.view3}>
-            <Text style={styles.text1}>Message</Text>
-          </View>
-          <View style={styles.view4}>
-            <TouchableOpacity
-              style={[
-                styles.btnSearch,
-                {
-                  backgroundColor: isPressedSearch ? '#999999' : 'transparent',
-                },
-              ]}
-              onPressIn={() => setIsPressedSearch(true)}
-              onPressOut={() => setIsPressedSearch(false)}>
-              <Icon name="search-outline" type="ionicon" color={'black'} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.btnNotifications,
-                {
-                  backgroundColor: isPressedNotifications
-                    ? '#999999'
-                    : 'transparent',
-                },
-              ]}
-              onPressIn={() => setIsPressedNotifications(true)}
-              onPressOut={() => setIsPressedNotifications(false)}>
-              <Icon
-                name="notifications-outline"
-                type="ionicon"
-                color={'black'}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.body}>
-          <View style={styles.view5}>
-            <TextInput style={styles.textInput} placeholder="Search" />
-            <View style={styles.view6}>
-              <Icon name="search" type="font-awesome" color={'gray'} />
-            </View>
-          </View>
-          <FlatList
-            data={data}
-            renderItem={renderItem}
-            keyExtractor={item => item.id.toString()}
-            extraData={selectedId}
-          />
-        </View>
-      </View>
-    </TouchableWithoutFeedback>
-  );
-};
-
-export default Chat;

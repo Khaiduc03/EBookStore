@@ -16,7 +16,9 @@ const InputCustom: FunctionComponent<
   InputProps & TextInputProps & BaseIPProps
 > = props => {
   const [inputFocused, setInputFocused] = React.useState(false);
+
   const styles = useStyles();
+
   const [secure, setSecure] = React.useState<boolean>(true);
   const _renderSecure = () => {
     return (
@@ -38,16 +40,14 @@ const InputCustom: FunctionComponent<
       <Input
         secureTextEntry={props.secure && secure}
         inputContainerStyle={[
-          styles.inputContainer,
+          styles.inputContainer || props.style,
           props.style,
-          {borderBottomWidth: 0},
         ]}
         placeholder={props.placeholder}
-        // leftIcon={(props.secure && <LockIcon />) || props.leftIcon}
-        leftIconContainerStyle={[styles.icon, styles.iconLeft]}
+        leftIconContainerStyle={styles.icon}
         rightIconContainerStyle={styles.icon}
         rightIcon={props.secure && _renderSecure()}
-        inputStyle={[inputFocused ? styles.input2 : styles.input]}
+        inputStyle={[inputFocused ? styles.inputFocus : styles.inputBlur]}
         value={props.value}
         onChangeText={props.onChangeText}
         renderErrorMessage={false}

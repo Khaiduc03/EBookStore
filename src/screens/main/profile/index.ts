@@ -14,6 +14,7 @@ import Update_Profile from './Update-profile';
 import PostDetail from './MyProfile/PostDetail';
 import ProfileUser from './Profile-User';
 import PostDetailUser from './Profile-User/PostDetailUser';
+import Message from '../message/Messages';
 
 export {default as Profile} from './Profile';
 
@@ -69,5 +70,9 @@ export const profileScreens: Screen[] = [
   {
     name: routes.POSTDETAILUSERS,
     component: PostDetailUser,
+  },
+  {
+    name: routes.MESSAGES,
+    component: Message,
   },
 ];

@@ -8,14 +8,15 @@ import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import useStyles from './styles';
 import ItemPostUser from './ItemPostUser/ItemPostUser';
 import {Icon} from '@rneui/themed';
+import AddFriend from './AddFriend';
 
 const ProfileUser: React.FC = props => {
   const styles = useStyles();
   const handlePressGoback = () => {
     NavigationService.navigate(routes.MYPROFILE);
   };
-  const handlePressGoScreen = () => {
-    NavigationService.navigate(routes.UPDATE_PROFILE2);
+  const handlePressMessage = () => {
+    NavigationService.navigate(routes.MESSAGES);
   };
   const [isFollowed, setIsFollowed] = useState(true);
   const handleFollowButtonClick = () => {
@@ -62,16 +63,11 @@ const ProfileUser: React.FC = props => {
             {isFollowed ? 'Follow' : 'unFollow'}
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnFollow}>
+        <TouchableOpacity style={styles.btnFollow} onPress={handlePressMessage}>
           <Text style={styles.textFollow}>Messenger</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btnAddUser}>
-          <Icon
-            name="user-plus"
-            type="font-awesome-5"
-            size={18}
-            color={'white'}
-          />
+          <AddFriend/>
         </TouchableOpacity>
       </View>
 

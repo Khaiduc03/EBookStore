@@ -1,11 +1,12 @@
 import {StyleSheet, Text, View, ImageBackground} from 'react-native';
 import React from 'react';
-import useStyles from './style';
+
 import {CustomTopicsProps} from './types';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {NavigationService} from '../../../navigation';
 
 import {routes} from '../../../constants';
+import useStyles from './styles';
 
 const TopicItem: React.FunctionComponent<CustomTopicsProps> = props => {
   const styles = useStyles();

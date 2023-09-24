@@ -5,5 +5,6 @@ export type CustomTopicsProps = {
   titleStyle?: TextStyle;
   viewStyle?: ViewStyle;
   containerStyle?: ViewStyle;
+
   index: number;
 };

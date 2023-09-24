@@ -7,8 +7,6 @@ import {
 } from 'react-native'; // Thêm ScrollView vào danh sách import
 import React from 'react';
 
-import useStyles from './styles';
-
 const Episodes = () => {
   const styles = useStyles();
 
@@ -23,22 +21,8 @@ const Episodes = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerChapter}>
-        <Text style={styles.textHeader}>Chapters</Text>
-        <Text style={styles.textHeader}>Update</Text>
-        <Text style={styles.textHeader}>Views</Text>
-      </View>
-
-      <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
-        {data.map(item => (
-          <TouchableOpacity key={item.id} style={styles.chapterContainer}>
-            <Text style={styles.textChapter}>Chapter {item.chapterNumber}</Text>
-            <Text style={styles.textChapter}>{item.dayUpdate}</Text>
-            <Text style={styles.textChapter}>{item.view}</Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+    <View style={{flex: 1}}>
+      <Text style={{fontSize: 40, color: '#000'}}>Episodes</Text>
     </View>
   );
 };
