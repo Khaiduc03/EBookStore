@@ -1,36 +1,75 @@
+import React, {useState} from 'react';
 import {
-  StyleSheet,
-  Text,
   View,
-  Image,
+  Text,
+  StatusBar,
+  TouchableOpacity,
   FlatList,
-  ActivityIndicator,
+  Image,
 } from 'react-native';
-import React from 'react';
-import {ScrollView} from 'react-native-gesture-handler';
-import useStyles from './styles';
 import {Device} from '../../../../utils';
+import useStyles from './styles';
+import {FooterChapter, HeaderChapter} from './Components';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const WIDTH = Device.getDeviceWidth();
-const HEIGHT = Device.getDeviceHeight();
 
-const ChapterDetail = () => {
+function ChapterDetail() {
   const styles = useStyles();
+  const [showHeader, setShowHeader] = useState(true);
+  const [showFooter, setShowFooter] = useState(true);
+
+  const toggleHeaderFooter = () => {
+    setShowHeader(!showHeader);
+    setShowFooter(!showFooter);
+  };
+
+  const renderHeader = () => {
+    if (showHeader) {
+      return <HeaderChapter />;
+    } else {
+      return null;
+    }
+  };
+  const renderFooter = () => {
+    if (showFooter) {
+      return <FooterChapter />;
+    } else {
+      return null;
+    }
+  };
+
   const renderItem = ({item}: any) => {
-    return (
-      <Image
-        style={{width: WIDTH, height: HEIGHT * 0.4}}
-        source={{uri: item.image}}
-      />
-    );
+    return <Image style={styles.imageStyle} source={{uri: item.image}} />;
   };
 
   return (
     <View style={styles.container}>
-      <FlatList data={data} renderItem={renderItem} />
+      <TouchableOpacity onPress={toggleHeaderFooter} activeOpacity={1}>
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item, index) => index.toString()}
+          onScroll={() => {
+            if (showHeader || showFooter) {
+              setShowHeader(false);
+              setShowFooter(false);
+            }
+          }}
+          scrollEventThrottle={16}
+        />
+      </TouchableOpacity>
+      {renderHeader()}
+      {renderFooter()}
+      {/* <StatusBar
+        showHideTransition={'fade'}
+        animated={true}
+        hidden={showHeader ? false : true}
+      /> */}
     </View>
   );
-};
+}
 
 export default ChapterDetail;
 const data = [
@@ -107,6 +146,34 @@ const data = [
   },
   {
     id: 10,
+    name: 'Boruto & Itachi',
+    topic: 'Dallis',
+    image: 'https://vidian.me/public-img/image-1677306627308.jpeg',
+    rate: 4.41,
+  },
+  {
+    id: 11,
+    name: 'Boruto & Itachi',
+    topic: 'Dallis',
+    image: 'https://vidian.me/public-img/image-1677306627308.jpeg',
+    rate: 4.41,
+  },
+  {
+    id: 12,
+    name: 'Boruto & Itachi',
+    topic: 'Dallis',
+    image: 'https://vidian.me/public-img/image-1677306627308.jpeg',
+    rate: 4.41,
+  },
+  {
+    id: 13,
+    name: 'Boruto & Itachi',
+    topic: 'Dallis',
+    image: 'https://vidian.me/public-img/image-1677306627308.jpeg',
+    rate: 4.41,
+  },
+  {
+    id: 14,
     name: 'Boruto & Itachi',
     topic: 'Dallis',
     image: 'https://vidian.me/public-img/image-1677306627308.jpeg',
