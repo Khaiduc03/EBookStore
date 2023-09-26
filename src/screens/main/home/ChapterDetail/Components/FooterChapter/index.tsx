@@ -1,9 +1,8 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import {Button} from '@rneui/themed';
 import {Icon} from '@rneui/themed';
-import useStyles from './styles';
+import React from 'react';
+import {Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import useStyles from './styles';
 
 const FooterChapter = () => {
   const styles = useStyles();

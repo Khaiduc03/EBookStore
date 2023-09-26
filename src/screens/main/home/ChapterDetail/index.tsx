@@ -1,16 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  StatusBar,
-  TouchableOpacity,
   FlatList,
   Image,
+  TouchableOpacity,
+  View
 } from 'react-native';
-import {Device} from '../../../../utils';
+import { Device } from '../../../../utils';
+import { FooterChapter, HeaderChapter } from './Components';
 import useStyles from './styles';
-import {FooterChapter, HeaderChapter} from './Components';
-import {SafeAreaView} from 'react-native-safe-area-context';
 
 const WIDTH = Device.getDeviceWidth();
 

@@ -1,5 +1,4 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {fontFamilySetup} from '../../../../utils/font';
+import {makeStyles} from '@rneui/themed';
 import {Device} from '../../../../utils';
 
 const WIDTH = Device.getDeviceWidth();
