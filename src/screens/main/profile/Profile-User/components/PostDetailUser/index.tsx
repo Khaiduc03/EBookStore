@@ -1,13 +1,13 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
-import Icon_Comment from '../../MyProfile/PostDetail/Icon-Comment';
-import {HeaderCustom} from '../../../../../components';
-import {NavigationService} from '../../../../../navigation';
-import {routes} from '../../../../../constants';
-import TextCustom from '../../../../../components/customs/Text';
+import {HeaderCustom} from '../../../../../../components';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
+import TextCustom from '../../../../../../components/customs/Text';
 import {Icon} from '@rneui/themed';
 import useStyles from './styles';
-import {images} from '../../../../../assets';
+import {images} from '../../../../../../assets';
+import Icon_Comment from '../../../MyProfile/components/Icon-Comment';
 
 const PostDetailUser: React.FC = props => {
   const styles = useStyles();
@@ -40,21 +40,9 @@ const PostDetailUser: React.FC = props => {
           },
         }}
       />
-      <View
-        style={{
-          paddingHorizontal: 20,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderWidth: 0.3,
-          borderColor: '#ffffff',
-          borderRadius: 9,
-        }}>
-        <View style={{flexDirection: 'row', alignItems: 'center', gap: 20}}>
-          <Image
-            style={{width: 32, height: 32, borderRadius: 99}}
-            source={images.avata}
-          />
+      <View style={styles.viewInformation}>
+        <View style={styles.viewimage}>
+          <Image style={styles.avatarUser} source={images.avata} />
           <TextCustom textBold title="Drake Kun" />
         </View>
         <TouchableOpacity>

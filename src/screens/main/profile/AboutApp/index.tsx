@@ -1,14 +1,13 @@
-import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import usestyles from './styles';
-import {Icon} from '@rneui/themed';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
+import {Text, View} from 'react-native';
 import {HeaderCustom} from '../../../../components';
+import {routes} from '../../../../constants';
+import {NavigationService} from '../../../../navigation';
 import ItemListAbout from './ItemListAbout';
+import useStyles from './styles';
 
 const AboutApp: React.FC = () => {
-  const styles = usestyles();
+  const styles = useStyles();
   const handlePressGoback = () => {
     NavigationService.navigate(routes.PROFILE);
   };

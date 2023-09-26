@@ -1,15 +1,19 @@
 import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../../../utils';
-import {StyleSheet} from 'react-native';
-import {fontFamilySetup} from '../../../../../utils/font';
+import {Device} from '../../../../../../utils';
+import {fontFamilySetup} from '../../../../../../utils/font';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    flex: 1,
+    flex: normalize(1),
     backgroundColor: colors.background,
+  },
+  avatarUser: {
+    width: normalize(40),
+    height: normalize(40),
+    borderRadius: normalize(99),
   },
   avatarDummy: {
     width: '100%',
@@ -17,32 +21,32 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewIcon: {
     flexDirection: 'row',
-    paddingHorizontal: 10,
+    paddingHorizontal: normalize(10),
     top: normalize(10),
     justifyContent: 'space-between',
   },
   test1: {
-    padding: 10,
+    paddingHorizontal: normalize(18),
+    paddingVertical: normalize(10),
   },
   text: {
     fontSize: normalize(15),
-    fontFamily: fontFamilySetup.regular,
+    fontFamily: fontFamilySetup.bold,
     color: colors.black,
-    paddingVertical: 4,
+    paddingVertical: normalize(4),
   },
-  viewgido: {
-    paddingHorizontal: 20,
+  viewInformation: {
+    paddingHorizontal: normalize(20),
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    borderWidth: 0.3,
+    borderWidth: normalize(0.2),
     borderColor: '#ffffff',
-    borderRadius: 9,
   },
   viewimage: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 20,
+    gap: normalize(20),
   },
 }));
 export default useStyles;

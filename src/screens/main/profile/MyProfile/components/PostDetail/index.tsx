@@ -1,15 +1,14 @@
-import {View, Text, Image} from 'react-native';
-import React, {useState} from 'react';
-import {HeaderCustom} from '../../../../../components';
-import {images} from '../../../../../assets';
-import useStyles from './styles';
-import TextCustom from '../../../../../components/customs/Text';
 import {Icon} from '@rneui/themed';
+import React, {useState} from 'react';
+import {Image, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import ModalWrapContent from '../../../../../components/customs/ModalWrapContent';
-import {NavigationService} from '../../../../../navigation';
-import {routes} from '../../../../../constants';
-import Icon_Comment from './Icon-Comment';
+import {images} from '../../../../../../assets';
+import {HeaderCustom} from '../../../../../../components';
+import TextCustom from '../../../../../../components/customs/Text';
+import {routes} from '../../../../../../constants';
+import {NavigationService} from '../../../../../../navigation';
+import Icon_Comment from '../Icon-Comment';
+import useStyles from './styles';
 
 const PostDetail: React.FC = () => {
   const styles = useStyles();
@@ -30,12 +29,9 @@ const PostDetail: React.FC = () => {
         title="Post Details"
         onPressLeftIcon={handlePressGoback}
       />
-      <View style={styles.viewgido}>
+      <View style={styles.viewInformation}>
         <View style={styles.viewimage}>
-          <Image
-            style={{width: 32, height: 32, borderRadius: 99}}
-            source={images.avata}
-          />
+          <Image style={styles.avatarUser} source={images.avata} />
           <TextCustom textBold title="Drake Kun" />
         </View>
         <TouchableOpacity>

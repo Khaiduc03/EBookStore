@@ -1,28 +1,37 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native'; // Thêm ScrollView vào danh sách import
+import {ScrollView, Text, TouchableOpacity, View} from 'react-native'; // Thêm ScrollView vào danh sách import
+
 import React from 'react';
+
+import {routes} from '../../../../../../constants';
+import {NavigationService} from '../../../../../../navigation';
+import useStyles from './styles';
 
 const Episodes = () => {
   const styles = useStyles();
-
-  const renderItem = ({item}: any) => {
-    return (
-      <TouchableOpacity style={styles.chapterContainer}>
-        <Text style={styles.textChapter}>Chapter {item.chapterNumber}</Text>
-        <Text style={styles.textChapter}>{item.dayUpdate}</Text>
-        <Text style={styles.textChapter}>{item.view}</Text>
-      </TouchableOpacity>
-    );
+  const handlePressChapter = () => {
+    NavigationService.navigate(routes.CHAPTER);
   };
 
   return (
-    <View style={{flex: 1}}>
-      <Text style={{fontSize: 40, color: '#000'}}>Episodes</Text>
+    <View style={styles.container}>
+      <View style={styles.headerChapter}>
+        <Text style={styles.textHeader}>Chapters</Text>
+        <Text style={styles.textHeader}>Update</Text>
+        <Text style={styles.textHeader}>Views</Text>
+      </View>
+
+      <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
+        {data.map(item => (
+          <TouchableOpacity
+            onPress={handlePressChapter}
+            key={item.id}
+            style={styles.chapterContainer}>
+            <Text style={styles.textChapter}>Chapter {item.chapterNumber}</Text>
+            <Text style={styles.textChapter}>{item.dayUpdate}</Text>
+            <Text style={styles.textChapter}>{item.view}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
     </View>
   );
 };

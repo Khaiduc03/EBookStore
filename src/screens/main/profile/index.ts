@@ -1,20 +1,19 @@
-import {Component} from 'react';
 import {routes} from '../../../constants';
 import {Screen} from '../../../types';
-import HelpCenter from './HelpCenter';
-import MyProfile from './MyProfile';
-import Notification from './Notification';
-import Security from './Security';
-import Payments_method from './Payment-method';
-import BecomeVIP from './BecomeVIP';
-import AboutApp from './AboutApp';
-import FAQ from './HelpCenter/FAQ';
-import Contact_us from './HelpCenter/Contact_us';
-import Update_Profile from './Update-profile';
-import PostDetail from './MyProfile/PostDetail';
-import ProfileUser from './Profile-User';
-import PostDetailUser from './Profile-User/PostDetailUser';
 import Message from '../message/Messages';
+import AboutApp from './AboutApp';
+import BecomeVIP from './BecomeVIP';
+import HelpCenter from './HelpCenter';
+import Contact_us from './HelpCenter/Contact_us';
+import FAQ from './HelpCenter/FAQ';
+import MyProfile from './MyProfile';
+import PostDetail from './MyProfile/components/PostDetail';
+import Notification from './Notification';
+import Payments_method from './Payment-method';
+import ProfileUser from './Profile-User';
+import PostDetailUser from './Profile-User/components/PostDetailUser';
+import Security from './Security';
+import Update_Profile from './Update-profile';
 
 export {default as Profile} from './Profile';
 

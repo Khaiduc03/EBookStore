@@ -1,17 +1,16 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {Device} from '../../../../../utils';
-import {StyleSheet} from 'react-native';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    flex: 1,
+    flex: normalize(1),
     backgroundColor: colors.background,
   },
   viewButton: {
     height: '30%',
-    padding: 24,
+    padding: normalize(24),
   },
 }));
 export default useStyles;

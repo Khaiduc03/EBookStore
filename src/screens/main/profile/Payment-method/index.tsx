@@ -1,10 +1,10 @@
+import React from 'react';
 import {View} from 'react-native';
-import React, {useState} from 'react';
-import useStyles from './styles';
+import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
-import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import Pay from './Pay';
+import useStyles from './styles';
 
 const Payments_method: React.FC = () => {
   const styles = useStyles();

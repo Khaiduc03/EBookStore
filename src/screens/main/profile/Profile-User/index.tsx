@@ -1,14 +1,13 @@
-import {View, TouchableOpacity, Image, FlatList, Text} from 'react-native';
 import React, {useState} from 'react';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import {images} from '../../../../assets';
-import TextCustom from '../../../../components/customs/Text';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
+import TextCustom from '../../../../components/customs/Text';
+import {routes} from '../../../../constants';
+import {NavigationService} from '../../../../navigation';
+import AddFriend from './components/AddFriend';
+import ItemPostUser from './components/ItemPostUser/ItemPostUser';
 import useStyles from './styles';
-import ItemPostUser from './ItemPostUser/ItemPostUser';
-import {Icon} from '@rneui/themed';
-import AddFriend from './AddFriend';
 
 const ProfileUser: React.FC = props => {
   const styles = useStyles();
@@ -67,7 +66,7 @@ const ProfileUser: React.FC = props => {
           <Text style={styles.textFollow}>Messenger</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btnAddUser}>
-          <AddFriend/>
+          <AddFriend />
         </TouchableOpacity>
       </View>
 

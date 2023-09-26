@@ -1,21 +1,12 @@
 import React, {FunctionComponent} from 'react';
-import {
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  FlatList,
-} from 'react-native';
-import useStyles from './styles';
-import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {getAuthEnableSignIn} from '../../../../redux/selectors/auth.selector';
-import {AuthActions} from '../../../../redux/reducer';
-import TextCustom from '../../../../components/customs/Text';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
-import HeaderCustom from '../../../../components/customs/HeaderCustom';
+import {Image, TouchableOpacity, View} from 'react-native';
 import {images} from '../../../../assets';
-import TableofContent from './Components/Tableofcontents';
+import HeaderCustom from '../../../../components/customs/HeaderCustom';
+import TextCustom from '../../../../components/customs/Text';
+import {routes} from '../../../../constants';
+import {NavigationService} from '../../../../navigation';
+import TableofContent from './Tableofcontents';
+import useStyles from './styles';
 
 const Profile: FunctionComponent = () => {
   const styles = useStyles();

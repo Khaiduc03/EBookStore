@@ -42,4 +42,5 @@ export enum routes {
   // Home
   TOPICS = 'TOPICS',
   SEARCH = 'SEARCH',
+  CHAPTER = 'CHAPTER',
 }

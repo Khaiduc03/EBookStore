@@ -19,7 +19,6 @@ const Home: FunctionComponent = () => {
   const handleGridIconPress = () => {
     setNumCols(2);
   };
-
   const handlePressSearch = () => {
     NavigationService.navigate(routes.SEARCH);
   };
@@ -31,9 +30,9 @@ const Home: FunctionComponent = () => {
     <View style={styles.container}>
       <HeaderCustom
         onPressRightIconLeft={handlePressSearch}
-        leftIcon={{ name: 'book', type: 'font-awesome' }}
+        leftIcon={{name: 'book', type: 'font-awesome'}}
         title="ComicVerse"
-        rightIconleft={{ name: 'search', type: 'ionicon' }}
+        rightIconleft={{name: 'search', type: 'ionicon'}}
         rightIconRight={createIcon({
           name: 'notifications-outline',
           type: 'ionicon',
@@ -55,7 +54,8 @@ const Home: FunctionComponent = () => {
         <TopicsHome />
 
         <HeaderCustom
-          title="Comics New"
+          titleStyle={styles.textTitle}
+          title="New Comics"
           rightIconleft={{
             name: 'grid-outline',
             type: 'ionicon',

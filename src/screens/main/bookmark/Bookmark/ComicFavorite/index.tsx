@@ -40,7 +40,7 @@ const renderItem = ({item}: {item: Item}) => (
           }}>
           <View style={{flexDirection: 'row', gap: 10}}>
             <Icon name="star" type="font-awesome" />
-            <TextCustom title={item.rating} textLight />
+            <TextCustom title={item.rating} textBold />
           </View>
           <TouchableOpacity style={{alignItems: 'flex-end'}}>
             <Icon name="ellipsis-vertical" type="ionicon" size={27} />

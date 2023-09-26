@@ -1,33 +1,32 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {Device} from '../../../../utils';
-import {StyleSheet} from 'react-native';
 import {fontFamilySetup} from '../../../../utils/font';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    flex: 1,
+    flex: normalize(1),
     backgroundColor: colors.background,
   },
   avatar: {
     width: normalize(60),
     height: normalize(60),
-    borderRadius: 50,
+    borderRadius: normalize(50),
   },
   viewFollow: {
-    paddingVertical: 24,
-    paddingHorizontal: 15,
+    paddingVertical: normalize(24),
+    paddingHorizontal: normalize(15),
     flexDirection: 'row',
   },
   viewTextFollow: {
     width: '25%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginStart: 10,
+    marginStart: normalize(10),
   },
   nameUser: {
-    paddingHorizontal: 24,
+    paddingHorizontal: normalize(24),
   },
   textPost: {
     fontSize: normalize(20),
@@ -37,7 +36,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewMyPost: {
     alignItems: 'center',
-    borderBottomWidth: 0.6,
+    borderBottomWidth: normalize(0.6),
     borderColor: '#8a8a8a',
     marginTop: normalize(25),
   },

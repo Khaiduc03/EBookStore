@@ -1,14 +1,12 @@
 import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../../../utils';
-import {StyleSheet} from 'react-native';
-import {fontFamilySetup} from '../../../../../utils/font';
+import {Device} from '../../../../../../utils';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    flex: 1,
+    paddingVertical: normalize(10),
     backgroundColor: colors.background,
   },
   avatarDummy: {
@@ -16,19 +14,10 @@ const useStyles = makeStyles(({colors}) => ({
     height: normalize(400),
   },
   viewIcon: {
+    paddingTop: normalize(20),
     flexDirection: 'row',
-    paddingHorizontal: 10,
-    top: normalize(10),
     justifyContent: 'space-between',
-  },
-  test1: {
-    padding: 10,
-  },
-  text: {
-    fontSize: normalize(15),
-    fontFamily: fontFamilySetup.regular,
-    color: colors.black,
-    paddingVertical: 4,
+    paddingHorizontal: normalize(24),
   },
 }));
 export default useStyles;

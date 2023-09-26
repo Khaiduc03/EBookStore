@@ -1,6 +1,5 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {Device} from '../../../../../utils';
-import {StyleSheet} from 'react-native';
 import {fontFamilySetup} from '../../../../../utils/font';
 
 const WIDTH = Device.getDeviceWidth();
@@ -8,16 +7,16 @@ const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    flex: 1,
+    flex: normalize(1),
     backgroundColor: colors.background,
   },
   viewTextBig: {
     width: '90%',
     height: normalize(90),
-    borderBottomWidth: 1,
+    borderBottomWidth: normalize(1),
     alignItems: 'center',
     justifyContent: 'center',
-    marginStart: 24,
+    marginStart: normalize(24),
     borderColor: '#6F6969',
   },
   name: {
@@ -33,8 +32,8 @@ const useStyles = makeStyles(({colors}) => ({
   viewTitle: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 24,
-    paddingVertical: 18,
+    paddingHorizontal: normalize(24),
+    paddingVertical: normalize(18),
   },
   text: {
     fontSize: normalize(HEIGHT * 0.021),

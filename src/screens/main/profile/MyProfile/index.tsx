@@ -1,13 +1,13 @@
-import {View, TouchableOpacity, Image, FlatList, Text} from 'react-native';
 import React from 'react';
-import useStyles from '../MyProfile/styles';
-import {images} from '../../../../assets';
-import TextCustom from '../../../../components/customs/Text';
-import ItemListMyProfile from './ItemListMyProfile';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
-import ItemPost from './ItemPost/ItemPost';
+import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
+import TextCustom from '../../../../components/customs/Text';
+import {routes} from '../../../../constants';
+import {NavigationService} from '../../../../navigation';
+import useStyles from '../MyProfile/styles';
+import ItemFollow from './components/ItemFollow';
+import ItemListMyProfile from './components/ItemListMyProfile';
+import ItemPost from './components/ItemPost';
 
 const MyProfile: React.FC = props => {
   const styles = useStyles();
@@ -31,20 +31,8 @@ const MyProfile: React.FC = props => {
         rightIconRight={{name: 'pen', type: 'font-awesome-5'}}
         onPressRightIconRight={handlePressGoScreen}
       />
-      <View style={styles.viewAvatarFollow}>
-        <Image style={styles.avatar} source={images.avata} />
-        <TouchableOpacity style={styles.viewFollow}>
-          <TextCustom number={100} />
-          <TextCustom textLight title="Follower" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.viewFollow}>
-          <TextCustom number={100} />
-          <TextCustom textLight title="Follow" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.viewFollow}>
-          <TextCustom number={100} />
-          <TextCustom textLight title="Post" />
-        </TouchableOpacity>
+      <View>
+        <ItemFollow />
       </View>
       <View style={styles.nameUser}>
         <TextCustom textBold title="Drake Kun" />

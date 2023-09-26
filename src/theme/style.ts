@@ -1,6 +1,6 @@
-import { createTheme } from '@rneui/themed';
-import { useAppSelector } from '../hooks';
-import { getMode } from '../redux/selectors/thems.selector';
+import {createTheme} from '@rneui/themed';
+import {useAppSelector} from '../hooks';
+import {getMode} from '../redux/selectors/thems.selector';
 
 const mode = useAppSelector(getMode);
 
@@ -8,6 +8,7 @@ declare module '@rneui/themed' {
   export interface Colors {
     input1: string;
     input2: string;
+    backgrounDetai: string;
   }
 }
 
@@ -24,10 +25,10 @@ export const theme = createTheme({
     black: '#212121',
     grey0: '#FFFFFF',
     grey2: '#90939B',
-    grey3: '#667085',
     white: '#FFFFFF',
     input1: '#F2F2F2',
     input2: '#FFF7EB',
+    backgrounDetai: '#F5C38B',
   },
   darkColors: {
     primary: '#F89300',
@@ -44,6 +45,7 @@ export const theme = createTheme({
     background: '#181A20',
     input1: '#1F222A',
     input2: '#2A241D',
+    backgrounDetai: '#212121',
   },
   components: {
     Button: (props, theme) => ({

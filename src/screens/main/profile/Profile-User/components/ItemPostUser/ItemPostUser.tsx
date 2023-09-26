@@ -1,7 +1,7 @@
-import {Dimensions, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
-import {NavigationService} from '../../../../../navigation';
-import {routes} from '../../../../../constants';
+import {Dimensions, Image, TouchableOpacity} from 'react-native';
+import {routes} from '../../../../../../constants';
+import {NavigationService} from '../../../../../../navigation';
 
 type Props = {
   data?: any;

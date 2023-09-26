@@ -2,9 +2,9 @@ import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
 import React, {useState, useCallback} from 'react';
 import useStyles from './styles';
 import {Topic} from '../../../../../../types/TopicType';
+import {TopicItem} from '../../../../../../components';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
-import TopicItem from '../../../../../../components/customs/TopicItem';
 
 const TopicsHome = () => {
   const styles = useStyles();

@@ -13,11 +13,6 @@ const useStyles = makeStyles(({colors}) => ({
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.bold,
   },
-  titleStyleProfile: {
-    color: colors.grey1,
-    fontSize: normalize(18),
-    fontFamily: fontFamilySetup.bold,
-  },
 }));
 
 export default useStyles;

@@ -1,14 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {SearchCustom} from '../../../../components';
 
 import useStyles from './styles';
-import { NavigationService } from '../../../../navigation';
-import { routes } from '../../../../constants';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Button } from '@rneui/themed';
-import { Icon } from '@rneui/base';
-import SearchCustom from '../../../../components/customs/Search';
-import HeaderCustom from '../../../../components/customs/HeaderCustom';
+import {NavigationService} from '../../../../navigation';
+import {routes} from '../../../../constants';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Button} from '@rneui/themed';
+import {Icon} from '@rneui/base';
 
 const Search = () => {
   const styles = useStyles();
@@ -25,12 +24,9 @@ const Search = () => {
         value={search}
         onPress={handlePressSearch}
       />
-      
       {/* 
       <Button icon={<Icon name="search" />} title={'hello'}></Button> */}
-       <HeaderCustom title='Detail' titleStyle={{fontSize:10}} rightIconRight={{name:'book',color:'green'}} rightIconleft={{name:'book',color:'green'}}/>
     </View>
-   
   );
 };
 

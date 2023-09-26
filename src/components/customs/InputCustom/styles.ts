@@ -8,6 +8,7 @@ const useStyles = makeStyles(({colors}) => ({
     width: Device.getDeviceWidth() - normalize(48),
     marginLeft: normalize(-10),
     marginVertical: normalize(12),
+    borderRadius:normalize(1)
   },
   inputBlur: {
     borderBottomWidth: 1,
