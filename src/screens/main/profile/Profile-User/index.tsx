@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
-import {images} from '../../../../assets';
+import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import TextCustom from '../../../../components/customs/Text';
 import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import AddFriend from './components/AddFriend';
+import ItemFollow from './components/ItemFollow';
+import ItemListProfileUser from './components/ItemListProfileUser';
 import ItemPostUser from './components/ItemPostUser/ItemPostUser';
 import useStyles from './styles';
 
@@ -21,6 +22,9 @@ const ProfileUser: React.FC = props => {
   const handleFollowButtonClick = () => {
     setIsFollowed(!isFollowed);
   };
+  const renderItem = ({item}: {item: (typeof data2)[0]}) => (
+    <ItemListProfileUser {...item} />
+  );
 
   return (
     <View style={styles.container}>
@@ -30,20 +34,8 @@ const ProfileUser: React.FC = props => {
         onPressLeftIcon={handlePressGoback}
         rightIconRight={{name: 'ellipsis-vertical', type: 'ionicon'}}
       />
-      <View style={styles.viewFollow}>
-        <Image style={styles.avatar} source={images.avata} />
-        <TouchableOpacity style={styles.viewTextFollow}>
-          <TextCustom number={100} />
-          <TextCustom textLight title="Follower" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.viewTextFollow}>
-          <TextCustom number={100} />
-          <TextCustom textLight title="Follow" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.viewTextFollow}>
-          <TextCustom number={100} />
-          <TextCustom textLight title="Post" />
-        </TouchableOpacity>
+      <View>
+        <ItemFollow />
       </View>
       <View style={styles.nameUser}>
         <TextCustom textBold title="Drake Kun" />
@@ -68,6 +60,18 @@ const ProfileUser: React.FC = props => {
         <TouchableOpacity style={styles.btnAddUser}>
           <AddFriend />
         </TouchableOpacity>
+      </View>
+      <View style={styles.viewExplore}>
+        <FlatList
+          data={data2}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          snapToAlignment="start"
+          snapToInterval={10}
+          decelerationRate={0.5}
+        />
       </View>
 
       <View style={styles.viewMyPost}>
@@ -148,5 +152,47 @@ const data = [
   {
     id: '15',
     images: require('../../../../assets/images/png/avatar.jpg'),
+  },
+];
+const data2 = [
+  {
+    id: '1',
+    avatarDummy: true,
+    name: 'Peter 1',
+    title: 'Suggestions for you',
+    button: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '2',
+    avatarDummy: true,
+    name: 'Peter 2',
+    title: 'Suggestions for you',
+    button: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '3',
+    avatarDummy: true,
+    name: 'Peter 3',
+    title: 'Suggestions for you',
+    button: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '4',
+    avatarDummy: true,
+    name: 'Peter 4',
+    title: 'Suggestions for you',
+    button: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '5',
+    avatarDummy: true,
+    name: 'Peter 5',
+    title: 'Suggestions for you',
+    button: true,
+    textButton: 'Follow',
   },
 ];

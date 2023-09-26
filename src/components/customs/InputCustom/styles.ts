@@ -8,10 +8,10 @@ const useStyles = makeStyles(({colors}) => ({
     width: Device.getDeviceWidth() - normalize(48),
     marginLeft: normalize(-10),
     marginVertical: normalize(12),
-    borderRadius:normalize(1)
+    borderRadius: normalize(14),
   },
   inputBlur: {
-    borderBottomWidth: 1,
+    borderBottomWidth: normalize(1),
     borderBottomColor: colors.grey0,
     fontSize: normalize(16),
     fontFamily: fontFamilySetup.regular,
@@ -20,7 +20,7 @@ const useStyles = makeStyles(({colors}) => ({
     paddingStart: normalize(10),
   },
   inputFocus: {
-    borderBottomWidth: 1,
+    borderBottomWidth: normalize(1),
     borderBottomColor: colors.primary,
     fontSize: normalize(16),
     fontFamily: fontFamilySetup.regular,

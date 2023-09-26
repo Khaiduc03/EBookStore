@@ -18,14 +18,14 @@ const useStyles = makeStyles(({colors}) => ({
     borderRadius: normalize(50),
   },
   textName: {
-    fontSize: normalize(23),
+    fontSize: normalize(21),
     letterSpacing: normalize(0.2),
     fontStyle: 'normal',
     fontFamily: fontFamilySetup.bold,
     color: colors.black,
   },
   textConnect: {
-    fontSize: normalize(21),
+    fontSize: normalize(18),
     letterSpacing: normalize(0.2),
     fontStyle: 'normal',
     fontFamily: fontFamilySetup.bold,

@@ -4,17 +4,6 @@ import {Icon, normalize} from '@rneui/themed';
 import {images} from '../../../../../assets';
 import TextCustom from '../../../../../components/customs/Text';
 
-type Item = {
-  id: string;
-  image: any;
-  name: string;
-  rating: string;
-  price: string;
-};
-type Props = {
-  data?: Item[];
-};
-
 const renderItem = ({item}: {item: Item}) => (
   <View style={{flex: 1, paddingHorizontal: 24, paddingVertical: 20}}>
     <View style={{flexDirection: 'row'}}>
@@ -23,30 +12,34 @@ const renderItem = ({item}: {item: Item}) => (
           style={{
             width: normalize(100),
             height: normalize(150),
-            borderRadius: 15,
+            borderRadius: normalize(15),
           }}
           source={item.image}
         />
       </TouchableOpacity>
 
-      <View style={{marginStart: 15}}>
+      <View style={{marginStart: normalize(15)}}>
         <TextCustom title={item.name} textBold />
         <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
             width: '62%',
-            paddingVertical: 30,
+            paddingVertical: normalize(30),
           }}>
-          <View style={{flexDirection: 'row', gap: 10}}>
+          <View
+            style={{
+              flexDirection: 'row',
+              gap: normalize(10),
+            }}>
             <Icon name="star" type="font-awesome" />
             <TextCustom title={item.rating} textBold />
           </View>
-          <TouchableOpacity style={{alignItems: 'flex-end'}}>
+          <TouchableOpacity>
             <Icon name="ellipsis-vertical" type="ionicon" size={27} />
           </TouchableOpacity>
         </View>
-        <View style={{flexDirection: 'row', gap: 10}}>
+        <View style={{flexDirection: 'row', gap: normalize(10)}}>
           <Icon name="dollar-sign" type="font-awesome-5" size={20} />
           <TextCustom title={item.price} textBold />
         </View>

@@ -75,5 +75,8 @@ const useStyles = makeStyles(({colors}) => ({
     justifyContent: 'center',
     top: normalize(6),
   },
+  viewExplore: {
+    paddingTop: normalize(18),
+  },
 }));
 export default useStyles;
