@@ -15,12 +15,18 @@ const useStyles = makeStyles(({colors}) => ({
   viewRow: {
     flexDirection: 'row',
   },
+  viewCenterHeader: {
+    justifyContent: 'center',
+    alignItems: 'baseline',
+    flexDirection: 'row',
+  },
   viewCenter: {
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'baseline',
   },
   viewTextLeft: {
     justifyContent: 'center',
+    alignItems: 'baseline',
   },
   textTitle: {
     fontSize: normalize(22),
@@ -37,6 +43,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   rightContainer: {
     justifyContent: 'center',
+    alignItems: 'baseline',
     flexDirection: 'row',
   },
   rightIconLeft: {
@@ -44,23 +51,24 @@ const useStyles = makeStyles(({colors}) => ({
   },
   rightIconRight: {
     marginRight: normalize(10),
+    marginTop: normalize(3),
   },
   profileImage: {
-    width: normalize(44),
-    height: normalize(44),
-    borderRadius: normalize(22),
+    width: normalize(36),
+    height: normalize(36),
+    borderRadius: normalize(26),
     left: normalize(20),
   },
   textFullName: {
     color: colors.black,
     fontFamily: fontFamilySetup.bold,
-    fontSize: normalize(19),
+    fontSize: normalize(14),
     left: normalize(28),
   },
   textUserStatus: {
     color: colors.grey4,
     fontFamily: fontFamilySetup.regular,
-    fontSize: normalize(12),
+    fontSize: normalize(9),
     left: normalize(28),
   },
 }));

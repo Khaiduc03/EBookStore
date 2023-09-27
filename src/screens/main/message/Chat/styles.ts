@@ -12,11 +12,41 @@ const useStyles = makeStyles(({colors}) => ({
   },
   body: {
     flex: 1,
-    padding: normalize(24),
   },
-  viewJA: {
+  pdH: {
+    paddingHorizontal: normalize(24),
+    marginBottom: normalize(8),
+  },
+  pdHT: {
+    paddingHorizontal: normalize(24),
+  },
+  flT: {
+    marginTop: normalize(12),
+  },
+  colorIconHeader: {
+    color: colors.primary,
+  },
+  viewHeaderText: {
     justifyContent: 'center',
     alignItems: 'center',
+    fontFamily: fontFamilySetup.bold,
+    fontSize: normalize(18),
+    color: colors.black,
+    marginLeft: normalize(6),
+  },
+  viewCenter: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  viewTextTime: {
+    width: normalize(250),
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    justifyContent: 'space-between',
+  },
+  viewRowText: {
+    flexDirection: 'row',
+    width: '50%',
   },
   view0: {
     flexDirection: 'row',
@@ -30,53 +60,49 @@ const useStyles = makeStyles(({colors}) => ({
   },
   view2: {
     flexDirection: 'row',
-    top: normalize(8),
-    left: normalize(10),
+    marginTop: normalize(3),
+  },
+  viewItem: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
   viewImage: {
-    width: normalize(80),
-    height: normalize(80),
+    width: normalize(60),
+    height: normalize(60),
     borderRadius: normalize(100),
-    backgroundColor: '#cccccc',
+    backgroundColor: colors.grey3,
+    marginEnd: normalize(10),
   },
   item: {
-    width: '100%',
-    height: normalize(120),
-    marginVertical: normalize(10),
-    borderRadius: normalize(24),
-    borderWidth: 1,
-    borderColor: colors.black,
+    maxWidth: '100%',
+    height: normalize(80),
     justifyContent: 'center',
   },
-  item1: {
-    backgroundColor: colors.primary,
-  },
-  item2: {
-    backgroundColor: colors.white,
-  },
   textName: {
-    marginStart: normalize(10),
     color: colors.black,
-    fontSize: normalize(19),
+    fontSize: normalize(12),
     fontFamily: fontFamilySetup.bold,
-  },
-  textName1: {
-    color: colors.white,
-  },
-  textName2: {
-    color: colors.black,
   },
   textAuthor: {
-    marginStart: normalize(10),
     color: colors.grey3,
     fontFamily: fontFamilySetup.bold,
-    fontSize: normalize(16),
+    fontSize: normalize(9),
   },
-  textAuthor1: {
-    color: colors.input1,
-  },
-  textAuthor2: {
+  textFollow: {
+    left: normalize(12),
     color: colors.grey3,
+    fontFamily: fontFamilySetup.bold,
+    fontSize: normalize(9),
+  },
+  textTime: {
+    left: normalize(15),
+    color: colors.grey3,
+    fontFamily: fontFamilySetup.bold,
+    fontSize: normalize(9),
+  },
+  iconStar: {
+    color: colors.primary,
   },
 }));
 

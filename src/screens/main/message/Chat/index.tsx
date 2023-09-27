@@ -1,17 +1,30 @@
 import React, {useState} from 'react';
-import {Keyboard, View, FlatList, TouchableWithoutFeedback} from 'react-native';
-import {Text} from '@rneui/base';
-import useStyles from './styles';
-import {data, ItemData, ItemProps} from './types';
-import {ScrollView} from 'react-native';
-import {ChatItem} from './components/RenderItems/renderItemChat';
+import {
+  FlatList,
+  Keyboard,
+  ScrollView,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import {HeaderCustom, SearchCustom} from '../../../../components';
+import ChatItem from './components/RenderItem/ChatItem';
+import useStyles from './styles';
+import {data, ItemData} from './types';
 
 const Chat: React.FC = () => {
   const styles = useStyles();
 
   const [selectedId, setSelectedId] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
+
+  const sortByTime = (a: ItemData, b: ItemData): number => {
+    const timeA = parseInt(a.time);
+    const timeB = parseInt(b.time);
+
+    return timeA - timeB;
+  };
+
+  data.sort(sortByTime);
 
   const filteredData = data.filter(
     item =>
@@ -25,8 +38,6 @@ const Chat: React.FC = () => {
       onPress={() => setSelectedId(item.id.toString())}
       isSelected={item.id.toString() === selectedId}
       backgroundColor={''}
-      textColor1={''}
-      textColor2={''}
     />
   );
 
@@ -36,25 +47,35 @@ const Chat: React.FC = () => {
       style={styles.container}>
       <View style={styles.wrapper}>
         <View style={styles.body}>
-          <HeaderCustom
-            leftIcon={{name: 'comment', type: 'font-awesome', color: '#F89300'}}
-            rightIconRight={{
-              name: 'notifications-outline',
-              type: 'ionicon',
-              color: 'black',
-            }}
-            title="Message"
-          />
-
-          <ScrollView showsVerticalScrollIndicator={false}>
-            <SearchCustom value={searchTerm} setValue={setSearchTerm} />
-            <FlatList
-              data={filteredData}
-              renderItem={renderItem}
-              keyExtractor={item => item.id.toString()}
-              extraData={selectedId}
-              scrollEnabled={false}
+          <View style={styles.pdH}>
+            <HeaderCustom
+              leftIcon={{
+                name: 'chatbubble-ellipses-outline',
+                type: 'ionicon',
+                color: styles.colorIconHeader.color,
+              }}
+              rightIconRight={{
+                name: 'notifications-outline',
+                type: 'ionicon',
+                color: 'black',
+              }}
+              title="Message"
+              titleStyle={styles.viewHeaderText}
             />
+          </View>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={styles.pdHT}>
+              <SearchCustom value={searchTerm} setValue={setSearchTerm} />
+            </View>
+            <View style={styles.flT}>
+              <FlatList
+                data={filteredData}
+                renderItem={renderItem}
+                keyExtractor={item => item.id.toString()}
+                extraData={selectedId}
+                scrollEnabled={false}
+              />
+            </View>
           </ScrollView>
         </View>
       </View>

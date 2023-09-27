@@ -1,5 +1,6 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {StyleSheet} from 'react-native';
+import {fontFamilySetup} from '../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
@@ -16,10 +17,8 @@ const useStyles = makeStyles(({colors}) => ({
   textEmail: {
     marginTop: normalize(16),
     color: colors.black,
-    fontFamily: 'Urbanist',
+    fontFamily: fontFamilySetup.medium,
     fontSize: normalize(16),
-    fontStyle: 'normal',
-    fontWeight: '700',
     lineHeight: normalize(22.4),
     letterSpacing: normalize(0.2),
   },
@@ -28,7 +27,7 @@ const useStyles = makeStyles(({colors}) => ({
     borderColor: colors.primary,
   },
   viewBottom: {
-    flex: 0.93,
+    flex: normalize(0.93),
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
@@ -50,12 +49,10 @@ const useStyles = makeStyles(({colors}) => ({
     alignSelf: 'stretch',
   },
   textContinue: {
-    color: colors.secondary,
+    color: colors.white,
+    fontFamily: fontFamilySetup.bold,
     textAlign: 'center',
-    fontFamily: 'Urbanist',
     fontSize: normalize(16),
-    fontStyle: 'normal',
-    fontWeight: '700',
     lineHeight: normalize(22.4),
     letterSpacing: normalize(0.2),
   },

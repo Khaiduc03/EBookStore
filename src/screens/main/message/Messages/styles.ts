@@ -14,19 +14,13 @@ const useStyles = makeStyles(({colors}) => ({
   body: {
     flex: 1,
     padding: normalize(24),
+    paddingBottom: normalize(0),
   },
   profileImage: {
-    width: normalize(44),
-    height: normalize(44),
-    borderRadius: normalize(22),
-  },
-  bubble: {
-    borderRadius: normalize(15),
-    marginVertical: normalize(5),
-    paddingVertical: normalize(16),
-    paddingHorizontal: normalize(15),
-    width: '100%',
-    flexWrap: 'wrap',
+    width: normalize(36),
+    height: normalize(36),
+    borderRadius: normalize(26),
+    marginEnd: normalize(6),
   },
   viewText: {
     left: normalize(-14),
@@ -34,74 +28,69 @@ const useStyles = makeStyles(({colors}) => ({
   viewRow: {
     flexDirection: 'row',
   },
-  viewImageTextChat: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+  user: {
+    alignItems: 'flex-end',
   },
-  text: {
-    color: colors.black,
-    fontFamily: fontFamilySetup.bold,
-    fontSize: normalize(19),
-    left: normalize(10),
+  notuser: {
+    alignItems: 'flex-start',
   },
-  text1: {
-    color: colors.grey4,
-    fontWeight: 'bold',
-    fontSize: normalize(10),
+  bubbleUser: {
+    width: 'auto',
+    maxWidth: 600,
+    borderRadius: normalize(15),
+    marginVertical: normalize(5),
+    padding: normalize(12),
+    flexWrap: 'wrap',
+    alignSelf: 'flex-end',
+    backgroundColor: '#20A090',
   },
-  textM: {
+  bubbleNotUser: {
+    width: 'auto',
+    maxWidth: 600,
+    borderRadius: normalize(15),
+    marginVertical: normalize(5),
+    padding: normalize(12),
+    flexWrap: 'wrap',
+    alignSelf: 'flex-start',
+    backgroundColor: '#F2F7FB',
+  },
+  textUser: {
+    width: 'auto',
+    maxWidth: 200,
+    flexWrap: 'wrap',
     color: colors.black,
     fontFamily: fontFamilySetup.medium,
-    fontSize: normalize(16),
-    maxWidth: '100%',
+    fontSize: normalize(12),
+  },
+  textNotUser: {
+    width: 'auto',
+    maxWidth: 200,
     flexWrap: 'wrap',
+    color: colors.black,
+    fontFamily: fontFamilySetup.medium,
+    fontSize: normalize(12),
   },
   viewTime: {
-    alignSelf: 'flex-end',
-    marginBottom: normalize(22),
+    width: 'auto',
   },
-  time: {
-    fontSize: normalize(10),
-    color: colors.grey4,
-    top: normalize(3),
+  textTimeUser: {
+    fontSize: normalize(8),
+    fontFamily: fontFamilySetup.regular,
+    marginBottom: normalize(18),
+    alignSelf: 'flex-end',
+  },
+  textTimeNotUser: {
+    fontSize: normalize(8),
+    fontFamily: fontFamilySetup.regular,
+    marginBottom: normalize(18),
+    alignSelf: 'flex-start',
   },
   footer: {
     width: '100%',
-    height: '9%',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: normalize(10),
-    backgroundColor: colors.white,
+    overflow: 'scroll',
   },
-  input: {
-    flex: 1,
-    width: '60%',
-    height: '8%',
-    backgroundColor: colors.input1,
-    borderColor: colors.grey4,
-    borderWidth: normalize(1),
-    borderRadius: normalize(20),
-    left: normalize(40),
-    paddingLeft: normalize(5),
-  },
-  btnAttach: {
-    transform: [{rotate: '44deg'}],
-    position: 'absolute',
-    left: normalize(16),
-  },
-  btnCopy: {
-    position: 'absolute',
-    right: normalize(124),
-  },
-  btnCamera: {
-    position: 'absolute',
-    right: normalize(60),
-  },
-  btnMic: {
-    position: 'absolute',
-    right: normalize(12),
+  iconBack: {
+    color: colors.black,
   },
 }));
 

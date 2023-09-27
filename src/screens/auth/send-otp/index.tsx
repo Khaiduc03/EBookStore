@@ -14,6 +14,8 @@ import {TextInput} from 'react-native-gesture-handler';
 import {showToastError} from '../../../utils';
 
 const SendOTP: React.FC = () => {
+  const styles = useStyles();
+
   const [pin1, setPin1] = React.useState('');
   const [pin2, setPin2] = React.useState('');
   const [pin3, setPin3] = React.useState('');
@@ -27,7 +29,7 @@ const SendOTP: React.FC = () => {
   const [countdown, setCountdown] = React.useState<number>(60);
   const [isCounting, setIsCounting] = React.useState<boolean>(false);
 
-  const [textColor, setTextColor] = React.useState('#F89300');
+  const [textColor, setTextColor] = React.useState(styles.textinitial.color);
   const [resendText, setResendText] = React.useState<string>('Send code');
 
   const validateOTP = () => {
@@ -52,7 +54,7 @@ const SendOTP: React.FC = () => {
         clearInterval(id);
       }
       setResendText('Send code');
-      setTextColor('#F89300');
+      setTextColor(styles.textinitial.color);
     }
 
     return () => {
@@ -116,7 +118,6 @@ const SendOTP: React.FC = () => {
     }
   };
 
-  const styles = useStyles();
   return (
     <TouchableWithoutFeedback
       onPress={() => Keyboard.dismiss()}
@@ -177,7 +178,7 @@ const SendOTP: React.FC = () => {
                 } else {
                   // Bắt đầu một bộ đếm ngược mới
                   startCountdown();
-                  setTextColor('#212121');
+                  setTextColor(styles.text6.color);
                 }
               }}>
               <Text style={[styles.textCT, {color: textColor}]}>

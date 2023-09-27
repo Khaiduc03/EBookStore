@@ -32,6 +32,7 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
               />
             )}
           </TouchableOpacity>
+
           {props.imageUri?.uri && (
             <Image
               style={styles.profileImage}

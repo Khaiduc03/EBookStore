@@ -18,7 +18,11 @@ const CreateNewPassword: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = React.useState('');
 
   const isPasswordMatch = () => {
-    return password === confirmPassword;
+    if ((password && confirmPassword) === '' || password !== confirmPassword) {
+      return false;
+    } else {
+      return true;
+    }
   };
 
   const [checked, setChecked] = React.useState<boolean>(false);

@@ -101,7 +101,7 @@ const SignIn: FunctionComponent = () => {
           />
 
           <View style={styles.formContainer}>
-            <Text style={styles.titleInput}>email</Text>
+            <Text style={styles.titleInput}>Email</Text>
             <InputCustom
               placeholder="Enter your email"
               value={credentials.email}
