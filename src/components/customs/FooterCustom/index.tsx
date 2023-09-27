@@ -44,66 +44,65 @@ const FooterCustom: React.FunctionComponent<CustomFooterProps> = props => {
 
   return (
     <KeyboardAvoidingView behavior={'height'}>
-      <TouchableWithoutFeedback>
-        <View style={styles.container}>
-          <View style={styles.viewRow}>
+      <View style={styles.container}>
+        <View style={styles.viewRow}>
+          <TouchableOpacity
+            style={styles.viewIconLeft}
+            onPress={props.onPressLeftIcon}>
+            {props.leftIcon?.name && (
+              <Icon
+                type={props.leftIcon.type}
+                name={props.leftIcon.name}
+                size={props.leftIcon.size}
+                color={props.leftIcon.color || styles.leftIcon.color}
+              />
+            )}
+          </TouchableOpacity>
+
+          <View style={styles.viewtextInput}>
+            <TextInput
+              style={styles.textInput}
+              placeholder={props.placeholder}
+              value={textInputValue}
+              onChangeText={text => setTextInputValue(text)}
+              multiline={true}
+            />
+          </View>
+
+          {props.imageUri?.uri && (
+            <Image
+              style={styles.profileImage}
+              source={{uri: `${props.imageUri.uri}`}}
+            />
+          )}
+          <View style={styles.rightContainer}>
             <TouchableOpacity
-              style={styles.viewIconLeft}
-              onPress={props.onPressLeftIcon}>
-              {props.leftIcon?.name && (
+              style={styles.rightIconLeft}
+              onPress={handleIconPress}>
+              {props.rightIconleft?.name && (
                 <Icon
-                  type={props.leftIcon.type}
-                  name={props.leftIcon.name}
-                  size={props.leftIcon.size}
-                  color={props.leftIcon.color || styles.leftIcon.color}
+                  type={props.rightIconleft?.type}
+                  size={24}
+                  name={props.rightIconleft?.name}
+                  color={props.rightIconleft?.color || styles.rightIcon.color}
                 />
               )}
             </TouchableOpacity>
-
-            <View style={styles.viewtextInput}>
-              <TextInput
-                style={styles.textInput}
-                placeholder={props.placeholder}
-                value={textInputValue}
-                onChangeText={text => setTextInputValue(text)}
-                multiline={true}
-              />
-            </View>
-
-            {props.imageUri?.uri && (
-              <Image
-                style={styles.profileImage}
-                source={{uri: `${props.imageUri.uri}`}}
-              />
-            )}
-            <View style={styles.rightContainer}>
-              <TouchableOpacity
-                style={styles.rightIconLeft}
-                onPress={handleIconPress}>
-                {props.rightIconleft?.name && (
-                  <Icon
-                    type={props.rightIconleft?.type}
-                    size={24}
-                    name={props.rightIconleft?.name}
-                    color={props.rightIconleft?.color || styles.rightIcon.color}
-                  />
-                )}
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.rightIconRight}
-                onPress={props.onPressRightIconRight}>
-                {props.rightIconright?.name && (
-                  <Icon
-                    type={props.rightIconright.type}
-                    name={props.rightIconright.name}
-                    size={props.rightIconright.size}
-                  />
-                )}
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              style={styles.rightIconRight}
+              onPress={props.onPressRightIconRight}>
+              {props.rightIconright?.name && (
+                <Icon
+                  type={props.rightIconright.type}
+                  name={props.rightIconright.name}
+                  size={props.rightIconright.size}
+                />
+              )}
+            </TouchableOpacity>
           </View>
         </View>
-      </TouchableWithoutFeedback>
+      </View>
+
       {isShowEmoiji && (
         <View style={styles.viewEmojiModal}>
           <View style={styles.viewClearAll}>

@@ -86,7 +86,7 @@ const useStyles = makeStyles(({colors}) => ({
     width: '100%',
   },
   emojiEmojiModal: {
-    display: 'flex',
+    color: colors.colorIcon,
   },
   viewClearAll: {
     width: '100%',
