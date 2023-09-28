@@ -100,7 +100,6 @@ const useStyles = makeStyles(({colors}) => ({
     height: normalize(66),
     backgroundColor: colors.white,
     flexDirection: 'row',
-    justifyContent: 'center',
     alignSelf: 'center',
   },
   containerEmojiModal: {
@@ -147,22 +146,23 @@ const useStyles = makeStyles(({colors}) => ({
   },
   rightIconLeft: {
     alignSelf: 'center',
-    marginHorizontal: normalize(6),
+    position: 'absolute',
+    right: normalize(80),
   },
   rightIconRight: {
     alignSelf: 'center',
-    marginHorizontal: normalize(6),
+    marginHorizontal: normalize(18),
   },
   viewIconLeft: {
     transform: [{rotate: '40deg'}],
     alignSelf: 'center',
-    marginHorizontal: normalize(9),
+    marginHorizontal: normalize(16),
   },
   viewtextInput: {
     alignSelf: 'center',
   },
   textInput: {
-    width: normalize(230),
+    width: normalize(250),
     height: normalize(44),
     flexWrap: 'wrap',
     paddingLeft: normalize(16),
