@@ -88,6 +88,10 @@ const useStyles = makeStyles(({colors}) => ({
   iconBack: {
     color: colors.black,
   },
+  iconEmoji: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
   viewBackgroundEmoji: {
     width: '100%',
     height: normalize(340),
@@ -102,29 +106,6 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
     alignSelf: 'center',
   },
-  containerEmojiModal: {
-    flex: 1,
-    width: '100%',
-    justifyContent: 'center',
-    alignSelf: 'center',
-  },
-  backGroundEmojiModal: {
-    width: '100%',
-    backgroundColor: colors.white,
-  },
-  searchEmojiModal: {
-    alignSelf: 'center',
-  },
-  headerEmojiModal: {
-    fontSize: normalize(26),
-    alignSelf: 'center',
-  },
-  modalEmojiModal: {
-    width: '100%',
-  },
-  emojiEmojiModal: {
-    color: colors.colorIcon,
-  },
   viewClearAll: {
     width: '100%',
     alignItems: 'center',
@@ -132,6 +113,7 @@ const useStyles = makeStyles(({colors}) => ({
   btnClearAll: {
     width: normalize(80),
     backgroundColor: colors.white,
+    marginBottom: normalize(6),
   },
   textClearAll: {
     fontFamily: fontFamilySetup.bold,

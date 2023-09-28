@@ -2,6 +2,7 @@ import {Icon, Text} from '@rneui/base';
 import React, {useEffect, useState} from 'react';
 import {
   Keyboard,
+  KeyboardAvoidingView,
   LogBox,
   ScrollView,
   TextInput,
@@ -9,11 +10,11 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import EmojiModal from 'react-native-emoji-modal';
 import {HeaderCustom} from '../../../../components';
 import {ChatBubble} from './components/RenderItem/ChatBubbleItem';
 import useStyles from './styles';
 import {messages} from './types';
+import EmojiSelector, {Categories} from 'react-native-emoji-selector';
 
 const Message: React.FC = () => {
   const styles = useStyles();
@@ -27,6 +28,8 @@ const Message: React.FC = () => {
       setSelectedEmojis([...selectedEmojis, emoji]);
       setTextInputValue(textInputValue + emoji);
     }
+
+    console.log('Click Icon: ', emoji);
   };
 
   const handleClearEmoji = () => {
@@ -44,6 +47,12 @@ const Message: React.FC = () => {
     }
 
     Keyboard.dismiss();
+  };
+
+  const handleFocusTouchableWithoutFeedback = () => {
+    if (isShowEmoiji) {
+      setIsShowEmoiji(!isShowEmoiji);
+    }
   };
 
   useEffect(() => {
@@ -91,12 +100,14 @@ const Message: React.FC = () => {
                 <Icon name="attach-outline" type="ionicon" size={30} />
               </TouchableOpacity>
             </View>
+
             <View style={styles.viewtextInput}>
               <TextInput
                 style={styles.textInput}
                 placeholder="Write your message"
                 value={textInputValue}
                 onChangeText={text => setTextInputValue(text)}
+                onFocus={handleFocusTouchableWithoutFeedback}
                 multiline={true}
               />
             </View>
@@ -123,15 +134,13 @@ const Message: React.FC = () => {
                   <Text style={styles.textClearAll}>Clear All</Text>
                 </TouchableOpacity>
               </View>
-              <EmojiModal
+
+              <EmojiSelector
+                category={Categories.symbols}
                 onEmojiSelected={handleEmojiSelected}
-                containerStyle={styles.containerEmojiModal}
-                backgroundStyle={styles.backGroundEmojiModal}
-                searchStyle={styles.searchEmojiModal}
-                headerStyle={styles.headerEmojiModal}
-                modalStyle={styles.modalEmojiModal}
-                emojiStyle={styles.emojiEmojiModal}
+                placeholder="Search"
                 columns={10}
+                style={styles.iconEmoji}
               />
             </View>
           )}
