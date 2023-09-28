@@ -1,6 +1,6 @@
 import {View, Text, FlatList} from 'react-native';
 import React from 'react';
-import {Toggleable} from '../../../../../../components/customs/Toggleable';
+import { Toggleable } from '../../../../../../../components/customs/Toggleable';
 
 const ItemListToggleable = () => {
   return (

@@ -1,26 +1,27 @@
+import {AirbnbRating} from '@rneui/themed';
 import React from 'react';
-import { StyleSheet, Text, View, Platform, ScrollView } from 'react-native';
-import { Rating } from '@rneui/themed';
+import {View} from 'react-native';
 import useStyles from './styles';
-import { RatingsComponentProps } from './types';
 
-
+type RatingsComponentProps = {};
 
 const Ratings: React.FunctionComponent<RatingsComponentProps> = () => {
-    const ratingCompleted = (rating: number) => {
-        console.log('Rating is: ' + rating);
-    };
-    const styles = useStyles();
-    return (
-        <Rating
-            showRating
-            imageSize={40}
-            onFinishRating={ratingCompleted}
-            style={{ paddingVertical: 10 }}
-        />
-    );
+  const styles = useStyles();
+  const ratingCompleted = (rating: number) => {
+    console.log('Rating is: ' + rating);
+  };
+
+  const ratingProps = {};
+  return (
+    <View style={styles.container}>
+      <AirbnbRating
+        count={5}
+        reviews={['Terrible', 'Bad', 'Meh', 'OK', 'Good']}
+        defaultRating={5}
+        size={20}
+      />
+    </View>
+  );
 };
-
-
 
 export default Ratings;

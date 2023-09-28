@@ -16,10 +16,10 @@ const ItemListProfile: React.FC<CustomCirclerProps> = props => {
   const mode = useAppSelector(getMode);
 
   const handleTheme = () => {
-    if (mode === 'dark') {
-      dispatch(ThemeActions.setTheme('light'));
-    } else {
+    if (mode === 'light') {
       dispatch(ThemeActions.setTheme('dark'));
+    } else {
+      dispatch(ThemeActions.setTheme('light'));
     }
   };
   return (

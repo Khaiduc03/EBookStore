@@ -42,33 +42,33 @@ const data: ListItem[] = [
 ];
 
 const handleVacanciesPress = () => {
-  console.log('Xử li');
+  console.log('Vacancies this here !!');
 };
 
 const handleFeePress = () => {
-  console.log('Xử li');
+  console.log('Fee this here !!');
 };
 
 const handleDevelopersPress = () => {
-  console.log('Xử li');
+  console.log('Developers this here !!');
 };
 const handlePartnerPress = () => {
-  console.log('Xử li');
+  console.log('Partner this here !!');
 };
 const handleAccessibilityPress = () => {
-  console.log('Xử li');
+  console.log('Accessibility this here !!');
 };
 const handleEvaluatePress = () => {
-  console.log('Xử li');
+  console.log('Evaluate this here !!');
 };
 const handleReviewsaboutusPress = () => {
-  console.log('Xử li');
+  console.log('Reviews about us this here !!'); 
 };
 const handleVisitourwebsitePress = () => {
-  console.log('Xử li');
+  console.log('Visit our Website this here !!');
 };
 const handleFollowusonsocialnetworksPress = () => {
-  console.log('Xử li');
+  console.log('Follow us on social networks this here !!');
 };
 
 const ItemListAbout: React.FC = () => {

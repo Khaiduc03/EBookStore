@@ -14,7 +14,7 @@ const AboutApp: React.FC = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'chevron-left', type: 'font-awesome-5'}}
         title="About The App"
         onPressLeftIcon={handlePressGoback}
       />

@@ -24,7 +24,7 @@ const ItemPostUser: React.FC<Props> = props => {
       }}>
       <Image
         source={data.images}
-        style={{width: itemWidth - 1.5, height: itemWidth - 1.5}}
+        style={{width: itemWidth - 3, height: itemWidth - 3}}
       />
     </TouchableOpacity>
   );

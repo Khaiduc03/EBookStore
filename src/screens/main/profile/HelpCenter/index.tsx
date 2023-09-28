@@ -15,7 +15,7 @@ const HelpCenter: React.FC = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'chevron-left', type: 'font-awesome-5'}}
         title="Help Center"
         onPressLeftIcon={handlePressGoback}
       />

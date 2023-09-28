@@ -1,32 +1,10 @@
 import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../utils';
-import {fontFamilySetup} from '../../../utils/font';
+import {fontFamilySetup} from '../../../../../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-  },
-  containerButtonBig: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  ButtonBig: {
-    width: normalize(360),
-    height: normalize(65),
-    borderRadius: 20,
-    backgroundColor: '#FEF4E6',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  txtButtonBig: {
-    textAlign: 'center',
-    fontSize: 25,
-    fontWeight: '900',
-    letterSpacing: 0.12,
-    fontFamily: 'Urbanist-Regular',
-    color: colors.black,
   },
   ButtonSmall: {
     width: normalize(100),

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, ScrollView} from 'react-native';
-import {ButtonSmall} from '../../../../../../components/customs/Button';
 import useStyles from './styles';
+import { ButtonSmall } from '../ButtonSmall';
 
 const ItemListBtnSmall: React.FC = () => {
   const styles = useStyles();

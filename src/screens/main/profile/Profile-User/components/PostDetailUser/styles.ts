@@ -27,7 +27,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   text: {
     fontSize: normalize(15),
-    fontFamily: fontFamilySetup.bold,
+    fontFamily: fontFamilySetup.regular,
     color: colors.black,
     paddingVertical: normalize(4),
   },

@@ -29,7 +29,7 @@ const ProfileUser: React.FC = props => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome'}}
+        leftIcon={{name: 'chevron-left', type: 'font-awesome-5'}}
         title="Profile User"
         onPressLeftIcon={handlePressGoback}
         rightIconRight={{name: 'ellipsis-vertical', type: 'ionicon'}}

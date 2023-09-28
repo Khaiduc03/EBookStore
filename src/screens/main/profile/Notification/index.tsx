@@ -1,7 +1,6 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 import useStyles from '../Notification/styles';
-
 import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import {HeaderCustom} from '../../../../components';
@@ -15,7 +14,7 @@ const Notification: React.FC = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'chevron-left', type: 'font-awesome-5'}}
         title="Notification"
         onPressLeftIcon={handlePressGoback}
       />

@@ -14,6 +14,13 @@ const TableofContent: FunctionComponent = props => {
   const handleLogout = () => {
     dispatch(AuthActions.handleLogout());
   };
+
+  const darkModeStyles = {
+    viewClick: {
+      padding: 15,
+    },
+  };
+
   const styles = useStyles();
   return (
     <View>
@@ -91,27 +98,41 @@ const TableofContent: FunctionComponent = props => {
           },
         ]}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            style={styles.viewClick}
-            onPress={() => {
-              if (item.route) {
-                NavigationService.navigate(item.route);
-              } else {
-                handleLogout();
-              }
-            }}>
-            <ItemListProfile
-              title={item.title}
-              colorBackground={item.colorBackground}
-              name={item.name}
-              type={item.type}
-              color={item.color}
-              rightIcon={item.rightIcon}
-              switchRight={item.switchRight}
-            />
-          </TouchableOpacity>
-        )}
+        renderItem={({item}) =>
+          item.title === 'Dark Mode' ? (
+            <View style={styles.viewDarkMode}>
+              <ItemListProfile
+                title={item.title}
+                colorBackground={item.colorBackground}
+                name={item.name}
+                type={item.type}
+                color={item.color}
+                rightIcon={item.rightIcon}
+                switchRight={item.switchRight}
+              />
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={styles.viewClick}
+              onPress={() => {
+                if (item.route) {
+                  NavigationService.navigate(item.route);
+                } else {
+                  handleLogout();
+                }
+              }}>
+              <ItemListProfile
+                title={item.title}
+                colorBackground={item.colorBackground}
+                name={item.name}
+                type={item.type}
+                color={item.color}
+                rightIcon={item.rightIcon}
+                switchRight={item.switchRight}
+              />
+            </TouchableOpacity>
+          )
+        }
       />
     </View>
   );

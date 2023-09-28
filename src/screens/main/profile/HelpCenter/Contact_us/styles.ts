@@ -12,5 +12,14 @@ const useStyles = makeStyles(({colors}) => ({
     height: '30%',
     padding: normalize(24),
   },
+  btnCustomerService: {
+    paddingVertical: normalize(24),
+  },
+  btnFacebook: {
+    paddingVertical: normalize(70),
+  },
+  btnWebsite: {
+    paddingVertical: normalize(13),
+  },
 }));
 export default useStyles;

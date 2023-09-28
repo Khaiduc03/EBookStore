@@ -13,19 +13,19 @@ const useStyles = makeStyles(({colors}) => ({
     padding: normalize(24),
   },
   icon: {
-    width: normalize(64),
-    height: normalize(64),
+    width: normalize(55),
+    height: normalize(55),
     borderRadius: normalize(50),
   },
   textName: {
-    fontSize: normalize(21),
+    fontSize: normalize(18),
     letterSpacing: normalize(0.2),
     fontStyle: 'normal',
     fontFamily: fontFamilySetup.bold,
     color: colors.black,
   },
   textConnect: {
-    fontSize: normalize(18),
+    fontSize: normalize(17),
     letterSpacing: normalize(0.2),
     fontStyle: 'normal',
     fontFamily: fontFamilySetup.bold,
