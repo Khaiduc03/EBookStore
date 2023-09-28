@@ -8,6 +8,7 @@ import {
   Image,
 } from 'react-native';
 import {Device} from '../../../../utils';
+
 import useStyles from './styles';
 import {FooterChapter, HeaderChapter} from './Components';
 import {SafeAreaView} from 'react-native-safe-area-context';

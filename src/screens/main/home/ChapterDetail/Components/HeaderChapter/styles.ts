@@ -8,13 +8,14 @@ const HEIGHT = Device.getDeviceHeight();
 const useStyles = makeStyles(({colors}) => ({
   container: {
     width: WIDTH,
-    backgroundColor: colors.grey1,
+    backgroundColor: colors.backgroundChapter,
     position: 'absolute',
     top: 0,
     height: HEIGHT * 0.07,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: normalize(10),
   },
 
   contentContainer: {flexDirection: 'row', alignItems: 'center'},
