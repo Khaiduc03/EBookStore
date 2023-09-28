@@ -36,7 +36,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   bubbleUser: {
     width: 'auto',
-    maxWidth: 600,
+    maxWidth: normalize(600),
     borderRadius: normalize(15),
     marginVertical: normalize(5),
     padding: normalize(12),
@@ -46,7 +46,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   bubbleNotUser: {
     width: 'auto',
-    maxWidth: 600,
+    maxWidth: normalize(600),
     borderRadius: normalize(15),
     marginVertical: normalize(5),
     padding: normalize(12),
@@ -56,7 +56,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   textUser: {
     width: 'auto',
-    maxWidth: 200,
+    maxWidth: normalize(200),
     flexWrap: 'wrap',
     color: colors.black,
     fontFamily: fontFamilySetup.medium,
@@ -64,7 +64,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   textNotUser: {
     width: 'auto',
-    maxWidth: 200,
+    maxWidth: normalize(200),
     flexWrap: 'wrap',
     color: colors.black,
     fontFamily: fontFamilySetup.medium,
@@ -85,12 +85,91 @@ const useStyles = makeStyles(({colors}) => ({
     marginBottom: normalize(18),
     alignSelf: 'flex-start',
   },
-  footer: {
-    width: '100%',
-    overflow: 'scroll',
-  },
   iconBack: {
     color: colors.black,
+  },
+  viewBackgroundEmoji: {
+    width: '100%',
+    height: normalize(340),
+    backgroundColor: colors.white,
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+  viewFooter: {
+    width: '100%',
+    height: normalize(66),
+    backgroundColor: colors.white,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+  containerEmojiModal: {
+    flex: 1,
+    width: '100%',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+  backGroundEmojiModal: {
+    width: '100%',
+    backgroundColor: colors.white,
+  },
+  searchEmojiModal: {
+    alignSelf: 'center',
+  },
+  headerEmojiModal: {
+    fontSize: normalize(26),
+    alignSelf: 'center',
+  },
+  modalEmojiModal: {
+    width: '100%',
+  },
+  emojiEmojiModal: {
+    color: colors.colorIcon,
+  },
+  viewClearAll: {
+    width: '100%',
+    alignItems: 'center',
+  },
+  btnClearAll: {
+    width: normalize(80),
+    backgroundColor: colors.white,
+  },
+  textClearAll: {
+    fontFamily: fontFamilySetup.bold,
+    fontSize: normalize(16),
+    color: colors.clear,
+    textAlign: 'center',
+  },
+  rightContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+  rightIconLeft: {
+    alignSelf: 'center',
+    marginHorizontal: normalize(6),
+  },
+  rightIconRight: {
+    alignSelf: 'center',
+    marginHorizontal: normalize(6),
+  },
+  viewIconLeft: {
+    transform: [{rotate: '40deg'}],
+    alignSelf: 'center',
+    marginHorizontal: normalize(9),
+  },
+  viewtextInput: {
+    alignSelf: 'center',
+  },
+  textInput: {
+    width: normalize(230),
+    height: normalize(44),
+    flexWrap: 'wrap',
+    paddingLeft: normalize(16),
+    paddingRight: normalize(46),
+    borderWidth: normalize(1),
+    borderColor: colors.black,
+    borderRadius: normalize(26),
   },
 }));
 
