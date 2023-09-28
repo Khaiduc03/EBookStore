@@ -9,6 +9,7 @@ declare module '@rneui/themed' {
     input1: string;
     input2: string;
     backgrounDetai: string;
+    backgroundChapter: string;
   }
 }
 
@@ -29,6 +30,7 @@ export const theme = createTheme({
     input1: '#F2F2F2',
     input2: '#FFF7EB',
     backgrounDetai: '#F5C38B',
+    backgroundChapter: '#181A20',
   },
   darkColors: {
     primary: '#F89300',
@@ -45,7 +47,8 @@ export const theme = createTheme({
     background: '#181A20',
     input1: '#1F222A',
     input2: '#2A241D',
-    backgrounDetai: '#212121',
+    backgrounDetai: '#181A20',
+    backgroundChapter: '#181A20',
   },
   components: {
     Button: (props, theme) => ({

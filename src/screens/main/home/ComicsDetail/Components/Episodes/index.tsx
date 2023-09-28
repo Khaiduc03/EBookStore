@@ -5,21 +5,17 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native'; // Thêm ScrollView vào danh sách import
+
 import React from 'react';
 
 import useStyles from './styles';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
 
 const Episodes = () => {
   const styles = useStyles();
-
-  const renderItem = ({item}: any) => {
-    return (
-      <TouchableOpacity style={styles.chapterContainer}>
-        <Text style={styles.textChapter}>Chapter {item.chapterNumber}</Text>
-        <Text style={styles.textChapter}>{item.dayUpdate}</Text>
-        <Text style={styles.textChapter}>{item.view}</Text>
-      </TouchableOpacity>
-    );
+  const handlePressChapter = () => {
+    NavigationService.navigate(routes.CHAPTER);
   };
 
   return (
@@ -32,7 +28,10 @@ const Episodes = () => {
 
       <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
         {data.map(item => (
-          <TouchableOpacity key={item.id} style={styles.chapterContainer}>
+          <TouchableOpacity
+            onPress={handlePressChapter}
+            key={item.id}
+            style={styles.chapterContainer}>
             <Text style={styles.textChapter}>Chapter {item.chapterNumber}</Text>
             <Text style={styles.textChapter}>{item.dayUpdate}</Text>
             <Text style={styles.textChapter}>{item.view}</Text>

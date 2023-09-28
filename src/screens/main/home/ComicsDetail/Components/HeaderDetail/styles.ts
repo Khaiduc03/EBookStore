@@ -2,12 +2,13 @@ import {makeStyles, normalize} from '@rneui/themed';
 import {Device} from '../../../../../../utils';
 import {fontFamilySetup} from '../../../../../../utils/font';
 import {color} from '@rneui/base';
+const WIDTH = Device.getDeviceWidth();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
     backgroundColor: colors.backgrounDetai,
     paddingHorizontal: normalize(24),
-    width: '100%',
+    width: WIDTH,
   },
 
   contentContainer: {
