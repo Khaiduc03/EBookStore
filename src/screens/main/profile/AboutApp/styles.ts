@@ -20,7 +20,7 @@ const useStyles = makeStyles(({colors}) => ({
     borderColor: '#6F6969',
   },
   name: {
-    fontSize: normalize(HEIGHT * 0.04),
+    fontSize: normalize(34),
     letterSpacing: normalize(0.5),
     fontStyle: 'normal',
     fontFamily: fontFamilySetup.bold,
@@ -36,7 +36,7 @@ const useStyles = makeStyles(({colors}) => ({
     paddingVertical: normalize(18),
   },
   text: {
-    fontSize: normalize(HEIGHT * 0.021),
+    fontSize: normalize(21),
     letterSpacing: normalize(0.5),
     fontStyle: 'normal',
     fontFamily: fontFamilySetup.bold,
