@@ -8,7 +8,7 @@ const HEIGHT = Device.getDeviceHeight();
 const useStyles = makeStyles(({colors}) => ({
   container: {
     width: WIDTH,
-    backgroundColor: colors.grey1,
+    backgroundColor: colors.backgroundChapter,
     position: 'absolute',
     bottom: 0,
     height: HEIGHT * 0.07,
@@ -35,6 +35,10 @@ const useStyles = makeStyles(({colors}) => ({
   },
   navChapter: {
     flexDirection: 'row',
+    gap: normalize(30),
+  },
+  nextChapter: {
+    padding: normalize(8),
   },
 }));
 

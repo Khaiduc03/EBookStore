@@ -18,7 +18,7 @@ const FooterChapter = () => {
         <Text style={styles.textComment}>5,0555</Text>
       </TouchableOpacity>
       <View style={styles.navChapter}>
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.nextChapter}>
           <Icon
             name="caret-back-outline"
             size={24}
@@ -26,7 +26,7 @@ const FooterChapter = () => {
             color={styles.iconStyle.color}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={{marginLeft: 10}}>
+        <TouchableOpacity style={styles.nextChapter}>
           <Icon
             name="caret-forward-outline"
             size={24}

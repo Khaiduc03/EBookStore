@@ -5,9 +5,10 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { Device } from '../../../../utils';
-import { FooterChapter, HeaderChapter } from './Components';
+import {Device} from '../../../../utils';
+
 import useStyles from './styles';
+import { FooterChapter, HeaderChapter } from './Components';
 
 const WIDTH = Device.getDeviceWidth();
 
