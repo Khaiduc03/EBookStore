@@ -1,4 +1,3 @@
-import {color} from '@rneui/base';
 import {makeStyles, normalize} from '@rneui/themed';
 import {StyleSheet} from 'react-native';
 import {fontFamilySetup} from '../../../../utils/font';
@@ -90,6 +89,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   iconEmoji: {
     flex: 1,
+    color: colors.colorIcon,
     backgroundColor: colors.white,
   },
   viewBackgroundEmoji: {
@@ -101,7 +101,6 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewFooter: {
     width: '100%',
-    height: normalize(66),
     backgroundColor: colors.white,
     flexDirection: 'row',
     alignSelf: 'center',
@@ -109,6 +108,14 @@ const useStyles = makeStyles(({colors}) => ({
   viewClearAll: {
     width: '100%',
     alignItems: 'center',
+  },
+  btnArrowDown: {
+    borderRadius: normalize(100),
+    position: 'absolute',
+    alignSelf: 'flex-end',
+    bottom: normalize(110),
+    right: normalize(10),
+    backgroundColor: colors.white,
   },
   btnClearAll: {
     width: normalize(80),
@@ -142,16 +149,23 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewtextInput: {
     alignSelf: 'center',
+    marginVertical: normalize(8),
   },
   textInput: {
     width: normalize(250),
-    height: normalize(44),
+    height: normalize(50),
     flexWrap: 'wrap',
     paddingLeft: normalize(16),
     paddingRight: normalize(46),
     borderWidth: normalize(1),
     borderColor: colors.black,
     borderRadius: normalize(26),
+  },
+  textInputHeightAuto: {
+    height: normalize(50),
+  },
+  textInputHeightAutoLimit: {
+    height: normalize(150),
   },
 }));
 

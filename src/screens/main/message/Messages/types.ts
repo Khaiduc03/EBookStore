@@ -55,4 +55,9 @@ export const messages: IMessage[] = [
     text: 'Oh, hehe',
     time: '9:35 AM',
   },
+  {
+    isUser: true,
+    text: 'hihi',
+    time: '9:38 AM',
+  },
 ];
