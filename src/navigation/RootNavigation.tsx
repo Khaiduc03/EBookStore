@@ -40,7 +40,7 @@ const RootNavigation = () => {
       />
       {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
 
-      <Ratings />
+      <AppNavigator />
     </NavigationContainer>
   );
 };
