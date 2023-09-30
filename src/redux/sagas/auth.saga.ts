@@ -2,11 +2,11 @@ import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeLatest} from 'redux-saga/effects';
 import {routes} from '../../constants';
 import {NavigationService} from '../../navigation';
-import {showToastError, showToastSuccess} from '../../utils';
+import {CustomToastBottom, showToastError, showToastSuccess} from '../../utils';
 import {GoogleService} from '../../utils/google';
 import {AuthActions, LoadingActions} from '../reducer';
 import {AuthService, UserService} from '../services';
-import {LoginPayload} from '../types';
+import {LoginPayload, SendOTPPayload} from '../types';
 
 //login
 function* loginSaga(action: PayloadAction<LoginPayload>): Generator {
@@ -112,7 +112,7 @@ function* createAccountSaga(
   } catch (error: any) {
     console.log(error.message);
   } finally {
-    yield put(LoadingActions.showLoading());
+    yield put(LoadingActions.hideLoading());
   }
 }
 //get profile user
@@ -218,6 +218,49 @@ function* cleanUser(): Generator {
   }
 }
 
+///////////////////////FORGOT PASSWORD/////////////////////////
+function* forgotPasswordSaga(
+  action: PayloadAction<Pick<LoginPayload, 'email'>>,
+): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    const {data}: any = yield call(
+      AuthService.hanleForgotPasswork,
+      action.payload,
+    );
+    if (data.code === 200) {
+      yield put(AuthActions.setEmailForgotPassword(action.payload));
+      NavigationService.navigate(routes.SEND_OTP);
+    } else {
+      CustomToastBottom(data.message);
+    }
+  } catch (error: any) {
+    console.log(error.message);
+    throw error;
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
+///////////////////////VERIFY OTP/////////////////////////
+function* verifyOTPSaga(action: PayloadAction<SendOTPPayload>): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    const {data}: any = yield call(AuthService.handleVerifyOTP, action.payload);
+    if (data.code === 200) {
+      CustomToastBottom(data.message);
+      NavigationService.navigate(routes.CREATE_NEW_PASSWORD);
+    } else {
+      CustomToastBottom(data.message);
+    }
+  } catch (error: any) {
+    console.log(error.message);
+    throw error;
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
 export default function* watchAuthSaga() {
   yield takeLatest(AuthActions.getUserInfo.type, getProfileUserSaga);
   yield takeLatest(AuthActions.handleLogin.type, loginSaga);
@@ -226,4 +269,6 @@ export default function* watchAuthSaga() {
   yield takeLatest(AuthActions.handleUpdateAvatar.type, updateAvatarUser);
   yield takeLatest(AuthActions.handleDeleteAvatar.type, deleteAvatarUser);
   yield takeLatest(AuthActions.handleUpdateUserProfile.type, updateUserProfile);
+  yield takeLatest(AuthActions.handleForgotPassword.type, forgotPasswordSaga);
+  yield takeLatest(AuthActions.handleVerifyOTP.type, verifyOTPSaga);
 }

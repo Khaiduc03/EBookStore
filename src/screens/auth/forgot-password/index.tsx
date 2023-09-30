@@ -1,23 +1,31 @@
+import {Text} from '@rneui/base';
+import React from 'react';
 import {
   Keyboard,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {Text} from '@rneui/base';
-import React from 'react';
 import {AuthHeader, Headers, InputCustom} from '../../../components';
-import useStyles from './styles';
-import {NavigationService} from '../../../navigation';
 import {routes} from '../../../constants';
-import {showToastError} from '../../../utils';
+import {useAppDispatch} from '../../../hooks';
+import {NavigationService} from '../../../navigation';
+import {CustomToastBottom} from '../../../utils';
+import useStyles from './styles';
+import {AuthActions} from '../../../redux';
 
 const ForgotPassword: React.FC = () => {
-  const [email, setEmail] = React.useState('');
+  // const [email, setEmail] = React.useState<string>('');
+  const dispatch = useAppDispatch();
+  const [email, setEmail] = React.useState<{
+    email: string;
+  }>({
+    email: 'p3nhox99@gmail.com',
+  });
 
   const isEmailValid = () => {
     // Kiểm tra xem giá trị nhập vào có phải là một địa chỉ email hợp lệ hay không
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.email);
   };
 
   const styles = useStyles();
@@ -38,17 +46,23 @@ const ForgotPassword: React.FC = () => {
           />
           <View>
             <Text style={styles.textEmail}>Email</Text>
-            <InputCustom onChangeText={text => setEmail(text)} value={email} />
+            <InputCustom
+              onChangeText={text => setEmail({email: text})}
+              value={email.email}
+            />
           </View>
           <View style={styles.viewBottom}>
             <TouchableOpacity
               style={styles.btnContinue}
               onPress={() => {
                 if (isEmailValid()) {
-                  NavigationService.navigate(routes.SEND_OTP);
+                  // Kiểm tra xem email có hợp lệ hay không
+                  dispatch(AuthActions.handleForgotPassword(email));
                 } else {
                   // Hiển thị thông báo lỗi nếu email không hợp lệ
-                  showToastError('Error, Please enter a valid email address');
+                  CustomToastBottom(
+                    'Error, Please enter a valid email address',
+                  );
                 }
               }}>
               <Text style={styles.textContinue}>Continue</Text>

@@ -3,13 +3,13 @@ import React, {useRef, useState} from 'react';
 import {Animated, FlatList, TouchableOpacity, View} from 'react-native';
 import {BigButton} from '../../../components';
 import {routes} from '../../../constants';
-import {useAppDispatch} from '../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {NavigationService} from '../../../navigation';
 import Pagination from './Pagination';
 import SlideItem from './SlideItem';
 import Slides from './slides';
 import useStyles from './styles';
-import {AppActions, AuthActions} from '../../../redux';
+import {AppActions, AuthActions, getAppIsReady} from '../../../redux';
 
 const Slider = () => {
   const [index, setIndex] = useState(0);
@@ -17,13 +17,12 @@ const Slider = () => {
   const flatListRef = useRef<any>(null);
   const dispatch = useAppDispatch();
   const styles = useStyles();
-
   const [index2, setIndex2] = useState(0);
-
+  let getIsReady: boolean = useAppSelector(getAppIsReady);
   React.useEffect(() => {
     if (index2 === 3) {
-      dispatch(AppActions.handleReady());
-      NavigationService.navigate(routes.LOBBY);
+      dispatch(AppActions.setReady());
+      getIsReady = true;
     }
   }, [index2]);
 
@@ -70,6 +69,8 @@ const Slider = () => {
     itemVisiblePercentThreshold: 50,
   }).current;
 
+  if (getIsReady) return <></>;
+
   return (
     <View>
       <FlatList
@@ -91,7 +92,10 @@ const Slider = () => {
         </View>
         {index > 0 && (
           <View style={styles.backButton}>
-            <TouchableOpacity onPress={handlebackButton}>
+            <TouchableOpacity
+              onPress={() => {
+                dispatch(AppActions.setReady());
+              }}>
               <Text>Back</Text>
             </TouchableOpacity>
           </View>

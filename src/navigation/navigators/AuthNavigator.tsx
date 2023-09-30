@@ -5,14 +5,10 @@ import {
   StackNavigationOptions,
   createStackNavigator,
 } from '@react-navigation/stack';
-import {routes} from '../../constants';
-import {authScreen} from '../../screens/auth';
-import {Screen} from '../../types';
+import { routes } from '../../constants';
+import { authScreen } from '../../screens/auth';
+import { Screen } from '../../types';
 
-import {useAppSelector} from '../../hooks';
-import {getAppIsReady} from '../../redux/selectors/app.selector';
-
-const isReady: boolean = useAppSelector(getAppIsReady);
 const AuthStack = createStackNavigator();
 
 const authScreenapp: Screen[] = [...authScreen];
@@ -22,13 +18,11 @@ const screenOptions: StackNavigationOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
 };
 
-console.log(isReady);
-
 const AuthNavigator = () => {
   return (
     <AuthStack.Navigator
       screenOptions={screenOptions}
-      initialRouteName={isReady === true ? routes.LOBBY : routes.ONBOARD}>
+      initialRouteName={routes.LOBBY}>
       {authScreenapp.map(screen => {
         return (
           <AuthStack.Screen

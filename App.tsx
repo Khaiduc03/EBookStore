@@ -1,14 +1,15 @@
-import { FunctionComponent, useEffect } from 'react';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import {FunctionComponent, useEffect} from 'react';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import { RootNavigation, ThemeContext } from './src';
+import {RootNavigation, ThemeContext} from './src';
 
 import SplashScreen from 'react-native-lottie-splash-screen';
 import Toast from 'react-native-toast-message';
 import Alert from './src/components/customs/Alert';
 import Loading from './src/components/shared/Loading';
-import { toastConfig } from './src/utils/toastConfig';
+import {toastConfig} from './src/utils/toastConfig';
+import Slider from './src/screens/auth/onboard';
 
 const App: FunctionComponent = () => {
   useEffect(() => {
@@ -27,7 +28,9 @@ const App: FunctionComponent = () => {
           {/* LOADING API */}
           <Loading />
           {/* MAIN APP */}
+          <Slider />
           <RootNavigation />
+
           <Toast config={toastConfig} topOffset={20} visibilityTime={2500} />
 
           {/* Modal progressing when upgrade version of app */}
