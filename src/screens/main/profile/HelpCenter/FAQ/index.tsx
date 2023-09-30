@@ -8,8 +8,7 @@ import {
 import React, {useState} from 'react';
 import useStyles from './styles';
 import SearchCustom from '../../../../../components/customs/Search';
-import ItemListBtnSmall from './components/itemListBtnSmall';
-import ItemListToggleable from './components/ItemListToggleable';
+import {ItemListBtnSmall, ItemListToggleable} from './components';
 
 const FAQ: React.FC = () => {
   const styles = useStyles();

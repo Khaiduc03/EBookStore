@@ -1,10 +1,10 @@
-// import * as dotenv from 'dotenv';
-
-// // config use env
-// dotenv.config();
+import Config from "react-native-config";
 
 // //URL
-export const BASE_URL = 'http://54.208.247.115';
+// export const BASE_URL = process.env.REACT_APP_BASE_URL;
+export const BASE_URL = Config.BASE_URL;
+
+
 
 export enum Endpoints {
   //AUTH

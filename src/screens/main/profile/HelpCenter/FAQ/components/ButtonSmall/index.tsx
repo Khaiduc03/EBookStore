@@ -4,7 +4,7 @@ import useStyles from './styles';
 import {ButtonSmallpros} from './types';
 import {theme} from '../../../../../../../theme';
 
-export const ButtonSmall: React.FC<ButtonSmallpros> = props => {
+ const ButtonSmall: React.FC<ButtonSmallpros> = props => {
   const {title, onPress, isSelected} = props;
   const styles = useStyles();
 
@@ -26,3 +26,4 @@ export const ButtonSmall: React.FC<ButtonSmallpros> = props => {
     </TouchableOpacity>
   );
 };
+export default ButtonSmall

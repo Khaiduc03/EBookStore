@@ -7,7 +7,7 @@ import {NavigationService} from '../../../../navigation';
 import AddFriend from './components/AddFriend';
 import ItemFollow from './components/ItemFollow';
 import ItemListProfileUser from './components/ItemListProfileUser';
-import ItemPostUser from './components/ItemPostUser/ItemPostUser';
+import ItemPostUser from './components/ItemPostUser';
 import useStyles from './styles';
 
 const ProfileUser: React.FC = props => {

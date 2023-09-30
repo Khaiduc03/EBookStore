@@ -1,10 +1,7 @@
 import {View} from 'react-native';
 import React from 'react';
 import useStyles from './styles';
-import CustomerService from './components/CustomerService';
-import Facebook from './components/Facebook';
-import Website from './components/WebSite';
-import {ButtonLong} from './components/ButtonLong';
+import {CustomerService, Facebook, Website} from './components';
 
 const Contact_us: React.FC = () => {
   const styles = useStyles();

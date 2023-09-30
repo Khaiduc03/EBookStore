@@ -5,9 +5,7 @@ import TextCustom from '../../../../components/customs/Text';
 import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import useStyles from '../MyProfile/styles';
-import ItemFollow from './components/ItemFollow';
-import ItemListMyProfile from './components/ItemListMyProfile';
-import ItemPost from './components/ItemPost';
+import {ItemFollow, ItemListMyProfile, ItemPost} from './components';
 
 const MyProfile: React.FC = props => {
   const styles = useStyles();

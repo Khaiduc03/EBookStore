@@ -4,7 +4,7 @@ import useStyles from './styles';
 import { ButtonLongpros } from './types';
 import { images } from '../../../../../../../assets';
 
-export const ButtonLong: React.FC<ButtonLongpros> = props => {
+ const ButtonLong: React.FC<ButtonLongpros> = props => {
   const {icon_Service, title, icon_Facebook, icon_Website} = props;
   const styles = useStyles();
 
@@ -31,3 +31,4 @@ export const ButtonLong: React.FC<ButtonLongpros> = props => {
     </View>
   );
 };
+export default ButtonLong

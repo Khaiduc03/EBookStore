@@ -2,7 +2,7 @@ import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import useStyles from './styles';
 
-import {images} from '../../../../../assets';
+import {images} from '../../../../../../assets';
 import {PayProps} from './types';
 
 const Pay: React.FC<PayProps> = props => {

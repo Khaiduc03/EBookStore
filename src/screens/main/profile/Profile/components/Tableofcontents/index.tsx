@@ -1,11 +1,11 @@
 import React, {FunctionComponent} from 'react';
 import {FlatList, TouchableOpacity, View} from 'react-native';
-import ItemListProfile from '../../../../../components/customs/ItemListProfile';
-import {routes} from '../../../../../constants';
-import {useAppDispatch, useAppSelector} from '../../../../../hooks';
-import {NavigationService} from '../../../../../navigation';
-import {AuthActions} from '../../../../../redux/reducer';
-import {getAuthEnableSignIn} from '../../../../../redux/selectors/auth.selector';
+import ItemListProfile from '../../../../../../components/customs/ItemListProfile';
+import {routes} from '../../../../../../constants';
+import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
+import {NavigationService} from '../../../../../../navigation';
+import {AuthActions} from '../../../../../../redux/reducer';
+import {getAuthEnableSignIn} from '../../../../../../redux/selectors/auth.selector';
 import useStyles from './styles';
 
 const TableofContent: FunctionComponent = props => {

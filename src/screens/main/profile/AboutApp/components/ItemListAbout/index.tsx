@@ -25,17 +25,17 @@ const data: ListItem[] = [
   },
   {key: 'evaluate', title: 'Evaluate', onPress: () => handleEvaluatePress()},
   {
-    key: 'reviewsaboutus',
+    key: 'reviewsAboutUs',
     title: 'Reviews about us',
     onPress: () => handleReviewsaboutusPress(),
   },
   {
-    key: 'visitourwebsite',
+    key: 'visitOurWebsite',
     title: 'Visit our website',
     onPress: () => handleVisitourwebsitePress(),
   },
   {
-    key: 'followusonsocialnetworks',
+    key: 'followUsOnSocialNetworks',
     title: 'Follow us on social networks',
     onPress: () => handleFollowusonsocialnetworksPress(),
   },
