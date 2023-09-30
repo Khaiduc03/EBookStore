@@ -6,7 +6,7 @@ import { images } from '../../../assets/images/png';
 
 
 
-export const Toggleable: React.FC<ToggleableViewProps> = ({ title, content }) => {
+const Toggleable: React.FC<ToggleableViewProps> = ({ title, content }) => {
     const [isContentVisible, setIsContentVisible] = useState(false);
     const styles = useStyles();
 
@@ -31,5 +31,6 @@ export const Toggleable: React.FC<ToggleableViewProps> = ({ title, content }) =>
         </View>
     )
 }
+export default Toggleable
 
 
