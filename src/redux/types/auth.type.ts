@@ -2,7 +2,7 @@ import {Avatar, Gender, Timestamp, uuid} from '../../types';
 
 export type AppStatus = {
   isReady: boolean;
-  isLoading: boolean;
+
 };
 
 export type AuthState = {

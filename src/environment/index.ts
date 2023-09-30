@@ -1,12 +1,12 @@
-import Config from "react-native-config";
+import Config from 'react-native-config';
 
 // //URL
 // export const BASE_URL = process.env.REACT_APP_BASE_URL;
 export const BASE_URL = Config.BASE_URL;
 
+console.log(BASE_URL);
 
-
- enum Endpoints {
+export enum Endpoints {
   //AUTH
   LOGIN_ENDPOINT = '/auth/login',
   REGISTER_ADMIN_ENDPOINT = '/auth/admin',
@@ -20,7 +20,7 @@ export const BASE_URL = Config.BASE_URL;
   UPLOAD_USER_AVATAR_ENDPOINT = '/user/avatar', //PUT, DELETE
   GET_PROFILE_ENDPOINT = '/user/profile', //GET, PUT
   GET_USER_BY_UUID_ENDPOINT = '/user/uuid', //GET
-  
+
   //TOPIC
   GET_ALL_TOPIC_ENDPOINT = '/topic', //GET, POST
   UPDATE_TOPIC_ENDPOINT = '/topic/update', //PUT
@@ -30,5 +30,4 @@ export const BASE_URL = Config.BASE_URL;
   //COMIC
   GET_ALL_COMIC_ENDPOINT = '/comic', //GET, POST
   GET_COMIC_BY_UUID_ENDPOINT = '/comic/uuid', //GET
-
 }

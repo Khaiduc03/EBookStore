@@ -4,13 +4,13 @@ import {routes} from '../../constants';
 import {NavigationService} from '../../navigation';
 import {showToastError, showToastSuccess} from '../../utils';
 import {GoogleService} from '../../utils/google';
-import {AppActions, AuthActions} from '../reducer';
+import {AuthActions, LoadingActions} from '../reducer';
 import {AuthService, UserService} from '../services';
 import {LoginPayload} from '../types';
 
 //login
 function* loginSaga(action: PayloadAction<LoginPayload>): Generator {
-  yield put(AppActions.handleLoading());
+  yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(AuthService.handleLogin, action.payload);
 
@@ -41,14 +41,14 @@ function* loginSaga(action: PayloadAction<LoginPayload>): Generator {
   } catch (error: any) {
     console.log(error.message);
   } finally {
-    yield put(AppActions.handleHideLoading());
+    yield put(LoadingActions.hideLoading());
   }
 }
 
 function* loginGoogleSaga(
   action: PayloadAction<Omit<LoginPayload, 'password' | 'email'>>,
 ): Generator {
-  yield put(AppActions.handleLoading());
+  yield put(LoadingActions.showLoading());
   try {
     yield GoogleService.logout();
     const checkLogin = yield GoogleService.checkSignIn();
@@ -68,7 +68,7 @@ function* loginGoogleSaga(
             enableSignIn: true,
           }),
         );
-      //  yield call(getProfileUserSaga);
+        //  yield call(getProfileUserSaga);
         showToastSuccess(data.message);
       } else if (data.code === 400) {
         showToastError(
@@ -82,14 +82,14 @@ function* loginGoogleSaga(
   } catch (error: any) {
     console.log('Have error at login google saga: ' + error.message);
   } finally {
-    yield put(AppActions.handleHideLoading());
+    yield put(LoadingActions.hideLoading());
   }
 }
 
 function* createAccountSaga(
   action: PayloadAction<Omit<LoginPayload, 'idToken' | 'device_token'>>,
 ): Generator {
-  yield put(AppActions.handleLoading());
+  yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(
       AuthService.handleCreateAccount,
@@ -112,7 +112,7 @@ function* createAccountSaga(
   } catch (error: any) {
     console.log(error.message);
   } finally {
-    yield put(AppActions.handleHideLoading());
+    yield put(LoadingActions.showLoading());
   }
 }
 //get profile user
@@ -135,7 +135,7 @@ function* getProfileUserSaga(): Generator {
 
 //update avatar user
 function* updateAvatarUser(action: PayloadAction<FormData>): Generator {
-  yield put(AppActions.handleLoading());
+  yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(
       UserService.updateUserAvatar,
@@ -153,12 +153,12 @@ function* updateAvatarUser(action: PayloadAction<FormData>): Generator {
   } catch (error: any) {
     console.log('Have error at get profile saga: ' + error.message);
   } finally {
-    yield put(AppActions.handleHideLoading());
+    yield put(LoadingActions.hideLoading());
   }
 }
 
 function* deleteAvatarUser(): Generator {
-  yield put(AppActions.handleLoading());
+  yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(UserService.deleteUserAvatar);
     if (data.code === 200) {
@@ -172,12 +172,12 @@ function* deleteAvatarUser(): Generator {
   } catch (error: any) {
     console.log('Have error at get profile saga: ' + error.message);
   } finally {
-    yield put(AppActions.handleHideLoading());
+    yield put(LoadingActions.hideLoading());
   }
 }
 
 function* updateUserProfile(action: PayloadAction<any>): Generator {
-  yield put(AppActions.handleLoading());
+  yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(
       UserService.updateUserProfile,
@@ -195,20 +195,27 @@ function* updateUserProfile(action: PayloadAction<any>): Generator {
   } catch (error: any) {
     console.log('Pless check your connection' + error);
   } finally {
-    yield put(AppActions.handleHideLoading());
+    yield put(LoadingActions.hideLoading());
   }
 }
 
 //clean user
 function* cleanUser(): Generator {
-  yield put(
-    AuthActions.getUserInfoFailed({
-      enableSignIn: false,
-      accessToken: '',
-      refreshToken: '',
-      user: {},
-    }),
-  );
+  yield put(LoadingActions.showLoading());
+  try {
+    yield put(
+      AuthActions.getUserInfoFailed({
+        enableSignIn: false,
+        accessToken: '',
+        refreshToken: '',
+        user: {},
+      }),
+    );
+  } catch (error) {
+    throw error;
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
 }
 
 export default function* watchAuthSaga() {

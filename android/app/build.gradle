@@ -83,7 +83,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        resValue "string", "build_config_package", "YOUR_PACKAGE_NAME_IN_ANDROIDMANIFEST_XML"
+        resValue "string", "build_config_package", "com.comicverse"
     }
     signingConfigs {
         debug {

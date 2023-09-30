@@ -22,11 +22,13 @@ const screenOptions: StackNavigationOptions = {
   cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
 };
 
+console.log(isReady);
+
 const AuthNavigator = () => {
   return (
     <AuthStack.Navigator
       screenOptions={screenOptions}
-      initialRouteName={routes.CREATE_NEW_PASSWORD}>
+      initialRouteName={isReady === true ? routes.LOBBY : routes.ONBOARD}>
       {authScreenapp.map(screen => {
         return (
           <AuthStack.Screen
