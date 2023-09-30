@@ -34,7 +34,7 @@ const Topics: React.FunctionComponent = () => {
         onPressLeftIcon={handlePressBack}
         onPressRightIconLeft={handlePressSearch}
       />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{width: '100%', alignItems: 'center', marginTop: 10}}>
           <FlatList
             data={data}
