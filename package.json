@@ -8,7 +8,8 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "link": "react-native-asset"
+    "link": "react-native-asset",
+    "configure": "react-native link react-native-config"
   },
   "dependencies": {
     "@react-native-community/datetimepicker": "^7.4.1",
@@ -31,6 +32,7 @@
     "react": "18.2.0",
     "react-native": "0.72.4",
     "react-native-asset": "^2.1.1",
+    "react-native-config": "^1.5.1",
     "react-native-device-info": "^10.8.0",
     "react-native-encrypted-storage": "^4.0.3",
     "react-native-gesture-handler": "^2.12.1",

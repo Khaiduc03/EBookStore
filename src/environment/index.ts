@@ -1,12 +1,12 @@
-// import * as dotenv from 'dotenv';
-
-// // config use env
-// dotenv.config();
+import Config from "react-native-config";
 
 // //URL
-export const BASE_URL = 'https://comicverse.onrender.com';
+// export const BASE_URL = process.env.REACT_APP_BASE_URL;
+export const BASE_URL = Config.BASE_URL;
 
-export enum Endpoints {
+
+
+ enum Endpoints {
   //AUTH
   LOGIN_ENDPOINT = '/auth/login',
   REGISTER_ADMIN_ENDPOINT = '/auth/admin',
