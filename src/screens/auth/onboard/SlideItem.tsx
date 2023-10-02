@@ -1,8 +1,7 @@
-import React from 'react';
-import {Image, Text, View} from 'react-native';
-import useStyles from './styles';
 import LottieView from 'lottie-react-native';
-import {JsonImages} from '../../../assets';
+import React from 'react';
+import {Text, View} from 'react-native';
+import useStyles from './styles';
 
 const SlideItem: React.FunctionComponent<any> = ({item}) => {
   const styles = useStyles();

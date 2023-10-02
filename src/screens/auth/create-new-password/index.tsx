@@ -1,18 +1,17 @@
+import {Text} from '@rneui/base';
+import {CheckBox} from '@rneui/themed';
+import React from 'react';
 import {
   Keyboard,
   TouchableOpacity,
-  View,
   TouchableWithoutFeedback,
+  View,
 } from 'react-native';
-import {Text} from '@rneui/base';
-import React from 'react';
 import {AuthHeader, Headers, InputCustom} from '../../../components';
-import useStyles from './styles';
-import {NavigationService} from '../../../navigation';
 import {routes} from '../../../constants';
+import {NavigationService} from '../../../navigation';
 import {showToastError, showToastSuccess} from '../../../utils';
-import {CheckBoxIcon} from '@rneui/base/dist/CheckBox/components/CheckBoxIcon';
-import {CheckBox} from '@rneui/themed';
+import useStyles from './styles';
 
 const CreateNewPassword: React.FC = () => {
   const [password, setPassword] = React.useState('');
@@ -36,9 +35,7 @@ const CreateNewPassword: React.FC = () => {
         <View style={styles.body}>
           <Headers
             leftIcon={true}
-            onPressLeftIcon={() =>
-              NavigationService.navigate(routes.FORGOT_PASSWORD)
-            }
+            onPressLeftIcon={() => NavigationService.navigate(routes.SEND_OTP)}
           />
           <AuthHeader
             title="Create New Password 🔐"
