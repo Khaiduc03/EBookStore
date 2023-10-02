@@ -1,19 +1,19 @@
 import LottieView from 'lottie-react-native';
 import React from 'react';
-import { KeyboardAvoidingView, Text, TouchableOpacity, View } from 'react-native';
-import { images } from '../../../assets';
-import { GoogleIcon } from '../../../assets/icons';
-import { routes } from '../../../constants';
-import { useAppDispatch } from '../../../hooks';
-import { NavigationService } from '../../../navigation';
-import { AuthActions } from '../../../redux/reducer';
+import {KeyboardAvoidingView, Text, TouchableOpacity, View} from 'react-native';
+import {GoogleIcon} from '../../../assets/icons';
+import {routes} from '../../../constants';
+import {useAppDispatch} from '../../../hooks';
+import {NavigationService} from '../../../navigation';
+import {AuthActions} from '../../../redux/reducer';
 import usestyles from './styles';
-import { Headers } from '../../../components';
+import {images} from '../../../assets';
 
 const LobbyScreen: React.FunctionComponent = () => {
   const styles = usestyles();
 
   const dispatch = useAppDispatch();
+  // const getSatate = useAppSelector(getAppIsReady);
 
   const handleGoogle = async () => {
     dispatch(
@@ -26,7 +26,6 @@ const LobbyScreen: React.FunctionComponent = () => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.container}>
-
         <View style={styles.header}>
           <LottieView
             style={styles.headerIMage}
@@ -47,7 +46,9 @@ const LobbyScreen: React.FunctionComponent = () => {
             Newsly is a social network that allows you to connect with friends
           </Text>
           <View style={styles.bottom}>
-            <TouchableOpacity style={[styles.button, styles.backgroundColorsWhite]} onPress={handleGoogle}>
+            <TouchableOpacity
+              style={[styles.button, styles.backgroundColorsWhite]}
+              onPress={handleGoogle}>
               <GoogleIcon />
               <Text style={styles.buttonText}> Continue with Google</Text>
             </TouchableOpacity>

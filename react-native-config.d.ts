@@ -1,6 +1,6 @@
 declare module 'react-native-config' {
     export interface NativeConfig {
-        BASE_URL?: string;
+        BASE_URL: string;
         REGISTER:string;
         LOGIN:string;
         LOGIN_GOOGLE:string;
