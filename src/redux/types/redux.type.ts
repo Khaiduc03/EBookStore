@@ -4,4 +4,5 @@ export enum Redux {
   app = 'app',
   alert = 'alert',
   theme = 'theme',
+  comic = 'comic',
 }
