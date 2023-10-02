@@ -4,10 +4,12 @@ import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import TextCustom from '../../../../components/customs/Text';
 import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
-import AddFriend from './components/AddFriend';
-import ItemFollow from './components/ItemFollow';
-import ItemListProfileUser from './components/ItemListProfileUser';
-import ItemPostUser from './components/ItemPostUser';
+import {
+  AddFriend,
+  ItemFollow,
+  ItemListProfileUSer,
+  ItemPostUser,
+} from './components';
 import useStyles from './styles';
 
 const ProfileUser: React.FC = props => {
@@ -23,7 +25,7 @@ const ProfileUser: React.FC = props => {
     setIsFollowed(!isFollowed);
   };
   const renderItem = ({item}: {item: (typeof data2)[0]}) => (
-    <ItemListProfileUser {...item} />
+    <ItemListProfileUSer {...item} />
   );
 
   return (

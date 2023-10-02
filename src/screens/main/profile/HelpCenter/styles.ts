@@ -3,6 +3,7 @@ import {Device} from '../../../../utils';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
+
 const useStyles = makeStyles(({colors}) => ({
   container: {
     flex: normalize(1),
