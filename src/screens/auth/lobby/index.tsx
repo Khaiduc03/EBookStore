@@ -4,16 +4,17 @@ import {KeyboardAvoidingView, Text, TouchableOpacity, View} from 'react-native';
 import {JsonImages} from '../../../assets';
 import {GoogleIcon} from '../../../assets/icons';
 import {routes} from '../../../constants';
-import {useAppDispatch} from '../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {NavigationService} from '../../../navigation';
-import {AuthActions} from '../../../redux/reducer';
+import {AppActions, AuthActions} from '../../../redux/reducer';
 import usestyles from './styles';
-import {Headers} from '../../../components';
+import {getAppIsReady} from '../../../redux';
 
 const LobbyScreen: React.FunctionComponent = () => {
   const styles = usestyles();
 
   const dispatch = useAppDispatch();
+  // const getSatate = useAppSelector(getAppIsReady);
 
   const handleGoogle = async () => {
     dispatch(

@@ -12,6 +12,8 @@ import {NavigationService} from '../../../navigation';
 import {routes} from '../../../constants';
 import {TextInput} from 'react-native-gesture-handler';
 import {showToastError} from '../../../utils';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
+import {AuthActions, SendOTPPayload, getAuthUserProfile} from '../../../redux';
 
 const SendOTP: React.FC = () => {
   const styles = useStyles();
@@ -21,6 +23,22 @@ const SendOTP: React.FC = () => {
   const [pin3, setPin3] = React.useState('');
   const [pin4, setPin4] = React.useState('');
 
+  const [payload, setPayload] = React.useState<SendOTPPayload>({
+    email: '',
+    otp: '',
+  });
+
+  const dispatch = useAppDispatch();
+
+  const {email} = useAppSelector(getAuthUserProfile);
+  console.log(email);
+  React.useEffect(() => {
+    setPayload({
+      email: email || '',
+      otp: pin1 + pin2 + pin3 + pin4,
+    });
+  }, [pin1, pin2, pin3, pin4]);
+  console.log(payload);
   const pin1Ref = React.useRef<TextInput | null>(null);
   const pin2Ref = React.useRef<TextInput | null>(null);
   const pin3Ref = React.useRef<TextInput | null>(null);
@@ -36,7 +54,7 @@ const SendOTP: React.FC = () => {
     if (pin1 === '' || pin2 === '' || pin3 === '' || pin4 === '') {
       showToastError('Error, OTP must not be left blank');
     } else {
-      NavigationService.navigate(routes.CREATE_NEW_PASSWORD);
+      dispatch(AuthActions.handleVerifyOTP(payload));
     }
   };
 
@@ -76,7 +94,7 @@ const SendOTP: React.FC = () => {
       if (text != null) {
         pin2Ref.current?.focus();
       }
-    } else if (text.length == 0) {
+    } else if (text.length === 0) {
       setPin1(text);
       pin1Ref.current?.focus();
     }
@@ -88,7 +106,7 @@ const SendOTP: React.FC = () => {
       if (text != null) {
         pin3Ref.current?.focus();
       }
-    } else if (text.length == 0) {
+    } else if (text.length === 0) {
       setPin2(text);
       pin1Ref.current?.focus();
     }
@@ -100,7 +118,7 @@ const SendOTP: React.FC = () => {
       if (text != null) {
         pin4Ref.current?.focus();
       }
-    } else if (text.length == 0) {
+    } else if (text.length === 0) {
       setPin3(text);
       pin2Ref.current?.focus();
     }
@@ -112,7 +130,7 @@ const SendOTP: React.FC = () => {
       if (text != null) {
         pin4Ref.current?.focus();
       }
-    } else if (text.length == 0) {
+    } else if (text.length === 0) {
       setPin4(text);
       pin3Ref.current?.focus();
     }

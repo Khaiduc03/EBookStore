@@ -1,4 +1,4 @@
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, Image} from 'react-native';
 
 import React, {FunctionComponent, useState} from 'react';
 import {NavigationService} from '../../../../navigation';
@@ -7,7 +7,7 @@ import useStyles from './styles';
 import {ComicItem, HeaderCustom, TopicItem} from '../../../../components';
 
 import {createIcon} from '../../../../utils';
-import {TopicsHome, ComicsNew} from './components';
+import {TopicsHome, ComicsNew, BannerComic} from './components';
 
 const Home: FunctionComponent = () => {
   const styles = useStyles();
@@ -41,7 +41,9 @@ const Home: FunctionComponent = () => {
       />
 
       <ScrollView showsVerticalScrollIndicator={false}>
+        <BannerComic />
         <HeaderCustom
+          titleStyle={styles.textTitle}
           title="Explore by Genre"
           rightIconRight={{
             name: 'arrow-forward-outline',
@@ -51,8 +53,10 @@ const Home: FunctionComponent = () => {
         />
 
         <TopicsHome />
+
         <HeaderCustom
-          title="Comics New"
+          titleStyle={styles.textTitle}
+          title="New Comics"
           rightIconleft={{
             name: 'grid-outline',
             type: 'ionicon',

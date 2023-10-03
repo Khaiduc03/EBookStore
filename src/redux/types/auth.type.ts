@@ -2,7 +2,6 @@ import {Avatar, Gender, Timestamp, uuid} from '../../types';
 
 export type AppStatus = {
   isReady: boolean;
-  isLoading: boolean;
 };
 
 export type AuthState = {
@@ -17,6 +16,11 @@ export type LoginPayload = {
   password: string;
   device_token: string;
   idToken: string;
+};
+
+export type SendOTPPayload = {
+  email: string 
+  otp: string;
 };
 
 export type RefreshToken = {
@@ -40,7 +44,7 @@ export type User = uuid &
     avatar: Avatar;
     isUpdate: boolean;
     isPassword: boolean;
-    wallet:string
+    wallet: string;
   };
 
 export enum USER_ROLE {

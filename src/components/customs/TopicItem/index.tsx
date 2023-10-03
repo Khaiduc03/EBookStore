@@ -4,6 +4,7 @@ import React from 'react';
 import {CustomTopicsProps} from './types';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {NavigationService} from '../../../navigation';
+
 import {routes} from '../../../constants';
 import useStyles from './styles';
 

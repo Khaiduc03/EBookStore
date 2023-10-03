@@ -15,3 +15,4 @@ export const showToastSuccess = (props:string) => {
     text2: props,
   });
 }
+
