@@ -58,7 +58,6 @@ function ChapterDetail() {
               setShowFooter(false);
             }
           }}
-          scrollEventThrottle={16}
         />
       </TouchableOpacity>
       {renderHeader()}

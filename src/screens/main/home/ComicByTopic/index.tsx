@@ -28,7 +28,8 @@ const ComicByTopic = () => {
     <View style={styles.container}>
       <HeaderCustom
         title="Romance"
-        leftIcon={{name: 'arrow-back', color: styles.iconStyle.color}}
+        leftIconStyle={styles.leftIconStyle}
+        leftIcon={{name: 'arrow-back', color: styles.leftIconStyle.color}}
         onPressLeftIcon={handlePressBack}
         rightIconleft={{name: 'search', type: 'ionicon'}}
         onPressRightIconLeft={handlePressSearch}
@@ -36,7 +37,7 @@ const ComicByTopic = () => {
       />
       <ScrollView>
         <HeaderCustom
-          titleStyle={styles.textHeader}
+          titleStyle={styles.titleHeaderStyle}
           title="Show in "
           rightIconleft={{
             name: 'grid-outline',

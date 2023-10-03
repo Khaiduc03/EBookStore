@@ -30,6 +30,7 @@ const Home: FunctionComponent = () => {
     <View style={styles.container}>
       <HeaderCustom
         onPressRightIconLeft={handlePressSearch}
+        leftIconStyle={styles.leftIconStyle}
         leftIcon={{name: 'book', type: 'font-awesome'}}
         title="ComicVerse"
         rightIconleft={{name: 'search', type: 'ionicon'}}

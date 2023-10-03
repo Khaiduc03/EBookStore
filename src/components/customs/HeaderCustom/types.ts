@@ -4,6 +4,7 @@ export type HeaderIcon = {
   name?: string;
   type?: string;
   color?: string;
+  size?: number;
 };
 
 export type CustomHeaderProps = {
@@ -18,4 +19,5 @@ export type CustomHeaderProps = {
   rightIconMiddle?: HeaderIcon; // Icon bên phảir
   rightIconRight?: HeaderIcon; // Icon bên phảir
   titleStyle?: TextStyle; // Kiểu dáng của tiêu đề
+  leftIconStyle?: ViewStyle;
 };

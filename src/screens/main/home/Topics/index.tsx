@@ -28,14 +28,20 @@ const Topics: React.FunctionComponent = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-back'}}
+        leftIconStyle={styles.leftIcon}
+        leftIcon={{
+          name: 'arrow-back',
+          type: 'ionicon',
+          color: styles.leftIcon.color,
+          size: styles.leftIcon.fontSize,
+        }}
         title="Explore by Genre"
-        rightIconleft={{name: 'search'}}
+        rightIconRight={{name: 'search', size: styles.rightLeftIcon.fontSize}}
         onPressLeftIcon={handlePressBack}
-        onPressRightIconLeft={handlePressSearch}
+        onPressRightIconRight={handlePressSearch}
       />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{width: '100%', alignItems: 'center', marginTop: 10}}>
+        <View style={styles.listTopicContainer}>
           <FlatList
             data={data}
             renderItem={RenderItem}

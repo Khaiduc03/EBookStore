@@ -15,6 +15,19 @@ const useStyles = makeStyles(({colors}) => ({
   itemContainer: {
     marginBottom: normalize(15),
   },
+  listTopicContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: normalize(10),
+  },
+  leftIcon: {
+    color: colors.black,
+    marginRight: normalize(10),
+    fontSize: 28,
+  },
+  rightLeftIcon: {
+    fontSize: 28,
+  },
 }));
 
 export default useStyles;
