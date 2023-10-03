@@ -8,12 +8,11 @@ const useStyles = makeStyles(({colors}) => ({
   },
   wrapper: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: '#e6e6e6',
+    backgroundColor: colors.grey6,
   },
   body: {
-    flex: 1,
+    flex: 6,
     padding: normalize(24),
-    paddingBottom: normalize(0),
   },
   profileImage: {
     width: normalize(36),
@@ -103,7 +102,8 @@ const useStyles = makeStyles(({colors}) => ({
     width: '100%',
     backgroundColor: colors.white,
     flexDirection: 'row',
-    alignSelf: 'center',
+    alignItems: 'center',
+    direction: 'inherit',
   },
   viewClearAll: {
     width: '100%',
@@ -113,7 +113,7 @@ const useStyles = makeStyles(({colors}) => ({
     borderRadius: normalize(100),
     position: 'absolute',
     alignSelf: 'flex-end',
-    bottom: normalize(110),
+    bottom: normalize(120),
     right: normalize(10),
     backgroundColor: colors.white,
   },
@@ -131,35 +131,29 @@ const useStyles = makeStyles(({colors}) => ({
   rightContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    alignSelf: 'center',
+    alignItems: 'center',
   },
   rightIconLeft: {
-    alignSelf: 'center',
     position: 'absolute',
     right: normalize(80),
   },
   rightIconRight: {
-    alignSelf: 'center',
     marginHorizontal: normalize(18),
   },
   viewIconLeft: {
     transform: [{rotate: '40deg'}],
-    alignSelf: 'center',
     marginHorizontal: normalize(16),
-  },
-  viewtextInput: {
-    alignSelf: 'center',
-    marginVertical: normalize(8),
   },
   textInput: {
     width: normalize(250),
-    height: normalize(50),
-    flexWrap: 'wrap',
+    marginVertical: normalize(14),
+    fontSize: normalize(15),
+    fontFamily: fontFamilySetup.bold,
     paddingLeft: normalize(16),
     paddingRight: normalize(46),
     borderWidth: normalize(1),
     borderColor: colors.black,
-    borderRadius: normalize(26),
+    borderRadius: normalize(25),
   },
   textInputHeightAuto: {
     height: normalize(50),

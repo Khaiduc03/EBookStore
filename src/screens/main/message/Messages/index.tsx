@@ -1,6 +1,15 @@
 import {Icon, Text} from '@rneui/base';
 import React, {useRef, useState} from 'react';
-import {ScrollView, TextInput, TouchableOpacity, View} from 'react-native';
+import {
+  Keyboard,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import EmojiSelector, {Categories} from 'react-native-emoji-selector';
 import {HeaderCustom} from '../../../../components';
 import {ChatBubble} from './components/RenderItem/ChatBubbleItem';
@@ -12,16 +21,16 @@ const Message: React.FC = () => {
 
   const [textInputValue, setTextInputValue] = useState<string>('');
   const [selectedEmojis, setSelectedEmojis] = useState<string[]>([]);
-  const [isShowEmoiji, setIsShowEmoiji] = useState<boolean>(false);
+  const [isShowEmoji, setIsShowEmoji] = useState<boolean>(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
-  const scrollViewRef = useRef<ScrollView | null>(null);
+  const scrollViewRef = useRef<ScrollView>(null);
 
   const handleSendMessage = () => {
     setTextInputValue('');
     scrollViewRef.current?.scrollToEnd({animated: true});
   };
 
-  const handleScroll = (event: any) => {
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const offsetY = event.nativeEvent.contentOffset.y;
     const contentHeight = event.nativeEvent.contentSize.height;
     const scrollViewHeight = event.nativeEvent.layoutMeasurement.height;
@@ -31,8 +40,8 @@ const Message: React.FC = () => {
     } else {
       setShowScrollButton(true);
     }
-    if (isShowEmoiji) {
-      setIsShowEmoiji(!isShowEmoiji);
+    if (isShowEmoji) {
+      setIsShowEmoji(!isShowEmoji);
     }
   };
 
@@ -56,12 +65,20 @@ const Message: React.FC = () => {
   };
 
   const handleIconPress = () => {
-    setIsShowEmoiji(!isShowEmoiji);
+    setIsShowEmoji(!isShowEmoji);
+    Keyboard.dismiss();
+  };
+
+  const handleTouchableWithoutFeedback = () => {
+    if (isShowEmoji) {
+      setIsShowEmoji(!isShowEmoji);
+    }
+    Keyboard.dismiss;
   };
 
   const handleFocusTouchableWithoutFeedback = () => {
-    if (isShowEmoiji) {
-      setIsShowEmoiji(!isShowEmoiji);
+    if (isShowEmoji) {
+      setIsShowEmoji(false);
     }
 
     scrollViewRef.current?.scrollToEnd({animated: true});
@@ -70,63 +87,55 @@ const Message: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.wrapper}>
-        <HeaderCustom
-          leftIcon={{
-            name: 'arrow-back-outline',
-            type: 'ionicon',
-            color: styles.iconBack.color,
-          }}
-          imageUri={{
-            uri: 'https://yt3.googleusercontent.com/ytc/AOPolaQ8qd9YUFBorodGktxw_--6xfk2EscQ-aT2v-dC6w=s900-c-k-c0x00ffffff-no-rj',
-          }}
-          fullName="Jhon Abraham"
-          userStatus="Active now"
-          rightIconleft={{
-            name: 'call-outline',
-            type: 'ionicon',
-          }}
-          rightIconRight={{
-            name: 'videocam-outline',
-            type: 'ionicon',
-          }}
-        />
+      <TouchableWithoutFeedback onPress={handleTouchableWithoutFeedback}>
+        <View style={styles.wrapper}>
+          <HeaderCustom
+            leftIcon={{
+              name: 'arrow-back-outline',
+              type: 'ionicon',
+              color: styles.iconBack.color,
+            }}
+            imageUri={{
+              uri: 'https://yt3.googleusercontent.com/ytc/AOPolaQ8qd9YUFBorodGktxw_--6xfk2EscQ-aT2v-dC6w=s900-c-k-c0x00ffffff-no-rj',
+            }}
+            fullName="Jhon Abraham"
+            userStatus="Active now"
+            rightIconleft={{
+              name: 'call-outline',
+              type: 'ionicon',
+            }}
+            rightIconRight={{
+              name: 'videocam-outline',
+              type: 'ionicon',
+            }}
+          />
 
-        <ScrollView
-          ref={scrollViewRef}
-          onScroll={handleScroll}
-          scrollEventThrottle={16}
-          showsVerticalScrollIndicator={false}>
           <View style={styles.body}>
-            {messages.map((message, index) => (
-              <ChatBubble key={index} {...message} />
-            ))}
-          </View>
-        </ScrollView>
-
-        {showScrollButton && (
-          <TouchableOpacity
-            onPress={handleScrollToEnd}
-            style={{
-              borderRadius: 100,
-              position: 'absolute',
-              alignSelf: 'flex-end',
-              bottom: 110,
-              right: 10,
-              backgroundColor: 'white',
-            }}>
-            <Icon name="arrow-down-outline" type="ionicon" size={30} />
-          </TouchableOpacity>
-        )}
-
-        <View style={styles.viewFooter} focusable={true}>
-          <View style={styles.viewIconLeft}>
-            <TouchableOpacity>
-              <Icon name="attach-outline" type="ionicon" size={30} />
-            </TouchableOpacity>
+            <ScrollView
+              ref={scrollViewRef}
+              onScroll={handleScroll}
+              scrollEventThrottle={16}
+              showsVerticalScrollIndicator={false}>
+              {messages.map((message, index) => (
+                <ChatBubble key={index} {...message} />
+              ))}
+            </ScrollView>
+            {showScrollButton && (
+              <TouchableOpacity
+                onPress={handleScrollToEnd}
+                style={styles.btnArrowDown}>
+                <Icon name="arrow-down-outline" type="ionicon" size={30} />
+              </TouchableOpacity>
+            )}
           </View>
 
-          <View style={styles.viewtextInput}>
+          <View style={styles.viewFooter}>
+            <View style={styles.viewIconLeft}>
+              <TouchableOpacity>
+                <Icon name="attach-outline" type="ionicon" size={30} />
+              </TouchableOpacity>
+            </View>
+
             <TextInput
               style={[
                 styles.textInput,
@@ -142,44 +151,44 @@ const Message: React.FC = () => {
               onChangeText={text => setTextInputValue(text)}
               onFocus={handleFocusTouchableWithoutFeedback}
               multiline={true}
-              scrollEnabled={false}
               numberOfLines={5}
             />
+
+            <View style={styles.rightContainer}>
+              <View style={styles.rightIconLeft}>
+                <TouchableOpacity onPress={handleIconPress}>
+                  <Icon name="happy" type="ionicon" size={30} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.rightIconRight}>
+                <TouchableOpacity onPress={handleSendMessage}>
+                  <Icon name="send" type="ionicon" size={30} />
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
 
-          <View style={styles.rightContainer}>
-            <View style={styles.rightIconLeft}>
-              <TouchableOpacity onPress={handleIconPress}>
-                <Icon name="happy" type="ionicon" size={30} />
-              </TouchableOpacity>
+          {isShowEmoji && (
+            <View style={styles.viewBackgroundEmoji}>
+              <View style={styles.viewClearAll}>
+                <TouchableOpacity
+                  onPress={handleClearEmoji}
+                  style={styles.btnClearAll}>
+                  <Text style={styles.textClearAll}>Clear All</Text>
+                </TouchableOpacity>
+              </View>
+
+              <EmojiSelector
+                category={Categories.symbols}
+                onEmojiSelected={handleEmojiSelected}
+                placeholder="Search"
+                columns={10}
+                style={styles.iconEmoji}
+              />
             </View>
-            <View style={styles.rightIconRight}>
-              <TouchableOpacity onPress={handleSendMessage}>
-                <Icon name="send" type="ionicon" size={30} />
-              </TouchableOpacity>
-            </View>
-          </View>
+          )}
         </View>
-        {isShowEmoiji && (
-          <View style={styles.viewBackgroundEmoji}>
-            <View style={styles.viewClearAll}>
-              <TouchableOpacity
-                onPress={handleClearEmoji}
-                style={styles.btnClearAll}>
-                <Text style={styles.textClearAll}>Clear All</Text>
-              </TouchableOpacity>
-            </View>
-
-            <EmojiSelector
-              category={Categories.symbols}
-              onEmojiSelected={handleEmojiSelected}
-              placeholder="Search"
-              columns={10}
-              style={styles.iconEmoji}
-            />
-          </View>
-        )}
-      </View>
+      </TouchableWithoutFeedback>
     </View>
   );
 };
