@@ -20,12 +20,12 @@ const ForgotPassword: React.FC = () => {
   const [email, setEmail] = React.useState<{
     email: string;
   }>({
-    email: 'p3nhox99@gmail.com',
+    email: '',
   });
 
   const isEmailValid = () => {
-    // Kiểm tra xem giá trị nhập vào có phải là một địa chỉ email hợp lệ hay không
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.email);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email.email);
   };
 
   const styles = useStyles();

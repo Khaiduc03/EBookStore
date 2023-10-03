@@ -169,9 +169,6 @@ const reducer = createSlice({
         ...state,
       };
     },
-
-    
-
   },
 });
 

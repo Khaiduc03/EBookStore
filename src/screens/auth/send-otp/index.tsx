@@ -38,11 +38,13 @@ const SendOTP: React.FC = () => {
       otp: pin1 + pin2 + pin3 + pin4,
     });
   }, [pin1, pin2, pin3, pin4]);
+
   console.log(payload);
-  const pin1Ref = React.useRef<TextInput | null>(null);
-  const pin2Ref = React.useRef<TextInput | null>(null);
-  const pin3Ref = React.useRef<TextInput | null>(null);
-  const pin4Ref = React.useRef<TextInput | null>(null);
+
+  const pin1Ref = React.useRef<TextInput>(null);
+  const pin2Ref = React.useRef<TextInput>(null);
+  const pin3Ref = React.useRef<TextInput>(null);
+  const pin4Ref = React.useRef<TextInput>(null);
 
   const [countdown, setCountdown] = React.useState<number>(60);
   const [isCounting, setIsCounting] = React.useState<boolean>(false);
@@ -89,50 +91,50 @@ const SendOTP: React.FC = () => {
   };
 
   const handlePin1Change = (text: string) => {
-    if (parseInt(text)) {
+    if (/^\d*$/.test(text)) {
+      // Kiểm tra xem text có phải là chuỗi số không
       setPin1(text);
-      if (text != null) {
+      if (text !== '') {
+        // Kiểm tra xem text có khác rỗng không
         pin2Ref.current?.focus();
+      } else {
+        setPin1(text);
+        pin1Ref.current?.focus();
       }
-    } else if (text.length === 0) {
-      setPin1(text);
-      pin1Ref.current?.focus();
     }
   };
 
   const handlePin2Change = (text: string) => {
-    if (parseInt(text)) {
+    if (/^\d*$/.test(text)) {
       setPin2(text);
-      if (text != null) {
+      if (text !== '') {
         pin3Ref.current?.focus();
+      } else {
+        setPin2(text);
+        pin1Ref.current?.focus();
       }
-    } else if (text.length === 0) {
-      setPin2(text);
-      pin1Ref.current?.focus();
     }
   };
 
   const handlePin3Change = (text: string) => {
-    if (parseInt(text)) {
+    if (/^\d*$/.test(text)) {
       setPin3(text);
-      if (text != null) {
+      if (text !== '') {
         pin4Ref.current?.focus();
+      } else {
+        setPin3(text);
+        pin2Ref.current?.focus();
       }
-    } else if (text.length === 0) {
-      setPin3(text);
-      pin2Ref.current?.focus();
     }
   };
 
   const handlePin4Change = (text: string) => {
-    if (parseInt(text)) {
+    if (/^\d*$/.test(text)) {
       setPin4(text);
-      if (text != null) {
-        pin4Ref.current?.focus();
+      if (text === '') {
+        setPin4(text);
+        pin3Ref.current?.focus();
       }
-    } else if (text.length === 0) {
-      setPin4(text);
-      pin3Ref.current?.focus();
     }
   };
 

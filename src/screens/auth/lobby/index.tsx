@@ -51,7 +51,7 @@ const LobbyScreen: React.FunctionComponent = () => {
               style={[styles.button, styles.backgroundColorsWhite]}
               onPress={handleGoogle}>
               <GoogleIcon />
-              <Text style={styles.buttonText}> Continue with Google</Text>
+              <Text style={styles.buttonTextGG}>Continue with Google</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
@@ -68,7 +68,7 @@ const LobbyScreen: React.FunctionComponent = () => {
               }}
               style={[styles.button, styles.backgroundColorsSecondary]}>
               <Text style={[styles.buttonText, styles.colors]}>
-                I Already Have an Account
+                I have an Account already
               </Text>
             </TouchableOpacity>
           </View>

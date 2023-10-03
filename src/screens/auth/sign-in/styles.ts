@@ -51,9 +51,10 @@ const useStyles = makeStyles(({colors}) => ({
   },
   optionView: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: normalize(14),
+    justifyContent: 'space-between',
     alignItems: 'center',
+    marginTop: normalize(14),
+    marginHorizontal: normalize(24),
   },
   backgroundcolor: {
     color: colors.primary,

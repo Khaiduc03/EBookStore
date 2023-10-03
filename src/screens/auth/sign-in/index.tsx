@@ -45,8 +45,8 @@ const SignIn: FunctionComponent = () => {
     email: string;
     password: string;
   }>({
-    email: 'p3nhox99@gmail.com',
-    password: '123456',
+    email: '',
+    password: '',
   });
 
   const [checked, setChecked] = React.useState<boolean>(false);
@@ -73,6 +73,14 @@ const SignIn: FunctionComponent = () => {
         onAccept: () => {
           console.log('hio');
         },
+      }),
+    );
+  };
+
+  const handleGoogle = async () => {
+    dispatch(
+      AuthActions.handleLoginGoogle({
+        device_token: '1234567890',
       }),
     );
   };
@@ -138,7 +146,11 @@ const SignIn: FunctionComponent = () => {
               <Text style={styles.textNor}>or continue with</Text>
             </View>
             <View style={styles.optionView}>
-              <SmallButton svgIcon={<GoogleIcon />} nameIcon="" />
+              <SmallButton
+                svgIcon={<GoogleIcon />}
+                nameIcon=""
+                onPressButton={handleGoogle}
+              />
               <SmallButton
                 nameIcon="logo-facebook"
                 typeIcon="ionicon"

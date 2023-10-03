@@ -1,6 +1,7 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {Device} from '../../../utils';
 import {StyleSheet} from 'react-native';
+import {fontFamilySetup} from '../../../utils/font';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
@@ -50,7 +51,7 @@ const usestyles = makeStyles(({colors}) => ({
   },
   bottom: {
     flex: 1,
-    paddingTop: normalize(20),
+    marginTop: normalize(20),
   },
   button: {
     borderRadius: normalize(99),
@@ -58,28 +59,31 @@ const usestyles = makeStyles(({colors}) => ({
     height: normalize(HEIGHT * 0.06),
     alignItems: 'center',
     justifyContent: 'center',
-
     borderWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
     marginVertical: normalize(HEIGHT * 0.01),
   },
   buttonText: {
     fontSize: normalize(HEIGHT * 0.02),
-    fontWeight: '700',
     letterSpacing: normalize(0.2),
-    fontStyle: 'normal',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fontFamilySetup.bold,
     color: colors.black,
+  },
+  buttonTextGG: {
+    fontSize: normalize(HEIGHT * 0.02),
+    letterSpacing: normalize(0.2),
+    fontFamily: fontFamilySetup.bold,
+    color: colors.blackDefault,
   },
   backgroundColors: {
     backgroundColor: colors.primary,
   },
 
   backgroundColorsWhite: {
-    backgroundColor: colors.grey0,
+    backgroundColor: colors.whiteDefault,
   },
   colorWhite: {
-    color: colors.grey0,
+    color: colors.whiteDefault,
   },
   backgroundColorsSecondary: {
     backgroundColor: colors.secondary,
