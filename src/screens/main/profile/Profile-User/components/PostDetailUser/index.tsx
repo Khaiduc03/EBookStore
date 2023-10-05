@@ -26,7 +26,7 @@ const PostDetailUser: React.FC = props => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'chevron-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
         title="Post by User"
         onPressLeftIcon={handlePressGoback}
         buttonProps={{

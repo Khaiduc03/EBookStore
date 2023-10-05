@@ -3,17 +3,20 @@ import {Screen} from '../../../types';
 import Message from '../message/Messages';
 import AboutApp from './AboutApp';
 import BecomeVIP from './BecomeVIP';
+import Favorite from './Favorite';
 import HelpCenter from './HelpCenter';
 import Contact_us from './HelpCenter/Contact_us';
 import FAQ from './HelpCenter/FAQ';
+import History from './History';
 import MyProfile from './MyProfile';
-import PostDetail from './MyProfile/components/PostDetail';
-import Notification from './Notification';
+import { PostDetail } from './MyProfile/components';
+import Notification from './SettingNotification';
 import Payments_method from './Payment-method';
 import ProfileUser from './Profile-User';
-import PostDetailUser from './Profile-User/components/PostDetailUser';
+import { PostDetailUser } from './Profile-User/components';
 import Security from './Security';
 import Update_Profile from './Update-profile';
+
 
 export {default as Profile} from './Profile';
 
@@ -31,7 +34,7 @@ export const profileScreens: Screen[] = [
     component: MyProfile,
   },
   {
-    name: routes.NOTIFICATION,
+    name: routes.SETTINGNOTIFICATION,
     component: Notification,
   },
   {
@@ -44,7 +47,7 @@ export const profileScreens: Screen[] = [
   },
   {
     name: routes.ABOUTAPP,
-    component: AboutApp,
+    component: AboutApp
   },
   {
     name: routes.FAQ,
@@ -73,5 +76,13 @@ export const profileScreens: Screen[] = [
   {
     name: routes.MESSAGES,
     component: Message,
+  },
+  {
+    name: routes.FAVORITE,
+    component: Favorite,
+  },
+  {
+    name: routes.HISTORY,
+    component: History,
   },
 ];

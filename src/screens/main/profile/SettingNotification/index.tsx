@@ -1,12 +1,12 @@
 import {View, Text} from 'react-native';
 import React from 'react';
-import useStyles from '../Notification/styles';
+import useStyles from './styles';
 import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import {HeaderCustom} from '../../../../components';
 import Switch_custom from '../../../../components/customs/Switch';
 
-const Notification: React.FC = () => {
+const SettingNotification: React.FC = () => {
   const styles = useStyles();
   const handlePressGoback = () => {
     NavigationService.navigate(routes.PROFILE);
@@ -14,7 +14,7 @@ const Notification: React.FC = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'chevron-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
         title="Notification"
         onPressLeftIcon={handlePressGoback}
       />
@@ -32,4 +32,4 @@ const Notification: React.FC = () => {
   );
 };
 
-export default Notification;
+export default SettingNotification;

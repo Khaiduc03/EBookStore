@@ -4,7 +4,7 @@ import {HeaderCustom} from '../../../../components';
 import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import useStyles from './styles';
-import { ItemListAbout } from './components';
+import {ItemListAbout} from './components';
 
 const AboutApp: React.FC = () => {
   const styles = useStyles();
@@ -14,7 +14,7 @@ const AboutApp: React.FC = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'chevron-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
         title="About The App"
         onPressLeftIcon={handlePressGoback}
       />

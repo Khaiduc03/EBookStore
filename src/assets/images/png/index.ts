@@ -33,5 +33,5 @@ export const images = {
   ic_Add: require('./ic_Add.png'),
   ic_ZaloPay: require('./ic_Zalopay.png'),
   ic_Paypal: require('./ic_Paypal.png'),
-  ic_Google: require('./ic_google.png'),
+  ic_Google: require('./ic_Google.png'),
 };

@@ -1,7 +1,7 @@
 import {View, Text} from 'react-native';
 import React from 'react';
-import {ButtonLong} from '../ButtonLong';
 import useStyles from './styles';
+import ButtonLong from '../ButtonLong';
 
 const Facebook = () => {
   const styles = useStyles();

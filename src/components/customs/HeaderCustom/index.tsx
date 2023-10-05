@@ -1,11 +1,11 @@
-import { View, Text } from 'react-native';
-import { Header, Icon } from '@rneui/base';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { TouchableOpacity } from 'react-native';
-import { CustomHeaderProps } from './types';
+import {View, Text} from 'react-native';
+import {Header, Icon} from '@rneui/base';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {TouchableOpacity} from 'react-native';
+import {CustomHeaderProps} from './types';
 import useStyles from './styles';
-import { useState } from 'react';
-import { normalize } from 'path';
+import {useState} from 'react';
+import {normalize} from 'path';
 
 const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
   const styles = useStyles();
@@ -34,7 +34,7 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
           )}
         </TouchableOpacity>
       }
-      leftContainerStyle={{ justifyContent: 'center' }}
+      leftContainerStyle={{justifyContent: 'center'}}
       placement="left"
       rightComponent={
         <View style={styles.rightContainer}>
@@ -44,7 +44,7 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
             {props.rightIconleft?.name && (
               <Icon
                 type={props.rightIconleft?.type}
-                size={24}
+                size={30}
                 name={props.rightIconleft?.name}
                 color={props.rightIconleft?.color || styles.rightIcon.color}
               />
@@ -82,25 +82,22 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
                   backgroundColor: isPressed ? 'gray' : '#0075FF',
                   borderRadius: 10,
                   width: 78,
-                  height:27,
-                  alignItems: 'center'
-                }}
-              >
+                  height: 27,
+                  alignItems: 'center',
+                }}>
                 <Text
                   style={{
                     color: 'white',
                     fontSize: 16,
-                  }}
-                >
+                  }}>
                   {buttonText}
                 </Text>
               </TouchableOpacity>
             )}
           </TouchableOpacity>
-
         </View>
       }
-      rightContainerStyle={{ justifyContent: 'center' }}
+      rightContainerStyle={{justifyContent: 'center'}}
       hideStatusBar={true}
       backgroundColor="transparent"
     />

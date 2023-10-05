@@ -16,7 +16,7 @@ const usestyles = makeStyles(({colors}) => ({
   txtCircle: {
     fontSize: normalize(18),
     fontWeight: '700',
-    letterSpacing: normalize(0.2),
+    letterSpacing: normalize(0.6),
     fontStyle: 'normal',
     fontFamily: fontFamilySetup.bold,
     color: colors.black,

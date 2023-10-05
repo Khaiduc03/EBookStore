@@ -1,12 +1,12 @@
 import React, {FunctionComponent} from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
 import {images} from '../../../../assets';
-import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import useStyles from './styles';
-import { TableofContent } from './components';
 import TextCustom from '../../../../components/customs/Text';
+import { HeaderCustom } from '../../../../components';
+import { TableofContent } from './Components';
 
 const Profile: FunctionComponent = () => {
   const styles = useStyles();

@@ -15,7 +15,7 @@ const Payments_method: React.FC = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'chevron-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
         title="Payments Method"
         onPressLeftIcon={handlePressGoback}
       />

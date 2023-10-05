@@ -15,6 +15,3 @@ export {default as Switch_custom} from './Switch';
 export {default as Ratings} from './Rating';
 export {default as Text} from './Text';
 export {default as Toggleable} from './Toggleable';
-
-
-

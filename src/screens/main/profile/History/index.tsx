@@ -5,7 +5,7 @@ import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {HeaderCustom} from '../../../../components';
 
-const BecomeVIP: React.FC = () => {
+const History: React.FC = () => {
   const styles = useStyles();
   const handlePressGoback = () => {
     NavigationService.navigate(routes.PROFILE);
@@ -14,12 +14,12 @@ const BecomeVIP: React.FC = () => {
     <View style={styles.container}>
       <HeaderCustom
         leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
-        title="Become Member VIP"
+        title="History"
         onPressLeftIcon={handlePressGoback}
       />
-      <Text style={styles.text}>Screen Member VIP this here!!!!!!</Text>
+      <Text style={styles.text}>History</Text>
     </View>
   );
 };
 
-export default BecomeVIP;
+export default History;

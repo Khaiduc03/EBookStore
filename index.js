@@ -12,11 +12,7 @@ import React from 'react';
 AppRegistry.registerComponent(appName, () => () => (
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <>
-        <App />
-      </>
+      <App />
     </PersistGate>
   </Provider>
-
 ));
-

@@ -27,14 +27,14 @@ const useStyles = makeStyles(({colors}) => ({
     height: normalize(24),
   },
   Name: {
-    fontSize: normalize(12),
+    fontSize: normalize(15),
     letterSpacing: normalize(0.2),
     fontStyle: 'normal',
     fontFamily: fontFamilySetup.bold,
     color: colors.black,
   },
   content: {
-    fontSize: normalize(12),
+    fontSize: normalize(14),
     letterSpacing: normalize(0.2),
     fontStyle: 'normal',
     fontFamily: fontFamilySetup.regular,

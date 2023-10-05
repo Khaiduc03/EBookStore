@@ -162,7 +162,7 @@ const Update_Profile: FunctionComponent = () => {
       //  behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <HeaderCustom
-        leftIcon={{name: 'chevron-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
         title="Update Profile"
         onPressLeftIcon={handlePressGoback}
       />
