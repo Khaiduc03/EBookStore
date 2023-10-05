@@ -6,6 +6,7 @@ import {useAppSelector} from '../hooks';
 import {getAuthEnableSignIn} from '../redux/selectors/auth.selector';
 import {getMode} from '../redux/selectors/thems.selector';
 import SignIn from '../screens/auth/sign-in';
+import Message from '../screens/main/message/Messages';
 import {navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
@@ -38,8 +39,8 @@ const RootNavigation = () => {
         backgroundColor={usestyles().Mode.backgroundColor}
         barStyle={themeMode}
       />
-      {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
-      {/* <SignIn /> */}
+      {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
+      <Message />
     </NavigationContainer>
   );
 };

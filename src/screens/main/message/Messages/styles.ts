@@ -1,5 +1,6 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {StyleSheet} from 'react-native';
+import {Device} from '../../../../utils';
 import {fontFamilySetup} from '../../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
@@ -11,8 +12,28 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: colors.grey6,
   },
   body: {
-    flex: 6,
-    padding: normalize(24),
+    flex: 1,
+    backgroundColor: colors.grey6,
+    padding: normalize(30),
+  },
+  footer: {
+    width: '100%',
+    height: normalize(56),
+    backgroundColor: colors.white,
+  },
+  viewFooter: {
+    width: '100%',
+    height: 'auto',
+    backgroundColor: colors.white,
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  containerScrollView: {
+    height: 'auto',
+    backgroundColor: colors.grey6,
+  },
+  viewRow: {
+    flexDirection: 'row',
   },
   profileImage: {
     width: normalize(36),
@@ -22,9 +43,6 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewText: {
     left: normalize(-14),
-  },
-  viewRow: {
-    flexDirection: 'row',
   },
   user: {
     alignItems: 'flex-end',
@@ -40,7 +58,7 @@ const useStyles = makeStyles(({colors}) => ({
     padding: normalize(12),
     flexWrap: 'wrap',
     alignSelf: 'flex-end',
-    backgroundColor: '#20A090',
+    backgroundColor: colors.bubbleUserBackground,
   },
   bubbleNotUser: {
     width: 'auto',
@@ -50,7 +68,7 @@ const useStyles = makeStyles(({colors}) => ({
     padding: normalize(12),
     flexWrap: 'wrap',
     alignSelf: 'flex-start',
-    backgroundColor: '#F2F7FB',
+    backgroundColor: colors.bubbleNotUserBackground,
   },
   textUser: {
     width: 'auto',
@@ -86,28 +104,18 @@ const useStyles = makeStyles(({colors}) => ({
   iconBack: {
     color: colors.black,
   },
-  iconEmoji: {
-    flex: 1,
-    color: colors.colorIcon,
-    backgroundColor: colors.white,
-  },
   viewBackgroundEmoji: {
+    flex: 1,
     width: '100%',
     height: normalize(340),
     backgroundColor: colors.white,
     justifyContent: 'center',
     alignSelf: 'center',
   },
-  viewFooter: {
-    width: '100%',
-    backgroundColor: colors.white,
-    flexDirection: 'row',
-    alignItems: 'center',
-    direction: 'inherit',
-  },
   viewClearAll: {
     width: '100%',
     alignItems: 'center',
+    marginVertical: normalize(6),
   },
   btnArrowDown: {
     borderRadius: normalize(100),
@@ -128,6 +136,14 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.clear,
     textAlign: 'center',
   },
+  leftContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: normalize(14),
+  },
+  leftIcon: {
+    transform: [{rotate: '40deg'}],
+  },
   rightContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -135,31 +151,38 @@ const useStyles = makeStyles(({colors}) => ({
   },
   rightIconLeft: {
     position: 'absolute',
-    right: normalize(80),
+    left: normalize(-44),
   },
   rightIconRight: {
-    marginHorizontal: normalize(18),
-  },
-  viewIconLeft: {
-    transform: [{rotate: '40deg'}],
-    marginHorizontal: normalize(16),
+    position: 'absolute',
+    right: normalize(-44),
   },
   textInput: {
     width: normalize(250),
-    marginVertical: normalize(14),
     fontSize: normalize(15),
     fontFamily: fontFamilySetup.bold,
-    paddingLeft: normalize(16),
-    paddingRight: normalize(46),
+    paddingVertical: normalize(12),
+    paddingStart: normalize(16),
+    paddingEnd: normalize(48),
     borderWidth: normalize(1),
     borderColor: colors.black,
     borderRadius: normalize(25),
+    marginVertical: normalize(5),
   },
   textInputHeightAuto: {
     height: normalize(50),
   },
   textInputHeightAutoLimit: {
-    height: normalize(150),
+    maxHeight: 'auto',
+  },
+  viewFocus: {
+    height: Device.getDeviceHeight() - 510,
+  },
+  viewBlur: {
+    height: normalize(60),
+  },
+  viewEmoji: {
+    height: normalize(460),
   },
 }));
 
