@@ -8,9 +8,6 @@ const useStyles = makeStyles(({colors}) => ({
   iconLeftStyle: {
     color: colors.black,
   },
-  headerStyle: {
-    backgroundColor: colors.backgrounDetai,
-  },
 }));
 
 export default useStyles;

@@ -11,12 +11,12 @@ const useStyles = makeStyles(({colors}) => ({
   dotActive: {
     color: colors.white,
     marginRight: normalize(10),
-    fontSize: normalize(18),
+    fontSize: normalize(15),
   },
   dot: {
     color: colors.grey2,
     marginRight: normalize(10),
-    fontSize: normalize(18),
+    fontSize: normalize(15),
   },
 }));
 

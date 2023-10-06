@@ -4,6 +4,7 @@ import useStyles from './style';
 import {ComicItem} from '../../../../../../components';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
+const gap = 10;
 
 const ComicsNew = ({numCols}: {numCols: number}) => {
   const number = numCols;
@@ -18,18 +19,17 @@ const ComicsNew = ({numCols}: {numCols: number}) => {
   );
   const styles = useStyles();
   return (
-    <View>
-      <View style={styles.container}>
-        <FlatList
-          data={data}
-          renderItem={RenderItem}
-          keyExtractor={item => item.id.toString()}
-          showsVerticalScrollIndicator={false}
-          key={numCols}
-          numColumns={numCols}
-          scrollEnabled={false}
-        />
-      </View>
+    <View style={styles.container}>
+      <FlatList
+        columnWrapperStyle={numCols === 3 ? {gap} : null}
+        data={data}
+        renderItem={RenderItem}
+        keyExtractor={item => item.id.toString()}
+        showsVerticalScrollIndicator={false}
+        key={numCols}
+        numColumns={numCols}
+        scrollEnabled={false}
+      />
     </View>
   );
 };
@@ -38,7 +38,7 @@ export default ComicsNew;
 const data = [
   {
     id: 1,
-    name: 'Boruto & Itachi',
+    name: 'Boruto & Itachi Itachi',
     topic: 'Tiffany',
     image:
       'https://i.pinimg.com/originals/fc/99/4e/fc994e76624d91c7baa236cec4043755.jpg',

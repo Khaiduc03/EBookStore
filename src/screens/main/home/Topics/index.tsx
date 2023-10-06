@@ -6,6 +6,7 @@ import {HeaderCustom, TopicItem} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {ScrollView} from 'react-native-gesture-handler';
+const gap = 16;
 
 const Topics: React.FunctionComponent = () => {
   const handlePressSearch = () => {
@@ -19,6 +20,7 @@ const Topics: React.FunctionComponent = () => {
   const RenderItem = ({item, index}: any) => (
     <TopicItem
       title={item.title}
+      titleStyle={styles.titleStyle}
       viewStyle={styles.imgContainer}
       image={item.image}
       containerStyle={styles.itemContainer}
@@ -40,18 +42,17 @@ const Topics: React.FunctionComponent = () => {
         onPressLeftIcon={handlePressBack}
         onPressRightIconRight={handlePressSearch}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.listTopicContainer}>
-          <FlatList
-            data={data}
-            renderItem={RenderItem}
-            keyExtractor={item => item.id.toString()}
-            showsVerticalScrollIndicator={false}
-            numColumns={2}
-            scrollEnabled={false}
-          />
-        </View>
-      </ScrollView>
+
+      <View style={styles.listTopicContainer}>
+        <FlatList
+          data={data}
+          renderItem={RenderItem}
+          keyExtractor={item => item.id.toString()}
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          columnWrapperStyle={{gap}}
+        />
+      </View>
     </View>
   );
 };

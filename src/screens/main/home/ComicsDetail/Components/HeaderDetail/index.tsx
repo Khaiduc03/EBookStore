@@ -1,33 +1,32 @@
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {ImageBackground, Text, View, Image, StatusBar} from 'react-native';
 import React from 'react';
 import useStyles from './styles';
 import {Icon, Divider} from '@rneui/themed';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const HeaderDetail = () => {
   const styles = useStyles();
   const topicTexts = ['Fantasy', 'Science Fiction', 'Mystery', 'Mystery'];
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      style={styles.container}
+      resizeMode="cover"
+      source={{
+        uri: 'https://gamek.mediacdn.vn/133514250583805952/2022/1/15/sword-she-16422636752621114958409.jpg',
+      }}>
       <View style={styles.contentContainer}>
-        <Image
-          style={styles.imgComic}
-          source={{
-            uri: 'https://vidian.me/public-img/image-1677306627308.jpeg',
-          }}
-        />
-        <View style={styles.content}>
-          <Text style={styles.nameComic}>Doremon </Text>
-          <Text style={styles.author}>Fujiko F.ujio</Text>
-          <Text style={styles.dayCreat}>Released on Dec, 2015</Text>
-          <View style={styles.topicsContainer}>
-            {topicTexts.map((text, index) => (
-              <View key={index} style={styles.itemTopics}>
-                <Text style={styles.textTopics}>{text}</Text>
-              </View>
-            ))}
-          </View>
+        <Text style={styles.nameComic}>Doremon </Text>
+        <Text style={styles.author}>Fujiko F.ujio</Text>
+        <Text style={styles.dayCreat}>Released on Dec, 2015</Text>
+        <View style={styles.topicsContainer}>
+          {topicTexts.map((text, index) => (
+            <View key={index} style={styles.itemTopics}>
+              <Text style={styles.textTopics}>{text}</Text>
+            </View>
+          ))}
         </View>
       </View>
+
       <View style={styles.interactContainer}>
         <View style={styles.interactItem}>
           <View style={styles.rate}>
@@ -52,7 +51,7 @@ const HeaderDetail = () => {
           <Text style={styles.titleInteracItem}>Views</Text>
         </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 

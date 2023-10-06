@@ -2,24 +2,26 @@ import {StyleSheet} from 'react-native';
 import {makeStyles, normalize} from '@rneui/themed';
 import {Device} from '../../../../../../utils';
 
+const WIDTH = Device.getDeviceWidth();
+
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    alignItems: 'center',
+    marginHorizontal: normalize(16),
+    flex: 1,
   },
   comicItem: {
-    width: '100%',
-    height: normalize(180),
+    height: normalize(135),
     flexDirection: 'row',
+    borderRadius: 6,
     marginBottom: normalize(15),
-    paddingLeft: normalize(15),
   },
   imgComic: {
-    width: '36%',
-    borderRadius: normalize(10),
+    width: WIDTH * 0.28,
+    borderRadius: normalize(6),
     marginRight: '2%',
   },
   content: {
-    width: '62%',
+    flex: 1,
   },
 }));
 
