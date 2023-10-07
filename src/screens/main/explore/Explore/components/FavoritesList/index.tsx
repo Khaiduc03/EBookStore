@@ -5,10 +5,11 @@ import useStyles from './styles';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
 import ItemFavoritesList from '../ItemFavoritesList';
+ItemFavoritesList;
 
 const FavoritesList: FunctionComponent = () => {
   const styles = useStyles();
-  const RenderItem = ({item, index}: any) => <ItemFavoritesList data={item} />;
+  const RenderItem = ({item}: any) => <ItemFavoritesList data={item} />;
   const handlePressSearch = () => {
     NavigationService.navigate(routes.SEARCH);
   };

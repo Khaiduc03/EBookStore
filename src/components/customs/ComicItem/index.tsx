@@ -21,12 +21,23 @@ const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
       />
 
       <View style={props.contentStyle || styles.content}>
-        <Text style={styles.nameTopic}>{comic.topic}</Text>
+        {!props.topicStyle && (
+          <Text style={styles.nameTopic}>{comic.topic[0]}</Text>
+        )}
         <Text style={styles.nameComic}>{comic.name}</Text>
         <View style={styles.rate}>
-          <Icon name="star-half" size={20} />
+          <Icon name="star-half" size={18} />
           <Text style={styles.textRate}>{comic.rate}</Text>
         </View>
+        {props.topicStyle && (
+          <View style={props.topicStyle}>
+            {props.data.topic.map((text, index) => (
+              <View key={index} style={styles.itemTopics}>
+                <Text style={styles.textTopics}>{text}</Text>
+              </View>
+            ))}
+          </View>
+        )}
       </View>
     </View>
   );

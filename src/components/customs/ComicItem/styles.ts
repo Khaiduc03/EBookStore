@@ -7,11 +7,11 @@ const WIDTH = Device.getDeviceWidth();
 const useStyles = makeStyles(({colors}) => ({
   container: {
     height: Device.getDeviceHeight() * 0.306,
-    width: (WIDTH - normalize(26) * 2) / 3,
+    width: (WIDTH - normalize(21) * 2) / 3,
   },
   imgComic: {
     width: '100%',
-    height: Device.getDeviceHeight() * 0.18,
+    height: Device.getDeviceHeight() * 0.2,
     borderRadius: 6,
   },
   content: {
@@ -36,9 +36,22 @@ const useStyles = makeStyles(({colors}) => ({
   },
   textRate: {
     color: colors.grey4,
-    fontSize: normalize(13),
+    fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
     marginLeft: normalize(5),
+  },
+  itemTopics: {
+    backgroundColor: colors.backgroundTopic,
+    marginRight: normalize(5),
+    marginTop: normalize(5),
+    paddingHorizontal: normalize(8),
+    paddingVertical: normalize(5),
+    borderRadius: 4,
+  },
+  textTopics: {
+    fontSize: normalize(7),
+    color: colors.black,
+    textAlign: 'center',
   },
 }));
 

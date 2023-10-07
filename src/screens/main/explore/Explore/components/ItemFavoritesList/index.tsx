@@ -17,7 +17,7 @@ const ItemFavoritesList: React.FunctionComponent<CustomComicProps> = props => {
         onPress={() => NavigationService.navigate(routes.COMICDETAIL)}
         style={styles.imgComic}>
         <Image
-          style={{width: '100%', height: '100%', borderRadius: 10}}
+          style={{width: '100%', height: '100%', borderRadius: 6}}
           source={{uri: comic.image}}
           PlaceholderContent={<ActivityIndicator />}
         />
@@ -27,7 +27,7 @@ const ItemFavoritesList: React.FunctionComponent<CustomComicProps> = props => {
           <Text style={styles.nameTopic}>{comic.topic}</Text>
           <Text style={styles.nameComic}>{comic.name}</Text>
           <View style={styles.rate}>
-            <Icon name="star-half" size={24} />
+            <Icon name="star-half" size={18} />
             <Text style={styles.textRate}>{comic.rate}</Text>
           </View>
         </View>
@@ -35,7 +35,7 @@ const ItemFavoritesList: React.FunctionComponent<CustomComicProps> = props => {
           <Icon
             name="ellipsis-vertical-sharp"
             type="ionicon"
-            size={24}
+            size={20}
             color={styles.ellipsiIconStyle.color}
           />
         </TouchableOpacity>

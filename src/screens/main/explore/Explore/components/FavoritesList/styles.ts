@@ -6,10 +6,7 @@ const useStyles = makeStyles(({colors}) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-  },
-
-  leftIconStyle: {
-    marginRight: normalize(5),
+    marginHorizontal: normalize(15),
   },
 }));
 

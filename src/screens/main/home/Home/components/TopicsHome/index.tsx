@@ -5,7 +5,6 @@ import {Topic} from '../../../../../../types/TopicType';
 import {TopicItem} from '../../../../../../components';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
-const gap = 10;
 
 const TopicsHome = () => {
   const styles = useStyles();
@@ -26,7 +25,7 @@ const TopicsHome = () => {
         keyExtractor={item => item.id.toString()}
         showsHorizontalScrollIndicator={false}
         horizontal
-        contentContainerStyle={{gap}}
+        contentContainerStyle={{gap: 5, paddingHorizontal: 16}}
       />
     </View>
   );

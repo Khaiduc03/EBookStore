@@ -12,7 +12,7 @@ const HeaderDetail = () => {
       style={styles.container}
       resizeMode="cover"
       source={{
-        uri: 'https://gamek.mediacdn.vn/133514250583805952/2022/1/15/sword-she-16422636752621114958409.jpg',
+        uri: 'https://gamek.mediacdn.vn/133514250583805952/2022/1/2/solo-leveling-1620917554185396197198-16410674690231914720800.jpg',
       }}>
       <View style={styles.contentContainer}>
         <Text style={styles.nameComic}>Doremon </Text>

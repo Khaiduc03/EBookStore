@@ -1,4 +1,4 @@
-import {ImageStyle, ViewStyle} from 'react-native';
+import {ImageStyle, TextStyle, ViewStyle} from 'react-native';
 import {Comic} from '../../../types';
 
 export type CustomComicProps = {
@@ -7,4 +7,5 @@ export type CustomComicProps = {
   viewStyle?: ViewStyle | null;
   contentStyle?: ViewStyle | null;
   index: number;
+  topicStyle?: ViewStyle | null;
 };

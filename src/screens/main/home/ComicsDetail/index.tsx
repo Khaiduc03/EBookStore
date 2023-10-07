@@ -22,12 +22,14 @@ const ComicsDetail = () => {
       />
 
       <TabViewItem
+        tabStyle={styles.tabStyle}
         title1={'PREVIEW'}
         title2={'EPISODES'}
         screen1={<Preview />}
         screen2={<Episodes />}
         viewStyle={{height: 800}}
         headerDetail={<HeaderDetail />}
+        titleStyle={styles.titleStyle}
       />
     </View>
   );

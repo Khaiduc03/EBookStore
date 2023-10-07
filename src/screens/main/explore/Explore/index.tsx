@@ -16,8 +16,9 @@ const Explore: FunctionComponent = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        onPressRightIconLeft={handlePressSearch}
+        titleStyle={styles.titleStyle}
         leftIconStyle={styles.leftIconStyle}
+        onPressRightIconLeft={handlePressSearch}
         leftIcon={{name: 'book', type: 'font-awesome'}}
         title="Favorites List"
         rightIconleft={{name: 'search', type: 'ionicon'}}
