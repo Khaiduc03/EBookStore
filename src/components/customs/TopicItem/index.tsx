@@ -1,12 +1,11 @@
 import {StyleSheet, Text, View, ImageBackground} from 'react-native';
 import React from 'react';
-
+import useStyles from './styles';
 import {CustomTopicsProps} from './types';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {NavigationService} from '../../../navigation';
 
 import {routes} from '../../../constants';
-import useStyles from './styles';
 
 const TopicItem: React.FunctionComponent<CustomTopicsProps> = props => {
   const styles = useStyles();
@@ -14,11 +13,9 @@ const TopicItem: React.FunctionComponent<CustomTopicsProps> = props => {
   return (
     <TouchableOpacity
       onPress={() => NavigationService.navigate(routes.COMICBYTOPIC)}
-      style={
-        props.index % 2 !== 0 ? styles.containerProps : {} || styles.container
-      }>
+      style={styles.container || props.viewStyle}>
       <ImageBackground
-        borderRadius={10}
+        borderRadius={6}
         resizeMode="cover"
         style={[styles.imgBackground, props.viewStyle]}
         source={{uri: props.image}}>

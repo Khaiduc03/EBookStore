@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { BASE_URL, Endpoints } from '../../environment';
-import { showToastError } from '../../utils';
-import { AuthActions } from '../reducer';
-import { store } from '../store';
+import {BASE_URL, Endpoints} from '../../environment';
+import {showToastError} from '../../utils';
+import {AuthActions} from '../reducer';
+import {store} from '../store';
 
 const apiService = axios.create({
   baseURL: BASE_URL,
@@ -10,7 +10,7 @@ const apiService = axios.create({
     'Content-Type': 'application/json',
   },
 });
-
+console.log(BASE_URL);
 apiService.interceptors.request.use(
   config => {
     const accessToken = store.getState().auth.accessToken;
@@ -25,15 +25,12 @@ apiService.interceptors.request.use(
     return Promise.reject(error);
   },
 );
-
 apiService.interceptors.response.use(
   response => {
-
     //showToastSuccess(`Call Api Successful  ${response.request.responseURL}`);
     return response;
   },
   async error => {
-
     const originalRequest = error.config;
     const refreshToken = store.getState().auth.refreshToken;
 
@@ -47,7 +44,6 @@ apiService.interceptors.response.use(
       const res = await apiService.post(Endpoints.REFRESH_TOKEN_ENDPOINT, {
         refreshToken,
       });
-
       if (res.status === 200) {
         store.dispatch(AuthActions.refreshToken(res.data));
         return apiService(originalRequest);

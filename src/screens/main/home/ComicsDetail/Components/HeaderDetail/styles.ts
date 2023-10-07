@@ -6,16 +6,15 @@ const WIDTH = Device.getDeviceWidth();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    backgroundColor: colors.backgrounDetai,
-    paddingHorizontal: normalize(24),
     width: WIDTH,
+    height: normalize(250),
+    justifyContent: 'space-between',
   },
 
   contentContainer: {
-    flexDirection: 'row',
     width: '100%',
-    alignItems: 'center',
     marginTop: normalize(10),
+    marginLeft: normalize(10),
   },
   dayCreat: {
     color: colors.white,
@@ -33,8 +32,7 @@ const useStyles = makeStyles(({colors}) => ({
   nameComic: {
     color: colors.white,
     fontFamily: fontFamilySetup.bold,
-    fontSize: normalize(25),
-    lineHeight: normalize(23),
+    fontSize: normalize(30),
   },
   imgComic: {
     height: Device.getDeviceHeight() * 0.22,
@@ -44,10 +42,10 @@ const useStyles = makeStyles(({colors}) => ({
 
   topicsContainer: {
     flexDirection: 'row',
-    width: '100%',
+    width: '60%',
     flexWrap: 'wrap',
   },
-  content: {marginLeft: normalize(20), flex: 1},
+
   itemTopics: {
     backgroundColor: colors.secondary,
     marginRight: normalize(10),
@@ -66,7 +64,7 @@ const useStyles = makeStyles(({colors}) => ({
   interactContainer: {
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     marginVertical: normalize(10),
   },
   interactItem: {
@@ -77,13 +75,14 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
   },
   numberInteract: {
-    color: colors.black,
+    color: colors.white,
     fontSize: normalize(16),
     fontFamily: fontFamilySetup.bold,
     lineHeight: normalize(25),
+    marginRight: normalize(5),
   },
   titleInteracItem: {
-    color: colors.black,
+    color: colors.white,
     fontSize: normalize(10),
     fontFamily: fontFamilySetup.medium,
   },

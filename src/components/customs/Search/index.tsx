@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { SearchBar } from '@rneui/themed';
-import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import { Icon } from '@rneui/base';
-import { TouchableOpacity } from 'react-native';
+import React, {useState} from 'react';
+import {SearchBar} from '@rneui/themed';
+import {
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from 'react-native';
+import {Icon} from '@rneui/base';
+import {TouchableOpacity} from 'react-native';
 import useStyles from './styles';
 import { SearchBarComponentProps } from './types';
 
@@ -35,7 +40,14 @@ const SearchCustom: React.FunctionComponent<SearchBarComponentProps> = props => 
           ? styles.backGroundInputFocus
           : styles.backGroundInputNoFocus,
       ]}
-      cancelIcon={{}}
+      cancelIcon={
+        <Icon
+          onPress={() => Keyboard.dismiss()}
+          name="search"
+          size={24}
+          color={styles.cancelIcon.color}
+        />
+      }
       autoFocus={true}
       returnKeyType="search"
       inputStyle={props.inputStyle || styles.inputStyle}

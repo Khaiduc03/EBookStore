@@ -15,20 +15,21 @@ const ComicByTopic = () => {
   const handlePressBack = () => {
     NavigationService.goBack();
   };
-  const [numCols, setNumCols] = useState(2);
+  const [numCols, setNumCols] = useState(3);
 
   const handleListIconPress = () => {
     setNumCols(1);
   };
   const handleGridIconPress = () => {
-    setNumCols(2);
+    setNumCols(3);
   };
 
   return (
     <View style={styles.container}>
       <HeaderCustom
         title="Romance"
-        leftIcon={{name: 'arrow-back', color: styles.iconStyle.color}}
+        leftIconStyle={styles.leftIconStyle}
+        leftIcon={{name: 'arrow-back', color: styles.leftIconStyle.color}}
         onPressLeftIcon={handlePressBack}
         rightIconleft={{name: 'search', type: 'ionicon'}}
         onPressRightIconLeft={handlePressSearch}
@@ -36,12 +37,12 @@ const ComicByTopic = () => {
       />
       <ScrollView>
         <HeaderCustom
-          titleStyle={styles.textHeader}
+          titleStyle={styles.titleHeaderStyle}
           title="Show in "
           rightIconleft={{
             name: 'grid-outline',
             type: 'ionicon',
-            color: numCols === 2 ? '#F89300' : '',
+            color: numCols === 3 ? '#F89300' : '',
           }}
           rightIconRight={{
             name: 'list-circle-outline',

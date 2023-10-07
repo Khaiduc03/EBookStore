@@ -1,4 +1,4 @@
-import {ViewComponent, ViewStyle} from 'react-native';
+import {ViewComponent, ViewStyle, TextStyle} from 'react-native';
 
 export type CustomTabViewItemProps = {
   screen1: any;
@@ -7,4 +7,6 @@ export type CustomTabViewItemProps = {
   title2?: string;
   viewStyle?: ViewStyle;
   headerDetail?: any;
+  tabStyle?: ViewStyle;
+  titleStyle?: TextStyle;
 };

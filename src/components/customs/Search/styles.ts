@@ -29,6 +29,9 @@ const useStyles = makeStyles(({ colors }) => ({
   clearIcon: {
     color: colors.primary,
   },
+  cancelIcon: {
+    color: colors.black,
+  },
 }));
 
 export default useStyles;

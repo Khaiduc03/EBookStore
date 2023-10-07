@@ -1,13 +1,13 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
   FlatList,
-  Image,
+  ActivityIndicator,
   StyleSheet,
   Text,
   View,
   Dimensions,
 } from 'react-native';
-
+import {Image} from '@rneui/themed';
 import useStyles from './styles';
 import {Device} from '../../../../../../utils';
 
@@ -57,7 +57,8 @@ const BannerComic: React.FC = () => {
       <View>
         <Image
           source={{uri: item.image}}
-          style={{height: screenWidth * 0.6, width: screenWidth}}
+          style={{height: screenWidth * 0.5, width: screenWidth}}
+          PlaceholderContent={<ActivityIndicator />}
         />
       </View>
     );

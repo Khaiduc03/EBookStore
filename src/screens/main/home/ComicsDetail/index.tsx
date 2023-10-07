@@ -1,5 +1,5 @@
-import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {HeaderCustom, TabViewItem} from '../../../../components';
 import useStyles from './styles';
 import {Episodes, HeaderDetail, Preview} from './Components';
@@ -10,10 +10,10 @@ const ComicsDetail = () => {
   const handlePressBack = () => {
     NavigationService.goBack();
   };
+
   return (
     <View style={styles.container}>
       <HeaderCustom
-        viewStyle={styles.headerStyle}
         onPressLeftIcon={handlePressBack}
         leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         rightIconleft={{name: 'bookmark-outline', type: 'ionicon'}}
@@ -22,12 +22,14 @@ const ComicsDetail = () => {
       />
 
       <TabViewItem
+        tabStyle={styles.tabStyle}
         title1={'PREVIEW'}
         title2={'EPISODES'}
         screen1={<Preview />}
         screen2={<Episodes />}
         viewStyle={{height: 800}}
         headerDetail={<HeaderDetail />}
+        titleStyle={styles.titleStyle}
       />
     </View>
   );

@@ -25,6 +25,7 @@ const TopicsHome = () => {
         keyExtractor={item => item.id.toString()}
         showsHorizontalScrollIndicator={false}
         horizontal
+        contentContainerStyle={{gap: 5, paddingHorizontal: 16}}
       />
     </View>
   );

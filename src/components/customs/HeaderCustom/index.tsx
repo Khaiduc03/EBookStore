@@ -1,11 +1,8 @@
-import {View, Text} from 'react-native';
-import {Header, Icon} from '@rneui/base';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {TouchableOpacity} from 'react-native';
-import {CustomHeaderProps} from './types';
+import { Header, Icon } from '@rneui/base';
+import { useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import useStyles from './styles';
-import {useState} from 'react';
-import {normalize} from 'path';
+import { CustomHeaderProps } from './types';
 
 const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
   const styles = useStyles();
@@ -28,13 +25,13 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
             <Icon
               type={props.leftIcon.type}
               name={props.leftIcon.name}
-              size={30}
+              size={props.leftIcon.size || 30}
               color={props.leftIcon.color || styles.leftIcon.color}
             />
           )}
         </TouchableOpacity>
       }
-      leftContainerStyle={{justifyContent: 'center'}}
+      leftContainerStyle={[{justifyContent: 'center'}, props.leftIconStyle]}
       placement="left"
       rightComponent={
         <View style={styles.rightContainer}>
@@ -43,10 +40,10 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
             onPress={props.onPressRightIconLeft}>
             {props.rightIconleft?.name && (
               <Icon
-                type={props.rightIconleft?.type}
-                size={30}
-                name={props.rightIconleft?.name}
-                color={props.rightIconleft?.color || styles.rightIcon.color}
+                type={props.rightIconleft.type}
+                size={props.rightIconleft.size || 24}
+                name={props.rightIconleft.name}
+                color={props.rightIconleft.color || styles.rightIcon.color}
               />
             )}
           </TouchableOpacity>
@@ -55,20 +52,20 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
             onPress={props.onPressRightIconMiddle}>
             {props.rightIconMiddle?.name && (
               <Icon
-                type={props.rightIconMiddle?.type}
-                size={24}
-                name={props.rightIconMiddle?.name}
-                color={props.rightIconMiddle?.color || styles.rightIcon.color}
+                type={props.rightIconMiddle.type}
+                size={props.rightIconMiddle.size || 24}
+                name={props.rightIconMiddle.name}
+                color={props.rightIconMiddle.color || styles.rightIcon.color}
               />
             )}
           </TouchableOpacity>
           <TouchableOpacity onPress={props.onPressRightIconRight}>
             {props.rightIconRight?.name && (
               <Icon
-                type={props.rightIconRight?.type}
+                type={props.rightIconRight.type}
                 color={props.rightIconRight.color || styles.rightIcon.color}
-                size={24}
-                name={props.rightIconRight?.name}
+                size={props.rightIconRight.size || 24}
+                name={props.rightIconRight.name}
               />
             )}
 

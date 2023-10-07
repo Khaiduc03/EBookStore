@@ -12,31 +12,32 @@ const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
   const comic: Comic = props.data;
   return (
-    <View
-      style={[
-        props.viewStyle
-          ? props.viewStyle
-          : props.index % 2 !== 0
-          ? {marginLeft: 15}
-          : {marginLeft: 0} || styles.container,
-        ,
-      ]}>
-      <TouchableOpacity
+    <View style={props.viewStyle || styles.container}>
+      <Image
         onPress={() => NavigationService.navigate(routes.COMICDETAIL)}
-        style={props.imageStyle || styles.imgComic}>
-        <Image
-          style={{width: '100%', height: '100%', borderRadius: 10}}
-          source={{uri: comic.image}}
-          PlaceholderContent={<ActivityIndicator />}
-        />
-      </TouchableOpacity>
+        style={props.imageStyle || styles.imgComic}
+        source={{uri: comic.image}}
+        PlaceholderContent={<ActivityIndicator />}
+      />
+
       <View style={props.contentStyle || styles.content}>
-        <Text style={styles.nameTopic}>{comic.topic}</Text>
+        {!props.topicStyle && (
+          <Text style={styles.nameTopic}>{comic.topic[0]}</Text>
+        )}
         <Text style={styles.nameComic}>{comic.name}</Text>
         <View style={styles.rate}>
-          <Icon name="star-half" size={24} />
+          <Icon name="star-half" size={18} />
           <Text style={styles.textRate}>{comic.rate}</Text>
         </View>
+        {props.topicStyle && (
+          <View style={props.topicStyle}>
+            {props.data.topic.map((text, index) => (
+              <View key={index} style={styles.itemTopics}>
+                <Text style={styles.textTopics}>{text}</Text>
+              </View>
+            ))}
+          </View>
+        )}
       </View>
     </View>
   );

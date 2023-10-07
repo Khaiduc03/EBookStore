@@ -30,6 +30,7 @@ export const ENDPOINTS = {
   DELETE_TOPIC: Config.DELETE_TOPIC,
 
   COMIC: Config.COMIC,
+
   COMIC_BY_TOPIC: Config.COMIC_BY_TOPIC,
   COMIC_BY_NAME: Config.COMIC_BY_NAME,
   COMIC_UUID: Config.COMIC_UUID,
@@ -40,6 +41,7 @@ export const ENDPOINTS = {
   CHAPTER: Config.CHAPTER,
   CHAPTER_UUID: Config.CHAPTER_UUID,
 };
+console.log(Config.COMIC);
 
 export enum Endpoints {
   //AUTH

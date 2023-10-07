@@ -14,22 +14,22 @@ const ComicsNew = ({numCols}: {numCols: number}) => {
       imageStyle={number == 1 ? styles.imgComic : null}
       contentStyle={number == 1 ? styles.content : null}
       index={index}
+      topicStyle={number == 1 ? styles.topicsContainer : null}
     />
   );
   const styles = useStyles();
   return (
-    <View>
-      <View style={styles.container}>
-        <FlatList
-          data={data}
-          renderItem={RenderItem}
-          keyExtractor={item => item.id.toString()}
-          showsVerticalScrollIndicator={false}
-          key={numCols}
-          numColumns={numCols}
-          scrollEnabled={false}
-        />
-      </View>
+    <View style={styles.container}>
+      <FlatList
+        columnWrapperStyle={numCols === 3 ? {gap: 5} : null}
+        data={data}
+        renderItem={RenderItem}
+        keyExtractor={item => item.id.toString()}
+        showsVerticalScrollIndicator={false}
+        key={numCols}
+        numColumns={numCols}
+        scrollEnabled={false}
+      />
     </View>
   );
 };
@@ -38,8 +38,8 @@ export default ComicsNew;
 const data = [
   {
     id: 1,
-    name: 'Boruto & Itachi',
-    topic: 'Tiffany',
+    name: 'Boruto & Itachi Itachi',
+    topic: ['Fantasy', 'Science Fiction', 'Mystery', 'Mystery'],
     image:
       'https://i.pinimg.com/originals/fc/99/4e/fc994e76624d91c7baa236cec4043755.jpg',
     rate: 3.28,
@@ -47,7 +47,7 @@ const data = [
   {
     id: 2,
     name: 'Boruto & Itachi',
-    topic: 'Osmond',
+    topic: ['Fantasy', 'Science Fiction', 'Mystery', 'Mystery'],
     image:
       'https://i.pinimg.com/1200x/a5/6d/47/a56d47ee7a756a257dec50dfbf87b625.jpg',
     rate: 2.25,
@@ -55,7 +55,7 @@ const data = [
   {
     id: 3,
     name: 'Boruto & Itachi',
-    topic: 'Stan',
+    topic: ['Fantasy', 'Science Fiction', 'Mystery', 'Mystery'],
     image:
       'https://thuvienanime.com/wp-content/uploads/2021/09/lieu-than-thuvienanime-2.jpg',
     rate: 4.5,
@@ -63,7 +63,7 @@ const data = [
   {
     id: 4,
     name: 'Boruto & Itachi',
-    topic: 'Maggie',
+    topic: ['Fantasy', 'Science Fiction', 'Mystery', 'Mystery'],
     image:
       'https://thuvienanime.com/wp-content/uploads/2021/09/lieu-than-thuvienanime-3.jpg',
     rate: 3.26,
@@ -71,14 +71,14 @@ const data = [
   {
     id: 5,
     name: 'Boruto & Itachi',
-    topic: 'Dallis',
+    topic: ['Fantasy', 'Science Fiction', 'Mystery', 'Mystery'],
     image: 'https://vidian.me/public-img/image-1677306627308.jpeg',
     rate: 4.41,
   },
   {
     id: 6,
     name: 'Boruto & Itachi ',
-    topic: 'Tiffany',
+    topic: ['Fantasy', 'Science Fiction', 'Mystery', 'Mystery'],
     image:
       'https://i.pinimg.com/originals/fc/99/4e/fc994e76624d91c7baa236cec4043755.jpg',
     rate: 3.28,
@@ -86,7 +86,7 @@ const data = [
   {
     id: 7,
     name: 'Boruto & Itachi',
-    topic: 'Osmond',
+    topic: ['Fantasy', 'Science Fiction', 'Mystery', 'Mystery'],
     image:
       'https://i.pinimg.com/1200x/a5/6d/47/a56d47ee7a756a257dec50dfbf87b625.jpg',
     rate: 2.25,
@@ -94,7 +94,7 @@ const data = [
   {
     id: 8,
     name: 'Boruto & Itachi',
-    topic: 'Stan',
+    topic: ['Fantasy', 'Science Fiction', 'Mystery', 'Mystery'],
     image:
       'https://thuvienanime.com/wp-content/uploads/2021/09/lieu-than-thuvienanime-2.jpg',
     rate: 4.5,
@@ -102,7 +102,7 @@ const data = [
   {
     id: 9,
     name: 'Boruto & Itachi',
-    topic: 'Maggie',
+    topic: ['Fantasy', 'Science Fiction', 'Mystery', 'Mystery'],
     image:
       'https://thuvienanime.com/wp-content/uploads/2021/09/lieu-than-thuvienanime-3.jpg',
     rate: 3.26,
@@ -110,7 +110,7 @@ const data = [
   {
     id: 10,
     name: 'Boruto & Itachi',
-    topic: 'Dallis',
+    topic: ['Fantasy', 'Science Fiction', 'Mystery', 'Mystery'],
     image: 'https://vidian.me/public-img/image-1677306627308.jpeg',
     rate: 4.41,
   },

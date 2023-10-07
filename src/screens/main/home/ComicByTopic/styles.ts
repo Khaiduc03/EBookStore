@@ -7,10 +7,11 @@ const useStyles = makeStyles(({colors}) => ({
     flex: 1,
     backgroundColor: colors.background,
   },
-  iconStyle: {
+  leftIconStyle: {
     color: colors.black,
+    marginRight: normalize(10),
   },
-  textHeader: {
+  titleHeaderStyle: {
     fontSize: normalize(18),
     fontFamily: fontFamilySetup.bold,
     lineHeight: normalize(25),

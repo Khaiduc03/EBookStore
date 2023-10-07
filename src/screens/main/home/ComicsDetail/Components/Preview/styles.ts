@@ -9,7 +9,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   textHeader: {
     marginTop: normalize(10),
-    fontSize: normalize(25),
+    fontSize: normalize(20),
     fontFamily: fontFamilySetup.bold,
     color: colors.black,
     lineHeight: normalize(35),

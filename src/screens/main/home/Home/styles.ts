@@ -8,10 +8,17 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: colors.background,
   },
   textTitle: {
+    fontSize: normalize(18),
+    fontFamily: fontFamilySetup.bold,
+    color: colors.black,
+  },
+  textTitleHeader: {
     fontSize: normalize(20),
     fontFamily: fontFamilySetup.bold,
-
     color: colors.black,
+  },
+  leftIconStyle: {
+    marginRight: normalize(5),
   },
 }));
 
