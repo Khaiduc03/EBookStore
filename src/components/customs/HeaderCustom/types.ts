@@ -1,9 +1,10 @@
-import {TextStyle, ViewProps} from 'react-native';
+import {TextStyle, ViewProps, ViewStyle} from 'react-native';
 
 export type HeaderIcon = {
   name?: string;
   type?: string;
   color?: string;
+  size?: number;
 };
 
 export type HeaderImage = {
@@ -11,14 +12,17 @@ export type HeaderImage = {
 };
 
 export type CustomHeaderProps = {
+  viewStyle?: ViewStyle;
   title?: string; // Tiêu đề
+  titleStyle?: TextStyle;
   leftIcon?: HeaderIcon; // Icon bên trái
   onPressLeftIcon?: () => void;
   onPressRightIconLeft?: () => void;
   onPressRightIconRight?: () => void;
-  rightIconleft?: HeaderIcon; // Icon bên phải phía bên trái
-  rightIconRight?: HeaderIcon; // Icon bên phải phía bên phải
-  titleStyle?: TextStyle; // Kiểu dáng của tiêu đề
+  onPressRightIconMiddle?: () => void;
+  rightIconleft?: HeaderIcon; // Icon bên phảir
+  rightIconMiddle?: HeaderIcon; // Icon bên phảir
+  rightIconRight?: HeaderIcon; // Icon bên phảir
   imageUri?: HeaderImage;
   fullName?: string;
   userStatus?: string;

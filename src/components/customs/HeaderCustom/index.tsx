@@ -62,6 +62,20 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
               />
             )}
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.rightIconLeft}
+            onPress={props.onPressRightIconMiddle}>
+            {props.rightIconMiddle?.name && (
+              <Icon
+                type={props.rightIconMiddle.type}
+                size={props.rightIconMiddle.size || 24}
+                name={props.rightIconMiddle.name}
+                color={props.rightIconMiddle.color || styles.rightIcon.color}
+              />
+            )}
+          </TouchableOpacity>
+
           <TouchableOpacity
             style={styles.rightIconRight}
             onPress={props.onPressRightIconRight}>
