@@ -1,6 +1,7 @@
 import {Icon, Text} from '@rneui/base';
 import React, {Fragment, useRef, useState} from 'react';
 import {
+  Animated,
   Keyboard,
   NativeScrollEvent,
   NativeSyntheticEvent,
@@ -14,68 +15,89 @@ import EmojiSelector, {Categories} from 'react-native-emoji-selector';
 import {HeaderCustom} from '../../../../components';
 import {ChatBubble} from './components/RenderItem/ChatBubbleItem';
 import useStyles from './styles';
-import {messages} from './types';
+import {IMessage, messages} from './types';
 
 const Message: React.FC = () => {
   const styles = useStyles();
 
-  const [textInputValue, setTextInputValue] = useState<string>('');
   const [selectedEmojis, setSelectedEmojis] = useState<string[]>([]);
   const [isShowEmoji, setIsShowEmoji] = useState<boolean>(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
   const scrollViewRef = useRef<ScrollView>(null);
   const inputRef = useRef<View>(null);
-  const emojiRef = useRef<View>(null);
+  const [newMessage, setNewMessage] = useState<string>('');
+  const footerRef = useRef<View>(null);
+  const translateY = useRef(new Animated.Value(0)).current;
 
   const handleIconEmojiPress = () => {
     setIsShowEmoji(!isShowEmoji);
-    Keyboard.dismiss;
     if (!isShowEmoji) {
-      Keyboard.dismiss;
-      inputRef.current?.setNativeProps(styles.viewEmoji);
-      emojiRef.current?.setNativeProps(styles.viewEmoji);
-    } else {
-      setIsShowEmoji(false);
-      inputRef.current?.setNativeProps(styles.viewBlur);
-      emojiRef.current?.setNativeProps(styles.viewBlur);
+      Keyboard.dismiss();
     }
+    inputRef.current?.setNativeProps(
+      isShowEmoji ? styles.viewBlur : styles.viewEmoji,
+    );
   };
-
-  console.log('isShowEmoji: ', isShowEmoji);
 
   const handleClearEmoji = () => {
     setSelectedEmojis([]);
-    setTextInputValue('');
+    setNewMessage('');
   };
 
   const handleEmojiSelected = (emoji: string | null) => {
     if (emoji !== null) {
       setSelectedEmojis([...selectedEmojis, emoji]);
-      setTextInputValue(textInputValue + emoji);
+      setNewMessage(newMessage + emoji);
     }
 
     console.log('Click Icon: ', emoji);
   };
 
   const handleSendMessage = () => {
-    setTextInputValue('');
-    scrollViewRef.current?.scrollToEnd({animated: true});
+    if (newMessage.trim() !== '') {
+      const currentTime = new Date().toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+      const newMessageItem: IMessage = {
+        isUser: true,
+        text: newMessage,
+        time: currentTime,
+      };
+
+      setNewMessage('');
+      scrollViewRef.current?.scrollToEnd({animated: true});
+
+      messages.push(newMessageItem);
+    }
   };
 
   const handleTouchableWithoutFeedback = () => {
     Keyboard.dismiss;
     inputRef.current?.setNativeProps(styles.viewBlur);
-    emojiRef.current?.setNativeProps(styles.viewBlur);
+    setIsShowEmoji(false);
   };
 
   const handleFocus = () => {
+    Animated.timing(translateY, {
+      toValue: -16,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
     setIsShowEmoji(false);
-    inputRef.current?.setNativeProps(styles.viewFocus);
+    inputRef.current?.setNativeProps(styles.viewBlur);
+    if (!isShowEmoji) {
+      Keyboard.dismiss;
+    }
   };
 
   const handleBlur = () => {
+    Animated.timing(translateY, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
     Keyboard.dismiss;
-    inputRef.current?.setNativeProps(styles.viewBlur);
   };
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
@@ -89,7 +111,6 @@ const Message: React.FC = () => {
       setShowScrollButton(true);
     }
     inputRef.current?.setNativeProps(styles.viewBlur);
-    emojiRef.current?.setNativeProps(styles.viewBlur);
   };
 
   const handleScrollToEnd = () => {
@@ -145,7 +166,12 @@ const Message: React.FC = () => {
         )}
 
         <View ref={inputRef} style={styles.footer}>
-          <View ref={emojiRef} style={styles.viewFooter}>
+          <Animated.View
+            ref={footerRef}
+            style={[
+              styles.viewFooter,
+              {transform: [{translateY}]}, // Sử dụng translateY để điều chỉnh vị trí
+            ]}>
             <View style={styles.viewRow}>
               <View style={styles.leftContainer}>
                 <View style={styles.leftIcon}>
@@ -160,15 +186,15 @@ const Message: React.FC = () => {
                   styles.textInput,
                   {
                     height:
-                      textInputValue.split('\n').length > 1 ||
+                      newMessage.split('\n').length > 1 ||
                       selectedEmojis.length > 9
                         ? styles.textInputHeightAutoLimit.maxHeight
                         : styles.textInputHeightAuto.height,
                   },
                 ]}
                 placeholder="Write your message"
-                value={textInputValue}
-                onChangeText={text => setTextInputValue(text)}
+                value={newMessage}
+                onChangeText={text => setNewMessage(text)}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 multiline={true}
@@ -187,26 +213,25 @@ const Message: React.FC = () => {
                 </View>
               </View>
             </View>
-
-            {isShowEmoji && (
-              <View style={styles.viewBackgroundEmoji}>
-                <View style={styles.viewClearAll}>
-                  <TouchableOpacity
-                    onPress={handleClearEmoji}
-                    style={styles.btnClearAll}>
-                    <Text style={styles.textClearAll}>Clear All</Text>
-                  </TouchableOpacity>
-                </View>
-
-                <EmojiSelector
-                  category={Categories.symbols}
-                  onEmojiSelected={handleEmojiSelected}
-                  placeholder="Search"
-                  columns={10}
-                />
+          </Animated.View>
+          {isShowEmoji && (
+            <View style={styles.viewBackgroundEmoji}>
+              <View style={styles.viewClearAll}>
+                <TouchableOpacity
+                  onPress={handleClearEmoji}
+                  style={styles.btnClearAll}>
+                  <Text style={styles.textClearAll}>Clear All</Text>
+                </TouchableOpacity>
               </View>
-            )}
-          </View>
+
+              <EmojiSelector
+                category={Categories.symbols}
+                onEmojiSelected={handleEmojiSelected}
+                placeholder="Search"
+                columns={10}
+              />
+            </View>
+          )}
         </View>
       </Fragment>
     </View>

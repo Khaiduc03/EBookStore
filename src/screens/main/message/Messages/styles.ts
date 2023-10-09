@@ -26,7 +26,6 @@ const useStyles = makeStyles(({colors}) => ({
     height: 'auto',
     backgroundColor: colors.white,
     justifyContent: 'center',
-    alignItems: 'flex-start',
   },
   containerScrollView: {
     height: 'auto',
@@ -143,6 +142,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   leftIcon: {
     transform: [{rotate: '40deg'}],
+    marginVertical: normalize(16),
   },
   rightContainer: {
     flexDirection: 'row',
@@ -150,15 +150,15 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
   },
   rightIconLeft: {
-    position: 'absolute',
-    left: normalize(-44),
+    marginLeft: normalize(240),
   },
   rightIconRight: {
-    position: 'absolute',
-    right: normalize(-44),
+    marginHorizontal: normalize(26),
   },
   textInput: {
-    width: normalize(250),
+    width: normalize(290),
+    left: normalize(50),
+    position: 'absolute',
     fontSize: normalize(15),
     fontFamily: fontFamilySetup.bold,
     paddingVertical: normalize(12),
