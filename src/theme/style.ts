@@ -35,7 +35,7 @@ export const theme = createTheme({
     backgroundTopic: '#EEEEEE',
     green:'#3BD74B',
     red:'#FF0000',
-
+    blue:'#0075FF',
   },
   darkColors: {
     primary: '#F89300',
@@ -57,6 +57,7 @@ export const theme = createTheme({
     backgroundTopic: '#35383F',
     green:'#3BD74B',
     red:'#FF0000',
+    blue:'#0075FF',
 
 
   },

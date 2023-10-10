@@ -4,6 +4,7 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import useStyles from './styles';
 import {CustomHeaderProps} from './types';
 import {normalize} from '@rneui/themed';
+import {theme} from '../../../theme';
 
 const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
   const styles = useStyles();
@@ -77,7 +78,9 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
                   setButtonText(isPressed ? 'Follow' : 'unFollow');
                 }}
                 style={{
-                  backgroundColor: isPressed ? 'gray' : '#0075FF',
+                  backgroundColor: isPressed
+                    ? theme?.lightColors?.grey5
+                    : theme?.lightColors?.blue,
                   borderRadius: normalize(10),
                   width: normalize(78),
                   height: normalize(27),

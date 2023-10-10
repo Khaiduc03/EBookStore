@@ -26,7 +26,6 @@ const useStyles = makeStyles(({colors}) => ({
   Button: {
     width: normalize(85),
     height: normalize(25),
-    backgroundColor: '#0075FF',
     borderRadius: normalize(8),
     top: normalize(10),
     alignItems: 'center',

@@ -6,6 +6,7 @@ import {SquaresCustomProps} from './types';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
+import { theme } from '../../../../../../theme';
 
 const ItemListProfileUser: React.FunctionComponent<
   SquaresCustomProps
@@ -33,7 +34,7 @@ const ItemListProfileUser: React.FunctionComponent<
         <TouchableOpacity
           style={[
             styles.Button,
-            {backgroundColor: isFollowing ? '#888484' : '#0075FF'},
+            {backgroundColor: isFollowing ? theme?.lightColors?.grey5 : theme?.lightColors?.blue},
           ]}
           onPress={handleButtonPress}>
           <Text style={styles.TextButton}>

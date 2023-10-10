@@ -11,6 +11,7 @@ import {
   ItemPostUser,
 } from './components';
 import useStyles from './styles';
+import { theme } from '../../../../theme';
 
 const ProfileUser: React.FC = props => {
   const styles = useStyles();
@@ -48,7 +49,7 @@ const ProfileUser: React.FC = props => {
           style={[
             styles.btnFollow,
             {
-              backgroundColor: isFollowed ? '#0075FF' : 'gray',
+              backgroundColor: isFollowed ? theme?.lightColors?.blue : theme?.lightColors?.grey5,
             },
           ]}
           onPress={handleFollowButtonClick}>
