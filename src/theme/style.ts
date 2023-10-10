@@ -33,6 +33,9 @@ export const theme = createTheme({
     backgrounDetai: '#F5C38B',
     backgroundChapter: '#181A20',
     backgroundTopic: '#EEEEEE',
+    green:'#3BD74B',
+    red:'#FF0000',
+
   },
   darkColors: {
     primary: '#F89300',
@@ -52,6 +55,10 @@ export const theme = createTheme({
     backgrounDetai: '#181A20',
     backgroundChapter: '#181A20',
     backgroundTopic: '#35383F',
+    green:'#3BD74B',
+    red:'#FF0000',
+
+
   },
   components: {
     Button: (props, theme) => ({

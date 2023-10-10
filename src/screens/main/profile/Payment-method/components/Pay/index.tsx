@@ -4,6 +4,8 @@ import useStyles from './styles';
 
 import {images} from '../../../../../../assets';
 import {PayProps} from './types';
+import {theme} from '../../../../../../theme';
+import {GoogleIcon} from '../../../../../../assets/icons';
 
 const Pay: React.FC<PayProps> = props => {
   const {title, icGoogle, icPaypal, icZaloPay} = props;
@@ -14,11 +16,13 @@ const Pay: React.FC<PayProps> = props => {
   };
   const textStyles = [
     styles.textConnect,
-    {color: isConnected ? '#3BD74B' : '#FF0000'},
+    {color: isConnected ? theme?.lightColors?.green : theme?.lightColors?.red},
   ];
+
   return (
     <View style={styles.payment}>
-      {icGoogle && <Image style={styles.icon} source={images.ic_Google} />}
+      {icGoogle && <GoogleIcon width={64} height={64} fill={'#000000'} />}
+
       {icPaypal && <Image style={styles.icon} source={images.ic_Paypal} />}
       {icZaloPay && <Image style={styles.icon} source={images.ic_ZaloPay} />}
       <Text style={styles.textName}>{title}</Text>

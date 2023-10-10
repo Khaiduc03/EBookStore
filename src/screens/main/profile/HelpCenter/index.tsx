@@ -1,11 +1,11 @@
-import {View} from 'react-native';
 import React from 'react';
-import useStyles from './styles';
-import {HeaderCustom, TabViewItem} from '../../../../components';
-import FAQ from './FAQ';
+import { View } from 'react-native';
+import { HeaderCustom, TabViewItem } from '../../../../components';
+import { routes } from '../../../../constants';
+import { NavigationService } from '../../../../navigation';
 import Contact_us from './Contact_us';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
+import FAQ from './FAQ';
+import useStyles from './styles';
 
 const HelpCenter: React.FC = () => {
   const styles = useStyles();
@@ -20,11 +20,13 @@ const HelpCenter: React.FC = () => {
         onPressLeftIcon={handlePressGoback}
       />
       <TabViewItem
+        tabStyle={styles.tabStyle}
         title1={'FAQ'}
-        title2={'Contact US'}
+        title2={'Contact_us'}
         screen1={<FAQ />}
         screen2={<Contact_us />}
-        viewStyle={{height: 1000}}
+        viewStyle={{height: 800}}
+        titleStyle={styles.titleStyle}
       />
     </View>
   );

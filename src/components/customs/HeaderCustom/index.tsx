@@ -1,8 +1,9 @@
-import { Header, Icon } from '@rneui/base';
-import { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import {Header, Icon} from '@rneui/base';
+import {useState} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
 import useStyles from './styles';
-import { CustomHeaderProps } from './types';
+import {CustomHeaderProps} from './types';
+import {normalize} from '@rneui/themed';
 
 const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
   const styles = useStyles();
@@ -25,7 +26,7 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
             <Icon
               type={props.leftIcon.type}
               name={props.leftIcon.name}
-              size={props.leftIcon.size || 30}
+              size={props.leftIcon.size || 28}
               color={props.leftIcon.color || styles.leftIcon.color}
             />
           )}
@@ -77,15 +78,15 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
                 }}
                 style={{
                   backgroundColor: isPressed ? 'gray' : '#0075FF',
-                  borderRadius: 10,
-                  width: 78,
-                  height: 27,
+                  borderRadius: normalize(10),
+                  width: normalize(78),
+                  height: normalize(27),
                   alignItems: 'center',
                 }}>
                 <Text
                   style={{
                     color: 'white',
-                    fontSize: 16,
+                    fontSize: normalize(16),
                   }}>
                   {buttonText}
                 </Text>

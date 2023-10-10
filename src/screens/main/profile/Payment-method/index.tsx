@@ -4,7 +4,7 @@ import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import useStyles from './styles';
-import { Pay } from './components';
+import {Pay} from './components';
 
 const Payments_method: React.FC = () => {
   const styles = useStyles();
