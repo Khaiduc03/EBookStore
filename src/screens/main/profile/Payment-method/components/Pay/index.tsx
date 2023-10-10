@@ -6,6 +6,7 @@ import {images} from '../../../../../../assets';
 import {PayProps} from './types';
 import {theme} from '../../../../../../theme';
 import {GoogleIcon} from '../../../../../../assets/icons';
+import Memo from '../../../../../../assets/icons/GoogleIcon';
 
 const Pay: React.FC<PayProps> = props => {
   const {title, icGoogle, icPaypal, icZaloPay} = props;
@@ -21,7 +22,7 @@ const Pay: React.FC<PayProps> = props => {
 
   return (
     <View style={styles.payment}>
-      {icGoogle && <GoogleIcon width={64} height={64} fill={'#000000'} />}
+      {icGoogle && <Memo width={64} height={64} viewBox="7 2 25 25" />}
 
       {icPaypal && <Image style={styles.icon} source={images.ic_Paypal} />}
       {icZaloPay && <Image style={styles.icon} source={images.ic_ZaloPay} />}

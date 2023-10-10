@@ -10,10 +10,8 @@ export const images = {
   cat: require('./cat.json'),
   manga_dummy: require('./manga_dummy.png'),
   ic_search: require('./ic_search.png'),
-  ic_Menu: require('./ic_Menu.png'),
 
   avata: require('./avatar.jpg'),
-  ic_Continue: require('./ic_Continue.png'),
   ic_Up: require('./ic_Up.png'),
   ic_Down: require('./ic_Down.png'),
   ic_Service: require('./ic_Service.png'),
@@ -22,5 +20,4 @@ export const images = {
   ic_Facebook: require('./ic_Facebook.png'),
   ic_ZaloPay: require('./ic_Zalopay.png'),
   ic_Paypal: require('./ic_Paypal.png'),
-  ic_Google: require('./ic_Google.png'),
 };
