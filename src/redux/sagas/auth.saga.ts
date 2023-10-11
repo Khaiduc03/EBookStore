@@ -12,7 +12,7 @@ import {LoginPayload, SendOTPPayload} from '../types';
 function* loginSaga(action: PayloadAction<LoginPayload>): Generator {
   yield put(LoadingActions.showLoading());
   try {
-    const { data }: any = yield call(AuthService.handleLogin, action.payload);
+    const {data}: any = yield call(AuthService.handleLogin, action.payload);
 
     if (data.code === 200) {
       yield put(
@@ -91,7 +91,7 @@ function* createAccountSaga(
 ): Generator {
   yield put(LoadingActions.showLoading());
   try {
-    const { data }: any = yield call(
+    const {data}: any = yield call(
       AuthService.handleCreateAccount,
       action.payload,
     );
@@ -118,7 +118,7 @@ function* createAccountSaga(
 //get profile user
 function* getProfileUserSaga(): Generator {
   try {
-    const { data }: any = yield call(UserService.getUserProfile);
+    const {data}: any = yield call(UserService.getUserProfile);
     if (data.code === 200) {
       yield put(
         AuthActions.getUserInfoSuccess({
@@ -137,7 +137,7 @@ function* getProfileUserSaga(): Generator {
 function* updateAvatarUser(action: PayloadAction<FormData>): Generator {
   yield put(LoadingActions.showLoading());
   try {
-    const { data }: any = yield call(
+    const {data}: any = yield call(
       UserService.updateUserAvatar,
       action.payload,
     );

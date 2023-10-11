@@ -1,13 +1,14 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { makeStyles, useThemeMode } from '@rneui/themed';
+import {NavigationContainer} from '@react-navigation/native';
+import {makeStyles, useThemeMode} from '@rneui/themed';
 import React from 'react';
-import { StatusBar } from 'react-native';
-import { useAppSelector } from '../hooks';
-import { getAuthEnableSignIn } from '../redux/selectors/auth.selector';
-import { getMode } from '../redux/selectors/thems.selector';
-import { navigationRef } from './NavigationService';
-import AppNavigator from './navigators/AppNavigator';
+import {StatusBar} from 'react-native';
+import {useAppSelector} from '../hooks';
+import {getAuthEnableSignIn} from '../redux/selectors/auth.selector';
+import {getMode} from '../redux/selectors/thems.selector';
+import {navigationRef} from './NavigationService';
 import AuthNavigator from './navigators/AuthNavigator';
+import AppNavigator from './navigators/AppNavigator';
+import Slider from '../screens/auth/onboard';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -37,8 +38,8 @@ const RootNavigation = () => {
         backgroundColor={usestyles().Mode.backgroundColor}
         barStyle={themeMode}
       />
-      {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      <AppNavigator />
+      {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
+      {/* <AppNavigator /> */}
       {/* <Slider/> */}
       {/* <AuthNavigator /> */}
     </NavigationContainer>

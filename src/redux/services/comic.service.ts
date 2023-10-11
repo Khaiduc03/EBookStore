@@ -4,9 +4,9 @@ import {configFormData, configNoCache} from './config.service';
 
 export class ComicService {
   //get data
-  static async getComic(action: any) {
+  static async getComic(action: number) {
     console.log(action);
     console.log(ENDPOINTS.COMIC);
-    return await apiService.get(`${ENDPOINTS.COMIC}`, action);
+    return await apiService.get(`${ENDPOINTS.COMIC}?page=${action}`);
   }
 }

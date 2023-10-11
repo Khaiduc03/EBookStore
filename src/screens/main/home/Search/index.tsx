@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {SearchCustom} from '../../../../components';
 
@@ -9,7 +9,7 @@ import {Icon} from '@rneui/themed';
 import {getListComic} from '../../../../redux/selectors/comic.selector';
 import {ComicActions} from '../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+
 import {backScreen} from '../../../../utils';
 
 const Search = () => {
@@ -43,6 +43,10 @@ const Search = () => {
           />
         </View>
       </View>
+      <TouchableOpacity onPress={() => handlePress(1)}>
+        <Text style={{fontSize: 40}}>GETCOMIC</Text>
+      </TouchableOpacity>
+      <Text>{JSON.stringify(dataComic)}</Text>
     </View>
   );
 };

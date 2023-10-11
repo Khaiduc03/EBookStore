@@ -8,9 +8,10 @@ function* getListDataSaga(action: PayloadAction<number>): Generator {
   try {
     console.log('run');
     console.log(action);
-    const data: any = yield call(ComicService.getComic, {page: action.payload});
-
-    if (data.code === 200) {
+    const {data}: any = yield call(ComicService.getComic, action.payload);
+    console.log(data);
+    if (data.code == 200) {
+      console.log('run push tookit');
       yield put(ComicActions.setListData(data));
     } else {
       console.log('Server errol !!!');

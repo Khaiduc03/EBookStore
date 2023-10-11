@@ -8,8 +8,8 @@ import {
 
 import BottomNavigator from './BottomNavigator';
 
-import { routes } from '../../constants';
-import { Screen } from '../../types';
+import {routes} from '../../constants';
+import {Screen} from '../../types';
 import {
   bookmarkScreens,
   exploreScreens,
@@ -17,7 +17,7 @@ import {
   profileScreens,
 } from '../../screens/main';
 import UpdateProfile from '../../screens/auth/update-profile';
-import { authScreen } from '../../screens/auth';
+import {authScreen} from '../../screens/auth';
 
 const AppStack = createStackNavigator();
 
@@ -27,7 +27,6 @@ const screenOption: StackNavigationOptions = {
 };
 
 const mainScreens: Screen[] = [
-
   {
     name: routes.BOTTOM_TAB,
     component: BottomNavigator,
@@ -43,7 +42,7 @@ const AppNavigator = () => {
   return (
     <AppStack.Navigator
       screenOptions={screenOption}
-      initialRouteName={routes.CHAT}>
+      initialRouteName={routes.BOTTOM_TAB}>
       {mainScreens.map((screen: Screen) => {
         return (
           <AppStack.Screen
