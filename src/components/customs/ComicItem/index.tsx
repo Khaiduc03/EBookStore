@@ -7,18 +7,21 @@ import {Image} from '@rneui/themed';
 import {Comic} from '../../../types';
 import {NavigationService} from '../../../navigation';
 import {routes} from '../../../constants';
+import FastImage from 'react-native-fast-image';
 
 const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
   const comic: Comic = props.data;
   return (
     <View style={props.viewStyle || styles.container}>
-      <Image
-        onPress={() => NavigationService.navigate(routes.COMICDETAIL)}
-        style={props.imageStyle || styles.imgComic}
-        source={{uri: comic.image}}
-        PlaceholderContent={<ActivityIndicator />}
-      />
+      <TouchableOpacity
+        onPress={() => NavigationService.navigate(routes.COMICDETAIL)}>
+        <FastImage
+          style={props.imageStyle || styles.imgComic}
+          source={{uri: comic.image, priority: FastImage.priority.normal}}
+          resizeMode={FastImage.resizeMode.cover}
+        />
+      </TouchableOpacity>
 
       <View style={props.contentStyle || styles.content}>
         {!props.topicStyle && (

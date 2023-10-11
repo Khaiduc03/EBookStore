@@ -36,25 +36,26 @@ const data = [
   {
     id: 1,
     title: 'Glad',
-    image: 'https://vidian.me/public-img/image-1677306627308.jpeg',
+    image:
+      'https://i0.wp.com/animeindia.in/wp-content/uploads/2022/04/Boss-Employee-Relationship-.jpg?resize=1024%2C576&ssl=1',
   },
   {
     id: 2,
     title: 'Amye',
     image:
-      'https://i.pinimg.com/originals/8a/5f/d9/8a5fd9d9bd638abe7a1cf80c0adc678a.jpg',
+      'https://mangaohyeah.files.wordpress.com/2012/05/file354752_12537.jpg?w=584',
   },
   {
     id: 3,
     title: 'Chan',
     image:
-      'https://thuvienanime.com/wp-content/uploads/2021/09/thanh-y-thuvienanime.jpeg',
+      'https://img5.thuthuatphanmem.vn/uploads/2021/09/29/top-20-manhwa-hay-nhat-hien-nay-khong-the-bo-lo_084931909.jpg',
   },
   {
     id: 4,
     title: 'Rich',
     image:
-      'https://thuvienanime.com/wp-content/uploads/2021/09/hoa-linh-nhi-thuvienanime-thumb.jpg',
+      'https://w0.peakpx.com/wallpaper/380/264/HD-wallpaper-manhwa-roxanne-girl-love-magic-manga-prince-romance.jpg',
   },
   {
     id: 5,

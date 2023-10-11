@@ -7,7 +7,7 @@ import useStyles from './styles';
 import {ComicItem, HeaderCustom, TopicItem} from '../../../../components';
 
 import {createIcon} from '../../../../utils';
-import {TopicsHome, ComicsNew, BannerComic} from './components';
+import {TopicsHome, ComicsNew, BannerComic, TrendingComic} from './components';
 
 const Home: FunctionComponent = () => {
   const styles = useStyles();
@@ -54,6 +54,16 @@ const Home: FunctionComponent = () => {
         />
 
         <TopicsHome />
+        <HeaderCustom
+          titleStyle={styles.textTitle}
+          title="Trending Now"
+          rightIconRight={{
+            name: 'arrow-forward-outline',
+            type: 'ionicon',
+          }}
+          onPressRightIconRight={handlePressTopics}
+        />
+        <TrendingComic />
 
         <HeaderCustom
           titleStyle={styles.textTitle}

@@ -4,6 +4,7 @@ import useStyles from './styles';
 
 const Preview = () => {
   const styles = useStyles();
+
   return (
     <View style={styles.container}>
       <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>

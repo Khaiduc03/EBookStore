@@ -17,6 +17,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   imgComic: {
     width: WIDTH * 0.28,
+    height: '100%',
     borderRadius: normalize(6),
     marginRight: '2%',
   },
@@ -25,7 +26,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   topicsContainer: {
     flexDirection: 'row',
-    width: '100%',
+    width: '70%',
     flexWrap: 'wrap',
   },
 }));
