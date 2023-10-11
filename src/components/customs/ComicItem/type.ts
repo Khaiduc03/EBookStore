@@ -3,7 +3,7 @@ import {Comic} from '../../../types';
 
 export type CustomComicProps = {
   data: Comic;
-  imageStyle?: ImageStyle | null;
+  imageStyle?: any | null;
   viewStyle?: ViewStyle | null;
   contentStyle?: ViewStyle | null;
   index: number;

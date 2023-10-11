@@ -5,8 +5,8 @@ import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import useStyles from './styles';
 import TextCustom from '../../../../components/customs/Text';
-import { HeaderCustom } from '../../../../components';
-import { TableofContent } from './Components';
+import {HeaderCustom} from '../../../../components';
+import {TableofContent} from './components';
 
 const Profile: FunctionComponent = () => {
   const styles = useStyles();
