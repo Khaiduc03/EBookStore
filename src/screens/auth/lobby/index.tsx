@@ -1,19 +1,20 @@
 import LottieView from 'lottie-react-native';
 import React from 'react';
 import {KeyboardAvoidingView, Text, TouchableOpacity, View} from 'react-native';
-import {images} from '../../../assets';
+import {JsonImages} from '../../../assets';
 import {GoogleIcon} from '../../../assets/icons';
 import {routes} from '../../../constants';
-import {useAppDispatch} from '../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {NavigationService} from '../../../navigation';
-import {AuthActions} from '../../../redux/reducer';
+import {AppActions, AuthActions} from '../../../redux/reducer';
 import usestyles from './styles';
-import {Headers} from '../../../components';
+import {getAppIsReady} from '../../../redux';
 
 const LobbyScreen: React.FunctionComponent = () => {
   const styles = usestyles();
 
   const dispatch = useAppDispatch();
+  // const getSatate = useAppSelector(getAppIsReady);
 
   const handleGoogle = async () => {
     dispatch(
@@ -26,11 +27,10 @@ const LobbyScreen: React.FunctionComponent = () => {
   return (
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.container}>
-        <Headers rightIcon={true}  leftIcon title='khai'/>
         <View style={styles.header}>
           <LottieView
             style={styles.headerIMage}
-            source={images.logo}
+            source={JsonImages.logo}
             autoPlay
             loop={false}
           />
@@ -47,7 +47,9 @@ const LobbyScreen: React.FunctionComponent = () => {
             Newsly is a social network that allows you to connect with friends
           </Text>
           <View style={styles.bottom}>
-            <TouchableOpacity style={styles.button} onPress={handleGoogle}>
+            <TouchableOpacity
+              style={[styles.button, styles.backgroundColorsWhite]}
+              onPress={handleGoogle}>
               <GoogleIcon />
               <Text style={styles.buttonText}> Continue with Google</Text>
             </TouchableOpacity>

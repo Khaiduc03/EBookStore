@@ -15,6 +15,16 @@ import {EyeOffIcon, EyeOnIcon, LockIcon} from '../../../assets/icons';
 const InputCustom: FunctionComponent<
   InputProps & TextInputProps & BaseIPProps
 > = props => {
+  const [isFocused, setIsFocused] = React.useState<boolean>(false);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  const handleBlur = () => {
+    setIsFocused(false);
+  };
+
   const styles = useStyles();
   const [secure, setSecure] = React.useState<boolean>(true);
   const _renderSecure = () => {
@@ -36,13 +46,22 @@ const InputCustom: FunctionComponent<
         rightIconContainerStyle={styles.icon}
         rightIcon={props.secure && _renderSecure()}
         inputStyle={styles.input}
-        style={styles.input}
+        style={[
+          styles.input,
+          {
+            borderBottomColor: isFocused
+              ? '#F89300'
+              : props.borderBottomColor || '#727272',
+          },
+        ]}
         value={props.value}
         onChangeText={props.onChangeText}
         renderErrorMessage={false}
         placeholderTextColor={styles.placeHolder.color}
         keyboardType={props.keyboardType}
         {...props}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
       />
     </TouchableNativeFeedback>
   );

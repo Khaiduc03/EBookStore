@@ -1,11 +1,25 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
+import {fontFamilySetup} from '../../../../utils/font';
+import {makeStyles, normalize} from '@rneui/themed';
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-});
+const useStyles = makeStyles(({colors}) => ({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  textTitle: {
+    fontSize: normalize(18),
+    fontFamily: fontFamilySetup.bold,
+    color: colors.black,
+  },
+  textTitleHeader: {
+    fontSize: normalize(20),
+    fontFamily: fontFamilySetup.bold,
+    color: colors.black,
+  },
+  leftIconStyle: {
+    marginRight: normalize(5),
+  },
+}));
 
-export default styles;
+export default useStyles;

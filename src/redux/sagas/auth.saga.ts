@@ -1,16 +1,16 @@
-import { PayloadAction } from '@reduxjs/toolkit';
-import { call, put, takeLatest } from 'redux-saga/effects';
-import { routes } from '../../constants';
-import { NavigationService } from '../../navigation';
-import { showToastError, showToastSuccess } from '../../utils';
-import { GoogleService } from '../../utils/google';
-import { AppActions, AuthActions } from '../reducer';
-import { AuthService, UserService } from '../services';
-import { LoginPayload } from '../types';
+import {PayloadAction} from '@reduxjs/toolkit';
+import {call, put, takeLatest} from 'redux-saga/effects';
+import {routes} from '../../constants';
+import {NavigationService} from '../../navigation';
+import {CustomToastBottom, showToastError, showToastSuccess} from '../../utils';
+import {GoogleService} from '../../utils/google';
+import {AuthActions, LoadingActions} from '../reducer';
+import {AuthService, UserService} from '../services';
+import {LoginPayload, SendOTPPayload} from '../types';
 
 //login
 function* loginSaga(action: PayloadAction<LoginPayload>): Generator {
-  yield put(AppActions.handleLoading());
+  yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(AuthService.handleLogin, action.payload);
 
@@ -41,14 +41,14 @@ function* loginSaga(action: PayloadAction<LoginPayload>): Generator {
   } catch (error: any) {
     console.log(error.message);
   } finally {
-    yield put(AppActions.handleHideLoading());
+    yield put(LoadingActions.hideLoading());
   }
 }
 
 function* loginGoogleSaga(
   action: PayloadAction<Omit<LoginPayload, 'password' | 'email'>>,
 ): Generator {
-  yield put(AppActions.handleLoading());
+  yield put(LoadingActions.showLoading());
   try {
     yield GoogleService.logout();
     const checkLogin = yield GoogleService.checkSignIn();
@@ -68,25 +68,28 @@ function* loginGoogleSaga(
             enableSignIn: true,
           }),
         );
+        //  yield call(getProfileUserSaga);
         showToastSuccess(data.message);
       } else if (data.code === 400) {
-        showToastError(data.message);
+        showToastError(
+          'This service is not available at this time, please try again later!!',
+        );
       } else {
         showToastError('Pless check your connection');
         yield call(cleanUser);
       }
     }
   } catch (error: any) {
-    console.log(error.message);
+    console.log('Have error at login google saga: ' + error.message);
   } finally {
-    yield put(AppActions.handleHideLoading());
+    yield put(LoadingActions.hideLoading());
   }
 }
 
 function* createAccountSaga(
   action: PayloadAction<Omit<LoginPayload, 'idToken' | 'device_token'>>,
 ): Generator {
-  yield put(AppActions.handleLoading());
+  yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(
       AuthService.handleCreateAccount,
@@ -109,7 +112,7 @@ function* createAccountSaga(
   } catch (error: any) {
     console.log(error.message);
   } finally {
-    yield put(AppActions.handleHideLoading());
+    yield put(LoadingActions.hideLoading());
   }
 }
 //get profile user
@@ -132,7 +135,7 @@ function* getProfileUserSaga(): Generator {
 
 //update avatar user
 function* updateAvatarUser(action: PayloadAction<FormData>): Generator {
-  yield put(AppActions.handleLoading());
+  yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(
       UserService.updateUserAvatar,
@@ -150,12 +153,12 @@ function* updateAvatarUser(action: PayloadAction<FormData>): Generator {
   } catch (error: any) {
     console.log('Have error at get profile saga: ' + error.message);
   } finally {
-    yield put(AppActions.handleHideLoading());
+    yield put(LoadingActions.hideLoading());
   }
 }
 
 function* deleteAvatarUser(): Generator {
-  yield put(AppActions.handleLoading());
+  yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(UserService.deleteUserAvatar);
     if (data.code === 200) {
@@ -169,12 +172,12 @@ function* deleteAvatarUser(): Generator {
   } catch (error: any) {
     console.log('Have error at get profile saga: ' + error.message);
   } finally {
-    yield put(AppActions.handleHideLoading());
+    yield put(LoadingActions.hideLoading());
   }
 }
 
 function* updateUserProfile(action: PayloadAction<any>): Generator {
-  yield put(AppActions.handleLoading());
+  yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(
       UserService.updateUserProfile,
@@ -192,20 +195,70 @@ function* updateUserProfile(action: PayloadAction<any>): Generator {
   } catch (error: any) {
     console.log('Pless check your connection' + error);
   } finally {
-    yield put(AppActions.handleHideLoading());
+    yield put(LoadingActions.hideLoading());
   }
 }
 
 //clean user
 function* cleanUser(): Generator {
-  yield put(
-    AuthActions.getUserInfoFailed({
-      enableSignIn: false,
-      accessToken: '',
-      refreshToken: '',
-      user: {},
-    }),
-  );
+  yield put(LoadingActions.showLoading());
+  try {
+    yield put(
+      AuthActions.getUserInfoFailed({
+        enableSignIn: false,
+        accessToken: '',
+        refreshToken: '',
+        user: {},
+      }),
+    );
+  } catch (error) {
+    throw error;
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
+///////////////////////FORGOT PASSWORD/////////////////////////
+function* forgotPasswordSaga(
+  action: PayloadAction<Pick<LoginPayload, 'email'>>,
+): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    const {data}: any = yield call(
+      AuthService.hanleForgotPasswork,
+      action.payload,
+    );
+    if (data.code === 200) {
+      yield put(AuthActions.setEmailForgotPassword(action.payload));
+      NavigationService.navigate(routes.SEND_OTP);
+    } else {
+      CustomToastBottom(data.message);
+    }
+  } catch (error: any) {
+    console.log(error.message);
+    throw error;
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
+///////////////////////VERIFY OTP/////////////////////////
+function* verifyOTPSaga(action: PayloadAction<SendOTPPayload>): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    const {data}: any = yield call(AuthService.handleVerifyOTP, action.payload);
+    if (data.code === 200) {
+      CustomToastBottom(data.message);
+      NavigationService.navigate(routes.CREATE_NEW_PASSWORD);
+    } else {
+      CustomToastBottom(data.message);
+    }
+  } catch (error: any) {
+    console.log(error.message);
+    throw error;
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
 }
 
 export default function* watchAuthSaga() {
@@ -216,4 +269,6 @@ export default function* watchAuthSaga() {
   yield takeLatest(AuthActions.handleUpdateAvatar.type, updateAvatarUser);
   yield takeLatest(AuthActions.handleDeleteAvatar.type, deleteAvatarUser);
   yield takeLatest(AuthActions.handleUpdateUserProfile.type, updateUserProfile);
+  yield takeLatest(AuthActions.handleForgotPassword.type, forgotPasswordSaga);
+  yield takeLatest(AuthActions.handleVerifyOTP.type, verifyOTPSaga);
 }

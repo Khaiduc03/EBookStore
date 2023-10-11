@@ -1,19 +1,25 @@
-import { Endpoints } from '../../environment';
-import { LoginPayload } from '../types';
+import {ENDPOINTS, Endpoints} from '../../environment';
+import {LoginPayload, SendOTPPayload} from '../types';
 import apiService from './api.service';
-
 
 export class AuthService {
   static async handleLogin(payload: LoginPayload) {
-    return await apiService.post(Endpoints.LOGIN_ENDPOINT, payload);
+    return await apiService.post(ENDPOINTS.LOGIN, payload);
   }
   static async handleCreateAccount(
-    payload: Omit<LoginPayload, 'device_token'| 'idToken'>
+    payload: Omit<LoginPayload, 'device_token' | 'idToken'>,
   ) {
-    return await apiService.post(Endpoints.CREATE_ACCOUNT_ENDPOINT, payload);
+    return await apiService.post(ENDPOINTS.REGISTER, payload);
   }
   static async hanleGGLogin(payload: Omit<LoginPayload, 'password' | 'email'>) {
-    console.log(Endpoints.SIGN_IN_GOOGLE)
-    return await apiService.post(Endpoints.SIGN_IN_GOOGLE, payload);
+    return await apiService.post(ENDPOINTS.LOGIN_GOOGLE, payload);
+  }
+
+  static async hanleForgotPasswork(payload: Pick<LoginPayload, 'email'>) {
+    return await apiService.post(ENDPOINTS.SEND_OTP, payload);
+  }
+
+  static async handleVerifyOTP(payload: SendOTPPayload) {
+    return await apiService.post(ENDPOINTS.VERIFY_OTP, payload);
   }
 }

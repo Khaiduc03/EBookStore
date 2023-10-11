@@ -31,7 +31,7 @@ const UpdateProfile: FunctionComponent = () => {
   const handleUpdateProfile = () => {
     dispatch(
       AuthActions.handleUpdateUserProfile({
-        phoneNumber: credentials.phone_number,
+        phone: credentials.phone_number,
         dob: credentials.dob,
         fullname: credentials.fullname,
         gender: credentials.gender,

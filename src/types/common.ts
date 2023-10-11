@@ -26,6 +26,10 @@ export type Screen = {
   component: FunctionComponent<any>;
 };
 
+export type image = uuid & {
+  url: string;
+};
+
 export type Pagination = {
   page: number;
   pageSize: number;

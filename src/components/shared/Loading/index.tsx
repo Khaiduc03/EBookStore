@@ -15,8 +15,9 @@ import LottieView from 'lottie-react-native';
 import {useAppSelector} from '../../../hooks';
 
 import useStyles from './styles';
-import { getAppIsLoading } from '../../../redux/selectors/app.selector';
-import { jsonFiles } from '../../../assets/json';
+
+import {JsonImages} from '../../../assets/json';
+import {getIsLoading} from '../../../redux/selectors/loading.selector';
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
@@ -24,7 +25,7 @@ const Loading: FunctionComponent = () => {
   // hooks
   const styles = useStyles();
   const progress = useSharedValue(0.5);
-  const isLoading: boolean = useAppSelector(getAppIsLoading);
+  const isLoading: boolean = useAppSelector(getIsLoading);
 
   const overlayStyle = useAnimatedStyle(() => {
     const background = interpolateColor(
@@ -62,7 +63,7 @@ const Loading: FunctionComponent = () => {
       <AnimatedView style={[styles.container, containerStyle]}>
         <LottieView
           style={styles.lottieView}
-          source={jsonFiles.loading}
+          source={JsonImages.loading}
           autoPlay
           loop
         />

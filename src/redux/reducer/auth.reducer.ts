@@ -1,5 +1,11 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {AuthState, LoginPayload, RefreshToken, User} from '../types';
+import {
+  AuthState,
+  LoginPayload,
+  RefreshToken,
+  SendOTPPayload,
+  User,
+} from '../types';
 import {Redux} from '../types/redux.type';
 import {UpdateProfileDto} from '../dto';
 
@@ -135,6 +141,37 @@ const reducer = createSlice({
         enableSignIn: true,
       };
     },
+
+    handleForgotPassword: (
+      state: AuthState,
+      _: PayloadAction<Pick<LoginPayload, 'email'>>,
+    ) => {
+      return {
+        ...state,
+      };
+    },
+
+    setEmailForgotPassword: (
+      state: AuthState,
+      payload: PayloadAction<Pick<LoginPayload, 'email'>>,
+    ) => {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          email: payload.payload.email,
+        },
+      };
+    },
+
+    handleVerifyOTP: (state: AuthState, _: PayloadAction<SendOTPPayload>) => {
+      return {
+        ...state,
+      };
+    },
+
+    
+
   },
 });
 

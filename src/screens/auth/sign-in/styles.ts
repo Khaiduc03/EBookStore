@@ -16,7 +16,6 @@ const useStyles = makeStyles(({colors}) => ({
   },
   formContainer: {
     flex: 1,
-
   },
   titleInput: {
     fontSize: normalize(15),

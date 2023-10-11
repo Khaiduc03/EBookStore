@@ -1,7 +1,8 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {AlertState} from '../types/alert.type';
 import {Redux} from '../types';
-import {images} from '../../assets';
+import {} from '../../assets';
+import { JsonImages } from '../../assets/json';
 
 const initialState: AlertState = {
   isShow: false,
@@ -9,10 +10,9 @@ const initialState: AlertState = {
   description: 'Can you accept this message?',
   onAccept: () => {},
   onCancel: () => {},
-  imageTitle: images.success,
+  imageTitle: JsonImages.success,
   isAccept: false,
   isCancel: false,
-
 };
 
 const reducer = createSlice({
