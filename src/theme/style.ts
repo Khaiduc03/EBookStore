@@ -11,6 +11,9 @@ declare module '@rneui/themed' {
     backgrounDetai: string;
     backgroundChapter: string;
     backgroundTopic: string;
+    green: string;
+    red: string;
+    blue: string;
   }
 }
 
@@ -33,9 +36,9 @@ export const theme = createTheme({
     backgrounDetai: '#F5C38B',
     backgroundChapter: '#181A20',
     backgroundTopic: '#EEEEEE',
-    green:'#3BD74B',
-    red:'#FF0000',
-    blue:'#0075FF',
+    green: '#3BD74B',
+    red: '#FF0000',
+    blue: '#0075FF',
   },
   darkColors: {
     primary: '#F89300',
@@ -55,11 +58,9 @@ export const theme = createTheme({
     backgrounDetai: '#181A20',
     backgroundChapter: '#181A20',
     backgroundTopic: '#35383F',
-    green:'#3BD74B',
-    red:'#FF0000',
-    blue:'#0075FF',
-
-
+    green: '#3BD74B',
+    red: '#FF0000',
+    blue: '#0075FF',
   },
   components: {
     Button: (props, theme) => ({
