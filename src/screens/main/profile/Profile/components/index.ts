@@ -1,1 +1,1 @@
-export {default as TableofContent} from './TableofContents';
+export {default as TableofContent} from './Tableofcontents';
