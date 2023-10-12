@@ -8,13 +8,13 @@ const Contact_us: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.viewButton}>
-        <View style={styles.btnCustomerService}>
+        <View style={styles.viewCustomerService}>
           <CustomerService />
         </View>
-        <View style={styles.btnFacebook}>
+        <View style={styles.viewFacebook}>
           <Facebook />
         </View>
-        <View style={styles.btnWebsite}>
+        <View style={styles.viewWebsite}>
           <Website />
         </View>
       </View>

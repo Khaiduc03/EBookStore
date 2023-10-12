@@ -9,9 +9,4 @@ export const images = {
   success: require('./success.json'),
   cat: require('./cat.json'),
   avata: require('./avatar.jpg'),
-  ic_Service: require('./ic_Service.png'),
-  ic_Facebook: require('./ic_Facebook.png'),
-  ic_Website: require('./ic_Website.png'),
-  ic_Up: require('./ic_Up.png'),
-  ic_Down: require('./ic_Down.png'),
 };

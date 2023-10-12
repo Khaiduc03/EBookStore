@@ -1,10 +1,10 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
-import React, {useState} from 'react';
+import { Icon } from '@rneui/themed';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import useStyles from './styles';
 import { ButtonLongpros } from './types';
-import { images } from '../../../../../../../assets';
 
- const ButtonLong: React.FC<ButtonLongpros> = props => {
+const ButtonLong: React.FC<ButtonLongpros> = props => {
   const {icon_Service, title, icon_Facebook, icon_Website} = props;
   const styles = useStyles();
 
@@ -12,23 +12,23 @@ import { images } from '../../../../../../../assets';
     <View style={styles.container}>
       {icon_Service && (
         <TouchableOpacity style={styles.ButtonService}>
-          <Image source={images.ic_Service} />
+          <Icon name="user-astronaut" type="font-awesome-5" color={'#f98300'} />
           <Text style={styles.name}>{title}</Text>
         </TouchableOpacity>
       )}
       {icon_Facebook && (
         <TouchableOpacity style={styles.ButtonMeta}>
-          <Image source={images.ic_Facebook} />
+          <Icon name="facebook" type="font-awesome-5" color={'blue'} />
           <Text style={styles.name}>{title}</Text>
         </TouchableOpacity>
       )}
       {icon_Website && (
         <TouchableOpacity style={styles.ButtonGoogle}>
-          <Image source={images.ic_Website} />
+          <Icon name="internet-explorer" type="font-awesome" color={'blue'} />
           <Text style={styles.name}>{title}</Text>
         </TouchableOpacity>
       )}
     </View>
   );
 };
-export default ButtonLong
+export default ButtonLong;

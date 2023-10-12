@@ -12,13 +12,13 @@ const useStyles = makeStyles(({colors}) => ({
     height: '30%',
     padding: normalize(24),
   },
-  btnCustomerService: {
+  viewCustomerService: {
     paddingVertical: normalize(24),
   },
-  btnFacebook: {
+  viewFacebook: {
     paddingVertical: normalize(70),
   },
-  btnWebsite: {
+  viewWebsite: {
     paddingVertical: normalize(13),
   },
 }));
