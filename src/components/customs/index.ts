@@ -10,3 +10,8 @@ export {default as TopicItem} from './TopicItem';
 export {default as ComicItem} from './ComicItem';
 export {default as SearchCustom} from './Search';
 export {default as TabViewItem} from './TabViewItem';
+export {default as ItemListProfile} from './ItemListProfile';
+export {default as Switch_custom} from './Switch';
+export {default as Ratings} from './Rating';
+export {default as Text} from './Text';
+export {default as Toggleable} from './Toggleable';
