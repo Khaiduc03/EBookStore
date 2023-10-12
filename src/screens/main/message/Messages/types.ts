@@ -2,6 +2,7 @@ export interface IMessage {
   isUser: boolean;
   text: string;
   time: string;
+  image?: string;
 }
 
 export const messages: IMessage[] = [

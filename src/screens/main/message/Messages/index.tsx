@@ -2,9 +2,12 @@ import {Icon, Text} from '@rneui/base';
 import React, {Fragment, useRef, useState} from 'react';
 import {
   Animated,
+  Image,
   Keyboard,
+  Modal,
   NativeScrollEvent,
   NativeSyntheticEvent,
+  Platform,
   ScrollView,
   TextInput,
   TouchableOpacity,
@@ -12,7 +15,13 @@ import {
   View,
 } from 'react-native';
 import EmojiSelector, {Categories} from 'react-native-emoji-selector';
+import * as ImagePicker from 'react-native-image-picker';
+import {PERMISSIONS, request, RESULTS} from 'react-native-permissions';
+import {useDispatch} from 'react-redux';
 import {HeaderCustom} from '../../../../components';
+import {PERMISSION_TYPE, usePermission} from '../../../../hooks';
+import {AuthActions} from '../../../../redux';
+import {showToastError} from '../../../../utils';
 import {ChatBubble} from './components/RenderItem/ChatBubbleItem';
 import useStyles from './styles';
 import {IMessage, messages} from './types';
@@ -28,6 +37,26 @@ const Message: React.FC = () => {
   const [newMessage, setNewMessage] = useState<string>('');
   const footerRef = useRef<View>(null);
   const translateY = useRef(new Animated.Value(0)).current;
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [isShowSelect, setIsShowSelect] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleAttachPress = () => {
+    // Hiển thị modal cho người dùng chọn giữa camera và thư viện
+    setIsShowSelect(true);
+    Keyboard.dismiss;
+    inputRef.current?.setNativeProps(styles.viewFocusSelectImage);
+  };
+
+  const handleOptionSelect = (option: any) => {
+    setSelectedOption(option);
+    setIsShowSelect(false);
+    if (option === 'camera') {
+      showCamera();
+    } else if (option === 'gallery') {
+      showGallery();
+    }
+  };
 
   const handleIconEmojiPress = () => {
     setIsShowEmoji(!isShowEmoji);
@@ -85,6 +114,7 @@ const Message: React.FC = () => {
       useNativeDriver: false,
     }).start();
     setIsShowEmoji(false);
+    setIsShowSelect(false);
     inputRef.current?.setNativeProps(styles.viewBlur);
     if (!isShowEmoji) {
       Keyboard.dismiss;
@@ -118,6 +148,80 @@ const Message: React.FC = () => {
     setShowScrollButton(false);
   };
 
+  const permission = usePermission();
+  const dispatch = useDispatch();
+  //show menu choose image
+  const [isShow, setIsShow] = useState<boolean>(false);
+
+  const optionsCamera: ImagePicker.CameraOptions = {
+    quality: 1,
+    mediaType: 'photo',
+    cameraType: 'front',
+    saveToPhotos: true,
+  };
+
+  const optionsLibrary: ImagePicker.ImageLibraryOptions = {
+    mediaType: 'photo',
+    quality: 1,
+    videoQuality: 'high',
+    selectionLimit: 0,
+    maxWidth: 500,
+    maxHeight: 500,
+  };
+
+  const showCamera = async () => {
+    setIsShow(false);
+    request(
+      Platform.OS === 'ios'
+        ? PERMISSIONS.IOS.CAMERA
+        : PERMISSIONS.ANDROID.CAMERA,
+    ).then(async result => {
+      if (result !== RESULTS.GRANTED && result !== RESULTS.UNAVAILABLE) {
+        await permission.showPermissionDialog(PERMISSION_TYPE.camera);
+      } else {
+        const result = await ImagePicker.launchCamera(optionsCamera);
+        if (result.errorCode) {
+          showToastError(result.errorMessage + '');
+        } else if (result.didCancel) {
+          showToastError("You haven't taken a photo yet");
+          inputRef.current?.setNativeProps(styles.viewBlur);
+        } else if (result.errorMessage) {
+          showToastError('An error occurred when opening the camera');
+          inputRef.current?.setNativeProps(styles.viewBlur);
+        } else if (result.assets) {
+          const formdata = new FormData();
+          formdata.append('avatar', {
+            uri: result.assets[0].uri,
+            name: result.assets[0].fileName,
+            type: result.assets[0].type,
+          });
+          await handleUploadImage(formdata);
+        }
+      }
+    });
+    setIsShow(false);
+  };
+
+  const showGallery = () => {
+    ImagePicker.launchImageLibrary(optionsLibrary, response => {
+      if (
+        response.assets &&
+        response.assets.length > 0 &&
+        response.assets[0].uri
+      ) {
+        setSelectedImage(response.assets[0].uri);
+        inputRef.current?.setNativeProps(styles.viewBlur);
+      } else {
+        showToastError('You have not selected a photo yet');
+        inputRef.current?.setNativeProps(styles.viewBlur);
+      }
+    });
+  };
+
+  const handleUploadImage = async (formdata: any) => {
+    dispatch(AuthActions.handleUpdateAvatar(formdata));
+  };
+
   return (
     <View style={styles.container}>
       <Fragment>
@@ -133,6 +237,7 @@ const Message: React.FC = () => {
               name: 'arrow-back-outline',
               type: 'ionicon',
               color: styles.iconBack.color,
+              size: 30,
             }}
             imageUri={{
               uri: 'https://yt3.googleusercontent.com/ytc/AOPolaQ8qd9YUFBorodGktxw_--6xfk2EscQ-aT2v-dC6w=s900-c-k-c0x00ffffff-no-rj',
@@ -142,10 +247,14 @@ const Message: React.FC = () => {
             rightIconleft={{
               name: 'call-outline',
               type: 'ionicon',
+              color: styles.iconCall.color,
+              size: 30,
             }}
             rightIconRight={{
               name: 'videocam-outline',
               type: 'ionicon',
+              color: styles.iconVideocam.color,
+              size: 30,
             }}
           />
 
@@ -168,14 +277,11 @@ const Message: React.FC = () => {
         <View ref={inputRef} style={styles.footer}>
           <Animated.View
             ref={footerRef}
-            style={[
-              styles.viewFooter,
-              {transform: [{translateY}]}, // Sử dụng translateY để điều chỉnh vị trí
-            ]}>
+            style={[styles.viewFooter, {transform: [{translateY}]}]}>
             <View style={styles.viewRow}>
               <View style={styles.leftContainer}>
                 <View style={styles.leftIcon}>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={handleAttachPress}>
                     <Icon name="attach-outline" type="ionicon" size={30} />
                   </TouchableOpacity>
                 </View>
@@ -230,6 +336,24 @@ const Message: React.FC = () => {
                 placeholder="Search"
                 columns={10}
               />
+            </View>
+          )}
+          {isShowSelect && (
+            <View>
+              <View style={styles.modalContainer}>
+                <TouchableOpacity onPress={() => handleOptionSelect('camera')}>
+                  <View>
+                    <Icon name="camera-outline" type="ionicon" size={30} />
+                    <Text>Camera</Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => handleOptionSelect('gallery')}>
+                  <View>
+                    <Icon name="image-outline" type="ionicon" size={30} />
+                    <Text>Gallery</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
             </View>
           )}
         </View>

@@ -103,6 +103,12 @@ const useStyles = makeStyles(({colors}) => ({
   iconBack: {
     color: colors.black,
   },
+  iconCall: {
+    color: colors.black,
+  },
+  iconVideocam: {
+    color: colors.black,
+  },
   viewBackgroundEmoji: {
     flex: 1,
     width: '100%',
@@ -139,26 +145,26 @@ const useStyles = makeStyles(({colors}) => ({
     justifyContent: 'center',
     alignItems: 'center',
     marginHorizontal: normalize(14),
+    marginVertical: normalize(16),
   },
   leftIcon: {
     transform: [{rotate: '40deg'}],
-    marginVertical: normalize(16),
   },
   rightContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center',
+    right: normalize(-10),
   },
   rightIconLeft: {
-    marginLeft: normalize(240),
+    position: 'absolute',
+    right: normalize(20),
   },
   rightIconRight: {
-    marginHorizontal: normalize(26),
+    position: 'absolute',
+    left: normalize(5),
   },
   textInput: {
-    width: normalize(290),
-    left: normalize(50),
-    position: 'absolute',
+    width: Device.getDeviceHeight() * 0.32,
     fontSize: normalize(15),
     fontFamily: fontFamilySetup.bold,
     paddingVertical: normalize(12),
@@ -181,8 +187,18 @@ const useStyles = makeStyles(({colors}) => ({
   viewBlur: {
     height: normalize(60),
   },
+  viewFocusSelectImage: {
+    height: Device.getDeviceHeight() - 690,
+  },
   viewEmoji: {
     height: normalize(460),
+  },
+  modalContainer: {
+    width: '100%',
+    height: '80%',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
   },
 }));
 

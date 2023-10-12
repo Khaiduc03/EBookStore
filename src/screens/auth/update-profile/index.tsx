@@ -161,7 +161,7 @@ const UpdateProfile: FunctionComponent = () => {
                     checkedIcon="dot-circle-o"
                     uncheckedIcon="circle-o"
                   />
-                  <Text>Famale</Text>
+                  <Text>Female</Text>
                 </View>
               </View>
             </View>

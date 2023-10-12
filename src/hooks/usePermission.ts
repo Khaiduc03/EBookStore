@@ -1,4 +1,4 @@
-import { Alert, Platform } from 'react-native';
+import {Alert, Platform} from 'react-native';
 import {
   check,
   PERMISSIONS,
@@ -89,7 +89,7 @@ export const usePermission = () => {
                   return false;
                 },
               },
-            ]
+            ],
           );
 
           break;
@@ -110,7 +110,7 @@ export const usePermission = () => {
                   return false;
                 },
               },
-            ]
+            ],
           );
 
           break;
@@ -131,7 +131,7 @@ export const usePermission = () => {
                   return false;
                 },
               },
-            ]
+            ],
           );
 
           break;
