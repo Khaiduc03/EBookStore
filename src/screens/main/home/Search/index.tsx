@@ -1,22 +1,24 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {SearchCustom} from '../../../../components';
-
 import useStyles from './styles';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {Icon} from '@rneui/themed';
 import {getListComic} from '../../../../redux/selectors/comic.selector';
-import {ComicActions} from '../../../../redux';
+import {ComicActions, TopicActions} from '../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
-
 import {backScreen} from '../../../../utils';
+import {getListTopic} from '../../../../redux/selectors/topic.selector';
 
 const Search = () => {
   const dispatch = useAppDispatch();
   const dataComic = useAppSelector(getListComic);
+  const dataTopic = useAppSelector(getListTopic);
+  console.log('data: ', dataTopic);
   const styles = useStyles();
   const [search, setSearch] = useState('');
+
   const handlePressSearch = () => {
     NavigationService.navigate(routes.TOPICS);
   };
@@ -46,7 +48,10 @@ const Search = () => {
       <TouchableOpacity onPress={() => handlePress(1)}>
         <Text style={{fontSize: 40}}>GETCOMIC</Text>
       </TouchableOpacity>
-      <Text>{JSON.stringify(dataComic)}</Text>
+      <TouchableOpacity onPress={() => dispatch(TopicActions.getListTopic())}>
+        <Text style={{fontSize: 40}}>GETTOPIC</Text>
+      </TouchableOpacity>
+      <Text>{JSON.stringify(dataTopic)}</Text>
     </View>
   );
 };

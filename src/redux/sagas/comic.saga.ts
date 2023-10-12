@@ -4,7 +4,7 @@ import {ComicActions, ComicReducer, LoadingActions} from '../reducer';
 import {ComicService} from '../services';
 
 function* getListDataSaga(action: PayloadAction<number>): Generator {
-  yield put(LoadingActions.showLoading);
+  yield put(LoadingActions.showLoading());
   try {
     console.log('run');
     console.log(action);
@@ -19,7 +19,7 @@ function* getListDataSaga(action: PayloadAction<number>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoading);
+    yield put(LoadingActions.hideLoading());
   }
 }
 
