@@ -1,6 +1,5 @@
 import {routes} from '../../../constants';
 import {Screen} from '../../../types';
-import Message from '../message/Messages';
 import AboutApp from './AboutApp';
 import BecomeVIP from './BecomeVIP';
 import Favorite from './Favorite';
@@ -72,10 +71,6 @@ export const profileScreens: Screen[] = [
   {
     name: routes.POSTDETAILUSERS,
     component: PostDetailUser,
-  },
-  {
-    name: routes.MESSAGES,
-    component: Message,
   },
   {
     name: routes.FAVORITE,

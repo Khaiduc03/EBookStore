@@ -5,8 +5,9 @@ import useStyles from './styles';
 import {images} from '../../../../../../assets';
 import {PayProps} from './types';
 import {theme} from '../../../../../../theme';
-import {GoogleIcon} from '../../../../../../assets/icons';
+import {GoogleIcon, ZaloPay} from '../../../../../../assets/icons';
 import Memo from '../../../../../../assets/icons/GoogleIcon';
+import Paypal from '../../../../../../assets/icons/PaypalIcon';
 
 const Pay: React.FC<PayProps> = props => {
   const {title, icGoogle, icPaypal, icZaloPay} = props;
@@ -23,9 +24,9 @@ const Pay: React.FC<PayProps> = props => {
   return (
     <View style={styles.payment}>
       {icGoogle && <Memo width={64} height={64} viewBox="7 2 25 25" />}
+      {icPaypal && <Paypal width={64} height={64} viewBox="7 2 25 25" />}
+      {icZaloPay && <ZaloPay width={64} height={64} viewBox="7 2 25 25" />}
 
-      {icPaypal && <Image style={styles.icon} source={images.ic_Paypal} />}
-      {icZaloPay && <Image style={styles.icon} source={images.ic_ZaloPay} />}
       <Text style={styles.textName}>{title}</Text>
       <TouchableOpacity onPress={toggleConnection}>
         <Text style={textStyles}>
