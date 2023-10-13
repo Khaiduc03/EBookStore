@@ -5,13 +5,12 @@ import {color} from '@rneui/base';
 
 Device.getDeviceWidth();
 
-const useStyles = makeStyles(({ colors }) => ({
+const useStyles = makeStyles(({colors}) => ({
   container: {
     height: Device.getDeviceWithScreen() * 0.15,
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 0,
-    paddingHorizontal: normalize(24)
   },
   textTitle: {
     fontSize: normalize(22),
@@ -33,9 +32,9 @@ const useStyles = makeStyles(({ colors }) => ({
   rightIconLeft: {
     marginRight: normalize(10),
   },
-  button:{
+  button: {
     color: colors.primary,
-  }
+  },
 }));
 
 export default useStyles;

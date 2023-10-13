@@ -5,8 +5,8 @@ import {TouchableOpacity} from 'react-native';
 import {CustomHeaderProps} from './types';
 import useStyles from './styles';
 import {useState} from 'react';
-import { theme } from '../../../theme';
-import { normalize } from '@rneui/themed';
+import {theme} from '../../../theme';
+import {normalize} from '@rneui/themed';
 
 const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
   const styles = useStyles();

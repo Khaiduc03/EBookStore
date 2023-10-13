@@ -27,7 +27,9 @@ const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
         {!props.topicStyle && (
           <Text style={styles.nameTopic}>{comic.topic[0]}</Text>
         )}
-        <Text style={styles.nameComic}>{comic.name}</Text>
+        <Text numberOfLines={2} style={styles.nameComic}>
+          {comic.name}
+        </Text>
         <View style={styles.rate}>
           <Icon name="star-half" size={18} />
           <Text style={styles.textRate}>{comic.rate}</Text>
