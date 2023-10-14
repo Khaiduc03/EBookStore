@@ -13,7 +13,7 @@ import {ComicType} from '../../../redux';
 const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
   const comic: ComicType = props.data;
-  console.log('data:', comic.topics);
+
   const onpress = () => {
     NavigationService.navigate(routes.COMICDETAIL);
   };

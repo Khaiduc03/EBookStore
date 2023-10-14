@@ -14,9 +14,12 @@ const gap = 16;
 
 const Topics: React.FunctionComponent = () => {
   const dispatch = useAppDispatch();
-  // useEffect(() => {}, [dispatch(TopicActions.getListTopic())]);
+  useEffect(() => {
+    dispatch(TopicActions.getListTopic());
+  }, []);
 
   const dataTopic = useAppSelector(getListTopic);
+  console.log(dataTopic);
 
   const handlePressSearch = () => {
     NavigationService.navigate(routes.SEARCH);

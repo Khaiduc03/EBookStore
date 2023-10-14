@@ -1,3 +1,4 @@
+import {type} from 'os';
 import {uuid, Timestamp, image, PayloadHttpList} from '../../types';
 import {TopicType} from './topic.type';
 export interface PayloadHttpListComics<T> {
@@ -9,6 +10,7 @@ export interface PayloadHttpListComics<T> {
 export type ComicState = Partial<{
   listData: PayloadHttpListComics<ComicType>;
   topic: PayloadHttpList<TopicType>;
+  detailData: PayloadHttpList<ComicDetailType>;
 }>;
 
 export type ComicType = uuid &
@@ -21,3 +23,8 @@ export type ComicType = uuid &
     image_url: string;
     topics: string[];
   };
+
+export type ComicDetailType = ComicType & {
+  favorite_uuid: string;
+  isfavorite: boolean;
+};
