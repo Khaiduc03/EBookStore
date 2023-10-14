@@ -19,7 +19,6 @@ const Topics: React.FunctionComponent = () => {
   }, []);
 
   const dataTopic = useAppSelector(getListTopic);
-  console.log(dataTopic);
 
   const handlePressSearch = () => {
     NavigationService.navigate(routes.SEARCH);

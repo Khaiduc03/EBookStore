@@ -3,24 +3,29 @@ import {Device} from '../../../../../../utils';
 import {fontFamilySetup} from '../../../../../../utils/font';
 import {color} from '@rneui/base';
 const WIDTH = Device.getDeviceWidth();
+const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    width: WIDTH,
-    height: normalize(250),
-    justifyContent: 'space-between',
+    height: HEIGHT * 0.35,
+    justifyContent: 'space-around',
   },
+  content: {
+    marginTop: normalize(16),
+    flexDirection: 'row',
+    marginHorizontal: normalize(16),
+  },
+  imageComic: {width: WIDTH * 0.3, height: HEIGHT * 0.2},
 
   contentContainer: {
-    width: '100%',
-    marginTop: normalize(10),
-    marginLeft: normalize(10),
+    flex: 1,
+    marginLeft: normalize(16),
   },
   dayCreat: {
     color: colors.white,
     fontFamily: fontFamilySetup.medium,
     fontSize: normalize(16),
-    lineHeight: normalize(20),
+    lineHeight: normalize(25),
   },
 
   author: {
@@ -32,7 +37,8 @@ const useStyles = makeStyles(({colors}) => ({
   nameComic: {
     color: colors.white,
     fontFamily: fontFamilySetup.bold,
-    fontSize: normalize(30),
+    fontSize: normalize(25),
+    lineHeight: normalize(30),
   },
   imgComic: {
     height: Device.getDeviceHeight() * 0.22,
@@ -42,7 +48,7 @@ const useStyles = makeStyles(({colors}) => ({
 
   topicsContainer: {
     flexDirection: 'row',
-    width: '60%',
+    width: '100%',
     flexWrap: 'wrap',
   },
 

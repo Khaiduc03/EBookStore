@@ -8,7 +8,6 @@ function* getListDataSaga(action: PayloadAction<number>): Generator {
   try {
     console.log('run');
     const {data}: any = yield call(ComicService.getComic, action.payload);
-    console.log(action);
     if (data.code == 200) {
       console.log('run push tookit');
       yield put(ComicActions.setListData(data.data));
@@ -26,7 +25,6 @@ function* getComicById(action: PayloadAction<string>): Generator {
   try {
     console.log('run');
     const {data}: any = yield call(ComicService.getComicById, action.payload);
-    console.log(action);
     if (data.code == 200) {
       console.log('run push tookit');
       yield put(ComicActions.setDetailComic(data));

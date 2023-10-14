@@ -5,6 +5,7 @@ const useStyles = makeStyles(({colors}) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+    justifyContent: 'space-between',
   },
   textHeader: {
     marginTop: normalize(10),

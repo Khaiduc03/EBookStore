@@ -24,7 +24,15 @@ export type ComicType = uuid &
     topics: string[];
   };
 
-export type ComicDetailType = ComicType & {
-  favorite_uuid: string;
-  isfavorite: boolean;
-};
+export type ComicDetailType = uuid &
+  Timestamp & {
+    comic_name: string;
+    isPublic: boolean;
+    author: string;
+    description: string;
+    views: number;
+    image_url: string;
+    topicnames: string[];
+    favorite_uuid: string;
+    isfavorite: boolean;
+  };

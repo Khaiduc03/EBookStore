@@ -14,13 +14,13 @@ const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
   const comic: ComicType = props.data;
 
-  const onpress = () => {
-    NavigationService.navigate(routes.COMICDETAIL);
+  const onPressNavDetail = () => {
+    NavigationService.navigate(routes.COMICDETAIL, {uuid: comic.uuid});
   };
 
   return (
     <View style={props.viewStyle || styles.container}>
-      <TouchableOpacity onPress={() => onpress()}>
+      <TouchableOpacity onPress={() => onPressNavDetail()}>
         <FastImage
           style={props.imageStyle || styles.imgComic}
           source={{uri: comic.image_url, priority: FastImage.priority.normal}}
