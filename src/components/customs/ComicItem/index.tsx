@@ -8,35 +8,40 @@ import {Comic} from '../../../types';
 import {NavigationService} from '../../../navigation';
 import {routes} from '../../../constants';
 import FastImage from 'react-native-fast-image';
+import {ComicType} from '../../../redux';
 
 const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
-  const comic: Comic = props.data;
+  const comic: ComicType = props.data;
+  console.log('data:', comic.topics);
+  const onpress = () => {
+    NavigationService.navigate(routes.COMICDETAIL);
+  };
+
   return (
     <View style={props.viewStyle || styles.container}>
-      <TouchableOpacity
-        onPress={() => NavigationService.navigate(routes.COMICDETAIL)}>
+      <TouchableOpacity onPress={() => onpress()}>
         <FastImage
           style={props.imageStyle || styles.imgComic}
-          source={{uri: comic.image, priority: FastImage.priority.normal}}
+          source={{uri: comic.image_url, priority: FastImage.priority.normal}}
           resizeMode={FastImage.resizeMode.cover}
         />
       </TouchableOpacity>
 
       <View style={props.contentStyle || styles.content}>
         {!props.topicStyle && (
-          <Text style={styles.nameTopic}>{comic.topic[0]}</Text>
+          <Text style={styles.nameTopic}>{comic.topics[0]}</Text>
         )}
         <Text numberOfLines={2} style={styles.nameComic}>
-          {comic.name}
+          {comic.comic_name}
         </Text>
         <View style={styles.rate}>
           <Icon name="star-half" size={18} />
-          <Text style={styles.textRate}>{comic.rate}</Text>
+          <Text style={styles.textRate}>{comic.views}</Text>
         </View>
         {props.topicStyle && (
           <View style={props.topicStyle}>
-            {props.data.topic.map((text, index) => (
+            {comic.topics.map((text, index) => (
               <View key={index} style={styles.itemTopics}>
                 <Text style={styles.textTopics}>{text}</Text>
               </View>

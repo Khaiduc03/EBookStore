@@ -10,12 +10,14 @@ import {ComicActions, TopicActions} from '../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {backScreen} from '../../../../utils';
 import {getListTopic} from '../../../../redux/selectors/topic.selector';
+import {TopicType} from '../../../../redux';
 
 const Search = () => {
   const dispatch = useAppDispatch();
   const dataComic = useAppSelector(getListComic);
+  console.log('=>>>>>', dataComic);
   const dataTopic = useAppSelector(getListTopic);
-  console.log('data: ', dataTopic);
+
   const styles = useStyles();
   const [search, setSearch] = useState('');
 
@@ -51,7 +53,7 @@ const Search = () => {
       <TouchableOpacity onPress={() => dispatch(TopicActions.getListTopic())}>
         <Text style={{fontSize: 40}}>GETTOPIC</Text>
       </TouchableOpacity>
-      <Text>{JSON.stringify(dataTopic)}</Text>
+      {/* <Text>{JSON.stringify(dataComic)}</Text> */}
     </View>
   );
 };

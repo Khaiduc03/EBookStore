@@ -1,4 +1,4 @@
-import {Timestamp} from 'react-native-reanimated';
+import {Timestamp} from '../../types';
 import {uuid} from '../../types';
 export type TopicType = uuid &
   Timestamp & {

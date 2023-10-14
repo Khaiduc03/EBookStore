@@ -1,6 +1,6 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 
-import {Redux, ComicState, ComicType} from '../types';
+import {Redux, ComicState, ComicType, PayloadHttpListComics} from '../types';
 import {PayloadHttpList} from '../../types';
 
 const initialState: ComicState = {};
@@ -16,12 +16,12 @@ const reducer = createSlice({
     },
     setListData: (
       state: ComicState,
-      action: PayloadAction<PayloadHttpList<ComicType>>,
+      action: PayloadAction<PayloadHttpListComics<ComicType>>,
     ) => {
       return {
         ...state,
         listData: {
-          data: action.payload.data,
+          comics: action.payload.comics,
         },
       };
     },
