@@ -1,4 +1,4 @@
-import { AxiosRequestConfig } from 'axios';
+import {AxiosRequestConfig} from 'axios';
 
 export const configFormData: AxiosRequestConfig = {
   headers: {

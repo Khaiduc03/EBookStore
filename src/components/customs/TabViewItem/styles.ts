@@ -13,6 +13,10 @@ const useStyles = makeStyles(({colors}) => ({
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.bold,
   },
+  indicatorStyle: {
+    height: 3,
+    backgroundColor: colors.grey5,
+  },
 }));
 
 export default useStyles;

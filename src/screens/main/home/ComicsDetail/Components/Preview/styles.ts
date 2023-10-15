@@ -5,7 +5,7 @@ const useStyles = makeStyles(({colors}) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    paddingHorizontal: normalize(10),
+    justifyContent: 'space-between',
   },
   textHeader: {
     marginTop: normalize(10),
@@ -20,6 +20,14 @@ const useStyles = makeStyles(({colors}) => ({
     lineHeight: normalize(22),
     color: colors.black,
     textAlign: 'justify',
+  },
+  textTitle: {
+    fontSize: normalize(18),
+    fontFamily: fontFamilySetup.bold,
+    color: colors.black,
+  },
+  content: {
+    paddingHorizontal: normalize(10),
   },
 }));
 

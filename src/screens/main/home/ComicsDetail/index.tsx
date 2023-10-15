@@ -1,13 +1,25 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, { useEffect } from 'react';
+import { View } from 'react-native';
 
-import {ComicsNew} from '../Home/components';
-import Search from '../Search';
-import {TabViewItem} from '../../../../components';
+import { useRoute } from '@react-navigation/native';
+import { TabViewItem } from '../../../../components';
+import { useAppDispatch } from '../../../../hooks';
+import { ComicActions } from '../../../../redux';
+import { Episodes, Preview } from './Components';
 import useStyles from './styles';
-import {Episodes, Preview} from './Components';
+
+interface RouteParamsIdComic {
+  uuid: string;
+}
 
 const ComicsDetail = () => {
+  const dispath = useAppDispatch();
+  const route = useRoute();
+  const uuidComic = (route.params as RouteParamsIdComic).uuid;
+  useEffect(() => {
+    dispath(ComicActions.getDetailComic(uuidComic));
+  }, []);
+
   const styles = useStyles();
   return (
     <View style={styles.container}>

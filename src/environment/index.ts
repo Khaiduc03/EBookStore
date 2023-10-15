@@ -4,8 +4,6 @@ import Config from 'react-native-config';
 // export const BASE_URL = process.env.REACT_APP_BASE_URL;
 export const BASE_URL = Config.BASE_URL;
 
-console.log(BASE_URL);
-
 export const ENDPOINTS = {
   LOGIN: Config.LOGIN,
   REGISTER: Config.REGISTER,
@@ -40,31 +38,3 @@ export const ENDPOINTS = {
   CHAPTER: Config.CHAPTER,
   CHAPTER_UUID: Config.CHAPTER_UUID,
 };
-
-export enum Endpoints {
-  //AUTH
-  LOGIN_ENDPOINT = '/api/auth/login',
-  REGISTER_ADMIN_ENDPOINT = '/api/auth/admin',
-  CREATE_ACCOUNT_ENDPOINT = '/api/auth/register',
-  REFRESH_TOKEN_ENDPOINT = '/api/auth/refresh-token',
-  SIGN_IN_GOOGLE = '/api/auth/google-login',
-  UPDATE_PASSWORD_ENDPOINT = '/api/auth/update-password',
-  SEND_OTP = '/api/auth/send-otp',
-  VERIFY_OTP = '/api/auth/verify-otp',
-
-  //USER
-  GET_ALL_USER_ENDPOINT = '/api/user',
-  UPLOAD_USER_AVATAR_ENDPOINT = '/api/user/avatar', //PUT, DELETE
-  GET_PROFILE_ENDPOINT = '/api/user/profile', //GET, PUT
-  GET_USER_BY_UUID_ENDPOINT = '/api/user/uuid', //GET
-
-  //TOPIC
-  GET_ALL_TOPIC_ENDPOINT = '/api/topic', //GET, POST
-  UPDATE_TOPIC_ENDPOINT = '/api/topic/update', //PUT
-  DELETE_TOPIC_ENDPOINT = '/api/topic/delete', //DELETE
-  GET_TOPIC_BY_UUID_ENDPOINT = '/api/topic/uuid', //GET
-
-  //COMIC
-  GET_ALL_COMIC_ENDPOINT = '/api/comic', //GET, POST
-  GET_COMIC_BY_UUID_ENDPOINT = '/api/comic/uuid', //GET
-}

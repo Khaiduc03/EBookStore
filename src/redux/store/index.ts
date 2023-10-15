@@ -9,6 +9,8 @@ import {
   AuthReducer,
   LoadingReducer,
   ThemeReducer,
+  ComicReducer,
+  TopicReducer,
 } from '../reducer';
 import {AlertReducer} from '../reducer/alert.reducer';
 import RootSaga from '../sagas';
@@ -21,7 +23,7 @@ const persistConfig: PersistConfig<RootState> = {
   version: 1, // version - defaults to 1
   debug: true, // enable logs - default is false
   stateReconciler: autoMergeLevel2,
-  whitelist: [Redux.auth, Redux.theme,  Redux.app],
+  whitelist: [Redux.auth, Redux.theme, Redux.app, Redux.comic, Redux.topic],
   blacklist: [Redux.loading],
 };
 
@@ -31,6 +33,8 @@ const rootReducers = combineReducers({
   app: AppReducer,
   alert: AlertReducer,
   theme: ThemeReducer,
+  comic: ComicReducer,
+  topic: TopicReducer,
 });
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducers);
 

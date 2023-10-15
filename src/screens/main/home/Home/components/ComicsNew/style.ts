@@ -14,12 +14,18 @@ const useStyles = makeStyles(({colors}) => ({
     paddingLeft: normalize(15),
   },
   imgComic: {
-    width: '36%',
-    borderRadius: normalize(10),
+    width: Device.getDeviceWidth() * 0.28,
+    height: '100%',
+    borderRadius: normalize(6),
     marginRight: '2%',
   },
   content: {
-    width: '62%',
+    flex: 1,
+  },
+  topicsContainer: {
+    flexDirection: 'row',
+    width: '70%',
+    flexWrap: 'wrap',
   },
 }));
 

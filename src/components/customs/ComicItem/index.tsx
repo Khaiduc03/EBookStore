@@ -7,36 +7,47 @@ import {Image} from '@rneui/themed';
 import {Comic} from '../../../types';
 import {NavigationService} from '../../../navigation';
 import {routes} from '../../../constants';
+import FastImage from 'react-native-fast-image';
+import {ComicType} from '../../../redux';
 
 const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
-  const comic: Comic = props.data;
+  const comic: ComicType = props.data;
+
+  const onPressNavDetail = () => {
+    NavigationService.navigate(routes.COMICDETAIL, {uuid: comic.uuid});
+  };
+
   return (
-    <View
-      style={[
-        props.viewStyle
-          ? props.viewStyle
-          : props.index % 2 !== 0
-          ? {marginLeft: 15}
-          : {marginLeft: 0} || styles.container,
-        ,
-      ]}>
-      <TouchableOpacity
-        onPress={() => NavigationService.navigate(routes.COMICDETAIL)}
-        style={props.imageStyle || styles.imgComic}>
-        <Image
-          style={{width: '100%', height: '100%', borderRadius: 10}}
-          source={{uri: comic.image}}
-          PlaceholderContent={<ActivityIndicator />}
+    <View style={props.viewStyle || styles.container}>
+      <TouchableOpacity onPress={() => onPressNavDetail()}>
+        <FastImage
+          style={props.imageStyle || styles.imgComic}
+          source={{uri: comic.image_url, priority: FastImage.priority.normal}}
+          resizeMode={FastImage.resizeMode.cover}
         />
       </TouchableOpacity>
+
       <View style={props.contentStyle || styles.content}>
-        <Text style={styles.nameTopic}>{comic.topic}</Text>
-        <Text style={styles.nameComic}>{comic.name}</Text>
+        {!props.topicStyle && (
+          <Text style={styles.nameTopic}>{comic.topics[0]}</Text>
+        )}
+        <Text numberOfLines={2} style={styles.nameComic}>
+          {comic.comic_name}
+        </Text>
         <View style={styles.rate}>
-          <Icon name="star-half" size={24} />
-          <Text style={styles.textRate}>{comic.rate}</Text>
+          <Icon name="star-half" size={18} />
+          <Text style={styles.textRate}>{comic.views}</Text>
         </View>
+        {props.topicStyle && (
+          <View style={props.topicStyle}>
+            {comic.topics.map((text, index) => (
+              <View key={index} style={styles.itemTopics}>
+                <Text style={styles.textTopics}>{text}</Text>
+              </View>
+            ))}
+          </View>
+        )}
       </View>
     </View>
   );

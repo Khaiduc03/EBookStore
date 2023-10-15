@@ -12,10 +12,10 @@ declare module '@rneui/themed' {
     grey6: string;
     backgrounDetai: string;
     backgroundChapter: string;
-    whiteDefault: string;
-    blackDefault: string;
-    bubbleUserBackground: string;
-    bubbleNotUserBackground: string;
+    backgroundTopic: string;
+    green: string;
+    red: string;
+    blue: string;
   }
 }
 
@@ -40,10 +40,10 @@ export const theme = createTheme({
     grey6: '#e6e6e6',
     backgrounDetai: '#F5C38B',
     backgroundChapter: '#181A20',
-    blackDefault: '#000',
-    whiteDefault: '#ffff',
-    bubbleUserBackground: '#20A090',
-    bubbleNotUserBackground: '#F2F7FB',
+    backgroundTopic: '#EEEEEE',
+    green: '#3BD74B',
+    red: '#FF0000',
+    blue: '#0075FF',
   },
   darkColors: {
     primary: '#F89300',
@@ -64,10 +64,10 @@ export const theme = createTheme({
     grey6: '#000',
     backgrounDetai: '#181A20',
     backgroundChapter: '#181A20',
-    blackDefault: '#000',
-    whiteDefault: '#ffff',
-    bubbleUserBackground: '#F2F7FB',
-    bubbleNotUserBackground: '#20A090',
+    backgroundTopic: '#35383F',
+    green: '#3BD74B',
+    red: '#FF0000',
+    blue: '#0075FF',
   },
   components: {
     Button: (props, theme) => ({

@@ -10,6 +10,10 @@ import {
 
 import useStyles from './styles';
 import {Device} from '../../../../../../utils';
+import FastImage from 'react-native-fast-image';
+import {TouchableOpacity} from 'react-native';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
 
 interface CarouselDataItem {
   id: string;
@@ -54,12 +58,14 @@ const BannerComic: React.FC = () => {
     index: number;
   }) => {
     return (
-      <View>
-        <Image
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={() => NavigationService.navigate(routes.COMICDETAIL)}>
+        <FastImage
           source={{uri: item.image}}
-          style={{height: screenWidth * 0.6, width: screenWidth}}
+          style={{height: screenWidth * 0.5, width: screenWidth}}
         />
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -102,17 +108,17 @@ const carouselData: CarouselDataItem[] = [
   {
     id: '1',
     image:
-      'https://png.pngtree.com/background/20230519/original/pngtree-the-manga-couple-of-anime-i-love-you-in-autumn-picture-image_2664667.jpg',
+      'https://gamek.mediacdn.vn/133514250583805952/2022/1/2/solo-leveling-1620917554185396197198-16410674690231914720800.jpg',
   },
   {
     id: '2',
     image:
-      'https://cdn.sforum.vn/sforum/wp-content/uploads/2022/05/kaeya-voi-diluc-genshin-impact-tro-choi-dien-tu-anime-hinh-nen-2560x1440_51.jpg',
+      'https://photo2.tinhte.vn/data/attachment-files/2021/03/5382277_Melissa-Poldebrat-And-Yuri-Elizabeth1.jpg',
   },
   {
     id: '3',
     image:
-      'https://cdn.sforum.vn/sforum/wp-content/uploads/2022/05/Destiny-Girl-codes.jpg',
+      'https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/03/20-best-romance-manhwa-for-fans-of-manga.jpg',
   },
   {
     id: '4',

@@ -4,9 +4,14 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {TouchableOpacity, Image} from 'react-native';
 import {CustomHeaderProps} from './types';
 import useStyles from './styles';
+import {useState} from 'react';
+import {theme} from '../../../theme';
+import {normalize} from '@rneui/themed';
 
 const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
   const styles = useStyles();
+  const [isPressed, setIsPressed] = useState(false);
+  const [buttonText, setButtonText] = useState('Follow');
   return (
     <Header
       barStyle="dark-content"
@@ -86,6 +91,30 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
                 size={24}
                 name={props.rightIconRight?.name}
               />
+            )}
+            {props.buttonProps && (
+              <TouchableOpacity
+                onPress={() => {
+                  setIsPressed(!isPressed);
+                  setButtonText(isPressed ? 'Follow' : 'unFollow');
+                }}
+                style={{
+                  backgroundColor: isPressed
+                    ? theme?.lightColors?.grey5
+                    : theme?.lightColors?.blue,
+                  borderRadius: normalize(10),
+                  width: normalize(78),
+                  height: normalize(27),
+                  alignItems: 'center',
+                }}>
+                <Text
+                  style={{
+                    color: 'white',
+                    fontSize: normalize(16),
+                  }}>
+                  {buttonText}
+                </Text>
+              </TouchableOpacity>
             )}
           </TouchableOpacity>
         </View>

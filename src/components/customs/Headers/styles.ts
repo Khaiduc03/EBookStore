@@ -8,7 +8,7 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
     backgroundColor: colors.background,
     marginVertical: normalize(12),
-    height: Device.getDeviceWithScreen()*0.04
+    height: Device.getDeviceWithScreen() * 0.04,
   },
   icon: {
     justifyContent: 'center',

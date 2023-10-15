@@ -40,6 +40,20 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.medium,
     marginLeft: normalize(5),
   },
+  itemTopics: {
+    backgroundColor: colors.backgroundTopic,
+    marginRight: normalize(5),
+    marginTop: normalize(5),
+    paddingHorizontal: normalize(8),
+    paddingVertical: normalize(5),
+    borderRadius: 4,
+  },
+  textTopics: {
+    fontSize: normalize(7),
+    color: colors.black,
+    textAlign: 'center',
+    fontFamily: fontFamilySetup.medium,
+  },
 }));
 
 export default useStyles;

@@ -6,6 +6,20 @@ export type HeaderIcon = {
   color?: string;
   size?: number;
 };
+export type ButtonProps = {
+  onPress: () => void;
+  icon?: {
+    type: string;
+    name: string;
+    size?: number;
+    color?: string;
+  };
+  title?: {
+    text: string;
+    size?: number;
+    color?: string;
+  };
+};
 
 export type HeaderImage = {
   uri?: string;
@@ -26,4 +40,7 @@ export type CustomHeaderProps = {
   imageUri?: HeaderImage;
   fullName?: string;
   userStatus?: string;
+
+  leftIconStyle?: ViewStyle;
+  buttonProps?: ButtonProps;
 };

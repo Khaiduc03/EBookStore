@@ -14,7 +14,7 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'column',
   },
   textView: {
-    flex:1,
+    flex: 1,
     padding: normalize(24),
     paddingBottom: normalize(8),
   },
@@ -33,14 +33,12 @@ const useStyles = makeStyles(({colors}) => ({
     letterSpacing: normalize(0.12),
   },
   bottom: {
-    
     flex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
 
     paddingHorizontal: normalize(24),
-    
   },
 
   button: {

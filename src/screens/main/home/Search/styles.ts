@@ -6,10 +6,19 @@ const useStyles = makeStyles(({colors}) => ({
     flex: 1,
     backgroundColor: colors.background,
   },
-  text: {
-    fontSize: 26,
-    fontFamily: fontFamilySetup.bold,
-    color: colors.primary,
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: normalize(10),
+    marginHorizontal: normalize(10),
+  },
+  backIcon: {
+    color: colors.black,
+  },
+  search: {
+    flex: 1,
+    marginLeft: normalize(10),
   },
 }));
 
