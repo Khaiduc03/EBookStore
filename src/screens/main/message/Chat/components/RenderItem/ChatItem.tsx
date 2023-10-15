@@ -5,7 +5,7 @@ import {NavigationService} from '../../../../../../navigation';
 import useStyles from '../../styles';
 import {ItemProps} from '../../types';
 
-const ChatItem = ({item}: ItemProps) => {
+export const ChatItem = ({item}: ItemProps) => {
   const styles = useStyles();
 
   return (
@@ -52,5 +52,3 @@ const ChatItem = ({item}: ItemProps) => {
     </TouchableOpacity>
   );
 };
-
-export default ChatItem;

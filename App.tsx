@@ -8,8 +8,8 @@ import SplashScreen from 'react-native-lottie-splash-screen';
 import Toast from 'react-native-toast-message';
 import Alert from './src/components/customs/Alert';
 import Loading from './src/components/shared/Loading';
-import {toastConfig} from './src/utils/toastConfig';
 import Slider from './src/screens/auth/onboard';
+import {toastConfig} from './src/utils/toastConfig';
 
 const App: FunctionComponent = () => {
   useEffect(() => {

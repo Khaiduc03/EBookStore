@@ -43,26 +43,28 @@ export const ENDPOINTS = {
 
 export enum Endpoints {
   //AUTH
-  LOGIN_ENDPOINT = '/auth/login',
-  REGISTER_ADMIN_ENDPOINT = '/auth/admin',
-  CREATE_ACCOUNT_ENDPOINT = '/auth/register',
-  REFRESH_TOKEN_ENDPOINT = '/auth/refresh-token',
-  SIGN_IN_GOOGLE = '/auth/google-login',
-  UPDATE_PASSWORD_ENDPOINT = '/auth/update-password',
+  LOGIN_ENDPOINT = '/api/auth/login',
+  REGISTER_ADMIN_ENDPOINT = '/api/auth/admin',
+  CREATE_ACCOUNT_ENDPOINT = '/api/auth/register',
+  REFRESH_TOKEN_ENDPOINT = '/api/auth/refresh-token',
+  SIGN_IN_GOOGLE = '/api/auth/google-login',
+  UPDATE_PASSWORD_ENDPOINT = '/api/auth/update-password',
+  SEND_OTP = '/api/auth/send-otp',
+  VERIFY_OTP = '/api/auth/verify-otp',
 
   //USER
-  GET_ALL_USER_ENDPOINT = '/user',
-  UPLOAD_USER_AVATAR_ENDPOINT = '/user/avatar', //PUT, DELETE
-  GET_PROFILE_ENDPOINT = '/user/profile', //GET, PUT
-  GET_USER_BY_UUID_ENDPOINT = '/user/uuid', //GET
+  GET_ALL_USER_ENDPOINT = '/api/user',
+  UPLOAD_USER_AVATAR_ENDPOINT = '/api/user/avatar', //PUT, DELETE
+  GET_PROFILE_ENDPOINT = '/api/user/profile', //GET, PUT
+  GET_USER_BY_UUID_ENDPOINT = '/api/user/uuid', //GET
 
   //TOPIC
-  GET_ALL_TOPIC_ENDPOINT = '/topic', //GET, POST
-  UPDATE_TOPIC_ENDPOINT = '/topic/update', //PUT
-  DELETE_TOPIC_ENDPOINT = '/topic/delete', //DELETE
-  GET_TOPIC_BY_UUID_ENDPOINT = '/topic/uuid', //GET
+  GET_ALL_TOPIC_ENDPOINT = '/api/topic', //GET, POST
+  UPDATE_TOPIC_ENDPOINT = '/api/topic/update', //PUT
+  DELETE_TOPIC_ENDPOINT = '/api/topic/delete', //DELETE
+  GET_TOPIC_BY_UUID_ENDPOINT = '/api/topic/uuid', //GET
 
   //COMIC
-  GET_ALL_COMIC_ENDPOINT = '/comic', //GET, POST
-  GET_COMIC_BY_UUID_ENDPOINT = '/comic/uuid', //GET
+  GET_ALL_COMIC_ENDPOINT = '/api/comic', //GET, POST
+  GET_COMIC_BY_UUID_ENDPOINT = '/api/comic/uuid', //GET
 }

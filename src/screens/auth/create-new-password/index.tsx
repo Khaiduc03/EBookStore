@@ -9,21 +9,41 @@ import {
 } from 'react-native';
 import {AuthHeader, Headers, InputCustom} from '../../../components';
 import {routes} from '../../../constants';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {NavigationService} from '../../../navigation';
-import {showToastError, showToastSuccess} from '../../../utils';
+import {AuthActions, getAuthUserProfile} from '../../../redux';
+import {CustomToastBottom} from '../../../utils';
 import useStyles from './styles';
 
 const CreateNewPassword: React.FC = () => {
+  const dispatch = useAppDispatch();
+  // const [email] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [confirmPassword, setConfirmPassword] = React.useState('');
+  const [rePassword, setRePassword] = React.useState('');
 
-  const isPasswordMatch = () => {
-    if ((password && confirmPassword) === '' || password !== confirmPassword) {
+  const {email} = useAppSelector(getAuthUserProfile);
+
+  const isPasswordMatch = async () => {
+    if (password === '' || rePassword === '') {
+      CustomToastBottom('Error, Passwords cannot be empty!');
+      return false;
+    } else if (password !== rePassword) {
+      CustomToastBottom('Error, Passwords do not match!');
       return false;
     } else {
+      CustomToastBottom('Success, Account created successfully!');
+      dispatch(
+        AuthActions.handleNewPassword({
+          email: email || '',
+          password: password,
+        }),
+      );
       return true;
     }
   };
+
+  console.log('email: ', email);
+  console.log('password: ', password);
 
   const [checked, setChecked] = React.useState<boolean>(false);
 
@@ -48,16 +68,16 @@ const CreateNewPassword: React.FC = () => {
           <View>
             <Text style={styles.text2}>Password</Text>
             <InputCustom
-              onChangeText={text => setPassword(text)}
               value={password}
+              onChangeText={text => setPassword(text)}
               secure
             />
           </View>
           <View>
             <Text style={styles.text2}>Confirm Password</Text>
             <InputCustom
-              onChangeText={text => setConfirmPassword(text)}
-              value={confirmPassword}
+              value={rePassword}
+              onChangeText={text => setRePassword(text)}
               secure
             />
           </View>
@@ -65,19 +85,12 @@ const CreateNewPassword: React.FC = () => {
             <View style={styles.checkBox}>
               <CheckBox checked={checked} onIconPress={toggleCheckbox} />
             </View>
-
             <Text style={styles.textRM}>Remember me</Text>
           </View>
           <View style={styles.viewBottom}>
             <TouchableOpacity
               style={styles.btnContinue}
-              onPress={() => {
-                if (isPasswordMatch()) {
-                  showToastSuccess('Success, Account created successfully!');
-                } else {
-                  showToastError('Error, Passwords do not match!');
-                }
-              }}>
+              onPress={isPasswordMatch}>
               <Text style={styles.textContinue}>Continue</Text>
             </TouchableOpacity>
           </View>

@@ -3,21 +3,23 @@ import React, {FunctionComponent} from 'react';
 import {Input, InputProps as BaseIPProps} from '@rneui/themed';
 import {
   Keyboard,
+  TextInput,
+  TextInputProps,
   TouchableNativeFeedback,
   TouchableOpacity,
-  TextInputProps,
 } from 'react-native';
 
 import useStyles from './styles';
 import {InputProps} from './types';
-import {EyeOffIcon, EyeOnIcon, LockIcon} from '../../../assets/icons';
+import {EyeOffIcon, EyeOnIcon} from '../../../assets/icons';
 
-const InputCustom: FunctionComponent<InputProps & TextInputProps> = props => {
-  const [inputFocused, setInputFocused] = React.useState(false);
-
+const InputCustomV1: FunctionComponent<
+  InputProps & TextInputProps & BaseIPProps
+> = React.forwardRef<TextInput, InputProps & TextInputProps>((props, ref) => {
   const styles = useStyles();
 
   const [secure, setSecure] = React.useState<boolean>(true);
+
   const _renderSecure = () => {
     return (
       <TouchableOpacity onPress={() => setSecure(!secure)}>
@@ -25,6 +27,9 @@ const InputCustom: FunctionComponent<InputProps & TextInputProps> = props => {
       </TouchableOpacity>
     );
   };
+
+  const [inputFocused, setInputFocused] = React.useState(false);
+
   const handleInputFocus = () => {
     setInputFocused(true);
   };
@@ -37,19 +42,19 @@ const InputCustom: FunctionComponent<InputProps & TextInputProps> = props => {
     <TouchableNativeFeedback onPress={() => Keyboard.dismiss()}>
       <Input
         secureTextEntry={props.secure && secure}
-        inputContainerStyle={[
-          styles.inputContainer || props.style,
-          props.style,
-        ]}
+        inputContainerStyle={
+          [inputFocused ? styles.inputContainerFocus : styles.inputContainer] ||
+          props.style
+        }
         placeholder={props.placeholder}
-        leftIconContainerStyle={styles.icon}
-        rightIconContainerStyle={styles.icon}
+        leftIconContainerStyle={styles.icon || props.style}
+        rightIconContainerStyle={styles.icon || props.style}
         rightIcon={props.secure && _renderSecure()}
-        inputStyle={[inputFocused ? styles.inputFocus : styles.inputBlur]}
+        inputStyle={[inputFocused && styles.inputFocus] || props.style}
         value={props.value}
         onChangeText={props.onChangeText}
         renderErrorMessage={false}
-        placeholderTextColor={styles.placeHolder.color}
+        placeholderTextColor={styles.placeHolder.color || undefined}
         keyboardType={props.keyboardType}
         onBlur={handleInputBlur}
         onFocus={handleInputFocus}
@@ -57,6 +62,6 @@ const InputCustom: FunctionComponent<InputProps & TextInputProps> = props => {
       />
     </TouchableNativeFeedback>
   );
-};
+});
 
-export default InputCustom;
+export default InputCustomV1;

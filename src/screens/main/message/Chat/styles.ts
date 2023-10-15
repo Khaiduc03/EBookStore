@@ -49,9 +49,10 @@ const useStyles = makeStyles(({colors}) => ({
     width: '50%',
   },
   view0: {
+    width: '96%',
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    left: normalize(16),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   view1: {
     flexDirection: 'row',
@@ -75,7 +76,7 @@ const useStyles = makeStyles(({colors}) => ({
     marginEnd: normalize(10),
   },
   item: {
-    maxWidth: '100%',
+    width: '100%',
     height: normalize(80),
     justifyContent: 'center',
   },

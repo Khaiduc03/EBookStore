@@ -43,14 +43,14 @@ const useStyles = makeStyles(({colors}) => ({
   },
   text4: {
     color: colors.black,
-    fontSize: normalize(14),
+    fontSize: normalize(16),
     fontFamily: fontFamilySetup.bold,
     lineHeight: normalize(21),
     letterSpacing: normalize(0.12),
   },
   text5: {
     color: colors.primary,
-    fontSize: normalize(14),
+    fontSize: normalize(16),
     fontFamily: fontFamilySetup.bold,
     lineHeight: normalize(21),
     letterSpacing: normalize(0.12),
@@ -62,7 +62,7 @@ const useStyles = makeStyles(({colors}) => ({
     letterSpacing: normalize(0.12),
   },
   textinitial: {
-    color: colors.primary,
+    color: colors.black,
   },
   text6: {
     color: colors.black,

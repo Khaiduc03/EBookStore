@@ -2,6 +2,7 @@ import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {
   AuthState,
   LoginPayload,
+  NewPasswordPayload,
   RefreshToken,
   SendOTPPayload,
   User,
@@ -164,9 +165,40 @@ const reducer = createSlice({
       };
     },
 
+    handleSendOTP: (
+      state: AuthState,
+      _: PayloadAction<Pick<SendOTPPayload, 'email'>>,
+    ) => {
+      return {
+        ...state,
+      };
+    },
+
     handleVerifyOTP: (state: AuthState, _: PayloadAction<SendOTPPayload>) => {
       return {
         ...state,
+      };
+    },
+
+    handleNewPassword: (
+      state: AuthState,
+      _: PayloadAction<NewPasswordPayload>,
+    ) => {
+      return {
+        ...state,
+      };
+    },
+    setNewPassword: (
+      state: AuthState,
+      _: PayloadAction<NewPasswordPayload>,
+    ) => {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          email: _.payload.email,
+          password: _.payload.password,
+        },
       };
     },
   },

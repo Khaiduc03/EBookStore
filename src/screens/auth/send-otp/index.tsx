@@ -23,23 +23,9 @@ const SendOTP: React.FC = () => {
   const [pin3, setPin3] = React.useState('');
   const [pin4, setPin4] = React.useState('');
 
-  const [payload, setPayload] = React.useState<SendOTPPayload>({
-    email: '',
-    otp: '',
-  });
-
   const dispatch = useAppDispatch();
 
   const {email} = useAppSelector(getAuthUserProfile);
-  console.log(email);
-  React.useEffect(() => {
-    setPayload({
-      email: email || '',
-      otp: pin1 + pin2 + pin3 + pin4,
-    });
-  }, [pin1, pin2, pin3, pin4]);
-
-  console.log(payload);
 
   const pin1Ref = React.useRef<TextInput>(null);
   const pin2Ref = React.useRef<TextInput>(null);
@@ -47,16 +33,23 @@ const SendOTP: React.FC = () => {
   const pin4Ref = React.useRef<TextInput>(null);
 
   const [countdown, setCountdown] = React.useState<number>(60);
-  const [isCounting, setIsCounting] = React.useState<boolean>(false);
+  const [isCounting, setIsCounting] = React.useState<boolean>(true);
 
   const [textColor, setTextColor] = React.useState(styles.textinitial.color);
-  const [resendText, setResendText] = React.useState<string>('Send code');
+  const [resendText, setResendText] = React.useState<string>(
+    'Send OTP code after ',
+  );
 
   const validateOTP = () => {
     if (pin1 === '' || pin2 === '' || pin3 === '' || pin4 === '') {
       showToastError('Error, OTP must not be left blank');
     } else {
-      dispatch(AuthActions.handleVerifyOTP(payload));
+      dispatch(
+        AuthActions.handleVerifyOTP({
+          email: email || '',
+          otp: pin1 + pin2 + pin3 + pin4,
+        }),
+      );
     }
   };
 
@@ -73,8 +66,8 @@ const SendOTP: React.FC = () => {
       if (id) {
         clearInterval(id);
       }
-      setResendText('Send code');
-      setTextColor(styles.textinitial.color);
+      setResendText('Send OTP code ');
+      setTextColor(styles.text5.color);
     }
 
     return () => {
@@ -85,17 +78,20 @@ const SendOTP: React.FC = () => {
   }, [isCounting, countdown]);
 
   const startCountdown = () => {
+    dispatch(
+      AuthActions.handleSendOTP({
+        email: email || '',
+      }),
+    );
     setIsCounting(true);
     setCountdown(60);
-    setResendText('Resend code in ');
+    setResendText('Send OTP code after ');
   };
 
   const handlePin1Change = (text: string) => {
     if (/^\d*$/.test(text)) {
-      // Kiểm tra xem text có phải là chuỗi số không
       setPin1(text);
       if (text !== '') {
-        // Kiểm tra xem text có khác rỗng không
         pin2Ref.current?.focus();
       } else {
         setPin1(text);
@@ -202,13 +198,14 @@ const SendOTP: React.FC = () => {
                 }
               }}>
               <Text style={[styles.textCT, {color: textColor}]}>
-                {resendText}
-                {isCounting && countdown > 0 ? (
+                {!isCounting && <>{resendText}</>}
+                {isCounting && countdown > 0 && (
                   <>
+                    {resendText}
                     <Text style={styles.text5}>{`${countdown} `}</Text>
                     <Text style={styles.text4}>s</Text>
                   </>
-                ) : null}
+                )}
               </Text>
             </TouchableOpacity>
           </View>

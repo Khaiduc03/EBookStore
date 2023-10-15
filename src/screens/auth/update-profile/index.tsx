@@ -139,7 +139,7 @@ const UpdateProfile: FunctionComponent = () => {
                 />
               )}
 
-              <Text style={styles.titleInput}>gender</Text>
+              <Text style={styles.titleInput}>Gender</Text>
               <View style={styles.checkBoxContainer}>
                 <View style={styles.checkBoxItem}>
                   <CheckBox

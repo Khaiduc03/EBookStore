@@ -1,12 +1,12 @@
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeLatest} from 'redux-saga/effects';
 import {routes} from '../../constants';
-import {NavigationService} from '../../navigation';
+import {navigationRef, NavigationService} from '../../navigation';
 import {CustomToastBottom, showToastError, showToastSuccess} from '../../utils';
 import {GoogleService} from '../../utils/google';
 import {AuthActions, LoadingActions} from '../reducer';
 import {AuthService, UserService} from '../services';
-import {LoginPayload, SendOTPPayload} from '../types';
+import {LoginPayload, NewPasswordPayload, SendOTPPayload} from '../types';
 
 //login
 function* loginSaga(action: PayloadAction<LoginPayload>): Generator {
@@ -59,6 +59,9 @@ function* loginGoogleSaga(
         device_token: action.payload.device_token,
         idToken,
       });
+
+      console.log('idToken: ', idToken);
+      console.log('device_token: ', action.payload.device_token);
 
       if (data.code === 200) {
         yield put(
@@ -225,12 +228,32 @@ function* forgotPasswordSaga(
   yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(
-      AuthService.hanleForgotPasswork,
+      AuthService.hanleForgotPassword,
       action.payload,
     );
     if (data.code === 200) {
       yield put(AuthActions.setEmailForgotPassword(action.payload));
       NavigationService.navigate(routes.SEND_OTP);
+    } else {
+      CustomToastBottom(data.message);
+    }
+  } catch (error: any) {
+    console.log(error.message);
+    throw error;
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
+///////////////////////SEND OTP/////////////////////////
+function* sendOTPSaga(
+  action: PayloadAction<Pick<SendOTPPayload, 'email'>>,
+): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    const {data}: any = yield call(AuthService.handleSendOTP, action.payload);
+    if (data.code === 200) {
+      CustomToastBottom(data.message);
     } else {
       CustomToastBottom(data.message);
     }
@@ -261,6 +284,31 @@ function* verifyOTPSaga(action: PayloadAction<SendOTPPayload>): Generator {
   }
 }
 
+///////////////////////NEW PASSWORD/////////////////////////
+function* newPasswordSaga(
+  action: PayloadAction<NewPasswordPayload>,
+): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    const {data}: any = yield call(
+      AuthService.handleNewPassword,
+      action.payload,
+    );
+    console.log('data: ', data);
+    if (data.code === 200) {
+      yield put(AuthActions.setNewPassword(action.payload));
+      NavigationService.navigate(routes.SIGN_IN);
+    } else {
+      CustomToastBottom(data.message);
+    }
+  } catch (error: any) {
+    console.log(error.message);
+    throw error;
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
 export default function* watchAuthSaga() {
   yield takeLatest(AuthActions.getUserInfo.type, getProfileUserSaga);
   yield takeLatest(AuthActions.handleLogin.type, loginSaga);
@@ -270,5 +318,7 @@ export default function* watchAuthSaga() {
   yield takeLatest(AuthActions.handleDeleteAvatar.type, deleteAvatarUser);
   yield takeLatest(AuthActions.handleUpdateUserProfile.type, updateUserProfile);
   yield takeLatest(AuthActions.handleForgotPassword.type, forgotPasswordSaga);
+  yield takeLatest(AuthActions.handleSendOTP.type, sendOTPSaga);
   yield takeLatest(AuthActions.handleVerifyOTP.type, verifyOTPSaga);
+  yield takeLatest(AuthActions.handleNewPassword.type, newPasswordSaga);
 }

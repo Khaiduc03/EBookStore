@@ -38,7 +38,7 @@ const SearchCustom: React.FunctionComponent<
           : styles.backGroundInputNoFocus,
       ]}
       cancelIcon={{}}
-      autoFocus={true}
+      autoFocus={false}
       returnKeyType="search"
       inputStyle={props.inputStyle || styles.inputStyle}
       onSubmitEditing={props.onPress}

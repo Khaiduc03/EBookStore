@@ -14,6 +14,7 @@ export enum routes {
   HOME = 'HOME',
   CHAT = 'CHAT',
   MESSAGES = 'MESSAGES',
+  APP_NAVIGATOR = 'APP_NAVIGATOR',
 
   TOPICS = 'TOPICS',
   SEARCH = 'SEARCH',

@@ -5,7 +5,10 @@ import {StatusBar} from 'react-native';
 import {useAppSelector} from '../hooks';
 import {getAuthEnableSignIn} from '../redux/selectors/auth.selector';
 import {getMode} from '../redux/selectors/thems.selector';
+import CreateNewPassword from '../screens/auth/create-new-password';
+import SendOTP from '../screens/auth/send-otp';
 import SignIn from '../screens/auth/sign-in';
+import Chat from '../screens/main/message/Chat';
 import Message from '../screens/main/message/Messages';
 import {navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
@@ -40,7 +43,10 @@ const RootNavigation = () => {
         barStyle={themeMode}
       />
       {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      <Message />
+      {/* <SendOTP /> */}
+      <SignIn />
+      {/* <Chat />
+      <Message /> */}
     </NavigationContainer>
   );
 };

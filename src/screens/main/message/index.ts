@@ -1,7 +1,8 @@
 import {routes} from '../../../constants';
+import AppNavigator from '../../../navigation/navigators/AppNavigator';
 import {Screen} from '../../../types';
 import Chat from './Chat';
-import Messages from './Messages';
+import Message from './Messages';
 
 export const messageScreens: Screen[] = [
   {
@@ -10,6 +11,6 @@ export const messageScreens: Screen[] = [
   },
   {
     name: routes.MESSAGES,
-    component: Messages,
+    component: Message,
   },
 ];

@@ -19,7 +19,9 @@ import * as ImagePicker from 'react-native-image-picker';
 import {PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 import {useDispatch} from 'react-redux';
 import {HeaderCustom} from '../../../../components';
+import {routes} from '../../../../constants';
 import {PERMISSION_TYPE, usePermission} from '../../../../hooks';
+import {NavigationService} from '../../../../navigation';
 import {AuthActions} from '../../../../redux';
 import {showToastError} from '../../../../utils';
 import {ChatBubble} from './components/RenderItem/ChatBubbleItem';
@@ -256,6 +258,7 @@ const Message: React.FC = () => {
               color: styles.iconVideocam.color,
               size: 30,
             }}
+            onPressLeftIcon={() => NavigationService.navigate(routes.CHAT)}
           />
 
           <TouchableWithoutFeedback onPress={handleTouchableWithoutFeedback}>

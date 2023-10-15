@@ -1,5 +1,6 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {StyleSheet} from 'react-native';
+import {fontFamilySetup} from '../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
@@ -8,43 +9,96 @@ const useStyles = makeStyles(({colors}) => ({
   wrapper: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.background,
+    padding: normalize(24),
   },
-
   body: {
     flex: 1,
-    padding: normalize(24),
+  },
+  viewCA: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  viewImage: {
+    width: 33,
+    height: 33,
+  },
+  view1: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  view2: {
+    width: normalize(96),
+    height: normalize(50),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: normalize(1),
+    borderRadius: normalize(25),
+    borderColor: '#D5D8DC',
+  },
+  view3: {
+    width: normalize(30),
+    marginLeft: normalize(10),
+    marginRight: normalize(20),
+  },
+  view4: {
+    width: '30%',
+    height: 1,
+    marginTop: 20,
+    backgroundColor: '#AEB6BF',
+  },
+  view5: {
+    width: '40%',
+    marginHorizontal: 10,
+    alignItems: 'center',
+  },
+  title: {
+    fontFamily: fontFamilySetup.bold,
+    fontSize: normalize(16),
+    color: colors.black,
+  },
+  introduction: {
+    fontFamily: fontFamilySetup.regular,
+    fontSize: normalize(14),
+    color: colors.black,
+  },
+  viewCenter: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   formContainer: {
     flex: 1,
+    marginTop: normalize(20),
   },
   titleInput: {
-    fontSize: normalize(15),
-    fontWeight: '500',
-    fontFamily: 'Urbanist-Bold',
+    marginLeft: normalize(10),
+    fontSize: normalize(17),
+    fontFamily: fontFamilySetup.bold,
     color: colors.black,
     letterSpacing: normalize(0.2),
   },
-
   checkbox: {
-    marginLeft: normalize(-18),
+    marginLeft: normalize(-10),
   },
   textView: {
     alignItems: 'center',
     justifyContent: 'center',
   },
   textCheckbox: {
-    fontFamily: 'Urbanist-Regular',
+    marginLeft: normalize(2),
+    marginTop: normalize(-2),
+    fontFamily: fontFamilySetup.thin,
     fontSize: normalize(14),
-    fontWeight: '600',
     color: colors.black,
   },
   color: {
     color: colors.primary,
+    fontSize: normalize(16),
+    fontFamily: fontFamilySetup.bold,
   },
-  textNor: {
-    fontFamily: 'Urbanist-Regular',
+  text: {
+    fontFamily: fontFamilySetup.regular,
     fontSize: normalize(14),
-    fontWeight: '400',
     color: colors.black,
     letterSpacing: normalize(0.2),
     marginTop: normalize(10),

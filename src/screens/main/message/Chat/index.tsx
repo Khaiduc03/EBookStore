@@ -6,8 +6,11 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {HeaderCustom, SearchCustom} from '../../../../components';
-import ChatItem from './components/RenderItem/ChatItem';
+import {SearchCustom} from '../../../../components';
+import HeaderCustomV1 from '../../../../components/customs/HeaderCustomV1';
+import {routes} from '../../../../constants';
+import {NavigationService} from '../../../../navigation';
+import {ChatItem} from './components/RenderItem/ChatItem';
 import useStyles from './styles';
 import {data, ItemData} from './types';
 
@@ -48,17 +51,22 @@ const Chat: React.FC = () => {
       <View style={styles.wrapper}>
         <View style={styles.body}>
           <View style={styles.pdH}>
-            <HeaderCustom
+            <HeaderCustomV1
               leftIcon={{
+                name: 'arrow-back-outline',
+                type: 'ionicon',
+              }}
+              iconMiddle={{
                 name: 'chatbubble-ellipses-outline',
                 type: 'ionicon',
-                color: styles.colorIconHeader.color,
               }}
               rightIconRight={{
                 name: 'notifications-outline',
                 type: 'ionicon',
-                color: 'black',
               }}
+              onPressLeftIcon={() =>
+                NavigationService.navigate(routes.BOTTOM_TAB)
+              }
               title="Message"
               titleStyle={styles.viewHeaderText}
             />
