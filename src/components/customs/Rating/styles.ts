@@ -1,5 +1,5 @@
-import { makeStyles } from '@rneui/themed';
-import { Platform } from 'react-native';
+import {makeStyles} from '@rneui/themed';
+import {Platform} from 'react-native';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {

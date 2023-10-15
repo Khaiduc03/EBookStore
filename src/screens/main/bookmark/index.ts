@@ -1,5 +1,5 @@
-import { Screen } from '../../../types';
+import {Screen} from '../../../types';
 
-export { default as Bookmark } from './Bookmark';
+export {default as Bookmark} from './Bookmark';
 
 export const bookmarkScreens: Screen[] = [];

@@ -8,14 +8,13 @@ import Contact_us from './HelpCenter/Contact_us';
 import FAQ from './HelpCenter/FAQ';
 import History from './History';
 import MyProfile from './MyProfile';
-import { PostDetail } from './MyProfile/components';
+import {PostDetail} from './MyProfile/components';
 import Notification from './SettingNotification';
 import Payments_method from './Payment-method';
 import ProfileUser from './Profile-User';
-import { PostDetailUser } from './Profile-User/components';
+import {PostDetailUser} from './Profile-User/components';
 import Security from './Security';
 import Update_Profile from './Update-profile';
-
 
 export {default as Profile} from './Profile';
 
@@ -46,7 +45,7 @@ export const profileScreens: Screen[] = [
   },
   {
     name: routes.ABOUTAPP,
-    component: AboutApp
+    component: AboutApp,
   },
   {
     name: routes.FAQ,

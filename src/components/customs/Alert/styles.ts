@@ -14,7 +14,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   container: {
     width: Device.getDeviceWidth() - PADDING * 3,
-     height: Device.getDeviceHeight() / 2.4,
+    height: Device.getDeviceHeight() / 2.4,
 
     // backgroundColor: colors.background,
     backgroundColor: 'rgba(256, 256, 256, 2)',
@@ -79,8 +79,8 @@ const useStyles = makeStyles(({colors}) => ({
   topContainer: {
     width: '100%',
     alignItems: 'center',
-    top:0
-    ,marginBottom:20
+    top: 0,
+    marginBottom: 20,
   },
   buttonTextStyle: {
     fontSize: normalize(16),

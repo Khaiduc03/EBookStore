@@ -2,7 +2,7 @@ import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {AlertState} from '../types/alert.type';
 import {Redux} from '../types';
 import {} from '../../assets';
-import { JsonImages } from '../../assets/json';
+import {JsonImages} from '../../assets/json';
 
 const initialState: AlertState = {
   isShow: false,

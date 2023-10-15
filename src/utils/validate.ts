@@ -11,4 +11,4 @@ export const isValidPassword = (password: string) => {
 };
 export const comparePassword = (password: string, confirmPassword: string) => {
   return password === confirmPassword;
-}
+};

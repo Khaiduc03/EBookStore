@@ -9,10 +9,10 @@ const useStyles = makeStyles(({colors}) => ({
     paddingHorizontal: normalize(15),
     paddingVertical: normalize(15),
   },
-  viewDarkMode:{
+  viewDarkMode: {
     paddingHorizontal: normalize(15),
     paddingVertical: normalize(10),
-  }
+  },
 }));
 
 export default useStyles;
