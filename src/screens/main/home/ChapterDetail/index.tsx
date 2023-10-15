@@ -8,10 +8,10 @@ import {
   Image,
 } from 'react-native';
 import {Device} from '../../../../utils';
-
 import useStyles from './styles';
 import {FooterChapter, HeaderChapter} from './Components';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import FastImage from 'react-native-fast-image';
 
 const WIDTH = Device.getDeviceWidth();
 
@@ -41,7 +41,13 @@ function ChapterDetail() {
   };
 
   const renderItem = ({item}: any) => {
-    return <Image style={styles.imageStyle} source={{uri: item.image}} />;
+    return (
+      <FastImage
+        style={styles.imageStyle}
+        resizeMode={FastImage.resizeMode.cover}
+        source={{uri: item.image}}
+      />
+    );
   };
 
   return (
@@ -62,11 +68,6 @@ function ChapterDetail() {
       </TouchableOpacity>
       {renderHeader()}
       {renderFooter()}
-      {/* <StatusBar
-        showHideTransition={'fade'}
-        animated={true}
-        hidden={showHeader ? false : true}
-      /> */}
     </View>
   );
 }

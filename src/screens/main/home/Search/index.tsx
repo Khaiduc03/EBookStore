@@ -5,25 +5,30 @@ import useStyles from './styles';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {Icon} from '@rneui/themed';
-import {getListComic} from '../../../../redux/selectors/comic.selector';
+import {
+  getListComic,
+  getDetailComic,
+} from '../../../../redux/selectors/comic.selector';
 import {ComicActions, TopicActions} from '../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {backScreen} from '../../../../utils';
 import {getListTopic} from '../../../../redux/selectors/topic.selector';
+import {TopicType} from '../../../../redux';
 
 const Search = () => {
   const dispatch = useAppDispatch();
   const dataComic = useAppSelector(getListComic);
   const dataTopic = useAppSelector(getListTopic);
-  console.log('data: ', dataTopic);
+  const dataComicDetail = useAppSelector(getDetailComic);
+
   const styles = useStyles();
   const [search, setSearch] = useState('');
 
   const handlePressSearch = () => {
     NavigationService.navigate(routes.TOPICS);
   };
-  const handlePress = (page: number) => {
-    dispatch(ComicActions.getListData(page));
+  const handlePress = (id: string) => {
+    dispatch(ComicActions.getDetailComic(id));
   };
 
   return (
@@ -45,13 +50,14 @@ const Search = () => {
           />
         </View>
       </View>
-      <TouchableOpacity onPress={() => handlePress(1)}>
-        <Text style={{fontSize: 40}}>GETCOMIC</Text>
+      <TouchableOpacity
+        onPress={() => handlePress('2b79b1a0-9251-410b-9db5-6ebc7e700c18')}>
+        <Text style={{fontSize: 40}}>GETCOMICDETAIL</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => dispatch(TopicActions.getListTopic())}>
+      {/* <TouchableOpacity onPress={() => dispatch(TopicActions.getListTopic())}>
         <Text style={{fontSize: 40}}>GETTOPIC</Text>
-      </TouchableOpacity>
-      <Text>{JSON.stringify(dataTopic)}</Text>
+      </TouchableOpacity> */}
+      <Text>{JSON.stringify(dataComicDetail)}</Text>
     </View>
   );
 };

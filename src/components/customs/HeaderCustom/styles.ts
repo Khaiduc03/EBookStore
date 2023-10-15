@@ -15,8 +15,8 @@ const useStyles = makeStyles(({colors}) => ({
   textTitle: {
     fontSize: normalize(22),
     fontFamily: fontFamilySetup.bold,
-
     lineHeight: normalize(35.2),
+    marginStart: normalize(25),
     color: colors.black,
   },
   leftIcon: {
@@ -31,6 +31,9 @@ const useStyles = makeStyles(({colors}) => ({
   },
   rightIconLeft: {
     marginRight: normalize(10),
+  },
+  button: {
+    color: colors.primary,
   },
 }));
 

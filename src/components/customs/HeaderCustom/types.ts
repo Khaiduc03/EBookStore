@@ -6,6 +6,20 @@ export type HeaderIcon = {
   color?: string;
   size?: number;
 };
+export type ButtonProps = {
+  onPress: () => void;
+  icon?: {
+    type: string;
+    name: string;
+    size?: number;
+    color?: string;
+  };
+  title?: {
+    text: string;
+    size?: number;
+    color?: string;
+  };
+}
 
 export type CustomHeaderProps = {
   viewStyle?: ViewStyle;
@@ -20,4 +34,6 @@ export type CustomHeaderProps = {
   rightIconRight?: HeaderIcon; // Icon bên phảir
   titleStyle?: TextStyle; // Kiểu dáng của tiêu đề
   leftIconStyle?: ViewStyle;
+  buttonProps?: ButtonProps;
+
 };

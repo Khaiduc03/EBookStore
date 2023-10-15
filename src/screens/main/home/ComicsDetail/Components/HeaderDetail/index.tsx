@@ -3,27 +3,48 @@ import React from 'react';
 import useStyles from './styles';
 import {Icon, Divider} from '@rneui/themed';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useAppSelector} from '../../../../../../hooks';
+import {getDetailComic} from '../../../../../../redux/selectors/comic.selector';
+import FastImage from 'react-native-fast-image';
 
 const HeaderDetail = () => {
+  const dataComicDetail = useAppSelector(getDetailComic);
+  const data = dataComicDetail ? dataComicDetail[0] : null;
+  console.log(data);
+
   const styles = useStyles();
-  const topicTexts = ['Fantasy', 'Science Fiction', 'Mystery', 'Mystery'];
+
   return (
     <ImageBackground
       style={styles.container}
+      blurRadius={3}
       resizeMode="cover"
       source={{
-        uri: 'https://gamek.mediacdn.vn/133514250583805952/2022/1/2/solo-leveling-1620917554185396197198-16410674690231914720800.jpg',
+        uri: data?.image_url,
       }}>
-      <View style={styles.contentContainer}>
-        <Text style={styles.nameComic}>Doremon </Text>
-        <Text style={styles.author}>Fujiko F.ujio</Text>
-        <Text style={styles.dayCreat}>Released on Dec, 2015</Text>
-        <View style={styles.topicsContainer}>
-          {topicTexts.map((text, index) => (
-            <View key={index} style={styles.itemTopics}>
-              <Text style={styles.textTopics}>{text}</Text>
-            </View>
-          ))}
+      <View style={styles.content}>
+        <FastImage
+          style={styles.imageComic}
+          resizeMode={FastImage.resizeMode.cover}
+          source={{uri: data?.image_url}}
+        />
+        <View style={styles.contentContainer}>
+          <Text numberOfLines={2} style={styles.nameComic}>
+            {data?.comic_name}
+          </Text>
+          <Text style={styles.author}>{data?.author}</Text>
+          <Text style={styles.dayCreat}>
+            {data?.created_at
+              ? data.created_at.toLocaleString()
+              : 'No Created Day'}
+          </Text>
+          <View style={styles.topicsContainer}>
+            {data?.topicnames.map((text, index) => (
+              <View key={index} style={styles.itemTopics}>
+                <Text style={styles.textTopics}>{text}</Text>
+              </View>
+            ))}
+          </View>
         </View>
       </View>
 
@@ -47,7 +68,7 @@ const HeaderDetail = () => {
         </View>
         <Divider orientation="vertical" width={1} color="#9E9E9E" />
         <View style={styles.interactItem}>
-          <Text style={styles.numberInteract}>50 M+</Text>
+          <Text style={styles.numberInteract}>{data?.views}</Text>
           <Text style={styles.titleInteracItem}>Views</Text>
         </View>
       </View>

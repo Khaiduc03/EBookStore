@@ -17,8 +17,9 @@ export type uuid = {
 };
 
 export type Timestamp = {
-  createdAt: Date;
-  updatedAt: Date;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at: Date;
 };
 
 export type Screen = {

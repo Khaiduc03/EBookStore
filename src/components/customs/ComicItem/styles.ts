@@ -52,6 +52,7 @@ const useStyles = makeStyles(({colors}) => ({
     fontSize: normalize(7),
     color: colors.black,
     textAlign: 'center',
+    fontFamily: fontFamilySetup.medium,
   },
 }));
 

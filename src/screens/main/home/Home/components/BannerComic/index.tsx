@@ -10,6 +10,10 @@ import {
 import {Image} from '@rneui/themed';
 import useStyles from './styles';
 import {Device} from '../../../../../../utils';
+import FastImage from 'react-native-fast-image';
+import {TouchableOpacity} from 'react-native';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
 
 interface CarouselDataItem {
   id: string;
@@ -54,13 +58,14 @@ const BannerComic: React.FC = () => {
     index: number;
   }) => {
     return (
-      <View>
-        <Image
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={() => NavigationService.navigate(routes.COMICDETAIL)}>
+        <FastImage
           source={{uri: item.image}}
           style={{height: screenWidth * 0.5, width: screenWidth}}
-          PlaceholderContent={<ActivityIndicator />}
         />
-      </View>
+      </TouchableOpacity>
     );
   };
 

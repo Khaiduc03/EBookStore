@@ -9,4 +9,9 @@ export class ComicService {
     console.log(ENDPOINTS.COMIC);
     return await apiService.get(`${ENDPOINTS.COMIC}?page=${action}`);
   }
+  //get comic by id
+  static async getComicById(action: string) {
+    console.log(`${ENDPOINTS.COMIC_UUID}${action}`);
+    return await apiService.get(`${ENDPOINTS.COMIC_UUID}${action}`);
+  }
 }

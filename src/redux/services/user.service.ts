@@ -1,34 +1,34 @@
 import apiService from './api.service';
 
-import {Endpoints} from '../../environment';
+import {ENDPOINTS} from '../../environment';
 import {Http} from '../../types';
 import {UpdateProfileDto} from '../dto';
 import {configFormData} from './config.service';
 
 export class UserService {
   static async getUserById(action: string) {
-    return await apiService.get(`${Endpoints.GET_ALL_USER_ENDPOINT}/${action}`);
+    return await apiService.get(`${ENDPOINTS.GET_USER_BY_UUID}/${action}`);
   }
   static async getUserProfile() {
-    return await apiService.get(`${Endpoints.GET_PROFILE_ENDPOINT}`);
+    return await apiService.get(`${ENDPOINTS.PROFILE}`);
   }
 
   static async updateUserAvatar(action: FormData) {
     console.log(action);
     return await apiService.put(
-      `${Endpoints.UPLOAD_USER_AVATAR_ENDPOINT}`,
+      `${ENDPOINTS.UPLOAD_AVATAR}`,
       action,
       configFormData,
     );
   }
 
   static async deleteUserAvatar(): Promise<Http> {
-    return await apiService.delete(`${Endpoints.UPLOAD_USER_AVATAR_ENDPOINT}`);
+    return await apiService.delete(`${ENDPOINTS.DELETE_AVATAR}`);
   }
 
   static async updateUserProfile(payload: UpdateProfileDto) {
-    console.log(payload)
-    return await apiService.put(`${Endpoints.GET_PROFILE_ENDPOINT}`, {
+    console.log(payload);
+    return await apiService.put(`${ENDPOINTS.PROFILE}`, {
       ...payload,
     });
   }

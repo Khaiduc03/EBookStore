@@ -18,11 +18,6 @@ const useStyles = makeStyles(({colors}) => ({
   content: {
     flex: 1,
   },
-  nameTopic: {
-    color: colors.grey4,
-    fontSize: normalize(10),
-    fontFamily: fontFamilySetup.medium,
-  },
   nameComic: {
     lineHeight: normalize(25),
     color: colors.black,
@@ -50,6 +45,25 @@ const useStyles = makeStyles(({colors}) => ({
   },
   ellipsiIconStyle: {
     color: colors.black,
+  },
+  textTopics: {
+    fontSize: normalize(7),
+    color: colors.black,
+    textAlign: 'center',
+    fontFamily: fontFamilySetup.medium,
+  },
+  itemTopics: {
+    backgroundColor: colors.backgroundTopic,
+    marginRight: normalize(5),
+    marginTop: normalize(5),
+    paddingHorizontal: normalize(8),
+    paddingVertical: normalize(5),
+    borderRadius: 4,
+  },
+  topicsContainer: {
+    flexDirection: 'row',
+    width: '70%',
+    flexWrap: 'wrap',
   },
 }));
 
