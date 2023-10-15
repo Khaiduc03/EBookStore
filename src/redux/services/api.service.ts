@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {BASE_URL, Endpoints} from '../../environment';
+import {BASE_URL, ENDPOINTS} from '../../environment';
 import {showToastError} from '../../utils';
 import {AuthActions} from '../reducer';
 import {store} from '../store';
@@ -14,7 +14,7 @@ console.log(BASE_URL);
 apiService.interceptors.request.use(
   config => {
     const accessToken = store.getState().auth.accessToken;
-    if (accessToken && config.url !== Endpoints.REFRESH_TOKEN_ENDPOINT) {
+    if (accessToken && config.url !== ENDPOINTS.REFRESH_TOKEN) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
 
@@ -41,7 +41,7 @@ apiService.interceptors.response.use(
     ) {
       originalRequest._retry = true;
 
-      const res = await apiService.post(Endpoints.REFRESH_TOKEN_ENDPOINT, {
+      const res = await apiService.post(ENDPOINTS.REFRESH_TOKEN, {
         refreshToken,
       });
       if (res.status === 200) {

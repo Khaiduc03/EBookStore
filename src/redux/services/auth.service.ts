@@ -1,4 +1,4 @@
-import {ENDPOINTS, Endpoints} from '../../environment';
+import {ENDPOINTS} from '../../environment';
 import {LoginPayload, SendOTPPayload} from '../types';
 import apiService from './api.service';
 
@@ -9,6 +9,7 @@ export class AuthService {
   static async handleCreateAccount(
     payload: Omit<LoginPayload, 'device_token' | 'idToken'>,
   ) {
+    console.log(ENDPOINTS.REGISTER);
     return await apiService.post(ENDPOINTS.REGISTER, payload);
   }
   static async hanleGGLogin(payload: Omit<LoginPayload, 'password' | 'email'>) {
