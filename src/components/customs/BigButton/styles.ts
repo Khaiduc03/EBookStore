@@ -1,6 +1,7 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {Device} from '../../../utils';
 import {StyleSheet} from 'react-native';
+import {fontFamilySetup} from '../../../utils/font';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
@@ -18,11 +19,9 @@ const usestyles = makeStyles(({colors}) => ({
   },
   buttonText: {
     fontSize: normalize(HEIGHT * 0.02),
-    fontWeight: '700',
     letterSpacing: normalize(0.2),
-    fontStyle: 'normal',
-    fontFamily: 'Urbanist-Regular',
-    color: colors.grey0,
+    fontFamily: fontFamilySetup.bold,
+    color: colors.whiteDefault,
   },
 }));
 

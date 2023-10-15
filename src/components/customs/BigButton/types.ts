@@ -1,8 +1,7 @@
-import {ReactElement} from 'react';
-import {ViewProps} from 'react-native';
+import {ViewStyle} from 'react-native';
 
 export type BigButtonProps = {
   onPressButton?: () => void;
-  style?: ViewProps['style'];
+  style?: ViewStyle;
   textButton: string;
 };

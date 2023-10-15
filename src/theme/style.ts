@@ -8,12 +8,20 @@ declare module '@rneui/themed' {
   export interface Colors {
     input1: string;
     input2: string;
+    clear: string;
+    grey6: string;
     backgrounDetai: string;
     backgroundChapter: string;
     backgroundTopic: string;
+    bubbleUserBackground: string;
+    bubbleNotUserBackground: string;
     green: string;
     red: string;
     blue: string;
+    borderColorLogin: string;
+    backgroundViewWidth: string;
+    blackDefault: string;
+    whiteDefault: string;
   }
 }
 
@@ -30,15 +38,24 @@ export const theme = createTheme({
     black: '#212121',
     grey0: '#FFFFFF',
     grey2: '#90939B',
+    grey3: '#667085',
     white: '#FFFFFF',
     input1: '#F2F2F2',
     input2: '#FFF7EB',
+    clear: '#ff0000',
+    grey6: '#e6e6e6',
     backgrounDetai: '#F5C38B',
     backgroundChapter: '#181A20',
     backgroundTopic: '#EEEEEE',
+    bubbleUserBackground: '#20A090',
+    bubbleNotUserBackground: '#F2F7FB',
     green: '#3BD74B',
     red: '#FF0000',
     blue: '#0075FF',
+    borderColorLogin: '#D5D8DC',
+    backgroundViewWidth: '#AEB6BF',
+    blackDefault: '#000',
+    whiteDefault: '#FFF',
   },
   darkColors: {
     primary: '#F89300',
@@ -49,18 +66,26 @@ export const theme = createTheme({
     divider: '#e3f3ff',
     grey1: '#212121',
     black: '#FAFAFA',
-    grey0: '#181A20',
+    grey0: '#34495E',
     grey2: '#90939B',
     white: '#FFFFFF',
     background: '#181A20',
     input1: '#1F222A',
     input2: '#2A241D',
+    clear: '#56aaff',
+    grey6: '#000',
     backgrounDetai: '#181A20',
     backgroundChapter: '#181A20',
     backgroundTopic: '#35383F',
+    bubbleUserBackground: '#F2F7FB',
+    bubbleNotUserBackground: '#20A090',
     green: '#3BD74B',
     red: '#FF0000',
     blue: '#0075FF',
+    borderColorLogin: '#FFFF',
+    backgroundViewWidth: '#FFFF',
+    blackDefault: '#000',
+    whiteDefault: '#FFF',
   },
   components: {
     Button: (props, theme) => ({

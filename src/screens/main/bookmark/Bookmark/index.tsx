@@ -1,18 +1,17 @@
-import React, {FunctionComponent, useState} from 'react';
-
-import {View, Switch} from 'react-native';
-
 import {Text} from '@rneui/base';
+import React, {FunctionComponent} from 'react';
+import {Switch, TouchableOpacity, View} from 'react-native';
+import {routes} from '../../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {getMode} from '../../../../redux/selectors/thems.selector';
+import {NavigationService} from '../../../../navigation';
 import {ThemeActions} from '../../../../redux';
+import {getMode} from '../../../../redux/selectors/thems.selector';
 import useStyles from './styles';
 
 const Bookmark: FunctionComponent = () => {
   const styles = useStyles();
   const dispatch = useAppDispatch();
   const mode = useAppSelector(getMode);
- 
 
   const handleTheme = () => {
     if (mode === 'dark') {
@@ -30,6 +29,9 @@ const Bookmark: FunctionComponent = () => {
         onValueChange={handleTheme}
         value={mode === 'dark' ? true : false}
       />
+      <TouchableOpacity onPress={() => NavigationService.navigate(routes.CHAT)}>
+        <Text>Chat</Text>
+      </TouchableOpacity>
     </View>
   );
 };
