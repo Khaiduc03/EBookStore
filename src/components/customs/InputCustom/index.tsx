@@ -12,20 +12,11 @@ import useStyles from './styles';
 import {InputProps} from './types';
 import {EyeOffIcon, EyeOnIcon, LockIcon} from '../../../assets/icons';
 
-const InputCustom: FunctionComponent<
-  InputProps & TextInputProps & BaseIPProps
-> = props => {
-  const [isFocused, setIsFocused] = React.useState<boolean>(false);
-
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
+const InputCustom: FunctionComponent<InputProps & TextInputProps> = props => {
+  const [inputFocused, setInputFocused] = React.useState(false);
 
   const styles = useStyles();
+
   const [secure, setSecure] = React.useState<boolean>(true);
   const _renderSecure = () => {
     return (
@@ -34,34 +25,35 @@ const InputCustom: FunctionComponent<
       </TouchableOpacity>
     );
   };
+  const handleInputFocus = () => {
+    setInputFocused(true);
+  };
+
+  const handleInputBlur = () => {
+    setInputFocused(false);
+  };
 
   return (
     <TouchableNativeFeedback onPress={() => Keyboard.dismiss()}>
       <Input
         secureTextEntry={props.secure && secure}
-        inputContainerStyle={[styles.inputContainer, props.style]}
+        inputContainerStyle={[
+          styles.inputContainer || props.style,
+          props.style,
+        ]}
         placeholder={props.placeholder}
-        // leftIcon={(props.secure && <LockIcon />) || props.leftIcon}
-        leftIconContainerStyle={[styles.icon, styles.iconLeft]}
+        leftIconContainerStyle={styles.icon}
         rightIconContainerStyle={styles.icon}
         rightIcon={props.secure && _renderSecure()}
-        inputStyle={styles.input}
-        style={[
-          styles.input,
-          {
-            borderBottomColor: isFocused
-              ? '#F89300'
-              : props.borderBottomColor || '#727272',
-          },
-        ]}
+        inputStyle={[inputFocused ? styles.inputFocus : styles.inputBlur]}
         value={props.value}
         onChangeText={props.onChangeText}
         renderErrorMessage={false}
         placeholderTextColor={styles.placeHolder.color}
         keyboardType={props.keyboardType}
+        onBlur={handleInputBlur}
+        onFocus={handleInputFocus}
         {...props}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
       />
     </TouchableNativeFeedback>
   );

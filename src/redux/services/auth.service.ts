@@ -1,5 +1,5 @@
 import {ENDPOINTS} from '../../environment';
-import {LoginPayload, SendOTPPayload} from '../types';
+import {LoginPayload, NewPasswordPayload, SendOTPPayload} from '../types';
 import apiService from './api.service';
 
 export class AuthService {
@@ -16,11 +16,19 @@ export class AuthService {
     return await apiService.post(ENDPOINTS.LOGIN_GOOGLE, payload);
   }
 
-  static async hanleForgotPasswork(payload: Pick<LoginPayload, 'email'>) {
+  static async hanleForgotPassword(payload: Pick<LoginPayload, 'email'>) {
+    return await apiService.post(ENDPOINTS.SEND_OTP, payload);
+  }
+
+  static async handleSendOTP(payload: Pick<SendOTPPayload, 'email'>) {
     return await apiService.post(ENDPOINTS.SEND_OTP, payload);
   }
 
   static async handleVerifyOTP(payload: SendOTPPayload) {
     return await apiService.post(ENDPOINTS.VERIFY_OTP, payload);
+  }
+
+  static async handleNewPassword(payload: NewPasswordPayload) {
+    return await apiService.put(ENDPOINTS.UPDATE_PASSWORD, payload);
   }
 }

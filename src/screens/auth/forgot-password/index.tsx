@@ -6,26 +6,22 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {AuthHeader, Headers, InputCustom} from '../../../components';
+import {AuthHeader, Headers} from '../../../components';
+import InputCustomV1 from '../../../components/customs/InputCustomV1';
 import {routes} from '../../../constants';
 import {useAppDispatch} from '../../../hooks';
 import {NavigationService} from '../../../navigation';
+import {AuthActions} from '../../../redux';
 import {CustomToastBottom} from '../../../utils';
 import useStyles from './styles';
-import {AuthActions} from '../../../redux';
 
 const ForgotPassword: React.FC = () => {
-  // const [email, setEmail] = React.useState<string>('');
   const dispatch = useAppDispatch();
-  const [email, setEmail] = React.useState<{
-    email: string;
-  }>({
-    email: 'p3nhox99@gmail.com',
-  });
+  const [email, setEmail] = React.useState('');
 
   const isEmailValid = () => {
-    // Kiểm tra xem giá trị nhập vào có phải là một địa chỉ email hợp lệ hay không
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.email);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
   };
 
   const styles = useStyles();
@@ -46,9 +42,10 @@ const ForgotPassword: React.FC = () => {
           />
           <View>
             <Text style={styles.textEmail}>Email</Text>
-            <InputCustom
-              onChangeText={text => setEmail({email: text})}
-              value={email.email}
+            <InputCustomV1
+              placeholder="Enter your email"
+              onChangeText={text => setEmail(text)}
+              value={email}
             />
           </View>
           <View style={styles.viewBottom}>
@@ -56,10 +53,8 @@ const ForgotPassword: React.FC = () => {
               style={styles.btnContinue}
               onPress={() => {
                 if (isEmailValid()) {
-                  // Kiểm tra xem email có hợp lệ hay không
-                  dispatch(AuthActions.handleForgotPassword(email));
+                  dispatch(AuthActions.handleForgotPassword({email: email}));
                 } else {
-                  // Hiển thị thông báo lỗi nếu email không hợp lệ
                   CustomToastBottom(
                     'Error, Please enter a valid email address',
                   );
