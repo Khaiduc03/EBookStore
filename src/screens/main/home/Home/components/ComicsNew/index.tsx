@@ -11,6 +11,7 @@ import {getListComic} from '../../../../../../redux/selectors/comic.selector';
 
 const ComicsNew = ({numCols}: {numCols: number}) => {
   const dataComic = useAppSelector(getListComic);
+
   const number = numCols;
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
     <ComicItem
