@@ -10,8 +10,6 @@ import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {getListComic} from '../../../../../../redux/selectors/comic.selector';
 
 const ComicsNew = ({numCols}: {numCols: number}) => {
-  const dataComic = useAppSelector(getListComic);
-
   const number = numCols;
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
     <ComicItem
@@ -28,7 +26,7 @@ const ComicsNew = ({numCols}: {numCols: number}) => {
     <View style={styles.container}>
       <FlatList
         columnWrapperStyle={numCols === 3 ? {gap: 5} : null}
-        data={dataComic}
+        data={[]}
         renderItem={RenderItem}
         keyExtractor={item => item.uuid.toString()}
         showsVerticalScrollIndicator={false}
