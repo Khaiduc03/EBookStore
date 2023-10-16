@@ -2,6 +2,7 @@ import React, {FunctionComponent} from 'react';
 
 import {Text} from '@rneui/base';
 import {
+  Image,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -11,22 +12,18 @@ import {
 } from 'react-native';
 
 import {CheckBox} from '@rneui/themed';
-import {GoogleIcon} from '../../../assets/icons';
-import {
-  AuthHeader,
-  BigButton,
-  InputCustom,
-  SmallButton,
-} from '../../../components';
+import {Toast} from 'react-native-toast-message/lib/src/Toast';
+import {JsonImages} from '../../../assets';
+import {AuthHeader, BigButton} from '../../../components';
 import Header from '../../../components/customs/Headers';
+import InputCustomV1 from '../../../components/customs/InputCustomV1';
 import {routes} from '../../../constants';
 import {useAppDispatch} from '../../../hooks';
 import {NavigationService} from '../../../navigation';
 import {AuthActions} from '../../../redux/reducer';
-import useStyles from './styles';
-import {Toast} from 'react-native-toast-message/lib/src/Toast';
 import {AlertActions} from '../../../redux/reducer/alert.reducer';
-import {JsonImages} from '../../../assets';
+import useStyles from './styles';
+import {FacebookIcon, GoogleIcon} from '../../../assets/icons';
 
 const SignIn: FunctionComponent = () => {
   const styles = useStyles();
@@ -45,8 +42,8 @@ const SignIn: FunctionComponent = () => {
     email: string;
     password: string;
   }>({
-    email: 'p3nhox99@gmail.com',
-    password: '123456',
+    email: '',
+    password: '',
   });
 
   const [checked, setChecked] = React.useState<boolean>(false);
@@ -77,13 +74,21 @@ const SignIn: FunctionComponent = () => {
     );
   };
 
+  const handleGoogle = async () => {
+    dispatch(
+      AuthActions.handleLoginGoogle({
+        device_token: '1234567890',
+      }),
+    );
+  };
+
   return (
     <KeyboardAvoidingView
       style={styles.wrapper}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -250}>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={styles.body}>
+        <View style={styles.wrapper}>
           <Header
             leftIcon={true}
             onPressLeftIcon={() => {
@@ -95,68 +100,88 @@ const SignIn: FunctionComponent = () => {
               NavigationService.navigate(routes.LOBBY);
             }}
           />
-          <AuthHeader
-            title="Login 🔐"
-            subTitle="Please enter your email and password to sign in."
-          />
+          <View style={{width: '100%', height: 'auto', marginVertical: 20}}>
+            <AuthHeader
+              title="Login 🔐"
+              subTitle="Please enter your email and password to sign in."
+            />
+          </View>
 
-          <View style={styles.formContainer}>
-            <Text style={styles.titleInput}>email</Text>
-            <InputCustom
-              placeholder="Enter your email"
-              value={credentials.email}
-              onChangeText={text =>
-                setCredentials({...credentials, email: text})
-              }
-            />
-            <Text style={styles.titleInput}>Password</Text>
-            <InputCustom
-              placeholder="Enter your password"
-              secure={true}
-              value={credentials.password}
-              onChangeText={text =>
-                setCredentials({...credentials, password: text})
-              }
-            />
-            <View style={styles.checkbox}>
-              <CheckBox
-                checked={checked}
-                textStyle={styles.textCheckbox}
-                onPress={toggleCheckbox}
-                title={'Remember me'}
+          <View style={styles.body}>
+            <View style={styles.formContainer}>
+              <Text style={styles.titleInput}>Email</Text>
+              <InputCustomV1
+                placeholder="Enter your email"
+                value={credentials.email}
+                onChangeText={text =>
+                  setCredentials({...credentials, email: text})
+                }
               />
-            </View>
-            <View style={styles.textView}>
-              <TouchableOpacity
-                onPress={() =>
-                  NavigationService.navigate(routes.FORGOT_PASSWORD)
-                }>
-                <Text style={[styles.titleInput, styles.color]}>
-                  Forgot Password
-                </Text>
-              </TouchableOpacity>
-              <Text style={styles.textNor}>or continue with</Text>
-            </View>
-            <View style={styles.optionView}>
-              <SmallButton svgIcon={<GoogleIcon />} nameIcon="" />
-              <SmallButton
-                nameIcon="logo-facebook"
-                typeIcon="ionicon"
-                isIonicons
-                colorIcon="#2079FF"
-                onPressButton={() => {
-                  showToast();
-                }}
+              <Text style={styles.titleInput}>Password</Text>
+              <InputCustomV1
+                placeholder="Enter your password"
+                secure={true}
+                value={credentials.password}
+                onChangeText={text =>
+                  setCredentials({...credentials, password: text})
+                }
               />
-            </View>
-            <View style={styles.bottom}>
-              <BigButton
-                textButton="Sign In"
-                onPressButton={() => {
-                  handleSignIn();
-                  //NavigationService.navigate(routes.UPDATE_PROFILE);
-                }}
-              />
+              <View style={styles.checkbox}>
+                <CheckBox
+                  checked={checked}
+                  textStyle={styles.textCheckbox}
+                  onPress={toggleCheckbox}
+                  title={'Remember me'}
+                />
+              </View>
+              <View style={{width: '100%', height: 'auto'}}>
+                <View style={styles.viewCenter}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      NavigationService.navigate(routes.FORGOT_PASSWORD)
+                    }
+                    style={styles.btnFP}>
+                    <Text style={styles.color}>Forgot Password</Text>
+                  </TouchableOpacity>
+                  <View style={styles.viewRP}>
+                    <View style={styles.view4} />
+                    <View style={styles.view5}>
+                      <Text style={styles.text}>or continue with</Text>
+                    </View>
+                    <View style={styles.view4} />
+                  </View>
+                </View>
+                <View style={styles.optionView}>
+                  <TouchableOpacity
+                    onPress={() => handleGoogle()}
+                    style={styles.view2}>
+                    <View style={styles.viewCA}>
+                      <View style={styles.view3}>
+                        <GoogleIcon style={styles.viewImage} />
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    onPress={() => handleGoogle()}
+                    style={styles.view2}>
+                    <View style={styles.viewCA}>
+                      <View style={styles.view3}>
+                        <FacebookIcon style={styles.viewImage} />
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              <View style={styles.bottom}>
+                <BigButton
+                  textButton="Sign In"
+                  onPressButton={() => {
+                    handleSignIn();
+                  }}
+                />
+              </View>
             </View>
           </View>
         </View>

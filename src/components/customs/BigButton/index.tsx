@@ -3,12 +3,15 @@ import React from 'react';
 import useStyles from './styles';
 import {BigButtonProps} from './types';
 
-const BigButton: React.FunctionComponent<BigButtonProps> = props => {
+const BigButton: React.FunctionComponent<BigButtonProps> = ({
+  textButton,
+  onPressButton,
+  style,
+}) => {
   const styles = useStyles();
-  const {textButton, onPressButton, style} = props;
 
   return (
-    <TouchableOpacity onPress={onPressButton} style={[styles.button, style]}>
+    <TouchableOpacity onPress={onPressButton} style={styles.button || style}>
       <Text style={[styles.buttonText, style]}>{textButton}</Text>
     </TouchableOpacity>
   );

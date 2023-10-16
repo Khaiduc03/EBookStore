@@ -1,27 +1,31 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {Device} from '../../../utils';
+import {fontFamilySetup} from '../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
   inputContainer: {
     backgroundColor: colors.white,
-    // borderRadius: normalize(8),
-    // borderWidth: 1,
-
     width: Device.getDeviceWidth() - normalize(48),
     marginLeft: normalize(-10),
-    marginVertical: normalize(12),
-    // borderBottomColor: colors.grey4,
-    // borderColor: colors.grey4,
+    marginVertical: normalize(3),
   },
-  input: {
+  inputBlur: {
     borderBottomWidth: 1,
-    borderBottomColor: colors.grey4,
+    borderBottomColor: colors.grey0,
     fontSize: normalize(16),
-    fontWeight: '400',
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fontFamilySetup.regular,
     color: colors.black,
     letterSpacing: normalize(0.2),
-    // paddingStart: normalize(10),
+    paddingStart: normalize(10),
+  },
+  inputFocus: {
+    borderBottomWidth: 1,
+    borderBottomColor: colors.primary,
+    fontSize: normalize(16),
+    fontFamily: fontFamilySetup.regular,
+    color: colors.black,
+    letterSpacing: normalize(0.2),
+    paddingStart: normalize(10),
   },
   placeHolder: {
     color: colors.grey5,
@@ -31,10 +35,12 @@ const useStyles = makeStyles(({colors}) => ({
     right: 0,
     width: normalize(30),
     height: normalize(30),
+    justifyContent: 'center',
+    alignItems: 'center',
     zIndex: 1000,
   },
-  iconLeft: {
-    paddingStart: normalize(10),
+  leftIcon: {
+    color: colors.primary,
   },
 }));
 

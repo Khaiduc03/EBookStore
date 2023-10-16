@@ -18,6 +18,11 @@ export type LoginPayload = {
   idToken: string;
 };
 
+export type NewPasswordPayload = {
+  email: string;
+  password: string;
+};
+
 export type SendOTPPayload = {
   email: string;
   otp: string;

@@ -7,7 +7,7 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: colors.background,
   },
   text: {
-    fontSize: 26,
+    fontSize: normalize(26),
     fontFamily: fontFamilySetup.bold,
     color: colors.primary,
   },

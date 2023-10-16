@@ -1,6 +1,6 @@
-import {color} from '@rneui/base';
 import {makeStyles, normalize} from '@rneui/themed';
 import {StyleSheet} from 'react-native';
+import {fontFamilySetup} from '../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
@@ -10,32 +10,35 @@ const useStyles = makeStyles(({colors}) => ({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.background,
   },
-
   body: {
     flex: 1,
     padding: normalize(24),
   },
   text2: {
-    marginTop: normalize(16),
+    marginTop: normalize(8),
     color: colors.black,
-    fontFamily: 'Urbanist',
+    fontFamily: fontFamilySetup.medium,
     fontSize: normalize(15),
-    fontStyle: 'normal',
-    fontWeight: '700',
     lineHeight: normalize(22.4),
     letterSpacing: normalize(0.2),
   },
-  checkBox: {
-    marginLeft: normalize(-21),
-    marginTop: normalize(-10),
+  checkbox: {
+    marginTop: normalize(-9),
+    marginLeft: normalize(-20),
+  },
+  textCheckbox: {
+    marginLeft: normalize(2),
+    marginTop: normalize(-2),
+    fontFamily: fontFamilySetup.thin,
+    fontSize: normalize(14),
+    color: colors.black,
   },
   textRM: {
     marginLeft: normalize(-10),
+    marginTop: normalize(16),
     color: colors.black,
-    fontFamily: 'Urbanist',
+    fontFamily: fontFamilySetup.medium,
     fontSize: normalize(13),
-    fontStyle: 'normal',
-    fontWeight: '700',
     lineHeight: normalize(22.4),
     letterSpacing: normalize(0.2),
   },
@@ -43,7 +46,7 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
   },
   viewBottom: {
-    flex: 0.93,
+    flex: normalize(0.93),
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
@@ -51,7 +54,7 @@ const useStyles = makeStyles(({colors}) => ({
     paddingHorizontal: normalize(16),
     paddingVertical: normalize(18),
     backgroundColor: colors.primary,
-    shadowColor: 'rgba(248, 147, 0, 0.25)',
+    shadowColor: colors.primary,
     shadowOffset: {
       width: normalize(4),
       height: normalize(8),
@@ -65,12 +68,10 @@ const useStyles = makeStyles(({colors}) => ({
     alignSelf: 'stretch',
   },
   textContinue: {
-    color: colors.secondary,
+    color: colors.white,
+    fontFamily: fontFamilySetup.bold,
     textAlign: 'center',
-    fontFamily: 'Urbanist',
     fontSize: normalize(16),
-    fontStyle: 'normal',
-    fontWeight: '700',
     lineHeight: normalize(22.4),
     letterSpacing: normalize(0.2),
   },

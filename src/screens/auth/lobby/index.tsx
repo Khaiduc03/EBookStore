@@ -1,14 +1,13 @@
 import LottieView from 'lottie-react-native';
 import React from 'react';
-import {KeyboardAvoidingView, Text, TouchableOpacity, View} from 'react-native';
-import {JsonImages} from '../../../assets';
-import {GoogleIcon} from '../../../assets/icons';
-import {routes} from '../../../constants';
-import {useAppDispatch, useAppSelector} from '../../../hooks';
-import {NavigationService} from '../../../navigation';
-import {AppActions, AuthActions} from '../../../redux/reducer';
+import { KeyboardAvoidingView, Text, TouchableOpacity, View } from 'react-native';
+import { images } from '../../../assets';
+import { GoogleIcon } from '../../../assets/icons';
+import { routes } from '../../../constants';
+import { useAppDispatch } from '../../../hooks';
+import { NavigationService } from '../../../navigation';
+import { AuthActions } from '../../../redux/reducer';
 import usestyles from './styles';
-import {getAppIsReady} from '../../../redux';
 
 const LobbyScreen: React.FunctionComponent = () => {
   const styles = usestyles();
@@ -30,7 +29,7 @@ const LobbyScreen: React.FunctionComponent = () => {
         <View style={styles.header}>
           <LottieView
             style={styles.headerIMage}
-            source={JsonImages.logo}
+            source={images.logo}
             autoPlay
             loop={false}
           />

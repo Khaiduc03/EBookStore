@@ -69,14 +69,13 @@ const usestyles = makeStyles(({colors}) => ({
     letterSpacing: normalize(0.2),
     fontStyle: 'normal',
     fontFamily: 'Urbanist-Regular',
-    color: colors.black,
+    color: colors.blackDefault,
   },
   backgroundColors: {
     backgroundColor: colors.primary,
   },
-
   backgroundColorsWhite: {
-    backgroundColor: colors.grey0,
+    backgroundColor: colors.whiteDefault,
   },
   colorWhite: {
     color: colors.grey0,
