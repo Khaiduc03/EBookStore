@@ -4,7 +4,7 @@ import React, {FunctionComponent, useState} from 'react';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import useStyles from './styles';
-import {ComicItem, HeaderCustom, TopicItem} from '../../../../components';
+import {ComicItem, HeaderCustom} from '../../../../components';
 
 import {createIcon} from '../../../../utils';
 import {TopicsHome, ComicsNew, BannerComic, TrendingComic} from './components';
@@ -81,7 +81,7 @@ const Home: FunctionComponent = () => {
           onPressRightIconLeft={handleGridIconPress}
           onPressRightIconRight={handleListIconPress}
         />
-        <ComicsNew numCols={numCols} />
+        {/* <ComicsNew numCols={numCols} /> */}
       </ScrollView>
     </View>
   );

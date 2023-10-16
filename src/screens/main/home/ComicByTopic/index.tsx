@@ -1,21 +1,54 @@
-import {StyleSheet, Text, FlatList, View} from 'react-native';
-import React, {useState} from 'react';
-import {HeaderCustom} from '../../../../components';
+import {
+  StyleSheet,
+  Text,
+  FlatList,
+  View,
+  ActivityIndicator,
+} from 'react-native';
+import React, {useState, useEffect, useCallback} from 'react';
+import {ComicItem, HeaderCustom} from '../../../../components';
 import useStyles from './styles';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
-import {ComicsNew} from '../Home/components';
-import {ScrollView} from 'react-native-gesture-handler';
+import {backScreen} from '../../../../utils';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {ComicActions, ComicType} from '../../../../redux';
+import {getListComic} from '../../../../redux/selectors/comic.selector';
 
 const ComicByTopic = () => {
-  const styles = useStyles();
-  const handlePressSearch = () => {
-    NavigationService.navigate(routes.SEARCH);
+  const dispatch = useAppDispatch();
+  const dataComic: ComicType[] = useAppSelector(getListComic) || [];
+  const [numCols, setNumCols] = useState<number>(3);
+  const [data, setData] = useState<ComicType[]>([]);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    dispatch(ComicActions.getListData(page));
+  }, [page]);
+
+  useEffect(() => {
+    if (dataComic.length > 0) {
+      setData([...data, ...dataComic]);
+      dispatch(ComicActions.clearListData());
+    }
+  }, [dataComic]);
+
+  const loadMoreComic = () => {
+    if (data.length > 0) {
+      setPage(page + 1);
+    }
   };
-  const handlePressBack = () => {
-    NavigationService.goBack();
-  };
-  const [numCols, setNumCols] = useState(3);
+
+  const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
+    <ComicItem
+      data={item}
+      viewStyle={numCols == 1 ? styles.comicItem : null}
+      imageStyle={numCols == 1 ? styles.imgComic : null}
+      contentStyle={numCols == 1 ? styles.content : null}
+      index={index}
+      topicStyle={numCols == 1 ? styles.topicsContainer : null}
+    />
+  );
 
   const handleListIconPress = () => {
     setNumCols(1);
@@ -24,118 +57,58 @@ const ComicByTopic = () => {
     setNumCols(3);
   };
 
+  const styles = useStyles();
+
+  const handlePressSearch = () => {
+    NavigationService.navigate(routes.SEARCH);
+  };
+
   return (
     <View style={styles.container}>
       <HeaderCustom
         title="Romance"
         leftIconStyle={styles.leftIconStyle}
         leftIcon={{name: 'arrow-back', color: styles.leftIconStyle.color}}
-        onPressLeftIcon={handlePressBack}
+        onPressLeftIcon={() => backScreen()}
         rightIconleft={{name: 'search', type: 'ionicon'}}
         onPressRightIconLeft={handlePressSearch}
         rightIconRight={{name: 'tune'}}
       />
-      <ScrollView>
-        <HeaderCustom
-          titleStyle={styles.titleHeaderStyle}
-          title="Show in "
-          rightIconleft={{
-            name: 'grid-outline',
-            type: 'ionicon',
-            color: numCols === 3 ? '#F89300' : '',
-          }}
-          rightIconRight={{
-            name: 'list-circle-outline',
-            type: 'ionicon',
-            color: numCols === 1 ? '#F89300' : '',
-          }}
-          onPressRightIconLeft={handleGridIconPress}
-          onPressRightIconRight={handleListIconPress}
-        />
-        <ComicsNew numCols={numCols} />
-      </ScrollView>
+
+      <FlatList
+        contentContainerStyle={{alignItems: 'center'}}
+        ListHeaderComponent={() => {
+          return (
+            <HeaderCustom
+              titleStyle={styles.titleHeaderStyle}
+              title="Show in "
+              rightIconleft={{
+                name: 'grid-outline',
+                type: 'ionicon',
+                color: numCols === 3 ? '#F89300' : '',
+              }}
+              rightIconRight={{
+                name: 'list-circle-outline',
+                type: 'ionicon',
+                color: numCols === 1 ? '#F89300' : '',
+              }}
+              onPressRightIconLeft={handleGridIconPress}
+              onPressRightIconRight={handleListIconPress}
+            />
+          );
+        }}
+        columnWrapperStyle={numCols === 3 ? {gap: 5} : null}
+        data={data}
+        renderItem={RenderItem}
+        keyExtractor={item => item.uuid.toString()}
+        showsVerticalScrollIndicator={false}
+        key={numCols.toString()}
+        numColumns={numCols}
+        onEndReached={loadMoreComic}
+        onEndReachedThreshold={0}
+      />
     </View>
   );
 };
 
 export default ComicByTopic;
-const data = [
-  {
-    id: 1,
-    name: 'Boruto & Itachi',
-    topic: 'Tiffany',
-    image:
-      'https://i.pinimg.com/originals/fc/99/4e/fc994e76624d91c7baa236cec4043755.jpg',
-    rate: 3.28,
-  },
-  {
-    id: 2,
-    name: 'Boruto & Itachi',
-    topic: 'Osmond',
-    image:
-      'https://i.pinimg.com/1200x/a5/6d/47/a56d47ee7a756a257dec50dfbf87b625.jpg',
-    rate: 2.25,
-  },
-  {
-    id: 3,
-    name: 'Boruto & Itachi',
-    topic: 'Stan',
-    image:
-      'https://thuvienanime.com/wp-content/uploads/2021/09/lieu-than-thuvienanime-2.jpg',
-    rate: 4.5,
-  },
-  {
-    id: 4,
-    name: 'Boruto & Itachi',
-    topic: 'Maggie',
-    image:
-      'https://thuvienanime.com/wp-content/uploads/2021/09/lieu-than-thuvienanime-3.jpg',
-    rate: 3.26,
-  },
-  {
-    id: 5,
-    name: 'Boruto & Itachi',
-    topic: 'Dallis',
-    image: 'https://vidian.me/public-img/image-1677306627308.jpeg',
-    rate: 4.41,
-  },
-  {
-    id: 6,
-    name: 'Boruto & Itachi ',
-    topic: 'Tiffany',
-    image:
-      'https://i.pinimg.com/originals/fc/99/4e/fc994e76624d91c7baa236cec4043755.jpg',
-    rate: 3.28,
-  },
-  {
-    id: 7,
-    name: 'Boruto & Itachi',
-    topic: 'Osmond',
-    image:
-      'https://i.pinimg.com/1200x/a5/6d/47/a56d47ee7a756a257dec50dfbf87b625.jpg',
-    rate: 2.25,
-  },
-  {
-    id: 8,
-    name: 'Boruto & Itachi',
-    topic: 'Stan',
-    image:
-      'https://thuvienanime.com/wp-content/uploads/2021/09/lieu-than-thuvienanime-2.jpg',
-    rate: 4.5,
-  },
-  {
-    id: 9,
-    name: 'Boruto & Itachi',
-    topic: 'Maggie',
-    image:
-      'https://thuvienanime.com/wp-content/uploads/2021/09/lieu-than-thuvienanime-3.jpg',
-    rate: 3.26,
-  },
-  {
-    id: 10,
-    name: 'Boruto & Itachi',
-    topic: 'Dallis',
-    image: 'https://vidian.me/public-img/image-1677306627308.jpeg',
-    rate: 4.41,
-  },
-];
