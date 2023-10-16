@@ -1,6 +1,5 @@
-import { Screen } from '../../../types';
+import {Screen} from '../../../types';
 
-export { default as Explore } from './Explore';
-
+export {default as Explore} from './Explore';
 
 export const exploreScreens: Screen[] = [];

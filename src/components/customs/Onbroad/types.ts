@@ -3,7 +3,7 @@ import {ViewProps} from 'react-native';
 
 export type OnbroadProps = {
   image: ReactElement;
-  iconColor?: string[]
+  iconColor?: string[];
   title: string;
   subTitle: string;
   onPressBackButton?: () => void;

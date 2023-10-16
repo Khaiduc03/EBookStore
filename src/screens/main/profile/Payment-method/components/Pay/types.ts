@@ -1,8 +1,6 @@
-
 export type PayProps = {
-    title?: string;
-    icGoogle?: boolean;
-    icZaloPay?: boolean;
-    icPaypal?: boolean;
-
+  title?: string;
+  icGoogle?: boolean;
+  icZaloPay?: boolean;
+  icPaypal?: boolean;
 };

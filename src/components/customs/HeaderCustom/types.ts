@@ -19,7 +19,7 @@ export type ButtonProps = {
     size?: number;
     color?: string;
   };
-}
+};
 
 export type CustomHeaderProps = {
   viewStyle?: ViewStyle;
@@ -35,5 +35,4 @@ export type CustomHeaderProps = {
   titleStyle?: TextStyle; // Kiểu dáng của tiêu đề
   leftIconStyle?: ViewStyle;
   buttonProps?: ButtonProps;
-
 };

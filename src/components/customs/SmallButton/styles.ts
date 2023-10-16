@@ -9,7 +9,7 @@ const useStyles = makeStyles(({colors}) => ({
     borderRadius: normalize(30),
     paddingVertical: normalize(10),
     paddingHorizontal: normalize(24),
-   borderBlockColor: colors.grey4,
+    borderBlockColor: colors.grey4,
     borderWidth: StyleSheet.hairlineWidth,
   },
 }));

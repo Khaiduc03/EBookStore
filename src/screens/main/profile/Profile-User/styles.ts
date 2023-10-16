@@ -49,7 +49,7 @@ const useStyles = makeStyles(({colors}) => ({
     justifyContent: 'center',
     borderWidth: 0.5,
     borderColor: 'white',
-    backgroundColor:colors.grey5,
+    backgroundColor: colors.grey5,
   },
   viewbtnFollow: {
     flexDirection: 'row',

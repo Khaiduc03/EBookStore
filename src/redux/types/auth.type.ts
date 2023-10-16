@@ -19,7 +19,7 @@ export type LoginPayload = {
 };
 
 export type SendOTPPayload = {
-  email: string 
+  email: string;
   otp: string;
 };
 

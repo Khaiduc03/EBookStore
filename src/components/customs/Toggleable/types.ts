@@ -1,8 +1,8 @@
-import { ReactElement } from 'react';
+import {ReactElement} from 'react';
 
-import { TextStyle, ViewProps } from 'react-native';
+import {TextStyle, ViewProps} from 'react-native';
 
 export type ToggleableViewProps = {
-    title: string;
-    content: string;
+  title: string;
+  content: string;
 };

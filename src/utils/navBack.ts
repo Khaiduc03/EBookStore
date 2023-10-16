@@ -1,4 +1,4 @@
-import { NavigationService } from '../navigation';
+import {NavigationService} from '../navigation';
 
 export const backScreen = () => {
   NavigationService.goBack();

@@ -9,7 +9,8 @@
     "start": "react-native start",
     "test": "jest",
     "link": "react-native-asset",
-    "configure": "react-native link react-native-config"
+    "configure": "react-native link react-native-config",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\""
   },
   "dependencies": {
     "@react-native-community/datetimepicker": "^7.4.1",
