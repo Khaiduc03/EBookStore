@@ -10,11 +10,6 @@ import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {getListComic} from '../../../../../../redux/selectors/comic.selector';
 
 const ComicsNew = ({numCols}: {numCols: number}) => {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(ComicActions.getListData(1));
-  }, []);
-
   const dataComic = useAppSelector(getListComic);
   const number = numCols;
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
@@ -45,7 +40,7 @@ const ComicsNew = ({numCols}: {numCols: number}) => {
 };
 
 export default ComicsNew;
-// const data = [
+
 //   {
 //     id: 1,
 //     name: 'Boruto & Itachi Itachi',

@@ -81,7 +81,7 @@ const Home: FunctionComponent = () => {
           onPressRightIconLeft={handleGridIconPress}
           onPressRightIconRight={handleListIconPress}
         />
-        <ComicsNew numCols={numCols} />
+        {/* <ComicsNew numCols={numCols} /> */}
       </ScrollView>
     </View>
   );

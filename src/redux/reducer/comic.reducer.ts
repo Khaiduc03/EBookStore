@@ -15,6 +15,15 @@ const reducer = createSlice({
   initialState: initialState,
   reducers: {
     //comic
+    clearListData: (state: ComicState) => {
+      return {
+        ...state,
+        listData: {
+          comics: [],
+        },
+      };
+    },
+
     getListData: (state: ComicState, _: PayloadAction<number>) => {
       return {
         ...state,
@@ -31,6 +40,7 @@ const reducer = createSlice({
         },
       };
     },
+
     //get comic detail
     getDetailComic: (state: ComicState, _: PayloadAction<string>) => {
       return {
