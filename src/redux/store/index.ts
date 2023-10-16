@@ -23,7 +23,7 @@ const persistConfig: PersistConfig<RootState> = {
   version: 1, // version - defaults to 1
   debug: true, // enable logs - default is false
   stateReconciler: autoMergeLevel2,
-  whitelist: [Redux.auth, Redux.theme, Redux.app, Redux.comic, Redux.topic],
+  whitelist: [Redux.auth, Redux.theme, Redux.app, Redux.topic],
   blacklist: [Redux.loading],
 };
 
