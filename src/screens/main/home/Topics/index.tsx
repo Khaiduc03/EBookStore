@@ -37,6 +37,7 @@ const Topics: React.FunctionComponent = () => {
       image={item.image_url}
       containerStyle={styles.itemContainer}
       index={index}
+      //hihi
     />
   );
   return (
