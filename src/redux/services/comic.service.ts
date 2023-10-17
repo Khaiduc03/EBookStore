@@ -13,4 +13,11 @@ export class ComicService {
     console.log(`${ENDPOINTS.COMIC_UUID}${action}`);
     return await apiService.get(`${ENDPOINTS.COMIC_UUID}${action}`);
   }
+
+  static async getComicByTopic(action: any) {
+    console.log(`${ENDPOINTS.COMIC_BY_TOPIC}?page=${action}`);
+    return await apiService.get(
+      `${ENDPOINTS.COMIC_BY_TOPIC}?page=${action.page}&topic_uuid=${action.uuid}`,
+    );
+  }
 }

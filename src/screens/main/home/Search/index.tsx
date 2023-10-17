@@ -8,6 +8,7 @@ import {Icon} from '@rneui/themed';
 import {
   getListComic,
   getDetailComic,
+  getDataByTopic,
 } from '../../../../redux/selectors/comic.selector';
 import {ComicActions, TopicActions} from '../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
@@ -20,6 +21,8 @@ const Search = () => {
   const dataComic = useAppSelector(getListComic);
   const dataTopic = useAppSelector(getListTopic);
   const dataComicDetail = useAppSelector(getDetailComic);
+
+  const dataByTopic = useAppSelector(getDataByTopic);
 
   const styles = useStyles();
   const [search, setSearch] = useState('');
@@ -51,13 +54,20 @@ const Search = () => {
         </View>
       </View>
       <TouchableOpacity
-        onPress={() => handlePress('2b79b1a0-9251-410b-9db5-6ebc7e700c18')}>
-        <Text style={{fontSize: 40}}>GETCOMICDETAIL</Text>
+        onPress={() =>
+          dispatch(
+            ComicActions.getListByTopic({
+              page: 1,
+              uuid: 'c848a70d-0cbf-4e74-a433-1471fe62bb4c',
+            }),
+          )
+        }>
+        <Text style={{fontSize: 40}}>GETCOMICBYTOPIC</Text>
       </TouchableOpacity>
       {/* <TouchableOpacity onPress={() => dispatch(TopicActions.getListTopic())}>
         <Text style={{fontSize: 40}}>GETTOPIC</Text>
       </TouchableOpacity> */}
-      <Text>{JSON.stringify(dataComicDetail)}</Text>
+      <Text>{JSON.stringify(dataByTopic)}</Text>
     </View>
   );
 };

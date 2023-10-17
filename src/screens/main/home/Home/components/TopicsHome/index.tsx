@@ -23,6 +23,7 @@ const TopicsHome = () => {
       viewStyle={styles.itemTopic}
       image={item.image_url}
       index={1.5}
+      uuid={item.uuid}
     />
   );
   return (

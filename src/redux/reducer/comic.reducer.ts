@@ -58,6 +58,31 @@ const reducer = createSlice({
         },
       };
     },
+
+    getListByTopic: (state: ComicState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+    setListByTopic: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpList<ComicType>>,
+    ) => {
+      return {
+        ...state,
+        listDataByTopic: {
+          data: action.payload.data,
+        },
+      };
+    },
+    clearListDataByComic: (state: ComicState) => {
+      return {
+        ...state,
+        listDataByTopic: {
+          data: [],
+        },
+      };
+    },
   },
 });
 

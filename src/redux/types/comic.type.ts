@@ -9,6 +9,7 @@ export interface PayloadHttpListComics<T> {
 
 export type ComicState = Partial<{
   listData: PayloadHttpListComics<ComicType>;
+  listDataByTopic: PayloadHttpList<ComicType>;
   topic: PayloadHttpList<TopicType>;
   detailData: PayloadHttpList<ComicDetailType>;
 }>;
