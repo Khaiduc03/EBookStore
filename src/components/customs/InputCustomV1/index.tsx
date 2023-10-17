@@ -60,6 +60,8 @@ const InputCustomV1: FunctionComponent<
         placeholderTextColor={
           styles.placeholderColor.color || props.placeholder
         }
+        errorMessage="sai"
+
         keyboardType={props.keyboardType}
         onBlur={handleInputBlur}
         onFocus={handleInputFocus}

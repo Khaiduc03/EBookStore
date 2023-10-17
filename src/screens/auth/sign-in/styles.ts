@@ -13,6 +13,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   body: {
     flex: 1,
+    marginTop: normalize(12),
   },
   viewCA: {
     flexDirection: 'row',
@@ -35,16 +36,18 @@ const useStyles = makeStyles(({colors}) => ({
   view3: {
     width: normalize(30),
   },
-  view4: {
-    width: '35%',
-    height: normalize(1),
-    marginTop: normalize(20),
+  line: {
+    width: '100%',
+    height: normalize(0.8),
+    marginTop: normalize(10),
     backgroundColor: colors.backgroundViewWidth,
   },
-  view5: {
-    width: '36%',
-    marginHorizontal: normalize(10),
-    alignItems: 'center',
+  linehafl: {
+    width: '33%',
+    height: normalize(0.8),
+    marginTop: normalize(10),
+    backgroundColor: colors.backgroundViewWidth,
+    marginHorizontal: normalize(4),
   },
   title: {
     fontFamily: fontFamilySetup.bold,
@@ -59,7 +62,9 @@ const useStyles = makeStyles(({colors}) => ({
   viewRP: {
     flexDirection: 'row',
     paddingHorizontal: normalize(20),
-    marginTop: normalize(9),
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'black',
   },
   viewCenter: {
     justifyContent: 'center',
@@ -67,16 +72,15 @@ const useStyles = makeStyles(({colors}) => ({
   },
   formContainer: {
     flex: 1,
-    marginTop: normalize(30),
   },
   titleInput: {
-    fontSize: normalize(17),
+    fontSize: normalize(14),
     fontFamily: fontFamilySetup.bold,
     color: colors.black,
     letterSpacing: normalize(0.2),
+    marginTop: normalize(10),
   },
   checkbox: {
-    marginTop: normalize(-9),
     marginLeft: normalize(-20),
   },
   textCheckbox: {
@@ -88,31 +92,29 @@ const useStyles = makeStyles(({colors}) => ({
   },
   color: {
     color: colors.primary,
-    fontSize: normalize(16),
+    fontSize: normalize(15),
     fontFamily: fontFamilySetup.bold,
+    letterSpacing: normalize(0.2),
+    borderBottomColor: colors.primary,
+    borderBottomWidth: 0.8,
   },
   text: {
     fontFamily: fontFamilySetup.regular,
     fontSize: normalize(14),
     color: colors.black,
     letterSpacing: normalize(0.2),
-    marginTop: normalize(10),
   },
   optionView: {
-    flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: normalize(14),
-    marginHorizontal: normalize(8),
   },
   backgroundcolor: {
     color: colors.primary,
   },
   button: {
     borderRadius: normalize(30),
-    paddingVertical: normalize(10),
+    paddingVertical: normalize(8),
     paddingHorizontal: normalize(24),
-    borderWidth: 1,
   },
   bottom: {
     flex: 1,
@@ -120,11 +122,13 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
   },
   btnFP: {
-    height: '20%',
-    marginVertical: normalize(10),
+    marginVertical: normalize(15),
   },
   btnSignIn: {
     color: colors.whiteDefault,
+  },
+  Headers: {
+    marginTop: normalize(16),
   },
 }));
 export default useStyles;
