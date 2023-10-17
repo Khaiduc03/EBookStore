@@ -15,20 +15,21 @@ const useStyles = makeStyles(({colors}) => ({
     marginBottom: normalize(10),
   },
   inputContainer: {
-    borderBottomWidth: normalize(0.5),
-    borderColor: colors.grey5,
+    borderBottomWidth: normalize(1),
+    borderColor: colors.primary,
   },
   inputContainerFocus: {
     borderBottomWidth: normalize(0.5),
     borderColor: colors.primary,
   },
   input: {
-    fontSize: normalize(13),
+    fontSize: normalize(15),
     fontFamily: fontFamilySetup.regular,
-    letterSpacing: normalize(0.2),
+    letterSpacing: normalize(0.3),
+    color: colors.black,
   },
   placeholderColor: {
-    color: colors.black,
+    color: colors.grey2,
   },
   icon: {
     position: 'absolute',
@@ -41,6 +42,12 @@ const useStyles = makeStyles(({colors}) => ({
   },
   leftIcon: {
     color: colors.primary,
+  },
+  errorStyle: {
+    fontSize: normalize(12),
+    fontFamily: fontFamilySetup.regular,
+    color: colors.red,
+    letterSpacing: normalize(0.3),
   },
 }));
 

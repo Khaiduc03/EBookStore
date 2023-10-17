@@ -20,10 +20,10 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
   },
   subTitle: {
-    fontSize: normalize(13),
+    fontSize: normalize(14),
     fontFamily: 'Urbanist-Regular',
     color: colors.black,
-    paddingVertical: normalize(14),
+    marginTop: normalize(4),
   },
 
   textInput: {

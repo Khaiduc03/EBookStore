@@ -1,19 +1,18 @@
-import {Onbroad} from '../../components';
-import {routes} from '../../constants';
-import {Screen} from '../../types';
+import { routes } from '../../constants';
+import { Screen } from '../../types';
 import CreateAccount from './create-account';
+import CreateNewPassword from './create-new-password';
+import ForgotPassword from './forgot-password';
 import LobbyScreen from './lobby';
 import Slider from './onboard';
-import SignIn from './sign-in';
-import ForgotPassword from './forgot-password';
 import SendOTP from './send-otp';
-import CreateNewPassword from './create-new-password';
+import LoginScreen from './sign-in';
 import UpdateProfile from './update-profile';
 
 export const authScreen: Screen[] = [
   {
     name: routes.SIGN_IN,
-    component: SignIn,
+    component: LoginScreen,
   },
   {
     name: routes.CREATE_ACCOUNT,
