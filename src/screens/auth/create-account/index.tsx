@@ -22,6 +22,7 @@ import {
   showToastError,
 } from '../../../utils';
 import useStyles from './styles';
+import InputCustomV1 from '../../../components/customs/InputCustomV1';
 
 const CreateAccount: FunctionComponent = () => {
   const styles = useStyles();
@@ -36,8 +37,8 @@ const CreateAccount: FunctionComponent = () => {
     comfirmPassword: string;
   }>({
     email: '',
-    password: '123456',
-    comfirmPassword: '123456',
+    password: '',
+    comfirmPassword: '',
   });
 
   const [inputErrors, setInputErrors] = React.useState<{
@@ -117,7 +118,7 @@ const CreateAccount: FunctionComponent = () => {
 
             <View style={styles.formContainer}>
               <Text style={styles.titleInput}>Email</Text>
-              <InputCustom
+              <InputCustomV1
                 placeholder="Enter your email"
                 value={credentials.email}
                 onChangeText={text =>
@@ -126,7 +127,7 @@ const CreateAccount: FunctionComponent = () => {
                 style={inputErrors.email ? styles.errorInput : null}
               />
               <Text style={styles.titleInput}>Password</Text>
-              <InputCustom
+              <InputCustomV1
                 placeholder="Enter your password"
                 secure={true}
                 value={credentials.password}
@@ -136,7 +137,7 @@ const CreateAccount: FunctionComponent = () => {
                 style={inputErrors.password ? styles.errorInput : null}
               />
               <Text style={styles.titleInput}>Confirm Password</Text>
-              <InputCustom
+              <InputCustomV1
                 placeholder="Enter your confirm password"
                 secure={true}
                 value={credentials.comfirmPassword}

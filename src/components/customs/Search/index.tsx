@@ -50,7 +50,7 @@ const SearchCustom: React.FunctionComponent<
           color={styles.cancelIcon.color}
         />
       }
-      autoFocus={true}
+      autoFocus={false}
       returnKeyType="search"
       inputStyle={props.inputStyle || styles.inputStyle}
       onSubmitEditing={props.onPress}
