@@ -29,9 +29,12 @@ const Bookmark: FunctionComponent = () => {
         onValueChange={handleTheme}
         value={mode === 'dark' ? true : false}
       />
-      <TouchableOpacity onPress={() => NavigationService.navigate(routes.CHAT)}>
-        <Text>Chat</Text>
-      </TouchableOpacity>
+      <View style={{alignItems: 'center'}}>
+        <TouchableOpacity
+          onPress={() => NavigationService.navigate(routes.CHAT)}>
+          <Text style={styles.textChat}>Chat</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

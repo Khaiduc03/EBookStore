@@ -1,5 +1,6 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {StyleSheet} from 'react-native';
+import {fontFamilySetup} from '../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
@@ -26,19 +27,20 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
     letterSpacing: normalize(0.2),
   },
-
   checkbox: {
-    marginLeft: normalize(-18),
+    marginTop: normalize(-9),
+    marginLeft: normalize(-20),
+  },
+  textCheckbox: {
+    marginLeft: normalize(2),
+    marginTop: normalize(-2),
+    fontFamily: fontFamilySetup.thin,
+    fontSize: normalize(14),
+    color: colors.black,
   },
   textView: {
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  textCheckbox: {
-    fontFamily: 'Urbanist-Regular',
-    fontSize: normalize(14),
-    fontWeight: '600',
-    color: colors.black,
   },
   color: {
     color: colors.primary,

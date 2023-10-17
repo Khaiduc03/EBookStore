@@ -10,7 +10,7 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
     justifyContent: 'center',
     borderBottomWidth: 0,
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
   },
   viewRow: {
     flexDirection: 'row',
