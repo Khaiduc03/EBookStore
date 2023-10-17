@@ -3,14 +3,29 @@ import React from 'react';
 import useStyles from './styles';
 import FastImage from 'react-native-fast-image';
 import ItemTrending from './components/ItemTrending';
+import {HeaderCustom} from '../../../../../../components';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
 
 const TrendingComic = () => {
   const styles = useStyles();
   const RenderItem = ({item, index}: any) => (
     <ItemTrending index={index} data={item} />
   );
+  const handlePressTopics = () => {
+    NavigationService.navigate(routes.TOPICS);
+  };
   return (
     <View style={styles.container}>
+      <HeaderCustom
+        titleStyle={styles.textTitle}
+        title="Trending Now"
+        rightIconRight={{
+          name: 'arrow-forward-outline',
+          type: 'ionicon',
+        }}
+        onPressRightIconRight={handlePressTopics}
+      />
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}

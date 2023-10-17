@@ -12,8 +12,9 @@ import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {backScreen} from '../../../../utils';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {ComicActions, ComicType} from '../../../../redux';
+import {ComicActions, ComicType, LoadingActions} from '../../../../redux';
 import {getListComic} from '../../../../redux/selectors/comic.selector';
+import {getIsLoading} from '../../../../redux/selectors/loading.selector';
 
 const ComicByTopic = () => {
   const dispatch = useAppDispatch();
