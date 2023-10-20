@@ -5,11 +5,11 @@ import {fontFamilySetup} from '../../../utils/font';
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
-const usestyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({colors}) => ({
   ViewCircle: {
-    borderRadius: 50,
-    width: 64,
-    height: 64,
+    borderRadius: normalize(50),
+    width: normalize(60),
+    height: normalize(60),
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -27,4 +27,4 @@ const usestyles = makeStyles(({colors}) => ({
     color: colors.black,
   },
 }));
-export default usestyles;
+export default useStyles;

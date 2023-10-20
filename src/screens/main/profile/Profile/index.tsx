@@ -7,6 +7,7 @@ import useStyles from './styles';
 import TextCustom from '../../../../components/customs/Text';
 import {HeaderCustom} from '../../../../components';
 import {TableofContent} from './components';
+import {LogoIcon} from '../../../../assets/icons';
 
 const Profile: FunctionComponent = () => {
   const styles = useStyles();

@@ -15,12 +15,6 @@ const TableofContent: FunctionComponent = props => {
     dispatch(AuthActions.handleLogout());
   };
 
-  const darkModeStyles = {
-    viewClick: {
-      padding: 15,
-    },
-  };
-
   const styles = useStyles();
   return (
     <View>
@@ -56,7 +50,7 @@ const TableofContent: FunctionComponent = props => {
           {
             route: routes.BECOMEVIP,
             title: 'Become a VIP member',
-            colorBackground: '#FFFDEA',
+            colorBackground: '#FFFBD9',
             name: 'crown',
             type: 'font-awesome-5',
             color: 'yellow',

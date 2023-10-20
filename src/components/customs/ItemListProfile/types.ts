@@ -8,5 +8,6 @@ export type CustomCirclerProps = {
   type?: string;
   rightIcon?: boolean;
   color?: string;
+  size?: number;
   switchRight?: boolean;
 };

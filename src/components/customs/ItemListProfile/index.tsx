@@ -1,17 +1,24 @@
-import {View, Text} from 'react-native';
+import {Avatar, Icon, Switch} from '@rneui/themed';
 import React from 'react';
-import usestyles from './styles';
-import {CustomCirclerProps} from './types';
-import {Icon, Avatar, Switch} from '@rneui/themed';
-import Switch_custom from '../Switch';
+import {Text, View} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
-import {getMode} from '../../../redux/selectors/thems.selector';
 import {ThemeActions} from '../../../redux';
+import {getMode} from '../../../redux/selectors/thems.selector';
+import useStyles from './styles';
+import {CustomCirclerProps} from './types';
 
 const ItemListProfile: React.FC<CustomCirclerProps> = props => {
-  const {colorBackground, title, name, type, rightIcon, color, switchRight} =
-    props;
-  const styles = usestyles();
+  const {
+    colorBackground,
+    title,
+    name,
+    type,
+    rightIcon,
+    color,
+    switchRight,
+    size,
+  } = props;
+  const styles = useStyles();
   const dispatch = useAppDispatch();
   const mode = useAppSelector(getMode);
 
@@ -31,7 +38,7 @@ const ItemListProfile: React.FC<CustomCirclerProps> = props => {
       }}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <Avatar
-          size={50}
+          size={42}
           rounded
           icon={{name: name, type: type, color: color}}
           containerStyle={{backgroundColor: colorBackground}}
