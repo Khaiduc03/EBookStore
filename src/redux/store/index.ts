@@ -24,7 +24,7 @@ const persistConfig: PersistConfig<RootState> = {
   debug: true, // enable logs - default is false
   stateReconciler: autoMergeLevel2,
   whitelist: [Redux.auth, Redux.theme, Redux.app, Redux.topic],
-  blacklist: [Redux.loading],
+  blacklist: [Redux.loading, Redux.comic],
 };
 
 const rootReducers = combineReducers({

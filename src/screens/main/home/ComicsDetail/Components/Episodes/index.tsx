@@ -11,12 +11,12 @@ import React from 'react';
 import useStyles from './styles';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
+import {getDataAllChapter} from '../../../../../../redux/selectors/comic.selector';
+import {useAppSelector} from '../../../../../../hooks';
 
 const Episodes = () => {
   const styles = useStyles();
-  const handlePressChapter = () => {
-    NavigationService.navigate(routes.CHAPTER);
-  };
+  const dataChapter = useAppSelector(getDataAllChapter) || undefined;
 
   return (
     <View style={styles.container}>
@@ -27,14 +27,16 @@ const Episodes = () => {
       </View>
 
       <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
-        {data.map(item => (
+        {dataChapter?.map(item => (
           <TouchableOpacity
-            onPress={handlePressChapter}
-            key={item.id}
+            onPress={() =>
+              NavigationService.navigate(routes.CHAPTER, {uuid: item.uuid})
+            }
+            key={item.uuid}
             style={styles.chapterContainer}>
-            <Text style={styles.textChapter}>Chapter {item.chapterNumber}</Text>
-            <Text style={styles.textChapter}>{item.dayUpdate}</Text>
-            <Text style={styles.textChapter}>{item.view}</Text>
+            <Text style={styles.textChapter}>{item.chapter_name}</Text>
+            <Text style={styles.textChapter}>{item.created_at + ''}</Text>
+            <Text style={styles.textChapter}>{item.views}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>

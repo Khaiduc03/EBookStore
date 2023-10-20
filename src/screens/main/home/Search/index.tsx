@@ -9,6 +9,8 @@ import {
   getListComic,
   getDetailComic,
   getDataByTopic,
+  getDataAllChapter,
+  getDataDetailChapter,
 } from '../../../../redux/selectors/comic.selector';
 import {ComicActions, TopicActions} from '../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
@@ -21,8 +23,11 @@ const Search = () => {
   const dataComic = useAppSelector(getListComic);
   const dataTopic = useAppSelector(getListTopic);
   const dataComicDetail = useAppSelector(getDetailComic);
-
   const dataByTopic = useAppSelector(getDataByTopic);
+
+  const dataChapter = useAppSelector(getDataAllChapter);
+
+  const dataDetailChapter = useAppSelector(getDataDetailChapter);
 
   const styles = useStyles();
   const [search, setSearch] = useState('');
@@ -56,18 +61,15 @@ const Search = () => {
       <TouchableOpacity
         onPress={() =>
           dispatch(
-            ComicActions.getListByTopic({
-              page: 1,
-              uuid: 'c848a70d-0cbf-4e74-a433-1471fe62bb4c',
-            }),
+            ComicActions.getListChapter('2b79b1a0-9251-410b-9db5-6ebc7e700c18'),
           )
         }>
-        <Text style={{fontSize: 40}}>GETCOMICBYTOPIC</Text>
+        <Text style={{fontSize: 40}}>GETCHAPTER</Text>
       </TouchableOpacity>
       {/* <TouchableOpacity onPress={() => dispatch(TopicActions.getListTopic())}>
         <Text style={{fontSize: 40}}>GETTOPIC</Text>
       </TouchableOpacity> */}
-      <Text>{JSON.stringify(dataByTopic)}</Text>
+      <Text>{JSON.stringify(dataChapter)}</Text>
     </View>
   );
 };

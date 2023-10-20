@@ -8,11 +8,19 @@ import {ComicItem, HeaderCustom} from '../../../../components';
 
 import {createIcon} from '../../../../utils';
 import {TopicsHome, ComicsNew, BannerComic, TrendingComic} from './components';
-import {ComicActions, ComicType, TopicActions} from '../../../../redux';
+import {
+  ComicActions,
+  ComicType,
+  TopicActions,
+  getAuthEnableSignIn,
+} from '../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {getListComic} from '../../../../redux/selectors/comic.selector';
+import {
+  getListComic,
+  getNextPage,
+  getTotalPage,
+} from '../../../../redux/selectors/comic.selector';
 import {getListTopic} from '../../../../redux/selectors/topic.selector';
-import {getIsLoading} from '../../../../redux/selectors/loading.selector';
 
 const Home: FunctionComponent = () => {
   const dispatch = useAppDispatch();
@@ -20,8 +28,9 @@ const Home: FunctionComponent = () => {
   const [numCols, setNumCols] = useState(3);
   const [data, setData] = useState<ComicType[]>([]);
   const [page, setPage] = useState(1);
-  const dataComic: ComicType[] = useAppSelector(getListComic) || [];
+  const dataComic = useAppSelector(getListComic) || [];
   const dataTopic = useAppSelector(getListTopic);
+  const nextPage = useAppSelector(getNextPage);
 
   useEffect(() => {
     dispatch(ComicActions.getListData(page));
@@ -33,12 +42,11 @@ const Home: FunctionComponent = () => {
   useEffect(() => {
     if (dataComic.length > 0) {
       setData([...data, ...dataComic]);
-      dispatch(ComicActions.clearListData());
     }
   }, [dataComic]);
 
   const loadMoreComic = () => {
-    if (page < 4) {
+    if (nextPage) {
       setPage(page + 1);
     }
   };

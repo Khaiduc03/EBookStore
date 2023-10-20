@@ -1,18 +1,24 @@
 import {ImageBackground, Text, View, Image, StatusBar} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import useStyles from './styles';
 import {Icon, Divider} from '@rneui/themed';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useAppSelector} from '../../../../../../hooks';
 import {getDetailComic} from '../../../../../../redux/selectors/comic.selector';
 import FastImage from 'react-native-fast-image';
+import {useDispatch} from 'react-redux';
+import {ComicActions} from '../../../../../../redux';
 
 const HeaderDetail = () => {
   const dataComicDetail = useAppSelector(getDetailComic);
+
   const data = dataComicDetail ? dataComicDetail[0] : null;
-  console.log(data);
 
   const styles = useStyles();
+
+  if (!data) {
+    return null;
+  }
 
   return (
     <ImageBackground
