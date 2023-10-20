@@ -1,6 +1,10 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {StyleSheet} from 'react-native';
 import {fontFamilySetup} from '../../../utils/font';
+import {Device} from '../../../utils';
+
+const WIDTH = Device.getDeviceWidth();
+const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
@@ -33,8 +37,18 @@ const useStyles = makeStyles(({colors}) => ({
     borderRadius: normalize(25),
     borderColor: colors.borderColorLogin,
   },
-  view3: {
-    width: normalize(30),
+  viewUnderLine: {
+    width: '30%',
+    height: normalize(0.8),
+    backgroundColor: colors.grey4,
+  },
+  textOSIW: {
+    width: '40%',
+    alignSelf: 'center',
+    fontFamily: fontFamilySetup.medium,
+    fontSize: normalize(15),
+    textAlign: 'center',
+    color: colors.grey4,
   },
   line: {
     width: '100%',
@@ -47,7 +61,6 @@ const useStyles = makeStyles(({colors}) => ({
     height: normalize(0.8),
     marginTop: normalize(10),
     backgroundColor: colors.backgroundViewWidth,
-    marginHorizontal: normalize(4),
   },
   title: {
     fontFamily: fontFamilySetup.bold,
@@ -72,63 +85,121 @@ const useStyles = makeStyles(({colors}) => ({
   },
   formContainer: {
     flex: 1,
+    marginTop: normalize(32),
   },
   titleInput: {
-    fontSize: normalize(14),
+    fontSize: normalize(15),
     fontFamily: fontFamilySetup.bold,
     color: colors.black,
     letterSpacing: normalize(0.2),
     marginTop: normalize(10),
   },
+  viewCBFP: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: normalize(3),
+  },
+  viewUO: {
+    flex: 1,
+    width: '100%',
+    paddingHorizontal: normalize(6),
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  viewNR: {
+    flex: 2,
+    flexDirection: 'row',
+    alignSelf: 'center',
+  },
+  viewBtnGoogle: {
+    flex: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  textNot: {
+    textAlign: 'center',
+    fontSize: normalize(16),
+    color: colors.grey4,
+    fontFamily: fontFamilySetup.medium,
+  },
+  textCA: {
+    marginLeft: normalize(6),
+    textAlign: 'center',
+    fontSize: normalize(16),
+    color: colors.primary,
+    fontFamily: fontFamilySetup.bold,
+  },
   checkbox: {
-    marginLeft: normalize(-20),
+    marginTop: normalize(-12),
+    marginLeft: normalize(-19),
   },
   textCheckbox: {
     marginLeft: normalize(2),
     marginTop: normalize(-2),
-    fontFamily: fontFamilySetup.thin,
-    fontSize: normalize(14),
+    fontFamily: fontFamilySetup.medium,
+    fontSize: normalize(15),
     color: colors.black,
   },
   color: {
     color: colors.primary,
     fontSize: normalize(15),
-    fontFamily: fontFamilySetup.bold,
+    fontFamily: fontFamilySetup.medium,
     letterSpacing: normalize(0.2),
-    borderBottomColor: colors.primary,
-    borderBottomWidth: 0.8,
+    fontStyle: 'italic',
+    textDecorationLine: 'underline',
   },
-  text: {
-    fontFamily: fontFamilySetup.regular,
-    fontSize: normalize(14),
-    color: colors.black,
-    letterSpacing: normalize(0.2),
+  marginError: {
+    marginBottom: normalize(15),
   },
   optionView: {
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-end',
+    marginTop: normalize(-12),
+    marginRight: normalize(9),
   },
   backgroundcolor: {
     color: colors.primary,
   },
   button: {
+    width: '100%',
+    alignItems: 'center',
     borderRadius: normalize(30),
     paddingVertical: normalize(8),
     paddingHorizontal: normalize(24),
   },
-  bottom: {
-    flex: 1,
-    alignItems: 'flex-end',
+  buttonGG: {
+    width: '100%',
+    height: normalize(HEIGHT * 0.058),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: normalize(99),
+    borderWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
+    marginVertical: normalize(HEIGHT * 0.01),
+  },
+  viewBtnLogin: {
+    flex: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   btnFP: {
+    width: 'auto',
+    height: normalize(24),
     marginVertical: normalize(15),
   },
   btnSignIn: {
     color: colors.whiteDefault,
   },
   Headers: {
-    marginTop: normalize(16),
+    marginTop: normalize(24),
+  },
+  backgroundColorsWhite: {
+    backgroundColor: colors.whiteDefault,
+  },
+  buttonText: {
+    fontSize: normalize(16),
+    fontFamily: fontFamilySetup.medium,
+    letterSpacing: normalize(0.2),
+    color: colors.blackDefault,
   },
 }));
 export default useStyles;

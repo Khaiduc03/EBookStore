@@ -1,7 +1,7 @@
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeLatest} from 'redux-saga/effects';
 import {routes} from '../../constants';
-import {navigationRef, NavigationService} from '../../navigation';
+import {NavigationService} from '../../navigation';
 import {CustomToastBottom, showToastError, showToastSuccess} from '../../utils';
 import {GoogleService} from '../../utils/google';
 import {AuthActions, LoadingActions} from '../reducer';
@@ -167,7 +167,7 @@ function* deleteAvatarUser(): Generator {
     } else if (data.code === 400) {
       showToastError(data.message);
     } else {
-      showToastError('Pless check your connection');
+      showToastError('Please check your connection');
     }
   } catch (error: any) {
     console.log('Have error at get profile saga: ' + error.message);
@@ -190,10 +190,10 @@ function* updateUserProfile(action: PayloadAction<any>): Generator {
     } else if (data.code === 400) {
       showToastError(data.message);
     } else {
-      showToastError('Pless check your connection');
+      showToastError('Please check your connection');
     }
   } catch (error: any) {
-    console.log('Pless check your connection' + error);
+    console.log('Please check your connection' + error);
   } finally {
     yield put(LoadingActions.hideLoading());
   }

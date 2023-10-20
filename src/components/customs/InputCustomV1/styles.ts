@@ -15,14 +15,15 @@ const useStyles = makeStyles(({colors}) => ({
     marginBottom: normalize(10),
   },
   inputContainer: {
-    borderBottomWidth: normalize(1),
-    borderColor: colors.primary,
-  },
-  inputContainerFocus: {
     borderBottomWidth: normalize(0.5),
     borderColor: colors.primary,
   },
+  inputContainerFocus: {
+    borderBottomWidth: normalize(0.8),
+    borderColor: colors.primary,
+  },
   input: {
+    paddingLeft: normalize(0),
     fontSize: normalize(15),
     fontFamily: fontFamilySetup.regular,
     letterSpacing: normalize(0.3),
@@ -44,6 +45,7 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.primary,
   },
   errorStyle: {
+    marginLeft: normalize(-1),
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.regular,
     color: colors.red,

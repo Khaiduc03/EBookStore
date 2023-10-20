@@ -1,33 +1,22 @@
-import * as React from "react"
-import Svg, {
-  SvgProps,
-  Path,
-  Defs,
-  Pattern,
-  Use,
-  Image,
-} from "react-native-svg"
-import { memo } from "react"
-import { Device } from '../../utils';
+import * as React from 'react';
+import Svg, {SvgProps, Path, Defs, Pattern, Use, Image} from 'react-native-svg';
+import {memo} from 'react';
+import {Device} from '../../../utils';
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 const SvgComponent = (props: SvgProps) => (
   <Svg
-    xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
     width={WIDTH}
-    height={HEIGHT*0.4}
+    height={HEIGHT * 0.4}
     fill="none"
-    {...props}
-  >
+    {...props}>
     <Path fill="url(#a)" d="M0 0h426v441H0z" />
     <Defs>
       <Pattern
         id="a"
         width={1}
         height={1}
-        patternContentUnits="objectBoundingBox"
-      >
+        patternContentUnits="objectBoundingBox">
         <Use xlinkHref="#b" transform="matrix(.00173 0 0 .00167 -.19 0)" />
       </Pattern>
       <Image
@@ -38,6 +27,6 @@ const SvgComponent = (props: SvgProps) => (
       />
     </Defs>
   </Svg>
-)
-const Memo = memo(SvgComponent)
-export default Memo
+);
+const Memo = memo(SvgComponent);
+export default Memo;

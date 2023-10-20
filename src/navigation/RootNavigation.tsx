@@ -39,6 +39,7 @@ const RootNavigation = () => {
         barStyle={themeMode}
       />
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
+      {/* <LoginScreen /> */}
       {/* <AppNavigator /> */}
       {/* <Slider/> */}
       {/* <AuthNavigator /> */}

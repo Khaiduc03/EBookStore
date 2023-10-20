@@ -14,7 +14,7 @@ const useStyles = makeStyles(({colors}) => ({
   textChat: {
     fontSize: normalize(18),
     fontFamily: fontFamilySetup.bold,
-    color: colors.white,
+    color: colors.black,
   },
 }));
 
