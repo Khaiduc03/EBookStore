@@ -14,6 +14,20 @@ const useStyles = makeStyles(({colors}) => ({
     flex: 1,
     padding: normalize(24),
   },
+  Headers: {
+    marginTop: normalize(24),
+    marginBottom: normalize(35),
+  },
+  marginError: {
+    marginBottom: normalize(14),
+  },
+  titleInput: {
+    fontSize: normalize(15),
+    fontWeight: '500',
+    fontFamily: 'Urbanist-Bold',
+    color: colors.black,
+    letterSpacing: normalize(0.2),
+  },
   text2: {
     marginTop: normalize(8),
     color: colors.black,
@@ -22,16 +36,35 @@ const useStyles = makeStyles(({colors}) => ({
     lineHeight: normalize(22.4),
     letterSpacing: normalize(0.2),
   },
+  viewCBFP: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: normalize(3),
+  },
   checkbox: {
-    marginTop: normalize(-9),
-    marginLeft: normalize(-20),
+    marginTop: normalize(-12),
+    marginLeft: normalize(-19),
   },
   textCheckbox: {
     marginLeft: normalize(2),
     marginTop: normalize(-2),
-    fontFamily: fontFamilySetup.thin,
-    fontSize: normalize(14),
+    fontFamily: fontFamilySetup.medium,
+    fontSize: normalize(15),
     color: colors.black,
+  },
+  viewBtnLogin: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    width: '100%',
+    alignItems: 'center',
+    borderRadius: normalize(30),
+    paddingVertical: normalize(8),
+    paddingHorizontal: normalize(24),
+  },
+  formContainer: {
+    flex: 1,
   },
   textRM: {
     marginLeft: normalize(-10),

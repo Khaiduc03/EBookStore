@@ -1,11 +1,11 @@
 import {routes} from '../../constants';
 import {Screen} from '../../types';
-import CreateAccount from './create-account';
+import CreateAccountScreen from './create-account';
 import CreateNewPassword from './create-new-password';
-import ForgotPassword from './forgot-password';
+import ForgotPasswordScreen from './forgot-password';
 import LobbyScreen from './lobby';
 import Slider from './onboard';
-import SendOTP from './send-otp';
+import SendOTPScreen from './send-otp';
 import LoginScreen from './sign-in';
 import UpdateProfileScreen from './update-profile';
 
@@ -16,7 +16,7 @@ export const authScreen: Screen[] = [
   },
   {
     name: routes.CREATE_ACCOUNT,
-    component: CreateAccount,
+    component: CreateAccountScreen,
   },
   {
     name: routes.LOBBY,
@@ -32,11 +32,11 @@ export const authScreen: Screen[] = [
   },
   {
     name: routes.FORGOT_PASSWORD,
-    component: ForgotPassword,
+    component: ForgotPasswordScreen,
   },
   {
     name: routes.SEND_OTP,
-    component: SendOTP,
+    component: SendOTPScreen,
   },
   {
     name: routes.CREATE_NEW_PASSWORD,

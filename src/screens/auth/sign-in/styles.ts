@@ -119,7 +119,7 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.bold,
   },
   checkbox: {
-    marginTop: normalize(-12),
+    marginTop: normalize(2),
     marginLeft: normalize(-19),
   },
   textCheckbox: {

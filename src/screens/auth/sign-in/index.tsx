@@ -124,7 +124,7 @@ const LoginScreen: FunctionComponent = () => {
                 <View style={styles.marginOriginal}>
                   <Text style={styles.titleInput}>Email</Text>
                   <InputCustomV1
-                    placeholder="Enter your email"
+                    placeholder="Enter your email address"
                     value={credentials.email}
                     onChangeText={text =>
                       setCredentials({...credentials, email: text})
