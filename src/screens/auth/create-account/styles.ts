@@ -10,7 +10,10 @@ const useStyles = makeStyles(({colors}) => ({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.background,
   },
-
+  Headers: {
+    marginTop: normalize(24),
+    marginBottom: normalize(35),
+  },
   body: {
     flex: 1,
     padding: normalize(24),

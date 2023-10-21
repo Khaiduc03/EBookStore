@@ -11,7 +11,7 @@ const AuthHeaderV1: React.FunctionComponent<AuthProps> = props => {
     <View style={styles.container}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         {props.title && <Text style={styles.title}>{props.title}</Text>}
-        {props.avatar && <ProfileImage fill={styles.avatarColor.color} />}
+        {props.avatar && props.avatar}
       </View>
 
       <View style={{flexDirection: 'row'}}>

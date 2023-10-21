@@ -5,6 +5,6 @@ export type AuthProps = {
   titleIcon?: boolean;
   subTitle?: string;
   titleComicverse?: string;
-  avatar?: boolean;
+  avatar?: React.ReactNode;
   onPress?: () => void;
 };

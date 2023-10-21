@@ -22,6 +22,7 @@ import {AuthActions} from '../../../redux/reducer';
 import {isValidEmail, isValidPassword} from '../../../utils';
 import useStyles from './styles';
 import {GoogleIcon} from '../../../assets/icons';
+import {ProfileImage} from '../../../assets/svg';
 
 const LoginScreen: FunctionComponent = () => {
   const styles = useStyles();
@@ -103,7 +104,7 @@ const LoginScreen: FunctionComponent = () => {
           <View style={styles.Headers}>
             <AuthHeaderV1
               title="Login Account"
-              avatar={true}
+              avatar={<ProfileImage />}
               subTitle="Welcome back to "
               titleComicverse="Comic Verse"
               onPress={() => {
@@ -115,7 +116,7 @@ const LoginScreen: FunctionComponent = () => {
           <View style={styles.body}>
             <View style={styles.formContainer}>
               {isCheckValidateEmail ? (
-                <View>
+                <View style={styles.marginOriginal}>
                   <Text style={styles.titleInput}>Email</Text>
                   <InputCustomV1
                     placeholder="Enter your email"

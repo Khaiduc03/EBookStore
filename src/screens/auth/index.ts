@@ -1,5 +1,5 @@
-import { routes } from '../../constants';
-import { Screen } from '../../types';
+import {routes} from '../../constants';
+import {Screen} from '../../types';
 import CreateAccount from './create-account';
 import CreateNewPassword from './create-new-password';
 import ForgotPassword from './forgot-password';

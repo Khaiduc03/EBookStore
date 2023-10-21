@@ -23,8 +23,12 @@ import {
 } from '../../../utils';
 import useStyles from './styles';
 import InputCustomV1 from '../../../components/customs/InputCustomV1';
+import {ProfileImage} from '../../../assets/svg';
+import AuthHeaderV1 from '../../../components/customs/AuthHeaderV1';
+import {GoogleIcon} from '../../../assets/icons';
+import {TextInput} from 'react-native-gesture-handler';
 
-const CreateAccount: FunctionComponent = () => {
+const CreateAccountScreen: FunctionComponent = () => {
   const styles = useStyles();
 
   const [checked, setChecked] = React.useState<boolean>(false);
@@ -41,51 +45,7 @@ const CreateAccount: FunctionComponent = () => {
     comfirmPassword: '',
   });
 
-  const [inputErrors, setInputErrors] = React.useState<{
-    email: boolean;
-    password: boolean;
-    comfirmPassword: boolean;
-  }>({
-    email: false,
-    password: false,
-    comfirmPassword: false,
-  });
-
   const handleCreateAccount = async () => {
-    const emailIsValid = isValidEmail(credentials.email);
-    const passwordIsValid = isValidPassword(credentials.password);
-    const comfirmPasswordIsValid = comparePassword(
-      credentials.password,
-      credentials.comfirmPassword,
-    );
-    setInputErrors({
-      email: !emailIsValid,
-      password: !passwordIsValid,
-      comfirmPassword: !comfirmPasswordIsValid,
-    });
-    if (
-      credentials.email.length === 0 ||
-      credentials.password.length === 0 ||
-      credentials.comfirmPassword.length === 0
-    ) {
-      showToastError('Please enter full information');
-
-      return;
-    }
-
-    if (!emailIsValid) {
-      showToastError('Please enter the correct email format');
-      return;
-    }
-    if (!comfirmPasswordIsValid) {
-      showToastError('Password must be more than 6 characters');
-      return;
-    }
-    if (!passwordIsValid) {
-      showToastError('Confirm password does not match');
-      return;
-    }
-
     dispatch(
       AuthActions.handleCreateAccount({
         email: credentials.email,
@@ -111,11 +71,15 @@ const CreateAccount: FunctionComponent = () => {
               }}
             />
 
-            <AuthHeader
-              title="Create an account 🔐"
-              subTitle="Enter your  username, email & password. If you forget it, then you have to do forgot password."
-            />
+            <View style={styles.Headers}>
+              <AuthHeaderV1
+                title="Create Account "
+                subTitle="You can create an account, and after that, you will be able to log in to our official application."
+                avatar={<ProfileImage />}
+              />
+            </View>
 
+            <TextInput style={{borderWidth: 1}} />
             <View style={styles.formContainer}>
               <Text style={styles.titleInput}>Email</Text>
               <InputCustomV1
@@ -124,7 +88,6 @@ const CreateAccount: FunctionComponent = () => {
                 onChangeText={text =>
                   setCredentials({...credentials, email: text})
                 }
-                style={inputErrors.email ? styles.errorInput : null}
               />
               <Text style={styles.titleInput}>Password</Text>
               <InputCustomV1
@@ -134,7 +97,6 @@ const CreateAccount: FunctionComponent = () => {
                 onChangeText={text =>
                   setCredentials({...credentials, password: text})
                 }
-                style={inputErrors.password ? styles.errorInput : null}
               />
               <Text style={styles.titleInput}>Confirm Password</Text>
               <InputCustomV1
@@ -144,7 +106,6 @@ const CreateAccount: FunctionComponent = () => {
                 onChangeText={text =>
                   setCredentials({...credentials, comfirmPassword: text})
                 }
-                style={inputErrors.comfirmPassword ? styles.errorInput : null}
               />
               <View style={styles.checkbox}>
                 <CheckBox
@@ -170,4 +131,4 @@ const CreateAccount: FunctionComponent = () => {
   );
 };
 
-export default CreateAccount;
+export default CreateAccountScreen;

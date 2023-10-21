@@ -38,29 +38,17 @@ const useStyles = makeStyles(({colors}) => ({
     borderColor: colors.borderColorLogin,
   },
   viewUnderLine: {
-    width: '30%',
+    width: normalize(WIDTH * 0.26),
     height: normalize(0.8),
     backgroundColor: colors.grey4,
   },
   textOSIW: {
-    width: '40%',
+    width: normalize(WIDTH * 0.3),
     alignSelf: 'center',
     fontFamily: fontFamilySetup.medium,
     fontSize: normalize(15),
     textAlign: 'center',
     color: colors.grey4,
-  },
-  line: {
-    width: '100%',
-    height: normalize(0.8),
-    marginTop: normalize(10),
-    backgroundColor: colors.backgroundViewWidth,
-  },
-  linehafl: {
-    width: '33%',
-    height: normalize(0.8),
-    marginTop: normalize(10),
-    backgroundColor: colors.backgroundViewWidth,
   },
   title: {
     fontFamily: fontFamilySetup.bold,
@@ -101,9 +89,9 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewUO: {
     flex: 1,
-    width: '100%',
-    paddingHorizontal: normalize(6),
+    width: 'auto',
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   viewNR: {
@@ -148,13 +136,15 @@ const useStyles = makeStyles(({colors}) => ({
     fontStyle: 'italic',
     textDecorationLine: 'underline',
   },
+  marginOriginal: {
+    marginBottom: normalize(-6),
+  },
   marginError: {
-    marginBottom: normalize(15),
+    marginBottom: normalize(12),
   },
   optionView: {
     alignItems: 'flex-end',
     marginTop: normalize(-12),
-    marginRight: normalize(9),
   },
   backgroundcolor: {
     color: colors.primary,
