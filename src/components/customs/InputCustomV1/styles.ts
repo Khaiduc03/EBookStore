@@ -3,7 +3,7 @@ import {fontFamilySetup} from '../../../utils/font';
 import {Device} from '../../../utils';
 
 const WIDTH = Device.getDeviceWidth();
-const HEGHIT = Device.getDeviceHeight();
+const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {

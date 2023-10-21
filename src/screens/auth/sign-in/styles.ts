@@ -96,6 +96,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewNR: {
     flex: 2,
+    marginTop: normalize(20),
     flexDirection: 'row',
     alignSelf: 'center',
   },
@@ -140,7 +141,7 @@ const useStyles = makeStyles(({colors}) => ({
     marginBottom: normalize(-6),
   },
   marginError: {
-    marginBottom: normalize(12),
+    marginBottom: normalize(14),
   },
   optionView: {
     alignItems: 'flex-end',

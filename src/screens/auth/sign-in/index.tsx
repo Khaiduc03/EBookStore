@@ -1,4 +1,9 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 
 import {
   Keyboard,
@@ -219,6 +224,8 @@ const LoginScreen: FunctionComponent = () => {
                     style={{height: 26}}
                     onPress={() => {
                       NavigationService.navigate(routes.CREATE_ACCOUNT);
+                      setIsCheckValidateEmail(true);
+                      setIsCheckValidatePassword(true);
                     }}>
                     <Text style={styles.textCA}>Create Account</Text>
                   </TouchableOpacity>

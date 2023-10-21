@@ -1,6 +1,7 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {StyleSheet} from 'react-native';
 import {Device} from '../../../utils';
+import {fontFamilySetup} from '../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
@@ -87,6 +88,24 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  textGender: {
+    fontFamily: fontFamilySetup.bold,
+    fontSize: normalize(12),
+    color: colors.black,
+    letterSpacing: normalize(0.2),
+  },
+  iconDateColor: {
+    color: colors.primary,
+  },
+  Headers: {
+    marginTop: normalize(24),
+  },
+  viewImageProfile: {
+    marginVertical: normalize(24),
+  },
+  marginError: {
+    marginBottom: normalize(14),
   },
 }));
 export default useStyles;

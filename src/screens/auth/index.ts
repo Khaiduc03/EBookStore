@@ -7,7 +7,7 @@ import LobbyScreen from './lobby';
 import Slider from './onboard';
 import SendOTP from './send-otp';
 import LoginScreen from './sign-in';
-import UpdateProfile from './update-profile';
+import UpdateProfileScreen from './update-profile';
 
 export const authScreen: Screen[] = [
   {
@@ -24,7 +24,7 @@ export const authScreen: Screen[] = [
   },
   {
     name: routes.UPDATE_PROFILE,
-    component: UpdateProfile,
+    component: UpdateProfileScreen,
   },
   {
     name: routes.ONBOARD,

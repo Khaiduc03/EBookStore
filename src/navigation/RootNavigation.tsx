@@ -9,6 +9,8 @@ import LoginScreen from '../screens/auth/sign-in';
 import {navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
+import ProfileUser from '../screens/main/profile/Profile-User';
+import UpdateProfileScreen from '../screens/auth/update-profile';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -39,11 +41,7 @@ const RootNavigation = () => {
         barStyle={themeMode}
       />
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
-      {/* <LoginScreen /> */}
-      {/* <AppNavigator /> */}
-      {/* <Slider/> */}
-      {/* <AuthNavigator /> */}
-      {/* <LoginScreen /> */}
+      {/* <UpdateProfileScreen /> */}
     </NavigationContainer>
   );
 };
