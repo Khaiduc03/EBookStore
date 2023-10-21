@@ -46,7 +46,8 @@ export type User = uuid &
     summary: string;
     status: boolean;
     device_token: string;
-    avatar: Avatar;
+    image_url: string;
+    public_id: string;
     isUpdate: boolean;
     isPassword: boolean;
     wallet: string;

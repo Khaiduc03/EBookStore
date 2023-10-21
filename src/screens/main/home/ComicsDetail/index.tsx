@@ -6,20 +6,23 @@ import {Episodes, HeaderDetail, Preview} from './Components';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {useRoute} from '@react-navigation/native';
-import {useAppDispatch} from '../../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {ComicActions} from '../../../../redux';
+import {getDetailComic} from '../../../../redux/selectors/comic.selector';
 
 interface RouteParamsIdComic {
   uuid: string;
 }
 
 const ComicsDetail = () => {
-  const dispath = useAppDispatch();
+  const dispatch = useAppDispatch();
   const route = useRoute();
   const uuidComic = (route.params as RouteParamsIdComic).uuid;
+
   useEffect(() => {
-    dispath(ComicActions.getDetailComic(uuidComic));
-  }, []);
+    dispatch(ComicActions.getDetailComic(uuidComic));
+    dispatch(ComicActions.getListChapter(uuidComic));
+  }, [uuidComic]);
 
   const styles = useStyles();
   const handlePressBack = () => {

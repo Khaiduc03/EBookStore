@@ -4,7 +4,7 @@ import ItemListProfile from '../../../../../../components/customs/ItemListProfil
 import {routes} from '../../../../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {NavigationService} from '../../../../../../navigation';
-import {AuthActions} from '../../../../../../redux/reducer';
+import {AuthActions, ComicActions} from '../../../../../../redux/reducer';
 import {getAuthEnableSignIn} from '../../../../../../redux/selectors/auth.selector';
 import useStyles from './styles';
 

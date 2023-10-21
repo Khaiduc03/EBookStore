@@ -13,12 +13,6 @@ import {getListTopic} from '../../../../redux/selectors/topic.selector';
 const gap = 16;
 
 const Topics: React.FunctionComponent = () => {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(TopicActions.getListTopic());
-  }, []);
-
   const dataTopic = useAppSelector(getListTopic);
 
   const handlePressSearch = () => {
@@ -37,7 +31,7 @@ const Topics: React.FunctionComponent = () => {
       image={item.image_url}
       containerStyle={styles.itemContainer}
       index={index}
-      //hihi
+      uuid={item.uuid}
     />
   );
   return (

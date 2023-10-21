@@ -4,9 +4,10 @@ import {routes} from '../../constants';
 import {navigationRef, NavigationService} from '../../navigation';
 import {CustomToastBottom, showToastError, showToastSuccess} from '../../utils';
 import {GoogleService} from '../../utils/google';
-import {AuthActions, LoadingActions} from '../reducer';
+import {AuthActions, ComicActions, LoadingActions} from '../reducer';
 import {AuthService, UserService} from '../services';
 import {LoginPayload, NewPasswordPayload, SendOTPPayload} from '../types';
+import {useAppDispatch} from '../../hooks';
 
 //login
 function* loginSaga(action: PayloadAction<LoginPayload>): Generator {
@@ -31,6 +32,7 @@ function* loginSaga(action: PayloadAction<LoginPayload>): Generator {
           enableSignIn: true,
         }),
       );
+
       showToastSuccess(data.message);
     } else if (data.code === 400) {
       showToastError(data.message);

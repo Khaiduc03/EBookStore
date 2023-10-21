@@ -10,6 +10,11 @@ const useStyles = makeStyles(({colors}) => ({
     // marginRight: normalize(10),
     // paddingLeft: 10,
   },
+  textTitle: {
+    fontSize: normalize(18),
+    fontFamily: fontFamilySetup.bold,
+    color: colors.black,
+  },
 }));
 
 export default useStyles;

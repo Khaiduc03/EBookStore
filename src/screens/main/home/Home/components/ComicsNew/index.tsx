@@ -2,23 +2,17 @@ import {StyleSheet, Text, View, FlatList} from 'react-native';
 import React, {useEffect} from 'react';
 import useStyles from './style';
 import {ComicItem} from '../../../../../../components';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
-import {ComicActions} from '../../../../../../redux';
-import {ComicType} from '../../../../../../redux';
-import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
-import {getListComic} from '../../../../../../redux/selectors/comic.selector';
+import {ComicActions, ComicType} from '../../../../../../redux';
 
-const ComicsNew = ({numCols}: {numCols: number}) => {
-  const number = numCols;
+const ComicsNew = ({numCols, data}: {numCols: number; data: ComicType[]}) => {
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
     <ComicItem
       data={item}
-      viewStyle={number == 1 ? styles.comicItem : null}
-      imageStyle={number == 1 ? styles.imgComic : null}
-      contentStyle={number == 1 ? styles.content : null}
+      viewStyle={numCols == 1 ? styles.comicItem : null}
+      imageStyle={numCols == 1 ? styles.imgComic : null}
+      contentStyle={numCols == 1 ? styles.content : null}
       index={index}
-      topicStyle={number == 1 ? styles.topicsContainer : null}
+      topicStyle={numCols == 1 ? styles.topicsContainer : null}
     />
   );
   const styles = useStyles();
@@ -26,7 +20,7 @@ const ComicsNew = ({numCols}: {numCols: number}) => {
     <View style={styles.container}>
       <FlatList
         columnWrapperStyle={numCols === 3 ? {gap: 5} : null}
-        data={[]}
+        data={data}
         renderItem={RenderItem}
         keyExtractor={item => item.uuid.toString()}
         showsVerticalScrollIndicator={false}
