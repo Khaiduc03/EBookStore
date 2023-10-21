@@ -32,7 +32,6 @@ const Topics: React.FunctionComponent = () => {
       containerStyle={styles.itemContainer}
       index={index}
       uuid={item.uuid}
-      //hihi
     />
   );
   return (

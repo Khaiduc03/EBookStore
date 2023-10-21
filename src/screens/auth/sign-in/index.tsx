@@ -20,7 +20,7 @@ import InputCustomV1 from '../../../components/customs/InputCustomV1';
 import {routes} from '../../../constants';
 import {useAppDispatch} from '../../../hooks';
 import {NavigationService} from '../../../navigation';
-import {AuthActions} from '../../../redux/reducer';
+import {AuthActions, ComicActions} from '../../../redux/reducer';
 import {AlertActions} from '../../../redux/reducer/alert.reducer';
 import useStyles from './styles';
 import {FacebookIcon, GoogleIcon} from '../../../assets/icons';
@@ -56,6 +56,7 @@ const SignIn: FunctionComponent = () => {
         device_token: '1234567890',
       }),
     );
+    dispatch(ComicActions.clearListData());
   };
 
   const onPress = () => {
@@ -80,6 +81,7 @@ const SignIn: FunctionComponent = () => {
         device_token: '1234567890',
       }),
     );
+    dispatch(ComicActions.clearListData());
   };
 
   return (

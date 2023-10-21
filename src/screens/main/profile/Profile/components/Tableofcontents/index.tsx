@@ -13,7 +13,6 @@ const TableofContent: FunctionComponent = props => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
   const handleLogout = () => {
     dispatch(AuthActions.handleLogout());
-    dispatch(ComicActions.clearListData());
   };
 
   const darkModeStyles = {
