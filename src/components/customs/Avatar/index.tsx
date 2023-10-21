@@ -173,8 +173,8 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
             rounded
             source={{
               uri:
-                user.avatar?.url ||
-                'https://res.cloudinary.com/dohynhgvm/image/upload/f_auto,q_auto/cld-sample',
+                user?.image_url ||
+                'https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg?w=1060&t=st=1697884276~exp=1697884876~hmac=8ae3b1ba19610030b247f24a1f8a03452924b22a72ebf3b5a8d4755defcd26f6',
             }}
           />
 
@@ -253,8 +253,8 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
             rounded
             source={{
               uri:
-                user.avatar?.url ||
-                'https://res.cloudinary.com/dohynhgvm/image/upload/f_auto,q_auto/cld-sample',
+                user.image_url ||
+                'https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg?w=1060&t=st=1697884276~exp=1697884876~hmac=8ae3b1ba19610030b247f24a1f8a03452924b22a72ebf3b5a8d4755defcd26f6',
             }}
           />
         </AnimatedView>
