@@ -19,3 +19,6 @@ export const getDataAllChapter = (state: RootState) =>
 
 export const getDataDetailChapter = (state: RootState) =>
   state.comic.listDetailChapter?.data;
+
+export const getDataComicBySeacrh = (state: RootState) =>
+  state.comic.listDataBySearch?.data;

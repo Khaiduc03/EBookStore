@@ -11,33 +11,18 @@ import {
   getDataByTopic,
   getDataAllChapter,
   getDataDetailChapter,
+  getDataComicBySeacrh,
 } from '../../../../redux/selectors/comic.selector';
 import {ComicActions, TopicActions} from '../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {backScreen} from '../../../../utils';
-import {getListTopic} from '../../../../redux/selectors/topic.selector';
-import {TopicType} from '../../../../redux';
 
 const Search = () => {
   const dispatch = useAppDispatch();
-  const dataComic = useAppSelector(getListComic);
-  const dataTopic = useAppSelector(getListTopic);
-  const dataComicDetail = useAppSelector(getDetailComic);
-  const dataByTopic = useAppSelector(getDataByTopic);
-
-  const dataChapter = useAppSelector(getDataAllChapter);
-
-  const dataDetailChapter = useAppSelector(getDataDetailChapter);
+  const dataBySearch = useAppSelector(getDataComicBySeacrh);
 
   const styles = useStyles();
   const [search, setSearch] = useState('');
-
-  const handlePressSearch = () => {
-    NavigationService.navigate(routes.TOPICS);
-  };
-  const handlePress = (id: string) => {
-    dispatch(ComicActions.getDetailComic(id));
-  };
 
   return (
     <View style={styles.container}>
@@ -51,25 +36,16 @@ const Search = () => {
           />
         </TouchableOpacity>
         <View style={styles.search}>
-          <SearchCustom
-            setValue={setSearch}
-            value={search}
-            onPress={handlePressSearch}
-          />
+          <SearchCustom setValue={setSearch} value={search} />
         </View>
       </View>
       <TouchableOpacity
         onPress={() =>
-          dispatch(
-            ComicActions.getListChapter('2b79b1a0-9251-410b-9db5-6ebc7e700c18'),
-          )
+          dispatch(ComicActions.getListBySearch({key: 'a', page: 1}))
         }>
-        <Text style={{fontSize: 40}}>GETCHAPTER</Text>
+        <Text style={{fontSize: 40}}>GETSEARCH</Text>
       </TouchableOpacity>
-      {/* <TouchableOpacity onPress={() => dispatch(TopicActions.getListTopic())}>
-        <Text style={{fontSize: 40}}>GETTOPIC</Text>
-      </TouchableOpacity> */}
-      <Text>{JSON.stringify(dataChapter)}</Text>
+      <Text>{JSON.stringify(dataBySearch)}</Text>
     </View>
   );
 };

@@ -28,4 +28,10 @@ export class ComicService {
   static async getChapterById(action: string) {
     return await apiService.get(`${ENDPOINTS.CHAPTER_UUID}${action}`);
   }
+
+  static async getComicBySearch(action: any) {
+    return await apiService.get(
+      `${ENDPOINTS.COMIC_BY_NAME}?comic_name=${action.key}&page=${action.page}`,
+    );
+  }
 }

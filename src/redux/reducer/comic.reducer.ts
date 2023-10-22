@@ -120,6 +120,23 @@ const reducer = createSlice({
         },
       };
     },
+
+    getListBySearch: (state: ComicState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+    setListBySeacrch: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpList<ComicType>>,
+    ) => {
+      return {
+        ...state,
+        listDataBySearch: {
+          data: action.payload.data,
+        },
+      };
+    },
   },
 });
 

@@ -26,6 +26,7 @@ export interface PayloadHttpListChapter<T> {
 export type ComicState = Partial<{
   listData: PayloadHttpListComics<ComicType>;
   listDataByTopic: PayloadHttpList<ComicType>;
+  listDataBySearch: PayloadHttpList<ComicType>;
   topic: PayloadHttpList<TopicType>;
   detailData: PayloadHttpList<ComicDetailType>;
   listDetailChapter: PayloadHttpList<DetailChapterType>;
