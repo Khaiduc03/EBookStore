@@ -10,7 +10,7 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
     fontSize: normalize(20),
     fontFamily: fontFamilySetup.bold,
-    paddingVertical: 20,
+    paddingVertical: normalize(20),
   },
   textInput: {
     color: colors.black,
@@ -34,10 +34,6 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewbtn: {
     padding: normalize(20),
-  },
-  errorText: {
-    fontSize: 30,
-    color: 'red',
   },
 }));
 export default useStyles;
