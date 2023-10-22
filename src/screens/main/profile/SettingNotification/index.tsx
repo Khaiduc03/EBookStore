@@ -9,7 +9,7 @@ import Switch_custom from '../../../../components/customs/Switch';
 const SettingNotification: React.FC = () => {
   const styles = useStyles();
   const handlePressGoback = () => {
-    NavigationService.navigate(routes.PROFILE);
+    NavigationService.goBack();
   };
   return (
     <View style={styles.container}>

@@ -10,7 +10,7 @@ import {ItemFollow, ItemListMyProfile, ItemPost} from './components';
 const MyProfile: React.FC = props => {
   const styles = useStyles();
   const handlePressGoback = () => {
-    NavigationService.navigate(routes.PROFILE);
+    NavigationService.goBack();
   };
   const handlePressGoScreen = () => {
     NavigationService.navigate(routes.UPDATE_PROFILE2);

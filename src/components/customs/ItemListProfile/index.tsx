@@ -1,6 +1,6 @@
 import {Avatar, Icon, Switch} from '@rneui/themed';
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {ThemeActions} from '../../../redux';
 import {getMode} from '../../../redux/selectors/thems.selector';
@@ -17,6 +17,7 @@ const ItemListProfile: React.FC<CustomCirclerProps> = props => {
     color,
     switchRight,
     size,
+    onPressScreen,
   } = props;
   const styles = useStyles();
   const dispatch = useAppDispatch();
@@ -30,15 +31,10 @@ const ItemListProfile: React.FC<CustomCirclerProps> = props => {
     }
   };
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-      }}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+    <View style={styles.viewHeader}>
+      <View style={styles.viewicon}>
         <Avatar
-          size={42}
+          size={size}
           rounded
           icon={{name: name, type: type, color: color}}
           containerStyle={{backgroundColor: colorBackground}}
@@ -53,7 +49,12 @@ const ItemListProfile: React.FC<CustomCirclerProps> = props => {
         />
       )}
       {rightIcon && (
-        <Icon style={styles.rightIcon} name="caret-right" type="font-awesome" />
+        <Icon
+          style={styles.rightIcon}
+          name="right"
+          type="antdesign"
+          size={18}
+        />
       )}
     </View>
   );

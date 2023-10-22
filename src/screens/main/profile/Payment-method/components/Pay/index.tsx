@@ -23,7 +23,7 @@ const Pay: React.FC<PayProps> = props => {
 
   return (
     <View style={styles.payment}>
-      {icGoogle && <Memo width={64} height={64} viewBox="7 2 25 25" />}
+      {icGoogle && <Memo width={64} height={64} viewBox="7 2 25 50" />}
 
       {icPaypal && <Paypal width={64} height={64} viewBox="7 0 16 45" />}
       {icZaloPay && <ZaloPay width={64} height={64} viewBox="7 -130 16 345" />}

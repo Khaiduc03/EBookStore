@@ -1,1 +1,1 @@
-export {default as TableofContent} from './Tableofcontents';
+export {default as Itemlish} from './Itemlist';

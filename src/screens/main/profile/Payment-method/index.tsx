@@ -9,7 +9,7 @@ import {Pay} from './components';
 const Payments_method: React.FC = () => {
   const styles = useStyles();
   const handlePressGoback = () => {
-    NavigationService.navigate(routes.PROFILE);
+    NavigationService.goBack();
   };
 
   return (
