@@ -48,5 +48,8 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
     gap: normalize(20),
   },
+  iconLeftStyle: {
+    color: colors.black,
+  },
 }));
 export default useStyles;

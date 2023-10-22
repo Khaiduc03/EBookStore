@@ -12,7 +12,7 @@ import useStyles from './styles';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {AuthActions, getAuthUserProfile} from '../../../../redux';
 import {CustomToastBottom} from '../../../../utils';
-import {AuthHeader, Headers} from '../../../../components';
+import {AuthHeader, HeaderCustom, Headers} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import InputCustomV1 from '../../../../components/customs/InputCustomV1';
@@ -59,8 +59,8 @@ const ChangePassword: React.FC = () => {
       style={styles.container}>
       <View style={styles.wrapper}>
         <View style={styles.body}>
-          <Headers
-            leftIcon={true}
+          <HeaderCustom
+            leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
             onPressLeftIcon={() => NavigationService.goBack()}
           />
           <AuthHeader

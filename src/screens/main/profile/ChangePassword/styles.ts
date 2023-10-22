@@ -75,5 +75,8 @@ const useStyles = makeStyles(({colors}) => ({
     lineHeight: normalize(22.4),
     letterSpacing: normalize(0.2),
   },
+  iconLeftStyle: {
+    color: colors.black,
+  },
 }));
 export default useStyles;

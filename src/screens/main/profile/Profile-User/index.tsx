@@ -11,7 +11,7 @@ import {
   ItemPostUser,
 } from './components';
 import useStyles from './styles';
-import { theme } from '../../../../theme';
+import {theme} from '../../../../theme';
 
 const ProfileUser: React.FC = props => {
   const styles = useStyles();
@@ -32,7 +32,7 @@ const ProfileUser: React.FC = props => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="Profile User"
         onPressLeftIcon={handlePressGoback}
         rightIconRight={{name: 'ellipsis-vertical', type: 'ionicon'}}
@@ -49,7 +49,9 @@ const ProfileUser: React.FC = props => {
           style={[
             styles.btnFollow,
             {
-              backgroundColor: isFollowed ? theme?.lightColors?.blue : theme?.lightColors?.grey5,
+              backgroundColor: isFollowed
+                ? theme?.lightColors?.blue
+                : theme?.lightColors?.grey5,
             },
           ]}
           onPress={handleFollowButtonClick}>

@@ -69,9 +69,7 @@ const useStyles = makeStyles(({colors}) => ({
     borderWidth: normalize(1),
   },
   bottom: {
-    flex: normalize(1),
-    justifyContent: 'flex-end',
-    marginBottom: normalize(15),
+    marginBottom: normalize(70),
   },
   checkBoxContainer: {
     flexDirection: 'row',
@@ -91,6 +89,9 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: 'red',
     width: '100%',
     height: normalize(56),
+  },
+  iconLeftStyle: {
+    color: colors.black,
   },
 }));
 

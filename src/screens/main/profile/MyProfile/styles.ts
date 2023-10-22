@@ -30,5 +30,8 @@ const useStyles = makeStyles(({colors}) => ({
     borderColor: '#8a8a8a',
     marginTop: normalize(15),
   },
+  iconLeftStyle: {
+    color: colors.black,
+  },
 }));
 export default useStyles;

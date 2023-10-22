@@ -78,5 +78,8 @@ const useStyles = makeStyles(({colors}) => ({
   viewExplore: {
     paddingTop: normalize(18),
   },
+  iconLeftStyle: {
+    color: colors.black,
+  },
 }));
 export default useStyles;

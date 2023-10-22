@@ -17,5 +17,8 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.bold,
     color: colors.black,
   },
+  iconLeftStyle:{
+    color: colors.black
+  }
 }));
 export default useStyles;

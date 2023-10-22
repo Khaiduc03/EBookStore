@@ -26,7 +26,7 @@ const CustomerService: React.FC = () => {
     <View style={styles.container}>
       <HeaderCustom
         title="Customer Service"
-        leftIcon={{name: 'arrow-left', type: 'font-awesome'}}
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         onPressLeftIcon={handlePressGoBack}
       />
       <View style={{paddingHorizontal: 20}}>

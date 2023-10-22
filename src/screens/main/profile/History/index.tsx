@@ -13,7 +13,8 @@ const History: React.FC = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
+                leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
+
         title="History"
         onPressLeftIcon={handlePressGoback}
       />
