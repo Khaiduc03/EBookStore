@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   FlatList,
   Image,
+  TouchableWithoutFeedback,
+  TouchableHighlight,
 } from 'react-native';
 import {Device} from '../../../../utils';
 import useStyles from './styles';
@@ -22,7 +24,7 @@ interface RouteParamsIdChapter {
   uuid: string;
 }
 
-function ChapterDetail() {
+const ChapterDetail = () => {
   const dispath = useAppDispatch();
   const route = useRoute();
   const uuidChapter = (route.params as RouteParamsIdChapter).uuid;
@@ -69,24 +71,18 @@ function ChapterDetail() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={toggleHeaderFooter} activeOpacity={1}>
+      <TouchableHighlight onPress={toggleHeaderFooter} activeOpacity={1}>
         <FlatList
           data={dataDetailChapter}
           renderItem={renderItem}
           showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => index.toString()}
-          onScroll={() => {
-            if (showHeader || showFooter) {
-              setShowHeader(false);
-              setShowFooter(false);
-            }
-          }}
         />
-      </TouchableOpacity>
+      </TouchableHighlight>
       {renderHeader()}
       {renderFooter()}
     </View>
   );
-}
+};
 
 export default ChapterDetail;
