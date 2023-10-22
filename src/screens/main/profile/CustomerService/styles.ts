@@ -15,7 +15,6 @@ const useStyles = makeStyles(({colors}) => ({
   textInput: {
     color: colors.black,
     fontFamily: fontFamilySetup.medium,
-  
   },
   viewinput: {
     backgroundColor: colors.grey7,

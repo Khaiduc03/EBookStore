@@ -45,7 +45,5 @@ export enum routes {
   CHANGEPASSWORD = 'CHANGEPASSWORD',
 
   // SCreen Help Center
-  DISCORD = 'DISCORD',
-  FACEBOOK = 'FACEBOOK',
   CUSTOMERSERVICE = 'CUSTOMERSERVICE',
 }

@@ -17,8 +17,6 @@ import Security from './Security';
 import Update_Profile from './Update-profile';
 import ChangePassWord from './ChangePassword';
 import CustomerService from './CustomerService';
-import Facebook from './Facebook';
-import Discord from './Discord';
 
 export {default as Profile} from './Profile';
 
@@ -90,13 +88,5 @@ export const profileScreens: Screen[] = [
   {
     name: routes.CUSTOMERSERVICE,
     component: CustomerService,
-  },
-  {
-    name: routes.FACEBOOK,
-    component: Facebook,
-  },
-  {
-    name: routes.DISCORD,
-    component: Discord,
   },
 ];

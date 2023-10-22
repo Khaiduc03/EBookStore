@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {Text, View, TextInput, Alert} from 'react-native';
-import useStyles from './styles';
+import {Alert, Text, TextInput, View} from 'react-native';
 import {BigButton, HeaderCustom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
+import useStyles from './styles';
 const CustomerService: React.FC = () => {
   const styles = useStyles();
   const [title, setTitle] = useState('');
@@ -21,13 +21,6 @@ const CustomerService: React.FC = () => {
       );
     }
   };
-  const [text, setText] = useState('');
-
-  const handleTextChange = (inputText: string) => {
-    if (inputText.length <= 250) {
-      setText(inputText);
-    }
-  };
 
   return (
     <View style={styles.container}>
@@ -40,9 +33,11 @@ const CustomerService: React.FC = () => {
         <Text style={styles.name}>Title</Text>
         <View style={styles.viewinput}>
           <TextInput
+            style={styles.textInput}
             multiline
             numberOfLines={1}
             placeholder="Please enter the subject you want"
+            placeholderTextColor="gray"
             value={title}
             onChangeText={text => {
               setTitle(text);
@@ -58,6 +53,7 @@ const CustomerService: React.FC = () => {
             style={styles.textInput}
             multiline
             placeholder="Please enter the content of the topic"
+            placeholderTextColor="gray"
             value={description}
             textAlignVertical="top"
             onChangeText={text => {
