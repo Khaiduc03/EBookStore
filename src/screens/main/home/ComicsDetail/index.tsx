@@ -4,11 +4,9 @@ import {HeaderCustom, TabViewItem} from '../../../../components';
 import useStyles from './styles';
 import {Episodes, HeaderDetail, Preview} from './Components';
 import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
 import {useRoute} from '@react-navigation/native';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {ComicActions} from '../../../../redux';
-import {getDetailComic} from '../../../../redux/selectors/comic.selector';
 
 interface RouteParamsIdComic {
   uuid: string;

@@ -27,10 +27,8 @@ interface RouteParamsIdTopic {
 const ComicByTopic = () => {
   const route = useRoute();
   const uuidComic = (route.params as RouteParamsIdTopic).uuid;
-  console.log(uuidComic);
-
   const dispatch = useAppDispatch();
-  const dataComic: ComicType[] = useAppSelector(getDataByTopic) || [];
+  const dataComic = useAppSelector(getDataByTopic) || [];
   const [numCols, setNumCols] = useState<number>(3);
   const [data, setData] = useState<ComicType[]>([]);
   const [page, setPage] = useState(1);
@@ -42,7 +40,7 @@ const ComicByTopic = () => {
   useEffect(() => {
     if (dataComic.length > 0) {
       setData([...data, ...dataComic]);
-      dispatch(ComicActions.clearListData());
+      dispatch(ComicActions.clearListDataByComic());
     }
   }, [dataComic]);
 

@@ -8,6 +8,7 @@ const useStyles = makeStyles(({colors}) => ({
   container: {
     height: Device.getDeviceHeight() * 0.306,
     width: (WIDTH - normalize(21) * 2) / 3,
+    marginBottom: normalize(15),
   },
   imgComic: {
     width: '100%',
@@ -16,6 +17,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   content: {
     flex: 1,
+    justifyContent: 'space-between',
   },
   nameTopic: {
     color: colors.grey4,
@@ -29,6 +31,7 @@ const useStyles = makeStyles(({colors}) => ({
     fontStyle: 'normal',
     lineHeight: normalize(20),
     fontFamily: fontFamilySetup.bold,
+    textAlign: 'left',
   },
   rate: {
     flexDirection: 'row',
