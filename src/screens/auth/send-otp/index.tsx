@@ -1,21 +1,21 @@
-import { Text } from '@rneui/base';
+import {Text} from '@rneui/base';
 import React from 'react';
 import {
   Keyboard,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View
+  View,
 } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
-import { AuthHeader, Headers } from '../../../components';
-import { routes } from '../../../constants';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
-import { NavigationService } from '../../../navigation';
-import { AuthActions, getAuthUserProfile } from '../../../redux';
-import { showToastError } from '../../../utils';
+import {TextInput} from 'react-native-gesture-handler';
+import {AuthHeader, BigButton, Headers} from '../../../components';
+import {routes} from '../../../constants';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
+import {NavigationService} from '../../../navigation';
+import {AuthActions, getAuthUserProfile} from '../../../redux';
+import {showToastError} from '../../../utils';
 import useStyles from './styles';
 
-const SendOTP: React.FC = () => {
+const SendOTPScreen: React.FC = () => {
   const styles = useStyles();
 
   const [pin1, setPin1] = React.useState('');
@@ -42,7 +42,7 @@ const SendOTP: React.FC = () => {
 
   const validateOTP = () => {
     if (pin1 === '' || pin2 === '' || pin3 === '' || pin4 === '') {
-      showToastError('Error, OTP must not be left blank');
+      showToastError('Error, OTP cannot be empty !');
     } else {
       dispatch(
         AuthActions.handleVerifyOTP({
@@ -146,73 +146,85 @@ const SendOTP: React.FC = () => {
               NavigationService.navigate(routes.FORGOT_PASSWORD)
             }
           />
-          <AuthHeader
-            title="OTP Verification"
-            subTitle="We have sent the OTP verification code to your email address. Check your email and enter the code below."
-          />
-          <View style={styles.viewCenter}>
-            <View style={styles.viewRow}>
-              <TextInput
-                style={styles.textOTP}
-                keyboardType="number-pad"
-                maxLength={1}
-                onChangeText={handlePin1Change}
-                value={pin1}
-                ref={pin1Ref}
-              />
-              <TextInput
-                style={styles.textOTP}
-                keyboardType="number-pad"
-                maxLength={1}
-                onChangeText={handlePin2Change}
-                value={pin2}
-                ref={pin2Ref}
-              />
-              <TextInput
-                style={styles.textOTP}
-                keyboardType="number-pad"
-                maxLength={1}
-                onChangeText={handlePin3Change}
-                value={pin3}
-                ref={pin3Ref}
-              />
-              <TextInput
-                style={styles.textOTP}
-                keyboardType="number-pad"
-                maxLength={1}
-                onChangeText={handlePin4Change}
-                value={pin4}
-                ref={pin4Ref}
-              />
-            </View>
-            <Text style={styles.text3}>Didn’t receive email?</Text>
-            <TouchableOpacity
-              style={styles.viewCenter}
-              onPress={() => {
-                if (isCounting) {
-                  // Đang đếm ngược, không làm gì cả
-                } else {
-                  // Bắt đầu một bộ đếm ngược mới
-                  startCountdown();
-                  setTextColor(styles.text6.color);
-                }
-              }}>
-              <Text style={[styles.textCT, {color: textColor}]}>
-                {!isCounting && <>{resendText}</>}
-                {isCounting && countdown > 0 && (
-                  <>
-                    {resendText}
-                    <Text style={styles.text5}>{`${countdown} `}</Text>
-                    <Text style={styles.text4}>s</Text>
-                  </>
-                )}
-              </Text>
-            </TouchableOpacity>
+
+          <View style={styles.Headers}>
+            <AuthHeader
+              title="OTP Verification"
+              subTitle="We have sent the OTP verification code to your email address. Check your email and enter the code below."
+            />
           </View>
-          <View style={styles.viewBottom}>
-            <TouchableOpacity style={styles.btnContinue} onPress={validateOTP}>
-              <Text style={styles.textContinue}>Continue</Text>
-            </TouchableOpacity>
+
+          <View style={styles.formContainer}>
+            <View style={styles.viewCenter}>
+              <View style={styles.viewRow}>
+                <TextInput
+                  style={styles.textOTP}
+                  keyboardType="number-pad"
+                  maxLength={1}
+                  onChangeText={handlePin1Change}
+                  value={pin1}
+                  ref={pin1Ref}
+                />
+                <TextInput
+                  style={styles.textOTP}
+                  keyboardType="number-pad"
+                  maxLength={1}
+                  onChangeText={handlePin2Change}
+                  value={pin2}
+                  ref={pin2Ref}
+                />
+                <TextInput
+                  style={styles.textOTP}
+                  keyboardType="number-pad"
+                  maxLength={1}
+                  onChangeText={handlePin3Change}
+                  value={pin3}
+                  ref={pin3Ref}
+                />
+                <TextInput
+                  style={styles.textOTP}
+                  keyboardType="number-pad"
+                  maxLength={1}
+                  onChangeText={handlePin4Change}
+                  value={pin4}
+                  ref={pin4Ref}
+                />
+              </View>
+              <Text style={styles.text3}>Didn’t receive email?</Text>
+              <TouchableOpacity
+                style={styles.viewCenter}
+                onPress={() => {
+                  if (isCounting) {
+                    // Đang đếm ngược, không làm gì cả
+                  } else {
+                    // Bắt đầu một bộ đếm ngược mới
+                    startCountdown();
+                    setTextColor(styles.text6.color);
+                  }
+                }}>
+                <Text style={[styles.textCT, {color: textColor}]}>
+                  {!isCounting && <>{resendText}</>}
+                  {isCounting && countdown > 0 && (
+                    <>
+                      {resendText}
+                      <Text style={styles.text5}>{`${countdown} `}</Text>
+                      <Text style={styles.text4}>s</Text>
+                    </>
+                  )}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={styles.viewBtnLogin}>
+            <BigButton
+              textButton="Continue"
+              onPressButton={() => {
+                validateOTP();
+              }}
+              style={styles.button}
+              textStyle={{fontSize: 16}}
+            />
           </View>
         </View>
       </View>
@@ -220,4 +232,4 @@ const SendOTP: React.FC = () => {
   );
 };
 
-export default SendOTP;
+export default SendOTPScreen;

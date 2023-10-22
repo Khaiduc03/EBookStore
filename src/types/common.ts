@@ -65,8 +65,8 @@ export enum Role {
 }
 
 export enum Gender {
-  FAMALE = 'famale',
   MALE = 'male',
+  FEMALE = 'female',
 }
 
 export type Onboard = {

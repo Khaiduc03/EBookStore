@@ -10,10 +10,27 @@ const useStyles = makeStyles(({colors}) => ({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors.background,
   },
-
   body: {
     flex: 1,
     padding: normalize(24),
+  },
+  Headers: {
+    marginTop: normalize(24),
+    marginBottom: normalize(10),
+  },
+  formContainer: {
+    flex: 1,
+  },
+  viewBtnLogin: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  button: {
+    width: '100%',
+    alignItems: 'center',
+    borderRadius: normalize(30),
+    paddingVertical: normalize(8),
+    paddingHorizontal: normalize(24),
   },
   viewCenter: {
     justifyContent: 'center',

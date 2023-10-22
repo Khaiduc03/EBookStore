@@ -1,6 +1,6 @@
 import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../utils';
 import {StyleSheet} from 'react-native';
+import {Device} from '../../../utils';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
@@ -31,7 +31,8 @@ const usestyles = makeStyles(({colors}) => ({
     alignItems: 'center',
   },
   title: {
-    fontSize: normalize(HEIGHT * 0.035),
+    width: normalize(WIDTH - 20),
+    fontSize: normalize(HEIGHT * 0.033),
     fontFamily: 'Urbanist-Bold',
     color: colors.black,
     fontWeight: '700',
@@ -41,7 +42,8 @@ const usestyles = makeStyles(({colors}) => ({
     color: colors.primary,
   },
   subTitle: {
-    fontSize: normalize(HEIGHT * 0.021),
+    width: normalize(WIDTH - 20),
+    fontSize: normalize(HEIGHT * 0.019),
     textAlign: 'center',
     fontFamily: 'Urbanist-Regular',
     fontWeight: '400',
@@ -58,7 +60,6 @@ const usestyles = makeStyles(({colors}) => ({
     height: normalize(HEIGHT * 0.06),
     alignItems: 'center',
     justifyContent: 'center',
-
     borderWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
     marginVertical: normalize(HEIGHT * 0.01),
