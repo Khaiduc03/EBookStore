@@ -7,12 +7,13 @@ const BigButton: React.FunctionComponent<BigButtonProps> = ({
   textButton,
   onPressButton,
   style,
+  textStyle,
 }) => {
   const styles = useStyles();
 
   return (
-    <TouchableOpacity onPress={onPressButton} style={styles.button || style}>
-      <Text style={[styles.buttonText, style]}>{textButton}</Text>
+    <TouchableOpacity onPress={onPressButton} style={[styles.button, style]}>
+      <Text style={[styles.buttonText, textStyle]}>{textButton}</Text>
     </TouchableOpacity>
   );
 };

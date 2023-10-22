@@ -1,10 +1,8 @@
-import {Icon, Text} from '@rneui/base';
-import React, {Fragment, useRef, useState} from 'react';
+import { Icon, Text } from '@rneui/base';
+import React, { Fragment, useRef, useState } from 'react';
 import {
   Animated,
-  Image,
   Keyboard,
-  Modal,
   NativeScrollEvent,
   NativeSyntheticEvent,
   Platform,
@@ -12,21 +10,20 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
+  View
 } from 'react-native';
-import EmojiSelector, {Categories} from 'react-native-emoji-selector';
+import EmojiSelector, { Categories } from 'react-native-emoji-selector';
 import * as ImagePicker from 'react-native-image-picker';
-import {PERMISSIONS, request, RESULTS} from 'react-native-permissions';
-import {useDispatch} from 'react-redux';
-import {HeaderCustom} from '../../../../components';
-import {routes} from '../../../../constants';
-import {PERMISSION_TYPE, usePermission} from '../../../../hooks';
-import {NavigationService} from '../../../../navigation';
-import {AuthActions} from '../../../../redux';
-import {showToastError} from '../../../../utils';
-import {ChatBubble} from './components/renderItem/ChatBubbleItem';
+import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
+import { useDispatch } from 'react-redux';
+import { HeaderCustom } from '../../../../components';
+import { routes } from '../../../../constants';
+import { PERMISSION_TYPE, usePermission } from '../../../../hooks';
+import { NavigationService } from '../../../../navigation';
+import { CustomToastBottom } from '../../../../utils';
+import { ChatBubble } from './components/renderItem/ChatBubbleItem';
 import useStyles from './styles';
-import {IMessage, messages} from './types';
+import { IMessage, messages } from './types';
 
 const Message: React.FC = () => {
   const styles = useStyles();
@@ -107,6 +104,7 @@ const Message: React.FC = () => {
     Keyboard.dismiss;
     inputRef.current?.setNativeProps(styles.viewBlur);
     setIsShowEmoji(false);
+    setIsShowSelect(false);
   };
 
   const handleFocus = () => {
@@ -183,12 +181,12 @@ const Message: React.FC = () => {
       } else {
         const result = await ImagePicker.launchCamera(optionsCamera);
         if (result.errorCode) {
-          showToastError(result.errorMessage + '');
+          CustomToastBottom(result.errorMessage + '');
         } else if (result.didCancel) {
-          showToastError("You haven't taken a photo yet");
+          CustomToastBottom("You haven't taken a photo yet");
           inputRef.current?.setNativeProps(styles.viewBlur);
         } else if (result.errorMessage) {
-          showToastError('An error occurred when opening the camera');
+          CustomToastBottom('An error occurred when opening the camera');
           inputRef.current?.setNativeProps(styles.viewBlur);
         } else if (result.assets) {
           const formdata = new FormData();
@@ -197,7 +195,6 @@ const Message: React.FC = () => {
             name: result.assets[0].fileName,
             type: result.assets[0].type,
           });
-          await handleUploadImage(formdata);
         }
       }
     });
@@ -214,14 +211,10 @@ const Message: React.FC = () => {
         setSelectedImage(response.assets[0].uri);
         inputRef.current?.setNativeProps(styles.viewBlur);
       } else {
-        showToastError('You have not selected a photo yet');
+        CustomToastBottom('You have not selected a photo yet');
         inputRef.current?.setNativeProps(styles.viewBlur);
       }
     });
-  };
-
-  const handleUploadImage = async (formdata: any) => {
-    dispatch(AuthActions.handleUpdateAvatar(formdata));
   };
 
   return (
@@ -342,21 +335,23 @@ const Message: React.FC = () => {
             </View>
           )}
           {isShowSelect && (
-            <View>
-              <View style={styles.modalContainer}>
-                <TouchableOpacity onPress={() => handleOptionSelect('camera')}>
-                  <View>
-                    <Icon name="camera-outline" type="ionicon" size={30} />
-                    <Text>Camera</Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleOptionSelect('gallery')}>
-                  <View>
-                    <Icon name="image-outline" type="ionicon" size={30} />
-                    <Text>Gallery</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
+            <View style={styles.modalContainer}>
+              <TouchableOpacity
+                onPress={() => handleOptionSelect('camera')}
+                style={styles.btnPB}>
+                <View>
+                  <Icon name="camera-outline" type="ionicon" size={30} />
+                  <Text>Camera</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => handleOptionSelect('gallery')}
+                style={styles.btnPB}>
+                <View>
+                  <Icon name="image-outline" type="ionicon" size={30} />
+                  <Text>Gallery</Text>
+                </View>
+              </TouchableOpacity>
             </View>
           )}
         </View>

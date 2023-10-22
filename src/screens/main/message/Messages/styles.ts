@@ -1,7 +1,7 @@
-import { makeStyles, normalize } from '@rneui/themed';
-import { StyleSheet } from 'react-native';
-import { Device } from '../../../../utils';
-import { fontFamilySetup } from '../../../../utils/font';
+import {makeStyles, normalize} from '@rneui/themed';
+import {StyleSheet} from 'react-native';
+import {Device} from '../../../../utils';
+import {fontFamilySetup} from '../../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
@@ -73,9 +73,9 @@ const useStyles = makeStyles(({colors}) => ({
     width: 'auto',
     maxWidth: normalize(200),
     flexWrap: 'wrap',
-    color: colors.black,
     fontFamily: fontFamilySetup.medium,
     fontSize: normalize(12),
+    color: colors.background,
   },
   textNotUser: {
     width: 'auto',
@@ -93,12 +93,14 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.regular,
     marginBottom: normalize(18),
     alignSelf: 'flex-end',
+    color: colors.black,
   },
   textTimeNotUser: {
     fontSize: normalize(8),
     fontFamily: fontFamilySetup.regular,
     marginBottom: normalize(18),
     alignSelf: 'flex-start',
+    color: colors.black,
   },
   iconBack: {
     color: colors.black,
@@ -171,7 +173,7 @@ const useStyles = makeStyles(({colors}) => ({
     paddingStart: normalize(16),
     paddingEnd: normalize(48),
     borderWidth: normalize(1),
-    borderColor: colors.black,
+    borderColor: colors.blackDefault,
     borderRadius: normalize(25),
     marginVertical: normalize(5),
   },
@@ -193,9 +195,12 @@ const useStyles = makeStyles(({colors}) => ({
   viewEmoji: {
     height: normalize(460),
   },
+  btnPB: {
+    paddingBottom: normalize(36),
+  },
   modalContainer: {
     width: '100%',
-    height: '80%',
+    height: '88%',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
