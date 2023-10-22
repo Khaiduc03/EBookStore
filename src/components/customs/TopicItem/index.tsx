@@ -12,7 +12,9 @@ const TopicItem: React.FunctionComponent<CustomTopicsProps> = props => {
 
   return (
     <TouchableOpacity
-      onPress={() => NavigationService.navigate(routes.COMICBYTOPIC)}
+      onPress={() =>
+        NavigationService.navigate(routes.COMICBYTOPIC, {uuid: props.uuid})
+      }
       style={styles.container || props.viewStyle}>
       <ImageBackground
         borderRadius={6}

@@ -36,7 +36,7 @@ const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
           {comic.comic_name}
         </Text>
         <View style={styles.rate}>
-          <Icon name="star-half" size={18} />
+          <Icon name="eye-sharp" type="ionicon" color={'#F89300'} size={18} />
           <Text style={styles.textRate}>{comic.views}</Text>
         </View>
         {props.topicStyle && (

@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react';
+import React, { FunctionComponent } from 'react';
 
 import {
   Keyboard,
@@ -9,16 +9,16 @@ import {
   View,
 } from 'react-native';
 
-import {CheckBox} from '@rneui/themed';
-import {AuthHeader, BigButton} from '../../../components';
+import { CheckBox } from '@rneui/themed';
+import { Text } from 'react-native';
+import { AuthHeader, BigButton } from '../../../components';
 import Header from '../../../components/customs/Headers';
 import InputCustomV1 from '../../../components/customs/InputCustomV1';
-import {routes} from '../../../constants';
-import {useAppDispatch} from '../../../hooks';
-import {NavigationService} from '../../../navigation';
-import {AuthActions} from '../../../redux/reducer';
+import { routes } from '../../../constants';
+import { useAppDispatch } from '../../../hooks';
+import { NavigationService } from '../../../navigation';
+import { AuthActions, ComicActions } from '../../../redux/reducer';
 import useStyles from './styles';
-import {Text} from 'react-native';
 
 const LoginScreen: FunctionComponent = () => {
   const styles = useStyles();
@@ -43,6 +43,7 @@ const LoginScreen: FunctionComponent = () => {
         device_token: '1234567890',
       }),
     );
+    dispatch(ComicActions.clearListData());
   };
 
   return (

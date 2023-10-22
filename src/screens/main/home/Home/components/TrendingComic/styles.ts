@@ -6,6 +6,11 @@ const useStyles = makeStyles(({colors}) => ({
   container: {
     width: '100%',
   },
+  textTitle: {
+    fontSize: normalize(18),
+    fontFamily: fontFamilySetup.bold,
+    color: colors.black,
+  },
 }));
 
 export default useStyles;

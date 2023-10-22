@@ -12,24 +12,35 @@ import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {backScreen} from '../../../../utils';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {ComicActions, ComicType} from '../../../../redux';
-import {getListComic} from '../../../../redux/selectors/comic.selector';
+import {ComicActions, ComicType, LoadingActions} from '../../../../redux';
+import {
+  getDataByTopic,
+  getListComic,
+} from '../../../../redux/selectors/comic.selector';
+import {getIsLoading} from '../../../../redux/selectors/loading.selector';
+import {useRoute} from '@react-navigation/native';
+
+interface RouteParamsIdTopic {
+  uuid: string;
+}
 
 const ComicByTopic = () => {
+  const route = useRoute();
+  const uuidComic = (route.params as RouteParamsIdTopic).uuid;
   const dispatch = useAppDispatch();
-  const dataComic: ComicType[] = useAppSelector(getListComic) || [];
+  const dataComic = useAppSelector(getDataByTopic) || [];
   const [numCols, setNumCols] = useState<number>(3);
   const [data, setData] = useState<ComicType[]>([]);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(ComicActions.getListData(page));
+    dispatch(ComicActions.getListByTopic({page: page, uuid: uuidComic}));
   }, [page]);
 
   useEffect(() => {
     if (dataComic.length > 0) {
       setData([...data, ...dataComic]);
-      dispatch(ComicActions.clearListData());
+      dispatch(ComicActions.clearListDataByComic());
     }
   }, [dataComic]);
 

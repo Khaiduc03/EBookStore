@@ -6,6 +6,9 @@ import {
   ComicType,
   PayloadHttpListComics,
   ComicDetailType,
+  PayloadHttpListChapter,
+  ChapterType,
+  DetailChapterType,
 } from '../types';
 import {PayloadHttpList} from '../../types';
 
@@ -19,7 +22,7 @@ const reducer = createSlice({
       return {
         ...state,
         listData: {
-          comics: [],
+          data: undefined,
         },
       };
     },
@@ -36,7 +39,7 @@ const reducer = createSlice({
       return {
         ...state,
         listData: {
-          comics: action.payload.comics,
+          data: action.payload.data,
         },
       };
     },
@@ -54,6 +57,65 @@ const reducer = createSlice({
       return {
         ...state,
         detailData: {
+          data: action.payload.data,
+        },
+      };
+    },
+
+    getListByTopic: (state: ComicState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+    setListByTopic: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpList<ComicType>>,
+    ) => {
+      return {
+        ...state,
+        listDataByTopic: {
+          data: action.payload.data,
+        },
+      };
+    },
+    clearListDataByComic: (state: ComicState) => {
+      return {
+        ...state,
+        listDataByTopic: {
+          data: [],
+        },
+      };
+    },
+
+    getListChapter: (state: ComicState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+    setListChapter: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpListChapter<ChapterType>>,
+    ) => {
+      return {
+        ...state,
+        listChapter: {
+          chapter: action.payload.chapter,
+        },
+      };
+    },
+
+    getListChapterDetail: (state: ComicState, _: PayloadAction<string>) => {
+      return {
+        ...state,
+      };
+    },
+    setListChapterDetail: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpList<DetailChapterType>>,
+    ) => {
+      return {
+        ...state,
+        listDetailChapter: {
           data: action.payload.data,
         },
       };

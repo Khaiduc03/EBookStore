@@ -4,9 +4,8 @@ import {HeaderCustom, TabViewItem} from '../../../../components';
 import useStyles from './styles';
 import {Episodes, HeaderDetail, Preview} from './Components';
 import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
 import {useRoute} from '@react-navigation/native';
-import {useAppDispatch} from '../../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {ComicActions} from '../../../../redux';
 
 interface RouteParamsIdComic {
@@ -14,12 +13,14 @@ interface RouteParamsIdComic {
 }
 
 const ComicsDetail = () => {
-  const dispath = useAppDispatch();
+  const dispatch = useAppDispatch();
   const route = useRoute();
   const uuidComic = (route.params as RouteParamsIdComic).uuid;
+
   useEffect(() => {
-    dispath(ComicActions.getDetailComic(uuidComic));
-  }, []);
+    dispatch(ComicActions.getDetailComic(uuidComic));
+    dispatch(ComicActions.getListChapter(uuidComic));
+  }, [uuidComic]);
 
   const styles = useStyles();
   const handlePressBack = () => {

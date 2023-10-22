@@ -4,9 +4,7 @@ import {TopicActions, LoadingActions} from '../reducer';
 import {TopicService} from '../services';
 
 function* getListDataTopic(action: any): Generator {
-  yield put(LoadingActions.showLoading());
   try {
-    console.log(action);
     console.log('run');
     const {data}: any = yield call(TopicService.getTopic);
     console.log('data:', {data});
@@ -18,8 +16,6 @@ function* getListDataTopic(action: any): Generator {
     }
   } catch (error) {
     console.log(error);
-  } finally {
-    yield put(LoadingActions.hideLoading());
   }
 }
 
