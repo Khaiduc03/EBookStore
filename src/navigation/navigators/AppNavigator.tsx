@@ -9,13 +9,13 @@ import {
 import BottomNavigator from './BottomNavigator';
 
 import {routes} from '../../constants';
-import {Screen} from '../../types';
 import {
-  bookmarkScreens,
   exploreScreens,
   homeScreens,
+  messageScreens,
   profileScreens,
 } from '../../screens/main';
+import {Screen} from '../../types';
 
 const AppStack = createStackNavigator();
 
@@ -31,7 +31,7 @@ const mainScreens: Screen[] = [
   },
   ...homeScreens,
   ...profileScreens,
-  ...bookmarkScreens,
+  ...messageScreens,
   ...exploreScreens,
 ];
 

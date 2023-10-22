@@ -48,7 +48,7 @@ const UpdateProfileScreen: FunctionComponent = () => {
     fullname: '',
     phone_number: '',
     dob: '',
-    gender: Gender.MALE,
+    gender: Gender.MALE || Gender.FEMALE,
   });
 
   useEffect(() => {
@@ -82,7 +82,9 @@ const UpdateProfileScreen: FunctionComponent = () => {
     if (
       credentials.fullname &&
       credentials.phone_number &&
-      credentials.dob !== null
+      credentials.dob !== null &&
+      (credentials.gender === Gender.MALE ||
+        credentials.gender === Gender.FEMALE)
     ) {
       dispatch(
         AuthActions.handleUpdateUserProfile({
@@ -112,6 +114,8 @@ const UpdateProfileScreen: FunctionComponent = () => {
       setIsCheckValidateDoB(true);
     }
   };
+
+  console.log(credentials.gender);
 
   return (
     <KeyboardAvoidingView style={styles.container}>

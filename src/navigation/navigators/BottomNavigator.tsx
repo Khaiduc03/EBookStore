@@ -3,14 +3,15 @@ import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import {Icon, Text, makeStyles, normalize} from '@rneui/themed';
-import React, {FunctionComponent, useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Text, makeStyles, normalize} from '@rneui/themed';
+import React, {FunctionComponent} from 'react';
+import {View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
+import {HomeImage} from '../../assets/svg';
 import {routes} from '../../constants';
+import {Chat, Explore, Home, Profile} from '../../screens/main';
 import {Device} from '../../utils';
-import {Bookmark, Explore, Home, Profile} from '../../screens/main';
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -24,15 +25,15 @@ const screenOptions: BottomTabNavigationOptions = {
 const choseIcon = (route: routes) => {
   switch (route) {
     case routes.HOME:
-      return 'home';
+      return 'Home';
     case routes.EXPLORE:
-      return 'id-card';
-    case routes.BOOKMARK:
-      return 'bookmarks';
+      return 'Explore';
+    case routes.MESSAGE:
+      return 'Message';
     case routes.PROFILE:
-      return 'person';
+      return 'Profile';
     default:
-      return 'home';
+      return 'Home';
   }
 };
 
@@ -101,20 +102,23 @@ const BottomNavigator: FunctionComponent = () => {
               onPress={onPress}
               onLongPress={onLongPress}
               style={styles.box}>
-              <Icon
+              {/* <Icon
                 name={choseIcon(route.name as routes)}
                 type="ionicon"
                 color={isFocused ? '#F89300' : 'gray'}
                 size={24}
-              />
+              /> */}
+
+              <HomeImage fill={isFocused ? '#F89300' : 'gray'} />
 
               <Text
                 style={{
                   color: isFocused ? '#F89300' : 'gray',
                   fontSize: 10,
                   marginTop: 1,
+                  textTransform: 'capitalize',
                 }}>
-                {route.name.toLowerCase()}
+                {route.name}
               </Text>
             </TouchableOpacity>
           );
@@ -129,7 +133,7 @@ const BottomNavigator: FunctionComponent = () => {
       tabBar={(props: BottomTabBarProps) => <Tab {...props} />}>
       <BottomTabs.Screen name={routes.HOME} component={Home} />
       <BottomTabs.Screen name={routes.EXPLORE} component={Explore} />
-      <BottomTabs.Screen name={routes.BOOKMARK} component={Bookmark} />
+      <BottomTabs.Screen name={routes.MESSAGE} component={Chat} />
       <BottomTabs.Screen name={routes.PROFILE} component={Profile} />
     </BottomTabs.Navigator>
   );

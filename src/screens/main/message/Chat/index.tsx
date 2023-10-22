@@ -14,7 +14,7 @@ import {ChatItem} from './components/renderItem/ChatItem';
 import useStyles from './styles';
 import {data, ItemData} from './types';
 
-const Chat: React.FC = () => {
+const ChatScreen: React.FC = () => {
   const styles = useStyles();
 
   const [selectedId, setSelectedId] = useState<string>('');
@@ -53,10 +53,6 @@ const Chat: React.FC = () => {
           <View style={styles.pdH}>
             <HeaderCustomV1
               leftIcon={{
-                name: 'arrow-back-outline',
-                type: 'ionicon',
-              }}
-              iconMiddle={{
                 name: 'chatbubble-ellipses-outline',
                 type: 'ionicon',
               }}
@@ -91,4 +87,4 @@ const Chat: React.FC = () => {
   );
 };
 
-export default Chat;
+export default ChatScreen;

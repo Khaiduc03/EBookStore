@@ -1,6 +1,10 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {StyleSheet} from 'react-native';
 import {fontFamilySetup} from '../../../../utils/font';
+import {Device} from '../../../../utils';
+
+const WIDTH = Device.getDeviceWidth();
+const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
@@ -27,12 +31,10 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.primary,
   },
   viewHeaderText: {
-    justifyContent: 'center',
-    alignItems: 'center',
     fontFamily: fontFamilySetup.bold,
     fontSize: normalize(18),
     color: colors.black,
-    marginLeft: normalize(6),
+    marginLeft: normalize(WIDTH * 0.056),
   },
   viewCenter: {
     justifyContent: 'center',

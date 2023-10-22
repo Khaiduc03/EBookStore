@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 
 import {CheckBox} from '@rneui/themed';
-import {ProfileImage} from '../../../assets/svg';
+import {GoogleIcon} from '../../../assets/icons';
+import {UserImage} from '../../../assets/svg';
 import {BigButton} from '../../../components';
 import AuthHeaderV1 from '../../../components/customs/AuthHeaderV1';
 import Header from '../../../components/customs/Headers';
@@ -19,9 +20,8 @@ import {routes} from '../../../constants';
 import {useAppDispatch} from '../../../hooks';
 import {NavigationService} from '../../../navigation';
 import {AuthActions} from '../../../redux';
-import useStyles from './styles';
 import {isValidEmail, isValidPassword, showToastError} from '../../../utils';
-import {GoogleIcon} from '../../../assets/icons';
+import useStyles from './styles';
 
 const CreateAccountScreen: FunctionComponent = () => {
   const styles = useStyles();
@@ -119,7 +119,7 @@ const CreateAccountScreen: FunctionComponent = () => {
               <AuthHeaderV1
                 title="Create Account "
                 subTitle="You can create an account, and after that, you will be able to log in to our official application."
-                avatar={<ProfileImage />}
+                avatar={<UserImage />}
               />
             </View>
 

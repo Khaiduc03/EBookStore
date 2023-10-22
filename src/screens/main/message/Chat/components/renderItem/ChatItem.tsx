@@ -10,7 +10,7 @@ export const ChatItem = ({item}: ItemProps) => {
 
   return (
     <TouchableOpacity
-      onPress={() => NavigationService.navigate(routes.MESSAGES)}
+      onPress={() => NavigationService.navigate(routes.MESSAGE)}
       style={styles.item}>
       <View style={styles.view0}>
         <View style={styles.view1}>

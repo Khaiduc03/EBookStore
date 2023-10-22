@@ -1,15 +1,16 @@
 import {routes} from '../../../constants';
 import {Screen} from '../../../types';
-import Chat from './Chat';
-import Message from './Messages';
+import ChatScreen from './Chat';
+import Message from './Message';
 
+export {default as Chat} from './Chat';
 export const messageScreens: Screen[] = [
   {
     name: routes.CHAT,
-    component: Chat,
+    component: ChatScreen,
   },
   {
-    name: routes.MESSAGES,
+    name: routes.MESSAGE,
     component: Message,
   },
 ];

@@ -39,7 +39,7 @@ const LobbyScreen: React.FunctionComponent = () => {
           <View style={styles.viewTitle}>
             <Text style={styles.title}>
               Welcome to{' '}
-              <Text style={[styles.title, styles.colors]}>Comic verse 👋</Text>
+              <Text style={[styles.title, styles.colors]}>Comic Verse</Text>
             </Text>
           </View>
           <Text style={styles.subTitle}>

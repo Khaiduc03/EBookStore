@@ -13,7 +13,7 @@ export enum routes {
   BOTTOM_TAB = 'BOTTOM_TAB',
   HOME = 'HOME',
   CHAT = 'CHAT',
-  MESSAGES = 'MESSAGES',
+  MESSAGE = 'MESSAGE',
   APP_NAVIGATOR = 'APP_NAVIGATOR',
 
   TOPICS = 'TOPICS',
@@ -23,7 +23,6 @@ export enum routes {
   CHAPTER = 'CHAPTER',
 
   PROFILE = 'PROFILE',
-  BOOKMARK = 'BOOKMARK',
   EXPLORE = 'EXPLORE',
 
   // Profile
