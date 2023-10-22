@@ -3,9 +3,10 @@ import React from 'react';
 import useStyles from './styles';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
+import {Icon} from '@rneui/themed';
 import {HeaderCustom} from '../../../../components';
 
-const History: React.FC = () => {
+const ChangePassWord: React.FC = () => {
   const styles = useStyles();
   const handlePressGoback = () => {
     NavigationService.goBack();
@@ -13,13 +14,22 @@ const History: React.FC = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
-        title="History"
+        title="Change Password"
+        leftIcon={{name: 'left', type: 'antdesign', color: 'black'}}
         onPressLeftIcon={handlePressGoback}
       />
-      <Text style={styles.text}>History</Text>
+
+      <Text
+        style={{
+          fontSize: 22,
+          color: 'red',
+          textAlign: 'center',
+          fontWeight: 'bold',
+        }}>
+        Change password this here !!
+      </Text>
     </View>
   );
 };
 
-export default History;
+export default ChangePassWord;

@@ -8,7 +8,7 @@ const Website = () => {
 
   return (
     <View style={{paddingVertical:20}}>
-      <ButtonLong icon_Website title="Website" />
+      <ButtonLong icon_Website title="Feedback" />
     </View>
   );
 };

@@ -5,26 +5,27 @@ import {fontFamilySetup} from '../../../utils/font';
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
-const usestyles = makeStyles(({colors}) => ({
-  ViewCircle: {
-    borderRadius: 50,
-    width: 64,
-    height: 64,
+const useStyles = makeStyles(({colors}) => ({
+  viewHeader: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+  },
+  viewicon: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   txtCircle: {
     fontSize: normalize(18),
-    fontWeight: '700',
     letterSpacing: normalize(0.6),
     fontStyle: 'normal',
-    fontFamily: fontFamilySetup.bold,
+    fontFamily: fontFamilySetup.medium,
     color: colors.black,
     lineHeight: normalize(35.2),
-    marginStart: normalize(20),
+    marginStart: normalize(10),
   },
   rightIcon: {
     color: colors.black,
   },
 }));
-export default usestyles;
+export default useStyles;

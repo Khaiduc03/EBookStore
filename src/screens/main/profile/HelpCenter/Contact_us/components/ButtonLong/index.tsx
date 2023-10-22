@@ -24,7 +24,7 @@ const ButtonLong: React.FC<ButtonLongpros> = props => {
       )}
       {icon_Website && (
         <TouchableOpacity style={styles.ButtonGoogle}>
-          <Icon name="internet-explorer" type="font-awesome" color={'blue'} />
+          <Icon name="feedback" type="material" color={'#EC449C'} />
           <Text style={styles.name}>{title}</Text>
         </TouchableOpacity>
       )}

@@ -9,14 +9,14 @@ import {Icon} from '@rneui/themed';
 const Favorite: React.FC = () => {
   const styles = useStyles();
   const handlePressGoback = () => {
-    NavigationService.navigate(routes.PROFILE);
+    NavigationService.goBack();
   };
 
   return (
     <View style={styles.container}>
       <HeaderCustom
         leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
-        title="Favorite"
+        title="Your Favorite"
         onPressLeftIcon={handlePressGoback}
       />
       <Text style={styles.text}>Favorite this here !!</Text>

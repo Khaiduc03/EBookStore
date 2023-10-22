@@ -2,7 +2,7 @@ import * as React from 'react';
 import Svg, {SvgProps, Path} from 'react-native-svg';
 import {memo} from 'react';
 
-const SvgComponent = (props: SvgProps) => (
+const ZaloPay = (props: SvgProps) => (
   <Svg
     //@ts-ignore
     xmlns="http://www.w3.org/2000/svg"
@@ -28,6 +28,5 @@ const SvgComponent = (props: SvgProps) => (
     />
   </Svg>
 );
-const ZaloPay = memo(SvgComponent);
 
 export default ZaloPay;

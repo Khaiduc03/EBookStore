@@ -16,7 +16,7 @@ import { theme } from '../../../../theme';
 const ProfileUser: React.FC = props => {
   const styles = useStyles();
   const handlePressGoback = () => {
-    NavigationService.navigate(routes.MYPROFILE);
+    NavigationService.goBack();
   };
   const handlePressMessage = () => {
     NavigationService.navigate(routes.MESSAGES);

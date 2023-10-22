@@ -10,7 +10,7 @@ import useStyles from './styles';
 const HelpCenter: React.FC = () => {
   const styles = useStyles();
   const handlePressGoback = () => {
-    NavigationService.navigate(routes.PROFILE);
+    NavigationService.goBack();
   };
   return (
     <View style={styles.container}>

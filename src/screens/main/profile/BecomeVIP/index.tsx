@@ -8,7 +8,7 @@ import {HeaderCustom} from '../../../../components';
 const BecomeVIP: React.FC = () => {
   const styles = useStyles();
   const handlePressGoback = () => {
-    NavigationService.navigate(routes.PROFILE);
+    NavigationService.goBack();
   };
   return (
     <View style={styles.container}>
