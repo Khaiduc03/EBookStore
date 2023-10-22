@@ -9,19 +9,36 @@ const useStyles = makeStyles(({colors}) => ({
   name: {
     color: colors.black,
     fontSize: normalize(20),
-    fontFamily:fontFamilySetup.bold,
+    fontFamily: fontFamilySetup.bold,
+    paddingVertical: 20,
   },
   textInput: {
     color: colors.black,
     fontFamily: fontFamilySetup.medium,
+  
   },
-  viewbtn: {
+  viewinput: {
     backgroundColor: colors.grey7,
     height: normalize(55),
     borderWidth: normalize(0.3),
     borderRadius: normalize(12),
     paddingHorizontal: normalize(10),
     borderColor: colors.black,
+  },
+  viewinputbig: {
+    backgroundColor: colors.grey7,
+    height: normalize(149),
+    borderWidth: normalize(0.3),
+    borderRadius: normalize(12),
+    paddingHorizontal: normalize(10),
+    borderColor: colors.black,
+  },
+  viewbtn: {
+    padding: normalize(20),
+  },
+  errorText: {
+    fontSize: 30,
+    color: 'red',
   },
 }));
 export default useStyles;
