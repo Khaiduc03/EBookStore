@@ -30,12 +30,6 @@ const useStyles = makeStyles(({colors}) => ({
   colorIconHeader: {
     color: colors.primary,
   },
-  viewHeaderText: {
-    fontFamily: fontFamilySetup.bold,
-    fontSize: normalize(18),
-    color: colors.black,
-    marginLeft: normalize(WIDTH * 0.056),
-  },
   viewCenter: {
     justifyContent: 'center',
     alignItems: 'center',

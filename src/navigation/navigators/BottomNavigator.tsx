@@ -8,9 +8,9 @@ import React, {FunctionComponent} from 'react';
 import {View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-import {HomeImage} from '../../assets/svg';
+import {Icon} from '@rneui/base';
 import {routes} from '../../constants';
-import {Chat, Explore, Home, Profile} from '../../screens/main';
+import {Chat, Explore, Forum, Home, Profile} from '../../screens/main';
 import {Device} from '../../utils';
 
 const BottomTabs = createBottomTabNavigator();
@@ -25,13 +25,15 @@ const screenOptions: BottomTabNavigationOptions = {
 const choseIcon = (route: routes) => {
   switch (route) {
     case routes.HOME:
-      return 'Home';
+      return 'home';
     case routes.EXPLORE:
-      return 'Explore';
+      return 'id-card';
+    case routes.FORUM:
+      return 'people';
     case routes.MESSAGE:
-      return 'Message';
+      return 'chatbubble-ellipses';
     case routes.PROFILE:
-      return 'Profile';
+      return 'person-circle';
     default:
       return 'Home';
   }
@@ -102,14 +104,12 @@ const BottomNavigator: FunctionComponent = () => {
               onPress={onPress}
               onLongPress={onLongPress}
               style={styles.box}>
-              {/* <Icon
+              <Icon
                 name={choseIcon(route.name as routes)}
                 type="ionicon"
                 color={isFocused ? '#F89300' : 'gray'}
                 size={24}
-              /> */}
-
-              <HomeImage fill={isFocused ? '#F89300' : 'gray'} />
+              />
 
               <Text
                 style={{
@@ -133,6 +133,7 @@ const BottomNavigator: FunctionComponent = () => {
       tabBar={(props: BottomTabBarProps) => <Tab {...props} />}>
       <BottomTabs.Screen name={routes.HOME} component={Home} />
       <BottomTabs.Screen name={routes.EXPLORE} component={Explore} />
+      <BottomTabs.Screen name={routes.FORUM} component={Forum} />
       <BottomTabs.Screen name={routes.MESSAGE} component={Chat} />
       <BottomTabs.Screen name={routes.PROFILE} component={Profile} />
     </BottomTabs.Navigator>

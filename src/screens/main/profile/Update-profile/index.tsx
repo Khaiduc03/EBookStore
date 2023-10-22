@@ -251,9 +251,9 @@ const Update_Profile: FunctionComponent = () => {
                 </View>
                 <View style={styles.checkBoxItem}>
                   <CheckBox
-                    checked={credentials.gender === Gender.FAMALE}
+                    checked={credentials.gender === Gender.FEMALE}
                     onPress={() =>
-                      setCredentials({...credentials, gender: Gender.FAMALE})
+                      setCredentials({...credentials, gender: Gender.FEMALE})
                     }
                     checkedIcon="dot-circle-o"
                     uncheckedIcon="circle-o"

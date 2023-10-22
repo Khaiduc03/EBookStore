@@ -21,9 +21,10 @@ import {routes} from '../../../../constants';
 import {PERMISSION_TYPE, usePermission} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
 import {CustomToastBottom} from '../../../../utils';
-import {ChatBubble} from './components/renderItem/ChatBubbleItem';
+import {ChatBubble} from './components/ChatBubbleItem';
 import useStyles from './styles';
 import {IMessage, messages} from './types';
+import AvatarComponets from './components/CameraGallery';
 
 const MessageScreen: React.FC = () => {
   const styles = useStyles();
@@ -36,26 +37,6 @@ const MessageScreen: React.FC = () => {
   const [newMessage, setNewMessage] = useState<string>('');
   const footerRef = useRef<View>(null);
   const translateY = useRef(new Animated.Value(0)).current;
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [isShowSelect, setIsShowSelect] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  const handleAttachPress = () => {
-    // Hiển thị modal cho người dùng chọn giữa camera và thư viện
-    setIsShowSelect(true);
-    Keyboard.dismiss;
-    inputRef.current?.setNativeProps(styles.viewFocusSelectImage);
-  };
-
-  const handleOptionSelect = (option: any) => {
-    setSelectedOption(option);
-    setIsShowSelect(false);
-    if (option === 'camera') {
-      showCamera();
-    } else if (option === 'gallery') {
-      showGallery();
-    }
-  };
 
   const handleIconEmojiPress = () => {
     setIsShowEmoji(!isShowEmoji);
@@ -104,7 +85,6 @@ const MessageScreen: React.FC = () => {
     Keyboard.dismiss;
     inputRef.current?.setNativeProps(styles.viewBlur);
     setIsShowEmoji(false);
-    setIsShowSelect(false);
   };
 
   const handleFocus = () => {
@@ -114,7 +94,6 @@ const MessageScreen: React.FC = () => {
       useNativeDriver: false,
     }).start();
     setIsShowEmoji(false);
-    setIsShowSelect(false);
     inputRef.current?.setNativeProps(styles.viewBlur);
     if (!isShowEmoji) {
       Keyboard.dismiss;
@@ -146,75 +125,6 @@ const MessageScreen: React.FC = () => {
   const handleScrollToEnd = () => {
     scrollViewRef.current?.scrollToEnd({animated: true});
     setShowScrollButton(false);
-  };
-
-  const permission = usePermission();
-  const dispatch = useDispatch();
-  //show menu choose image
-  const [isShow, setIsShow] = useState<boolean>(false);
-
-  const optionsCamera: ImagePicker.CameraOptions = {
-    quality: 1,
-    mediaType: 'photo',
-    cameraType: 'front',
-    saveToPhotos: true,
-  };
-
-  const optionsLibrary: ImagePicker.ImageLibraryOptions = {
-    mediaType: 'photo',
-    quality: 1,
-    videoQuality: 'high',
-    selectionLimit: 0,
-    maxWidth: 500,
-    maxHeight: 500,
-  };
-
-  const showCamera = async () => {
-    setIsShow(false);
-    request(
-      Platform.OS === 'ios'
-        ? PERMISSIONS.IOS.CAMERA
-        : PERMISSIONS.ANDROID.CAMERA,
-    ).then(async result => {
-      if (result !== RESULTS.GRANTED && result !== RESULTS.UNAVAILABLE) {
-        await permission.showPermissionDialog(PERMISSION_TYPE.camera);
-      } else {
-        const result = await ImagePicker.launchCamera(optionsCamera);
-        if (result.errorCode) {
-          CustomToastBottom(result.errorMessage + '');
-        } else if (result.didCancel) {
-          CustomToastBottom("You haven't taken a photo yet");
-          inputRef.current?.setNativeProps(styles.viewBlur);
-        } else if (result.errorMessage) {
-          CustomToastBottom('An error occurred when opening the camera');
-          inputRef.current?.setNativeProps(styles.viewBlur);
-        } else if (result.assets) {
-          const formdata = new FormData();
-          formdata.append('avatar', {
-            uri: result.assets[0].uri,
-            name: result.assets[0].fileName,
-            type: result.assets[0].type,
-          });
-        }
-      }
-    });
-    setIsShow(false);
-  };
-
-  const showGallery = () => {
-    ImagePicker.launchImageLibrary(optionsLibrary, response => {
-      if (
-        response.assets &&
-        response.assets.length > 0 &&
-        response.assets[0].uri
-      ) {
-        setSelectedImage(response.assets[0].uri);
-        inputRef.current?.setNativeProps(styles.viewBlur);
-      } else {
-        CustomToastBottom('You have not selected a photo yet');
-        inputRef.current?.setNativeProps(styles.viewBlur);
-      }
-    });
   };
 
   return (
@@ -251,7 +161,7 @@ const MessageScreen: React.FC = () => {
               color: styles.iconVideocam.color,
               size: 30,
             }}
-            onPressLeftIcon={() => NavigationService.navigate(routes.CHAT)}
+            onPressLeftIcon={() => NavigationService.goBack()}
           />
 
           <TouchableWithoutFeedback onPress={handleTouchableWithoutFeedback}>
@@ -277,9 +187,7 @@ const MessageScreen: React.FC = () => {
             <View style={styles.viewRow}>
               <View style={styles.leftContainer}>
                 <View style={styles.leftIcon}>
-                  <TouchableOpacity onPress={handleAttachPress}>
-                    <Icon name="attach-outline" type="ionicon" size={30} />
-                  </TouchableOpacity>
+                  <AvatarComponets />
                 </View>
               </View>
 
@@ -332,26 +240,6 @@ const MessageScreen: React.FC = () => {
                 placeholder="Search"
                 columns={10}
               />
-            </View>
-          )}
-          {isShowSelect && (
-            <View style={styles.modalContainer}>
-              <TouchableOpacity
-                onPress={() => handleOptionSelect('camera')}
-                style={styles.btnPB}>
-                <View>
-                  <Icon name="camera-outline" type="ionicon" size={30} />
-                  <Text>Camera</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => handleOptionSelect('gallery')}
-                style={styles.btnPB}>
-                <View>
-                  <Icon name="image-outline" type="ionicon" size={30} />
-                  <Text>Gallery</Text>
-                </View>
-              </TouchableOpacity>
             </View>
           )}
         </View>

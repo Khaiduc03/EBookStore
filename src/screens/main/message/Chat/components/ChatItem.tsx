@@ -1,16 +1,16 @@
 import {Icon, Text} from '@rneui/base';
 import {Image, TouchableOpacity, View} from 'react-native';
-import {routes} from '../../../../../../constants';
-import {NavigationService} from '../../../../../../navigation';
-import useStyles from '../../styles';
-import {ItemProps} from '../../types';
+import {routes} from '../../../../../constants';
+import {NavigationService} from '../../../../../navigation';
+import useStyles from '../styles';
+import {ItemProps} from '../types';
 
 export const ChatItem = ({item}: ItemProps) => {
   const styles = useStyles();
 
   return (
     <TouchableOpacity
-      onPress={() => NavigationService.navigate(routes.MESSAGE)}
+      onPress={() => NavigationService.push(routes.MESSAGE)}
       style={styles.item}>
       <View style={styles.view0}>
         <View style={styles.view1}>

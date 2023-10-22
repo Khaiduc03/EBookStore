@@ -7,12 +7,9 @@ import {
   View,
 } from 'react-native';
 import {SearchCustom} from '../../../../components';
-import HeaderCustomV1 from '../../../../components/customs/HeaderCustomV1';
-import {routes} from '../../../../constants';
-import {NavigationService} from '../../../../navigation';
-import {ChatItem} from './components/renderItem/ChatItem';
+import {ChatItem} from './components/ChatItem';
 import useStyles from './styles';
-import {data, ItemData} from './types';
+import {ItemData, data} from './types';
 
 const ChatScreen: React.FC = () => {
   const styles = useStyles();
@@ -50,23 +47,7 @@ const ChatScreen: React.FC = () => {
       style={styles.container}>
       <View style={styles.wrapper}>
         <View style={styles.body}>
-          <View style={styles.pdH}>
-            <HeaderCustomV1
-              leftIcon={{
-                name: 'chatbubble-ellipses-outline',
-                type: 'ionicon',
-              }}
-              rightIconRight={{
-                name: 'notifications-outline',
-                type: 'ionicon',
-              }}
-              onPressLeftIcon={() =>
-                NavigationService.navigate(routes.BOTTOM_TAB)
-              }
-              title="Message"
-              titleStyle={styles.viewHeaderText}
-            />
-          </View>
+          <View style={styles.pdH}></View>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.pdHT}>
               <SearchCustom value={searchTerm} setValue={setSearchTerm} />
