@@ -1,13 +1,13 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 import useStyles from './styles';
-import ButtonLong from '../ButtonLong';
+import {ButtonLong} from '../HelpCenter/Contact_us/components';
 
-const Facebook = () => {
+const Facebook: React.FC = () => {
   const styles = useStyles();
 
   return (
-    <View>
+    <View style={styles.container}>
       <ButtonLong icon_Facebook title="Facebook" />
     </View>
   );
