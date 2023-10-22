@@ -131,7 +131,7 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
         ? PERMISSIONS.IOS.PHOTO_LIBRARY
         : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
     ).then(async result => {
-      if (result !== RESULTS.GRANTED && result !== RESULTS.UNAVAILABLE) {
+      if (result === RESULTS.GRANTED) {
         await permission.showPermissionDialog(PERMISSION_TYPE.library);
       } else {
         const result = await ImagePicker.launchImageLibrary(optionLibrary);

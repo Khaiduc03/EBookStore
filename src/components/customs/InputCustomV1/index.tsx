@@ -56,12 +56,12 @@ const InputCustomV1: FunctionComponent<
         rightIcon={props.secure && _renderSecure()}
         value={props.value}
         onChangeText={props.onChangeText}
-        renderErrorMessage={false}
         placeholderTextColor={
           styles.placeholderColor.color || props.placeholder
         }
-        errorMessage="sai"
-
+        renderErrorMessage={false}
+        errorMessage={props.errorMessage}
+        errorStyle={styles.errorStyle}
         keyboardType={props.keyboardType}
         onBlur={handleInputBlur}
         onFocus={handleInputFocus}
