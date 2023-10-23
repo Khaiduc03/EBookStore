@@ -65,11 +65,11 @@ const Home: FunctionComponent = () => {
     <View style={styles.container}>
       <HeaderCustom
         titleStyle={styles.textTitleHeader}
-        onPressRightIconLeft={handlePressSearch}
+        onPressRightIconMiddle={handlePressSearch}
         leftIconStyle={styles.leftIconStyle}
         leftIcon={{name: 'book', type: 'font-awesome'}}
         title="ComicVerse"
-        rightIconleft={{name: 'search', type: 'ionicon'}}
+        rightIconMiddle={{name: 'search', type: 'ionicon'}}
         rightIconRight={createIcon({
           name: 'notifications-outline',
           type: 'ionicon',

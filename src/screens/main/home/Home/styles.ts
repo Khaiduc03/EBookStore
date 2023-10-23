@@ -40,7 +40,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   topicsContainer: {
     flexDirection: 'row',
-    width: '70%',
+    width: '100%',
     flexWrap: 'wrap',
   },
 }));

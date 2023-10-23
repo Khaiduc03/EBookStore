@@ -137,6 +137,14 @@ const reducer = createSlice({
         },
       };
     },
+    ClearListBySearch: (state: ComicState) => {
+      return {
+        ...state,
+        listDataBySearch: {
+          data: [],
+        },
+      };
+    },
   },
 });
 
