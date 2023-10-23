@@ -38,14 +38,18 @@ const AddPayment: React.FC = () => {
     setExpiryDate(text);
   };
   const handleCardNumberChange = (text: string) => {
-    if (text.length > 21) {
-      text = text.substring(0, 21);
-    }
-    setCardNumber(text);
+    text = text.replace(/-/g, '');
 
-    if (text.length > 20) {
+    text = text.replace(/[^0-9]/g, '');
+
+    if (text.length > 16) {
+      text = text.substring(0, 16);
+    }
+    const formattedText = text.replace(/(.{4})/g, '$1-');
+    const trimmedText = formattedText.replace(/-$/, '');
+    setCardNumber(trimmedText);
+    if (trimmedText.length < 16) {
       setErrorState(true);
-      setErrorText('Card number should be 20 characters or less.');
     } else {
       setErrorState(false);
       setErrorText('');
@@ -124,7 +128,7 @@ const AddPayment: React.FC = () => {
           multiline
           keyboardType="numeric"
           numberOfLines={1}
-          placeholder="Please enter your bank card number"
+          placeholder="Please enter your card number"
           placeholderTextColor="gray"
           onChangeText={handleCardNumberChange}
           value={cardNumber}

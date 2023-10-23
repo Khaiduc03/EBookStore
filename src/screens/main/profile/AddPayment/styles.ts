@@ -27,7 +27,9 @@ const useStyles = makeStyles(({colors}) => ({
   },
   textInput: {
     color: colors.black,
-    fontFamily: fontFamilySetup.medium,
+    fontFamily: fontFamilySetup.bold,
+    fontSize: normalize(15),
+    letterSpacing: normalize(1.5),
   },
   viewinput: {
     backgroundColor: colors.grey7,
