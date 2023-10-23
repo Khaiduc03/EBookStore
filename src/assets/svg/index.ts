@@ -5,4 +5,5 @@ export {default as LobbyImage} from './components/LobbyImage';
 export {default as ProfileImage} from './components/ProfileImage';
 export {default as CalendarImage} from './components/CalendarImage';
 export {default as Default_avatar} from './components/Default_avatar';
+export {default as CreditCard} from './components/CreditCardImage';
 export const SvgImages = {};

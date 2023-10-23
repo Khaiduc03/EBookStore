@@ -46,4 +46,7 @@ export enum routes {
 
   // SCreen Help Center
   CUSTOMERSERVICE = 'CUSTOMERSERVICE',
+
+  //Screen Payment
+  ADDPAYMENT = 'ADDPAYMENT',
 }

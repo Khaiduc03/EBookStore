@@ -1,5 +1,5 @@
-import { Icon, Text } from '@rneui/base';
-import React, { Fragment, useRef, useState } from 'react';
+import {Icon, Text} from '@rneui/base';
+import React, {Fragment, useRef, useState} from 'react';
 import {
   Animated,
   Keyboard,
@@ -10,20 +10,20 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View
+  View,
 } from 'react-native';
-import EmojiSelector, { Categories } from 'react-native-emoji-selector';
+import EmojiSelector, {Categories} from 'react-native-emoji-selector';
 import * as ImagePicker from 'react-native-image-picker';
-import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
-import { useDispatch } from 'react-redux';
-import { HeaderCustom } from '../../../../components';
-import { routes } from '../../../../constants';
-import { PERMISSION_TYPE, usePermission } from '../../../../hooks';
-import { NavigationService } from '../../../../navigation';
-import { CustomToastBottom } from '../../../../utils';
-import { ChatBubble } from './components/renderItem/ChatBubbleItem';
+import {PERMISSIONS, RESULTS, request} from 'react-native-permissions';
+import {useDispatch} from 'react-redux';
+import {HeaderCustom} from '../../../../components';
+import {routes} from '../../../../constants';
+import {PERMISSION_TYPE, usePermission} from '../../../../hooks';
+import {NavigationService} from '../../../../navigation';
+import {CustomToastBottom} from '../../../../utils';
+import {ChatBubble} from './components/renderItem/ChatBubbleItem';
 import useStyles from './styles';
-import { IMessage, messages } from './types';
+import {IMessage, messages} from './types';
 
 const Message: React.FC = () => {
   const styles = useStyles();
