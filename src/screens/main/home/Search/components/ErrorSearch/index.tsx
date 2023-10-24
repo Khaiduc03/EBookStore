@@ -4,17 +4,17 @@ import useStyles from './styles';
 import LottieView from 'lottie-react-native';
 import {JsonImages} from '../../../../../../assets';
 
-const NoSearch = () => {
+const ErrorSearch = () => {
   const styles = useStyles();
   return (
     <View style={styles.container}>
       <LottieView
         autoPlay
         style={styles.lottieStyle}
-        source={JsonImages.noSearch}
+        source={JsonImages.errorSearch}
       />
     </View>
   );
 };
 
-export default NoSearch;
+export default ErrorSearch;

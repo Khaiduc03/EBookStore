@@ -9,8 +9,9 @@ import {getDataComicBySeacrh} from '../../../../redux/selectors/comic.selector';
 import {ComicActions, ComicType, TopicActions} from '../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {backScreen} from '../../../../utils';
-import NoSearch from './components/NoSearch';
 import {FlatList} from 'react-native-gesture-handler';
+import ErrorSearch from './components/ErrorSearch';
+import NoSearch from './components/NoSearch';
 
 const Search = () => {
   const dispatch = useAppDispatch();
@@ -18,9 +19,11 @@ const Search = () => {
   const [numCols, setNumCols] = useState(3);
   const [data, setData] = useState<any>([]);
   const [page, setPage] = useState(2);
+  const [result, SetResult] = useState(true);
 
   useEffect(() => {
     if (dataBySearch && dataBySearch.length !== 0) {
+      SetResult(true);
       setData([...data, ...dataBySearch]);
     }
   }, [dataBySearch]);
@@ -36,8 +39,9 @@ const Search = () => {
   };
 
   const onPressSearch = () => {
-    setData([]);
     dispatch(ComicActions.getListBySearch({key: search, page: 1}));
+    setData([]);
+    SetResult(false);
     setPage(2);
   };
 
@@ -68,7 +72,10 @@ const Search = () => {
           />
         </View>
       </View>
-      {data?.length == 0 ? (
+
+      {data?.length === 0 && !result ? (
+        <ErrorSearch />
+      ) : data?.length === 0 ? (
         <NoSearch />
       ) : (
         <FlatList
