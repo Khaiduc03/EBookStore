@@ -62,7 +62,7 @@ const handleEvaluatePress = () => {
   console.log('Evaluate this here !!');
 };
 const handleReviewsaboutusPress = () => {
-  console.log('Reviews about us this here !!'); 
+  console.log('Reviews about us this here !!');
 };
 const handleVisitourwebsitePress = () => {
   console.log('Visit our Website this here !!');

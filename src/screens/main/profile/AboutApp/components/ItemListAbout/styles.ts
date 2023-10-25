@@ -42,5 +42,17 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.bold,
     color: colors.grey5,
   },
+  modalContent:{
+
+  },
+  modalText:{
+
+  },
+  modalButton:{
+
+  },
+  modalButtonText:{
+
+  },
 }));
 export default useStyles;

@@ -12,7 +12,7 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
     padding: normalize(10),
     borderWidth: normalize(1),
-    borderColor: '#ccc',
+    borderColor: colors.grey4,
     borderRadius: normalize(10),
   },
   iconContainer: {
@@ -45,7 +45,7 @@ const useStyles = makeStyles(({colors}) => ({
     borderBottomWidth: normalize(0.3),
     width: normalize(250),
     alignItems: 'center',
-    borderColor: 'gray',
+    borderColor: colors.grey4,
     paddingVertical: normalize(5),
   },
 }));

@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {View, ScrollView} from 'react-native';
 import useStyles from './styles';
 import ButtonSmall from '../ButtonSmall';
+import {NavigationService} from '../../../../../../../navigation';
+import {routes} from '../../../../../../../constants';
 
 const ItemListBtnSmall: React.FC = () => {
   const styles = useStyles();

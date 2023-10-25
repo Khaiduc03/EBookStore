@@ -13,12 +13,9 @@ const CustomerService: React.FC = () => {
   };
   const handleAccept = () => {
     if (!title || !description) {
-      Alert.alert('Sending failed', 'Please fill in all information');
+      Alert.alert('Failed', 'Please fill in all information');
     } else {
-      Alert.alert(
-        'Submitted successfully',
-        'We have received your information',
-      );
+      Alert.alert('Successfully ', 'We have received your information');
     }
   };
 
@@ -29,7 +26,7 @@ const CustomerService: React.FC = () => {
         leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         onPressLeftIcon={handlePressGoBack}
       />
-      <View style={{paddingHorizontal: 20}}>
+      <View style={{paddingHorizontal: 20, paddingVertical: 10}}>
         <Text style={styles.name}>Title</Text>
         <View style={styles.viewinput}>
           <TextInput

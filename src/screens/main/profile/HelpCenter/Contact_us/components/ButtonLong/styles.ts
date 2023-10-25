@@ -27,7 +27,7 @@ const useStyles = makeStyles(({colors}) => ({
     lineHeight: normalize(21),
     letterSpacing: normalize(0.12),
     marginStart: normalize(20),
-    color: colors.black1,
+    color: colors.blackDefault,
   },
   ButtonMeta: {
     width: normalize(300),

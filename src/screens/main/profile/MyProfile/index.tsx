@@ -22,8 +22,7 @@ const MyProfile: React.FC = props => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-                leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
-
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="My Profile"
         onPressLeftIcon={handlePressGoback}
         rightIconleft={{name: 'plus-square', type: 'font-awesome-5'}}

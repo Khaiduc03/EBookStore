@@ -23,9 +23,9 @@ const Payments_method: React.FC = () => {
       <Pay icGoogle title="Google Pay" />
       <Pay icZaloPay title="Zalo Pay" />
       <Pay icPaypal title="Paypal" />
-      <View style={{paddingHorizontal:20}}>
+      <View style={{paddingHorizontal: 20}}>
         <BigButton
-          textButton="Add"
+          textButton="+ Add"
           onPressButton={() => NavigationService.navigate(routes.ADDPAYMENT)}
         />
       </View>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {memo} from 'react';
 
 import Svg, {SvgProps, Path} from 'react-native-svg';
-const SvgComponent = (props: SvgProps) => (
+const PayPalIcon = (props: SvgProps) => (
   <Svg
   //@ts-ignore
     xmlns="http://www.w3.org/2000/svg"
@@ -24,5 +24,4 @@ const SvgComponent = (props: SvgProps) => (
     />
   </Svg>
 );
-const Paypal = memo(SvgComponent);
-export default Paypal;
+export default PayPalIcon;

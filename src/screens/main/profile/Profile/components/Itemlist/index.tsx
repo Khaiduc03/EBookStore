@@ -68,7 +68,7 @@ const Itemlish: React.FC = () => {
             rightIcon
           />
         </TouchableOpacity>
-        
+
         <TouchableOpacity
           onPress={() => NavigationService.navigate(routes.HISTORY)}>
           <ItemListProfile
@@ -109,6 +109,17 @@ const Itemlish: React.FC = () => {
           <ItemListProfile
             title="About this app"
             name="book"
+            type="font-awesome"
+            color="#F89300"
+            size={50}
+            rightIcon
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => NavigationService.navigate(routes.BECOMEVIP)}>
+          <ItemListProfile
+            title="Become a VIP "
+            name="user-secret"
             type="font-awesome"
             color="#F89300"
             size={50}

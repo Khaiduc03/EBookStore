@@ -24,6 +24,7 @@ declare module '@rneui/themed' {
     blackDefault: string;
     whiteDefault: string;
     black1: string;
+
   }
 }
 
