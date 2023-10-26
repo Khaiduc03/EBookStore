@@ -1,6 +1,5 @@
 import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../../utils';
-import {fontFamilySetup} from '../../../../utils/font';
+import {Device} from '../../../../../utils';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
@@ -10,14 +9,9 @@ const useStyles = makeStyles(({colors}) => ({
     flex: 1,
     backgroundColor: colors.background,
   },
-  tabStyle: {},
-  titleStyle: {
+  text: {
     color: colors.black,
-    fontSize: normalize(18),
-    fontFamily: fontFamilySetup.bold,
-  },
-  iconLeftStyle: {
-    color: colors.black,
+    fontSize: normalize(30),
   },
 }));
 export default useStyles;

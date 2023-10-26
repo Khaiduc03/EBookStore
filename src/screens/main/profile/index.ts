@@ -1,23 +1,24 @@
 import {routes} from '../../../constants';
 import {Screen} from '../../../types';
 import AboutApp from './AboutApp';
+import AddPayment from './AddPayment';
 import BecomeVIP from './BecomeVIP';
-import Favorite from './Favorite';
+import ChangePassWord from './ChangePassword';
+import CustomerService from './CustomerService';
 import HelpCenter from './HelpCenter';
 import Contact_us from './HelpCenter/Contact_us';
 import FAQ from './HelpCenter/FAQ';
-import History from './History';
+import HistoryandFavorite from './HistoryandFavorite';
+import FavoriteScreen from './HistoryandFavorite/Favorite';
+import HistoryScreen from './HistoryandFavorite/History';
 import MyProfile from './MyProfile';
 import {PostDetail} from './MyProfile/components';
-import Notification from './SettingNotification';
 import Payments_method from './Payment-method';
 import ProfileUser from './Profile-User';
 import {PostDetailUser} from './Profile-User/components';
 import Security from './Security';
+import Notification from './SettingNotification';
 import Update_Profile from './Update-profile';
-import ChangePassWord from './ChangePassword';
-import CustomerService from './CustomerService';
-import AddPayment from './AddPayment';
 
 export {default as Profile} from './Profile';
 
@@ -76,11 +77,11 @@ export const profileScreens: Screen[] = [
   },
   {
     name: routes.FAVORITE,
-    component: Favorite,
+    component: FavoriteScreen,
   },
   {
     name: routes.HISTORY,
-    component: History,
+    component: HistoryScreen,
   },
   {
     name: routes.CHANGEPASSWORD,
@@ -93,5 +94,9 @@ export const profileScreens: Screen[] = [
   {
     name: routes.ADDPAYMENT,
     component: AddPayment,
+  },
+  {
+    name: routes.HISTORYANDFAVORITE,
+    component: HistoryandFavorite,
   },
 ];

@@ -10,15 +10,14 @@ const useStyles = makeStyles(({colors}) => ({
     flex: 1,
     backgroundColor: colors.background,
   },
-  text: {
-    fontSize: normalize(40),
-    letterSpacing: normalize(0.5),
-    fontStyle: 'normal',
-    fontFamily: fontFamilySetup.bold,
-    color: colors.black,
-  },
   iconLeftStyle: {
     color: colors.black,
+  },
+  tabStyle: {},
+  titleStyle: {
+    color: colors.primary,
+    fontSize: normalize(18),
+    fontFamily: fontFamilySetup.bold,
   },
 }));
 export default useStyles;

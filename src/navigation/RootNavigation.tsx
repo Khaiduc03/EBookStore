@@ -10,6 +10,7 @@ import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
 import AddPayment from '../screens/main/profile/AddPayment';
 import BecomeVIP from '../screens/main/profile/BecomeVIP';
+import HistoryandFavorite from '../screens/main/profile/HistoryandFavorite';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -39,8 +40,8 @@ const RootNavigation = () => {
         backgroundColor={usestyles().Mode.backgroundColor}
         barStyle={themeMode}
       />
-      {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      <AppNavigator />
+      {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
+      {/* <HistoryandFavorite /> */}
     </NavigationContainer>
   );
 };

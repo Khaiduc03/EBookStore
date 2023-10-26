@@ -1,10 +1,8 @@
-import {StyleSheet, View} from 'react-native';
-import {Tab, Text, TabView} from '@rneui/themed';
+import {Tab, TabView} from '@rneui/themed';
 import React from 'react';
-import {CustomTabViewItemProps} from './types';
-import useStyles from './styles';
 import {ScrollView} from 'react-native-gesture-handler';
-import {HeaderDetail} from '../../../screens/main/home/ComicsDetail/Components';
+import useStyles from './styles';
+import {CustomTabViewItemProps} from './types';
 
 const TabViewItem: React.FunctionComponent<CustomTabViewItemProps> = props => {
   const [index, setIndex] = React.useState(0);
