@@ -31,6 +31,7 @@ const Episodes = () => {
               NavigationService.navigate(routes.CHAPTER, {
                 chapter_number: item.chapter_number,
                 comic_uuid: item.comic_uuid,
+                chapter_name: item.chapter_name,
               })
             }
             key={item.uuid}

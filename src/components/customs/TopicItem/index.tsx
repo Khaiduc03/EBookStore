@@ -13,7 +13,10 @@ const TopicItem: React.FunctionComponent<CustomTopicsProps> = props => {
   return (
     <TouchableOpacity
       onPress={() =>
-        NavigationService.navigate(routes.COMICBYTOPIC, {uuid: props.uuid})
+        NavigationService.navigate(routes.COMICBYTOPIC, {
+          uuid: props.uuid,
+          name: props.title,
+        })
       }
       style={styles.container || props.viewStyle}>
       <ImageBackground

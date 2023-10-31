@@ -9,6 +9,7 @@ import {NavigationService} from '../../../navigation';
 import {routes} from '../../../constants';
 import FastImage from 'react-native-fast-image';
 import {ComicType} from '../../../redux';
+import {Skeleton} from '@rneui/base';
 
 const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();

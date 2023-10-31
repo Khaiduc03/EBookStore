@@ -114,7 +114,7 @@ const Home: FunctionComponent = () => {
                   type: 'ionicon',
                   color: numCols === 1 ? '#F89300' : '',
                 }}
-                onPressRightIconLeft={handleGridIconPress}
+                onPressRightIconMiddle={handleGridIconPress}
                 onPressRightIconRight={handleListIconPress}
               />
             </View>

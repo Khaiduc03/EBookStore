@@ -1,14 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  StatusBar,
-  TouchableOpacity,
-  FlatList,
-  Image,
-  TouchableWithoutFeedback,
-  TouchableHighlight,
-} from 'react-native';
+import {View, FlatList, TouchableHighlight} from 'react-native';
 import {Device} from '../../../../utils';
 import useStyles from './styles';
 import {FooterChapter, HeaderChapter} from './Components';
@@ -23,6 +14,7 @@ const WIDTH = Device.getDeviceWidth();
 interface RouteParamsIdChapter {
   chapter_number: number;
   comic_uuid: string;
+  chapter_name: string;
 }
 
 const ChapterDetail = () => {
@@ -30,9 +22,9 @@ const ChapterDetail = () => {
   const route = useRoute();
   const chapter_number = (route.params as RouteParamsIdChapter).chapter_number;
   const comic_uuid = (route.params as RouteParamsIdChapter).comic_uuid;
+  const chapter_name = (route.params as RouteParamsIdChapter).chapter_name;
 
   const dataDetailChapter = useAppSelector(getDataDetailChapter);
-  console.log('data', dataDetailChapter);
 
   useEffect(() => {
     dispath(
@@ -54,7 +46,7 @@ const ChapterDetail = () => {
 
   const renderHeader = () => {
     if (showHeader) {
-      return <HeaderChapter chapter_number={chapter_number} />;
+      return <HeaderChapter chapter_name={chapter_name} />;
     } else {
       return null;
     }

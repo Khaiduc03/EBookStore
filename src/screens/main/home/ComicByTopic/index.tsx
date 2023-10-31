@@ -22,11 +22,13 @@ import {useRoute} from '@react-navigation/native';
 
 interface RouteParamsIdTopic {
   uuid: string;
+  name: string;
 }
 
 const ComicByTopic = () => {
   const route = useRoute();
   const uuidComic = (route.params as RouteParamsIdTopic).uuid;
+  const nameTopic = (route.params as RouteParamsIdTopic).name;
   const dispatch = useAppDispatch();
   const dataComic = useAppSelector(getDataByTopic) || [];
   const [numCols, setNumCols] = useState<number>(3);
@@ -77,7 +79,7 @@ const ComicByTopic = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        title="Romance"
+        title={nameTopic}
         leftIconStyle={styles.leftIconStyle}
         leftIcon={{name: 'arrow-back', color: styles.leftIconStyle.color}}
         onPressLeftIcon={() => backScreen()}
@@ -103,7 +105,7 @@ const ComicByTopic = () => {
                 type: 'ionicon',
                 color: numCols === 1 ? '#F89300' : '',
               }}
-              onPressRightIconLeft={handleGridIconPress}
+              onPressRightIconMiddle={handleGridIconPress}
               onPressRightIconRight={handleListIconPress}
             />
           );
