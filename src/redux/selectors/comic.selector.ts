@@ -15,10 +15,10 @@ export const getDataByTopic = (state: RootState) =>
   state.comic.listDataByTopic?.data;
 
 export const getDataAllChapter = (state: RootState) =>
-  state.comic.listChapter?.chapter;
+  state.comic.listChapter?.data;
 
 export const getDataDetailChapter = (state: RootState) =>
-  state.comic.listDetailChapter?.data;
+  state.comic.listDetailChapter?.data_chapter;
 
 export const getDataComicBySeacrh = (state: RootState) =>
   state.comic.listDataBySearch?.data;

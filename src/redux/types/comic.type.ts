@@ -18,9 +18,13 @@ export interface PayloadHttpListComics<T> {
 }
 
 export interface PayloadHttpListChapter<T> {
-  code?: number;
-  message?: string;
-  chapter?: T[];
+  data?: T[];
+}
+
+export interface PayloadHttpDetailChapter<T> {
+  next_chapter?: string;
+  previous_chapter?: string;
+  data_chapter?: T[];
 }
 
 export type ComicState = Partial<{
@@ -29,7 +33,7 @@ export type ComicState = Partial<{
   listDataBySearch: PayloadHttpList<ComicType>;
   topic: PayloadHttpList<TopicType>;
   detailData: PayloadHttpList<ComicDetailType>;
-  listDetailChapter: PayloadHttpList<DetailChapterType>;
+  listDetailChapter: PayloadHttpDetailChapter<DetailChapterType>;
   listChapter: PayloadHttpListChapter<ChapterType>;
 }>;
 
@@ -52,23 +56,24 @@ export type ComicDetailType = uuid &
     description: string;
     views: number;
     image_url: string;
-    topicnames: string[];
+    topics: string[];
     favorite_uuid: string;
     isfavorite: boolean;
   };
 
 export type ChapterType = uuid &
   Timestamp & {
+    comic_uuid: string;
     chapter_name: string;
     chapter_number: string;
     views: string;
   };
 
-export type DetailChapterType = uuid &
-  Timestamp & {
-    public_id: string;
-    url: string;
-    secure_url: string;
-    page: number;
-    chapter: ChapterType;
-  };
+export type DetailChapterType = Timestamp & {
+  chapter_uuid: string;
+  public_id: string;
+  url: string;
+  secure_url: string;
+  page: number;
+  chapter: ChapterType;
+};

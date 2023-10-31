@@ -45,7 +45,7 @@ const HeaderDetail = () => {
               : 'No Created Day'}
           </Text>
           <View style={styles.topicsContainer}>
-            {data?.topicnames.map((text, index) => (
+            {data?.topics.map((text, index) => (
               <View key={index} style={styles.itemTopics}>
                 <Text style={styles.textTopics}>{text}</Text>
               </View>

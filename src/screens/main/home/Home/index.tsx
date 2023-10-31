@@ -104,7 +104,7 @@ const Home: FunctionComponent = () => {
               <HeaderCustom
                 titleStyle={styles.textTitle}
                 title="New Comics"
-                rightIconleft={{
+                rightIconMiddle={{
                   name: 'grid-outline',
                   type: 'ionicon',
                   color: numCols === 3 ? '#F89300' : '',

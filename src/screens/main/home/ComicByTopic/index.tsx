@@ -93,7 +93,7 @@ const ComicByTopic = () => {
             <HeaderCustom
               titleStyle={styles.titleHeaderStyle}
               title="Show in "
-              rightIconleft={{
+              rightIconMiddle={{
                 name: 'grid-outline',
                 type: 'ionicon',
                 color: numCols === 3 ? '#F89300' : '',

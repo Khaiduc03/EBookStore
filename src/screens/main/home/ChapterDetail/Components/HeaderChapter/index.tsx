@@ -4,8 +4,13 @@ import useStyles from './styles';
 import {Icon} from '@rneui/themed';
 import {TouchableOpacity} from 'react-native';
 import {backScreen} from '../../../../../../utils';
+import ChapterDetail from '../..';
+import {ChapterType} from '../../../../../../redux';
+interface HeaderChapterProps {
+  chapter_number: number;
+}
 
-const HeaderChapter = () => {
+const HeaderChapter: React.FC<HeaderChapterProps> = props => {
   const styles = useStyles();
   return (
     <View style={styles.container}>
@@ -18,7 +23,7 @@ const HeaderChapter = () => {
             color={styles.iconStyle.color}
           />
         </TouchableOpacity>
-        <Text style={styles.textChapter}>Chapter 1</Text>
+        <Text style={styles.textChapter}>Chapter {props.chapter_number}</Text>
       </View>
       <TouchableOpacity>
         <Icon

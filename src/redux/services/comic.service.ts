@@ -21,12 +21,19 @@ export class ComicService {
   }
 
   static async getAllChapterByComic(action: any) {
-    console.log(`${ENDPOINTS.CHAPTER}?comic_uuid=${action}`);
-    return await apiService.get(`${ENDPOINTS.CHAPTER}?comic_uuid=${action}`);
+    console.log(`${ENDPOINTS.CHAPTER}${action}?chapter_number=${0}`);
+    return await apiService.get(
+      `${ENDPOINTS.CHAPTER}${action}?chapter_number=${0}`,
+    );
   }
 
-  static async getChapterById(action: string) {
-    return await apiService.get(`${ENDPOINTS.CHAPTER_UUID}${action}`);
+  static async getChapterById(action: any) {
+    console.log(
+      `${ENDPOINTS.CHAPTER}${action.comic_uuid}?chapter_number=${action.chapter_number}`,
+    );
+    return await apiService.get(
+      `${ENDPOINTS.CHAPTER}${action.comic_uuid}?chapter_number=${action.chapter_number}`,
+    );
   }
 
   static async getComicBySearch(action: any) {

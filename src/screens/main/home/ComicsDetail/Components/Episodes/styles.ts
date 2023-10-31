@@ -5,16 +5,16 @@ const useStyles = makeStyles(({colors}) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    paddingHorizontal: normalize(15),
+    paddingHorizontal: normalize(10),
   },
   chapterContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderWidth: 1,
-    borderColor: colors.black,
+    borderBottomWidth: 0.5,
+    borderColor: '#757171',
     padding: normalize(8),
     borderRadius: 10,
-    marginBottom: normalize(10),
+    marginTop: normalize(5),
   },
   headerChapter: {
     flexDirection: 'row',
@@ -27,9 +27,15 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.bold,
   },
   textChapter: {
-    fontSize: normalize(14),
+    fontSize: normalize(12),
     color: colors.black,
     fontFamily: fontFamilySetup.medium,
+    paddingLeft: normalize(5),
+  },
+  textName: {
+    fontSize: normalize(16),
+    color: colors.black,
+    fontFamily: fontFamilySetup.bold,
   },
 }));
 

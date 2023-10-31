@@ -21,19 +21,27 @@ import {getDataDetailChapter} from '../../../../redux/selectors/comic.selector';
 
 const WIDTH = Device.getDeviceWidth();
 interface RouteParamsIdChapter {
-  uuid: string;
+  chapter_number: number;
+  comic_uuid: string;
 }
 
 const ChapterDetail = () => {
   const dispath = useAppDispatch();
   const route = useRoute();
-  const uuidChapter = (route.params as RouteParamsIdChapter).uuid;
+  const chapter_number = (route.params as RouteParamsIdChapter).chapter_number;
+  const comic_uuid = (route.params as RouteParamsIdChapter).comic_uuid;
 
   const dataDetailChapter = useAppSelector(getDataDetailChapter);
+  console.log('data', dataDetailChapter);
 
   useEffect(() => {
-    dispath(ComicActions.getListChapterDetail(uuidChapter));
-  }, [uuidChapter]);
+    dispath(
+      ComicActions.getListChapterDetail({
+        chapter_number: chapter_number,
+        comic_uuid: comic_uuid,
+      }),
+    );
+  }, [chapter_number, comic_uuid]);
 
   const styles = useStyles();
   const [showHeader, setShowHeader] = useState(true);
@@ -46,7 +54,7 @@ const ChapterDetail = () => {
 
   const renderHeader = () => {
     if (showHeader) {
-      return <HeaderChapter />;
+      return <HeaderChapter chapter_number={chapter_number} />;
     } else {
       return null;
     }

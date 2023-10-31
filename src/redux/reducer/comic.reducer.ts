@@ -9,6 +9,7 @@ import {
   PayloadHttpListChapter,
   ChapterType,
   DetailChapterType,
+  PayloadHttpDetailChapter,
 } from '../types';
 import {PayloadHttpList} from '../../types';
 
@@ -99,24 +100,26 @@ const reducer = createSlice({
       return {
         ...state,
         listChapter: {
-          chapter: action.payload.chapter,
+          data: action.payload.data,
         },
       };
     },
 
-    getListChapterDetail: (state: ComicState, _: PayloadAction<string>) => {
+    getListChapterDetail: (state: ComicState, _: PayloadAction<any>) => {
       return {
         ...state,
       };
     },
     setListChapterDetail: (
       state: ComicState,
-      action: PayloadAction<PayloadHttpList<DetailChapterType>>,
+      action: PayloadAction<PayloadHttpDetailChapter<DetailChapterType>>,
     ) => {
       return {
         ...state,
         listDetailChapter: {
-          data: action.payload.data,
+          data_chapter: action.payload.data_chapter,
+          next_chapter: action.payload.next_chapter,
+          previous_chapter: action.payload.previous_chapter,
         },
       };
     },

@@ -25,8 +25,10 @@ function* getComicById(action: PayloadAction<string>): Generator {
   try {
     console.log('run');
     const {data}: any = yield call(ComicService.getComicById, action.payload);
+
     if (data.code == 200) {
       console.log('run push tookit');
+      console.log(data);
       yield put(ComicActions.setDetailComic(data));
     } else {
       console.log('Server errol !!!');
@@ -71,7 +73,7 @@ function* getChapterByComicSaga(action: PayloadAction<string>): Generator {
     );
     if (data.code == 200) {
       console.log('run push tookit');
-      yield put(ComicActions.setListChapter(data.data));
+      yield put(ComicActions.setListChapter(data));
     } else {
       console.log('Server errol !!!');
     }
@@ -82,14 +84,15 @@ function* getChapterByComicSaga(action: PayloadAction<string>): Generator {
   }
 }
 
-function* getDetailChapterSaga(action: PayloadAction<string>): Generator {
+function* getDetailChapterSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoading());
   try {
     console.log('run');
     const {data}: any = yield call(ComicService.getChapterById, action.payload);
+
     if (data.code == 200) {
       console.log('run push tookit');
-      yield put(ComicActions.setListChapterDetail(data));
+      yield put(ComicActions.setListChapterDetail(data.data));
     } else {
       console.log('Server errol !!!');
     }
