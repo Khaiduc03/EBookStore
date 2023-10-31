@@ -35,6 +35,7 @@ const rootReducers = combineReducers({
   theme: ThemeReducer,
   comic: ComicReducer,
   topic: TopicReducer,
+  
 });
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducers);
 

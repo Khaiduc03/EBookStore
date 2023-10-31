@@ -12,7 +12,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewAvatarFollow: {
     paddingVertical: normalize(24),
-    paddingHorizontal: normalize(15),
+    paddingHorizontal: normalize(24),
     flexDirection: 'row',
   },
   viewFollow: {

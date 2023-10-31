@@ -34,6 +34,18 @@ const useStyles = makeStyles(({colors}) => ({
   viewList: {
     flex: 1,
   },
+  nameUser: {
+    fontSize: normalize(22),
+    fontFamily: fontFamilySetup.bold,
+    color: colors.black,
+    lineHeight: normalize(21),
+  },
+  email: {
+    fontSize: normalize(15),
+    fontFamily: fontFamilySetup.regular,
+    color: colors.black,
+    lineHeight: normalize(21),
+  },
 }));
 
 export default useStyles;

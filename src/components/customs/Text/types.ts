@@ -7,4 +7,5 @@ export type TextCustomProps = {
   textPrimary?: boolean;
   title?: string;
   number?: number;
+  statuss?: boolean;
 };

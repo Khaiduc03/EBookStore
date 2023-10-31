@@ -6,6 +6,8 @@ import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import useStyles from '../MyProfile/styles';
 import {ItemFollow, ItemListMyProfile, ItemPost} from './components';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {AuthActions, getAuthUserProfile} from '../../../../redux';
 
 const MyProfile: React.FC = props => {
   const styles = useStyles();
@@ -18,23 +20,25 @@ const MyProfile: React.FC = props => {
   const renderItem = ({item}: {item: (typeof data)[0]}) => (
     <ItemListMyProfile {...item} />
   );
-
+  const dispatch = useAppDispatch();
+  dispatch(AuthActions.getUserInfo());
+  const {email, fullname, image_url, summary} =
+    useAppSelector(getAuthUserProfile);
   return (
     <View style={styles.container}>
       <HeaderCustom
         leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="My Profile"
         onPressLeftIcon={handlePressGoback}
-        rightIconleft={{name: 'plus-square', type: 'font-awesome-5'}}
-        rightIconRight={{name: 'pen', type: 'font-awesome-5'}}
+        rightIconRight={{name: 'plus-square', type: 'font-awesome-5'}}
         onPressRightIconRight={handlePressGoScreen}
       />
       <View>
         <ItemFollow />
       </View>
       <View style={styles.nameUser}>
-        <TextCustom textBold title="Drake Kun" />
-        <TextCustom textLight title="Biographic this here !!!!! 😎" />
+        <TextCustom textBold title={fullname} />
+        <TextCustom textLight title={summary} />
       </View>
       <View style={styles.viewExplore}>
         <TextCustom textBold title="Explore everyone" />
