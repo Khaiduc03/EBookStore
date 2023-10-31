@@ -22,3 +22,8 @@ export const getDataDetailChapter = (state: RootState) =>
 
 export const getDataComicBySeacrh = (state: RootState) =>
   state.comic.listDataBySearch?.data;
+
+export const getNextChapter = (state: RootState) =>
+  state.comic.listDetailChapter?.next_chapter;
+export const getPreviousChapter = (state: RootState) =>
+  state.comic.listDetailChapter?.previous_chapter;

@@ -4,15 +4,29 @@ import {Button} from '@rneui/themed';
 import {Icon} from '@rneui/themed';
 import useStyles from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useAppDispatch} from '../../../../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {ComicActions} from '../../../../../../redux';
+import {
+  getNextChapter,
+  getPreviousChapter,
+} from '../../../../../../redux/selectors/comic.selector';
 
 const FooterChapter: React.FC = props => {
+  const Next = useAppSelector(getNextChapter);
+  const Previous = useAppSelector(getPreviousChapter);
   const dispath = useAppDispatch();
 
-  const onPressNext = () => {};
+  const onPressNext = () => {
+    if (Next) {
+      dispath(ComicActions.getListDetailChapterNav(Next));
+    }
+  };
 
-  const onPressPrevious = () => {};
+  const onPressPrevious = () => {
+    if (Previous) {
+      dispath(ComicActions.getListDetailChapterNav(Previous));
+    }
+  };
 
   const styles = useStyles();
   return (

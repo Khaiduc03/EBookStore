@@ -35,6 +35,10 @@ export class ComicService {
       `${ENDPOINTS.CHAPTER}${action.comic_uuid}?chapter_number=${action.chapter_number}`,
     );
   }
+  static async getChapterByNav(action: any) {
+    console.log(`v1/api/${action}`);
+    return await apiService.get(`v1/api/${action}`);
+  }
 
   static async getComicBySearch(action: any) {
     return await apiService.get(

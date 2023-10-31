@@ -123,6 +123,11 @@ const reducer = createSlice({
         },
       };
     },
+    getListDetailChapterNav: (state: ComicState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
 
     getListBySearch: (state: ComicState, _: PayloadAction<any>) => {
       return {
