@@ -10,6 +10,7 @@ import {Itemlish} from './components';
 
 const Profile: FunctionComponent = () => {
   const styles = useStyles();
+  
   return (
     <View style={styles.container}>
       <HeaderCustom

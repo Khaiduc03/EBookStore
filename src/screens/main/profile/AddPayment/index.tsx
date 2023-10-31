@@ -118,7 +118,7 @@ const AddPayment: React.FC = () => {
         onPressLeftIcon={handleGoback}
       />
       <View style={{borderBottomWidth: 0.5}}>
-        <CreditCard width={'100%'} height={200} viewBox="-2 0 340 200" />
+        <CreditCard width={'100%'} height={250} viewBox="55 20 200 270" />
       </View>
 
       <Text style={styles.textName}>Card Number</Text>
