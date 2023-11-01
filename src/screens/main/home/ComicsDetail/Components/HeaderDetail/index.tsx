@@ -28,6 +28,7 @@ const HeaderDetail = () => {
       source={{
         uri: data?.image_url,
       }}>
+      <View style={styles.overLay} />
       <View style={styles.content}>
         <FastImage
           style={styles.imageComic}

@@ -29,6 +29,7 @@ const TabViewItem: React.FunctionComponent<CustomTabViewItemProps> = props => {
       </Tab>
 
       <TabView
+        disableSwipe={true}
         containerStyle={props.viewStyle}
         value={index}
         onChange={setIndex}

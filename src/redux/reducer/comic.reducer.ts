@@ -51,6 +51,14 @@ const reducer = createSlice({
         ...state,
       };
     },
+    clearListDataDetail: (state: ComicState) => {
+      return {
+        ...state,
+        detailData: {
+          data: [],
+        },
+      };
+    },
     setDetailComic: (
       state: ComicState,
       action: PayloadAction<PayloadHttpList<ComicDetailType>>,
@@ -91,6 +99,14 @@ const reducer = createSlice({
     getListChapter: (state: ComicState, _: PayloadAction<any>) => {
       return {
         ...state,
+      };
+    },
+    clearListDataChpater: (state: ComicState) => {
+      return {
+        ...state,
+        listChapter: {
+          data: [],
+        },
       };
     },
     setListChapter: (

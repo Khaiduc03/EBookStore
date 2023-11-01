@@ -26,7 +26,7 @@ export class NavigationService {
     if (navigationRef.current?.canGoBack()) {
       navigationRef.current?.goBack();
     } else {
-      this.navigateAndReset([{name: routes.LOBBY}], 0);
+      this.navigateAndReset([], 0);
     }
   }
 

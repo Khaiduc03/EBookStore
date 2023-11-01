@@ -20,10 +20,11 @@ const ComicsDetail = () => {
   useEffect(() => {
     dispatch(ComicActions.getDetailComic(uuidComic));
     dispatch(ComicActions.getListChapter(uuidComic));
-  }, [uuidComic]);
+  }, []);
 
   const styles = useStyles();
   const handlePressBack = () => {
+    dispatch(ComicActions.clearListDataDetail());
     NavigationService.goBack();
   };
 

@@ -21,7 +21,6 @@ function* getListDataSaga(action: PayloadAction<number>): Generator {
   }
 }
 function* getComicById(action: PayloadAction<string>): Generator {
-  yield put(LoadingActions.showLoading());
   try {
     console.log('run');
     const {data}: any = yield call(ComicService.getComicById, action.payload);
@@ -36,7 +35,6 @@ function* getComicById(action: PayloadAction<string>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoading());
   }
 }
 
