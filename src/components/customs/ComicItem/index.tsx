@@ -22,7 +22,7 @@ const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   };
 
   const onPressNavDetail = () => {
-    NavigationService.navigate(routes.COMICDETAIL, {uuid: comic.uuid});
+    NavigationService.navigate(routes.COMICDETAIL, {data: props.data});
   };
 
   return (

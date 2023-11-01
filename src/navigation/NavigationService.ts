@@ -26,7 +26,6 @@ export class NavigationService {
     if (navigationRef.current?.canGoBack()) {
       navigationRef.current?.goBack();
     } else {
-      this.navigateAndReset([], 0);
     }
   }
 

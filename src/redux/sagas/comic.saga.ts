@@ -10,7 +10,7 @@ function* getListDataSaga(action: PayloadAction<number>): Generator {
     const {data}: any = yield call(ComicService.getComic, action.payload);
     if (data.code == 200) {
       console.log('run push tookit');
-      yield put(ComicActions.setListData(data));
+      yield put(ComicActions.setListData(data.data));
     } else {
       console.log('Server errol !!!');
     }

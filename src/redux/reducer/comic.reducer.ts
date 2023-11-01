@@ -4,12 +4,12 @@ import {
   Redux,
   ComicState,
   ComicType,
-  PayloadHttpListComics,
   ComicDetailType,
   PayloadHttpListChapter,
   ChapterType,
   DetailChapterType,
   PayloadHttpDetailChapter,
+  PayloadHttpListComicData,
 } from '../types';
 import {PayloadHttpList} from '../../types';
 
@@ -23,7 +23,7 @@ const reducer = createSlice({
       return {
         ...state,
         listData: {
-          data: undefined,
+          data: [],
         },
       };
     },
@@ -35,12 +35,17 @@ const reducer = createSlice({
     },
     setListData: (
       state: ComicState,
-      action: PayloadAction<PayloadHttpListComics<ComicType>>,
+      action: PayloadAction<PayloadHttpListComicData<ComicType>>,
     ) => {
       return {
         ...state,
         listData: {
           data: action.payload.data,
+          canNext: action.payload.canNext,
+          currentDataSize: action.payload.currentDataSize,
+          currentPage: action.payload.currentPage,
+          totalPage: action.payload.totalPage,
+          totalData: action.payload.totalData,
         },
       };
     },

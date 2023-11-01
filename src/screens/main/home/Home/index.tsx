@@ -1,26 +1,20 @@
-import {View, ScrollView, Image, FlatList} from 'react-native';
+import {FlatList, View} from 'react-native';
 
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
-import useStyles from './styles';
 import {ComicItem, HeaderCustom} from '../../../../components';
+import {routes} from '../../../../constants';
+import {NavigationService} from '../../../../navigation';
+import useStyles from './styles';
 
-import {createIcon} from '../../../../utils';
-import {TopicsHome, ComicsNew, BannerComic, TrendingComic} from './components';
-import {
-  ComicActions,
-  ComicType,
-  TopicActions,
-  getAuthEnableSignIn,
-} from '../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {ComicActions, ComicType, TopicActions} from '../../../../redux';
 import {
   getListComic,
   getNextPage,
-  getTotalPage,
 } from '../../../../redux/selectors/comic.selector';
 import {getListTopic} from '../../../../redux/selectors/topic.selector';
+import {createIcon} from '../../../../utils';
+import {BannerComic, TopicsHome, TrendingComic} from './components';
 
 const Home: FunctionComponent = () => {
   const dispatch = useAppDispatch();

@@ -6,24 +6,24 @@ import {Episodes, HeaderDetail, Preview} from './Components';
 import {NavigationService} from '../../../../navigation';
 import {useRoute} from '@react-navigation/native';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {ComicActions} from '../../../../redux';
+import {ComicActions, ComicType} from '../../../../redux';
 
 interface RouteParamsIdComic {
-  uuid: string;
+  data: ComicType;
 }
 
 const ComicsDetail = () => {
   const dispatch = useAppDispatch();
   const route = useRoute();
-  const uuidComic = (route.params as RouteParamsIdComic).uuid;
+  const data = (route.params as RouteParamsIdComic).data;
 
   useEffect(() => {
-    dispatch(ComicActions.getDetailComic(uuidComic));
-    dispatch(ComicActions.getListChapter(uuidComic));
+    dispatch(ComicActions.getListChapter(data.uuid));
   }, []);
 
   const styles = useStyles();
   const handlePressBack = () => {
+    dispatch(ComicActions.clearListDataChpater());
     dispatch(ComicActions.clearListDataDetail());
     NavigationService.goBack();
   };
@@ -42,10 +42,10 @@ const ComicsDetail = () => {
         tabStyle={styles.tabStyle}
         title1={'PREVIEW'}
         title2={'EPISODES'}
-        screen1={<Preview />}
+        screen1={<Preview data={data} />}
+        headerDetail={<HeaderDetail data={data} />}
         screen2={<Episodes />}
         viewStyle={{height: 800}}
-        headerDetail={<HeaderDetail />}
         titleStyle={styles.titleStyle}
       />
     </View>

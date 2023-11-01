@@ -4,11 +4,11 @@ import {TopicType} from './topic.type';
 
 type ComicAllType = {
   data: ComicType[];
-  totalData: string;
+  totalData: number;
   totalPage: number;
   currentPage: string;
   canNext: boolean;
-  currentDataSize: string;
+  currentDataSize: number;
 };
 
 export interface PayloadHttpListComics<T> {
@@ -21,6 +21,15 @@ export interface PayloadHttpListChapter<T> {
   data?: T[];
 }
 
+export interface PayloadHttpListComicData<T> {
+  totalData?: number;
+  totalPage?: number;
+  currentPage?: string;
+  canNext?: boolean;
+  currentDataSize?: number;
+  data?: T[];
+}
+
 export interface PayloadHttpDetailChapter<T> {
   next_chapter?: string;
   previous_chapter?: string;
@@ -28,7 +37,7 @@ export interface PayloadHttpDetailChapter<T> {
 }
 
 export type ComicState = Partial<{
-  listData: PayloadHttpListComics<ComicType>;
+  listData: PayloadHttpListComicData<ComicType>;
   listDataByTopic: PayloadHttpList<ComicType>;
   listDataBySearch: PayloadHttpList<ComicType>;
   topic: PayloadHttpList<TopicType>;
@@ -46,6 +55,8 @@ export type ComicType = uuid &
     views: number;
     image_url: string;
     topics: string[];
+    favorite_uuid: string;
+    isfavorite: boolean;
   };
 
 export type ComicDetailType = uuid &

@@ -7,16 +7,19 @@ import {useAppSelector} from '../../../../../../hooks';
 import {getDetailComic} from '../../../../../../redux/selectors/comic.selector';
 import FastImage from 'react-native-fast-image';
 import {useDispatch} from 'react-redux';
-import {ComicActions} from '../../../../../../redux';
+import {ComicActions, ComicType} from '../../../../../../redux';
+interface Comic {
+  data: ComicType;
+}
 
-const HeaderDetail = () => {
-  const dataComicDetail = useAppSelector(getDetailComic);
+const HeaderDetail: React.FC<Comic> = props => {
+  // const dataComicDetail = useAppSelector(getDetailComic);
 
-  const data = dataComicDetail ? dataComicDetail[0] : null;
+  // const data = dataComicDetail ? dataComicDetail[0] : null;
 
   const styles = useStyles();
 
-  if (!data) {
+  if (!props.data) {
     return null;
   }
 
@@ -26,27 +29,27 @@ const HeaderDetail = () => {
       blurRadius={3}
       resizeMode="cover"
       source={{
-        uri: data?.image_url,
+        uri: props.data?.image_url,
       }}>
       <View style={styles.overLay} />
       <View style={styles.content}>
         <FastImage
           style={styles.imageComic}
           resizeMode={FastImage.resizeMode.cover}
-          source={{uri: data?.image_url}}
+          source={{uri: props.data?.image_url}}
         />
         <View style={styles.contentContainer}>
           <Text numberOfLines={2} style={styles.nameComic}>
-            {data?.comic_name}
+            {props.data?.comic_name}
           </Text>
-          <Text style={styles.author}>{data?.author}</Text>
+          <Text style={styles.author}>{props.data?.author}</Text>
           <Text style={styles.dayCreat}>
-            {data?.created_at
-              ? data.created_at.toLocaleString()
+            {props.data?.created_at
+              ? props.data.created_at.toLocaleString()
               : 'No Created Day'}
           </Text>
           <View style={styles.topicsContainer}>
-            {data?.topics.map((text, index) => (
+            {props.data?.topics.map((text, index) => (
               <View key={index} style={styles.itemTopics}>
                 <Text style={styles.textTopics}>{text}</Text>
               </View>
@@ -75,7 +78,7 @@ const HeaderDetail = () => {
         </View>
         <Divider orientation="vertical" width={1} color="#9E9E9E" />
         <View style={styles.interactItem}>
-          <Text style={styles.numberInteract}>{data?.views}</Text>
+          <Text style={styles.numberInteract}>{props.data?.views}</Text>
           <Text style={styles.titleInteracItem}>Views</Text>
         </View>
       </View>
