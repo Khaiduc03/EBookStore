@@ -11,32 +11,42 @@ import React from 'react';
 import useStyles from './styles';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
-import {getDataAllChapter} from '../../../../../../redux/selectors/comic.selector';
+import {
+  getDataAllChapter,
+  getDetailComic,
+} from '../../../../../../redux/selectors/comic.selector';
 import {useAppSelector} from '../../../../../../hooks';
+import {Icon} from '@rneui/base';
 
 const Episodes = () => {
   const styles = useStyles();
-  const dataChapter = useAppSelector(getDataAllChapter) || undefined;
+  const dataChapter = useAppSelector(getDataAllChapter);
 
   return (
     <View style={styles.container}>
-      <View style={styles.headerChapter}>
-        <Text style={styles.textHeader}>Chapters</Text>
-        <Text style={styles.textHeader}>Update</Text>
-        <Text style={styles.textHeader}>Views</Text>
-      </View>
-
       <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
         {dataChapter?.map(item => (
           <TouchableOpacity
             onPress={() =>
-              NavigationService.navigate(routes.CHAPTER, {uuid: item.uuid})
+              NavigationService.navigate(routes.CHAPTER, {
+                chapter_number: item.chapter_number,
+                comic_uuid: item.comic_uuid,
+                chapter_name: item.chapter_name,
+              })
             }
             key={item.uuid}
             style={styles.chapterContainer}>
-            <Text style={styles.textChapter}>{item.chapter_name}</Text>
-            <Text style={styles.textChapter}>{item.created_at + ''}</Text>
-            <Text style={styles.textChapter}>{item.views}</Text>
+            <View style={{alignItems: 'flex-start'}}>
+              <Text style={styles.textName}>{item.chapter_name}</Text>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <Icon name="time-outline" type="ionicon" size={20} />
+                <Text style={styles.textChapter}>{item.created_at + ''}</Text>
+              </View>
+            </View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Icon name="eye-outline" type="ionicon" size={20} />
+              <Text style={styles.textChapter}>{item.views} views</Text>
+            </View>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -45,198 +55,3 @@ const Episodes = () => {
 };
 
 export default Episodes;
-
-const data = [
-  {
-    id: 1,
-    chapterNumber: 1,
-    dayUpdate: '8/2/2024',
-    view: 1,
-  },
-  {
-    id: 2,
-    chapterNumber: 2,
-    dayUpdate: '9/12/2024',
-    view: 2,
-  },
-  {
-    id: 3,
-    chapterNumber: 3,
-    dayUpdate: '11/3/2023',
-    view: 3,
-  },
-  {
-    id: 4,
-    chapterNumber: 4,
-    dayUpdate: '5/23/2024',
-    view: 4,
-  },
-  {
-    id: 5,
-    chapterNumber: 5,
-    dayUpdate: '11/8/2023',
-    view: 5,
-  },
-  {
-    id: 6,
-    chapterNumber: 6,
-    dayUpdate: '3/12/2023',
-    view: 6,
-  },
-  {
-    id: 7,
-    chapterNumber: 7,
-    dayUpdate: '11/13/2023',
-    view: 7,
-  },
-  {
-    id: 8,
-    chapterNumber: 8,
-    dayUpdate: '11/13/2022',
-    view: 8,
-  },
-  {
-    id: 9,
-    chapterNumber: 9,
-    dayUpdate: '2/28/2024',
-    view: 9,
-  },
-  {
-    id: 10,
-    chapterNumber: 10,
-    dayUpdate: '9/10/2024',
-    view: 10,
-  },
-  {
-    id: 11,
-    chapterNumber: 11,
-    dayUpdate: '12/5/2023',
-    view: 11,
-  },
-  {
-    id: 12,
-    chapterNumber: 12,
-    dayUpdate: '3/17/2023',
-    view: 12,
-  },
-  {
-    id: 13,
-    chapterNumber: 13,
-    dayUpdate: '4/20/2024',
-    view: 13,
-  },
-  {
-    id: 14,
-    chapterNumber: 14,
-    dayUpdate: '6/24/2023',
-    view: 14,
-  },
-  {
-    id: 15,
-    chapterNumber: 15,
-    dayUpdate: '8/1/2023',
-    view: 15,
-  },
-  {
-    id: 16,
-    chapterNumber: 16,
-    dayUpdate: '9/21/2022',
-    view: 16,
-  },
-  {
-    id: 17,
-    chapterNumber: 17,
-    dayUpdate: '9/29/2022',
-    view: 17,
-  },
-  {
-    id: 18,
-    chapterNumber: 18,
-    dayUpdate: '7/12/2023',
-    view: 18,
-  },
-  {
-    id: 19,
-    chapterNumber: 19,
-    dayUpdate: '12/12/2023',
-    view: 19,
-  },
-  {
-    id: 20,
-    chapterNumber: 20,
-    dayUpdate: '5/17/2024',
-    view: 20,
-  },
-  {
-    id: 21,
-    chapterNumber: 21,
-    dayUpdate: '5/13/2024',
-    view: 20,
-  },
-  {
-    id: 22,
-    chapterNumber: 22,
-    dayUpdate: '5/13/2024',
-    view: 20,
-  },
-  {
-    id: 23,
-    chapterNumber: 23,
-    dayUpdate: '5/13/2024',
-    view: 20,
-  },
-  {
-    id: 24,
-    chapterNumber: 24,
-    dayUpdate: '5/13/2024',
-    view: 20,
-  },
-  {
-    id: 25,
-    chapterNumber: 25,
-    dayUpdate: '5/13/2024',
-    view: 20,
-  },
-  {
-    id: 26,
-    chapterNumber: 26,
-    dayUpdate: '5/13/2024',
-    view: 20,
-  },
-  {
-    id: 28,
-    chapterNumber: 27,
-    dayUpdate: '5/13/2024',
-    view: 20,
-  },
-  {
-    id: 29,
-    chapterNumber: 29,
-    dayUpdate: '5/13/2024',
-    view: 20,
-  },
-  {
-    id: 30,
-    chapterNumber: 30,
-    dayUpdate: '5/13/2024',
-    view: 20,
-  },
-  {
-    id: 31,
-    chapterNumber: 31,
-    dayUpdate: '5/13/2024',
-    view: 20,
-  },
-  {
-    id: 32,
-    chapterNumber: 32,
-    dayUpdate: '5/13/2024',
-    view: 20,
-  },
-  {
-    id: 33,
-    chapterNumber: 33,
-    dayUpdate: '5/13/2024',
-    view: 20,
-  },
-];

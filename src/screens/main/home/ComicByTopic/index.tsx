@@ -22,32 +22,25 @@ import {useRoute} from '@react-navigation/native';
 
 interface RouteParamsIdTopic {
   uuid: string;
+  name: string;
 }
 
 const ComicByTopic = () => {
   const route = useRoute();
   const uuidComic = (route.params as RouteParamsIdTopic).uuid;
+  const nameTopic = (route.params as RouteParamsIdTopic).name;
   const dispatch = useAppDispatch();
   const dataComic = useAppSelector(getDataByTopic) || [];
   const [numCols, setNumCols] = useState<number>(3);
-  const [data, setData] = useState<ComicType[]>([]);
+
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     dispatch(ComicActions.getListByTopic({page: page, uuid: uuidComic}));
   }, [page]);
 
-  useEffect(() => {
-    if (dataComic.length > 0) {
-      setData([...data, ...dataComic]);
-      dispatch(ComicActions.clearListDataByComic());
-    }
-  }, [dataComic]);
-
   const loadMoreComic = () => {
-    if (data.length > 0) {
-      setPage(page + 1);
-    }
+    setPage(page + 1);
   };
 
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
@@ -77,7 +70,7 @@ const ComicByTopic = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        title="Romance"
+        title={nameTopic}
         leftIconStyle={styles.leftIconStyle}
         leftIcon={{name: 'arrow-back', color: styles.leftIconStyle.color}}
         onPressLeftIcon={() => backScreen()}
@@ -93,7 +86,7 @@ const ComicByTopic = () => {
             <HeaderCustom
               titleStyle={styles.titleHeaderStyle}
               title="Show in "
-              rightIconleft={{
+              rightIconMiddle={{
                 name: 'grid-outline',
                 type: 'ionicon',
                 color: numCols === 3 ? '#F89300' : '',
@@ -103,13 +96,13 @@ const ComicByTopic = () => {
                 type: 'ionicon',
                 color: numCols === 1 ? '#F89300' : '',
               }}
-              onPressRightIconLeft={handleGridIconPress}
+              onPressRightIconMiddle={handleGridIconPress}
               onPressRightIconRight={handleListIconPress}
             />
           );
         }}
         columnWrapperStyle={numCols === 3 ? {gap: 5} : null}
-        data={data}
+        data={dataComic}
         renderItem={RenderItem}
         keyExtractor={item => item.uuid.toString()}
         showsVerticalScrollIndicator={false}

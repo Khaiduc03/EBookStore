@@ -1,31 +1,53 @@
 import {Text, TouchableOpacity, View, ActivityIndicator} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import useStyles from './styles';
 import {Icon} from '@rneui/themed';
 import {CustomComicProps} from './type';
-import {Image} from '@rneui/themed';
-import {Comic} from '../../../types';
 import {NavigationService} from '../../../navigation';
 import {routes} from '../../../constants';
 import FastImage from 'react-native-fast-image';
 import {ComicType} from '../../../redux';
+import {Skeleton} from '@rneui/base';
 
 const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
   const comic: ComicType = props.data;
+  const [isLoading, setLoading] = useState(true);
+
+  const onLoadStart = () => {
+    setLoading(true);
+  };
+  const onLoadEnd = () => {
+    setLoading(false);
+  };
 
   const onPressNavDetail = () => {
-    NavigationService.navigate(routes.COMICDETAIL, {uuid: comic.uuid});
+    NavigationService.navigate(routes.COMICDETAIL, {data: props.data});
   };
 
   return (
     <View style={props.viewStyle || styles.container}>
-      <TouchableOpacity onPress={() => onPressNavDetail()}>
+      <TouchableOpacity
+        style={{alignItems: 'center', justifyContent: 'center'}}
+        onPress={() => onPressNavDetail()}>
         <FastImage
+          onLoadEnd={onLoadEnd}
+          onLoadStart={onLoadStart}
           style={props.imageStyle || styles.imgComic}
           source={{uri: comic.image_url, priority: FastImage.priority.normal}}
           resizeMode={FastImage.resizeMode.cover}
         />
+        {isLoading && (
+          <Skeleton animation="wave" style={styles.skeletonStyle}></Skeleton>
+        )}
+        {isLoading && (
+          <ActivityIndicator
+            size={'large'}
+            style={{
+              position: 'absolute',
+            }}
+          />
+        )}
       </TouchableOpacity>
 
       <View style={props.contentStyle || styles.content}>
