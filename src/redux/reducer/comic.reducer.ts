@@ -4,11 +4,12 @@ import {
   Redux,
   ComicState,
   ComicType,
-  PayloadHttpListComics,
   ComicDetailType,
   PayloadHttpListChapter,
   ChapterType,
   DetailChapterType,
+  PayloadHttpDetailChapter,
+  PayloadHttpListComicData,
 } from '../types';
 import {PayloadHttpList} from '../../types';
 
@@ -22,7 +23,7 @@ const reducer = createSlice({
       return {
         ...state,
         listData: {
-          data: undefined,
+          data: [],
         },
       };
     },
@@ -34,12 +35,20 @@ const reducer = createSlice({
     },
     setListData: (
       state: ComicState,
-      action: PayloadAction<PayloadHttpListComics<ComicType>>,
+      action: PayloadAction<PayloadHttpListComicData<ComicType>>,
     ) => {
+      const currentData: ComicType[] = state.listData?.data || [];
+      const newData = action.payload.data || [];
+      const updatedData = [...currentData, ...newData];
       return {
         ...state,
         listData: {
-          data: action.payload.data,
+          data: updatedData,
+          canNext: action.payload.canNext,
+          currentDataSize: action.payload.currentDataSize,
+          currentPage: action.payload.currentPage,
+          totalPage: action.payload.totalPage,
+          totalData: action.payload.totalData,
         },
       };
     },
@@ -48,6 +57,14 @@ const reducer = createSlice({
     getDetailComic: (state: ComicState, _: PayloadAction<string>) => {
       return {
         ...state,
+      };
+    },
+    clearListDataDetail: (state: ComicState) => {
+      return {
+        ...state,
+        detailData: {
+          data: [],
+        },
       };
     },
     setDetailComic: (
@@ -71,10 +88,13 @@ const reducer = createSlice({
       state: ComicState,
       action: PayloadAction<PayloadHttpList<ComicType>>,
     ) => {
+      const currentData: ComicType[] = state.listDataByTopic?.data || [];
+      const newData = action.payload.data || [];
+      const updatedData = [...currentData, ...newData];
       return {
         ...state,
         listDataByTopic: {
-          data: action.payload.data,
+          data: updatedData,
         },
       };
     },
@@ -92,6 +112,14 @@ const reducer = createSlice({
         ...state,
       };
     },
+    clearListDataChpater: (state: ComicState) => {
+      return {
+        ...state,
+        listChapter: {
+          data: [],
+        },
+      };
+    },
     setListChapter: (
       state: ComicState,
       action: PayloadAction<PayloadHttpListChapter<ChapterType>>,
@@ -99,24 +127,56 @@ const reducer = createSlice({
       return {
         ...state,
         listChapter: {
-          chapter: action.payload.chapter,
+          data: action.payload.data,
         },
       };
     },
 
-    getListChapterDetail: (state: ComicState, _: PayloadAction<string>) => {
+    getListChapterDetail: (state: ComicState, _: PayloadAction<any>) => {
       return {
         ...state,
       };
     },
     setListChapterDetail: (
       state: ComicState,
-      action: PayloadAction<PayloadHttpList<DetailChapterType>>,
+      action: PayloadAction<PayloadHttpDetailChapter<DetailChapterType>>,
     ) => {
       return {
         ...state,
         listDetailChapter: {
+          data_chapter: action.payload.data_chapter,
+          next_chapter: action.payload.next_chapter,
+          previous_chapter: action.payload.previous_chapter,
+        },
+      };
+    },
+    getListDetailChapterNav: (state: ComicState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+
+    getListBySearch: (state: ComicState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+    setListBySeacrch: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpList<ComicType>>,
+    ) => {
+      return {
+        ...state,
+        listDataBySearch: {
           data: action.payload.data,
+        },
+      };
+    },
+    ClearListBySearch: (state: ComicState) => {
+      return {
+        ...state,
+        listDataBySearch: {
+          data: [],
         },
       };
     },

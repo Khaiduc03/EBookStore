@@ -13,7 +13,8 @@ const TabViewItem: React.FunctionComponent<CustomTabViewItemProps> = props => {
     <ScrollView
       overScrollMode="never"
       stickyHeaderIndices={[1]}
-      showsVerticalScrollIndicator={false}>
+      showsVerticalScrollIndicator={false}
+      nestedScrollEnabled>
       {props.headerDetail}
       <Tab
         containerStyle={styles.container}
@@ -28,6 +29,7 @@ const TabViewItem: React.FunctionComponent<CustomTabViewItemProps> = props => {
       </Tab>
 
       <TabView
+        disableSwipe={true}
         containerStyle={props.viewStyle}
         value={index}
         onChange={setIndex}

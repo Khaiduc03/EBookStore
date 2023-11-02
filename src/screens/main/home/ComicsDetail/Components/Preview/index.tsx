@@ -5,17 +5,23 @@ import ReadMore from './components/ReadMore';
 import {HeaderCustom} from '../../../../../../components';
 import {useAppSelector} from '../../../../../../hooks';
 import {getDetailComic} from '../../../../../../redux/selectors/comic.selector';
+import {ComicType} from '../../../../../../redux';
 
-const Preview = () => {
+interface Comic {
+  data: ComicType;
+}
+
+const Preview: React.FC<Comic> = props => {
   const styles = useStyles();
-  const dataComicDetail = useAppSelector(getDetailComic);
-  const data = dataComicDetail ? dataComicDetail[0] : null;
+
+  // const dataComicDetail = useAppSelector(getDetailComic);
+  // const data = dataComicDetail ? dataComicDetail[0] : null;
 
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.textHeader}>Describe:</Text>
-        <Text style={styles.textDescribe}>{data?.description}</Text>
+        <Text style={styles.textDescribe}>{props.data.description}</Text>
       </View>
       <View>
         <HeaderCustom titleStyle={styles.textTitle} title="Read more" />

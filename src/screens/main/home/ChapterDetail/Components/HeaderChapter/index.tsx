@@ -5,7 +5,11 @@ import {Icon} from '@rneui/themed';
 import {TouchableOpacity} from 'react-native';
 import {backScreen} from '../../../../../../utils';
 
-const HeaderChapter = () => {
+interface HeaderChapterProps {
+  chapter_name: string;
+}
+
+const HeaderChapter: React.FC<HeaderChapterProps> = props => {
   const styles = useStyles();
   return (
     <View style={styles.container}>
@@ -18,7 +22,7 @@ const HeaderChapter = () => {
             color={styles.iconStyle.color}
           />
         </TouchableOpacity>
-        <Text style={styles.textChapter}>Chapter 1</Text>
+        <Text style={styles.textChapter}>{props.chapter_name}</Text>
       </View>
       <TouchableOpacity>
         <Icon

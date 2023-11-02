@@ -19,9 +19,9 @@ import InputCustomV1 from '../../../components/customs/InputCustomV1';
 import {routes} from '../../../constants';
 import {useAppDispatch} from '../../../hooks';
 import {NavigationService} from '../../../navigation';
-import {AuthActions} from '../../../redux';
-import {isValidEmail, isValidPassword, showToastError} from '../../../utils';
+import {AuthActions, ComicActions} from '../../../redux';
 import useStyles from './styles';
+import {isValidEmail, isValidPassword, showToastError} from '../../../utils';
 
 const CreateAccountScreen: FunctionComponent = () => {
   const styles = useStyles();
@@ -91,6 +91,7 @@ const CreateAccountScreen: FunctionComponent = () => {
   };
 
   const handleGoogle = async () => {
+    dispatch(ComicActions.clearListData());
     dispatch(
       AuthActions.handleLoginGoogle({
         device_token: '1234567890',
