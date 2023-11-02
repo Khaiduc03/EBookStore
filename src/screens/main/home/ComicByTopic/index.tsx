@@ -17,7 +17,11 @@ import {
   getDataByTopic,
   getListComic,
 } from '../../../../redux/selectors/comic.selector';
-import {getIsLoading} from '../../../../redux/selectors/loading.selector';
+import {
+  getIsLoading,
+  getIsLoadingPage,
+  getIsLoadingTopic,
+} from '../../../../redux/selectors/loading.selector';
 import {useRoute} from '@react-navigation/native';
 
 interface RouteParamsIdTopic {
@@ -32,7 +36,7 @@ const ComicByTopic = () => {
   const dispatch = useAppDispatch();
   const dataComic = useAppSelector(getDataByTopic) || [];
   const [numCols, setNumCols] = useState<number>(3);
-
+  const isLoading = useAppSelector(getIsLoadingTopic);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -66,6 +70,9 @@ const ComicByTopic = () => {
   const handlePressSearch = () => {
     NavigationService.navigate(routes.SEARCH);
   };
+  const listFooterComponent = useCallback(() => {
+    return <ActivityIndicator size={'large'} />;
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -109,7 +116,10 @@ const ComicByTopic = () => {
         key={numCols.toString()}
         numColumns={numCols}
         onEndReached={loadMoreComic}
-        onEndReachedThreshold={0}
+        onEndReachedThreshold={0.1}
+        ListFooterComponent={
+          isLoading ? isLoading && listFooterComponent : undefined
+        }
       />
     </View>
   );

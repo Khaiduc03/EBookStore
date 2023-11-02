@@ -5,6 +5,8 @@ import {LoadingState} from '../types';
 const initialState: LoadingState = {
   isLoading: false,
   isLoadingMain: false,
+  isLoadingPage: false,
+  isLoadingTopic: false,
 };
 
 const reducer = createSlice({
@@ -18,11 +20,24 @@ const reducer = createSlice({
       state.isLoading = false;
     },
 
+    showLoadingPage: (state: LoadingState) => {
+      state.isLoadingPage = true;
+    },
+    hideLoadingPage: (state: LoadingState) => {
+      state.isLoadingPage = false;
+    },
     showLoadingMain: (state: LoadingState) => {
-      state.isLoading = true;
+      state.isLoadingMain = true;
     },
     hideLoadingMain: (state: LoadingState) => {
-      state.isLoading = false;
+      state.isLoadingMain = false;
+    },
+
+    showLoadingTopic: (state: LoadingState) => {
+      state.isLoadingTopic = true;
+    },
+    hideLoadingTopic: (state: LoadingState) => {
+      state.isLoadingTopic = false;
     },
   },
 });

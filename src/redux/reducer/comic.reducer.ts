@@ -112,7 +112,7 @@ const reducer = createSlice({
         ...state,
       };
     },
-    clearListDataChpater: (state: ComicState) => {
+    clearListDataChapter: (state: ComicState) => {
       return {
         ...state,
         listChapter: {

@@ -4,7 +4,7 @@ import {ComicActions, ComicReducer, LoadingActions} from '../reducer';
 import {ComicService} from '../services';
 
 function* getListDataSaga(action: PayloadAction<number>): Generator {
-  yield put(LoadingActions.showLoading());
+  yield put(LoadingActions.showLoadingPage());
   try {
     console.log('run');
     const {data}: any = yield call(ComicService.getComic, action.payload);
@@ -17,7 +17,7 @@ function* getListDataSaga(action: PayloadAction<number>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoading());
+    yield put(LoadingActions.hideLoadingPage());
   }
 }
 function* getComicById(action: PayloadAction<string>): Generator {
@@ -39,30 +39,28 @@ function* getComicById(action: PayloadAction<string>): Generator {
 }
 
 function* getListComicByTopicSaga(action: PayloadAction<any>): Generator {
-  yield put(LoadingActions.showLoading());
-  try {
-    console.log('run');
+  yield put(LoadingActions.showLoadingTopic());
 
+  try {
     const {data}: any = yield call(
       ComicService.getComicByTopic,
       action.payload,
     );
 
-    if (data.code == 200) {
-      console.log('run push tookit');
+    if (data.code === 200) {
       yield put(ComicActions.setListByTopic(data));
     } else {
-      console.log('Server errol !!!');
+      console.log('Lỗi từ máy chủ !!!');
     }
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoading());
+    yield put(LoadingActions.hideLoadingTopic());
   }
 }
 
 function* getChapterByComicSaga(action: PayloadAction<string>): Generator {
-  yield put(LoadingActions.showLoading());
+  yield put(LoadingActions.showLoadingMain());
   try {
     console.log('run');
     const {data}: any = yield call(
@@ -78,7 +76,7 @@ function* getChapterByComicSaga(action: PayloadAction<string>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoading());
+    yield put(LoadingActions.hideLoadingMain());
   }
 }
 

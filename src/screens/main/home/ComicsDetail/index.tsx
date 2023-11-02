@@ -23,7 +23,7 @@ const ComicsDetail = () => {
 
   const styles = useStyles();
   const handlePressBack = () => {
-    dispatch(ComicActions.clearListDataChpater());
+    dispatch(ComicActions.clearListDataChapter());
     dispatch(ComicActions.clearListDataDetail());
     NavigationService.goBack();
   };

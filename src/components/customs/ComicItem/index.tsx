@@ -28,6 +28,7 @@ const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   return (
     <View style={props.viewStyle || styles.container}>
       <TouchableOpacity
+        activeOpacity={0.5}
         style={{alignItems: 'center', justifyContent: 'center'}}
         onPress={() => onPressNavDetail()}>
         <FastImage

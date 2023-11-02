@@ -10,6 +10,7 @@ import Alert from './src/components/customs/Alert';
 import Loading from './src/components/shared/Loading';
 import {toastConfig} from './src/utils/toastConfig';
 import Slider from './src/screens/auth/onboard';
+import LoadingMain from './src/components/shared/LoadingMain';
 
 const App: FunctionComponent = () => {
   useEffect(() => {
@@ -27,6 +28,8 @@ const App: FunctionComponent = () => {
           <Alert />
           {/* LOADING API */}
           <Loading />
+          <LoadingMain />
+
           {/* MAIN APP */}
           <Slider />
           <RootNavigation />

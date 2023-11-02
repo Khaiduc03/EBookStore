@@ -5,6 +5,8 @@ import {CustomTabViewItemProps} from './types';
 import useStyles from './styles';
 import {ScrollView} from 'react-native-gesture-handler';
 import {HeaderDetail} from '../../../screens/main/home/ComicsDetail/Components';
+import {Touchable} from 'react-native';
+import {TouchableWithoutFeedback} from 'react-native';
 
 const TabViewItem: React.FunctionComponent<CustomTabViewItemProps> = props => {
   const [index, setIndex] = React.useState(0);
@@ -37,6 +39,7 @@ const TabViewItem: React.FunctionComponent<CustomTabViewItemProps> = props => {
         <TabView.Item style={styles.containerTabView}>
           {props.screen1}
         </TabView.Item>
+
         <TabView.Item style={styles.containerTabView}>
           {props.screen2}
         </TabView.Item>

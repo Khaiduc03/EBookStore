@@ -7,7 +7,6 @@ export type AlertState = {
   onAccept: () => void;
   onCancel: () => void;
   imageTitle: any;
-
   isCancel?: boolean;
   isAccept?: boolean;
   // isLoader?: boolean;

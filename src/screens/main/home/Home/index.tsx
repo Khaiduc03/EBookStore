@@ -1,6 +1,11 @@
 import {FlatList, View} from 'react-native';
 
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, {
+  FunctionComponent,
+  useEffect,
+  useState,
+  useCallback,
+} from 'react';
 import {ComicItem, HeaderCustom} from '../../../../components';
 import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
@@ -15,6 +20,8 @@ import {
 import {getListTopic} from '../../../../redux/selectors/topic.selector';
 import {createIcon} from '../../../../utils';
 import {BannerComic, TopicsHome, TrendingComic} from './components';
+import {ActivityIndicator} from 'react-native';
+import {getIsLoadingPage} from '../../../../redux/selectors/loading.selector';
 
 const Home: FunctionComponent = () => {
   const dispatch = useAppDispatch();
@@ -24,16 +31,18 @@ const Home: FunctionComponent = () => {
   const dataComic = useAppSelector(getListComic) || [];
   const dataTopic = useAppSelector(getListTopic);
   const nextPage = useAppSelector(getNextPage);
+  const isLoading = useAppSelector(getIsLoadingPage);
 
   useEffect(() => {
     dispatch(ComicActions.getListData(page));
+
     if (dataTopic?.length === undefined) {
       dispatch(TopicActions.getListTopic());
     }
   }, [page]);
 
   const loadMoreComic = () => {
-    if (nextPage) {
+    if (nextPage && !isLoading) {
       setPage(page + 1);
     }
   };
@@ -47,6 +56,10 @@ const Home: FunctionComponent = () => {
   const handlePressSearch = () => {
     NavigationService.navigate(routes.SEARCH);
   };
+
+  const listFooterComponent = useCallback(() => {
+    return <ActivityIndicator size={'large'} />;
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -76,6 +89,9 @@ const Home: FunctionComponent = () => {
         )}
         onEndReached={loadMoreComic}
         onEndReachedThreshold={0.1}
+        ListFooterComponent={
+          isLoading ? isLoading && listFooterComponent : undefined
+        }
         data={dataComic}
         key={numCols.toString()}
         columnWrapperStyle={
