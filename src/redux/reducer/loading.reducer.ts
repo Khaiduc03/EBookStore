@@ -4,6 +4,7 @@ import {LoadingState} from '../types';
 
 const initialState: LoadingState = {
   isLoading: false,
+  isLoadingMain: false,
 };
 
 const reducer = createSlice({
@@ -14,6 +15,13 @@ const reducer = createSlice({
       state.isLoading = true;
     },
     hideLoading: (state: LoadingState) => {
+      state.isLoading = false;
+    },
+
+    showLoadingMain: (state: LoadingState) => {
+      state.isLoading = true;
+    },
+    hideLoadingMain: (state: LoadingState) => {
       state.isLoading = false;
     },
   },

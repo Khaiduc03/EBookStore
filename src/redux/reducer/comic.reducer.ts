@@ -37,10 +37,13 @@ const reducer = createSlice({
       state: ComicState,
       action: PayloadAction<PayloadHttpListComicData<ComicType>>,
     ) => {
+      const currentData: ComicType[] = state.listData?.data || [];
+      const newData = action.payload.data || [];
+      const updatedData = [...currentData, ...newData];
       return {
         ...state,
         listData: {
-          data: action.payload.data,
+          data: updatedData,
           canNext: action.payload.canNext,
           currentDataSize: action.payload.currentDataSize,
           currentPage: action.payload.currentPage,
@@ -85,10 +88,13 @@ const reducer = createSlice({
       state: ComicState,
       action: PayloadAction<PayloadHttpList<ComicType>>,
     ) => {
+      const currentData: ComicType[] = state.listDataByTopic?.data || [];
+      const newData = action.payload.data || [];
+      const updatedData = [...currentData, ...newData];
       return {
         ...state,
         listDataByTopic: {
-          data: action.payload.data,
+          data: updatedData,
         },
       };
     },

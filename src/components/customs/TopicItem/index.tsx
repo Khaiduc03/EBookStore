@@ -6,18 +6,24 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {NavigationService} from '../../../navigation';
 
 import {routes} from '../../../constants';
+import {useAppDispatch} from '../../../hooks';
+import {ComicActions} from '../../../redux';
 
 const TopicItem: React.FunctionComponent<CustomTopicsProps> = props => {
   const styles = useStyles();
+  const dispatch = useAppDispatch();
+
+  const onPressTopic = () => {
+    dispatch(ComicActions.clearListDataByComic());
+    NavigationService.navigate(routes.COMICBYTOPIC, {
+      uuid: props.uuid,
+      name: props.title,
+    });
+  };
 
   return (
     <TouchableOpacity
-      onPress={() =>
-        NavigationService.navigate(routes.COMICBYTOPIC, {
-          uuid: props.uuid,
-          name: props.title,
-        })
-      }
+      onPress={onPressTopic}
       style={styles.container || props.viewStyle}>
       <ImageBackground
         borderRadius={6}

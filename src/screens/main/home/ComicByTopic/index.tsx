@@ -32,24 +32,15 @@ const ComicByTopic = () => {
   const dispatch = useAppDispatch();
   const dataComic = useAppSelector(getDataByTopic) || [];
   const [numCols, setNumCols] = useState<number>(3);
-  const [data, setData] = useState<ComicType[]>([]);
+
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     dispatch(ComicActions.getListByTopic({page: page, uuid: uuidComic}));
   }, [page]);
 
-  useEffect(() => {
-    if (dataComic.length > 0) {
-      setData([...data, ...dataComic]);
-      dispatch(ComicActions.clearListDataByComic());
-    }
-  }, [dataComic]);
-
   const loadMoreComic = () => {
-    if (data.length > 0) {
-      setPage(page + 1);
-    }
+    setPage(page + 1);
   };
 
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
@@ -111,7 +102,7 @@ const ComicByTopic = () => {
           );
         }}
         columnWrapperStyle={numCols === 3 ? {gap: 5} : null}
-        data={data}
+        data={dataComic}
         renderItem={RenderItem}
         keyExtractor={item => item.uuid.toString()}
         showsVerticalScrollIndicator={false}

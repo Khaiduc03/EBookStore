@@ -20,7 +20,6 @@ const Home: FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const styles = useStyles();
   const [numCols, setNumCols] = useState(3);
-  const [data, setData] = useState<ComicType[]>([]);
   const [page, setPage] = useState(1);
   const dataComic = useAppSelector(getListComic) || [];
   const dataTopic = useAppSelector(getListTopic);
@@ -32,12 +31,6 @@ const Home: FunctionComponent = () => {
       dispatch(TopicActions.getListTopic());
     }
   }, [page]);
-
-  useEffect(() => {
-    if (dataComic.length > 0) {
-      setData([...data, ...dataComic]);
-    }
-  }, [dataComic]);
 
   const loadMoreComic = () => {
     if (nextPage) {
@@ -83,7 +76,7 @@ const Home: FunctionComponent = () => {
         )}
         onEndReached={loadMoreComic}
         onEndReachedThreshold={0.1}
-        data={data}
+        data={dataComic}
         key={numCols.toString()}
         columnWrapperStyle={
           numCols === 3 ? {gap: 5, paddingHorizontal: 16} : null
