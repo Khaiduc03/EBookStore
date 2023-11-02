@@ -9,13 +9,14 @@ import {
 import BottomNavigator from './BottomNavigator';
 
 import {routes} from '../../constants';
-import {Screen} from '../../types';
 import {
-  bookmarkScreens,
-  exploreScreens,
   homeScreens,
+  exploreScreens,
+  forumScreens,
+  messageScreens,
   profileScreens,
 } from '../../screens/main';
+import {Screen} from '../../types';
 
 const AppStack = createStackNavigator();
 
@@ -30,9 +31,10 @@ const mainScreens: Screen[] = [
     component: BottomNavigator,
   },
   ...homeScreens,
-  ...profileScreens,
-  ...bookmarkScreens,
   ...exploreScreens,
+  ...forumScreens,
+  ...messageScreens,
+  ...profileScreens,
 ];
 
 const AppNavigator = () => {

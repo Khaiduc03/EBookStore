@@ -12,7 +12,7 @@ import {
 import {CheckBox} from '@rneui/themed';
 import {Text} from 'react-native';
 import {GoogleIcon} from '../../../assets/icons';
-import {ProfileImage} from '../../../assets/svg';
+import {UserImage} from '../../../assets/svg';
 import {BigButton} from '../../../components';
 import AuthHeaderV1 from '../../../components/customs/AuthHeaderV1';
 import Header from '../../../components/customs/Headers';
@@ -106,7 +106,7 @@ const LoginScreen: FunctionComponent = () => {
           <View style={styles.Headers}>
             <AuthHeaderV1
               title="Login Account"
-              avatar={<ProfileImage />}
+              avatar={<UserImage />}
               subTitle="Welcome back to "
               titleComicverse="Comic Verse"
               onPress={() => {

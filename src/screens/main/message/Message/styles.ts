@@ -140,7 +140,7 @@ const useStyles = makeStyles(({colors}) => ({
   textClearAll: {
     fontFamily: fontFamilySetup.bold,
     fontSize: normalize(16),
-    color: colors.clear,
+    color: colors.red,
     textAlign: 'center',
   },
   leftContainer: {
@@ -204,6 +204,40 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
+  },
+
+  avatarContainer: {
+    width: normalize(130),
+    height: normalize(90),
+    backgroundColor: 'rgba(256, 256, 256, 1)',
+  },
+
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0, 0, 0, 1)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  contentStyle: {
+    paddingTop: normalize(16),
+  },
+  modalItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '100%',
+    paddingHorizontal: normalize(24),
+    paddingVertical: normalize(16),
+  },
+  textStyle: {
+    fontSize: normalize(16),
+    marginLeft: normalize(12),
+    color: colors.blackDefault,
+    fontFamily: fontFamilySetup.bold,
+  },
+  iconStyle: {
+    backgroundColor: colors.grey5,
+    padding: normalize(8),
+    borderRadius: normalize(1000),
   },
 }));
 

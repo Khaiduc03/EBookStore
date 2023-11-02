@@ -11,7 +11,7 @@ import {
   ItemPostUser,
 } from './components';
 import useStyles from './styles';
-import { theme } from '../../../../theme';
+import {theme} from '../../../../theme';
 
 const ProfileUser: React.FC = props => {
   const styles = useStyles();
@@ -19,7 +19,7 @@ const ProfileUser: React.FC = props => {
     NavigationService.goBack();
   };
   const handlePressMessage = () => {
-    NavigationService.navigate(routes.MESSAGES);
+    NavigationService.navigate(routes.MESSAGE);
   };
   const [isFollowed, setIsFollowed] = useState(true);
   const handleFollowButtonClick = () => {
@@ -49,7 +49,9 @@ const ProfileUser: React.FC = props => {
           style={[
             styles.btnFollow,
             {
-              backgroundColor: isFollowed ? theme?.lightColors?.blue : theme?.lightColors?.grey5,
+              backgroundColor: isFollowed
+                ? theme?.lightColors?.blue
+                : theme?.lightColors?.grey5,
             },
           ]}
           onPress={handleFollowButtonClick}>
