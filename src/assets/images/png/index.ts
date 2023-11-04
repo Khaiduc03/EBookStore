@@ -9,4 +9,5 @@ export const images = {
   success: require('./success.json'),
   cat: require('./cat.json'),
   avata: require('./avatar.jpg'),
+  image_default: require('./image_default.png'),
 };

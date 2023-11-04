@@ -1,15 +1,11 @@
-import React, {useState} from 'react';
-import {SearchBar} from '@rneui/themed';
+import { Icon } from '@rneui/base';
+import { SearchBar } from '@rneui/themed';
+import React, { useState } from 'react';
 import {
-  View,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  Keyboard,
+  Keyboard
 } from 'react-native';
-import {Icon} from '@rneui/base';
-import {TouchableOpacity} from 'react-native';
 import useStyles from './styles';
-import {SearchBarComponentProps} from './types';
+import { SearchBarComponentProps } from './types';
 
 const SearchCustom: React.FunctionComponent<
   SearchBarComponentProps
