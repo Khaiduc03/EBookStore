@@ -1,13 +1,12 @@
-import {PayloadAction} from '@reduxjs/toolkit';
-import {call, put, takeLatest} from 'redux-saga/effects';
-import {routes} from '../../constants';
-import {NavigationService} from '../../navigation';
-import {CustomToastBottom, showToastError, showToastSuccess} from '../../utils';
-import {GoogleService} from '../../utils/google';
-import {AuthActions, ComicActions, LoadingActions} from '../reducer';
-import {AuthService, UserService} from '../services';
-import {LoginPayload, NewPasswordPayload, SendOTPPayload} from '../types';
-import {useAppDispatch} from '../../hooks';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { routes } from '../../constants';
+import { NavigationService } from '../../navigation';
+import { CustomToastBottom, showToastError, showToastSuccess } from '../../utils';
+import { GoogleService } from '../../utils/google';
+import { AuthActions, LoadingActions } from '../reducer';
+import { AuthService, UserService } from '../services';
+import { LoginPayload, NewPasswordPayload, SendOTPPayload } from '../types';
 
 //login
 function* loginSaga(action: PayloadAction<LoginPayload>): Generator {

@@ -22,8 +22,7 @@ const MyProfile: React.FC = props => {
   );
   const dispatch = useAppDispatch();
   dispatch(AuthActions.getUserInfo());
-  const {email, fullname, image_url, summary} =
-    useAppSelector(getAuthUserProfile);
+  const user = useAppSelector(getAuthUserProfile);
   return (
     <View style={styles.container}>
       <HeaderCustom
@@ -37,8 +36,8 @@ const MyProfile: React.FC = props => {
         <ItemFollow />
       </View>
       <View style={styles.nameUser}>
-        <TextCustom textBold title={fullname} />
-        <TextCustom textLight title={summary} />
+        <TextCustom textBold title={user.fullname} />
+        <TextCustom textLight title={user.summary} />
       </View>
       <View style={styles.viewExplore}>
         <TextCustom textBold title="Explore everyone" />

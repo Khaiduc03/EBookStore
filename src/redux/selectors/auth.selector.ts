@@ -6,6 +6,5 @@ export const getAuthEnableSignIn = (state: RootState) =>
 export const getAuthAccessToken = (state: RootState) => state.auth.accessToken;
 export const getAuthRefreshToken = (state: RootState) =>
   state.auth.refreshToken;
-export const getAuthUserProfile = (state: RootState) => state.auth.user;
-
+export const getAuthUserProfile = (state: RootState ) => state.auth.user;
 // export const getAuthIsGoogle = (state: RootState) => state.auth.isGoogle;

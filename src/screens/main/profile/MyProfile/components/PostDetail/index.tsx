@@ -25,7 +25,7 @@ const PostDetail: React.FC = () => {
   };
   const dispatch = useAppDispatch();
   dispatch(AuthActions.getUserInfo());
-  const {email, fullname, image_url} = useAppSelector(getAuthUserProfile);
+  const user = useAppSelector(getAuthUserProfile);
   return (
     <View style={styles.container}>
       <HeaderCustom
@@ -35,8 +35,11 @@ const PostDetail: React.FC = () => {
       />
       <View style={styles.viewInformation}>
         <View style={styles.viewimage}>
-          <Image source={{uri: `${image_url}`}} style={styles.avatarUser} />
-          <TextCustom textBold title={fullname} />
+          <Image
+            source={{uri: `${user.image_url}`}}
+            style={styles.avatarUser}
+          />
+          <TextCustom textBold title={user.fullname} />
         </View>
         <TouchableOpacity>
           <Icon name="ellipsis-vertical" type="ionicon" />
