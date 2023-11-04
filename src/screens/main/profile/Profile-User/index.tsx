@@ -19,7 +19,7 @@ const ProfileUser: React.FC = props => {
     NavigationService.goBack();
   };
   const handlePressMessage = () => {
-    NavigationService.navigate(routes.MESSAGES);
+    NavigationService.navigate(routes.MESSAGE);
   };
   const [isFollowed, setIsFollowed] = useState(true);
   const handleFollowButtonClick = () => {

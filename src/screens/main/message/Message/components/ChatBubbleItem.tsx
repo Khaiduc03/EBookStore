@@ -1,7 +1,7 @@
 import {Text} from '@rneui/base';
 import {View} from 'react-native';
-import useStyles from '../../styles';
-import {IMessage} from '../../types';
+import useStyles from '../styles';
+import {IMessage} from '../types';
 
 export const ChatBubble: React.FC<IMessage> = ({isUser, text, time}) => {
   const styles = useStyles();

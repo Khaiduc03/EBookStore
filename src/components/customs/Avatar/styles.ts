@@ -1,6 +1,7 @@
 import {normalize, makeStyles} from '@rneui/themed';
 import {Device} from '../../../utils';
 import {StyleSheet} from 'react-native';
+import {fontFamilySetup} from '../../../utils/font';
 const PADDING = 40;
 Device.getDeviceWidth();
 const useStyles = makeStyles(({colors}) => ({
@@ -52,8 +53,8 @@ const useStyles = makeStyles(({colors}) => ({
   textStyle: {
     fontSize: normalize(16),
     marginLeft: normalize(12),
-    color: colors.black,
-    fontFamily: 'Urbanist-Bold',
+    color: colors.blackDefault,
+    fontFamily: fontFamilySetup.bold,
   },
   iconStyle: {
     backgroundColor: colors.grey5,

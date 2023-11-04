@@ -1,32 +1,25 @@
-import {View, ScrollView, Image, FlatList} from 'react-native';
+import {FlatList, View} from 'react-native';
 
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
-import useStyles from './styles';
 import {ComicItem, HeaderCustom} from '../../../../components';
+import {routes} from '../../../../constants';
+import {NavigationService} from '../../../../navigation';
+import useStyles from './styles';
 
-import {createIcon} from '../../../../utils';
-import {TopicsHome, ComicsNew, BannerComic, TrendingComic} from './components';
-import {
-  ComicActions,
-  ComicType,
-  TopicActions,
-  getAuthEnableSignIn,
-} from '../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {ComicActions, ComicType, TopicActions} from '../../../../redux';
 import {
   getListComic,
   getNextPage,
-  getTotalPage,
 } from '../../../../redux/selectors/comic.selector';
 import {getListTopic} from '../../../../redux/selectors/topic.selector';
+import {createIcon} from '../../../../utils';
+import {BannerComic, TopicsHome, TrendingComic} from './components';
 
 const Home: FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const styles = useStyles();
   const [numCols, setNumCols] = useState(3);
-  const [data, setData] = useState<ComicType[]>([]);
   const [page, setPage] = useState(1);
   const dataComic = useAppSelector(getListComic) || [];
   const dataTopic = useAppSelector(getListTopic);
@@ -38,12 +31,6 @@ const Home: FunctionComponent = () => {
       dispatch(TopicActions.getListTopic());
     }
   }, [page]);
-
-  useEffect(() => {
-    if (dataComic.length > 0) {
-      setData([...data, ...dataComic]);
-    }
-  }, [dataComic]);
 
   const loadMoreComic = () => {
     if (nextPage) {
@@ -65,11 +52,11 @@ const Home: FunctionComponent = () => {
     <View style={styles.container}>
       <HeaderCustom
         titleStyle={styles.textTitleHeader}
-        onPressRightIconLeft={handlePressSearch}
+        onPressRightIconMiddle={handlePressSearch}
         leftIconStyle={styles.leftIconStyle}
         leftIcon={{name: 'book', type: 'font-awesome'}}
         title="ComicVerse"
-        rightIconleft={{name: 'search', type: 'ionicon'}}
+        rightIconMiddle={{name: 'search', type: 'ionicon'}}
         rightIconRight={createIcon({
           name: 'notifications-outline',
           type: 'ionicon',
@@ -89,7 +76,7 @@ const Home: FunctionComponent = () => {
         )}
         onEndReached={loadMoreComic}
         onEndReachedThreshold={0.1}
-        data={data}
+        data={dataComic}
         key={numCols.toString()}
         columnWrapperStyle={
           numCols === 3 ? {gap: 5, paddingHorizontal: 16} : null
@@ -104,7 +91,7 @@ const Home: FunctionComponent = () => {
               <HeaderCustom
                 titleStyle={styles.textTitle}
                 title="New Comics"
-                rightIconleft={{
+                rightIconMiddle={{
                   name: 'grid-outline',
                   type: 'ionicon',
                   color: numCols === 3 ? '#F89300' : '',
@@ -114,7 +101,7 @@ const Home: FunctionComponent = () => {
                   type: 'ionicon',
                   color: numCols === 1 ? '#F89300' : '',
                 }}
-                onPressRightIconLeft={handleGridIconPress}
+                onPressRightIconMiddle={handleGridIconPress}
                 onPressRightIconRight={handleListIconPress}
               />
             </View>

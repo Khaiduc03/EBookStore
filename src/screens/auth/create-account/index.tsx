@@ -10,7 +10,8 @@ import {
 } from 'react-native';
 
 import {CheckBox} from '@rneui/themed';
-import {ProfileImage} from '../../../assets/svg';
+import {GoogleIcon} from '../../../assets/icons';
+import {UserImage} from '../../../assets/svg';
 import {BigButton} from '../../../components';
 import AuthHeaderV1 from '../../../components/customs/AuthHeaderV1';
 import Header from '../../../components/customs/Headers';
@@ -18,10 +19,9 @@ import InputCustomV1 from '../../../components/customs/InputCustomV1';
 import {routes} from '../../../constants';
 import {useAppDispatch} from '../../../hooks';
 import {NavigationService} from '../../../navigation';
-import {AuthActions} from '../../../redux';
+import {AuthActions, ComicActions} from '../../../redux';
 import useStyles from './styles';
 import {isValidEmail, isValidPassword, showToastError} from '../../../utils';
-import {GoogleIcon} from '../../../assets/icons';
 
 const CreateAccountScreen: FunctionComponent = () => {
   const styles = useStyles();
@@ -91,6 +91,7 @@ const CreateAccountScreen: FunctionComponent = () => {
   };
 
   const handleGoogle = async () => {
+    dispatch(ComicActions.clearListData());
     dispatch(
       AuthActions.handleLoginGoogle({
         device_token: '1234567890',
@@ -119,7 +120,7 @@ const CreateAccountScreen: FunctionComponent = () => {
               <AuthHeaderV1
                 title="Create Account "
                 subTitle="You can create an account, and after that, you will be able to log in to our official application."
-                avatar={<ProfileImage />}
+                avatar={<UserImage />}
               />
             </View>
 

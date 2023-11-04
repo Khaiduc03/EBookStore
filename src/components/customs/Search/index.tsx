@@ -15,12 +15,7 @@ const SearchCustom: React.FunctionComponent<
   SearchBarComponentProps
 > = props => {
   const styles = useStyles();
-  const [search, setSearch] = useState('');
   const [inputFocused, setInputFocused] = useState(false);
-
-  const handleKeyPress = () => {
-    console.log(search);
-  };
 
   const handleInputFocus = () => {
     setInputFocused(true);
@@ -50,7 +45,7 @@ const SearchCustom: React.FunctionComponent<
           color={styles.cancelIcon.color}
         />
       }
-      autoFocus={false}
+      autoFocus={true}
       returnKeyType="search"
       inputStyle={props.inputStyle || styles.inputStyle}
       onSubmitEditing={props.onPress}

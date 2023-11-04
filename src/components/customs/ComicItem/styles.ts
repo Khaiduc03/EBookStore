@@ -57,6 +57,11 @@ const useStyles = makeStyles(({colors}) => ({
     textAlign: 'center',
     fontFamily: fontFamilySetup.medium,
   },
+  skeletonStyle: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
 }));
 
 export default useStyles;

@@ -5,6 +5,11 @@ export interface IMessage {
   image?: string;
 }
 
+export type AvatarProps = {
+  onPressAvatar?: () => void;
+  isZoomable?: boolean;
+};
+
 export const messages: IMessage[] = [
   {
     isUser: false,

@@ -48,7 +48,9 @@ apiService.interceptors.response.use(
       });
       console.log(res)
       if (res.status === 200) {
+        console.log(res);
         store.dispatch(AuthActions.refreshToken(res.data));
+        console.log(res.data);
         return apiService(originalRequest);
       } else {
         store.dispatch(AuthActions.handleLogout());

@@ -42,7 +42,7 @@ const usestyles = makeStyles(({colors}) => ({
     color: colors.primary,
   },
   subTitle: {
-    width: normalize(WIDTH - 20),
+    width: normalize(WIDTH * 2),
     fontSize: normalize(HEIGHT * 0.019),
     textAlign: 'center',
     fontFamily: 'Urbanist-Regular',

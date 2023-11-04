@@ -1,14 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  StatusBar,
-  TouchableOpacity,
-  FlatList,
-  Image,
-  TouchableWithoutFeedback,
-  TouchableHighlight,
-} from 'react-native';
+import {View, FlatList, TouchableHighlight} from 'react-native';
 import {Device} from '../../../../utils';
 import useStyles from './styles';
 import {FooterChapter, HeaderChapter} from './Components';
@@ -21,19 +12,28 @@ import {getDataDetailChapter} from '../../../../redux/selectors/comic.selector';
 
 const WIDTH = Device.getDeviceWidth();
 interface RouteParamsIdChapter {
-  uuid: string;
+  chapter_number: number;
+  comic_uuid: string;
+  chapter_name: string;
 }
 
 const ChapterDetail = () => {
   const dispath = useAppDispatch();
   const route = useRoute();
-  const uuidChapter = (route.params as RouteParamsIdChapter).uuid;
+  const chapter_number = (route.params as RouteParamsIdChapter).chapter_number;
+  const comic_uuid = (route.params as RouteParamsIdChapter).comic_uuid;
+  const chapter_name = (route.params as RouteParamsIdChapter).chapter_name;
 
   const dataDetailChapter = useAppSelector(getDataDetailChapter);
 
   useEffect(() => {
-    dispath(ComicActions.getListChapterDetail(uuidChapter));
-  }, [uuidChapter]);
+    dispath(
+      ComicActions.getListChapterDetail({
+        chapter_number: chapter_number,
+        comic_uuid: comic_uuid,
+      }),
+    );
+  }, [chapter_number, comic_uuid]);
 
   const styles = useStyles();
   const [showHeader, setShowHeader] = useState(true);
@@ -46,7 +46,7 @@ const ChapterDetail = () => {
 
   const renderHeader = () => {
     if (showHeader) {
-      return <HeaderChapter />;
+      return <HeaderChapter chapter_name={chapter_name} />;
     } else {
       return null;
     }
