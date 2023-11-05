@@ -243,6 +243,56 @@ const reducer = createSlice({
         ...state,
       };
     },
+
+    getListFavorite: (state: ComicState, _: PayloadAction<number>) => {
+      return {
+        ...state,
+      };
+    },
+    setListFavorite: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpListComicData<ComicType>>,
+    ) => {
+      const currentData: ComicType[] = state.listFavorite?.data || [];
+      const newData = action.payload.data || [];
+      const updatedData = [...currentData, ...newData];
+      return {
+        ...state,
+        listFavorite: {
+          data: updatedData,
+          canNext: action.payload.canNext,
+          currentDataSize: action.payload.currentDataSize,
+          currentPage: action.payload.currentPage,
+          totalPage: action.payload.totalPage,
+          totalData: action.payload.totalData,
+        },
+      };
+    },
+
+    getListHistotyComic: (state: ComicState, _: PayloadAction<number>) => {
+      return {
+        ...state,
+      };
+    },
+    setListHistotyComic: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpListComicData<ComicType>>,
+    ) => {
+      const currentData: ComicType[] = state.listHistoryComic?.data || [];
+      const newData = action.payload.data || [];
+      const updatedData = [...currentData, ...newData];
+      return {
+        ...state,
+        listHistoryComic: {
+          data: updatedData,
+          canNext: action.payload.canNext,
+          currentDataSize: action.payload.currentDataSize,
+          currentPage: action.payload.currentPage,
+          totalPage: action.payload.totalPage,
+          totalData: action.payload.totalData,
+        },
+      };
+    },
   },
 });
 

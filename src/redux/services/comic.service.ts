@@ -70,4 +70,14 @@ export class ComicService {
       `${ENDPOINTS.CHECK_FAVORITE}?comic_uuid=${payload}`,
     );
   }
+
+  static async getListFavorite(payload: number) {
+    console.log(`${ENDPOINTS.ALL_FAVORITE}?page=${payload}`);
+    return await apiService.get(`${ENDPOINTS.ALL_FAVORITE}?page=${payload}`);
+  }
+
+  static async getListHistory(payload: number) {
+    console.log(`${ENDPOINTS.HISTORY_COMIC}?page=${payload}`);
+    return await apiService.get(`${ENDPOINTS.HISTORY_COMIC}?page=${payload}`);
+  }
 }

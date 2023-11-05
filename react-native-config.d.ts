@@ -39,6 +39,7 @@ declare module 'react-native-config' {
     DELETE_FAVORITE: string;
     CHECK_FAVORITE: string;
     ALL_FAVORITE: string;
+    HISTORY_COMIC: string;
   }
 
   export const Config: NativeConfig;

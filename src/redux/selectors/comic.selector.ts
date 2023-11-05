@@ -36,3 +36,9 @@ export const getPreviousChapter = (state: RootState) =>
 
 export const getListTopView = (state: RootState) =>
   state.comic.listTopView?.data;
+
+export const getListFavorite = (state: RootState) =>
+  state.comic.listFavorite?.data;
+
+export const nextPageFavorite = (state: RootState) =>
+  state.comic.listFavorite?.canNext;

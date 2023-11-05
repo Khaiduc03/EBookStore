@@ -1,21 +1,23 @@
 import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../../utils';
+import {StyleSheet} from 'react-native';
 import {fontFamilySetup} from '../../../../utils/font';
-
-const WIDTH = Device.getDeviceWidth();
-const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
   },
-  text: {
-    fontSize: normalize(40),
-    letterSpacing: normalize(0.5),
-    fontStyle: 'normal',
-    fontFamily: fontFamilySetup.bold,
+  leftIconStyle: {
+    marginRight: normalize(100),
     color: colors.black,
   },
+
+  titleStyle: {
+    color: colors.black,
+    fontSize: normalize(20),
+    fontFamily: fontFamilySetup.bold,
+    marginLeft: normalize(10),
+  },
 }));
+
 export default useStyles;

@@ -5,6 +5,7 @@ import {HeaderCustom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {Icon} from '@rneui/themed';
+import {FavoritesList} from './components';
 
 const Favorite: React.FC = () => {
   const styles = useStyles();
@@ -15,12 +16,19 @@ const Favorite: React.FC = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
-        title="Your Favorite"
-        onPressLeftIcon={handlePressGoback}
+        titleStyle={styles.titleStyle}
+        leftIcon={{
+          name: 'arrow-back-sharp',
+          type: 'ionicon',
+          color: styles.leftIconStyle.color,
+        }}
+        title="Favorites List"
+        rightIconRight={{
+          name: 'notifications-outline',
+          type: 'ionicon',
+        }}
       />
-      <Text style={styles.text}>Favorite this here !!</Text>
-      <Icon name="book" type="font-awesome" size={12} />
+      <FavoritesList />
     </View>
   );
 };

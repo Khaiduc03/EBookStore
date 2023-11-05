@@ -56,6 +56,8 @@ export type ComicState = Partial<{
   listChapter: PayloadHttpListChapter<ChapterType>;
   listTopView: PayloadHttpListTopView<ComicType>;
   dataPostFavorite: PayloadHttp<AddFavoriteType>;
+  listFavorite: PayloadHttpListComicData<ComicType>;
+  listHistoryComic: PayloadHttpListComicData<ComicType>;
 }>;
 
 export type ComicType = uuid &
@@ -70,6 +72,7 @@ export type ComicType = uuid &
     topic_names: string[];
     favorite_uuid: string;
     isfavorite: boolean;
+    last_chapter_number: number;
   };
 
 export type ComicDetailType = uuid &
