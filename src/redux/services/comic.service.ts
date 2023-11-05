@@ -47,4 +47,8 @@ export class ComicService {
       `${ENDPOINTS.COMIC_BY_NAME}?comic_name=${action.key}&page=${action.page}`,
     );
   }
+
+  static async getComicByTopView() {
+    return await apiService.get(`${ENDPOINTS.COMIC_TOP_20}`);
+  }
 }

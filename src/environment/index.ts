@@ -38,5 +38,5 @@ export const ENDPOINTS = {
 
   CHAPTER: Config.CHAPTER,
   CHAPTER_UUID: Config.CHAPTER_UUID,
+  COMIC_TOP_20: Config.COMIC_TOP_20,
 };
-

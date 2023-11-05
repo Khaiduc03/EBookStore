@@ -33,3 +33,6 @@ export const getNextChapter = (state: RootState) =>
   state.comic.listDetailChapter?.next_chapter;
 export const getPreviousChapter = (state: RootState) =>
   state.comic.listDetailChapter?.previous_chapter;
+
+export const getListTopView = (state: RootState) =>
+  state.comic.listTopView?.data;

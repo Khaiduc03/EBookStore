@@ -21,6 +21,10 @@ export interface PayloadHttpListChapter<T> {
   data?: T[];
 }
 
+export interface PayloadHttpListTopView<T> {
+  data?: T[];
+}
+
 export interface PayloadHttpListComicData<T> {
   totalData?: number;
   totalPage?: number;
@@ -44,6 +48,7 @@ export type ComicState = Partial<{
   detailData: PayloadHttpList<ComicDetailType>;
   listDetailChapter: PayloadHttpDetailChapter<DetailChapterType>;
   listChapter: PayloadHttpListChapter<ChapterType>;
+  listTopView: PayloadHttpListTopView<ComicType>;
 }>;
 
 export type ComicType = uuid &

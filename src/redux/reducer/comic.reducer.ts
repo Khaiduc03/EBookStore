@@ -10,6 +10,7 @@ import {
   DetailChapterType,
   PayloadHttpDetailChapter,
   PayloadHttpListComicData,
+  PayloadHttpListTopView,
 } from '../types';
 import {PayloadHttpList} from '../../types';
 
@@ -183,6 +184,23 @@ const reducer = createSlice({
         ...state,
         listDataBySearch: {
           data: [],
+        },
+      };
+    },
+
+    getListTopView: (state: ComicState) => {
+      return {
+        ...state,
+      };
+    },
+    setListTopView: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpListTopView<ComicType>>,
+    ) => {
+      return {
+        ...state,
+        listTopView: {
+          data: action.payload.data,
         },
       };
     },

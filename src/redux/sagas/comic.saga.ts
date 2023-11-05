@@ -142,6 +142,25 @@ function* getDataChapterNavSaga(action: PayloadAction<any>): Generator {
   }
 }
 
+function* getComicByTop20Saga(): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    console.log('run');
+    const {data}: any = yield call(ComicService.getComicByTopView);
+    if (data.code == 200) {
+      console.log('run push tookit');
+      console.log(data);
+      yield put(ComicActions.setListTopView(data));
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
 //watch saga runn
 export default function* watchComicSaga() {
   yield takeLatest(ComicActions.getListData.type, getListDataSaga);
@@ -154,4 +173,5 @@ export default function* watchComicSaga() {
   );
   yield takeLatest(ComicActions.getListBySearch.type, getDataComicBySearchSaga);
   yield takeLatest(ComicActions.getListDetailChapterNav, getDataChapterNavSaga);
+  yield takeLatest(ComicActions.getListTopView, getComicByTop20Saga);
 }
