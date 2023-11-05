@@ -16,6 +16,7 @@ import {ComicActions, ComicType, LoadingActions} from '../../../../redux';
 import {
   getDataByTopic,
   getListComic,
+  getNextTopic,
 } from '../../../../redux/selectors/comic.selector';
 import {
   getIsLoading,
@@ -31,20 +32,24 @@ interface RouteParamsIdTopic {
 
 const ComicByTopic = () => {
   const route = useRoute();
-  const uuidComic = (route.params as RouteParamsIdTopic).uuid;
   const nameTopic = (route.params as RouteParamsIdTopic).name;
   const dispatch = useAppDispatch();
   const dataComic = useAppSelector(getDataByTopic) || [];
+  // console.log('========>', dataComic);
+  const nextPage = useAppSelector(getNextTopic);
   const [numCols, setNumCols] = useState<number>(3);
   const isLoading = useAppSelector(getIsLoadingTopic);
   const [page, setPage] = useState(1);
+  console.log('nextPage', nextPage);
 
   useEffect(() => {
-    dispatch(ComicActions.getListByTopic({page: page, uuid: uuidComic}));
+    dispatch(ComicActions.getListByTopic({page: page, name: nameTopic}));
   }, [page]);
 
   const loadMoreComic = () => {
-    setPage(page + 1);
+    if (nextPage && !isLoading) {
+      setPage(page + 1);
+    }
   };
 
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (

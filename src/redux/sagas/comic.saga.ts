@@ -48,7 +48,7 @@ function* getListComicByTopicSaga(action: PayloadAction<any>): Generator {
     );
 
     if (data.code === 200) {
-      yield put(ComicActions.setListByTopic(data));
+      yield put(ComicActions.setListByTopic(data.data));
     } else {
       console.log('Lỗi từ máy chủ !!!');
     }
@@ -100,7 +100,7 @@ function* getDetailChapterSaga(action: PayloadAction<any>): Generator {
 }
 
 function* getDataComicBySearchSaga(action: PayloadAction<string>): Generator {
-  yield put(LoadingActions.showLoading());
+  yield put(LoadingActions.showLoadingTopic());
   try {
     console.log('run');
     const {data}: any = yield call(
@@ -109,14 +109,14 @@ function* getDataComicBySearchSaga(action: PayloadAction<string>): Generator {
     );
     if (data.code == 200) {
       console.log('run push tookit');
-      yield put(ComicActions.setListBySeacrch(data));
+      yield put(ComicActions.setListBySeacrch(data.data));
     } else {
       console.log('Server errol !!!');
     }
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoading());
+    yield put(LoadingActions.hideLoadingTopic());
   }
 }
 

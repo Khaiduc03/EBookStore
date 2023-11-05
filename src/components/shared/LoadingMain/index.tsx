@@ -50,8 +50,17 @@ const LoadingMain = () => {
           marginTop: 30,
           justifyContent: 'space-around',
         }}>
-        <Skeleton width={130} height={50} />
-        <Skeleton width={130} height={50} />
+        <Skeleton width={150} height={50} />
+        <Skeleton width={150} height={50} />
+      </View>
+
+      <View
+        style={{
+          flexDirection: 'row',
+          marginTop: 30,
+          justifyContent: 'space-around',
+        }}>
+        <Skeleton width={'100%'} height={300} />
       </View>
     </View>
   );

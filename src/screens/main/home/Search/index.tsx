@@ -1,29 +1,40 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from 'react-native';
+import React, {useState, useEffect, useCallback} from 'react';
 import {ComicItem, HeaderCustom, SearchCustom} from '../../../../components';
 import useStyles from './styles';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {Icon} from '@rneui/themed';
-import {getDataComicBySeacrh} from '../../../../redux/selectors/comic.selector';
+import {
+  getDataComicBySeacrh,
+  getNextSearch,
+} from '../../../../redux/selectors/comic.selector';
 import {ComicActions, ComicType, TopicActions} from '../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {backScreen} from '../../../../utils';
 import {FlatList} from 'react-native-gesture-handler';
 import ErrorSearch from './components/ErrorSearch';
 import NoSearch from './components/NoSearch';
+import {getIsLoadingTopic} from '../../../../redux/selectors/loading.selector';
 
 const Search = () => {
   const dispatch = useAppDispatch();
   const dataBySearch = useAppSelector(getDataComicBySeacrh);
+  const nextPage = useAppSelector(getNextSearch);
   const [numCols, setNumCols] = useState(3);
   const [data, setData] = useState<any>([]);
   const [page, setPage] = useState(2);
-  const [result, SetResult] = useState(true);
+
+  const isLoading = useAppSelector(getIsLoadingTopic);
 
   useEffect(() => {
     if (dataBySearch && dataBySearch.length !== 0) {
-      SetResult(true);
       setData([...data, ...dataBySearch]);
     }
   }, [dataBySearch]);
@@ -41,15 +52,16 @@ const Search = () => {
   const onPressSearch = () => {
     dispatch(ComicActions.getListBySearch({key: search, page: 1}));
     setData([]);
-    SetResult(false);
     setPage(2);
   };
 
   const loadMoreComic = () => {
     if (data.length > 0) {
       if (search) {
-        setPage(page + 1);
-        dispatch(ComicActions.getListBySearch({key: search, page: page}));
+        if (nextPage) {
+          setPage(page + 1);
+          dispatch(ComicActions.getListBySearch({key: search, page: page}));
+        }
       }
     }
   };
@@ -57,6 +69,16 @@ const Search = () => {
     dispatch(ComicActions.ClearListBySearch());
     backScreen();
   };
+
+  const listFooterComponent = useCallback(() => {
+    return (
+      <ActivityIndicator
+        style={{marginBottom: 10}}
+        size={'large'}
+        color={'#F89300'}
+      />
+    );
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -73,12 +95,13 @@ const Search = () => {
         </View>
       </View>
 
-      {data?.length === 0 && !result ? (
-        <ErrorSearch />
-      ) : data?.length === 0 ? (
+      {data?.length === 0 ? (
         <NoSearch />
       ) : (
         <FlatList
+          ListFooterComponent={
+            isLoading ? isLoading && listFooterComponent : undefined
+          }
           ListHeaderComponent={() => {
             return (
               <HeaderCustom

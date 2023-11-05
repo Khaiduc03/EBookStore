@@ -86,7 +86,7 @@ const reducer = createSlice({
     },
     setListByTopic: (
       state: ComicState,
-      action: PayloadAction<PayloadHttpList<ComicType>>,
+      action: PayloadAction<PayloadHttpListComicData<ComicType>>,
     ) => {
       const currentData: ComicType[] = state.listDataByTopic?.data || [];
       const newData = action.payload.data || [];
@@ -95,6 +95,7 @@ const reducer = createSlice({
         ...state,
         listDataByTopic: {
           data: updatedData,
+          canNext: action.payload.canNext,
         },
       };
     },
@@ -163,12 +164,17 @@ const reducer = createSlice({
     },
     setListBySeacrch: (
       state: ComicState,
-      action: PayloadAction<PayloadHttpList<ComicType>>,
+      action: PayloadAction<PayloadHttpListComicData<ComicType>>,
     ) => {
       return {
         ...state,
         listDataBySearch: {
           data: action.payload.data,
+          canNext: action.payload.canNext,
+          currentDataSize: action.payload.currentDataSize,
+          currentPage: action.payload.currentPage,
+          totalPage: action.payload.totalPage,
+          totalData: action.payload.totalData,
         },
       };
     },

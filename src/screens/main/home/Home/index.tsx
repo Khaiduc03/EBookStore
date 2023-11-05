@@ -58,7 +58,13 @@ const Home: FunctionComponent = () => {
   };
 
   const listFooterComponent = useCallback(() => {
-    return <ActivityIndicator size={'large'} />;
+    return (
+      <ActivityIndicator
+        style={{marginBottom: 10}}
+        size={'large'}
+        color={'#F89300'}
+      />
+    );
   }, []);
 
   return (
@@ -97,6 +103,7 @@ const Home: FunctionComponent = () => {
         columnWrapperStyle={
           numCols === 3 ? {gap: 5, paddingHorizontal: 16} : null
         }
+        keyExtractor={item => item.uuid}
         numColumns={numCols}
         ListHeaderComponent={() => {
           return (

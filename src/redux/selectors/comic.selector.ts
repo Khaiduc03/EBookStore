@@ -11,6 +11,8 @@ export const getDetailComic = (state: RootState) =>
 
 export const getDataByTopic = (state: RootState) =>
   state.comic.listDataByTopic?.data;
+export const getNextTopic = (state: RootState) =>
+  state.comic.listDataByTopic?.canNext;
 
 export const getDataAllChapter = (state: RootState) =>
   state.comic.listChapter?.data;
@@ -20,6 +22,12 @@ export const getDataDetailChapter = (state: RootState) =>
 
 export const getDataComicBySeacrh = (state: RootState) =>
   state.comic.listDataBySearch?.data;
+
+export const getNextSearch = (state: RootState) =>
+  state.comic.listDataBySearch?.canNext;
+
+export const getTotalSearch = (state: RootState) =>
+  state.comic.listDataBySearch?.totalPage;
 
 export const getNextChapter = (state: RootState) =>
   state.comic.listDetailChapter?.next_chapter;

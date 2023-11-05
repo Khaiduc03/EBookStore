@@ -16,7 +16,6 @@ const TopicItem: React.FunctionComponent<CustomTopicsProps> = props => {
   const onPressTopic = () => {
     dispatch(ComicActions.clearListDataByComic());
     NavigationService.navigate(routes.COMICBYTOPIC, {
-      uuid: props.uuid,
       name: props.title,
     });
   };

@@ -38,8 +38,8 @@ export interface PayloadHttpDetailChapter<T> {
 
 export type ComicState = Partial<{
   listData: PayloadHttpListComicData<ComicType>;
-  listDataByTopic: PayloadHttpList<ComicType>;
-  listDataBySearch: PayloadHttpList<ComicType>;
+  listDataByTopic: PayloadHttpListComicData<ComicType>;
+  listDataBySearch: PayloadHttpListComicData<ComicType>;
   topic: PayloadHttpList<TopicType>;
   detailData: PayloadHttpList<ComicDetailType>;
   listDetailChapter: PayloadHttpDetailChapter<DetailChapterType>;
@@ -55,6 +55,7 @@ export type ComicType = uuid &
     views: number;
     image_url: string;
     topics: string[];
+    topic_names: string[];
     favorite_uuid: string;
     isfavorite: boolean;
   };
