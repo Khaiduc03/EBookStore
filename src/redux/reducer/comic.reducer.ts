@@ -11,6 +11,8 @@ import {
   PayloadHttpDetailChapter,
   PayloadHttpListComicData,
   PayloadHttpListTopView,
+  AddFavoriteType,
+  PayloadHttp,
 } from '../types';
 import {PayloadHttpList} from '../../types';
 
@@ -202,6 +204,43 @@ const reducer = createSlice({
         listTopView: {
           data: action.payload.data,
         },
+      };
+    },
+
+    postFavorite: (state: ComicState, _: PayloadAction<string>) => {
+      return {
+        ...state,
+      };
+    },
+    setPostFavorite: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttp<AddFavoriteType>>,
+    ) => {
+      return {
+        ...state,
+        dataPostFavorite: {
+          data: action.payload.data,
+          code: action.payload.code,
+          message: action.payload.message,
+        },
+      };
+    },
+    clearPostFavorite: (state: ComicState) => {
+      return {
+        ...state,
+        dataPostFavorite: {},
+      };
+    },
+
+    deleteFavorite: (state: ComicState, _: PayloadAction<string>) => {
+      return {
+        ...state,
+      };
+    },
+
+    checkFavorite: (state: ComicState, _: PayloadAction<string>) => {
+      return {
+        ...state,
       };
     },
   },

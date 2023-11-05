@@ -1,3 +1,4 @@
+import {config} from 'dotenv';
 import Config from 'react-native-config';
 
 // //URL
@@ -39,4 +40,8 @@ export const ENDPOINTS = {
   CHAPTER: Config.CHAPTER,
   CHAPTER_UUID: Config.CHAPTER_UUID,
   COMIC_TOP_20: Config.COMIC_TOP_20,
+  POST_FAVORITE: Config.POST_FAVORITE,
+  DELETE_FAVORITE: Config.DELETE_FAVORITE,
+  CHECK_FAVORITE: Config.CHECK_FAVORITE,
+  ALL_FAVORITE: Config.ALL_FAVORITE,
 };

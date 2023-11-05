@@ -25,6 +25,12 @@ export interface PayloadHttpListTopView<T> {
   data?: T[];
 }
 
+export interface PayloadHttp<T> {
+  code?: number;
+  message?: string;
+  data?: T;
+}
+
 export interface PayloadHttpListComicData<T> {
   totalData?: number;
   totalPage?: number;
@@ -49,6 +55,7 @@ export type ComicState = Partial<{
   listDetailChapter: PayloadHttpDetailChapter<DetailChapterType>;
   listChapter: PayloadHttpListChapter<ChapterType>;
   listTopView: PayloadHttpListTopView<ComicType>;
+  dataPostFavorite: PayloadHttp<AddFavoriteType>;
 }>;
 
 export type ComicType = uuid &
@@ -84,6 +91,12 @@ export type ChapterType = uuid &
     chapter_name: string;
     chapter_number: string;
     views: string;
+  };
+
+export type AddFavoriteType = uuid &
+  Timestamp & {
+    user: string;
+    comic: string;
   };
 
 export type DetailChapterType = Timestamp & {

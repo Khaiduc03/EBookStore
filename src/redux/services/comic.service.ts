@@ -51,4 +51,23 @@ export class ComicService {
   static async getComicByTopView() {
     return await apiService.get(`${ENDPOINTS.COMIC_TOP_20}`);
   }
+
+  static async postFavorite(payload: string) {
+    console.log(`${ENDPOINTS.POST_FAVORITE}`, payload);
+    return await apiService.post(`${ENDPOINTS.POST_FAVORITE}`, {
+      comic_uuid: payload,
+    });
+  }
+
+  static async deleteFavorite(payload: string) {
+    console.log(`${ENDPOINTS.DELETE_FAVORITE}${payload}`);
+    return await apiService.delete(`${ENDPOINTS.DELETE_FAVORITE}${payload}`);
+  }
+
+  static async checkFavorite(payload: string) {
+    console.log(`${ENDPOINTS.CHECK_FAVORITE}?comic_uuid=${payload}`);
+    return await apiService.get(
+      `${ENDPOINTS.CHECK_FAVORITE}?comic_uuid=${payload}`,
+    );
+  }
 }

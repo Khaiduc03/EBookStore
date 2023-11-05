@@ -35,6 +35,10 @@ declare module 'react-native-config' {
     CHAPTER: string;
     CHAPTER_UUID: string;
     COMIC_TOP_20: string;
+    POST_FAVORITE: string;
+    DELETE_FAVORITE: string;
+    CHECK_FAVORITE: string;
+    ALL_FAVORITE: string;
   }
 
   export const Config: NativeConfig;

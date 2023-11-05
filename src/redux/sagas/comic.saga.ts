@@ -161,6 +161,63 @@ function* getComicByTop20Saga(): Generator {
   }
 }
 
+function* postFavoriteSaga(action: PayloadAction<string>): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    console.log('run');
+    const {data}: any = yield call(ComicService.postFavorite, action.payload);
+    if (data.code == 200) {
+      console.log('run push tookit');
+      console.log(data);
+      yield put(ComicActions.setPostFavorite(data));
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
+function* deleteFavoriteSaga(action: PayloadAction<string>): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    console.log('run');
+    const {data}: any = yield call(ComicService.deleteFavorite, action.payload);
+    if (data.code == 200) {
+      console.log('run push tookit');
+      console.log(data);
+      yield put(ComicActions.setPostFavorite(data));
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
+function* checkFavoriteSaga(action: PayloadAction<string>): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    console.log('run');
+    const {data}: any = yield call(ComicService.checkFavorite, action.payload);
+    if (data.code == 200) {
+      console.log('run push tookit');
+      console.log(data);
+      yield put(ComicActions.setPostFavorite(data));
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
 //watch saga runn
 export default function* watchComicSaga() {
   yield takeLatest(ComicActions.getListData.type, getListDataSaga);
@@ -174,4 +231,7 @@ export default function* watchComicSaga() {
   yield takeLatest(ComicActions.getListBySearch.type, getDataComicBySearchSaga);
   yield takeLatest(ComicActions.getListDetailChapterNav, getDataChapterNavSaga);
   yield takeLatest(ComicActions.getListTopView, getComicByTop20Saga);
+  yield takeLatest(ComicActions.postFavorite, postFavoriteSaga);
+  yield takeLatest(ComicActions.deleteFavorite, deleteFavoriteSaga);
+  yield takeLatest(ComicActions.checkFavorite, checkFavoriteSaga);
 }
