@@ -24,6 +24,9 @@ const ChapterDetail = () => {
   const comic_uuid = (route.params as RouteParamsIdChapter).comic_uuid;
   const chapter_name = (route.params as RouteParamsIdChapter).chapter_name;
 
+  const [currentChapter, setCurrentChapter] = useState(chapter_number);
+  console.log(currentChapter);
+
   const dataDetailChapter = useAppSelector(getDataDetailChapter);
 
   useEffect(() => {
@@ -34,6 +37,14 @@ const ChapterDetail = () => {
       }),
     );
   }, [chapter_number, comic_uuid]);
+
+  const incrementChapter = () => {
+    setCurrentChapter(currentChapter + 1);
+  };
+
+  const decrementChapter = () => {
+    setCurrentChapter(currentChapter - 1);
+  };
 
   const styles = useStyles();
   const [showHeader, setShowHeader] = useState(true);
@@ -46,14 +57,24 @@ const ChapterDetail = () => {
 
   const renderHeader = () => {
     if (showHeader) {
-      return <HeaderChapter chapter_name={chapter_name} />;
+      return (
+        <HeaderChapter
+          chapter_name={chapter_name}
+          chapter_number={currentChapter}
+        />
+      );
     } else {
       return null;
     }
   };
   const renderFooter = () => {
     if (showFooter) {
-      return <FooterChapter />;
+      return (
+        <FooterChapter
+          incrementChapter={incrementChapter}
+          decrementChapter={decrementChapter}
+        />
+      );
     } else {
       return null;
     }

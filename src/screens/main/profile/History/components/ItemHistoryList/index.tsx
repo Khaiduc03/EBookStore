@@ -17,7 +17,10 @@ const ItemHistoryList: React.FunctionComponent<CustomComicProps> = props => {
     <View style={styles.container}>
       <TouchableOpacity
         onPress={() =>
-          NavigationService.navigate(routes.COMICDETAIL, {data: props.data})
+          NavigationService.navigate(routes.CHAPTER, {
+            chapter_number: comic.last_chapter_number,
+            comic_uuid: comic.comic_uuid,
+          })
         }
         style={styles.imgComic}>
         <FastImage

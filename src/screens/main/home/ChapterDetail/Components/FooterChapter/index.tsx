@@ -10,8 +10,12 @@ import {
   getNextChapter,
   getPreviousChapter,
 } from '../../../../../../redux/selectors/comic.selector';
+interface FooterChapterProps {
+  incrementChapter: () => void; // Hàm để tăng chapter_number
+  decrementChapter: () => void; // Hàm để giảm chapter_number
+}
 
-const FooterChapter: React.FC = props => {
+const FooterChapter: React.FC<FooterChapterProps> = props => {
   const Next = useAppSelector(getNextChapter);
   const Previous = useAppSelector(getPreviousChapter);
   const dispath = useAppDispatch();
@@ -19,12 +23,14 @@ const FooterChapter: React.FC = props => {
   const onPressNext = () => {
     if (Next) {
       dispath(ComicActions.getListDetailChapterNav(Next));
+      props.incrementChapter();
     }
   };
 
   const onPressPrevious = () => {
     if (Previous) {
       dispath(ComicActions.getListDetailChapterNav(Previous));
+      props.decrementChapter();
     }
   };
 

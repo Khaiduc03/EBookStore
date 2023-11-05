@@ -7,9 +7,11 @@ import {backScreen} from '../../../../../../utils';
 
 interface HeaderChapterProps {
   chapter_name: string;
+  chapter_number: number;
 }
 
 const HeaderChapter: React.FC<HeaderChapterProps> = props => {
+  console.log('chater', props.chapter_number);
   const styles = useStyles();
   return (
     <View style={styles.container}>
@@ -22,7 +24,7 @@ const HeaderChapter: React.FC<HeaderChapterProps> = props => {
             color={styles.iconStyle.color}
           />
         </TouchableOpacity>
-        <Text style={styles.textChapter}>{props.chapter_name}</Text>
+        <Text style={styles.textChapter}>Chapter {props.chapter_number}</Text>
       </View>
       <TouchableOpacity>
         <Icon

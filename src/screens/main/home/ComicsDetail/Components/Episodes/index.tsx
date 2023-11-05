@@ -37,7 +37,7 @@ const Episodes = () => {
             key={item.uuid}
             style={styles.chapterContainer}>
             <View style={{alignItems: 'flex-start'}}>
-              <Text style={styles.textName}>{item.chapter_name}</Text>
+              <Text style={styles.textName}>Chapter {item.chapter_number}</Text>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Icon
                   name="time-outline"
