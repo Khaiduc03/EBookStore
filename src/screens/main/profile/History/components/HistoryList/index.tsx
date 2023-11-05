@@ -9,29 +9,35 @@ import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import useStyles from './styles';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
-import ItemFavoritesList from '../ItemFavoritesList';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {
   getListFavorite,
   nextPageFavorite,
 } from '../../../../../../redux/selectors/comic.selector';
-import {ComicActions, ComicType} from '../../../../../../redux';
+import {
+  ComicActions,
+  ComicType,
+  getListHistory,
+  nextPageHistory,
+} from '../../../../../../redux';
 import {
   getIsLoadingPage,
   getIsLoadingTopic,
 } from '../../../../../../redux/selectors/loading.selector';
-ItemFavoritesList;
+import ItemHistoryList from '../ItemHistoryList';
 
-const FavoritesList: FunctionComponent = () => {
-  const data = useAppSelector(getListFavorite);
-  const nextPage = useAppSelector(nextPageFavorite);
+const HistoryList: FunctionComponent = () => {
   const [page, setPage] = useState(1);
   const styles = useStyles();
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(getIsLoadingTopic);
+  const data = useAppSelector(getListHistory);
+  const nextPage = useAppSelector(nextPageHistory);
+
+  console.log('============>', data);
 
   useEffect(() => {
-    dispatch(ComicActions.getListFavorite(page));
+    dispatch(ComicActions.getListHistotyComic(page));
   }, [page]);
 
   const loadMoreComic = () => {
@@ -51,7 +57,7 @@ const FavoritesList: FunctionComponent = () => {
   }, []);
 
   const RenderItem = ({item}: {item: ComicType}) => (
-    <ItemFavoritesList key={item.uuid} data={item} />
+    <ItemHistoryList key={item.uuid} data={item} />
   );
   return (
     <View style={styles.container}>
@@ -70,4 +76,4 @@ const FavoritesList: FunctionComponent = () => {
   );
 };
 
-export default FavoritesList;
+export default HistoryList;

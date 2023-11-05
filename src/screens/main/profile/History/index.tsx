@@ -1,25 +1,39 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 import useStyles from './styles';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
 import {HeaderCustom} from '../../../../components';
+import {NavigationService} from '../../../../navigation';
+import {useAppDispatch} from '../../../../hooks';
+import {ComicActions} from '../../../../redux';
+import {HistoryList} from './components';
 
-const History: React.FC = () => {
+const Favorite: React.FC = () => {
+  const dispatch = useAppDispatch();
   const styles = useStyles();
   const handlePressGoback = () => {
+    dispatch(ComicActions.clearListHistory());
     NavigationService.goBack();
   };
+
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
-        title="History"
+        titleStyle={styles.titleStyle}
         onPressLeftIcon={handlePressGoback}
+        leftIcon={{
+          name: 'arrow-back-sharp',
+          type: 'ionicon',
+          color: styles.leftIconStyle.color,
+        }}
+        title="Historys List"
+        rightIconRight={{
+          name: 'notifications-outline',
+          type: 'ionicon',
+        }}
       />
-      <Text style={styles.text}>History</Text>
+      <HistoryList />
     </View>
   );
 };
 
-export default History;
+export default Favorite;

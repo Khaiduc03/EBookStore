@@ -6,10 +6,14 @@ import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {Icon} from '@rneui/themed';
 import {FavoritesList} from './components';
+import {useAppDispatch} from '../../../../hooks';
+import {ComicActions} from '../../../../redux';
 
 const Favorite: React.FC = () => {
+  const dispatch = useAppDispatch();
   const styles = useStyles();
   const handlePressGoback = () => {
+    dispatch(ComicActions.clearListFavorite());
     NavigationService.goBack();
   };
 
@@ -17,6 +21,7 @@ const Favorite: React.FC = () => {
     <View style={styles.container}>
       <HeaderCustom
         titleStyle={styles.titleStyle}
+        onPressLeftIcon={handlePressGoback}
         leftIcon={{
           name: 'arrow-back-sharp',
           type: 'ionicon',

@@ -62,6 +62,7 @@ export type ComicState = Partial<{
 
 export type ComicType = uuid &
   Timestamp & {
+    comic_uuid: string;
     comic_name: string;
     isPublic: boolean;
     author: string;

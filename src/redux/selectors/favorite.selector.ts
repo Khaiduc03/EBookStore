@@ -5,3 +5,8 @@ export const getUuidPostFavorite = (state: RootState) =>
 
 export const getCodePostFavorite = (state: RootState) =>
   state.comic.dataPostFavorite?.code;
+
+export const getListHistory = (state: RootState) =>
+  state.comic.listHistoryComic?.data;
+export const nextPageHistory = (state: RootState) =>
+  state.comic.listHistoryComic?.canNext;

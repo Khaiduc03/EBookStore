@@ -219,7 +219,7 @@ function* checkFavoriteSaga(action: PayloadAction<string>): Generator {
 }
 
 function* getListFavoriteSaga(action: PayloadAction<number>): Generator {
-  yield put(LoadingActions.showLoading());
+  yield put(LoadingActions.showLoadingTopic());
   try {
     console.log('run');
     const {data}: any = yield call(
@@ -228,6 +228,7 @@ function* getListFavoriteSaga(action: PayloadAction<number>): Generator {
     );
     if (data.code == 200) {
       console.log('run push tookit');
+
       yield put(ComicActions.setListFavorite(data.data));
     } else {
       console.log('Server errol !!!');
@@ -235,12 +236,12 @@ function* getListFavoriteSaga(action: PayloadAction<number>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoading());
+    yield put(LoadingActions.hideLoadingTopic());
   }
 }
 
 function* getListHistoryComicSaga(action: PayloadAction<number>): Generator {
-  yield put(LoadingActions.showLoading());
+  yield put(LoadingActions.showLoadingTopic());
   try {
     console.log('run');
     const {data}: any = yield call(ComicService.getListHistory, action.payload);
@@ -253,7 +254,7 @@ function* getListHistoryComicSaga(action: PayloadAction<number>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoading());
+    yield put(LoadingActions.hideLoadingTopic());
   }
 }
 

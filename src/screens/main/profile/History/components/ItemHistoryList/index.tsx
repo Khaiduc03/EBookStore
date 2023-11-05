@@ -10,7 +10,7 @@ import {Comic} from '../../../../../../types';
 import FastImage from 'react-native-fast-image';
 import {ComicType} from '../../../../../../redux';
 
-const ItemFavoritesList: React.FunctionComponent<CustomComicProps> = props => {
+const ItemHistoryList: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
   const comic: ComicType = props.data;
   return (
@@ -27,18 +27,20 @@ const ItemFavoritesList: React.FunctionComponent<CustomComicProps> = props => {
       </TouchableOpacity>
       <View style={styles.contentContainer}>
         <View style={styles.content}>
-          <Text style={styles.nameComic}>{comic.comic_name}</Text>
-          <View style={styles.rate}>
-            <Icon name="eye" type="ionicon" color={'#F89300'} size={18} />
-            <Text style={styles.textRate}>{comic.views}</Text>
+          <View>
+            <Text style={styles.nameComic}>{comic.comic_name}</Text>
+
+            <View style={styles.topicsContainer}>
+              {props.data.topics.map((text, index) => (
+                <View key={index} style={styles.itemTopics}>
+                  <Text style={styles.textTopics}>{text}</Text>
+                </View>
+              ))}
+            </View>
           </View>
-          <View style={styles.topicsContainer}>
-            {props.data.topics.map((text, index) => (
-              <View key={index} style={styles.itemTopics}>
-                <Text style={styles.textTopics}>{text}</Text>
-              </View>
-            ))}
-          </View>
+          <Text style={styles.textContinue}>
+            Continue at chapter {comic.last_chapter_number}
+          </Text>
         </View>
         <TouchableOpacity style={styles.ellipsiIcon}>
           <Icon
@@ -53,4 +55,4 @@ const ItemFavoritesList: React.FunctionComponent<CustomComicProps> = props => {
   );
 };
 
-export default ItemFavoritesList;
+export default ItemHistoryList;

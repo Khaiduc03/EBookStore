@@ -22,10 +22,11 @@ const ComicsDetail = () => {
   const route = useRoute();
   const data = (route.params as RouteParamsIdComic).data;
 
+  console.log(data);
   const uuidPost = useAppSelector(getUuidPostFavorite);
 
   useEffect(() => {
-    dispatch(ComicActions.getListChapter(data.uuid));
+    dispatch(ComicActions.getListChapter(data.comic_uuid || data.uuid));
   }, []);
 
   const styles = useStyles();
@@ -36,14 +37,14 @@ const ComicsDetail = () => {
     NavigationService.goBack();
   };
   useEffect(() => {
-    dispatch(ComicActions.checkFavorite(data.uuid));
-  }, [data.uuid]);
+    dispatch(ComicActions.checkFavorite(data.comic_uuid || data.uuid));
+  }, [data.comic_uuid, data.uuid]);
 
   const postFavorite = () => {
     if (uuidPost) {
       dispatch(ComicActions.deleteFavorite(uuidPost));
     } else {
-      dispatch(ComicActions.postFavorite(data.uuid));
+      dispatch(ComicActions.postFavorite(data.comic_uuid || data.uuid));
     }
   };
 

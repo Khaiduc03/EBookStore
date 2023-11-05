@@ -39,12 +39,22 @@ const Episodes = () => {
             <View style={{alignItems: 'flex-start'}}>
               <Text style={styles.textName}>{item.chapter_name}</Text>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Icon name="time-outline" type="ionicon" size={20} />
+                <Icon
+                  name="time-outline"
+                  type="ionicon"
+                  size={20}
+                  color={'#F89300'}
+                />
                 <Text style={styles.textChapter}>{item.created_at + ''}</Text>
               </View>
             </View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Icon name="eye-outline" type="ionicon" size={20} />
+              <Icon
+                name="eye-outline"
+                type="ionicon"
+                size={20}
+                color={'#F89300'}
+              />
               <Text style={styles.textChapter}>{item.views} views</Text>
             </View>
           </TouchableOpacity>

@@ -269,6 +269,12 @@ const reducer = createSlice({
       };
     },
 
+    clearListFavorite: (state: ComicState) => {
+      return {
+        ...state,
+        listFavorite: {},
+      };
+    },
     getListHistotyComic: (state: ComicState, _: PayloadAction<number>) => {
       return {
         ...state,
@@ -291,6 +297,12 @@ const reducer = createSlice({
           totalPage: action.payload.totalPage,
           totalData: action.payload.totalData,
         },
+      };
+    },
+    clearListHistory: (state: ComicState) => {
+      return {
+        ...state,
+        listHistoryComic: {},
       };
     },
   },
