@@ -1,8 +1,8 @@
 import {Avatar, Icon, Text} from '@rneui/themed';
 import React, {useEffect, useState} from 'react';
-import {Platform, TouchableOpacity, View} from 'react-native';
+import {PermissionsAndroid, TouchableOpacity, View} from 'react-native';
 import * as ImagePicker from 'react-native-image-picker';
-import {PERMISSIONS, RESULTS, request} from 'react-native-permissions';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Animated, {
   Extrapolate,
   interpolate,
@@ -11,14 +11,9 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
-import {
-  PERMISSION_TYPE,
-  useAppDispatch,
-  useAppSelector,
-  usePermission,
-} from '../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {AuthActions, getAuthUserProfile} from '../../../redux';
-import {showToastError} from '../../../utils';
+import {showToastError, showToastSuccess} from '../../../utils';
 import ModalWrapContent from '../ModalWrapContent';
 import useStyles from './styles';
 import {AvatarProps} from './type';
@@ -31,8 +26,11 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
 
   const dispatch = useAppDispatch();
 
+  const [selectImageCamera, setSelectImageCamera] = useState('');
+  const [selectImageGallery, setSelectImageGallery] = useState('');
+
   const [isZoomed, setIsZoomed] = useState(false);
-  const permission = usePermission();
+
   const toggleZoom = () => setIsZoomed(!isZoomed);
 
   // animation
@@ -77,81 +75,113 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
   //show menu choose image
   const [isShow, setIsShow] = useState<boolean>(false);
   const toggleShow = () => setIsShow(!isShow);
-  //image picker
 
-  const optionsCamera: ImagePicker.CameraOptions = {
-    quality: 1,
-    mediaType: 'photo',
+  const optionCamera: ImagePicker.CameraOptions = {
+    mediaType: 'mixed',
     cameraType: 'front',
-    saveToPhotos: true,
-  };
-  const optionLibrary: ImagePicker.ImageLibraryOptions = {
-    mediaType: 'photo',
     quality: 1,
-    selectionLimit: 0,
+    saveToPhotos: true,
+    includeBase64: false,
     maxWidth: 500,
     maxHeight: 500,
   };
 
-  const showCamera = async () => {
+  const optionLibrary: ImagePicker.ImageLibraryOptions = {
+    mediaType: 'mixed',
+    quality: 1,
+    selectionLimit: 1,
+    includeBase64: false,
+    maxWidth: 500,
+    maxHeight: 500,
+  };
+
+  const handleCamera = async () => {
     setIsShow(false);
-    request(
-      Platform.OS === 'ios'
-        ? PERMISSIONS.IOS.CAMERA
-        : PERMISSIONS.ANDROID.CAMERA,
-    ).then(async result => {
-      if (result !== RESULTS.GRANTED && result !== RESULTS.UNAVAILABLE) {
-        await permission.showPermissionDialog(PERMISSION_TYPE.camera);
-      } else {
-        const result = await ImagePicker.launchCamera(optionsCamera);
-        if (result.errorCode) {
-          showToastError(result.errorMessage + '');
-        } else if (result.didCancel) {
-          showToastError('Bạn chưa chụp ảnh');
-        } else if (result.errorMessage) {
-          showToastError('Có lỗi xảy ra khi mở camera');
-        } else if (result.assets) {
+
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: 'App Camera Permission',
+          message: 'App needs access to your camera ',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+          {
+            title: 'App Camera Permission',
+            message: 'App needs access to your camera ',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          },
+        );
+        const result = await launchCamera(optionCamera);
+        if (result?.assets && result.assets[0].uri) {
           const formdata = new FormData();
           formdata.append('avatar', {
             uri: result.assets[0].uri,
             name: result.assets[0].fileName,
             type: result.assets[0].type,
           });
-          await handleUploadImage(formdata);
+          handleUploadImage(formdata);
+          setSelectImageCamera(result.assets[0].uri);
+          showToastSuccess('Image taken successfully');
+        } else {
+          showToastError('User cancelled launchCamera!');
         }
+      } else {
+        showToastError('Camera permission denied!');
       }
-    });
+    } catch (error) {
+      console.warn(error);
+    }
     setIsShow(false);
   };
 
-  const showGallery = async () => {
+  const handleGallery = async () => {
     setIsShow(false);
-    request(
-      Platform.OS === 'ios'
-        ? PERMISSIONS.IOS.PHOTO_LIBRARY
-        : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
-    ).then(async result => {
-      if (result === RESULTS.GRANTED) {
-        await permission.showPermissionDialog(PERMISSION_TYPE.library);
-      } else {
-        const result = await ImagePicker.launchImageLibrary(optionLibrary);
-        if (result.errorCode) {
-          showToastError('Have error when open the libary');
-        } else if (result.didCancel) {
-          showToastError('You was cancel');
-        } else if (result.errorMessage) {
-          showToastError('Something wrong!!');
-        } else if (result.assets) {
-          const formdata = new FormData();
-          formdata.append('avatar', {
-            uri: result.assets[0].uri,
-            name: result.assets[0].fileName,
-            type: result.assets[0].type,
-          });
-          await handleUploadImage(formdata);
+
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        {
+          title: 'Storage Permission',
+          message: 'Your app needs access to your gallery',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted) {
+        const result = await launchImageLibrary(optionLibrary);
+        if (result.didCancel) {
+          showToastError('User cancelled launchImageLibrary');
+        } else {
+          if (result?.assets && result.assets[0].uri) {
+            const formdata = new FormData();
+            formdata.append('avatar', {
+              uri: result.assets[0].uri,
+              name: result.assets[0].fileName,
+              type: result.assets[0].type,
+            });
+            handleUploadImage(formdata);
+            setSelectImageGallery(result.assets[0].uri);
+            showToastSuccess('Image taken successfully');
+          } else {
+            showToastError('Image URI is missing in the response!');
+          }
         }
       }
-    });
+    } catch (error) {
+      console.warn(error);
+    }
+
     setIsShow(false);
   };
 
@@ -174,7 +204,7 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
             source={{
               uri:
                 user?.image_url ||
-                'https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg?w=1060&t=st=1697884276~exp=1697884876~hmac=8ae3b1ba19610030b247f24a1f8a03452924b22a72ebf3b5a8d4755defcd26f6',
+                'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
             }}
           />
 
@@ -203,7 +233,7 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.modalItem}
-                onPress={() => showCamera()}>
+                onPress={() => handleCamera()}>
                 <Icon
                   type="ionicon"
                   name={'camera-outline'}
@@ -215,7 +245,7 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.modalItem}
-                onPress={() => showGallery()}>
+                onPress={() => handleGallery()}>
                 <Icon
                   type="ionicon"
                   name={'images-outline'}
@@ -254,7 +284,7 @@ const AvatarComponets: React.FunctionComponent<AvatarProps> = props => {
             source={{
               uri:
                 user.image_url ||
-                'https://img.freepik.com/free-photo/3d-rendering-zoom-call-avatar_23-2149556777.jpg?w=1060&t=st=1697884276~exp=1697884876~hmac=8ae3b1ba19610030b247f24a1f8a03452924b22a72ebf3b5a8d4755defcd26f6',
+                'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
             }}
           />
         </AnimatedView>
