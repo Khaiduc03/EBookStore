@@ -115,8 +115,6 @@ const UpdateProfileScreen: FunctionComponent = () => {
     }
   };
 
-  console.log(credentials.gender);
-
   return (
     <KeyboardAvoidingView style={styles.container}>
       <ScrollView style={styles.container}>
