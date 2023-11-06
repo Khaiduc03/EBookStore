@@ -11,7 +11,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   imageStyle: {
     width: '100%',
-    height: 300,
+    height: 100,
   },
 }));
 

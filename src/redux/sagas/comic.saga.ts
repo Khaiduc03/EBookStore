@@ -200,7 +200,6 @@ function* deleteFavoriteSaga(action: PayloadAction<string>): Generator {
 }
 
 function* checkFavoriteSaga(action: PayloadAction<string>): Generator {
-  yield put(LoadingActions.showLoading());
   try {
     console.log('run');
     const {data}: any = yield call(ComicService.checkFavorite, action.payload);
@@ -214,7 +213,6 @@ function* checkFavoriteSaga(action: PayloadAction<string>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoading());
   }
 }
 

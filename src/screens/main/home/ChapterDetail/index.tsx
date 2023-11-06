@@ -9,6 +9,7 @@ import {useRoute} from '@react-navigation/native';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {ComicActions, DetailChapterType} from '../../../../redux';
 import {getDataDetailChapter} from '../../../../redux/selectors/comic.selector';
+import {Image} from '@rneui/base';
 
 const WIDTH = Device.getDeviceWidth();
 interface RouteParamsIdChapter {
@@ -82,24 +83,28 @@ const ChapterDetail = () => {
 
   const renderItem = ({item}: {item: DetailChapterType}) => {
     return (
-      <FastImage
-        style={styles.imageStyle}
-        resizeMode={FastImage.resizeMode.cover}
-        source={{uri: item.url}}
-      />
+      <TouchableHighlight
+        onPress={toggleHeaderFooter}
+        activeOpacity={1}
+        style={styles.imageStyle}>
+        <FastImage
+          resizeMode={FastImage.resizeMode.cover}
+          source={{uri: item.url}}
+          style={{height: '100%', width: '100%'}}
+        />
+      </TouchableHighlight>
     );
   };
 
   return (
     <View style={styles.container}>
-      <TouchableHighlight onPress={toggleHeaderFooter} activeOpacity={1}>
-        <FlatList
-          data={dataDetailChapter}
-          renderItem={renderItem}
-          showsVerticalScrollIndicator={false}
-          keyExtractor={(item, index) => index.toString()}
-        />
-      </TouchableHighlight>
+      <FlatList
+        data={dataDetailChapter}
+        renderItem={renderItem}
+        showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => index.toString()}
+      />
+
       {renderHeader()}
       {renderFooter()}
     </View>
