@@ -70,7 +70,8 @@ function* loginGoogleSaga(
             enableSignIn: true,
           }),
         );
-        //  yield call(getProfileUserSaga);
+
+        yield call(getProfileUserSaga);
         showToastSuccess(data.message);
       } else if (data.code === 400) {
         showToastError(
@@ -121,10 +122,11 @@ function* createAccountSaga(
 function* getProfileUserSaga(): Generator {
   try {
     const {data}: any = yield call(UserService.getUserProfile);
+
     if (data.code === 200) {
       yield put(
         AuthActions.getUserInfoSuccess({
-          user: data.data,
+          user: data.data[0],
         }),
       );
     } else {

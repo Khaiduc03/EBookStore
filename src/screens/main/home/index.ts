@@ -5,6 +5,7 @@ import Search from './Search';
 import ComicByTopic from './ComicByTopic';
 import ComicsDetail from './ComicsDetail';
 import ChapterDetail from './ChapterDetail';
+import CommentComic from './CommentComic';
 
 export {default as Home} from './Home';
 export const homeScreens: Screen[] = [
@@ -27,5 +28,9 @@ export const homeScreens: Screen[] = [
   {
     name: routes.CHAPTER,
     component: ChapterDetail,
+  },
+  {
+    name: routes.COMMENT_COMIC,
+    component: CommentComic,
   },
 ];
