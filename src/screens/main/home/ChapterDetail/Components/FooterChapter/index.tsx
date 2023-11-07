@@ -10,9 +10,11 @@ import {
   getNextChapter,
   getPreviousChapter,
 } from '../../../../../../redux/selectors/comic.selector';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
 interface FooterChapterProps {
-  incrementChapter: () => void; // Hàm để tăng chapter_number
-  decrementChapter: () => void; // Hàm để giảm chapter_number
+  incrementChapter: () => void;
+  decrementChapter: () => void;
 }
 
 const FooterChapter: React.FC<FooterChapterProps> = props => {
@@ -37,7 +39,9 @@ const FooterChapter: React.FC<FooterChapterProps> = props => {
   const styles = useStyles();
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.commentButtonStyle}>
+      <TouchableOpacity
+        onPress={() => NavigationService.navigate(routes.COMMENT_COMIC)}
+        style={styles.commentButtonStyle}>
         <Icon
           name="chatbubble-ellipses"
           type="ionicon"

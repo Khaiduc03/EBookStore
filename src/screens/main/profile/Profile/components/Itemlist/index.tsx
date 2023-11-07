@@ -4,7 +4,11 @@ import {ItemListProfile} from '../../../../../../components';
 import {routes} from '../../../../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {NavigationService} from '../../../../../../navigation';
-import {AuthActions, getAuthEnableSignIn} from '../../../../../../redux';
+import {
+  AuthActions,
+  ComicActions,
+  getAuthEnableSignIn,
+} from '../../../../../../redux';
 import useStyles from './styles';
 import {Text} from '@rneui/themed';
 
@@ -13,6 +17,7 @@ const Itemlish: React.FC = () => {
   const dispatch = useAppDispatch();
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
   const handleLogout = () => {
+    dispatch(ComicActions.clearListData());
     dispatch(AuthActions.handleLogout());
   };
   return (
@@ -68,7 +73,7 @@ const Itemlish: React.FC = () => {
             rightIcon
           />
         </TouchableOpacity>
-        
+
         <TouchableOpacity
           onPress={() => NavigationService.navigate(routes.HISTORY)}>
           <ItemListProfile

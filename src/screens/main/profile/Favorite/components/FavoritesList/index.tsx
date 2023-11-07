@@ -51,7 +51,7 @@ const FavoritesList: FunctionComponent = () => {
   }, []);
 
   const RenderItem = ({item}: {item: ComicType}) => (
-    <ItemFavoritesList key={item.uuid} data={item} />
+    <ItemFavoritesList key={item.comic_uuid} data={item} />
   );
   return (
     <View style={styles.container}>

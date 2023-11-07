@@ -51,6 +51,8 @@ export type User = uuid &
     isUpdate: boolean;
     isPassword: boolean;
     wallet: string;
+    followercount: number;
+    followingcount: number;
   };
 
 export enum USER_ROLE {

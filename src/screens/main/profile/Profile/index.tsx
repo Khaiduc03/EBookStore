@@ -7,8 +7,14 @@ import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import useStyles from './styles';
 import {Itemlish} from './components';
+import {useAppSelector} from '../../../../hooks';
+import {getAuthUserProfile} from '../../../../redux';
 
 const Profile: FunctionComponent = () => {
+  const user = useAppSelector(getAuthUserProfile);
+  console.log(user);
+
+  console.log(user.fullname);
   const styles = useStyles();
   return (
     <View style={styles.container}>
@@ -17,12 +23,12 @@ const Profile: FunctionComponent = () => {
         title="My profile"
       />
       <View style={styles.viewAvatar}>
-        <Image source={images.avata} style={styles.avatar} />
+        <Image source={{uri: user.image_url}} style={styles.avatar} />
         <TouchableOpacity
           style={styles.btnMyProfile}
           onPress={() => NavigationService.navigate(routes.MYPROFILE)}>
-          <TextCustom textBold title="Drake Kun" />
-          <TextCustom textLight title="drake@gmail.com" />
+          <TextCustom textBold title={user.fullname} />
+          <TextCustom textLight title={user.email} />
         </TouchableOpacity>
       </View>
       <View style={styles.line} />
