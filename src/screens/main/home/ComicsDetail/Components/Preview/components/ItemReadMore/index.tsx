@@ -3,13 +3,15 @@ import React, {useState} from 'react';
 import useStyles from './styles';
 import {Icon} from '@rneui/themed';
 import {CustomComicProps} from './type';
-import {NavigationService} from '../../../navigation';
-import {routes} from '../../../constants';
-import FastImage from 'react-native-fast-image';
-import {ComicType} from '../../../redux';
-import {Skeleton} from '@rneui/base';
 
-const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
+import FastImage from 'react-native-fast-image';
+
+import {Skeleton} from '@rneui/base';
+import {ComicType} from '../../../../../../../../redux';
+import {NavigationService} from '../../../../../../../../navigation';
+import {routes} from '../../../../../../../../constants';
+
+const ItemReadMore: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
   const comic: ComicType = props.data;
   const [isLoading, setLoading] = useState(true);
@@ -76,4 +78,4 @@ const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   );
 };
 
-export default ComicItem;
+export default ItemReadMore;

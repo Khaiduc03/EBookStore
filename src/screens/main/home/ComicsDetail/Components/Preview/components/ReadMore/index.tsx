@@ -8,6 +8,7 @@ import {
   getDetailComic,
   getListComic,
 } from '../../../../../../../../redux/selectors/comic.selector';
+import ItemReadMore from '../ItemReadMore';
 
 const ReadMore = () => {
   const styles = useStyles();
@@ -19,7 +20,7 @@ const ReadMore = () => {
   console.log(topic);
 
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
-    <ComicItem data={item} index={index} />
+    <ItemReadMore data={item} index={index} />
   );
   return (
     <View style={styles.container}>

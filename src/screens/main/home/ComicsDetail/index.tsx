@@ -27,13 +27,12 @@ const ComicsDetail = () => {
 
   useEffect(() => {
     dispatch(ComicActions.getListChapter(data.comic_uuid || data.uuid));
-  }, []);
+  }, [data.comic_uuid || data.uuid]);
 
   const styles = useStyles();
   const handlePressBack = () => {
     dispatch(ComicActions.clearPostFavorite());
     dispatch(ComicActions.clearListDataChapter());
-    dispatch(ComicActions.clearListDataDetail());
     NavigationService.goBack();
   };
   useEffect(() => {

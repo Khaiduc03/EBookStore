@@ -3,4 +3,5 @@ export type LoadingState = {
   isLoadingMain: boolean;
   isLoadingPage: boolean;
   isLoadingTopic: boolean;
+  isLoadingStart: boolean;
 };

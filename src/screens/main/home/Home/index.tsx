@@ -15,6 +15,7 @@ import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {ComicActions, ComicType, TopicActions} from '../../../../redux';
 import {
   getListComic,
+  getListTopView,
   getNextPage,
 } from '../../../../redux/selectors/comic.selector';
 import {getListTopic} from '../../../../redux/selectors/topic.selector';
@@ -32,17 +33,28 @@ const Home: FunctionComponent = () => {
   const dataTopic = useAppSelector(getListTopic);
   const nextPage = useAppSelector(getNextPage);
   const isLoading = useAppSelector(getIsLoadingPage);
+  const dataTopView = useAppSelector(getListTopView);
+  const [loadMore, setloadMore] = useState(false);
+
+  console.log('isLoading:', isLoading);
+  console.log('nextPage:', nextPage);
 
   useEffect(() => {
-    dispatch(ComicActions.getListData(page));
+    if (!loadMore) {
+      dispatch(ComicActions.getListData(page));
+      setloadMore(true);
+    }
 
     if (dataTopic?.length === undefined) {
       dispatch(TopicActions.getListTopic());
     }
+    if (dataTopView?.length === undefined) {
+      dispatch(ComicActions.getListTopView());
+    }
   }, [page]);
 
   const loadMoreComic = () => {
-    if (nextPage && !isLoading) {
+    if (!isLoading && nextPage && loadMore) {
       setPage(page + 1);
     }
   };

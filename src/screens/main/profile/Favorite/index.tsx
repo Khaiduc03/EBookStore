@@ -10,10 +10,8 @@ import {useAppDispatch} from '../../../../hooks';
 import {ComicActions} from '../../../../redux';
 
 const Favorite: React.FC = () => {
-  const dispatch = useAppDispatch();
   const styles = useStyles();
   const handlePressGoback = () => {
-    dispatch(ComicActions.clearListFavorite());
     NavigationService.goBack();
   };
 

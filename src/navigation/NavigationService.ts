@@ -63,4 +63,12 @@ export class NavigationService {
       routes,
     });
   }
+  static resetScreen() {
+    const resetAction = CommonActions.reset({
+      index: 1,
+      routes: [{name: routes.COMICDETAIL}],
+    });
+
+    navigationRef.current?.dispatch(resetAction);
+  }
 }

@@ -7,3 +7,6 @@ export const getIsLoadingPage = (state: RootState) =>
   state.loading.isLoadingPage;
 export const getIsLoadingTopic = (state: RootState) =>
   state.loading.isLoadingTopic;
+
+export const getIsLoadingStart = (state: RootState) =>
+  state.loading.isLoadingStart;
