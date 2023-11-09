@@ -6,6 +6,8 @@ import {Episodes, HeaderDetail, Preview} from './Components';
 import {NavigationService} from '../../../../navigation';
 import {useRoute} from '@react-navigation/native';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import Share from 'react-native-share';
+
 import {
   ComicActions,
   ComicType,
@@ -13,6 +15,7 @@ import {
   getUuidPostFavorite,
 } from '../../../../redux';
 import {ScrollView} from 'react-native-gesture-handler';
+import {Alert} from 'react-native';
 
 interface RouteParamsIdComic {
   data: ComicType;
@@ -48,6 +51,23 @@ const ComicsDetail = () => {
     }
   };
 
+  const onShare = async () => {
+    const options: any = {
+      url: data.image_url,
+      message:
+        'ComicVerse app đọc truyện hàng đầu Việt Nam hihi : \n' +
+        data.comic_name +
+        '\n',
+    };
+
+    try {
+      const res = await Share.open(options);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <HeaderCustom
@@ -59,6 +79,7 @@ const ComicsDetail = () => {
           type: 'ionicon',
         }}
         onPressRightIconLeft={postFavorite}
+        onPressRightIconRight={onShare}
         rightIconMiddle={{name: 'document-outline', type: 'ionicon'}}
         rightIconRight={{name: 'paper-plane-outline', type: 'ionicon'}}
       />
