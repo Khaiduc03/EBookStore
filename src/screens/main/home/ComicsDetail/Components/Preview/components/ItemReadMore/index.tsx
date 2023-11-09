@@ -33,7 +33,9 @@ const ItemReadMore: React.FunctionComponent<CustomComicProps> = props => {
   };
 
   const onPressNavDetail = () => {
-    dispatch(ComicActions.clearListDataByComic());
+    dispatch(ComicActions.clearPostFavorite());
+    dispatch(ComicActions.clearListDataChapter());
+    dispatch(ComicActions.clearListDataByTopicMore());
     NavigationService.navigate(routes.COMICDETAIL, {
       data: props.data,
       scrollRef: scrollRef,

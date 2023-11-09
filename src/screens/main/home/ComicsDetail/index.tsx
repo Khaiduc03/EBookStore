@@ -25,32 +25,20 @@ const ComicsDetail = () => {
   const data = (route.params as RouteParamsIdComic).data;
   const scrollRef = (route.params as RouteParamsIdComic).scrollRef;
 
-  console.log('===========>', scrollRef);
-  const topicFirst = data.topics[0];
+  console.log('===========>', data.topics);
 
-  const [first, setfirst] = useState(false);
-
-  console.log(first);
-
-  console.log(data);
   const uuidPost = useAppSelector(getUuidPostFavorite);
 
   useEffect(() => {
+    dispatch(ComicActions.checkFavorite(data.comic_uuid || data.uuid));
     dispatch(ComicActions.getListChapter(data.comic_uuid || data.uuid));
-    dispatch(ComicActions.getListByTopic({page: 1, name: topicFirst}));
-    setfirst(true);
-  }, [data.comic_uuid || data.uuid || topicFirst]);
+    dispatch(ComicActions.getListByTopicMore({name: data.topics}));
+  }, [data]);
 
   const styles = useStyles();
   const handlePressBack = () => {
-    dispatch(ComicActions.clearPostFavorite());
-    dispatch(ComicActions.clearListDataChapter());
-
     NavigationService.goBack();
   };
-  useEffect(() => {
-    dispatch(ComicActions.checkFavorite(data.comic_uuid || data.uuid));
-  }, [data.comic_uuid, data.uuid]);
 
   const postFavorite = () => {
     if (uuidPost) {

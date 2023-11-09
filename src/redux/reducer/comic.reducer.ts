@@ -102,6 +102,30 @@ const reducer = createSlice({
         },
       };
     },
+
+    getListByTopicMore: (state: ComicState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+    setListByTopicMore: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpListComicData<ComicType>>,
+    ) => {
+      return {
+        ...state,
+        listDataByTopicMore: {
+          data: action.payload.data,
+        },
+      };
+    },
+
+    clearListDataByTopicMore: (state: ComicState) => {
+      return {
+        ...state,
+        listDataByTopicMore: {},
+      };
+    },
     clearListDataByComic: (state: ComicState) => {
       return {
         ...state,

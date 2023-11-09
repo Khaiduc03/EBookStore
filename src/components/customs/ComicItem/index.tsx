@@ -6,13 +6,15 @@ import {CustomComicProps} from './type';
 import {NavigationService} from '../../../navigation';
 import {routes} from '../../../constants';
 import FastImage from 'react-native-fast-image';
-import {ComicType} from '../../../redux';
+import {ComicActions, ComicType} from '../../../redux';
 import {Skeleton} from '@rneui/base';
+import {useAppDispatch} from '../../../hooks';
 
 const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
   const comic: ComicType = props.data;
   const [isLoading, setLoading] = useState(true);
+  const dispatch = useAppDispatch();
 
   const onLoadStart = () => {
     setLoading(true);
@@ -22,6 +24,9 @@ const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   };
 
   const onPressNavDetail = () => {
+    dispatch(ComicActions.clearPostFavorite());
+    dispatch(ComicActions.clearListDataChapter());
+    dispatch(ComicActions.clearListDataByTopicMore());
     NavigationService.navigate(routes.COMICDETAIL, {data: props.data});
   };
 
