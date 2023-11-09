@@ -5,6 +5,7 @@ import {ComicItem} from '../../../../../../../../components';
 import {ComicType} from '../../../../../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../../../../../hooks';
 import {
+  getDataByTopic,
   getDetailComic,
   getListComic,
 } from '../../../../../../../../redux/selectors/comic.selector';
@@ -12,12 +13,7 @@ import ItemReadMore from '../ItemReadMore';
 
 const ReadMore = () => {
   const styles = useStyles();
-  const dataComic = useAppSelector(getListComic);
-  const dataComicDetail = useAppSelector(getDetailComic);
-
-  const data = dataComicDetail ? dataComicDetail[0] : null;
-  const topic = data?.topics[0];
-  console.log(topic);
+  const dataReadMore = useAppSelector(getDataByTopic);
 
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
     <ItemReadMore data={item} index={index} />
@@ -29,7 +25,7 @@ const ReadMore = () => {
         contentContainerStyle={{gap: 5, paddingHorizontal: 10}}
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={dataComic}
+        data={dataReadMore}
         renderItem={RenderItem}
       />
     </View>

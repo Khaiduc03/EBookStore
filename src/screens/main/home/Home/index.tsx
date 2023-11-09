@@ -35,6 +35,7 @@ const Home: FunctionComponent = () => {
   const isLoading = useAppSelector(getIsLoadingPage);
   const dataTopView = useAppSelector(getListTopView);
   const [loadMore, setloadMore] = useState(false);
+  console.log(loadMore);
 
   console.log('isLoading:', isLoading);
   console.log('nextPage:', nextPage);
@@ -56,6 +57,7 @@ const Home: FunctionComponent = () => {
   const loadMoreComic = () => {
     if (!isLoading && nextPage && loadMore) {
       setPage(page + 1);
+      setloadMore(false);
     }
   };
 
@@ -95,6 +97,7 @@ const Home: FunctionComponent = () => {
       />
 
       <FlatList
+        scrollsToTop={true}
         renderItem={({item, index}: {item: ComicType; index: number}) => (
           <ComicItem
             data={item}

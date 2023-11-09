@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {HeaderCustom, TabViewItem} from '../../../../components';
 import useStyles from './styles';
@@ -12,27 +12,40 @@ import {
   getCodePostFavorite,
   getUuidPostFavorite,
 } from '../../../../redux';
+import {ScrollView} from 'react-native-gesture-handler';
 
 interface RouteParamsIdComic {
   data: ComicType;
+  scrollRef: React.RefObject<ScrollView>;
 }
 
 const ComicsDetail = () => {
   const dispatch = useAppDispatch();
   const route = useRoute();
   const data = (route.params as RouteParamsIdComic).data;
+  const scrollRef = (route.params as RouteParamsIdComic).scrollRef;
+
+  console.log('===========>', scrollRef);
+  const topicFirst = data.topics[0];
+
+  const [first, setfirst] = useState(false);
+
+  console.log(first);
 
   console.log(data);
   const uuidPost = useAppSelector(getUuidPostFavorite);
 
   useEffect(() => {
     dispatch(ComicActions.getListChapter(data.comic_uuid || data.uuid));
-  }, [data.comic_uuid || data.uuid]);
+    dispatch(ComicActions.getListByTopic({page: 1, name: topicFirst}));
+    setfirst(true);
+  }, [data.comic_uuid || data.uuid || topicFirst]);
 
   const styles = useStyles();
   const handlePressBack = () => {
     dispatch(ComicActions.clearPostFavorite());
     dispatch(ComicActions.clearListDataChapter());
+
     NavigationService.goBack();
   };
   useEffect(() => {
@@ -71,6 +84,7 @@ const ComicsDetail = () => {
         screen2={<Episodes />}
         viewStyle={{height: 800}}
         titleStyle={styles.titleStyle}
+        scrollRef={scrollRef}
       />
     </View>
   );
