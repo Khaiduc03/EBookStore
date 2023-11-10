@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, FlatList, TouchableHighlight} from 'react-native';
+import {View, FlatList, TouchableHighlight, Image} from 'react-native';
 import {Device} from '../../../../utils';
 import useStyles from './styles';
 import {FooterChapter, HeaderChapter} from './Components';
@@ -9,7 +9,6 @@ import {useRoute} from '@react-navigation/native';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {ComicActions, DetailChapterType} from '../../../../redux';
 import {getDataDetailChapter} from '../../../../redux/selectors/comic.selector';
-import {Image} from '@rneui/base';
 
 const WIDTH = Device.getDeviceWidth();
 interface RouteParamsIdChapter {
@@ -88,7 +87,7 @@ const ChapterDetail = () => {
         activeOpacity={1}
         style={styles.imageStyle}>
         <FastImage
-          resizeMode={FastImage.resizeMode.cover}
+          resizeMode={FastImage.resizeMode.stretch}
           source={{uri: item.url}}
           style={{height: '100%', width: '100%'}}
         />
