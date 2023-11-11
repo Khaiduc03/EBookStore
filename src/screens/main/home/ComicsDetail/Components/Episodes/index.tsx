@@ -15,25 +15,28 @@ import {
   getDataAllChapter,
   getDetailComic,
 } from '../../../../../../redux/selectors/comic.selector';
-import {useAppSelector} from '../../../../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {Icon} from '@rneui/base';
+import {ComicActions} from '../../../../../../redux';
 
 const Episodes = () => {
   const styles = useStyles();
   const dataChapter = useAppSelector(getDataAllChapter);
+  const dispatch = useAppDispatch();
 
   return (
     <View style={styles.container}>
       <ScrollView nestedScrollEnabled showsVerticalScrollIndicator={false}>
         {dataChapter?.map(item => (
           <TouchableOpacity
-            onPress={() =>
+            onPress={() => {
+              dispatch(ComicActions.clearListChapterDetail());
               NavigationService.navigate(routes.CHAPTER, {
                 chapter_number: item.chapter_number,
                 comic_uuid: item.comic_uuid,
                 chapter_name: item.chapter_name,
-              })
-            }
+              });
+            }}
             key={item.uuid}
             style={styles.chapterContainer}>
             <View style={{alignItems: 'flex-start'}}>

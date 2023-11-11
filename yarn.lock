@@ -6380,6 +6380,13 @@ react-native-asset@^2.1.1:
     sha1-file "^1.0.4"
     xcode "^2.0.0"
 
+react-native-auto-height-image@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/react-native-auto-height-image/-/react-native-auto-height-image-3.2.4.tgz#c7a95d4d9701055c680c8dc02076def1107f9522"
+  integrity sha512-PTVzLuYY4Q5IDAk0QmnSNK12VnUPlt+ZiEJUlo5JUiHverR5Lg386iHK7D2bVkTNo7SCahIPlWzdSuX5Col3XQ==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-config@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-1.5.1.tgz#73c94f511493e9b7ff9350cdf351d203a1b05acc"
@@ -6427,6 +6434,11 @@ react-native-image-picker@^5.6.1:
   version "5.7.0"
   resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-5.7.0.tgz#3c146550bc89daddfca2fe123aaa0c753b58a5e2"
   integrity sha512-LGBrFQzKEAt/u4z+IcY7COZA7N6lCeLQ2dMu1PubK10+d9YBRS8n/ABNj48CJhEpUhcRPt7H3iWbwIuOlcZrDA==
+
+react-native-image-size@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/react-native-image-size/-/react-native-image-size-1.1.6.tgz#a380a605cd43ebfc13c30dad12b4e456f5647345"
+  integrity sha512-UlfyBqYvmf2TjHSV25mh4Se7xw6zTkodvt6DjSZJefqEfz4ZECk+petIadSDFVWgPOqULB+3LIrj6U6t/SlKQA==
 
 react-native-logs@^5.0.1:
   version "5.0.1"

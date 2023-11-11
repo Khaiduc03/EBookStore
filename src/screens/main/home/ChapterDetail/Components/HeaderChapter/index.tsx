@@ -11,7 +11,6 @@ interface HeaderChapterProps {
 }
 
 const HeaderChapter: React.FC<HeaderChapterProps> = props => {
-  console.log('chater', props.chapter_number);
   const styles = useStyles();
   return (
     <View style={styles.container}>

@@ -178,6 +178,13 @@ const reducer = createSlice({
         },
       };
     },
+    clearListChapterDetail: (state: ComicState) => {
+      return {
+        ...state,
+        listDetailChapter: {},
+      };
+    },
+
     getListDetailChapterNav: (state: ComicState, _: PayloadAction<any>) => {
       return {
         ...state,
