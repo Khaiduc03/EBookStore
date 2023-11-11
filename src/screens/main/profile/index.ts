@@ -9,9 +9,6 @@ import DiscoverPeople from './DiscoverPeople';
 import HelpCenter from './HelpCenter';
 import Contact_us from './HelpCenter/Contact_us';
 import FAQ from './HelpCenter/FAQ';
-import HistoryandFavorite from './HistoryandFavorite';
-import FavoriteScreen from './HistoryandFavorite/Favorite';
-import HistoryScreen from './HistoryandFavorite/History';
 import MyProfile from './MyProfile';
 import {PostDetail} from './MyProfile/components';
 import Payments_method from './Payment-method';
@@ -76,14 +73,7 @@ export const profileScreens: Screen[] = [
     name: routes.POSTDETAILUSERS,
     component: PostDetailUser,
   },
-  {
-    name: routes.FAVORITE,
-    component: FavoriteScreen,
-  },
-  {
-    name: routes.HISTORY,
-    component: HistoryScreen,
-  },
+
   {
     name: routes.CHANGEPASSWORD,
     component: ChangePassWord,
@@ -96,10 +86,7 @@ export const profileScreens: Screen[] = [
     name: routes.ADDPAYMENT,
     component: AddPayment,
   },
-  {
-    name: routes.HISTORYANDFAVORITE,
-    component: HistoryandFavorite,
-  },
+
   {
     name: routes.DISCOVERPEOPLE,
     component: DiscoverPeople,

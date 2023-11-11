@@ -57,17 +57,7 @@ const Itemlish: React.FC = () => {
 
         <View style={styles.line} />
         <Text style={styles.textName}>Comic</Text>
-        <TouchableOpacity
-          onPress={() => NavigationService.navigate(routes.HISTORYANDFAVORITE)}>
-          <ItemListProfile
-            title="History and Favorites"
-            name="menu-book"
-            type="material"
-            color="#F89300"
-            size={50}
-            rightIcon
-          />
-        </TouchableOpacity>
+       
 
         <View style={styles.line} />
         <Text style={styles.textName}>App</Text>
