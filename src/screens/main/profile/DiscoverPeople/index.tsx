@@ -1,12 +1,12 @@
-import { useNavigation } from '@react-navigation/native';
-import { Icon } from '@rneui/themed';
-import React, { useState } from 'react';
-import { FlatList, Text, View } from 'react-native';
-import { HeaderCustom } from '../../../../components';
-import { ItemList } from './components';
+import {useNavigation} from '@react-navigation/native';
+import {Icon} from '@rneui/themed';
+import React, {useState} from 'react';
+import {FlatList, Text, View} from 'react-native';
+import {HeaderCustom} from '../../../../components';
+import {ItemList} from './components';
 import useStyles from './styles';
-import { routes } from '../../../../constants';
-import { NavigationService } from '../../../../navigation';
+import {routes} from '../../../../constants';
+import {NavigationService} from '../../../../navigation';
 
 const DiscoverPeople: React.FC = () => {
   const styles = useStyles();
@@ -16,6 +16,9 @@ const DiscoverPeople: React.FC = () => {
     setRefreshing(false);
     NavigationService.replace(routes.DISCOVERPEOPLE);
   };
+  const handleGoback = () => {
+    NavigationService.goBack();
+  };
   const renderItem = ({item}: {item: (typeof data)[0]}) => (
     <ItemList {...item} />
   );
@@ -24,6 +27,7 @@ const DiscoverPeople: React.FC = () => {
       <HeaderCustom
         leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="Discover People"
+        onPressLeftIcon={handleGoback}
       />
       <View style={{padding: 24}}>
         <View style={styles.viewRefesh}>
@@ -88,6 +92,78 @@ const data = [
   },
   {
     id: '5',
+    avatarDummy: true,
+    name: 'Peter 5',
+    title: 'Suggestions for you',
+    button: true,
+    deleteUser: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '6',
+    avatarDummy: true,
+    name: 'Peter 5',
+    title: 'Suggestions for you',
+    button: true,
+    deleteUser: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '7',
+    avatarDummy: true,
+    name: 'Peter 5',
+    title: 'Suggestions for you',
+    button: true,
+    deleteUser: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '8',
+    avatarDummy: true,
+    name: 'Peter 5',
+    title: 'Suggestions for you',
+    button: true,
+    deleteUser: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '9',
+    avatarDummy: true,
+    name: 'Peter 5',
+    title: 'Suggestions for you',
+    button: true,
+    deleteUser: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '10',
+    avatarDummy: true,
+    name: 'Peter 5',
+    title: 'Suggestions for you',
+    button: true,
+    deleteUser: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '11',
+    avatarDummy: true,
+    name: 'Peter 5',
+    title: 'Suggestions for you',
+    button: true,
+    deleteUser: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '12',
+    avatarDummy: true,
+    name: 'Peter 5',
+    title: 'Suggestions for you',
+    button: true,
+    deleteUser: true,
+    textButton: 'Follow',
+  },
+  {
+    id: '13',
     avatarDummy: true,
     name: 'Peter 5',
     title: 'Suggestions for you',

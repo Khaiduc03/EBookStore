@@ -1,48 +1,19 @@
 import {makeStyles, normalize} from '@rneui/themed';
-import {StyleSheet} from 'react-native';
-import {fontFamilySetup} from '../../../../utils/font';
-import {Device} from '../../../../utils';
+import {fontFamilySetup} from '../../../../../../utils/font';
+import {Device} from '../../../../../../utils';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
   image: {
     width: normalize(48),
     height: normalize(48),
     borderRadius: normalize(50),
   },
-  buttonHeader: {
-    borderWidth: 1,
-    borderRadius: normalize(50),
-    width: normalize(230),
-    height: normalize(50),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textHeader: {
-    fontSize: normalize(16),
-    fontFamily: fontFamilySetup.regular,
-    color: colors.black,
-    lineHeight: normalize(21),
-    letterSpacing: normalize(0.12),
-  },
-
-  header: {
-    paddingHorizontal: normalize(15),
-    paddingVertical: normalize(30),
-    backgroundColor: colors.white,
-  },
-  itemHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   content: {
-    height: '100%',
+    borderTopWidth: normalize(10),
+    borderColor: colors.grey9,
     paddingVertical: normalize(21),
     backgroundColor: colors.white,
   },
@@ -67,7 +38,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   createAt: {
     fontSize: normalize(16),
-    fontFamily: fontFamilySetup.medium,
+    fontFamily: fontFamilySetup.regular,
     color: colors.grey8,
   },
   description: {
@@ -75,7 +46,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   textDescription: {
     fontSize: normalize(16),
-    fontFamily: fontFamilySetup.medium,
+    fontFamily: fontFamilySetup.regular,
     color: colors.black,
     lineHeight: normalize(21),
     letterSpacing: normalize(0.5),
@@ -93,8 +64,14 @@ const useStyles = makeStyles(({colors}) => ({
     justifyContent: 'space-between',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    borderTopWidth: 1,
     width: '100%',
+  },
+  viewNumberCount: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    borderBottomWidth: 1,
+    paddingVertical: normalize(10),
   },
 }));
 

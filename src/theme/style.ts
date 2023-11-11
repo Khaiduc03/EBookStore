@@ -12,6 +12,7 @@ declare module '@rneui/themed' {
     grey6: string;
     grey7: string;
     grey8: string;
+    grey9: string;
     backgrounDetai: string;
     backgroundChapter: string;
     backgroundTopic: string;
@@ -45,6 +46,7 @@ export const theme = createTheme({
     grey3: '#667085',
     grey7: '#F7F6F6',
     grey8: '#9A9A9A',
+    grey9: '#D9D9D9',
     white: '#FFFFFF',
     input1: '#F2F2F2',
     input2: '#FFF7EB',

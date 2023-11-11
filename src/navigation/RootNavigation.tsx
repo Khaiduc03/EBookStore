@@ -1,18 +1,13 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {makeStyles, useThemeMode} from '@rneui/themed';
+import { NavigationContainer } from '@react-navigation/native';
+import { makeStyles, useThemeMode } from '@rneui/themed';
 import React from 'react';
-import {StatusBar} from 'react-native';
-import {useAppSelector} from '../hooks';
-import {getAuthEnableSignIn} from '../redux/selectors/auth.selector';
-import {getMode} from '../redux/selectors/thems.selector';
-import {navigationRef} from './NavigationService';
+import { StatusBar } from 'react-native';
+import { useAppSelector } from '../hooks';
+import { getAuthEnableSignIn } from '../redux/selectors/auth.selector';
+import { getMode } from '../redux/selectors/thems.selector';
+import { navigationRef } from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
-import AddPayment from '../screens/main/profile/AddPayment';
-import BecomeVIP from '../screens/main/profile/BecomeVIP';
-import HistoryandFavorite from '../screens/main/profile/HistoryandFavorite';
-import {Forum} from '../screens/main';
-import DiscoverPeople from '../screens/main/profile/DiscoverPeople';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -43,7 +38,7 @@ const RootNavigation = () => {
         barStyle={themeMode}
       />
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
-      {/* <DiscoverPeople /> */}
+      {/* <AppNavigator /> */}
     </NavigationContainer>
   );
 };
