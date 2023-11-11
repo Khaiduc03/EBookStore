@@ -2,9 +2,15 @@ import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeLatest} from 'redux-saga/effects';
 import {ComicActions, ComicReducer, LoadingActions} from '../reducer';
 import {ComicService} from '../services';
+import {showToastSuccess} from '../../utils';
+import {ToastAndroid} from 'react-native';
 
 function* getListDataSaga(action: PayloadAction<number>): Generator {
-  yield put(LoadingActions.showLoadingPage());
+  if (action.payload == 1) {
+    yield put(LoadingActions.showLoadingStart());
+  } else {
+    yield put(LoadingActions.showLoadingPage());
+  }
   try {
     console.log('run');
     const {data}: any = yield call(ComicService.getComic, action.payload);
@@ -17,7 +23,11 @@ function* getListDataSaga(action: PayloadAction<number>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoadingPage());
+    if (action.payload == 1) {
+      yield put(LoadingActions.hideLoadingStart());
+    } else {
+      yield put(LoadingActions.hideLoadingPage());
+    }
   }
 }
 function* getComicById(action: PayloadAction<string>): Generator {
@@ -56,6 +66,25 @@ function* getListComicByTopicSaga(action: PayloadAction<any>): Generator {
     console.log(error);
   } finally {
     yield put(LoadingActions.hideLoadingTopic());
+  }
+}
+
+function* getListComicByTopicMoreSaga(action: PayloadAction<any>): Generator {
+  try {
+    const {data}: any = yield call(
+      ComicService.getComicByTopicMore,
+      action.payload,
+    );
+    console.log('saga=======>', data.data);
+
+    if (data.code === 200) {
+      yield put(ComicActions.setListByTopicMore(data.data));
+    } else {
+      console.log('Lỗi từ máy chủ !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
   }
 }
 
@@ -110,6 +139,11 @@ function* getDataComicBySearchSaga(action: PayloadAction<string>): Generator {
     if (data.code == 200) {
       console.log('run push tookit');
       yield put(ComicActions.setListBySeacrch(data.data));
+      if (data.data.data.length !== 0) {
+        ToastAndroid.show('Successful comic search !!!!', ToastAndroid.SHORT);
+      } else {
+        ToastAndroid.show('No comics available !!!!', ToastAndroid.SHORT);
+      }
     } else {
       console.log('Server errol !!!');
     }
@@ -143,13 +177,12 @@ function* getDataChapterNavSaga(action: PayloadAction<any>): Generator {
 }
 
 function* getComicByTop20Saga(): Generator {
-  yield put(LoadingActions.showLoading());
   try {
     console.log('run');
     const {data}: any = yield call(ComicService.getComicByTopView);
     if (data.code == 200) {
       console.log('run push tookit');
-      console.log(data);
+
       yield put(ComicActions.setListTopView(data));
     } else {
       console.log('Server errol !!!');
@@ -157,7 +190,6 @@ function* getComicByTop20Saga(): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoading());
   }
 }
 
@@ -274,4 +306,8 @@ export default function* watchComicSaga() {
   yield takeLatest(ComicActions.checkFavorite, checkFavoriteSaga);
   yield takeLatest(ComicActions.getListFavorite, getListFavoriteSaga);
   yield takeLatest(ComicActions.getListHistotyComic, getListHistoryComicSaga);
+  yield takeLatest(
+    ComicActions.getListByTopicMore,
+    getListComicByTopicMoreSaga,
+  );
 }

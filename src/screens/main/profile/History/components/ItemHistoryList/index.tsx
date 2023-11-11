@@ -8,20 +8,23 @@ import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
 import {Comic} from '../../../../../../types';
 import FastImage from 'react-native-fast-image';
-import {ComicType} from '../../../../../../redux';
+import {ComicActions, ComicType} from '../../../../../../redux';
+import {useAppDispatch} from '../../../../../../hooks';
 
 const ItemHistoryList: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
   const comic: ComicType = props.data;
+  const dispatch = useAppDispatch();
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() =>
-          NavigationService.navigate(routes.CHAPTER, {
-            chapter_number: comic.last_chapter_number,
-            comic_uuid: comic.comic_uuid,
-          })
-        }
+        onPress={() => {
+          dispatch(ComicActions.clearListChapterDetail()),
+            NavigationService.navigate(routes.CHAPTER, {
+              chapter_number: comic.last_chapter_number,
+              comic_uuid: comic.comic_uuid,
+            });
+        }}
         style={styles.imgComic}>
         <FastImage
           style={{width: '100%', height: '100%', borderRadius: 6}}

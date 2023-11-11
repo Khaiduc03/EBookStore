@@ -11,6 +11,7 @@ import Loading from './src/components/shared/Loading';
 import {toastConfig} from './src/utils/toastConfig';
 import Slider from './src/screens/auth/onboard';
 import LoadingMain from './src/components/shared/LoadingMain';
+import LoadingStart from './src/components/shared/LoadingStart';
 
 const App: FunctionComponent = () => {
   useEffect(() => {
@@ -29,6 +30,7 @@ const App: FunctionComponent = () => {
           {/* LOADING API */}
           <Loading />
           <LoadingMain />
+          <LoadingStart />
 
           {/* MAIN APP */}
           <Slider />

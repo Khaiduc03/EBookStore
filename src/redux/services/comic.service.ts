@@ -22,6 +22,14 @@ export class ComicService {
     );
   }
 
+  static async getComicByTopicMore(action: any) {
+    return await apiService.get(
+      `${ENDPOINTS.COMIC_BY_TOPIC}?topic_name=${
+        action.name[0]
+      }&page=${1}&topic_name=${action.name[1]}&topic_name=${action.name[2]}`,
+    );
+  }
+
   static async getAllChapterByComic(action: any) {
     console.log(`${ENDPOINTS.CHAPTER}${action}?chapter_number=${0}`);
     return await apiService.get(

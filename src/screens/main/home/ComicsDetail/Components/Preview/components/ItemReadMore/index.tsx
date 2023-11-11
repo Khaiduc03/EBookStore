@@ -1,20 +1,29 @@
-import {Text, TouchableOpacity, View, ActivityIndicator} from 'react-native';
-import React, {useState} from 'react';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  ActivityIndicator,
+  ScrollView,
+} from 'react-native';
+import React, {useRef, useState} from 'react';
 import useStyles from './styles';
 import {Icon} from '@rneui/themed';
 import {CustomComicProps} from './type';
-import {NavigationService} from '../../../navigation';
-import {routes} from '../../../constants';
-import FastImage from 'react-native-fast-image';
-import {ComicActions, ComicType} from '../../../redux';
-import {Skeleton} from '@rneui/base';
-import {useAppDispatch} from '../../../hooks';
 
-const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
+import FastImage from 'react-native-fast-image';
+
+import {Skeleton} from '@rneui/base';
+import {ComicActions, ComicType} from '../../../../../../../../redux';
+import {NavigationService} from '../../../../../../../../navigation';
+import {routes} from '../../../../../../../../constants';
+import {useAppDispatch} from '../../../../../../../../hooks';
+
+const ItemReadMore: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
+  const dispatch = useAppDispatch();
   const comic: ComicType = props.data;
   const [isLoading, setLoading] = useState(true);
-  const dispatch = useAppDispatch();
+  const scrollRef = useRef<ScrollView | null>(null);
 
   const onLoadStart = () => {
     setLoading(true);
@@ -27,7 +36,10 @@ const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
     dispatch(ComicActions.clearPostFavorite());
     dispatch(ComicActions.clearListDataChapter());
     dispatch(ComicActions.clearListDataByTopicMore());
-    NavigationService.navigate(routes.COMICDETAIL, {data: props.data});
+    NavigationService.navigate(routes.COMICDETAIL, {
+      data: props.data,
+      scrollRef: scrollRef,
+    });
   };
 
   return (
@@ -81,4 +93,4 @@ const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   );
 };
 
-export default ComicItem;
+export default ItemReadMore;

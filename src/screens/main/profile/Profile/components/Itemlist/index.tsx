@@ -63,7 +63,10 @@ const Itemlish: React.FC = () => {
         <View style={styles.line} />
         <Text style={styles.textName}>Comic</Text>
         <TouchableOpacity
-          onPress={() => NavigationService.navigate(routes.FAVORITE)}>
+          onPress={() => {
+            dispatch(ComicActions.clearListFavorite());
+            NavigationService.navigate(routes.FAVORITE);
+          }}>
           <ItemListProfile
             title="Your favorites"
             name="menu-book"
@@ -75,7 +78,10 @@ const Itemlish: React.FC = () => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => NavigationService.navigate(routes.HISTORY)}>
+          onPress={() => {
+            dispatch(ComicActions.clearListHistory());
+            NavigationService.navigate(routes.HISTORY);
+          }}>
           <ItemListProfile
             title="History"
             name="history"

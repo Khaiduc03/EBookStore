@@ -50,15 +50,15 @@ const FavoritesList: FunctionComponent = () => {
     );
   }, []);
 
-  const RenderItem = ({item}: {item: ComicType}) => (
-    <ItemFavoritesList key={item.comic_uuid} data={item} />
+  const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
+    <ItemFavoritesList key={index} data={item} />
   );
   return (
     <View style={styles.container}>
       <FlatList
         data={data}
         renderItem={RenderItem}
-        keyExtractor={item => item.uuid}
+        keyExtractor={item => item.comic_uuid}
         showsVerticalScrollIndicator={false}
         onEndReached={loadMoreComic}
         onEndReachedThreshold={0.1}

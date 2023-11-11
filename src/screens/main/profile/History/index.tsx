@@ -8,10 +8,8 @@ import {ComicActions} from '../../../../redux';
 import {HistoryList} from './components';
 
 const Favorite: React.FC = () => {
-  const dispatch = useAppDispatch();
   const styles = useStyles();
   const handlePressGoback = () => {
-    dispatch(ComicActions.clearListHistory());
     NavigationService.goBack();
   };
 

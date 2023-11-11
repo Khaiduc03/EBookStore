@@ -118,7 +118,7 @@ const carouselData: CarouselDataItem[] = [
   {
     id: '3',
     image:
-      'https://www.google.com/imgres?imgurl=https%3A%2F%2Fgamek.mediacdn.vn%2F133514250583805952%2F2022%2F1%2F15%2Fsword-she-16422636752621114958409.jpg&tbnid=sXlloBxwj3pG0M&vet=12ahUKEwivx7OI3ZiCAxUZNd4KHQ2hD2AQMyhAegUIARDMAQ..i&imgrefurl=https%3A%2F%2Fgamek.vn%2Ftop-7-bo-manhwa-co-trang-han-quoc-dang-duoc-nhieu-nguoi-doc-san-don-nhat-2022011523353546.chn&docid=8sGa7Ijv1hc31M&w=957&h=638&q=manhwa%20jpg&ved=2ahUKEwivx7OI3ZiCAxUZNd4KHQ2hD2AQMyhAegUIARDMAQ',
+      'https://photo2.tinhte.vn/data/attachment-files/2021/03/5382259_Cale-Henituse-In-Trash-Of-The-Counts-Family1.jpg',
   },
   {
     id: '4',

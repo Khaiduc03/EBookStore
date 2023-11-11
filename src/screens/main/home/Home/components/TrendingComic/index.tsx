@@ -13,14 +13,7 @@ import {getListTopView} from '../../../../../../redux/selectors/comic.selector';
 const TrendingComic = () => {
   const styles = useStyles();
 
-  const dispatch = useAppDispatch();
   const data = useAppSelector(getListTopView);
-
-  useEffect(() => {
-    if (!data) {
-      dispatch(ComicActions.getListTopView());
-    }
-  }, []);
 
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
     <ItemTrending index={index} data={item} />

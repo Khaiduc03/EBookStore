@@ -1,6 +1,6 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Tab, Text, TabView} from '@rneui/themed';
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {CustomTabViewItemProps} from './types';
 import useStyles from './styles';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -11,8 +11,13 @@ import {TouchableWithoutFeedback} from 'react-native';
 const TabViewItem: React.FunctionComponent<CustomTabViewItemProps> = props => {
   const [index, setIndex] = React.useState(0);
   const styles = useStyles();
+  useEffect(() => {
+    props.scrollRef?.current?.scrollTo({y: 0, animated: true});
+  }, [props.scrollRef]);
+
   return (
     <ScrollView
+      ref={props.scrollRef}
       overScrollMode="never"
       stickyHeaderIndices={[1]}
       showsVerticalScrollIndicator={false}

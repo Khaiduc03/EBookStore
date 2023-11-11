@@ -6,6 +6,7 @@ import {HeaderCustom} from '../../../../../../components';
 import {useAppSelector} from '../../../../../../hooks';
 import {getDetailComic} from '../../../../../../redux/selectors/comic.selector';
 import {ComicType} from '../../../../../../redux';
+import {data} from '../../../../message/Chat/types';
 
 interface Comic {
   data: ComicType;

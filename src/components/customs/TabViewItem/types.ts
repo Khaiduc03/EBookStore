@@ -1,4 +1,4 @@
-import {ViewComponent, ViewStyle, TextStyle} from 'react-native';
+import {ViewComponent, ViewStyle, TextStyle, ScrollView} from 'react-native';
 
 export type CustomTabViewItemProps = {
   screen1: any;
@@ -9,4 +9,5 @@ export type CustomTabViewItemProps = {
   headerDetail?: any;
   tabStyle?: ViewStyle;
   titleStyle?: TextStyle;
+  scrollRef?: React.RefObject<ScrollView>;
 };

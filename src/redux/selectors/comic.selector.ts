@@ -11,6 +11,9 @@ export const getDetailComic = (state: RootState) =>
 
 export const getDataByTopic = (state: RootState) =>
   state.comic.listDataByTopic?.data;
+
+export const getDataByTopicMore = (state: RootState) =>
+  state.comic.listDataByTopicMore?.data;
 export const getNextTopic = (state: RootState) =>
   state.comic.listDataByTopic?.canNext;
 
