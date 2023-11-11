@@ -8,16 +8,14 @@ import {AuthActions, getAuthUserProfile} from '../../../redux';
 const TextCustom: React.FunctionComponent<TextCustomProps> = props => {
   const {textBold, textLight, title, number, textPrimary, statuss} = props;
   const styles = useStyles();
-  const dispatch = useAppDispatch();
-  dispatch(AuthActions.getUserInfo());
-  const {status} = useAppSelector(getAuthUserProfile);
+  const user = useAppSelector(getAuthUserProfile);
   return (
     <View>
       {textLight && <Text style={styles.Lighttext}>{title}</Text>}
       {textBold && <Text style={styles.Boldtext}>{title}</Text>}
       {textPrimary && <Text style={styles.Primarytext}>{title}</Text>}
       {number && <Text style={styles.Boldtext}>{number}</Text>}
-      {statuss && <Text style={styles.Lighttext}>{status}</Text>}
+      {statuss && <Text style={styles.Lighttext}>{user.status}</Text>}
     </View>
   );
 };

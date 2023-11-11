@@ -1,12 +1,13 @@
-import { PayloadAction } from '@reduxjs/toolkit';
-import { call, put, takeLatest } from 'redux-saga/effects';
-import { routes } from '../../constants';
-import { NavigationService } from '../../navigation';
-import { CustomToastBottom, showToastError, showToastSuccess } from '../../utils';
-import { GoogleService } from '../../utils/google';
-import { AuthActions, LoadingActions } from '../reducer';
-import { AuthService, UserService } from '../services';
-import { LoginPayload, NewPasswordPayload, SendOTPPayload } from '../types';
+import {PayloadAction} from '@reduxjs/toolkit';
+import {call, put, takeLatest} from 'redux-saga/effects';
+import {routes} from '../../constants';
+import {NavigationService} from '../../navigation';
+import {CustomToastBottom, showToastError, showToastSuccess} from '../../utils';
+import {GoogleService} from '../../utils/google';
+import {AuthActions, ComicActions, LoadingActions} from '../reducer';
+import {AuthService, UserService} from '../services';
+import {LoginPayload, NewPasswordPayload, SendOTPPayload} from '../types';
+import {useAppDispatch} from '../../hooks';
 
 //login
 function* loginSaga(action: PayloadAction<LoginPayload>): Generator {
@@ -55,6 +56,7 @@ function* loginGoogleSaga(
     const checkLogin = yield GoogleService.checkSignIn();
     if (!checkLogin) {
       const {idToken}: any = yield GoogleService.login();
+      console.log(idToken);
       const {data}: any = yield call(AuthService.hanleGGLogin, {
         device_token: action.payload.device_token,
         idToken,
@@ -68,7 +70,8 @@ function* loginGoogleSaga(
             enableSignIn: true,
           }),
         );
-        //  yield call(getProfileUserSaga);
+
+        yield call(getProfileUserSaga);
         showToastSuccess(data.message);
       } else if (data.code === 400) {
         showToastError(
@@ -119,10 +122,11 @@ function* createAccountSaga(
 function* getProfileUserSaga(): Generator {
   try {
     const {data}: any = yield call(UserService.getUserProfile);
+
     if (data.code === 200) {
       yield put(
         AuthActions.getUserInfoSuccess({
-          user: data.data,
+          user: data.data[0],
         }),
       );
     } else {

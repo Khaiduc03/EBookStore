@@ -17,11 +17,12 @@ const MyProfile: React.FC = props => {
   const handlePressGoScreen = () => {
     NavigationService.navigate(routes.UPDATE_PROFILE2);
   };
+  const handlePressGoScreen2 = () => {
+    NavigationService.navigate(routes.DISCOVERPEOPLE);
+  };
   const renderItem = ({item}: {item: (typeof data)[0]}) => (
     <ItemListMyProfile {...item} />
   );
-  const dispatch = useAppDispatch();
-  dispatch(AuthActions.getUserInfo());
   const user = useAppSelector(getAuthUserProfile);
   return (
     <View style={styles.container}>
@@ -41,7 +42,7 @@ const MyProfile: React.FC = props => {
       </View>
       <View style={styles.viewExplore}>
         <TextCustom textBold title="Explore everyone" />
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handlePressGoScreen2}>
           <TextCustom textPrimary title="See all" />
         </TouchableOpacity>
       </View>

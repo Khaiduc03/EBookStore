@@ -12,6 +12,7 @@ import AddPayment from '../screens/main/profile/AddPayment';
 import BecomeVIP from '../screens/main/profile/BecomeVIP';
 import HistoryandFavorite from '../screens/main/profile/HistoryandFavorite';
 import {Forum} from '../screens/main';
+import DiscoverPeople from '../screens/main/profile/DiscoverPeople';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -41,8 +42,8 @@ const RootNavigation = () => {
         backgroundColor={usestyles().Mode.backgroundColor}
         barStyle={themeMode}
       />
-      {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      <AppNavigator />
+      {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
+      {/* <DiscoverPeople /> */}
     </NavigationContainer>
   );
 };

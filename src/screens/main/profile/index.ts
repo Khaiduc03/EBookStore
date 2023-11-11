@@ -5,6 +5,7 @@ import AddPayment from './AddPayment';
 import BecomeVIP from './BecomeVIP';
 import ChangePassWord from './ChangePassword';
 import CustomerService from './CustomerService';
+import DiscoverPeople from './DiscoverPeople';
 import HelpCenter from './HelpCenter';
 import Contact_us from './HelpCenter/Contact_us';
 import FAQ from './HelpCenter/FAQ';
@@ -98,5 +99,9 @@ export const profileScreens: Screen[] = [
   {
     name: routes.HISTORYANDFAVORITE,
     component: HistoryandFavorite,
+  },
+  {
+    name: routes.DISCOVERPEOPLE,
+    component: DiscoverPeople,
   },
 ];

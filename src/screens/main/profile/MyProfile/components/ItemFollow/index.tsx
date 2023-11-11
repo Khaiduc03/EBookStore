@@ -1,25 +1,23 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
-import useStyles from './styles';
-import {images} from '../../../../../../assets';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import TextCustom from '../../../../../../components/customs/Text';
-import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
-import {AuthActions, getAuthUserProfile} from '../../../../../../redux';
+import {useAppSelector} from '../../../../../../hooks';
+import {getAuthUserProfile} from '../../../../../../redux';
+import useStyles from './styles';
 
 const ItemFollow = () => {
   const styles = useStyles();
-  const dispatch = useAppDispatch();
-  dispatch(AuthActions.getUserInfo());
-  const {email, fullname, image_url} = useAppSelector(getAuthUserProfile);
+
+  const user = useAppSelector(getAuthUserProfile);
   return (
     <View style={styles.viewAvatarFollow}>
-      <Image style={styles.avatar} source={{uri: `${image_url}`}} />
+      <Image style={styles.avatar} source={{uri: user.image_url}} />
       <TouchableOpacity style={styles.viewFollow}>
-        <TextCustom number={100} />
+        <Text>{user.followercount}</Text>
         <TextCustom textLight title="Follower" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.viewFollow}>
-        <TextCustom number={100} />
+        <Text>{user.followingcount}</Text>
         <TextCustom textLight title="Follow" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.viewFollow}>

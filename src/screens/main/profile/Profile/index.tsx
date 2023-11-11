@@ -1,19 +1,20 @@
-import React, { FunctionComponent } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { HeaderCustom } from '../../../../components';
-import { routes } from '../../../../constants';
-import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { NavigationService } from '../../../../navigation';
-import { AuthActions, getAuthUserProfile } from '../../../../redux';
-import { Itemlish } from './components';
+import React, {FunctionComponent} from 'react';
+import {Image, TouchableOpacity, View} from 'react-native';
+import {HeaderCustom} from '../../../../components';
+import TextCustom from '../../../../components/customs/Text';
+import {routes} from '../../../../constants';
+import {useAppSelector} from '../../../../hooks';
+import {NavigationService} from '../../../../navigation';
+import {getAuthUserProfile} from '../../../../redux';
+import {Itemlish} from './components';
 import useStyles from './styles';
 
 const Profile: FunctionComponent = () => {
   const styles = useStyles();
-  const dispatch = useAppDispatch();
-  dispatch(AuthActions.getUserInfo());
+
   const user = useAppSelector(getAuthUserProfile);
   console.log(user);
+  console.log(user.fullname);
   return (
     <View style={styles.container}>
       <HeaderCustom
@@ -21,12 +22,12 @@ const Profile: FunctionComponent = () => {
         title="My profile"
       />
       <View style={styles.viewAvatar}>
-        <Image source={{uri: `${user.image_url}`}} style={styles.avatar} />
+        <Image source={{uri: user.image_url}} style={styles.avatar} />
         <TouchableOpacity
           style={styles.btnMyProfile}
           onPress={() => NavigationService.navigate(routes.MYPROFILE)}>
-          <Text style={styles.nameUser}>{user.fullname}</Text>
-          <Text style={styles.email}>{user.email}</Text>
+          <TextCustom textBold title={user.fullname} />
+          <TextCustom textLight title={user.email} />
         </TouchableOpacity>
       </View>
       <View style={styles.line} />

@@ -12,9 +12,6 @@ export class UserService {
   static async getUserProfile() {
     return await apiService.get(`${ENDPOINTS.PROFILE}`);
   }
-  static async getAllUserProfile(action: string) {
-    return await apiService.get(`${ENDPOINTS.GET_ALL_USER}/${action}`);
-  }
 
   static async updateUserAvatar(action: FormData) {
     console.log(action);
