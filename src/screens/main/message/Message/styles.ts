@@ -3,6 +3,9 @@ import {StyleSheet} from 'react-native';
 import {Device} from '../../../../utils';
 import {fontFamilySetup} from '../../../../utils/font';
 
+const WIDTH = Device.getDeviceWidth();
+const HEIGHT = Device.getDeviceHeight();
+
 const useStyles = makeStyles(({colors}) => ({
   container: {
     flex: 1,
@@ -20,12 +23,6 @@ const useStyles = makeStyles(({colors}) => ({
     width: '100%',
     height: normalize(56),
     backgroundColor: colors.white,
-  },
-  viewFooter: {
-    width: '100%',
-    height: 'auto',
-    backgroundColor: colors.white,
-    justifyContent: 'center',
   },
   containerScrollView: {
     height: 'auto',
@@ -111,14 +108,6 @@ const useStyles = makeStyles(({colors}) => ({
   iconVideocam: {
     color: colors.black,
   },
-  viewBackgroundEmoji: {
-    flex: 1,
-    width: '100%',
-    height: normalize(340),
-    backgroundColor: colors.white,
-    justifyContent: 'center',
-    alignSelf: 'center',
-  },
   viewClearAll: {
     width: '100%',
     alignItems: 'center',
@@ -127,7 +116,8 @@ const useStyles = makeStyles(({colors}) => ({
   btnArrowDown: {
     borderRadius: normalize(100),
     position: 'absolute',
-    alignSelf: 'flex-end',
+    justifyContent: 'center',
+    alignItems: 'center',
     bottom: normalize(120),
     right: normalize(10),
     backgroundColor: colors.white,
@@ -149,24 +139,16 @@ const useStyles = makeStyles(({colors}) => ({
     marginHorizontal: normalize(14),
     marginVertical: normalize(16),
   },
-  leftIcon: {
-    transform: [{rotate: '40deg'}],
-  },
-  rightContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    right: normalize(-10),
-  },
   rightIconLeft: {
-    position: 'absolute',
-    right: normalize(20),
+    top: normalize(HEIGHT * 0.018),
+    right: normalize(HEIGHT * 0.056),
   },
   rightIconRight: {
-    position: 'absolute',
-    left: normalize(5),
+    top: normalize(HEIGHT * 0.018),
+    right: normalize(HEIGHT * 0.02),
   },
   textInput: {
-    width: Device.getDeviceHeight() * 0.32,
+    width: normalize(WIDTH * 0.68),
     fontSize: normalize(15),
     fontFamily: fontFamilySetup.bold,
     paddingVertical: normalize(12),
@@ -181,19 +163,19 @@ const useStyles = makeStyles(({colors}) => ({
     height: normalize(50),
   },
   textInputHeightAutoLimit: {
-    maxHeight: 'auto',
+    height: normalize(50),
   },
   viewFocus: {
-    height: Device.getDeviceHeight() - 510,
+    height: normalize(HEIGHT * 0.44),
   },
   viewBlur: {
-    height: normalize(60),
+    height: normalize(HEIGHT * 0.069),
   },
   viewFocusSelectImage: {
-    height: Device.getDeviceHeight() - 690,
+    height: normalize(HEIGHT * 0.3),
   },
   viewEmoji: {
-    height: normalize(460),
+    height: normalize(HEIGHT * 0.6),
   },
   btnPB: {
     paddingBottom: normalize(36),
@@ -238,6 +220,13 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: colors.grey5,
     padding: normalize(8),
     borderRadius: normalize(1000),
+  },
+
+  viewEmojis: {
+    width: '100%',
+    height: normalize(HEIGHT * 0.5),
+    top: normalize(HEIGHT * 0.09),
+    position: 'absolute',
   },
 }));
 
