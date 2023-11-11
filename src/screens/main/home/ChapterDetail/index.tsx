@@ -124,7 +124,7 @@ const ChapterDetail = () => {
                 ? imageSize.width / imageSize.height
                 : 1,
           }}
-          resizeMode={FastImage.resizeMode.stretch}
+          resizeMode={FastImage.resizeMode.cover}
         />
       </TouchableWithoutFeedback>
     );
