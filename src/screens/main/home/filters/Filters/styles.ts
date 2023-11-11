@@ -15,7 +15,7 @@ const useStyles = makeStyles(({colors}) => ({
     paddingHorizontal: normalize(12),
   },
   viewItem: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -39,11 +39,14 @@ const useStyles = makeStyles(({colors}) => ({
   },
   scrollViewTitle: {
     width: normalize(WIDTH * 0.9),
-    height: normalize(HEIGHT * 0.05),
+    height: normalize(HEIGHT * 0.06),
   },
   scrollViewItem: {
     width: normalize(WIDTH * 0.9),
     height: normalize(HEIGHT * 0.9),
+  },
+  backgroundColorCB: {
+    backgroundColor: colors.whiteDefault,
   },
   textTitle: {
     fontSize: normalize(14),
@@ -86,7 +89,7 @@ const useStyles = makeStyles(({colors}) => ({
     borderColor: colors.grey3,
   },
   textHeaderItem: {
-    color: colors.black,
+    color: colors.blackDefault,
     fontSize: normalize(18),
     fontFamily: fontFamilySetup.bold,
     marginLeft: normalize(WIDTH * 0.044),
@@ -95,7 +98,7 @@ const useStyles = makeStyles(({colors}) => ({
   textItem: {
     left: normalize(WIDTH * 0.001),
     padding: normalize(12),
-    color: colors.black,
+    color: colors.blackDefault,
     fontSize: normalize(15),
     fontFamily: fontFamilySetup.bold,
   },

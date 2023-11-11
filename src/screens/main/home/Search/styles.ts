@@ -19,6 +19,8 @@ const useStyles = makeStyles(({colors}) => ({
   },
   search: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textTitle: {
     fontSize: normalize(18),
@@ -45,6 +47,14 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
     width: '70%',
     flexWrap: 'wrap',
+  },
+  btnFilters: {
+    width: normalize(24),
+    height: normalize(24),
+    marginHorizontal: normalize(6),
+  },
+  colorFilters: {
+    color: colors.black,
   },
 }));
 

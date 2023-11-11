@@ -556,6 +556,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbSortItem1Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected1
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -576,6 +577,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbSortItem2Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected2
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -596,6 +598,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbSortItem3Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected3
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -616,6 +619,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbSortItem4Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected4
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -636,6 +640,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbSortItem5Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected5
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -656,6 +661,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbSortItem6Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected6
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -686,6 +692,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbPriceItem7Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected7
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -706,6 +713,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbPriceItem8Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected8
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -736,6 +744,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbRatingItem9Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected9
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -756,6 +765,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbRatingItem10Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected10
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -776,6 +786,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbRatingItem11Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected11
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -804,6 +815,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected12}
                   onPress={handleCbGenreItem12Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected12
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -822,6 +834,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected13}
                   onPress={handleCbGenreItem13Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected13
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -840,6 +853,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected14}
                   onPress={handleCbGenreItem14Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected14
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -859,6 +873,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected15}
                   onPress={handleCbGenreItem15Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected15
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -877,6 +892,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected16}
                   onPress={handleCbGenreItem16Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected16
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -895,6 +911,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected17}
                   onPress={handleCbGenreItem17Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected17
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -914,6 +931,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected18}
                   onPress={handleCbGenreItem18Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected18
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -932,6 +950,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected19}
                   onPress={handleCbGenreItem19Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected19
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -950,6 +969,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected20}
                   onPress={handleCbGenreItem20Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected20
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -969,6 +989,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected21}
                   onPress={handleCbGenreItem21Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected21
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -987,6 +1008,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected22}
                   onPress={handleCbGenreItem22Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected22
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1005,6 +1027,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected23}
                   onPress={handleCbGenreItem23Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected23
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1039,6 +1062,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbSortItem1Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected1
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1059,6 +1083,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbSortItem2Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected2
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1079,6 +1104,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbSortItem3Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected3
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1099,6 +1125,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbSortItem4Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected4
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1119,6 +1146,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbSortItem5Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected5
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1139,6 +1167,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbSortItem6Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected6
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1173,6 +1202,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbPriceItem7Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected7
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1193,6 +1223,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbPriceItem8Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected8
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1227,6 +1258,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbRatingItem9Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected9
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1247,6 +1279,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbRatingItem10Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected10
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1267,6 +1300,7 @@ const ItemFilters: React.FC = () => {
                   onPress={handleCbRatingItem11Click}
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected11
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1299,6 +1333,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected12}
                   onPress={handleCbGenreItem12Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected12
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1317,6 +1352,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected13}
                   onPress={handleCbGenreItem13Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected13
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1335,6 +1371,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected14}
                   onPress={handleCbGenreItem14Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected14
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1354,6 +1391,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected15}
                   onPress={handleCbGenreItem15Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected15
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1372,6 +1410,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected16}
                   onPress={handleCbGenreItem16Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected16
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1390,6 +1429,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected17}
                   onPress={handleCbGenreItem17Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected17
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1409,6 +1449,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected18}
                   onPress={handleCbGenreItem18Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected18
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1427,6 +1468,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected19}
                   onPress={handleCbGenreItem19Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected19
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1445,6 +1487,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected20}
                   onPress={handleCbGenreItem20Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected20
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1464,6 +1507,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected21}
                   onPress={handleCbGenreItem21Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected21
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1482,6 +1526,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected22}
                   onPress={handleCbGenreItem22Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected22
                       ? styles.backgroundBtnTitleFocus.backgroundColor
@@ -1500,6 +1545,7 @@ const ItemFilters: React.FC = () => {
                 <CheckBox
                   checked={isCbSelected23}
                   onPress={handleCbGenreItem23Click}
+                  containerStyle={styles.backgroundColorCB}
                   style={{
                     backgroundColor: isCbSelected23
                       ? styles.backgroundBtnTitleFocus.backgroundColor
