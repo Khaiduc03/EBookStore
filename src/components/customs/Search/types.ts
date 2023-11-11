@@ -5,4 +5,5 @@ export type SearchBarComponentProps = {
   onPress?: () => void;
   value?: string;
   setValue?: (value: string) => void;
+  autoFocus?: boolean;
 };

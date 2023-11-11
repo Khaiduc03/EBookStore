@@ -80,6 +80,9 @@ const Home: FunctionComponent = () => {
           name: 'notifications-outline',
           type: 'ionicon',
         })}
+        onPressRightIconRight={() =>
+          NavigationService.push(routes.NOTIFICATIONS)
+        }
       />
 
       <FlatList

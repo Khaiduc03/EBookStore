@@ -91,6 +91,7 @@ const Search = () => {
             value={search}
             setValue={setSearch}
             onPress={onPressSearch}
+            autoFocus={true}
           />
         </View>
       </View>
