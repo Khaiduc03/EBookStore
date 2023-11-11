@@ -6,7 +6,11 @@ import {showToastSuccess} from '../../utils';
 import {ToastAndroid} from 'react-native';
 
 function* getListDataSaga(action: PayloadAction<number>): Generator {
-  yield put(LoadingActions.showLoadingPage());
+  if (action.payload == 1) {
+    yield put(LoadingActions.showLoadingStart());
+  } else {
+    yield put(LoadingActions.showLoadingPage());
+  }
   try {
     console.log('run');
     const {data}: any = yield call(ComicService.getComic, action.payload);
@@ -19,7 +23,11 @@ function* getListDataSaga(action: PayloadAction<number>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoadingPage());
+    if (action.payload == 1) {
+      yield put(LoadingActions.hideLoadingStart());
+    } else {
+      yield put(LoadingActions.hideLoadingPage());
+    }
   }
 }
 function* getComicById(action: PayloadAction<string>): Generator {
@@ -169,7 +177,6 @@ function* getDataChapterNavSaga(action: PayloadAction<any>): Generator {
 }
 
 function* getComicByTop20Saga(): Generator {
-  yield put(LoadingActions.showLoadingStart());
   try {
     console.log('run');
     const {data}: any = yield call(ComicService.getComicByTopView);
@@ -183,7 +190,6 @@ function* getComicByTop20Saga(): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoadingStart());
   }
 }
 

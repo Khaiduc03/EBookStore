@@ -1,10 +1,11 @@
-import {FlatList, View} from 'react-native';
+import {FlatList, TouchableOpacity, View} from 'react-native';
 
 import React, {
   FunctionComponent,
   useEffect,
   useState,
   useCallback,
+  useRef,
 } from 'react';
 import {ComicItem, HeaderCustom} from '../../../../components';
 import {routes} from '../../../../constants';
@@ -34,17 +35,12 @@ const Home: FunctionComponent = () => {
   const nextPage = useAppSelector(getNextPage);
   const isLoading = useAppSelector(getIsLoadingPage);
   const dataTopView = useAppSelector(getListTopView);
-  const [loadMore, setloadMore] = useState(false);
-  console.log(loadMore);
 
   console.log('isLoading:', isLoading);
   console.log('nextPage:', nextPage);
 
   useEffect(() => {
-    if (!loadMore) {
-      dispatch(ComicActions.getListData(page));
-      setloadMore(true);
-    }
+    dispatch(ComicActions.getListData(page));
 
     if (dataTopic?.length === undefined) {
       dispatch(TopicActions.getListTopic());
@@ -55,9 +51,8 @@ const Home: FunctionComponent = () => {
   }, [page]);
 
   const loadMoreComic = () => {
-    if (!isLoading && nextPage && loadMore) {
+    if (!isLoading && nextPage) {
       setPage(page + 1);
-      setloadMore(false);
     }
   };
 
@@ -97,7 +92,6 @@ const Home: FunctionComponent = () => {
       />
 
       <FlatList
-        scrollsToTop={true}
         renderItem={({item, index}: {item: ComicType; index: number}) => (
           <ComicItem
             data={item}
