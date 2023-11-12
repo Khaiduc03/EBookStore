@@ -49,9 +49,9 @@ const MyProfile: React.FC = props => {
           keyExtractor={item => item.id}
           horizontal
           showsHorizontalScrollIndicator={false}
-          snapToAlignment="start" // Snap tới phần tử gần nhất khi cuộn
-          snapToInterval={10} // Đặt khoảng cách giữa các phần tử
-          decelerationRate={0.5} // Điều chỉnh tốc độ giảm dần của cuộn
+          snapToAlignment="start"
+          snapToInterval={10}
+          decelerationRate={0.5}
         />
       </View>
       <View style={styles.viewMyPost}>

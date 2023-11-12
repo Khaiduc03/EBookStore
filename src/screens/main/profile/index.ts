@@ -16,6 +16,7 @@ import {PostDetailUser} from './Profile-User/components';
 import Security from './Security';
 import Update_Profile from './Update-profile';
 import ChangePassWord from './ChangePassword';
+import DiscoverPeople from './DiscoverPeople';
 
 export {default as Profile} from './Profile';
 
@@ -83,5 +84,9 @@ export const profileScreens: Screen[] = [
   {
     name: routes.CHANGEPASSWORD,
     component: ChangePassWord,
+  },
+  {
+    name: routes.DISCOVERPEOPLE,
+    component: DiscoverPeople,
   },
 ];
