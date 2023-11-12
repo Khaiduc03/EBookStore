@@ -1,13 +1,9 @@
-import {View, Text} from 'react-native';
 import React from 'react';
+import { View } from 'react-native';
+import { HeaderCustom } from '../../../../components';
+import { NavigationService } from '../../../../navigation';
+import { FavoritesList } from './components';
 import useStyles from './styles';
-import {HeaderCustom} from '../../../../components';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
-import {Icon} from '@rneui/themed';
-import {FavoritesList} from './components';
-import {useAppDispatch} from '../../../../hooks';
-import {ComicActions} from '../../../../redux';
 
 const Favorite: React.FC = () => {
   const styles = useStyles();

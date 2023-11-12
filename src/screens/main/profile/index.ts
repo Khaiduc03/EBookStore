@@ -19,6 +19,9 @@ import ChangePassWord from './ChangePassword';
 import DiscoverPeople from './DiscoverPeople';
 import AddPayment from './AddPayment';
 import CustomerService from './CustomerService';
+import HistoryandFavorite from './HistoryandFavorite';
+import HistoryScreen from './HistoryandFavorite/History';
+import FavoriteSreen from './HistoryandFavorite/Favorite';
 
 export {default as Profile} from './Profile';
 
@@ -98,5 +101,17 @@ export const profileScreens: Screen[] = [
   {
     name: routes.CUSTOMERSERVICE,
     component: CustomerService,
+  },
+  {
+    name: routes.HISTORYANDFAVORITE,
+    component: HistoryandFavorite,
+  },
+  {
+    name: routes.HISTORYSCREEN,
+    component: HistoryScreen,
+  },
+  {
+    name: routes.FAVORITESCREEN,
+    component: FavoriteSreen,
   },
 ];
