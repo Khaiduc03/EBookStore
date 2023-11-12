@@ -2,7 +2,7 @@ import {getAuthAccessToken} from '../selectors';
 import {useAppSelector} from '../../hooks';
 import {Socket, io} from 'socket.io-client';
 import {BASE_URL} from '../../environment';
-import {data} from '../../screens/main/message/Chat/types';
+import {data} from '../../screens/main/message/Conversation/types';
 import {ChatActions} from '../reducer/chat.reducer';
 import {
   ConversationI,
