@@ -7,11 +7,12 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
 import {theme} from '../../../../../../theme';
+import {Icon} from '@rneui/themed';
 
 const ItemListMyProfile: React.FunctionComponent<
   SquaresCustomProps
 > = props => {
-  const {avatarDummy, name, title, button, textButton} = props;
+  const {avatarDummy, name, title, button, textButton, closeIcon} = props;
   const styles = useStyles();
   const [isFollowing, setIsFollowing] = useState(false);
   const [isDetail, setIsDetail] = useState();
@@ -29,6 +30,11 @@ const ItemListMyProfile: React.FunctionComponent<
       {avatarDummy && (
         <TouchableOpacity style={styles.ViewTop} onPress={handlePressUser}>
           <Image style={styles.Avatar} source={images.avata} />
+        </TouchableOpacity>
+      )}
+      {closeIcon && (
+        <TouchableOpacity style={styles.iconDelete}>
+          <Icon name="close-outline" type="ionicon" size={24} />
         </TouchableOpacity>
       )}
       {name && <Text style={styles.name}>{name}</Text>}
