@@ -118,7 +118,7 @@ const AddPayment: React.FC = () => {
         onPressLeftIcon={handleGoback}
       />
       <View style={{borderBottomWidth: 0.5}}>
-        <CreditCard width={'100%'} height={250} viewBox="55 20 200 270" />
+        <CreditCard width={'100%'} height={250} viewBox="55 20 200 300" />
       </View>
 
       <Text style={styles.textName}>Card Number</Text>
@@ -177,8 +177,8 @@ const AddPayment: React.FC = () => {
           <View style={styles.viewinputSmallCCV}>
             <TextInput
               style={styles.textInputSmallCCV}
-              keyboardType="numeric"
               placeholder="000"
+              keyboardType="numeric"
               placeholderTextColor="gray"
               onChangeText={handleCcvChange}
               value={ccv}

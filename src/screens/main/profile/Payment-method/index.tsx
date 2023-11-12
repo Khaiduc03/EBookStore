@@ -5,7 +5,7 @@ import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import useStyles from './styles';
 import {Pay} from './components';
-import { BigButton } from '../../../../components';
+import {BigButton} from '../../../../components';
 
 const Payments_method: React.FC = () => {
   const styles = useStyles();
@@ -16,7 +16,7 @@ const Payments_method: React.FC = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="Payments Method"
         onPressLeftIcon={handlePressGoback}
       />

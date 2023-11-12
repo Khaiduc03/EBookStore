@@ -12,7 +12,7 @@ const Security: React.FC = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="Security"
         onPressLeftIcon={handlePressGoback}
       />
@@ -23,7 +23,7 @@ const Security: React.FC = () => {
       <Switch_custom title="Google Authenticator" />
 
       <View style={styles.viewButton}>
-        <BigButton textButton="Change Password" />
+        <BigButton textButton="Save" />
       </View>
     </View>
   );

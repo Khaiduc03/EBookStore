@@ -57,7 +57,7 @@ const useStyles = makeStyles(({colors}) => ({
     width: normalize(140),
     textAlign: 'center',
     letterSpacing: normalize(10),
-    fontSize: normalize(18),
+    fontSize: normalize(15),
     marginTop: normalize(5),
   },
   viewinputSmallCCV: {
@@ -75,7 +75,7 @@ const useStyles = makeStyles(({colors}) => ({
     width: normalize(80),
     textAlign: 'center',
     letterSpacing: normalize(10),
-    fontSize: normalize(18),
+    fontSize: normalize(15),
     marginTop: normalize(5),
   },
   textError: {

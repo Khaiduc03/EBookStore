@@ -10,5 +10,8 @@ const useStyles = makeStyles(({colors}) => ({
     flex: normalize(1),
     backgroundColor: colors.background,
   },
+  iconLeftStyle: {
+    color: colors.black,
+  },
 }));
 export default useStyles;
