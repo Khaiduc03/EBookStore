@@ -48,6 +48,7 @@ export interface RequestAddMessageI {
 
 export interface ListConversationStateI {
     conversations: ConversationI[];
-    loading: boolean;
-    error: string | null;
+    messages: MessageI[];
+    // loading: boolean;
+    // error: string | null;
 }

@@ -6,4 +6,5 @@ export enum Redux {
   theme = 'theme',
   comic = 'comic',
   topic = 'topic',
+  chat = 'chat',
 }

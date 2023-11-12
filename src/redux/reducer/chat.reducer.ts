@@ -1,105 +1,98 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {ListConversationStateI} from '../types';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
+import {
+  ConversationI,
+  ListConversationStateI,
+  MessageI,
+  RequestAddMessageI,
+  RequestJoinConversationI,
+} from '../types';
 
 const initialState: ListConversationStateI = {
   conversations: [],
-  loading: false,
-  error: null,
+  messages: [],
 };
 
-export const chatSlice = createSlice({
+export const reducer = createSlice({
   initialState,
   name: 'chat',
   reducers: {
     //get list conversation
-    getListConversation: (state: ListConversationStateI) => {
-      return {
-        ...state,
-        loading: true,
-      };
+    handleGetListConversation: (state: ListConversationStateI) => {
+      return state;
     },
-    getListConversationSuccess: (
+
+    handleGetListConversationSuccess: (
       state: ListConversationStateI,
-      action: any,
+      action: PayloadAction<ConversationI[]>,
     ) => {
       return {
         ...state,
         conversations: action.payload,
-        loading: false,
       };
     },
-    getListConversationFailed: (state: ListConversationStateI, action: any) => {
+    //handle Join Conversation
+    handleJoinConversation: (
+      state: ListConversationStateI,
+      _: PayloadAction<RequestJoinConversationI>,
+    ) => {
+      return state;
+    },
+
+    handleJoinConversationSuccess: (
+      state: ListConversationStateI,
+      action: PayloadAction<MessageI[]>,
+    ) => {
       return {
         ...state,
-        loading: false,
-        error: action.payload,
+        messages: action.payload,
       };
     },
 
-    //create conversation
-    createConversation: (state: ListConversationStateI) => {
-      return {
-        ...state,
-        loading: true,
-      };
+    //handle add message
+    handleAddMessage: (
+      state: ListConversationStateI,
+      _: PayloadAction<RequestAddMessageI>,
+    ) => {
+      return state;
     },
-    createConversationSuccess: (state: ListConversationStateI, action: any) => {
+
+    handleAddMessageSuccess: (
+      state: ListConversationStateI,
+      action: PayloadAction<MessageI>,
+    ) => {
       return {
         ...state,
-        conversations: [...state.conversations, action.payload],
-        loading: false,
-      };
-    },
-    createConversationFailed: (state: ListConversationStateI, action: any) => {
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
+        messages: [...state.messages, action.payload],
       };
     },
 
-    //join conversation
-    joinConversation: (state: ListConversationStateI) => {
-      return {
-        ...state,
-        loading: true,
-      };
+    //handle create conversation
+    handleCreateConversation: (
+      state: ListConversationStateI,
+      _: PayloadAction<RequestJoinConversationI>,
+    ) => {
+      return state;
     },
-    joinConversationSuccess: (state: ListConversationStateI, action: any) => {
+
+    handleCreateConversationSuccess: (
+      state: ListConversationStateI,
+      action: PayloadAction<ConversationI[]>,
+    ) => {
       return {
         ...state,
-        conversations: [...state.conversations, action.payload],
-        loading: false,
-      };
-    },
-    joinConversationFailed: (state: ListConversationStateI, action: any) => {
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
+        conversations: action.payload,
       };
     },
 
-    //add message
-    addMessage: (state: ListConversationStateI) => {
+    //handle leave conversation
+    handleLeaveConversation: (state: ListConversationStateI) => {
       return {
         ...state,
-        loading: true,
-      };
-    },
-    addMessageSuccess: (state: ListConversationStateI, action: any) => {
-      return {
-        ...state,
-        conversations: [...state.conversations, action.payload],
-        loading: false,
-      };
-    },
-    addMessageFailed: (state: ListConversationStateI, action: any) => {
-      return {
-        ...state,
-        loading: false,
-        error: action.payload,
+        messages: [],
       };
     },
   },
 });
+
+export const ChatActions = reducer.actions;
+export const ChatReducer = reducer.reducer;
