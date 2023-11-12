@@ -42,8 +42,8 @@ const RootNavigation = () => {
         backgroundColor={usestyles().Mode.backgroundColor}
         barStyle={themeMode}
       />
-      {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      <Filters />
+      {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
+      {/* <Filters /> */}
     </NavigationContainer>
   );
 };

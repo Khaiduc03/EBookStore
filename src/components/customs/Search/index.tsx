@@ -1,8 +1,12 @@
 import React, {useState} from 'react';
 import {SearchBar} from '@rneui/themed';
-import {Keyboard} from 'react-native';
+import {
+  Keyboard,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import {Icon} from '@rneui/base';
-import {TouchableOpacity} from 'react-native';
 import useStyles from './styles';
 import {SearchBarComponentProps} from './types';
 
@@ -33,21 +37,12 @@ const SearchCustom: React.FunctionComponent<
           : styles.backGroundInputNoFocus,
       ]}
       cancelIcon={
-        inputFocused ? (
-          <Icon
-            onPress={() => Keyboard.dismiss()}
-            name="search"
-            size={24}
-            color={styles.cancelIcon.color}
-          />
-        ) : (
-          <Icon
-            onPress={() => Keyboard.dismiss()}
-            name="search"
-            size={24}
-            color={styles.cancelIcon.color}
-          />
-        )
+        <Icon
+          onPress={() => Keyboard.dismiss()}
+          name="search"
+          size={24}
+          color={styles.cancelIcon.color}
+        />
       }
       autoFocus={props.autoFocus}
       returnKeyType="search"
