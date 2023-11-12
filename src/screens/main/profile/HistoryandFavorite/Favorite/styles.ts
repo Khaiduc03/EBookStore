@@ -7,17 +7,7 @@ const useStyles = makeStyles(({colors}) => ({
     flex: 1,
     backgroundColor: colors.background,
   },
-  leftIconStyle: {
-    marginRight: normalize(100),
-    color: colors.black,
-  },
 
-  titleStyle: {
-    color: colors.black,
-    fontSize: normalize(20),
-    fontFamily: fontFamilySetup.bold,
-    marginLeft: normalize(10),
-  },
 }));
 
 export default useStyles;

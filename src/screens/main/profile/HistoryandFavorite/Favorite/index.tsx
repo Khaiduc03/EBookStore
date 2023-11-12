@@ -1,6 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
-import {FavoritesList} from './components';
+import {View, Text} from 'react-native';
 import useStyles from './styles';
 
 const FavoriteSreen: React.FC = () => {
@@ -8,7 +7,7 @@ const FavoriteSreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <FavoritesList />
+      <Text>Hihi</Text>
     </View>
   );
 };

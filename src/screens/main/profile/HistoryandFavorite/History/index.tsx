@@ -1,13 +1,12 @@
 import React from 'react';
-import {View} from 'react-native';
-import {HistoryList} from './components';
+import {View, Text} from 'react-native';
 import useStyles from './styles';
 
 const HistoryScreen: React.FC = () => {
   const styles = useStyles();
   return (
     <View style={styles.container}>
-      <HistoryList />
+      <Text>hihi</Text>
     </View>
   );
 };

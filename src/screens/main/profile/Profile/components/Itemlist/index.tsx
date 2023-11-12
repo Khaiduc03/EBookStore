@@ -93,8 +93,6 @@ const Itemlish: React.FC = () => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            dispatch(ComicActions.clearListFavorite());
-            dispatch(ComicActions.clearListHistory());
             NavigationService.navigate(routes.HISTORYANDFAVORITE);
           }}>
           <ItemListProfile
