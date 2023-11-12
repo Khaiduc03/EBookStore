@@ -28,3 +28,26 @@ export interface MessageI {
     sender_status: string;
 }
 
+export interface RequsetCreateConversationI {
+    //user_uuid who will join the conversation
+    joined_uuid: string
+}
+
+export interface RequestJoinConversationI {
+    //conversation_uuid of the conversation
+    uuid: string
+}
+
+export interface RequestAddMessageI {
+    //conversation_uuid of the conversation
+    conversation_uuid: string;
+    //content of the message
+    message: string;
+}
+
+
+export interface ListConversationStateI {
+    conversations: ConversationI[];
+    loading: boolean;
+    error: string | null;
+}
