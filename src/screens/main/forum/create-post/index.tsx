@@ -1,4 +1,4 @@
-import {View, Text, NativeModules, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import useStyles from './styles';
 import {HeaderCustom} from '../../../../components';
