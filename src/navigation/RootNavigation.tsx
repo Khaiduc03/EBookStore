@@ -9,6 +9,11 @@ import {navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
 import CreatePost from '../screens/main/forum/create-post';
+import NotificationsScreen from '../screens/main/home/notifications';
+import Notifications from '../screens/main/home/notifications/Notifications/components/RenderItem/Notifications';
+import SettingsScreen from '../screens/main/home/notifications/Notifications/components/Settings';
+import MessageScreen from '../screens/main/message/Message';
+import Filters from '../screens/main/home/filters/Filters';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -40,6 +45,7 @@ const RootNavigation = () => {
       />
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
       {/* <CreatePost/> */}
+      {/* <Filters /> */}
     </NavigationContainer>
   );
 };

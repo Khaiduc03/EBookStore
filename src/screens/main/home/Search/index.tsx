@@ -4,6 +4,8 @@ import {
   View,
   TouchableOpacity,
   ActivityIndicator,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import React, {useState, useEffect, useCallback} from 'react';
 import {ComicItem, HeaderCustom, SearchCustom} from '../../../../components';
@@ -81,68 +83,84 @@ const Search = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.searchContainer}>
-        <TouchableOpacity onPress={onPressBackIcon} style={styles.iconBack}>
-          <Icon name="arrow-back" type="ionicon" />
-        </TouchableOpacity>
-        <View style={styles.search}>
-          <SearchCustom
-            value={search}
-            setValue={setSearch}
-            onPress={onPressSearch}
-          />
-        </View>
-      </View>
-
-      {data?.length === 0 ? (
-        <NoSearch />
-      ) : (
-        <FlatList
-          ListFooterComponent={
-            isLoading ? isLoading && listFooterComponent : undefined
-          }
-          ListHeaderComponent={() => {
-            return (
-              <HeaderCustom
-                titleStyle={styles.textTitle}
-                title="Search comic"
-                rightIconMiddle={{
-                  name: 'grid-outline',
-                  type: 'ionicon',
-                  color: numCols === 3 ? '#F89300' : '',
-                }}
-                rightIconRight={{
-                  name: 'list-circle-outline',
-                  type: 'ionicon',
-                  color: numCols === 1 ? '#F89300' : '',
-                }}
-                onPressRightIconMiddle={handleGridIconPress}
-                onPressRightIconRight={handleListIconPress}
-              />
-            );
-          }}
-          renderItem={({item, index}: {item: ComicType; index: number}) => (
-            <ComicItem
-              data={item}
-              viewStyle={numCols == 1 ? styles.comicItem : null}
-              imageStyle={numCols == 1 ? styles.imgComic : null}
-              contentStyle={numCols == 1 ? styles.content : null}
-              index={index}
-              topicStyle={numCols == 1 ? styles.topicsContainer : null}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <View style={styles.searchContainer}>
+          <TouchableOpacity onPress={onPressBackIcon} style={styles.iconBack}>
+            <Icon name="arrow-back" type="ionicon" />
+          </TouchableOpacity>
+          <View style={styles.search}>
+            <SearchCustom
+              value={search}
+              setValue={setSearch}
+              onPress={onPressSearch}
+              autoFocus={true}
             />
-          )}
-          data={data}
-          key={numCols.toString()}
-          numColumns={numCols}
-          columnWrapperStyle={
-            numCols === 3 ? {gap: 5, paddingHorizontal: 16} : null
-          }
-          onEndReached={loadMoreComic}
-          onEndReachedThreshold={0.1}
-        />
-      )}
-    </View>
+          </View>
+          <TouchableOpacity
+            style={styles.btnFilters}
+            onPress={() => {
+              NavigationService.push(routes.FILTERS);
+              Keyboard.dismiss();
+            }}>
+            <Icon
+              name="options-outline"
+              type="ionicon"
+              size={24}
+              color={styles.colorFilters.color}
+            />
+          </TouchableOpacity>
+        </View>
+
+        {data?.length === 0 ? (
+          <NoSearch />
+        ) : (
+          <FlatList
+            ListFooterComponent={
+              isLoading ? isLoading && listFooterComponent : undefined
+            }
+            ListHeaderComponent={() => {
+              return (
+                <HeaderCustom
+                  titleStyle={styles.textTitle}
+                  title="Search comic"
+                  rightIconMiddle={{
+                    name: 'grid-outline',
+                    type: 'ionicon',
+                    color: numCols === 3 ? '#F89300' : '',
+                  }}
+                  rightIconRight={{
+                    name: 'list-circle-outline',
+                    type: 'ionicon',
+                    color: numCols === 1 ? '#F89300' : '',
+                  }}
+                  onPressRightIconMiddle={handleGridIconPress}
+                  onPressRightIconRight={handleListIconPress}
+                />
+              );
+            }}
+            renderItem={({item, index}: {item: ComicType; index: number}) => (
+              <ComicItem
+                data={item}
+                viewStyle={numCols == 1 ? styles.comicItem : null}
+                imageStyle={numCols == 1 ? styles.imgComic : null}
+                contentStyle={numCols == 1 ? styles.content : null}
+                index={index}
+                topicStyle={numCols == 1 ? styles.topicsContainer : null}
+              />
+            )}
+            data={data}
+            key={numCols.toString()}
+            numColumns={numCols}
+            columnWrapperStyle={
+              numCols === 3 ? {gap: 5, paddingHorizontal: 16} : null
+            }
+            onEndReached={loadMoreComic}
+            onEndReachedThreshold={0.1}
+          />
+        )}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

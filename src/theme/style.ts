@@ -97,6 +97,8 @@ export const theme = createTheme({
     backgroundViewWidth: '#FFFF',
     blackDefault: '#000',
     whiteDefault: '#FFF',
+    grayDefault: '#4E4B66',
+    grey3: '#FFFFFF',
   },
   components: {
     Button: (props, theme) => ({

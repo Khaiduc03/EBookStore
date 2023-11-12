@@ -50,7 +50,11 @@ const ChatScreen: React.FC = () => {
           <View style={styles.pdH}></View>
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.pdHT}>
-              <SearchCustom value={searchTerm} setValue={setSearchTerm} />
+              <SearchCustom
+                value={searchTerm}
+                setValue={setSearchTerm}
+                autoFocus={false}
+              />
             </View>
             <View style={styles.flT}>
               <FlatList
