@@ -6,6 +6,8 @@ import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import useStyles from '../MyProfile/styles';
 import {ItemFollow, ItemListMyProfile, ItemPost} from './components';
+import {getAuthUserProfile} from '../../../../redux';
+import {useAppSelector} from '../../../../hooks';
 
 const MyProfile: React.FC = props => {
   const styles = useStyles();
@@ -19,6 +21,7 @@ const MyProfile: React.FC = props => {
   const renderItem = ({item}: {item: (typeof data)[0]}) => (
     <ItemListMyProfile {...item} />
   );
+  const user = useAppSelector(getAuthUserProfile);
 
   return (
     <View style={styles.container}>
@@ -32,7 +35,7 @@ const MyProfile: React.FC = props => {
         <ItemFollow />
       </View>
       <View style={styles.nameUser}>
-        <TextCustom textBold title="Drake Kun" />
+        <TextCustom textBold title={user.fullname} />
         <TextCustom textLight title="Biographic this here !!!!! 😎" />
       </View>
       <View style={styles.viewButton}>
