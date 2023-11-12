@@ -7,7 +7,7 @@ const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    flex: normalize(1),
+    flex: 1,
     backgroundColor: colors.background,
   },
   tabStyle: {},
@@ -15,6 +15,9 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
     fontSize: normalize(18),
     fontFamily: fontFamilySetup.bold,
+  },
+  iconLeftStyle: {
+    color: colors.black,
   },
 }));
 export default useStyles;

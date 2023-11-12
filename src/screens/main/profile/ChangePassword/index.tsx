@@ -15,7 +15,7 @@ const ChangePassWord: React.FC = () => {
     <View style={styles.container}>
       <HeaderCustom
         title="Change Password"
-        leftIcon={{name: 'left', type: 'antdesign', color: 'black'}}
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         onPressLeftIcon={handlePressGoback}
       />
 

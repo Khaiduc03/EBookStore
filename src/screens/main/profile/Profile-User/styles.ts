@@ -33,12 +33,12 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.bold,
     lineHeight: normalize(20),
     color: colors.black,
+    borderBottomWidth: 0.6,
   },
   viewMyPost: {
-    alignItems: 'center',
-    borderBottomWidth: normalize(0.6),
     borderColor: '#8a8a8a',
-    marginTop: normalize(25),
+    marginTop: normalize(15),
+    paddingHorizontal: normalize(24),
   },
   btnFollow: {
     width: normalize(130),
@@ -77,6 +77,9 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewExplore: {
     paddingTop: normalize(18),
+  },
+  iconLeftStyle: {
+    color: colors.black,
   },
 }));
 export default useStyles;

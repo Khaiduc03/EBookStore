@@ -16,6 +16,12 @@ import {PostDetailUser} from './Profile-User/components';
 import Security from './Security';
 import Update_Profile from './Update-profile';
 import ChangePassWord from './ChangePassword';
+import DiscoverPeople from './DiscoverPeople';
+import AddPayment from './AddPayment';
+import CustomerService from './CustomerService';
+import HistoryandFavorite from './HistoryandFavorite';
+import HistoryScreen from './HistoryandFavorite/History';
+import FavoriteSreen from './HistoryandFavorite/Favorite';
 
 export {default as Profile} from './Profile';
 
@@ -83,5 +89,29 @@ export const profileScreens: Screen[] = [
   {
     name: routes.CHANGEPASSWORD,
     component: ChangePassWord,
+  },
+  {
+    name: routes.DISCOVERPEOPLE,
+    component: DiscoverPeople,
+  },
+  {
+    name: routes.ADDPAYMENT,
+    component: AddPayment,
+  },
+  {
+    name: routes.CUSTOMERSERVICE,
+    component: CustomerService,
+  },
+  {
+    name: routes.HISTORYANDFAVORITE,
+    component: HistoryandFavorite,
+  },
+  {
+    name: routes.HISTORYSCREEN,
+    component: HistoryScreen,
+  },
+  {
+    name: routes.FAVORITESCREEN,
+    component: FavoriteSreen,
   },
 ];

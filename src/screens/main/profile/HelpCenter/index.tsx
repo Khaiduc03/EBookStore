@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
-import { HeaderCustom, TabViewItem } from '../../../../components';
-import { routes } from '../../../../constants';
-import { NavigationService } from '../../../../navigation';
+import {View} from 'react-native';
+import {HeaderCustom, TabViewItem} from '../../../../components';
+import {routes} from '../../../../constants';
+import {NavigationService} from '../../../../navigation';
 import Contact_us from './Contact_us';
 import FAQ from './FAQ';
 import useStyles from './styles';
@@ -15,7 +15,7 @@ const HelpCenter: React.FC = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="Help Center"
         onPressLeftIcon={handlePressGoback}
       />

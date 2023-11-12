@@ -4,4 +4,5 @@ export type SquaresCustomProps = {
   title?: string;
   button?: boolean;
   textButton?: string;
+  closeIcon?: boolean;
 };

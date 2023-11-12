@@ -8,6 +8,7 @@ import {getMode} from '../redux/selectors/thems.selector';
 import {navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
+import CreatePost from '../screens/main/forum/create-post';
 import NotificationsScreen from '../screens/main/home/notifications';
 import Notifications from '../screens/main/home/notifications/Notifications/components/RenderItem/Notifications';
 import SettingsScreen from '../screens/main/home/notifications/Notifications/components/Settings';
@@ -43,6 +44,7 @@ const RootNavigation = () => {
         barStyle={themeMode}
       />
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
+      {/* <CreatePost/> */}
       {/* <Filters /> */}
     </NavigationContainer>
   );
