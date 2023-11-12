@@ -16,90 +16,30 @@ const useStyles = makeStyles(({colors}) => ({
   },
   body: {
     flex: 1,
+    backgroundColor: colors.background,
+    marginHorizontal: normalize(16),
   },
-  pdH: {
-    paddingHorizontal: normalize(24),
-    marginBottom: normalize(8),
+  header: {
+    // borderStartColor: colors.red,
+
+    marginHorizontal: normalize(8),
   },
-  pdHT: {
-    paddingHorizontal: normalize(24),
+  headerWarpper: {
+    borderBottomColor: colors.black,
+    borderBottomWidth: 0.2,
+    marginBottom: normalize(0.5),
   },
-  flT: {
-    marginTop: normalize(12),
+
+  listStyle: {
+    marginTop: normalize(24),
+    flex: 1,
   },
-  colorIconHeader: {
-    color: colors.primary,
-  },
-  viewCenter: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  viewTextTime: {
-    width: normalize(250),
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    justifyContent: 'space-between',
-  },
-  viewRowText: {
-    flexDirection: 'row',
-    width: '50%',
-  },
-  view0: {
-    width: '96%',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  view1: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  view2: {
-    flexDirection: 'row',
-    marginTop: normalize(3),
-  },
-  viewItem: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  viewImage: {
-    width: normalize(60),
-    height: normalize(60),
-    borderRadius: normalize(100),
-    backgroundColor: colors.grey3,
-    marginEnd: normalize(10),
-  },
-  item: {
-    width: '100%',
-    height: normalize(80),
-    justifyContent: 'center',
-  },
-  textName: {
+
+  textTitleHeader: {
+    fontSize: normalize(24),
+    fontFamily: fontFamilySetup.bold,
     color: colors.black,
-    fontSize: normalize(12),
-    fontFamily: fontFamilySetup.bold,
-  },
-  textAuthor: {
-    color: colors.grey3,
-    fontFamily: fontFamilySetup.bold,
-    fontSize: normalize(9),
-  },
-  textFollow: {
-    left: normalize(12),
-    color: colors.grey3,
-    fontFamily: fontFamilySetup.bold,
-    fontSize: normalize(9),
-  },
-  textTime: {
-    left: normalize(15),
-    color: colors.grey3,
-    fontFamily: fontFamilySetup.bold,
-    fontSize: normalize(9),
-  },
-  iconStar: {
-    color: colors.primary,
+    marginLeft: normalize(4),
   },
 }));
 

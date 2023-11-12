@@ -14,6 +14,8 @@ import Notifications from '../screens/main/home/notifications/Notifications/comp
 import SettingsScreen from '../screens/main/home/notifications/Notifications/components/Settings';
 import MessageScreen from '../screens/main/message/Message';
 import Filters from '../screens/main/home/filters/Filters';
+import {ConversationItem} from '../screens/main/message/Conversation/components/ConversationItem';
+import ConversationScreen from '../screens/main/message/Conversation';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -43,9 +45,14 @@ const RootNavigation = () => {
         backgroundColor={usestyles().Mode.backgroundColor}
         barStyle={themeMode}
       />
-      {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
+      {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
       {/* <CreatePost/> */}
       {/* <Filters /> */}
+      <ConversationScreen />
+      {/* <NotificationsScreen /> */}
+      {/* <Notifications /> */}
+      {/* <SettingsScreen /> */}
+      {/* <MessageScreen /> */}
     </NavigationContainer>
   );
 };
