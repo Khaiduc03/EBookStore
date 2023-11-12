@@ -15,6 +15,7 @@ const MyProfile: React.FC = props => {
   const handlePressGoScreen = () => {
     NavigationService.navigate(routes.UPDATE_PROFILE2);
   };
+
   const renderItem = ({item}: {item: (typeof data)[0]}) => (
     <ItemListMyProfile {...item} />
   );
@@ -38,7 +39,8 @@ const MyProfile: React.FC = props => {
       </View>
       <View style={styles.viewExplore}>
         <TextCustom textBold title="Explore everyone" />
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => NavigationService.navigate(routes.DISCOVERPEOPLE)}>
           <TextCustom textPrimary title="See all" />
         </TouchableOpacity>
       </View>

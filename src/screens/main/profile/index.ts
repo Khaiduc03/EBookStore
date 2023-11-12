@@ -17,6 +17,7 @@ import Security from './Security';
 import Update_Profile from './Update-profile';
 import ChangePassWord from './ChangePassword';
 import DiscoverPeople from './DiscoverPeople';
+import AddPayment from './AddPayment';
 
 export {default as Profile} from './Profile';
 
@@ -88,5 +89,9 @@ export const profileScreens: Screen[] = [
   {
     name: routes.DISCOVERPEOPLE,
     component: DiscoverPeople,
+  },
+  {
+    name: routes.ADDPAYMENT,
+    component: AddPayment,
   },
 ];
