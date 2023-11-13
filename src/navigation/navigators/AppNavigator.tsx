@@ -38,9 +38,7 @@ const mainScreens: Screen[] = [
 ];
 
 const AppNavigator = () => {
-  useEffect(() => {
-    
-  }, []);
+
   return (
     <AppStack.Navigator
       screenOptions={screenOption}
