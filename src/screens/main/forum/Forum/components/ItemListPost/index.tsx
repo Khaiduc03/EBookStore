@@ -26,7 +26,7 @@ const ItemListPost: React.FC = () => {
 
   const onShare = async () => {
     const options: any = {
-      url: 'https://',
+      url: 'https://ComicVerse.com',
       message:
         'ComicVerse app vừa kiếm người yêu vừa đọc truyện hihi ^__^ ! : \n' +
         +'\n',
