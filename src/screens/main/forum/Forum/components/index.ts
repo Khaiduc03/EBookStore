@@ -1,1 +1,1 @@
-export {default as ItemListPost} from './content';
+export {default as ItemListPost} from './ItemListPost';

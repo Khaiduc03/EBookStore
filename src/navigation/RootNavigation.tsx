@@ -9,6 +9,8 @@ import {navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
 import CreatePost from '../screens/main/forum/create-post';
+import UpdateProfileScreen from '../screens/auth/update-profile';
+import Update_Profile from '../screens/main/profile/Update-profile';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -39,8 +41,6 @@ const RootNavigation = () => {
         barStyle={themeMode}
       />
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
-      {/* <CreatePost /> */}
-      {/* <Filters /> */}
     </NavigationContainer>
   );
 };

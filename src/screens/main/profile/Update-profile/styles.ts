@@ -1,7 +1,8 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {StyleSheet} from 'react-native';
-import {Device} from '../../../../utils';
-import {fontFamilySetup} from '../../../../utils/font';
+import { Device } from '../../../../utils';
+import { fontFamilySetup } from '../../../../utils/font';
+
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
@@ -16,18 +17,22 @@ const useStyles = makeStyles(({colors}) => ({
   body: {
     flex: 1,
     padding: normalize(24),
+    alignContent: 'center',
+    justifyContent: 'center',
+
     height: Device.getDeviceHeight(),
   },
   formContainer: {
-    flex: normalize(1),
+    flex: 1,
     marginTop: normalize(12),
     backgroundColor: colors.background,
   },
   titleInput: {
-    fontSize: normalize(16),
+    fontSize: normalize(15),
+    fontWeight: '500',
+    fontFamily: 'Urbanist-Bold',
     color: colors.black,
     letterSpacing: normalize(0.2),
-    fontFamily: fontFamilySetup.bold,
   },
 
   checkbox: {
@@ -38,15 +43,16 @@ const useStyles = makeStyles(({colors}) => ({
     justifyContent: 'center',
   },
   textCheckbox: {
+    fontFamily: 'Urbanist-Regular',
     fontSize: normalize(14),
+    fontWeight: '600',
     color: colors.black,
-    fontFamily: fontFamilySetup.regular,
   },
   color: {
     color: colors.primary,
   },
   textNor: {
-    fontFamily: fontFamilySetup.regular,
+    fontFamily: 'Urbanist-Regular',
     fontSize: normalize(14),
     fontWeight: '400',
     color: colors.black,
@@ -66,10 +72,13 @@ const useStyles = makeStyles(({colors}) => ({
     borderRadius: normalize(30),
     paddingVertical: normalize(10),
     paddingHorizontal: normalize(24),
-    borderWidth: normalize(1),
+    borderWidth: 1,
   },
   bottom: {
-    marginBottom: normalize(70),
+    flex: 1,
+
+    justifyContent: 'flex-end',
+    marginBottom: normalize(10),
   },
   checkBoxContainer: {
     flexDirection: 'row',
@@ -81,18 +90,26 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  error: {
-    color: colors.red,
-    fontWeight: 'bold',
+  textGender: {
+    fontFamily: fontFamilySetup.bold,
+    fontSize: normalize(12),
+    color: colors.black,
+    letterSpacing: normalize(0.2),
   },
-  Buttoncolor: {
-    backgroundColor: colors.primary,
-    width: '100%',
-    height: normalize(56),
+  iconDateColor: {
+    color: colors.primary,
+  },
+  Headers: {
+    marginTop: normalize(24),
+  },
+  viewImageProfile: {
+    marginVertical: normalize(24),
+  },
+  marginError: {
+    marginBottom: normalize(14),
   },
   iconLeftStyle: {
     color: colors.black,
   },
 }));
-
 export default useStyles;

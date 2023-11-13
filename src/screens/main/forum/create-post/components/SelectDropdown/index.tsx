@@ -1,8 +1,8 @@
-import {View, Text} from 'react-native';
-import React, {useState} from 'react';
 import {Icon} from '@rneui/themed';
-import useStyles from './styles';
+import React, {useState} from 'react';
+import {View} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
+import useStyles from './styles';
 
 const SelectDropDown: React.FC = () => {
   const styles = useStyles();

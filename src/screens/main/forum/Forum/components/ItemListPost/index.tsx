@@ -31,7 +31,6 @@ const ItemListPost: React.FC = () => {
         'ComicVerse app vừa kiếm người yêu vừa đọc truyện hihi ^__^ ! : \n' +
         +'\n',
     };
-
     try {
       const res = await Share.open(options);
       console.log(res);
@@ -63,7 +62,12 @@ const ItemListPost: React.FC = () => {
         <Text style={styles.textDescription}>{item.description}</Text>
       </View>
       <View>
-        <Image style={styles.imagePost} source={images.avata} />
+        <Image
+          style={styles.imagePost}
+          source={{
+            uri: 'https://images2.thanhnien.vn/528068263637045248/2023/9/30/cristiano-ronaldo--169604187049959114942.jpeg',
+          }}
+        />
         <View
           style={{
             alignItems: 'center',
@@ -71,8 +75,8 @@ const ItemListPost: React.FC = () => {
           }}>
           <View style={styles.viewNumberCount}>
             <View style={styles.iconText}>
-              <Text>{item.likeCount}</Text>
-              <Text>Like</Text>
+              <Text style={styles.textLike}>{item.likeCount}</Text>
+              <Text style={styles.textLike}>Like</Text>
             </View>
             <View style={styles.iconText}>
               <Text>{item.commentCount}</Text>

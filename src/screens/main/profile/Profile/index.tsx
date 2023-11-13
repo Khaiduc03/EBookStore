@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import {Image, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View, Text} from 'react-native';
 import {images} from '../../../../assets';
 import {HeaderCustom} from '../../../../components';
 import TextCustom from '../../../../components/customs/Text';
@@ -13,7 +13,6 @@ import {getAuthUserProfile} from '../../../../redux';
 const Profile: FunctionComponent = () => {
   const user = useAppSelector(getAuthUserProfile);
   console.log(user);
-
   console.log(user.fullname);
   const styles = useStyles();
   return (
@@ -27,8 +26,8 @@ const Profile: FunctionComponent = () => {
         <TouchableOpacity
           style={styles.btnMyProfile}
           onPress={() => NavigationService.navigate(routes.MYPROFILE)}>
-          <TextCustom textBold title={user.fullname} />
-          <TextCustom textLight title={user.email} />
+          <Text style={styles.nameUser}>{user.fullname}</Text>
+          <Text style={styles.email}>{user.email}</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.line} />

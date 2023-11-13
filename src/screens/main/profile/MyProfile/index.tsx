@@ -3,11 +3,11 @@ import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import TextCustom from '../../../../components/customs/Text';
 import {routes} from '../../../../constants';
+import {useAppSelector} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
+import {getAuthUserProfile} from '../../../../redux';
 import useStyles from '../MyProfile/styles';
 import {ItemFollow, ItemListMyProfile, ItemPost} from './components';
-import {getAuthUserProfile} from '../../../../redux';
-import {useAppSelector} from '../../../../hooks';
 
 const MyProfile: React.FC = props => {
   const styles = useStyles();
@@ -34,8 +34,8 @@ const MyProfile: React.FC = props => {
       <View>
         <ItemFollow />
       </View>
-      <View style={styles.nameUser}>
-        <TextCustom textBold title={user.fullname} />
+      <View style={styles.viewTextName}>
+        <Text style={styles.nameUser}>{user.fullname}</Text>
         <TextCustom textLight title="Biographic this here !!!!! 😎" />
       </View>
       <View style={styles.viewButton}>
