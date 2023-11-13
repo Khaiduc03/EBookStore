@@ -49,7 +49,6 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.regular,
     color: colors.black,
     lineHeight: normalize(21),
-    letterSpacing: normalize(0.5),
   },
   imagePost: {
     width: normalize(430),
@@ -70,8 +69,9 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.4,
     paddingVertical: normalize(10),
+    borderColor:colors.grey8,
   },
 }));
 

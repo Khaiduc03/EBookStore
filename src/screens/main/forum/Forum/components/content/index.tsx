@@ -4,25 +4,40 @@ import {Icon} from '@rneui/themed';
 import useStyles from './styles';
 import {images} from '../../../../../../assets';
 import {theme} from '../../../../../../theme';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
+import Share from 'react-native-share';
 
 interface Post {
   id: string;
   name: string;
   createAt: string;
   description: string;
-  favoriteCount: number;
+  likeCount: number;
   commentCount: number;
 }
 
 const ItemListPost: React.FC = () => {
   const styles = useStyles();
-  const [isFavorite, setFavorite] = useState(false);
-  const [isComment, setComment] = useState(false);
-  const handleFavoritePress = () => {
-    setFavorite(!isFavorite);
+  const [islike, setlike] = useState(false);
+  const handlelikePress = () => {
+    setlike(!islike);
   };
-  const handleCommentPress = () => {
-    setComment(!isComment);
+
+  const onShare = async () => {
+    const options: any = {
+      url: 'https://',
+      message:
+        'ComicVerse app vừa kiếm người yêu vừa đọc truyện hihi ^__^ ! : \n' +
+        +'\n',
+    };
+
+    try {
+      const res = await Share.open(options);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const renderItem = ({item}: {item: Post}) => (
@@ -32,7 +47,10 @@ const ItemListPost: React.FC = () => {
           <Image style={styles.image} source={images.avata} />
           <View style={styles.viewTextPost}>
             <Text style={styles.name}>{item.name}</Text>
-            <Text style={styles.createAt}>{item.createAt}</Text>
+            <View style={{flexDirection: 'row', gap: 10}}>
+              <Text style={styles.createAt}>{item.createAt}</Text>
+              <Icon name="public" type="material" />
+            </View>
           </View>
         </View>
 
@@ -53,8 +71,8 @@ const ItemListPost: React.FC = () => {
           }}>
           <View style={styles.viewNumberCount}>
             <View style={styles.iconText}>
-              <Text>{item.favoriteCount}</Text>
-              <Text>Favorite</Text>
+              <Text>{item.likeCount}</Text>
+              <Text>Like</Text>
             </View>
             <View style={styles.iconText}>
               <Text>{item.commentCount}</Text>
@@ -64,35 +82,23 @@ const ItemListPost: React.FC = () => {
         </View>
 
         <View style={styles.footerPost}>
-          <TouchableOpacity
-            style={styles.iconText}
-            onPress={handleFavoritePress}>
+          <TouchableOpacity style={styles.iconText} onPress={handlelikePress}>
             <Icon
-              name={isFavorite ? 'heart' : 'heart-outline'}
+              name={islike ? 'heart' : 'heart-outline'}
               type="ionicon"
               color={
-                isFavorite
-                  ? theme?.lightColors?.primary
-                  : theme?.lightColors?.black
+                islike ? theme?.lightColors?.primary : theme?.lightColors?.black
               }
             />
-            <Text>Favorite</Text>
+            <Text>Like</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.iconText}
-            onPress={handleCommentPress}>
-            <Icon
-              name={isComment ? 'commenting-o' : 'commenting'}
-              type="font-awesome"
-              color={
-                isComment
-                  ? theme?.lightColors?.black
-                  : theme?.lightColors?.primary
-              }
-            />
+            onPress={() => NavigationService.navigate(routes.COMMENT_POST)}>
+            <Icon name="commenting-o" type="font-awesome" />
             <Text>Comment</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.iconText}>
+          <TouchableOpacity style={styles.iconText} onPress={onShare}>
             <Icon name="share-social-outline" type="ionicon" />
             <Text>Share</Text>
           </TouchableOpacity>
@@ -118,7 +124,7 @@ const data: Post[] = [
     createAt: '18/02/2023 at 22:23',
     description:
       "Amidst the roaring crowd, the striker's precision and the goalie's reflexes created a mesmerizing dance on the pitch",
-    favoriteCount: 1123,
+    likeCount: 1123,
     commentCount: 1123,
   },
   {
@@ -127,7 +133,7 @@ const data: Post[] = [
     createAt: '18/02/2023 at 22:23',
     description:
       "Amidst the roaring crowd, the striker's precision and the goalie's reflexes created a mesmerizing dance on the pitch",
-    favoriteCount: 1123,
+    likeCount: 1123,
     commentCount: 1123,
   },
 ];

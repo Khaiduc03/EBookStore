@@ -57,4 +57,5 @@ export enum routes {
 
   // Forum
   CREATEPOST = 'CREATEPOST',
+  COMMENT_POST = 'COMMENT_POST',
 }

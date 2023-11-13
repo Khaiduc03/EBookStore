@@ -17,12 +17,13 @@ const useStyles = makeStyles(({colors}) => ({
     borderRadius: normalize(50),
   },
   buttonHeader: {
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: normalize(50),
     width: normalize(230),
     height: normalize(50),
     justifyContent: 'center',
     alignItems: 'center',
+    borderColor: colors.grey4,
   },
   textHeader: {
     fontSize: normalize(16),
@@ -87,14 +88,6 @@ const useStyles = makeStyles(({colors}) => ({
   iconText: {
     flexDirection: 'row',
     gap: normalize(10),
-  },
-  footerPost: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderTopWidth: 1,
-    width: '100%',
   },
 }));
 
