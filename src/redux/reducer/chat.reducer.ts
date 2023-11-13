@@ -18,6 +18,7 @@ export const reducer = createSlice({
   reducers: {
     //get list conversation
     handleGetListConversation: (state: ListConversationStateI) => {
+      console.log('handle');
       return state;
     },
 
@@ -25,6 +26,7 @@ export const reducer = createSlice({
       state: ListConversationStateI,
       action: PayloadAction<ConversationI[]>,
     ) => {
+      console.log('handle success');
       return {
         ...state,
         conversations: action.payload,

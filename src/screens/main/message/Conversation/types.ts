@@ -15,7 +15,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: 'b6aff79b-a9fe-49b8-87d6-64ff5d1f49ca',
     your_name: 'Petey',
     joined_name: 'Petey Rudge',
-    status: true,
+    joined_status: true,
     joined_url: 'https://robohash.org/cumvelitenim.jpg?size=120x120&set=set1',
     your_url: 'https://robohash.org/utsuscipitsint.jpg?size=120x120&set=set1',
     last_sender_name: 'You',
@@ -33,7 +33,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: 'f4e6005c-6323-4e49-b848-bf7639a56f45',
     your_name: 'Werner',
     joined_name: 'Werner Cucuzza',
-    status: false,
+    joined_status: false,
     joined_url:
       'https://robohash.org/evenietquoveniam.jpg?size=120x120&set=set1',
     your_url:
@@ -53,7 +53,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: '8dca2d86-6f0b-4556-b5d3-a1c5105568db',
     your_name: 'Aldo',
     joined_name: 'Aldo Liccardo',
-    status: true,
+    joined_status: true,
     joined_url:
       'https://robohash.org/aspernaturrepudiandaeea.jpg?size=120x120&set=set1',
     your_url: 'https://robohash.org/magnamatquetotam.jpg?size=120x120&set=set1',
@@ -72,7 +72,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: 'f43f16ec-e3ba-49f1-9f23-adcfa3310d0c',
     your_name: 'Charlton',
     joined_name: 'Charlton Vasyukov',
-    status: false,
+    joined_status: false,
     joined_url:
       'https://robohash.org/eosdebitisprovident.jpg?size=120x120&set=set1',
     your_url:
@@ -92,7 +92,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: '27a0975d-26d6-4018-9d31-984e78f905a0',
     your_name: 'Kinna',
     joined_name: 'Kinna Rustan',
-    status: false,
+    joined_status: false,
     joined_url:
       'https://robohash.org/solutaquosrepellendus.jpg?size=120x120&set=set1',
     your_url:
@@ -112,7 +112,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: '61905e1f-7f68-430f-a199-c3bb0aa0c3d0',
     your_name: 'Theo',
     joined_name: 'Theo Wastie',
-    status: true,
+    joined_status: true,
     joined_url:
       'https://robohash.org/sedenimvoluptatum.jpg?size=120x120&set=set1',
     your_url: 'https://robohash.org/esterroreos.jpg?size=120x120&set=set1',
@@ -130,7 +130,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: '82a15daf-c560-46f7-8fd6-41b1480292cf',
     your_name: 'Liam',
     joined_name: 'Liam Leuren',
-    status: true,
+    joined_status: true,
     joined_url: 'https://robohash.org/itaqueametaut.jpg?size=120x120&set=set1',
     your_url: 'https://robohash.org/veleaquevoluptas.jpg?size=120x120&set=set1',
     last_sender_name: 'You',
@@ -148,7 +148,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: 'fb543c8d-2e4f-44a7-a9d7-3e4b265feaff',
     your_name: 'Erinna',
     joined_name: 'Erinna Snaith',
-    status: false,
+    joined_status: false,
     joined_url:
       'https://robohash.org/aliaseosoccaecati.jpg?size=120x120&set=set1',
     your_url:
@@ -168,7 +168,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: '7bb18d17-1395-49d4-a1e6-5fe00f937e91',
     your_name: 'Corine',
     joined_name: 'Corine Easton',
-    status: true,
+    joined_status: true,
     joined_url:
       'https://robohash.org/quibusdamenimodit.jpg?size=120x120&set=set1',
     your_url:
@@ -188,7 +188,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: '35451aba-cb50-446e-97e0-2282774a4fb3',
     your_name: 'Berty',
     joined_name: 'Berty Bernardoux',
-    status: false,
+    joined_status: false,
     joined_url:
       'https://robohash.org/delenitialiastempora.jpg?size=120x120&set=set1',
     your_url:
@@ -208,7 +208,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: 'f2c43ede-e53f-4257-b07b-da6f12740fcd',
     your_name: 'Bartholomeus',
     joined_name: 'Bartholomeus Quinn',
-    status: true,
+    joined_status: true,
     joined_url:
       'https://robohash.org/corporislaboriosamimpedit.jpg?size=120x120&set=set1',
     your_url:
@@ -228,7 +228,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: 'a906c96e-bab4-471a-ad4b-8494d11d4793',
     your_name: 'Bron',
     joined_name: 'Bron Bartusek',
-    status: true,
+    joined_status: true,
     joined_url:
       'https://robohash.org/quodsuntcorrupti.jpg?size=120x120&set=set1',
     your_url:
@@ -248,7 +248,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: 'd9a9d1d3-8360-4cae-abef-18abafbab8af',
     your_name: 'Therine',
     joined_name: 'Therine Olivi',
-    status: true,
+    joined_status: true,
     joined_url: 'https://robohash.org/molestiaeinqui.jpg?size=120x120&set=set1',
     your_url: 'https://robohash.org/eosestminus.jpg?size=120x120&set=set1',
     last_sender_name: 'You',
@@ -266,7 +266,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: 'f240e6b4-07ac-47b1-8b24-b4ec475229dc',
     your_name: 'Melamie',
     joined_name: 'Melamie Davidof',
-    status: false,
+    joined_status: false,
     joined_url:
       'https://robohash.org/eiusautsuscipit.jpg?size=120x120&set=set1',
     your_url:
@@ -286,7 +286,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: '0360bd14-aad2-4ee6-b792-858d12cd7ec1',
     your_name: 'Cedric',
     joined_name: 'Cedric Rubi',
-    status: false,
+    joined_status: false,
     joined_url: 'https://robohash.org/estmaximererum.jpg?size=120x120&set=set1',
     your_url: 'https://robohash.org/sedauteaque.jpg?size=120x120&set=set1',
     last_sender_name: 'You',
@@ -304,7 +304,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: 'c4eeb8d3-558c-4d2c-b9bb-a467d43bf354',
     your_name: 'Zondra',
     joined_name: 'Zondra Molohan',
-    status: false,
+    joined_status: false,
     joined_url:
       'https://robohash.org/eaautperspiciatis.jpg?size=120x120&set=set1',
     your_url:
@@ -324,7 +324,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: 'e612326f-5ce7-42f0-832e-11444ead5498',
     your_name: 'Eamon',
     joined_name: 'Eamon Fevers',
-    status: true,
+    joined_status: true,
     joined_url:
       'https://robohash.org/doloremnobisconsequatur.jpg?size=120x120&set=set1',
     your_url: 'https://robohash.org/eumautaperiam.jpg?size=120x120&set=set1',
@@ -343,7 +343,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: 'c12038ab-8545-4805-ba72-1c80a09a2ba7',
     your_name: 'Horst',
     joined_name: 'Horst Kedward',
-    status: false,
+    joined_status: false,
     joined_url:
       'https://robohash.org/maioresdignissimossed.jpg?size=120x120&set=set1',
     your_url:
@@ -363,7 +363,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: '460c5d57-670f-4bb8-b422-4038e99feea7',
     your_name: 'Matti',
     joined_name: 'Matti Dowbiggin',
-    status: false,
+    joined_status: false,
     joined_url: 'https://robohash.org/illoutsequi.jpg?size=120x120&set=set1',
     your_url: 'https://robohash.org/molestiaeutqui.jpg?size=120x120&set=set1',
     last_sender_name: 'You',
@@ -381,7 +381,7 @@ export const listConversations: ConversationI[] = [
     last_message_uuid: '2f2db199-3c56-47f4-8c31-dff5759a51ea',
     your_name: 'Maximo',
     joined_name: 'Maximo MacCallion',
-    status: false,
+    joined_status: false,
     joined_url:
       'https://robohash.org/omnisetpariatur.jpg?size=120x120&set=set1',
     your_url: 'https://robohash.org/officiisquasnon.jpg?size=120x120&set=set1',

@@ -12,6 +12,7 @@ import {Icon} from '@rneui/base';
 import {routes} from '../../constants';
 import {Chat, Explore, Forum, Home, Profile} from '../../screens/main';
 import {Device} from '../../utils';
+import {SocketProvider, socketIO} from '../../contexts/SocketContext';
 
 const BottomTabs = createBottomTabNavigator();
 

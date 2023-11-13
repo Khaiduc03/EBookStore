@@ -17,6 +17,7 @@ import {
   profileScreens,
 } from '../../screens/main';
 import {Screen} from '../../types';
+import {SocketProvider, socketIO} from '../../contexts/SocketContext';
 
 const AppStack = createStackNavigator();
 

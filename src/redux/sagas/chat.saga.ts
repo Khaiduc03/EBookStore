@@ -1,9 +1,10 @@
-import {getAuthAccessToken} from '../selectors';
-import {useAppSelector} from '../../hooks';
-import {Socket, io} from 'socket.io-client';
+import {PayloadAction} from '@reduxjs/toolkit';
+import {call, takeLatest} from 'redux-saga/effects';
+import {io} from 'socket.io-client';
 import {BASE_URL} from '../../environment';
-import {data} from '../../screens/main/message/Conversation/types';
+import {useAppSelector} from '../../hooks';
 import {ChatActions} from '../reducer/chat.reducer';
+import {getAuthAccessToken} from '../selectors';
 import {
   ConversationI,
   MessageI,
@@ -11,9 +12,6 @@ import {
   RequestJoinConversationI,
   RequsetCreateConversationI,
 } from '../types';
-import {call, put, takeLatest} from 'redux-saga/effects';
-import {PayloadAction} from '@reduxjs/toolkit';
-import {LoadingActions} from '../reducer';
 
 //function connect to socket
 function connect() {
