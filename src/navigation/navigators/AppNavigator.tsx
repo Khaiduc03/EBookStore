@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
   CardStyleInterpolators,
@@ -17,7 +17,6 @@ import {
   profileScreens,
 } from '../../screens/main';
 import {Screen} from '../../types';
-import {SocketProvider, socketIO} from '../../contexts/SocketContext';
 
 const AppStack = createStackNavigator();
 
@@ -39,6 +38,9 @@ const mainScreens: Screen[] = [
 ];
 
 const AppNavigator = () => {
+  useEffect(() => {
+    
+  }, []);
   return (
     <AppStack.Navigator
       screenOptions={screenOption}

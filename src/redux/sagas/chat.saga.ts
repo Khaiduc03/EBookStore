@@ -78,15 +78,15 @@ function* createConversation(
 //   });
 // }
 
-export default function* watchAuthSaga() {
-  yield takeLatest(
-    ChatActions.handleGetListConversation.type,
-    getListConversation,
-  );
-  yield takeLatest(ChatActions.handleJoinConversation.type, joinConversation);
-  yield takeLatest(ChatActions.handleAddMessage.type, addMessage);
-  yield takeLatest(
-    ChatActions.handleCreateConversation.type,
-    createConversation,
-  );
+export default function* watchChatSaga() {
+  // yield takeLatest(
+  //   ChatActions.handleGetListConversation.type,
+  //   getListConversation,
+  // );
+  // yield takeLatest(ChatActions.handleJoinConversation.type, joinConversation);
+  // yield takeLatest(ChatActions.handleAddMessage.type, addMessage);
+  // yield takeLatest(
+  //   ChatActions.handleCreateConversation.type,
+  //   createConversation,
+  // );
 }

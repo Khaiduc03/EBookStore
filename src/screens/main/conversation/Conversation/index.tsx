@@ -79,7 +79,7 @@ const ConversationScreen: React.FC = () => {
         </View>
         <View style={styles.body}>
           <FlatList
-            data={listConversations}
+            data={data}
             renderItem={({item}) => renderItem(item)}
             keyExtractor={item => item.uuid.toString()}
             extraData={selectedId}
