@@ -6,7 +6,17 @@ const useStyles = makeStyles(({colors}) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    marginHorizontal: normalize(15),
+  },
+  leftIconStyle: {
+    marginRight: normalize(100),
+    color: colors.black,
+  },
+
+  titleStyle: {
+    color: colors.black,
+    fontSize: normalize(20),
+    fontFamily: fontFamilySetup.bold,
+    marginLeft: normalize(10),
   },
 }));
 

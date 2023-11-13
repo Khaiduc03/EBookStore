@@ -4,21 +4,27 @@ import useStyles from './styles';
 import {Icon} from '@rneui/themed';
 import {CustomComicProps} from './type';
 import {Image} from '@rneui/themed';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
-import {Comic} from '../../../../../../types';
+import {ComicActions, ComicType} from '../../../../../../../../redux';
+import {NavigationService} from '../../../../../../../../navigation';
+import {routes} from '../../../../../../../../constants';
 import FastImage from 'react-native-fast-image';
-import {ComicType} from '../../../../../../redux';
+import {useAppDispatch} from '../../../../../../../../hooks';
 
 const ItemFavoritesList: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
   const comic: ComicType = props.data;
+  const dispatch = useAppDispatch();
+  const onPressNavDetail = () => {
+    dispatch(ComicActions.clearPostFavorite());
+    dispatch(ComicActions.clearListDataChapter());
+    dispatch(ComicActions.clearListDataByTopicMore());
+    NavigationService.navigate(routes.COMICDETAIL, {data: comic});
+  };
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() =>
-          NavigationService.navigate(routes.COMICDETAIL, {data: props.data})
-        }
+        activeOpacity={0.5}
+        onPress={onPressNavDetail}
         style={styles.imgComic}>
         <FastImage
           style={{width: '100%', height: '100%', borderRadius: 6}}

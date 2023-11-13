@@ -2,11 +2,11 @@ import {routes} from '../../../constants';
 import {Screen} from '../../../types';
 import AboutApp from './AboutApp';
 import BecomeVIP from './BecomeVIP';
-import Favorite from './Favorite';
+
 import HelpCenter from './HelpCenter';
 import Contact_us from './HelpCenter/Contact_us';
 import FAQ from './HelpCenter/FAQ';
-import History from './History';
+
 import MyProfile from './MyProfile';
 import {PostDetail} from './MyProfile/components';
 import Notification from './SettingNotification';
@@ -20,8 +20,8 @@ import DiscoverPeople from './DiscoverPeople';
 import AddPayment from './AddPayment';
 import CustomerService from './CustomerService';
 import HistoryandFavorite from './HistoryandFavorite';
-import HistoryScreen from './HistoryandFavorite/History';
-import FavoriteSreen from './HistoryandFavorite/Favorite';
+import Favorite from './HistoryandFavorite/components/Favorite';
+import History from './HistoryandFavorite/components/History';
 
 export {default as Profile} from './Profile';
 
@@ -105,13 +105,5 @@ export const profileScreens: Screen[] = [
   {
     name: routes.HISTORYANDFAVORITE,
     component: HistoryandFavorite,
-  },
-  {
-    name: routes.HISTORYSCREEN,
-    component: HistoryScreen,
-  },
-  {
-    name: routes.FAVORITESCREEN,
-    component: FavoriteSreen,
   },
 ];

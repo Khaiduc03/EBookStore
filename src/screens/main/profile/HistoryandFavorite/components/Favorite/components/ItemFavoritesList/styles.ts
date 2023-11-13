@@ -2,8 +2,8 @@ import {StyleSheet} from 'react-native';
 import {makeStyles, normalize} from '@rneui/themed';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {Device} from '../../../../../../utils';
-import {fontFamilySetup} from '../../../../../../utils/font';
+import {fontFamilySetup} from '../../../../../../../../utils/font';
+
 const useStyles = makeStyles(({colors}) => ({
   container: {
     width: '100%',

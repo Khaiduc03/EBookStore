@@ -7,20 +7,14 @@ import React, {
 
 import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import useStyles from './styles';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
-import ItemFavoritesList from '../ItemFavoritesList';
-import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../../../../../../hooks';
 import {
   getListFavorite,
   nextPageFavorite,
-} from '../../../../../../redux/selectors/comic.selector';
-import {ComicActions, ComicType} from '../../../../../../redux';
-import {
-  getIsLoadingPage,
-  getIsLoadingTopic,
-} from '../../../../../../redux/selectors/loading.selector';
-ItemFavoritesList;
+} from '../../../../../../../../redux/selectors/comic.selector';
+import {getIsLoadingTopic} from '../../../../../../../../redux/selectors/loading.selector';
+import {ComicActions, ComicType} from '../../../../../../../../redux';
+import ItemFavoritesList from '../ItemFavoritesList';
 
 const FavoritesList: FunctionComponent = () => {
   const data = useAppSelector(getListFavorite);

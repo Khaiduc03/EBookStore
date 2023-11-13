@@ -7,24 +7,16 @@ import React, {
 
 import {View, Text, FlatList, ActivityIndicator} from 'react-native';
 import useStyles from './styles';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
-import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
-import {
-  getListFavorite,
-  nextPageFavorite,
-} from '../../../../../../redux/selectors/comic.selector';
+
+import ItemHistoryList from '../ItemHistoryList';
+import {useAppDispatch, useAppSelector} from '../../../../../../../../hooks';
+import {getIsLoadingTopic} from '../../../../../../../../redux/selectors/loading.selector';
 import {
   ComicActions,
   ComicType,
   getListHistory,
   nextPageHistory,
-} from '../../../../../../redux';
-import {
-  getIsLoadingPage,
-  getIsLoadingTopic,
-} from '../../../../../../redux/selectors/loading.selector';
-import ItemHistoryList from '../ItemHistoryList';
+} from '../../../../../../../../redux';
 
 const HistoryList: FunctionComponent = () => {
   const [page, setPage] = useState(1);

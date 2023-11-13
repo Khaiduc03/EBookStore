@@ -1,15 +1,17 @@
-import React from 'react';
 import {View, Text} from 'react-native';
+import React from 'react';
 import useStyles from './styles';
 
-const FavoriteSreen: React.FC = () => {
+import {HistoryList} from './components';
+
+const History: React.FC = () => {
   const styles = useStyles();
 
   return (
     <View style={styles.container}>
-      <Text>Hihi</Text>
+      <HistoryList />
     </View>
   );
 };
 
-export default FavoriteSreen;
+export default History;
