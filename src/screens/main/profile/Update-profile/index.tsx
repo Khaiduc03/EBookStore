@@ -31,14 +31,14 @@ const Update_Profile: FunctionComponent = () => {
     phone_number: string;
     dob: string;
     gender: Gender;
-    biography: string;
+    summary: string;
   }>({
     fullname: '',
     email: '',
     phone_number: '',
     dob: '',
     gender: Gender.MALE,
-    biography: '',
+    summary: '',
   });
   const handlePressGoback = () => {
     NavigationService.navigate(routes.MYPROFILE);
@@ -120,7 +120,7 @@ const Update_Profile: FunctionComponent = () => {
     }
 
     if (!credentials.email || !isEmailValid(credentials.email)) {
-      errors.push('Please use a valid email format\nInvalid email.😅 ');
+      errors.push('Please use a valid email format');
     }
 
     if (!credentials.phone_number) {
@@ -136,7 +136,6 @@ const Update_Profile: FunctionComponent = () => {
   const handleSaveButtonPress = () => {
     const validationErrors = validateInputs();
     if (validationErrors.length > 0) {
-      // Hiển thị cảnh báo với các lỗi
       const errorMessages = validationErrors.join('\n');
       Alert.alert(errorMessages);
     } else {
@@ -147,7 +146,8 @@ const Update_Profile: FunctionComponent = () => {
           {
             text: 'OK',
             onPress: () => {
-              // Xử lí sau khi người dùng nhấn OK
+              setCredentials;
+              NavigationService.goBack();
             },
           },
         ],
@@ -162,7 +162,7 @@ const Update_Profile: FunctionComponent = () => {
       //  behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="Update Profile"
         onPressLeftIcon={handlePressGoback}
       />
@@ -230,9 +230,9 @@ const Update_Profile: FunctionComponent = () => {
               <Text style={styles.titleInput}>Biography</Text>
               <InputCustom
                 placeholder="Enter your Biography"
-                value={credentials.biography}
+                value={credentials.summary}
                 onChangeText={text =>
-                  setCredentials({...credentials, biography: text})
+                  setCredentials({...credentials, summary: text})
                 }
               />
 
@@ -251,9 +251,11 @@ const Update_Profile: FunctionComponent = () => {
                 </View>
                 <View style={styles.checkBoxItem}>
                   <CheckBox
-                    checked={credentials.gender === Gender.FEMALE}
+                    //@ts-ignore
+                    checked={credentials.gender === Gender.FAMALE}
                     onPress={() =>
-                      setCredentials({...credentials, gender: Gender.FEMALE})
+                      //@ts-ignore
+                      setCredentials({...credentials, gender: Gender.FAMALE})
                     }
                     checkedIcon="dot-circle-o"
                     uncheckedIcon="circle-o"

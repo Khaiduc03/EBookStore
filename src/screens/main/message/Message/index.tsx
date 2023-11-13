@@ -5,7 +5,6 @@ import {
   Keyboard,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  Platform,
   ScrollView,
   TextInput,
   TouchableOpacity,
@@ -13,18 +12,12 @@ import {
   View,
 } from 'react-native';
 import EmojiSelector, {Categories} from 'react-native-emoji-selector';
-import * as ImagePicker from 'react-native-image-picker';
-import {PERMISSIONS, RESULTS, request} from 'react-native-permissions';
-import {useDispatch} from 'react-redux';
 import {HeaderCustom} from '../../../../components';
-import {routes} from '../../../../constants';
-import {PERMISSION_TYPE, usePermission} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
-import {CustomToastBottom} from '../../../../utils';
+import AvatarComponets from './components/CameraGallery';
 import {ChatBubble} from './components/ChatBubbleItem';
 import useStyles from './styles';
 import {IMessage, messages} from './types';
-import AvatarComponets from './components/CameraGallery';
 
 const MessageScreen: React.FC = () => {
   const styles = useStyles();
@@ -43,10 +36,12 @@ const MessageScreen: React.FC = () => {
     if (!isShowEmoji) {
       Keyboard.dismiss();
     }
-    inputRef.current?.setNativeProps(
+    footerRef.current?.setNativeProps(
       isShowEmoji ? styles.viewBlur : styles.viewEmoji,
     );
   };
+
+  console.log(isShowEmoji);
 
   const handleClearEmoji = () => {
     setSelectedEmojis([]);
@@ -83,18 +78,18 @@ const MessageScreen: React.FC = () => {
 
   const handleTouchableWithoutFeedback = () => {
     Keyboard.dismiss;
-    inputRef.current?.setNativeProps(styles.viewBlur);
+    footerRef.current?.setNativeProps(styles.viewBlur);
     setIsShowEmoji(false);
   };
 
   const handleFocus = () => {
     Animated.timing(translateY, {
-      toValue: -16,
+      toValue: 200,
       duration: 300,
       useNativeDriver: false,
     }).start();
     setIsShowEmoji(false);
-    inputRef.current?.setNativeProps(styles.viewBlur);
+    footerRef.current?.setNativeProps(styles.viewFocus);
     if (!isShowEmoji) {
       Keyboard.dismiss;
     }
@@ -106,6 +101,7 @@ const MessageScreen: React.FC = () => {
       duration: 300,
       useNativeDriver: false,
     }).start();
+    footerRef.current?.setNativeProps(styles.viewBlur);
     Keyboard.dismiss;
   };
 
@@ -176,17 +172,15 @@ const MessageScreen: React.FC = () => {
           <TouchableOpacity
             onPress={handleScrollToEnd}
             style={styles.btnArrowDown}>
-            <Icon name="arrow-down-outline" type="ionicon" size={30} />
+            <Icon name="chevron-down" type="ionicon" size={30} />
           </TouchableOpacity>
         )}
 
-        <View ref={inputRef} style={styles.footer}>
-          <Animated.View
-            ref={footerRef}
-            style={[styles.viewFooter, {transform: [{translateY}]}]}>
+        <Animated.View ref={footerRef} style={styles.footer}>
+          <View>
             <View style={styles.viewRow}>
               <View style={styles.leftContainer}>
-                <View style={styles.leftIcon}>
+                <View>
                   <AvatarComponets />
                 </View>
               </View>
@@ -198,7 +192,7 @@ const MessageScreen: React.FC = () => {
                     height:
                       newMessage.split('\n').length > 1 ||
                       selectedEmojis.length > 9
-                        ? styles.textInputHeightAutoLimit.maxHeight
+                        ? styles.textInputHeightAutoLimit.height
                         : styles.textInputHeightAuto.height,
                   },
                 ]}
@@ -210,39 +204,38 @@ const MessageScreen: React.FC = () => {
                 multiline={true}
               />
 
-              <View style={styles.rightContainer}>
-                <View style={styles.rightIconLeft}>
-                  <TouchableOpacity onPress={handleIconEmojiPress}>
-                    <Icon name="happy" type="ionicon" size={30} />
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.rightIconRight}>
-                  <TouchableOpacity onPress={handleSendMessage}>
-                    <Icon name="send" type="ionicon" size={30} />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-          </Animated.View>
-          {isShowEmoji && (
-            <View style={styles.viewBackgroundEmoji}>
-              <View style={styles.viewClearAll}>
-                <TouchableOpacity
-                  onPress={handleClearEmoji}
-                  style={styles.btnClearAll}>
-                  <Text style={styles.textClearAll}>Clear All</Text>
+              <View style={styles.rightIconLeft}>
+                <TouchableOpacity onPress={handleIconEmojiPress}>
+                  <Icon name="happy" type="ionicon" size={30} />
                 </TouchableOpacity>
               </View>
-
-              <EmojiSelector
-                category={Categories.symbols}
-                onEmojiSelected={handleEmojiSelected}
-                placeholder="Search"
-                columns={10}
-              />
+              <View style={styles.rightIconRight}>
+                <TouchableOpacity onPress={handleSendMessage}>
+                  <Icon name="send" type="ionicon" size={30} />
+                </TouchableOpacity>
+              </View>
             </View>
-          )}
-        </View>
+            {isShowEmoji && (
+              <View style={styles.viewEmojis}>
+                <View style={styles.viewClearAll}>
+                  <TouchableOpacity
+                    onPress={handleClearEmoji}
+                    style={styles.btnClearAll}>
+                    <Text style={styles.textClearAll}>Clear All</Text>
+                  </TouchableOpacity>
+                </View>
+
+                <EmojiSelector
+                  category={Categories.symbols}
+                  onEmojiSelected={handleEmojiSelected}
+                  placeholder="Search"
+                  columns={10}
+                  showSearchBar={false}
+                />
+              </View>
+            )}
+          </View>
+        </Animated.View>
       </Fragment>
     </View>
   );

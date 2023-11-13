@@ -6,6 +6,8 @@ import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import useStyles from '../MyProfile/styles';
 import {ItemFollow, ItemListMyProfile, ItemPost} from './components';
+import {getAuthUserProfile} from '../../../../redux';
+import {useAppSelector} from '../../../../hooks';
 
 const MyProfile: React.FC = props => {
   const styles = useStyles();
@@ -15,47 +17,53 @@ const MyProfile: React.FC = props => {
   const handlePressGoScreen = () => {
     NavigationService.navigate(routes.UPDATE_PROFILE2);
   };
+
   const renderItem = ({item}: {item: (typeof data)[0]}) => (
     <ItemListMyProfile {...item} />
   );
+  const user = useAppSelector(getAuthUserProfile);
 
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="My Profile"
         onPressLeftIcon={handlePressGoback}
         rightIconleft={{name: 'plus-square', type: 'font-awesome-5'}}
-        rightIconRight={{name: 'pen', type: 'font-awesome-5'}}
-        onPressRightIconRight={handlePressGoScreen}
       />
       <View>
         <ItemFollow />
       </View>
       <View style={styles.nameUser}>
-        <TextCustom textBold title="Drake Kun" />
+        <TextCustom textBold title={user.fullname} />
         <TextCustom textLight title="Biographic this here !!!!! 😎" />
       </View>
-      <View style={styles.viewExplore}>
-        <TextCustom textBold title="Explore everyone" />
-        <TouchableOpacity>
-          <TextCustom textPrimary title="See all" />
+      <View style={styles.viewButton}>
+        <TouchableOpacity style={styles.button} onPress={handlePressGoScreen}>
+          <Text style={styles.textButton}>Edit Profile</Text>
         </TouchableOpacity>
       </View>
-      <View>
+      <View style={styles.viewExplore}>
+        <Text style={styles.textDiscover}>Discover People</Text>
+        <TouchableOpacity
+          onPress={() => NavigationService.navigate(routes.DISCOVERPEOPLE)}>
+          <Text style={styles.text}>See all</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={{paddingVertical: 10}}>
         <FlatList
           data={data}
           renderItem={renderItem}
           keyExtractor={item => item.id}
           horizontal
           showsHorizontalScrollIndicator={false}
-          snapToAlignment="start" // Snap tới phần tử gần nhất khi cuộn
-          snapToInterval={10} // Đặt khoảng cách giữa các phần tử
-          decelerationRate={0.5} // Điều chỉnh tốc độ giảm dần của cuộn
+          snapToAlignment="start"
+          snapToInterval={10}
+          decelerationRate={0.5}
         />
       </View>
       <View style={styles.viewMyPost}>
-        <Text style={styles.textPost}>MY POST</Text>
+        <Text style={styles.textPost}>Your Post</Text>
       </View>
       <View style={{flex: 1}}>
         <FlatList
@@ -79,6 +87,7 @@ const data = [
     title: 'Suggestions for you',
     button: true,
     textButton: 'Follow',
+    closeIcon: true,
   },
   {
     id: '2',
@@ -87,6 +96,7 @@ const data = [
     title: 'Suggestions for you',
     button: true,
     textButton: 'Follow',
+    closeIcon: true,
   },
   {
     id: '3',
@@ -94,6 +104,7 @@ const data = [
     name: 'Peter 3',
     title: 'Suggestions for you',
     button: true,
+    closeIcon: true,
     textButton: 'Follow',
   },
   {
@@ -102,6 +113,7 @@ const data = [
     name: 'Peter 4',
     title: 'Suggestions for you',
     button: true,
+    closeIcon: true,
     textButton: 'Follow',
   },
   {
@@ -110,6 +122,7 @@ const data = [
     name: 'Peter 5',
     title: 'Suggestions for you',
     button: true,
+    closeIcon: true,
     textButton: 'Follow',
   },
 ];

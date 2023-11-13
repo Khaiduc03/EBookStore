@@ -7,7 +7,7 @@ const useStyles = makeStyles(({colors}) => ({
     width: '100%',
     borderStyle: 'solid',
     borderColor: '#F89300',
-    height: normalize(56),
+    height: normalize(39),
     borderRadius: 16,
     justifyContent: 'center',
   },

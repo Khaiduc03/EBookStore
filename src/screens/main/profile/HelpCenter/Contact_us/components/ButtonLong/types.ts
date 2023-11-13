@@ -6,5 +6,7 @@ export type ButtonLongpros = {
   title?: string;
   ButtonColor?: boolean;
   icon_Facebook?: boolean;
-  icon_Website?: boolean;
+  icon_Discord?: boolean;
+  onPressScreen?: () => void;
+
 };

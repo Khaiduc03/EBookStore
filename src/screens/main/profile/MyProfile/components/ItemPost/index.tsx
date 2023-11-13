@@ -21,10 +21,12 @@ const ItemPost: React.FC<Props> = props => {
         backgroundColor: '#ffffff',
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: 10,
+        
       }}>
       <Image
         source={data.images}
-        style={{width: itemWidth - 3, height: itemWidth - 3}}
+        style={{width: itemWidth - 5, height: itemWidth - 5, borderRadius: 10}}
       />
     </TouchableOpacity>
   );

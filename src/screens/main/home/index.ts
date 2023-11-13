@@ -6,6 +6,8 @@ import ComicByTopic from './ComicByTopic';
 import ComicsDetail from './ComicsDetail';
 import ChapterDetail from './ChapterDetail';
 import CommentComic from './CommentComic';
+import NotificationsScreen from './notifications';
+import Filters from './filters/Filters';
 
 export {default as Home} from './Home';
 export const homeScreens: Screen[] = [
@@ -32,5 +34,13 @@ export const homeScreens: Screen[] = [
   {
     name: routes.COMMENT_COMIC,
     component: CommentComic,
+  },
+  {
+    name: routes.NOTIFICATIONS,
+    component: NotificationsScreen,
+  },
+  {
+    name: routes.FILTERS,
+    component: Filters,
   },
 ];

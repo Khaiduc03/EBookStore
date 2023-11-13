@@ -21,7 +21,8 @@ function* getListDataSaga(action: PayloadAction<number>): Generator {
       console.log('Server errol !!!');
     }
   } catch (error) {
-    console.log(error);
+    console.log('hihi');
+  
   } finally {
     if (action.payload == 1) {
       yield put(LoadingActions.hideLoadingStart());

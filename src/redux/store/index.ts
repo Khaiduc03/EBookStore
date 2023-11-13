@@ -15,6 +15,7 @@ import {
 import {AlertReducer} from '../reducer/alert.reducer';
 import RootSaga from '../sagas';
 import {Redux} from '../types/redux.type';
+import {ChatReducer} from '../reducer/chat.reducer';
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
@@ -24,7 +25,7 @@ const persistConfig: PersistConfig<RootState> = {
   debug: true, // enable logs - default is false
   stateReconciler: autoMergeLevel2,
   whitelist: [Redux.auth, Redux.theme, Redux.app, Redux.topic],
-  blacklist: [Redux.loading, Redux.comic],
+  blacklist: [Redux.loading, Redux.comic, Redux.chat],
 };
 
 const rootReducers = combineReducers({
@@ -35,6 +36,7 @@ const rootReducers = combineReducers({
   theme: ThemeReducer,
   comic: ComicReducer,
   topic: TopicReducer,
+  chat: ChatReducer,
 });
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducers);
 

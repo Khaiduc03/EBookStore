@@ -5,7 +5,7 @@ import {fontFamilySetup} from '../../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    flex: normalize(1),
+    flex: 1,
     backgroundColor: colors.background,
   },
   wrapper: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
 
   body: {
-    flex: normalize(1),
+    flex: 1,
     padding: normalize(24),
     height: Device.getDeviceHeight(),
   },
@@ -46,7 +46,7 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.primary,
   },
   textNor: {
-    fontFamily: 'Urbanist-Regular',
+    fontFamily: fontFamilySetup.regular,
     fontSize: normalize(14),
     fontWeight: '400',
     color: colors.black,
@@ -69,9 +69,7 @@ const useStyles = makeStyles(({colors}) => ({
     borderWidth: normalize(1),
   },
   bottom: {
-    flex: normalize(1),
-    justifyContent: 'flex-end',
-    marginBottom: normalize(15),
+    marginBottom: normalize(70),
   },
   checkBoxContainer: {
     flexDirection: 'row',
@@ -84,13 +82,16 @@ const useStyles = makeStyles(({colors}) => ({
     justifyContent: 'space-between',
   },
   error: {
-    color: 'red',
+    color: colors.red,
     fontWeight: 'bold',
   },
   Buttoncolor: {
-    backgroundColor: 'red',
+    backgroundColor: colors.primary,
     width: '100%',
     height: normalize(56),
+  },
+  iconLeftStyle: {
+    color: colors.black,
   },
 }));
 

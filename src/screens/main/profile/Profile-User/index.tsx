@@ -32,7 +32,7 @@ const ProfileUser: React.FC = props => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="Profile User"
         onPressLeftIcon={handlePressGoback}
         rightIconRight={{name: 'ellipsis-vertical', type: 'ionicon'}}
@@ -167,6 +167,7 @@ const data2 = [
     title: 'Suggestions for you',
     button: true,
     textButton: 'Follow',
+    closeIcon: true,
   },
   {
     id: '2',
@@ -174,6 +175,7 @@ const data2 = [
     name: 'Peter 2',
     title: 'Suggestions for you',
     button: true,
+    closeIcon: true,
     textButton: 'Follow',
   },
   {
@@ -183,6 +185,7 @@ const data2 = [
     title: 'Suggestions for you',
     button: true,
     textButton: 'Follow',
+    closeIcon: true,
   },
   {
     id: '4',
@@ -191,6 +194,7 @@ const data2 = [
     title: 'Suggestions for you',
     button: true,
     textButton: 'Follow',
+    closeIcon: true,
   },
   {
     id: '5',
@@ -199,5 +203,6 @@ const data2 = [
     title: 'Suggestions for you',
     button: true,
     textButton: 'Follow',
+    closeIcon: true,
   },
 ];

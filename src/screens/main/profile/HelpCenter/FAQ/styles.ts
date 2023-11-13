@@ -6,7 +6,7 @@ const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    flex: normalize(1),
+    flex: 1,
     backgroundColor: colors.background,
   },
   scrollView: {

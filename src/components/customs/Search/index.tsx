@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
 import {SearchBar} from '@rneui/themed';
 import {
-  View,
-  StyleSheet,
-  TouchableWithoutFeedback,
   Keyboard,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
 import {Icon} from '@rneui/base';
-import {TouchableOpacity} from 'react-native';
 import useStyles from './styles';
 import {SearchBarComponentProps} from './types';
 
@@ -45,7 +44,7 @@ const SearchCustom: React.FunctionComponent<
           color={styles.cancelIcon.color}
         />
       }
-      autoFocus={true}
+      autoFocus={props.autoFocus}
       returnKeyType="search"
       inputStyle={props.inputStyle || styles.inputStyle}
       onSubmitEditing={props.onPress}

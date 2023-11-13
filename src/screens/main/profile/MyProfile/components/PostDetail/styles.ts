@@ -7,7 +7,7 @@ const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    flex: normalize(1),
+    flex: 1,
     backgroundColor: colors.background,
   },
   avatarUser: {
@@ -47,6 +47,9 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
     alignItems: 'center',
     gap: normalize(20),
+  },
+  iconLeftStyle: {
+    color: colors.black,
   },
 }));
 export default useStyles;
