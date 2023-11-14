@@ -24,9 +24,7 @@ const ItemCommnent = () => {
           rendered item.
         </Text>
         <View style={styles.repContent}>
-          <TouchableOpacity
-            onPress={() => NavigationService.navigate(routes.COMMENT_REP)}
-            style={styles.rep}>
+          <TouchableOpacity style={styles.rep}>
             <Icon
               name="chatbox-outline"
               type="ionicon"

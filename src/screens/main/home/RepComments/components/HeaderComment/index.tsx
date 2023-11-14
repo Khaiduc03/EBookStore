@@ -5,7 +5,7 @@ import {Icon} from '@rneui/base';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {backScreen} from '../../../../../../utils';
 
-const HeaderComment = () => {
+const HeaderRepComment = () => {
   const styles = useStyles();
   return (
     <View style={styles.container}>
@@ -17,10 +17,10 @@ const HeaderComment = () => {
           color={styles.iconStylle.color}
         />
       </TouchableOpacity>
-      <Text style={styles.textHeader}>Comments (13)</Text>
+      <Text style={styles.textHeader}>Replies(0)</Text>
       <View style={{paddingRight: 16}} />
     </View>
   );
 };
 
-export default HeaderComment;
+export default HeaderRepComment;

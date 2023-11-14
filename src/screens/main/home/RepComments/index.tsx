@@ -1,11 +1,11 @@
 import {FlatList, TextInput, SafeAreaView} from 'react-native';
 import React from 'react';
-import {HeaderComment, ItemComment} from './components';
+import {ItemComment} from './components';
 import useStyles from '../RepComments/styles';
 import {Input} from '@rneui/themed';
 import {HeaderRepComment} from '../RepComments/components';
 
-const CommentComic = () => {
+const CommentRepComic = () => {
   const styles = useStyles();
   const data = Array.from({length: 20}, (_, index) => ({id: index}));
   return (
@@ -23,9 +23,9 @@ const CommentComic = () => {
         returnKeyType="send"
         style={styles.inputStyle}
       />
-      <HeaderComment />
+      <HeaderRepComment />
     </SafeAreaView>
   );
 };
 
-export default CommentComic;
+export default CommentRepComic;
