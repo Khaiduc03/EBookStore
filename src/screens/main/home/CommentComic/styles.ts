@@ -9,6 +9,22 @@ const useStyles = makeStyles(({colors}) => ({
     flex: 1,
     backgroundColor: colors.background,
   },
+  inputStyle: {
+    width: '100%',
+    height: normalize(45),
+    paddingHorizontal: normalize(15),
+    backgroundColor: colors.white,
+    position: 'absolute',
+    bottom: 0,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
 }));
 
 export default useStyles;
