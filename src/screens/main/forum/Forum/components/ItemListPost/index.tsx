@@ -128,8 +128,8 @@ const data: Post[] = [
     createAt: '18/02/2023 at 22:23',
     description:
       "Amidst the roaring crowd, the striker's precision and the goalie's reflexes created a mesmerizing dance on the pitch",
-    likeCount: 1123,
-    commentCount: 1123,
+    likeCount: 456,
+    commentCount: 1233,
   },
   {
     id: '2',
@@ -137,7 +137,7 @@ const data: Post[] = [
     createAt: '18/02/2023 at 22:23',
     description:
       "Amidst the roaring crowd, the striker's precision and the goalie's reflexes created a mesmerizing dance on the pitch",
-    likeCount: 1123,
-    commentCount: 1123,
+    likeCount: 123,
+    commentCount: 456,
   },
 ];
