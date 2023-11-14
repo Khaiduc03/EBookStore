@@ -19,8 +19,6 @@ interface ListItem {
 const DiscoverPeople: React.FC = () => {
   const styles = useStyles();
 
- 
-
   const [listData, setListData] = useState(initialData);
 
   const handleGoback = () => {

@@ -5,7 +5,6 @@ import {StatusBar} from 'react-native';
 import {useAppSelector} from '../hooks';
 import {getAuthEnableSignIn} from '../redux/selectors/auth.selector';
 import {getMode} from '../redux/selectors/thems.selector';
-import ChangePassWord from '../screens/main/profile/ChangePassword';
 import {navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
@@ -39,7 +38,7 @@ const RootNavigation = () => {
         barStyle={themeMode}
       />
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
-      {/* <ChangePassWord /> */}
+      {/* <AppNavigator /> */}
     </NavigationContainer>
   );
 };
