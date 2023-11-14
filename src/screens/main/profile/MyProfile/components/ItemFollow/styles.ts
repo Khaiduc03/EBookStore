@@ -33,7 +33,7 @@ const useStyles = makeStyles(({colors}) => ({
     letterSpacing: normalize(0.12),
   },
   text: {
-    color: colors.black2,
+    color: colors.black,
     fontFamily: fontFamilySetup.regular,
     fontSize: normalize(16),
     lineHeight: normalize(21),

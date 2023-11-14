@@ -30,10 +30,9 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.bold,
     lineHeight: normalize(20),
     color: colors.black,
-    borderBottomWidth: normalize(0.6),
+    
   },
   viewMyPost: {
-    borderColor: '#8a8a8a',
     marginTop: normalize(15),
     paddingHorizontal: normalize(24),
   },

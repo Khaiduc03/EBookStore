@@ -1,12 +1,11 @@
-import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
-import React, {useState} from 'react';
 import {Icon} from '@rneui/themed';
-import useStyles from './styles';
-import {images} from '../../../../../../assets';
-import {theme} from '../../../../../../theme';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
+import React, {useState} from 'react';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import Share from 'react-native-share';
+import {routes} from '../../../../../../constants';
+import {NavigationService} from '../../../../../../navigation';
+import {theme} from '../../../../../../theme';
+import useStyles from './styles';
 
 interface Post {
   id: string;
@@ -27,9 +26,7 @@ const ItemListPost: React.FC = () => {
   const onShare = async () => {
     const options: any = {
       url: 'https://ComicVerse.com',
-      message:
-        'ComicVerse app vừa kiếm người yêu vừa đọc truyện hihi ^__^ ! : \n' +
-        +'\n',
+      message: 'ComicVerse app đọc truyện tích hợp mạng xã hội ^__^ ! : \n',
     };
     try {
       const res = await Share.open(options);
@@ -43,7 +40,12 @@ const ItemListPost: React.FC = () => {
     <View style={styles.content}>
       <View style={styles.post}>
         <View style={{flexDirection: 'row'}}>
-          <Image style={styles.image} source={images.avata} />
+          <Image
+            style={styles.image}
+            source={{
+              uri: 'https://images2.thanhnien.vn/528068263637045248/2023/9/30/cristiano-ronaldo--169604187049959114942.jpeg',
+            }}
+          />
           <View style={styles.viewTextPost}>
             <Text style={styles.name}>{item.name}</Text>
             <View style={{flexDirection: 'row', gap: 10}}>

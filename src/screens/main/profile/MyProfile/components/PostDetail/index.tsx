@@ -1,5 +1,5 @@
 import {Icon} from '@rneui/themed';
-import React, {useState} from 'react';
+import React from 'react';
 import {Image, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {images} from '../../../../../../assets';
@@ -14,12 +14,6 @@ const PostDetail: React.FC = () => {
   const styles = useStyles();
   const handlePressGoback = () => {
     NavigationService.navigate(routes.MYPROFILE);
-  };
-
-  const [selectedIcon, setSelectedIcon] = useState('');
-
-  const handleIconClick = (iconName: string) => {
-    setSelectedIcon(iconName);
   };
 
   return (

@@ -1,10 +1,8 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
-import useStyles from './styles';
-import {images} from '../../../../../../assets';
-import TextCustom from '../../../../../../components/customs/Text';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {useAppSelector} from '../../../../../../hooks';
 import {getAuthUserProfile} from '../../../../../../redux';
+import useStyles from './styles';
 
 const ItemFollow = () => {
   const styles = useStyles();

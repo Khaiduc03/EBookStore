@@ -32,27 +32,6 @@ const ChangePassWord: React.FC = () => {
     }
   }, [password, confirmpassword]);
 
-  const handleContinue = () => {
-    if (confirmpassword === password) {
-      dispatch(
-        AuthActions.handleNewPassword({
-          email: user.email || '',
-          password: password,
-        }),
-      );
-    } else {
-      showToastError('An error occurred, please check again!');
-    }
-
-    !isValidPassword(password)
-      ? setIsCheckValidatePassword(false)
-      : setIsCheckValidatePassword(true);
-
-    if (confirmpassword !== password || !isValidPassword(confirmpassword)) {
-      setIsCheckValidateConfirmPassword(false);
-    }
-  };
-
   const [checked, setChecked] = React.useState<boolean>(false);
 
   const toggleCheckbox = () => setChecked(!checked);
@@ -150,10 +129,7 @@ const ChangePassWord: React.FC = () => {
 
           <View style={styles.viewBtnLogin}>
             <BigButton
-              textButton="Continue"
-              onPressButton={() => {
-                handleContinue();
-              }}
+              textButton="Change"
               style={styles.button}
               textStyle={{fontSize: 16}}
             />
