@@ -52,8 +52,8 @@ const useStyles = makeStyles(({colors}) => ({
     lineHeight: normalize(21),
   },
   imagePost: {
-    width: normalize(430),
-    height: normalize(287),
+    width: WIDTH,
+    height: HEIGHT * 0.25,
   },
   iconText: {
     flexDirection: 'row',
@@ -77,12 +77,32 @@ const useStyles = makeStyles(({colors}) => ({
     paddingVertical: normalize(10),
     borderColor: colors.grey8,
   },
-  textLike:{
+  textLike: {
     fontSize: normalize(16),
     fontFamily: fontFamilySetup.regular,
     color: colors.black,
     lineHeight: normalize(21),
-  }
+  },
+  wrap: {
+    width: WIDTH,
+    height: HEIGHT * 0.25,
+  },
+  wrapDot: {
+    position: 'absolute',
+    bottom: normalize(15),
+    flexDirection: 'row',
+    left: normalize(170),
+    alignSelf: 'center',
+  },
+  dotActive: {
+    margin: normalize(3),
+    color: colors.black,
+  },
+  dot: {
+    margin: normalize(3),
+    color: colors.white,
+  },
+  scrollView: {},
 }));
 
 export default useStyles;
