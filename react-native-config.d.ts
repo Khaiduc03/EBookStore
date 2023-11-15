@@ -40,6 +40,8 @@ declare module 'react-native-config' {
     CHECK_FAVORITE: string;
     ALL_FAVORITE: string;
     HISTORY_COMIC: string;
+    //CONVERSATION
+    CONVERSATION: string;
   }
 
   export const Config: NativeConfig;

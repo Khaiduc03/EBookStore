@@ -18,7 +18,6 @@ export const reducer = createSlice({
   reducers: {
     //get list conversation
     handleGetListConversation: (state: ListConversationStateI) => {
-      console.log('handle');
       return state;
     },
 

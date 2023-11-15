@@ -4,7 +4,7 @@ import {routes} from '../../../../../constants';
 import {NavigationService} from '../../../../../navigation';
 
 import {Avatar} from '@rneui/themed';
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ConversationI} from '../../../../../redux';
 import {formatTime} from '../../../../../utils';
 import useStyles from './styles';
@@ -18,6 +18,7 @@ export const ConversationItem = (item: ConversationI) => {
   const [lastMessage, setLastMessage] = useState<string>('');
   const [message, setMessage] = useState(item.message);
   const [name, setname] = useState(item.joined_name);
+
   const last_message_time = formatTime(item.last_message_time);
 
   useEffect(() => {
@@ -76,3 +77,5 @@ export const ConversationItem = (item: ConversationI) => {
     </TouchableOpacity>
   );
 };
+
+export default React.memo(ConversationItem);

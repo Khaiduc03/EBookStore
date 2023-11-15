@@ -7,54 +7,27 @@ import useStyles from './styles';
 import {ConversationI} from '../../../../redux';
 import {ConversationItem} from './components/ConversationItem';
 
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {ChatActions} from '../../../../redux/reducer/chat.reducer';
 import {
-  SocketContext,
-  SocketProvider,
-  socketIO,
-} from '../../../../contexts/SocketContext';
-import {listConversations} from './types';
+  getListConversation,
+} from '../../../../redux/selectors/chat.selector';
 
 const ConversationScreen: React.FC = () => {
   const styles = useStyles();
 
   const [selectedId, setSelectedId] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const socket = React.useContext(SocketContext);
 
+  const dispatch = useAppDispatch();
   const [data, setData] = useState<ConversationI[]>([]);
-  // useEffect(() => {
-  //   //console.log(socket);
-  //   if (socket) {
-  //     console.log('hihi');
-  //     socket.on('conversations', data => {
-  //       console.log('Received data:', data);
-  //     });
-  //     // Bạn có thể sử dụng socket ở đây
-  //   }
+  const listConversation: ConversationI[] = useAppSelector(getListConversation);
 
-  //   // Lưu ý: Đảm bảo xử lý ngắt kết nối hoặc làm sạch các tài nguyên khi component unmount
-  //   // return () => {
-  //   //   if (socket) {
-  //   //     socket.off('conversations');
-  //   //   }
-  //   // };
-  // }, [socket]);
   useEffect(() => {
-    const handleConversations = (newData: ConversationI[]) => {
-      console.log(newData);
-      setData(newData);
-    };
 
-    // Subscribe to the 'conversations' event when the component mounts
-    if (socket) {
-      socket.on('conversations', handleConversations);
-
-      // Unsubscribe when the component unmounts
-      return () => {
-        socket.off('conversations', handleConversations);
-      };
-    }
-  }, [socket]);
+      dispatch(ChatActions.handleGetListConversation());
+    
+  }, []);
 
   const renderItem = (item: ConversationI) => (
     <ConversationItem {...item} key={item.uuid.toString()} />
@@ -79,7 +52,7 @@ const ConversationScreen: React.FC = () => {
         </View>
         <View style={styles.body}>
           <FlatList
-            data={data}
+            data={listConversation}
             renderItem={({item}) => renderItem(item)}
             keyExtractor={item => item.uuid.toString()}
             extraData={selectedId}
@@ -93,16 +66,6 @@ const ConversationScreen: React.FC = () => {
             ListHeaderComponentStyle={{paddingVertical: 16}}
             showsVerticalScrollIndicator={false}
           />
-          {/* <View style={styles.header}>
-            <SearchCustom
-              value={searchTerm}
-              setValue={setSearchTerm}
-              autoFocus={false}
-            />
-          </View>
-          <View style={styles.listStyle}>
-       
-          </View> */}
         </View>
       </View>
     </TouchableWithoutFeedback>
