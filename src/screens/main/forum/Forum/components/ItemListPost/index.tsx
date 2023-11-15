@@ -14,21 +14,9 @@ import {routes} from '../../../../../../constants';
 import {NavigationService} from '../../../../../../navigation';
 import {theme} from '../../../../../../theme';
 import useStyles from './styles';
-import {useAppSelector} from '../../../../../../hooks';
-import {getAuthUserProfile} from '../../../../../../redux';
+import {Post} from './types';
 
-interface Post {
-  id: string;
-  name: string;
-  avatar: string;
-  images: string[];
-  createAt: string;
-  description: string;
-  likeCount: number;
-  commentCount: number;
-}
-
-const ItemListPost: React.FC = () => {
+const ItemListPost: React.FC<Post> = () => {
   const styles = useStyles();
   const [isLike, setIsLike] = useState(false);
   const [imageActive, setImageActive] = useState(0);
