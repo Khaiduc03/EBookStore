@@ -83,10 +83,6 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
     lineHeight: normalize(21),
   },
-  wrap: {
-    width: WIDTH,
-    height: HEIGHT * 0.25,
-  },
   wrapDot: {
     position: 'absolute',
     bottom: normalize(15),
@@ -97,9 +93,11 @@ const useStyles = makeStyles(({colors}) => ({
   dotActive: {
     margin: normalize(3),
     color: colors.black,
+    fontSize: normalize(20),
   },
   dot: {
     margin: normalize(3),
+    fontSize: normalize(20),
     color: colors.white,
   },
   scrollView: {},
