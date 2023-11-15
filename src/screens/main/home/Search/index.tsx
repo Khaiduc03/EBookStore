@@ -72,6 +72,18 @@ const Search = () => {
     backScreen();
   };
 
+  const sortIncreaseDataByViews = () => {
+    const newData = [...data];
+    newData.sort((a, b) => a.views - b.views); // Sắp xếp từ nhỏ đến lớn theo trường views
+    setData(newData);
+  };
+
+  const sortReduceDataByView = () => {
+    const newData = [...data];
+    newData.sort((a, b) => b.views - a.views); // Sắp xếp từ nhỏ đến lớn theo trường views
+    setData(newData);
+  };
+
   const listFooterComponent = useCallback(() => {
     return (
       <ActivityIndicator
@@ -111,6 +123,17 @@ const Search = () => {
             />
           </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          onPress={sortIncreaseDataByViews}
+          style={{backgroundColor: 'yellow'}}>
+          <Text style={{fontSize: 30}}>Decrease Data</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={sortReduceDataByView}
+          style={{backgroundColor: 'yellow'}}>
+          <Text style={{fontSize: 30}}>Reduce Data</Text>
+        </TouchableOpacity>
 
         {data?.length === 0 ? (
           <NoSearch />

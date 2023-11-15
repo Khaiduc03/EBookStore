@@ -38,6 +38,7 @@ const Home: FunctionComponent = () => {
   const flatListRef = useRef<FlatList<ComicType>>(null);
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
+  console.log(dataComic);
 
   console.log('==========> fisrt', sizeContent);
 
