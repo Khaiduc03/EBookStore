@@ -12,20 +12,17 @@ import {
   View,
 } from 'react-native';
 
-import {format, isValid, parse} from 'date-fns';
+import {format} from 'date-fns';
 
-import useStyles from './styles';
-import {useAppDispatch} from '../../../../hooks';
-import {Gender} from '../../../../types';
-import {AuthActions} from '../../../../redux';
-import Header from '../../../../components/customs/Headers';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
-import AuthHeaderV1 from '../../../../components/customs/AuthHeaderV1';
-import AvatarComponets from '../../../../components/customs/Avatar';
-import InputCustomV1 from '../../../../components/customs/InputCustomV1';
 import {CalendarImage} from '../../../../assets/svg';
 import {BigButton, HeaderCustom} from '../../../../components';
+import AvatarComponets from '../../../../components/customs/Avatar';
+import InputCustomV1 from '../../../../components/customs/InputCustomV1';
+import {useAppDispatch} from '../../../../hooks';
+import {NavigationService} from '../../../../navigation';
+import {AuthActions} from '../../../../redux';
+import {Gender} from '../../../../types';
+import useStyles from './styles';
 
 const UpdateProfileScreen: FunctionComponent = () => {
   const styles = useStyles();
@@ -51,7 +48,6 @@ const UpdateProfileScreen: FunctionComponent = () => {
     phone_number: '',
     dob: '',
     biography: '',
-
     gender: Gender.MALE || Gender.FEMALE,
   });
 

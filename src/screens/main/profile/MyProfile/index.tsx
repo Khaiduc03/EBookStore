@@ -30,6 +30,9 @@ const MyProfile: React.FC = props => {
         title="My Profile"
         onPressLeftIcon={handlePressGoback}
         rightIconleft={{name: 'plus-square', type: 'font-awesome-5'}}
+        onPressRightIconLeft={() =>
+          NavigationService.navigate(routes.CREATEPOST)
+        }
       />
       <View>
         <ItemFollow />
