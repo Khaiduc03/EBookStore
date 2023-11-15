@@ -23,6 +23,7 @@ import {getListTopic} from '../../../../redux/selectors/topic.selector';
 import {createIcon} from '../../../../utils';
 import {BannerComic, TopicsHome, TrendingComic} from './components';
 import {getIsLoadingPage} from '../../../../redux/selectors/loading.selector';
+import OverLay from './components/OverLay';
 
 const Home: FunctionComponent = () => {
   const dispatch = useAppDispatch();
@@ -44,6 +45,7 @@ const Home: FunctionComponent = () => {
 
   useEffect(() => {
     dispatch(ComicActions.getListData(1));
+
     console.log('===========>page1');
   }, []);
 
@@ -92,6 +94,7 @@ const Home: FunctionComponent = () => {
 
   return (
     <View style={styles.container}>
+      {current == 1 ? <OverLay /> : <View />}
       <HeaderCustom
         titleStyle={styles.textTitleHeader}
         onPressRightIconMiddle={handlePressSearch}

@@ -1,35 +1,18 @@
-import React, {FunctionComponent} from 'react';
-
-import {View, Text, FlatList} from 'react-native';
+import React, {FunctionComponent, useState} from 'react';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import useStyles from './styles';
-import {HeaderCustom} from '../../../../components';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
-import {FavoritesList} from './components';
+import {Button, Icon, Overlay} from '@rneui/base';
+import FastImage from 'react-native-fast-image';
 
 const Explore: FunctionComponent = () => {
   const styles = useStyles();
+  const [visible, setVisible] = useState(false);
 
-  const handlePressSearch = () => {
-    NavigationService.navigate(routes.SEARCH);
+  const toggleOverlay = () => {
+    setVisible(!visible);
   };
-  return (
-    <View style={styles.container}>
-      <HeaderCustom
-        titleStyle={styles.titleStyle}
-        leftIconStyle={styles.leftIconStyle}
-        onPressRightIconLeft={handlePressSearch}
-        leftIcon={{name: 'book', type: 'font-awesome'}}
-        title="Favorites List"
-        rightIconleft={{name: 'search', type: 'ionicon'}}
-        rightIconRight={{
-          name: 'notifications-outline',
-          type: 'ionicon',
-        }}
-      />
-      <FavoritesList />
-    </View>
-  );
+
+  return <View style={styles.container}></View>;
 };
 
 export default Explore;
