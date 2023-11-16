@@ -29,6 +29,7 @@ declare module '@rneui/themed' {
     black1: string;
     grayDefault: string;
     black2: string;
+    chatText: string;
   }
 }
 
@@ -69,6 +70,7 @@ export const theme = createTheme({
     blackDefault: '#000',
     whiteDefault: '#FFF',
     black1: '#ffffff',
+    chatText: '#464951',
   },
   darkColors: {
     primary: '#F89300',
@@ -103,6 +105,7 @@ export const theme = createTheme({
     whiteDefault: '#FFF',
     grayDefault: '#4E4B66',
     grey3: '#FFFFFF',
+    chatText: '#FFFFFF',
   },
   components: {
     Button: (props, theme) => ({

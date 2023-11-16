@@ -1,3 +1,4 @@
+import {format, isSameDay, isSameMonth, isSameYear} from 'date-fns';
 export const isValidEmail = (email: string) => {
   if (email === '') {
     return false;
@@ -12,3 +13,21 @@ export const isValidPassword = (password: string) => {
 export const comparePassword = (password: string, confirmPassword: string) => {
   return password === confirmPassword;
 };
+
+export function formatTime(receivedTime: any) {
+  const now = new Date();
+  const receivedDate = new Date(receivedTime);
+
+  // Kiểm tra xem ngày tháng năm có trùng nhau không
+  if (
+    isSameDay(now, receivedDate) &&
+    isSameMonth(now, receivedDate) &&
+    isSameYear(now, receivedDate)
+  ) {
+    // Trả về phút và giờ nếu cùng một ngày
+    return format(receivedDate, 'HH:mm');
+  } else {
+    // Trả về ngày và tháng nếu không cùng một ngày
+    return format(receivedDate, 'dd-MM');
+  }
+}

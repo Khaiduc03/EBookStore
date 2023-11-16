@@ -1,8 +1,10 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import useStyles from './styles';
 import FastImage from 'react-native-fast-image';
 import {Icon} from '@rneui/base';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
 
 const ItemCommnent = () => {
   const styles = useStyles();
@@ -22,7 +24,9 @@ const ItemCommnent = () => {
           rendered item.
         </Text>
         <View style={styles.repContent}>
-          <View style={styles.rep}>
+          <TouchableOpacity
+            onPress={() => NavigationService.navigate(routes.COMMENT_REP)}
+            style={styles.rep}>
             <Icon
               name="chatbox-outline"
               type="ionicon"
@@ -30,7 +34,7 @@ const ItemCommnent = () => {
               size={15}
             />
             <Text style={styles.numberRepStyle}>10</Text>
-          </View>
+          </TouchableOpacity>
           <Icon
             name="ellipsis-vertical"
             type="ionicon"

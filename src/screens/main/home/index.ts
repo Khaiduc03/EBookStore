@@ -5,9 +5,12 @@ import Search from './Search';
 import ComicByTopic from './ComicByTopic';
 import ComicsDetail from './ComicsDetail';
 import ChapterDetail from './ChapterDetail';
-import CommentComic from './CommentComic';
+
 import NotificationsScreen from './notifications';
 import Filters from './filters/Filters';
+import CommentRepComic from './RepComments';
+import CommentComic from './CommentComic';
+import TopViewComic from './TopViewComic';
 
 export {default as Home} from './Home';
 export const homeScreens: Screen[] = [
@@ -42,5 +45,13 @@ export const homeScreens: Screen[] = [
   {
     name: routes.FILTERS,
     component: Filters,
+  },
+  {
+    name: routes.COMMENT_REP,
+    component: CommentRepComic,
+  },
+  {
+    name: routes.TREDING_COMIC,
+    component: TopViewComic,
   },
 ];

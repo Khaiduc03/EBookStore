@@ -58,9 +58,7 @@ const BannerComic: React.FC = () => {
     index: number;
   }) => {
     return (
-      <TouchableOpacity
-        activeOpacity={0.5}
-        onPress={() => NavigationService.navigate(routes.COMICDETAIL)}>
+      <TouchableOpacity activeOpacity={0.5}>
         <FastImage
           source={{uri: item.image}}
           style={{height: screenWidth * 0.5, width: screenWidth}}

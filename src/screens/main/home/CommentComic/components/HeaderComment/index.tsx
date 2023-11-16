@@ -5,7 +5,7 @@ import {Icon} from '@rneui/base';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {backScreen} from '../../../../../../utils';
 
-const FooterComment = () => {
+const HeaderComment = () => {
   const styles = useStyles();
   return (
     <View style={styles.container}>
@@ -23,6 +23,4 @@ const FooterComment = () => {
   );
 };
 
-export default FooterComment;
-
-const styles = StyleSheet.create({});
+export default HeaderComment;
