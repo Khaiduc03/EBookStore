@@ -21,12 +21,13 @@ export interface MessageI {
   conversation_uuid: string;
   user_uuid: string;
   message: string;
-  created_at: string;
-  updated_at: string;
+  created_at?: string;
+  updated_at?: string;
   deleted_at?: string | null;
-  sender_name: string;
-  sender_image: string | null;
-  sender_status: string;
+
+  // sender_name: string;
+   sender_image?: string | null;
+  // sender_status: string;
 }
 
 export interface RequsetCreateConversationI {
