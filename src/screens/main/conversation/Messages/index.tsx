@@ -18,8 +18,11 @@ import AvatarComponets from './components/CameraGallery';
 import {ChatBubble} from './components/ChatBubbleItem';
 import useStyles from './styles';
 import {IMessage, messages} from './types';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 const MessageScreen: React.FC = () => {
+  const {params} = useRoute() as any;
+
   const styles = useStyles();
 
   const [selectedEmojis, setSelectedEmojis] = useState<string[]>([]);
@@ -31,6 +34,10 @@ const MessageScreen: React.FC = () => {
   const footerRef = useRef<View>(null);
   const translateY = useRef(new Animated.Value(0)).current;
 
+  React.useEffect(() => {
+    console.log(params.uuid);
+  }, []);
+
   const handleIconEmojiPress = () => {
     setIsShowEmoji(!isShowEmoji);
     if (!isShowEmoji) {
@@ -40,8 +47,6 @@ const MessageScreen: React.FC = () => {
       isShowEmoji ? styles.viewBlur : styles.viewEmoji,
     );
   };
-
-  console.log(isShowEmoji);
 
   const handleClearEmoji = () => {
     setSelectedEmojis([]);
@@ -84,8 +89,8 @@ const MessageScreen: React.FC = () => {
 
   const handleFocus = () => {
     Animated.timing(translateY, {
-      toValue: 200,
-      duration: 300,
+      toValue: 400,
+      duration: 200,
       useNativeDriver: false,
     }).start();
     setIsShowEmoji(false);
@@ -141,7 +146,7 @@ const MessageScreen: React.FC = () => {
               size: 30,
             }}
             imageUri={{
-              uri: 'https://yt3.googleusercontent.com/ytc/AOPolaQ8qd9YUFBorodGktxw_--6xfk2EscQ-aT2v-dC6w=s900-c-k-c0x00ffffff-no-rj',
+              uri: params.joined_url,
             }}
             fullName="Jhon Abraham"
             userStatus="Active now"
