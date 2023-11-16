@@ -16,7 +16,7 @@ import {theme} from '../../../../../../theme';
 import useStyles from './styles';
 import {Post} from './types';
 
-const ItemListPost: React.FC<Post> = () => {
+const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
   const styles = useStyles();
   const [isLike, setIsLike] = useState(false);
   const [imageActive, setImageActive] = useState(0);
@@ -53,13 +53,14 @@ const ItemListPost: React.FC<Post> = () => {
   };
 
   const renderImages = (images: string[]) => (
-    <ScrollView
+    <FlatList
+      data={images}
       onScroll={({nativeEvent}) => onChange(nativeEvent)}
-      showsHorizontalScrollIndicator={false}
-      pagingEnabled
       horizontal
-      style={styles.scrollView}>
-      {images.map((url, index) => (
+      pagingEnabled
+      showsHorizontalScrollIndicator={false}
+      keyExtractor={(url, index) => index.toString()}
+      renderItem={({item: url, index}) => (
         <View key={url}>
           <FastImage
             resizeMode="stretch"
@@ -67,17 +68,19 @@ const ItemListPost: React.FC<Post> = () => {
             source={{uri: url}}
           />
           <View style={styles.wrapDot}>
-            {images.map((e, index) => (
+            {images.map((e, dotIndex) => (
               <Text
                 key={e}
-                style={imageActive === index ? styles.dotActive : styles.dot}>
+                style={
+                  imageActive === dotIndex ? styles.dotActive : styles.dot
+                }>
                 ●
               </Text>
             ))}
           </View>
         </View>
-      ))}
-    </ScrollView>
+      )}
+    />
   );
 
   const renderItem = ({item}: {item: Post}) => (
@@ -117,7 +120,7 @@ const ItemListPost: React.FC<Post> = () => {
           <View style={styles.viewNumberCount}>
             <View style={styles.iconText}>
               <Text style={styles.textLike}>{item.likeCount}</Text>
-              <Text style={styles.textLike}>Like</Text>
+              <Text style={styles.textLike}>Likes</Text>
             </View>
             <View style={styles.iconText}>
               <Text>{item.commentCount}</Text>
@@ -163,33 +166,4 @@ const ItemListPost: React.FC<Post> = () => {
 
 export default ItemListPost;
 
-const data: Post[] = [
-  {
-    id: '1',
-    name: 'Ronaldo',
-    avatar:
-      'https://cdnimg.vietnamplus.vn/t660/uploaded/mzdic/2023_03_24/cristiano_ronaldo_portugal_2403.jpg',
-    images: [
-      'https://static01.nyt.com/images/2022/12/30/multimedia/30soccer-ronaldo-1-76fd/30soccer-ronaldo-1-76fd-videoSixteenByNine3000.jpg',
-      'https://nld.mediacdn.vn/291774122806476800/2022/12/9/13-ronaldo-16705925694541880121770.jpg',
-    ],
-    createAt: '18/02/2023 at 22:23',
-    description: 'Champion in the hearts of fans',
-    likeCount: 999999,
-    commentCount: 4564,
-  },
-  {
-    id: '2',
-    name: 'Messi',
-    avatar:
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoRfqVdN2MYZFFzupxTtLYQhdWjIV6B5zFjg&usqp=CAU',
-    images: [
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPsOPB-a3bhbczpXyXl8A_R2gvuCJ_HYmyrw&usqp=CAU',
-      'https://media.sot.com.al/sot.com.al/media3/-800-0-6468604ada513.jpg',
-    ],
-    createAt: '18/02/2023 at 22:23',
-    description: 'World Cup champion',
-    likeCount: 456,
-    commentCount: 1233,
-  },
-];
+

@@ -17,13 +17,13 @@ const useStyles = makeStyles(({colors}) => ({
     borderRadius: normalize(50),
   },
   buttonHeader: {
-    borderWidth: 0.5,
+    borderWidth: 0.4,
     borderRadius: normalize(50),
-    width: normalize(210),
-    height: normalize(50),
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: '65%',
+    height: normalize(46),
     borderColor: colors.grey4,
+    justifyContent: 'center',
+    paddingHorizontal: normalize(15),
   },
   textHeader: {
     fontSize: normalize(15),
@@ -34,9 +34,11 @@ const useStyles = makeStyles(({colors}) => ({
   },
 
   header: {
-    paddingHorizontal: normalize(15),
-    paddingVertical: normalize(30),
-    backgroundColor: colors.white,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: normalize(19),
+    paddingVertical: normalize(10),
+    alignItems:'center',
   },
   itemHeader: {
     flexDirection: 'row',
@@ -88,6 +90,10 @@ const useStyles = makeStyles(({colors}) => ({
   iconText: {
     flexDirection: 'row',
     gap: normalize(10),
+  },
+  img_default: {
+    width: normalize(36),
+    height: normalize(36),
   },
 }));
 
