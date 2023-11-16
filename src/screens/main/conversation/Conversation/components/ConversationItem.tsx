@@ -38,7 +38,7 @@ export const ConversationItem = (item: ConversationI) => {
 
   return (
     <TouchableOpacity
-      onPress={() => NavigationService.navigate(routes.CHAT)}
+      onPress={() => NavigationService.navigate(routes.CHAT, item)}
       style={styles.container_item}>
       <View style={styles.avatarStyle}>
         <Avatar
