@@ -1,11 +1,14 @@
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
 import useStyles from './styles';
 import {Image} from '@rneui/themed';
-import {ComicType} from '../../../../../../../../redux';
+import {ComicActions, ComicType} from '../../../../../../../../redux';
 import {Icon} from '@rneui/base';
 import {GoogleIcon} from '../../../../../../../../assets/icons';
 import {TopOneImage} from '../../../../../../../../assets/svg';
+import {useAppDispatch} from '../../../../../../../../hooks';
+import {NavigationService} from '../../../../../../../../navigation';
+import {routes} from '../../../../../../../../constants';
 
 interface ItemListHotProps {
   data: ComicType;
@@ -15,9 +18,19 @@ interface ItemListHotProps {
 const ItemListHot: React.FC<ItemListHotProps> = props => {
   const styles = useStyles();
   const comic: ComicType = props.data;
+  const dispatch = useAppDispatch();
+  const onPressComic = () => {
+    dispatch(ComicActions.clearPostFavorite());
+    dispatch(ComicActions.clearListDataChapter());
+    dispatch(ComicActions.clearListDataByTopicMore());
+    NavigationService.navigate(routes.COMICDETAIL, {data: comic});
+  };
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      activeOpacity={0.5}
+      onPress={onPressComic}
+      style={styles.container}>
       {props.index == 0 ? (
         <View style={{alignItems: 'center', justifyContent: 'center'}}>
           <TopOneImage />
@@ -46,7 +59,7 @@ const ItemListHot: React.FC<ItemListHotProps> = props => {
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

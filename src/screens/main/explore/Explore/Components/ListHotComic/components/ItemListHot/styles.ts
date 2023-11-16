@@ -20,7 +20,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   imageStyle: {
     height: normalize(45),
-    width: normalize(50),
+    width: normalize(45),
     borderRadius: 4,
   },
   content: {

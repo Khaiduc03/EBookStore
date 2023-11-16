@@ -48,6 +48,7 @@ const ListHotComic = () => {
       <FlatList
         onScroll={handleScroll}
         pagingEnabled
+        showsHorizontalScrollIndicator={false}
         horizontal
         data={combinedData}
         keyExtractor={(item, index) => `${index}`}
