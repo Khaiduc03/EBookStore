@@ -34,7 +34,7 @@ export interface PayloadHttp<T> {
 export interface PayloadHttpListComicData<T> {
   totalData?: number;
   totalPage?: number;
-  currentPage?: string;
+  currentPage?: number;
   canNext?: boolean;
   currentDataSize?: number;
   data?: T[];

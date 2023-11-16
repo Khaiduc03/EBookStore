@@ -18,8 +18,8 @@ const TrendingComic = () => {
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
     <ItemTrending index={index} data={item} />
   );
-  const handlePressTopics = () => {
-    NavigationService.navigate(routes.TOPICS);
+  const handlePressTrending = () => {
+    NavigationService.navigate(routes.TREDING_COMIC);
   };
   return (
     <View style={styles.container}>
@@ -30,7 +30,7 @@ const TrendingComic = () => {
           name: 'arrow-forward-outline',
           type: 'ionicon',
         }}
-        onPressRightIconRight={handlePressTopics}
+        onPressRightIconRight={handlePressTrending}
       />
       <FlatList
         horizontal

@@ -46,7 +46,6 @@ const RootNavigation = () => {
         backgroundColor={usestyles().Mode.backgroundColor}
         barStyle={themeMode}
       />
-
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
 
       {/* <CreatePost/> */}
