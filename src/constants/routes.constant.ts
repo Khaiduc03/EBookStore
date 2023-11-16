@@ -12,8 +12,7 @@ export enum routes {
 
   BOTTOM_TAB = 'BOTTOM_TAB',
   HOME = 'HOME',
-  CHAT = 'CHAT',
-  MESSAGE = 'MESSAGE',
+
   FORUM = 'FORUM',
   APP_NAVIGATOR = 'APP_NAVIGATOR',
 
@@ -58,4 +57,10 @@ export enum routes {
 
   // Forum
   CREATEPOST = 'CREATEPOST',
+  COMMENT_POST = 'COMMENT_POST',
+
+  // Message
+  CHAT = 'CHAT',
+  MESSAGE = 'MESSAGE',
+  CONVERSATION = 'CONVERSATION',
 }

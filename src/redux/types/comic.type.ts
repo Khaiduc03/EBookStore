@@ -75,6 +75,7 @@ export type ComicType = uuid &
     favorite_uuid: string;
     isfavorite: boolean;
     last_chapter_number: number;
+    
   };
 
 export type ComicDetailType = uuid &

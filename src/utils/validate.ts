@@ -14,7 +14,7 @@ export const comparePassword = (password: string, confirmPassword: string) => {
   return password === confirmPassword;
 };
 
-export function formatTime(receivedTime: Date) {
+export function formatTime(receivedTime: any) {
   const now = new Date();
   const receivedDate = new Date(receivedTime);
 

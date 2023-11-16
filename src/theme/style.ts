@@ -13,6 +13,7 @@ declare module '@rneui/themed' {
     grey7: string;
     grey8: string;
     grey9: string;
+    grey10: string;
     backgrounDetai: string;
     backgroundChapter: string;
     backgroundTopic: string;
@@ -27,6 +28,7 @@ declare module '@rneui/themed' {
     whiteDefault: string;
     black1: string;
     grayDefault: string;
+    black2: string;
     chatText: string;
     colorTextExplore: string;
   }
@@ -41,6 +43,7 @@ export const theme = createTheme({
     grey5: '#B0B3B8',
     grey4: '#727272',
     divider: '#e3f3ff',
+    black2: '#181A20',
     grey1: '#212121',
     black: '#212121',
     grey0: '#FFFFFF',
@@ -49,6 +52,7 @@ export const theme = createTheme({
     grey7: '#F7F6F6',
     grey8: '#9A9A9A',
     grey9: '#D9D9D9',
+    grey10: '#626162',
     white: '#FFFFFF',
     input1: '#F2F2F2',
     input2: '#FFF7EB',

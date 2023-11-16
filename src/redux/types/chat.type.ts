@@ -8,7 +8,7 @@ export interface ConversationI {
   last_message_uuid: string | null;
   your_name: string;
   joined_name: string;
-  status: boolean;
+  joined_status: boolean;
   joined_url: string;
   your_url: string | null;
   message: string;
@@ -49,6 +49,12 @@ export interface RequestAddMessageI {
 export interface ListConversationStateI {
   conversations: ConversationI[];
   messages: MessageI[];
+
   // loading: boolean;
   // error: string | null;
+}
+
+
+export interface Accesstoken{
+  payload: string
 }

@@ -1,13 +1,12 @@
-import {View, Text, Image} from 'react-native';
-import React, {useState} from 'react';
-import useStyles from './styles';
-import {images} from '../../../../../../assets/images/png';
-import {SquaresCustomProps} from './types';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
-import {theme} from '../../../../../../theme';
 import {Icon} from '@rneui/themed';
+import React, {useState} from 'react';
+import {Image, Text, View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {routes} from '../../../../../../constants';
+import {NavigationService} from '../../../../../../navigation';
+import {theme} from '../../../../../../theme';
+import useStyles from './styles';
+import {SquaresCustomProps} from './types';
 
 const ItemListMyProfile: React.FunctionComponent<
   SquaresCustomProps
@@ -22,14 +21,16 @@ const ItemListMyProfile: React.FunctionComponent<
   const handlePressUser = () => {
     NavigationService.navigate(routes.PROFILEUSER);
   };
-  const handlePressGoback = () => {
-    NavigationService.navigate(routes.MYPROFILE);
-  };
   return (
     <View style={styles.Squares}>
       {avatarDummy && (
         <TouchableOpacity style={styles.ViewTop} onPress={handlePressUser}>
-          <Image style={styles.Avatar} source={images.avata} />
+          <Image
+            style={styles.Avatar}
+            source={{
+              uri: 'https://images2.thanhnien.vn/528068263637045248/2023/9/30/cristiano-ronaldo--169604187049959114942.jpeg',
+            }}
+          />
         </TouchableOpacity>
       )}
       {closeIcon && (

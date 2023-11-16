@@ -3,12 +3,12 @@ import {Image, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {images} from '../../../../assets';
 import {HeaderCustom} from '../../../../components';
-import {ItemListPost} from './components';
 import useStyles from './styles';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {useAppSelector} from '../../../../hooks';
 import {getAuthUserProfile} from '../../../../redux';
+import {ItemListPost} from './components';
 
 const Forum: React.FC = () => {
   const styles = useStyles();

@@ -1,8 +1,6 @@
-import {makeStyles} from '@rneui/themed';
-import {Device} from '../../../../../../../utils';
-
+import { makeStyles } from '@rneui/themed';
+import { Device } from '../../../../utils';
 const WIDTH = Device.getDeviceWidth();
-const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
@@ -10,4 +8,5 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: colors.background,
   },
 }));
+
 export default useStyles;

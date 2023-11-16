@@ -1,27 +1,38 @@
-import {useNavigation} from '@react-navigation/native';
 import {Icon} from '@rneui/themed';
 import React, {useState} from 'react';
 import {FlatList, Text, View} from 'react-native';
 import {HeaderCustom} from '../../../../components';
+import {NavigationService} from '../../../../navigation';
 import {ItemList} from './components';
 import useStyles from './styles';
-import {routes} from '../../../../constants';
-import {NavigationService} from '../../../../navigation';
+
+interface ListItem {
+  id: string;
+  avatarDummy: boolean;
+  name: string;
+  title: string;
+  button: boolean;
+  textButton: string;
+  deleteUser: boolean;
+}
 
 const DiscoverPeople: React.FC = () => {
   const styles = useStyles();
-  const navigation = useNavigation();
-  const [refreshing, setRefreshing] = useState(false);
-  const handleRefresh = () => {
-    setRefreshing(false);
-    NavigationService.replace(routes.DISCOVERPEOPLE);
-  };
+
+  const [listData, setListData] = useState(initialData);
+
   const handleGoback = () => {
     NavigationService.goBack();
   };
-  const renderItem = ({item}: {item: (typeof data)[0]}) => (
-    <ItemList {...item} />
-  );
+
+  const refreshList = () => {
+    const refreshedData = [...initialData];
+    setListData(refreshedData);
+    console.log('Refreshed Data Succesfully:', refreshList);
+  };
+
+  const renderItem = ({item}: {item: ListItem}) => <ItemList {...item} />;
+
   return (
     <View style={styles.container}>
       <HeaderCustom
@@ -31,15 +42,15 @@ const DiscoverPeople: React.FC = () => {
       />
       <View style={{padding: 24}}>
         <View style={styles.viewRefesh}>
-          <Text style={styles.test}>Refesh list</Text>
-          <Icon name="reload-outline" type="ionicon" onPress={handleRefresh} />
+          <Text style={styles.test}>Refresh list</Text>
+          <Icon name="reload-outline" type="ionicon" onPress={refreshList} />
         </View>
       </View>
       <View style={{paddingHorizontal: 11}}>
         <Text style={styles.testContent}>Top Suggestions</Text>
         <View style={{paddingVertical: 20}}>
           <FlatList
-            data={data}
+            data={listData}
             renderItem={renderItem}
             keyExtractor={item => item.id}
             showsHorizontalScrollIndicator={false}
@@ -53,7 +64,7 @@ const DiscoverPeople: React.FC = () => {
 };
 
 export default DiscoverPeople;
-const data = [
+const initialData: ListItem[] = [
   {
     id: '1',
     avatarDummy: true,
