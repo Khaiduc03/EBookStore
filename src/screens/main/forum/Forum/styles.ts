@@ -12,20 +12,21 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: colors.background,
   },
   image: {
-    width: normalize(48),
-    height: normalize(48),
+    width: normalize(55),
+    height: normalize(55),
     borderRadius: normalize(50),
   },
   buttonHeader: {
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: normalize(50),
-    width: normalize(230),
+    width: normalize(210),
     height: normalize(50),
     justifyContent: 'center',
     alignItems: 'center',
+    borderColor: colors.grey4,
   },
   textHeader: {
-    fontSize: normalize(16),
+    fontSize: normalize(15),
     fontFamily: fontFamilySetup.regular,
     color: colors.black,
     lineHeight: normalize(21),
@@ -87,14 +88,6 @@ const useStyles = makeStyles(({colors}) => ({
   iconText: {
     flexDirection: 'row',
     gap: normalize(10),
-  },
-  footerPost: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderTopWidth: 1,
-    width: '100%',
   },
 }));
 

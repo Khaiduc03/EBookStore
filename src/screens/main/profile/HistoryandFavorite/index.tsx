@@ -1,12 +1,15 @@
 import {View, Text} from 'react-native';
 import React from 'react';
 import useStyles from './styles';
+import {Tab, TabView} from '@rneui/themed';
 import {HeaderCustom, TabViewItem} from '../../../../components';
-import HistoryScreen from './History';
-import FavoriteSreen from './Favorite';
+
 import {NavigationService} from '../../../../navigation';
+import Favorite from './components/Favorite';
+import History from './components/History';
 
 const HistoryandFavorite: React.FC = () => {
+  const [index, setIndex] = React.useState(0);
   const styles = useStyles();
   const handlePressGoback = () => {
     NavigationService.goBack();
@@ -14,19 +17,40 @@ const HistoryandFavorite: React.FC = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
-        title="History and Favorite"
+        titleStyle={styles.titleStyleHeader}
         onPressLeftIcon={handlePressGoback}
+        leftIcon={{
+          name: 'arrow-back-sharp',
+          type: 'ionicon',
+          color: styles.leftIconStyle.color,
+        }}
+        title="Favorites List"
+        rightIconRight={{
+          name: 'notifications-outline',
+          type: 'ionicon',
+        }}
       />
-      <TabViewItem
-        tabStyle={styles.tabStyle}
-        title1={'History'}
-        title2={'Favorites'}
-        screen1={<HistoryScreen />}
-        screen2={<FavoriteSreen />}
-        viewStyle={{height: 800}}
-        titleStyle={styles.titleStyle}
-      />
+      <Tab
+        containerStyle={styles.container}
+        buttonStyle={{backgroundColor: '#181A20'}}
+        value={index}
+        onChange={e => setIndex(e)}
+        indicatorStyle={styles.indicatorStyle}
+        variant="default"
+        titleStyle={styles.titleStyle}>
+        <Tab.Item title={'Favorite'} />
+        <Tab.Item title={'History'} />
+      </Tab>
+
+      <TabView value={index} onChange={setIndex} animationType="spring">
+        <TabView.Item style={styles.containerTabView}>
+          <Favorite />
+        </TabView.Item>
+
+        <TabView.Item style={styles.containerTabView}>
+          <History />
+        </TabView.Item>
+      </TabView>
     </View>
   );
 };

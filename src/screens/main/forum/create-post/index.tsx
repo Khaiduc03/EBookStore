@@ -1,32 +1,45 @@
-import {View, Text, NativeModules, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
-import useStyles from './styles';
+import {Image, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {images} from '../../../../assets';
 import {HeaderCustom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
-import {images} from '../../../../assets';
-import {Icon} from '@rneui/themed';
+import {AddPicture, SelectDropDown} from './components';
+import useStyles from './styles';
+import {useAppSelector} from '../../../../hooks';
+import {getAuthUserProfile} from '../../../../redux';
 
 const CreatePost: React.FC = () => {
   const styles = useStyles();
-  const handleGoBack = () => {
-    NavigationService.goBack();
-  };
+  const user = useAppSelector(getAuthUserProfile);
+
   return (
     <View style={styles.container}>
       <HeaderCustom
         leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="Create Your Post"
         rightIconRight={{name: 'checkmark', type: 'ionicon'}}
-        onPressLeftIcon={handleGoBack}
+        onPressLeftIcon={() => NavigationService.goBack()}
       />
       <View style={styles.header}>
-        <Image style={styles.image} source={images.avata} />
-        <Text>Drake</Text>
-        <TouchableOpacity>
-          <Icon name="public" type="material" />
-          <Text>Public</Text>
-          <Icon name="caret-down-sharp" type="ionicon" />
-        </TouchableOpacity>
+        <View style={{flexDirection: 'row'}}>
+          <Image style={styles.image} source={{uri: user.image_url}} />
+          <View style={styles.viewStatus}>
+            <Text style={styles.nameUser}>{user.fullname}</Text>
+            <View style={styles.buttonClick}>
+              <SelectDropDown />
+              <AddPicture />
+            </View>
+          </View>
+        </View>
+      </View>
+      <View style={styles.content}>
+        <TextInput
+          placeholder="What do you think today?"
+          placeholderTextColor={'gray'}
+          style={styles.input}
+          multiline
+          textAlignVertical="top"
+        />
       </View>
     </View>
   );

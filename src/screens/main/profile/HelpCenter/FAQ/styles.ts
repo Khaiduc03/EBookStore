@@ -9,26 +9,13 @@ const useStyles = makeStyles(({colors}) => ({
     flex: 1,
     backgroundColor: colors.background,
   },
-  scrollView: {
-    maxWidth: '100%',
-    maxHeight: normalize(70),
-    padding: normalize(10),
+  body: {
+    flex: 1,
+    paddingHorizontal: normalize(12),
   },
-  viewConten: {
-    flexDirection: 'row',
-    gap: normalize(10),
-  },
-  viewSearch: {
-    paddingHorizontal: normalize(20),
-  },
-  viewToggleable: {
-    paddingVertical: normalize(20),
-    paddingHorizontal: normalize(24),
-  },
-  viewItemBtnSmall: {
-    width: '100%',
-    height: normalize(90),
-    paddingVertical: normalize(10),
+
+  viewItemFilters: {
+    height: normalize(HEIGHT * 0.69),
   },
 }));
 export default useStyles;

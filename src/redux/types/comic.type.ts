@@ -34,7 +34,7 @@ export interface PayloadHttp<T> {
 export interface PayloadHttpListComicData<T> {
   totalData?: number;
   totalPage?: number;
-  currentPage?: string;
+  currentPage?: number;
   canNext?: boolean;
   currentDataSize?: number;
   data?: T[];
@@ -75,6 +75,7 @@ export type ComicType = uuid &
     favorite_uuid: string;
     isfavorite: boolean;
     last_chapter_number: number;
+    
   };
 
 export type ComicDetailType = uuid &

@@ -10,7 +10,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 
 import {Icon} from '@rneui/base';
 import {routes} from '../../constants';
-import {Chat, Explore, Forum, Home, Profile} from '../../screens/main';
+import {Conversation, Explore, Forum, Home, Profile} from '../../screens/main';
 import {Device} from '../../utils';
 
 const BottomTabs = createBottomTabNavigator();
@@ -131,10 +131,11 @@ const BottomNavigator: FunctionComponent = () => {
     <BottomTabs.Navigator
       screenOptions={screenOptions}
       tabBar={(props: BottomTabBarProps) => <Tab {...props} />}>
+      <BottomTabs.Screen name={routes.MESSAGE} component={Conversation} />
       <BottomTabs.Screen name={routes.HOME} component={Home} />
       <BottomTabs.Screen name={routes.EXPLORE} component={Explore} />
       <BottomTabs.Screen name={routes.FORUM} component={Forum} />
-      <BottomTabs.Screen name={routes.MESSAGE} component={Chat} />
+
       <BottomTabs.Screen name={routes.PROFILE} component={Profile} />
     </BottomTabs.Navigator>
   );

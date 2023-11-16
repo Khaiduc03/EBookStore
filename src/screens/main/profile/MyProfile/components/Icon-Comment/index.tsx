@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import {Image, TouchableOpacity, View} from 'react-native';
 import {images} from '../../../../../../assets';
 import useStyles from './styles';
+import Share from 'react-native-share';
 
 const Icon_Comment: React.FC = props => {
   const styles = useStyles();
@@ -16,7 +17,20 @@ const Icon_Comment: React.FC = props => {
       setIconType('font-awesome');
     }
   };
-
+  const onShare = async () => {
+    const options: any = {
+      url: 'https://ComicVerse.com',
+      message:
+        'ComicVerse app vừa kiếm người yêu vừa đọc truyện hihi ^__^ ! : \n' +
+        +'\n',
+    };
+    try {
+      const res = await Share.open(options);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <View style={styles.container}>
       <Image style={styles.avatarDummy} source={images.avata} />
@@ -43,10 +57,9 @@ const Icon_Comment: React.FC = props => {
           <TouchableOpacity onPress={() => handleIconClick('plane')}>
             <Icon
               name="paper-plane"
-              type={
-                selectedIcon === 'plane' ? 'font-awesome' : 'font-awesome-5'
-              }
-              color={selectedIcon === 'plane' ? 'green' : '#F98300'}
+              type={'font-awesome-5'}
+              color={'#F98300'}
+              onPress={onShare}
             />
           </TouchableOpacity>
         </View>

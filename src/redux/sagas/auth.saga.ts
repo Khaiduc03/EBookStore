@@ -55,7 +55,7 @@ function* loginGoogleSaga(
     const checkLogin = yield GoogleService.checkSignIn();
     if (!checkLogin) {
       const {idToken}: any = yield GoogleService.login();
-      console.log(idToken);
+
       const {data}: any = yield call(AuthService.hanleGGLogin, {
         device_token: action.payload.device_token,
         idToken,

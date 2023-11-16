@@ -1,9 +1,14 @@
-import React from 'react';
-
-import {View} from 'react-native';
-import {HeaderCustom} from '../../../../components';
-import {CarouselSquareList} from './components';
+import React, {FunctionComponent} from 'react';
+import {View, FlatList} from 'react-native';
 import useStyles from './styles';
+import ItemListHot from './Components/ListHotComic/components/ItemListHot';
+import ListHotComic from './Components/ListHotComic';
+import TrendingComic from './Components/TrendingComic';
+import ItemRecommend from './Components/RecommendedSeries/components/ItemRecommend';
+import RecommendedSeries from './Components/RecommendedSeries';
+import {ScrollView} from 'react-native-gesture-handler';
+import { HeaderCustom } from '../../../../components';
+import CarouselSquareList from './components/CarouselSquareList';
 
 const data = [
   {
@@ -59,6 +64,11 @@ const ExploreScreen: React.FC = () => {
       <View style={styles.backgoundPopular}>
         <CarouselSquareList data={data} autoPlay={false} pagination={true} />
       </View>
+      <ScrollView>
+        <RecommendedSeries />
+        <TrendingComic />
+        <ListHotComic />
+      </ScrollView>
     </View>
   );
 };

@@ -16,6 +16,7 @@ import MessageScreen from '../screens/main/message/Message';
 import Filters from '../screens/main/home/filters/Filters';
 import {ConversationItem} from '../screens/main/message/Conversation/components/ConversationItem';
 import ConversationScreen from '../screens/main/message/Conversation';
+import {SocketProvider, socketIO} from '../contexts/SocketContext';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
