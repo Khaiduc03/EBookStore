@@ -53,3 +53,8 @@ export interface ListConversationStateI {
   // loading: boolean;
   // error: string | null;
 }
+
+
+export interface Accesstoken{
+  payload: string
+}

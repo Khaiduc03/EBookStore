@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { BASE_URL, ENDPOINTS } from '../../environment';
-import { AuthActions } from '../reducer';
-import { store } from '../store';
+import {BASE_URL, ENDPOINTS} from '../../environment';
+import {AuthActions} from '../reducer';
+import {store} from '../store';
 
 const apiService = axios.create({
   baseURL: BASE_URL,
@@ -13,6 +13,7 @@ const apiService = axios.create({
 apiService.interceptors.request.use(
   config => {
     const accessToken = store.getState().auth.accessToken;
+    //console.log('aceess token', accessToken);
     if (accessToken && config.url !== ENDPOINTS.REFRESH_TOKEN) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -33,7 +34,6 @@ apiService.interceptors.response.use(
     const refreshToken = store.getState().auth.refreshToken;
 
     if (error.response.status === 401) {
-
       originalRequest._retry = true;
       const res = await apiService.post(ENDPOINTS.REFRESH_TOKEN, {
         refreshToken: refreshToken,

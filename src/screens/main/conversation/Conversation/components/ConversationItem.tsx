@@ -19,7 +19,7 @@ export const ConversationItem = (item: ConversationI) => {
   const [message, setMessage] = useState(item.message);
   const [name, setname] = useState(item.joined_name);
 
-  const last_message_time = formatTime(item.last_message_time);
+  const last_message_time = formatTime(item.created_at);
 
   useEffect(() => {
     if (item.last_sender_name === 'You') {

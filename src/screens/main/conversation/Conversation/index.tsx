@@ -4,14 +4,12 @@ import {HeaderCustom, SearchCustom} from '../../../../components';
 
 import useStyles from './styles';
 
-import {ConversationI} from '../../../../redux';
+import {ConversationI, getAuthAccessToken} from '../../../../redux';
 import {ConversationItem} from './components/ConversationItem';
 
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {ChatActions} from '../../../../redux/reducer/chat.reducer';
-import {
-  getListConversation,
-} from '../../../../redux/selectors/chat.selector';
+import {getListConversation} from '../../../../redux/selectors/chat.selector';
 
 const ConversationScreen: React.FC = () => {
   const styles = useStyles();
@@ -22,11 +20,10 @@ const ConversationScreen: React.FC = () => {
   const dispatch = useAppDispatch();
   const [data, setData] = useState<ConversationI[]>([]);
   const listConversation: ConversationI[] = useAppSelector(getListConversation);
+   const token = useAppSelector(getAuthAccessToken);
 
   useEffect(() => {
-
-      dispatch(ChatActions.handleGetListConversation());
-    
+    dispatch(ChatActions.handleGetListConversation(token));
   }, []);
 
   const renderItem = (item: ConversationI) => (

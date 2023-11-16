@@ -17,7 +17,10 @@ export const reducer = createSlice({
   name: 'chat',
   reducers: {
     //get list conversation
-    handleGetListConversation: (state: ListConversationStateI) => {
+    handleGetListConversation: (
+      state: ListConversationStateI,
+      action: PayloadAction<String>,
+    ) => {
       return state;
     },
 
@@ -25,7 +28,6 @@ export const reducer = createSlice({
       state: ListConversationStateI,
       action: PayloadAction<ConversationI[]>,
     ) => {
-      console.log('handle success');
       return {
         ...state,
         conversations: action.payload,
