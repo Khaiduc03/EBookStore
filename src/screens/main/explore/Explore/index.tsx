@@ -1,35 +1,66 @@
-import React, {FunctionComponent} from 'react';
+import React from 'react';
 
-import {View, Text, FlatList} from 'react-native';
-import useStyles from './styles';
+import {View} from 'react-native';
 import {HeaderCustom} from '../../../../components';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
-import {FavoritesList} from './components';
+import {CarouselSquareList} from './components';
+import useStyles from './styles';
 
-const Explore: FunctionComponent = () => {
+const data = [
+  {
+    title: 'Cô sáu mười ngón',
+    category: 'Fantasy',
+    image:
+      'https://img.dtruyen.com/public/images/large/923/kieuthecokhonggiandayconlamgiaugsyQgwG.jpg',
+  },
+  {
+    title: 'Cô chín mặt mu',
+    category: 'Drama',
+    image:
+      'https://img.dtruyen.com/public/images/large/1023/trove80trothanhnuphubancondoiluongthucuWo1Sse.jpg',
+  },
+  {
+    title: 'Cô mười ngự cu',
+    category: 'Action',
+    image:
+      'https://img.dtruyen.com/public/images/large/thapnien70mynhanmemmairuLCZ6p.jpg',
+  },
+  {
+    title: 'Cô hai chai mặt',
+    category: 'Comedy',
+    image:
+      'https://img.dtruyen.com/public/images/large/thapnien90taohuonggiangxemqueCLnJfWG.jpg',
+  },
+  {
+    title: 'Cô ba la ma to',
+    category: 'Mystery',
+    image:
+      'https://img.dtruyen.com/public/images/large/923/trongsinhvethoinguyenthuylamruongZ2bsyDe.jpg',
+  },
+  {
+    title: 'Cô cô nhiều chuyện',
+    category: 'Horror',
+    image:
+      'https://img.dtruyen.com/public/images/large/823/quaphunhanongnuoiconlamgiauDk5ys24.jpg',
+  },
+];
+
+const ExploreScreen: React.FC = () => {
   const styles = useStyles();
 
-  const handlePressSearch = () => {
-    NavigationService.navigate(routes.SEARCH);
-  };
   return (
     <View style={styles.container}>
       <HeaderCustom
         titleStyle={styles.titleStyle}
         leftIconStyle={styles.leftIconStyle}
-        onPressRightIconLeft={handlePressSearch}
-        leftIcon={{name: 'book', type: 'font-awesome'}}
-        title="Favorites List"
-        rightIconleft={{name: 'search', type: 'ionicon'}}
-        rightIconRight={{
-          name: 'notifications-outline',
-          type: 'ionicon',
-        }}
+        leftIcon={{name: 'id-card', type: 'ionicon'}}
+        title="Explore"
       />
-      <FavoritesList />
+
+      <View style={styles.backgoundPopular}>
+        <CarouselSquareList data={data} autoPlay={false} pagination={true} />
+      </View>
     </View>
   );
 };
 
-export default Explore;
+export default ExploreScreen;

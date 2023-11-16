@@ -45,10 +45,10 @@ const RootNavigation = () => {
         backgroundColor={usestyles().Mode.backgroundColor}
         barStyle={themeMode}
       />
-      {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
+      {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
       {/* <CreatePost/> */}
       {/* <Filters /> */}
-      <ConversationScreen />
+      {/* <ConversationScreen /> */}
       {/* <NotificationsScreen /> */}
       {/* <Notifications /> */}
       {/* <SettingsScreen /> */}
