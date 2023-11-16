@@ -1,13 +1,6 @@
 import {Icon} from '@rneui/themed';
 import React, {useState} from 'react';
-import {
-  FlatList,
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Share from 'react-native-share';
 import {routes} from '../../../../../../constants';
@@ -15,11 +8,15 @@ import {NavigationService} from '../../../../../../navigation';
 import {theme} from '../../../../../../theme';
 import useStyles from './styles';
 import {Post} from './types';
+import {useAppSelector} from '../../../../../../hooks';
+import {getAuthUserProfile} from '../../../../../../redux';
+import {images} from '../../../../../../assets';
 
 const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
   const styles = useStyles();
   const [isLike, setIsLike] = useState(false);
   const [imageActive, setImageActive] = useState(0);
+  const user = useAppSelector(getAuthUserProfile);
 
   const handleLikePress = () => {
     setIsLike(!isLike);
@@ -82,6 +79,8 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
       )}
     />
   );
+  const headerIndex = 0;
+  const dataIndices = data.map((_, index) => headerIndex + index + 9);
 
   const renderItem = ({item}: {item: Post}) => (
     <View style={styles.content}>
@@ -123,8 +122,8 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
               <Text style={styles.textLike}>Likes</Text>
             </View>
             <View style={styles.iconText}>
-              <Text>{item.commentCount}</Text>
-              <Text>Comment</Text>
+              <Text style={styles.textLike}>{item.commentCount}</Text>
+              <Text style={styles.textLike}>Comment</Text>
             </View>
           </View>
         </View>
@@ -135,20 +134,20 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
               name={isLike ? 'heart' : 'heart-outline'}
               type="ionicon"
               color={
-                isLike ? theme?.lightColors?.primary : theme?.lightColors?.black
+                isLike ? theme.lightColors?.primary : theme.lightColors?.primary
               }
             />
-            <Text>Like</Text>
+            <Text style={styles.textLike}>Like</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.iconText}
             onPress={() => NavigationService.navigate(routes.COMMENT_POST)}>
             <Icon name="commenting-o" type="font-awesome" />
-            <Text>Comment</Text>
+            <Text style={styles.textLike}>Comment</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconText} onPress={onShare}>
             <Icon name="share-social-outline" type="ionicon" />
-            <Text>Share</Text>
+            <Text style={styles.textLike}>Share</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -156,14 +155,33 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
   );
 
   return (
-    <FlatList
-      data={data}
-      renderItem={renderItem}
-      keyExtractor={item => item.id}
-    />
+    <View>
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+        ListHeaderComponent={() => (
+          <View style={styles.header}>
+            <TouchableOpacity
+              onPress={() => NavigationService.navigate(routes.MYPROFILE)}>
+              <Image style={styles.image} source={{uri: user.image_url}} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.buttonHeader}
+              onPress={() => NavigationService.navigate(routes.CREATEPOST)}>
+              <Text>Bạn đang nghĩ gì?</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{justifyContent: 'center'}}
+              onPress={() => NavigationService.navigate(routes.CREATEPOST)}>
+              <Image style={styles.img_default} source={images.image_default} />
+            </TouchableOpacity>
+          </View>
+        )}
+        stickyHeaderIndices={[headerIndex, ...dataIndices]}
+      />
+    </View>
   );
 };
 
 export default ItemListPost;
-
-
