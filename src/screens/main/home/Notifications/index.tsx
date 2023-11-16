@@ -1,12 +1,12 @@
 import React from 'react';
 import {View} from 'react-native';
-import HeaderCustomV1 from '../../../../components/customs/HeaderCustomV1';
-import {routes} from '../../../../constants';
-import {NavigationService} from '../../../../navigation';
-import Notifications from './Notifications/components/RenderItem/Notifications';
 import useStyles from './styles';
+import HeaderCustomV1 from '../../../../components/customs/HeaderCustomV1';
+import {NavigationService} from '../../../../navigation';
+import {routes} from '../../../../constants';
+import ItemNotifications from './components/RenderItem/ItemNotifications';
 
-const NotificationsScreen: React.FC = () => {
+const Notifications: React.FC = () => {
   const styles = useStyles();
 
   return (
@@ -31,7 +31,7 @@ const NotificationsScreen: React.FC = () => {
             }
           />
           <View style={{width: '100%', height: '100%'}}>
-            <Notifications />
+            <ItemNotifications />
           </View>
         </View>
       </View>
@@ -39,4 +39,4 @@ const NotificationsScreen: React.FC = () => {
   );
 };
 
-export default NotificationsScreen;
+export default Notifications;
