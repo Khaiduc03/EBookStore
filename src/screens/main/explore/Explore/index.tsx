@@ -1,18 +1,17 @@
-import React, {FunctionComponent, useState} from 'react';
-import {View, Text, FlatList, TouchableOpacity} from 'react-native';
+import React, {FunctionComponent} from 'react';
+import {View} from 'react-native';
 import useStyles from './styles';
-import {Button, Icon, Overlay} from '@rneui/base';
-import FastImage from 'react-native-fast-image';
+import ItemListHot from './Components/ListHotComic/components/ItemListHot';
+import ListHotComic from './Components/ListHotComic';
 
 const Explore: FunctionComponent = () => {
   const styles = useStyles();
-  const [visible, setVisible] = useState(false);
 
-  const toggleOverlay = () => {
-    setVisible(!visible);
-  };
-
-  return <View style={styles.container}></View>;
+  return (
+    <View style={styles.container}>
+      <ListHotComic />
+    </View>
+  );
 };
 
 export default Explore;
