@@ -1,14 +1,12 @@
-import React, {FunctionComponent} from 'react';
-import {View, FlatList} from 'react-native';
-import useStyles from './styles';
-import ItemListHot from './Components/ListHotComic/components/ItemListHot';
-import ListHotComic from './Components/ListHotComic';
-import TrendingComic from './Components/TrendingComic';
-import ItemRecommend from './Components/RecommendedSeries/components/ItemRecommend';
-import RecommendedSeries from './Components/RecommendedSeries';
-import {ScrollView} from 'react-native-gesture-handler';
+import React from 'react';
+import { View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import { HeaderCustom } from '../../../../components';
-import CarouselSquareList from './components/CarouselSquareList';
+import CarouselSquareList from './Components/CarouselSquareList';
+import ListHotComic from './Components/ListHotComic';
+import RecommendedSeries from './Components/RecommendedSeries';
+import TrendingComic from './Components/TrendingComic';
+import useStyles from './styles';
 
 const data = [
   {

@@ -1,2 +1,2 @@
-export {default as CarouselSquareList} from './CarouselSquareList';
-export {default as Pagination} from './Pagination';
+export {default as FavoritesList} from './FavoritesList';
+export {default as ItemFavoritesList} from './ItemFavoritesList';

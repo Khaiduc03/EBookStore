@@ -1,8 +1,9 @@
 import React from 'react';
 import {View} from 'react-native';
 
-import {FavoritesList} from './components';
+
 import useStyles from './styles';
+import { FavoritesList } from './components';
 
 const Favorite: React.FC = () => {
   const styles = useStyles();
