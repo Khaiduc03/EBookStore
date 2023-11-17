@@ -15,16 +15,17 @@ import {NoConversation} from '../../../../assets/svg';
 const ConversationScreen: React.FC = () => {
   const styles = useStyles();
 
-
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   const dispatch = useAppDispatch();
-  const [data, setData] = useState<ConversationI[]>([]);
   const listConversation: ConversationI[] = useAppSelector(getListConversation);
   const token = useAppSelector(getAuthAccessToken);
 
   useEffect(() => {
     dispatch(ChatActions.handleGetListConversation(token));
+    return () => {
+      console.log('unmount');
+    };
   }, []);
 
   const renderItem = (item: ConversationI) => (
@@ -51,11 +52,11 @@ const ConversationScreen: React.FC = () => {
         <View style={styles.body}>
           {listConversation.length === 0 ? (
             <View>
-                 <SearchCustom
-                  value={searchTerm}
-                  setValue={setSearchTerm}
-                  autoFocus={false}
-                />
+              <SearchCustom
+                value={searchTerm}
+                setValue={setSearchTerm}
+                autoFocus={false}
+              />
               <NoConversation />
             </View>
           ) : (
@@ -70,6 +71,7 @@ const ConversationScreen: React.FC = () => {
                   autoFocus={false}
                 />
               }
+              extraData={listConversation}
               ListHeaderComponentStyle={{paddingVertical: 16}}
               showsVerticalScrollIndicator={false}
             />

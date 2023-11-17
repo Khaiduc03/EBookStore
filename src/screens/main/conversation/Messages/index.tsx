@@ -23,6 +23,7 @@ import AvatarComponets from './components/CameraGallery';
 import { ChatBubble } from './components/ChatBubbleItem';
 import useStyles from './styles';
 
+
 const MessageScreen: React.FC = () => {
   const {params} = useRoute() as any;
 
