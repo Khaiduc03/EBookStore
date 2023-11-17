@@ -1,6 +1,6 @@
 import {routes} from '../../../constants';
 import {Screen} from '../../../types';
-import MessageScreen from './Messages1';
+import MessageScreen from './Messages';
 
 export {default as Conversation} from './Conversation';
 export const messageScreens: Screen[] = [
