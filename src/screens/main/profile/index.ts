@@ -7,21 +7,21 @@ import HelpCenter from './HelpCenter';
 import Contact_us from './HelpCenter/Contact_us';
 import FAQ from './HelpCenter/FAQ';
 
+import AddPayment from './AddPayment';
+import ChangePassWord from './ChangePassword';
+import CustomerService from './CustomerService';
+import DiscoverPeople from './DiscoverPeople';
+import HistoryandFavorite from './HistoryandFavorite';
+import Favorite from './HistoryandFavorite/components/Favorite';
+import History from './HistoryandFavorite/components/History';
 import MyProfile from './MyProfile';
 import {PostDetail} from './MyProfile/components';
-import Notification from './SettingNotification';
 import Payments_method from './Payment-method';
 import ProfileUser from './Profile-User';
 import {PostDetailUser} from './Profile-User/components';
 import Security from './Security';
+import SettingsNotification from './SettingNotification';
 import Update_Profile from './Update-profile';
-import ChangePassWord from './ChangePassword';
-import DiscoverPeople from './DiscoverPeople';
-import AddPayment from './AddPayment';
-import CustomerService from './CustomerService';
-import HistoryandFavorite from './HistoryandFavorite';
-import Favorite from './HistoryandFavorite/components/Favorite';
-import History from './HistoryandFavorite/components/History';
 
 export {default as Profile} from './Profile';
 
@@ -39,8 +39,8 @@ export const profileScreens: Screen[] = [
     component: MyProfile,
   },
   {
-    name: routes.SETTINGNOTIFICATION,
-    component: Notification,
+    name: routes.SETTINGS_NOTIFICATION,
+    component: SettingsNotification,
   },
   {
     name: routes.PAYMENTSMETHOD,

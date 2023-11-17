@@ -8,7 +8,7 @@ import {
 import React from 'react';
 import useStyles from './styles';
 import {ComicActions, ComicType} from '../../../../../../../../redux';
-import {data} from '../../../../../../home/notifications/types';
+import {data} from '../../../../../../home/Home/components/Notifications/types';
 import {useAppDispatch} from '../../../../../../../../hooks';
 import {NavigationService} from '../../../../../../../../navigation';
 import {routes} from '../../../../../../../../constants';

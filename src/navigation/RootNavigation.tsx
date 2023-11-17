@@ -8,16 +8,6 @@ import {getMode} from '../redux/selectors/thems.selector';
 import {navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
-import CreatePost from '../screens/main/forum/create-post';
-import NotificationsScreen from '../screens/main/home/notifications';
-import Notifications from '../screens/main/home/notifications/Notifications/components/RenderItem/Notifications';
-import SettingsScreen from '../screens/main/home/notifications/Notifications/components/Settings';
-
-import Filters from '../screens/main/home/filters/Filters';
-import {ConversationItem} from '../screens/main/message/Conversation/components/ConversationItem';
-import ConversationScreen from '../screens/main/message/Conversation';
-import {SocketProvider, socketIO} from '../contexts/SocketContext';
-import MessageScreen from '../screens/main/conversation/Messages';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -48,14 +38,6 @@ const RootNavigation = () => {
         barStyle={themeMode}
       />
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
-
-      {/* <CreatePost/> */}
-      {/* <Filters /> */}
-      {/* <ConversationScreen /> */}
-      {/* <NotificationsScreen /> */}
-      {/* <Notifications /> */}
-      {/* <SettingsScreen /> */}
-      {/* <MessageScreen /> */}
     </NavigationContainer>
   );
 };

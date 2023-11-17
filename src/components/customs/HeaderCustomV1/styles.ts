@@ -40,7 +40,6 @@ const useStyles = makeStyles(({colors}) => ({
   textTitle: {
     fontSize: normalize(22),
     fontFamily: fontFamilySetup.bold,
-    marginLeft: normalize(8),
     lineHeight: normalize(35.2),
     color: colors.black,
   },
