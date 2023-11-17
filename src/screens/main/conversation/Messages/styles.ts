@@ -17,12 +17,14 @@ const useStyles = makeStyles(({colors}) => ({
   body: {
     flex: 1,
     backgroundColor: colors.grey6,
-    padding: normalize(30),
+    paddingHorizontal: normalize(16),
   },
   footer: {
     width: '100%',
-    height: normalize(56),
+    height: '8%',
     backgroundColor: colors.white,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   containerScrollView: {
     backgroundColor: colors.grey6,
@@ -52,7 +54,6 @@ const useStyles = makeStyles(({colors}) => ({
     marginVertical: normalize(5),
     padding: normalize(12),
     flexWrap: 'wrap',
-    alignSelf: 'flex-end',
     backgroundColor: colors.bubbleUserBackground,
   },
   bubbleNotUser: {
@@ -62,7 +63,6 @@ const useStyles = makeStyles(({colors}) => ({
     marginVertical: normalize(5),
     padding: normalize(12),
     flexWrap: 'wrap',
-    alignSelf: 'flex-start',
     backgroundColor: colors.bubbleNotUserBackground,
   },
   textUser: {
@@ -92,10 +92,10 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
   },
   textTimeNotUser: {
+    marginLeft: normalize(WIDTH * 0.01),
     fontSize: normalize(8),
     fontFamily: fontFamilySetup.regular,
     marginBottom: normalize(18),
-    alignSelf: 'flex-start',
     color: colors.black,
   },
   iconBack: {
@@ -135,46 +135,43 @@ const useStyles = makeStyles(({colors}) => ({
   leftContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: normalize(14),
+    marginHorizontal: normalize(6),
     marginVertical: normalize(16),
   },
   rightIconLeft: {
     top: normalize(HEIGHT * 0.018),
-    right: normalize(HEIGHT * 0.056),
+    right: normalize(WIDTH * 0.002),
   },
   rightIconRight: {
     top: normalize(HEIGHT * 0.018),
-    right: normalize(HEIGHT * 0.02),
+    left: normalize(WIDTH * 0.05),
   },
   textInput: {
-    width: normalize(WIDTH * 0.68),
+    width: '66%',
     fontSize: normalize(15),
     fontFamily: fontFamilySetup.bold,
     paddingVertical: normalize(12),
-    paddingStart: normalize(16),
-    paddingEnd: normalize(48),
-    borderWidth: normalize(1),
-    borderColor: colors.blackDefault,
-    borderRadius: normalize(25),
+    paddingHorizontal: normalize(9),
     marginVertical: normalize(5),
   },
   textInputHeightAuto: {
     height: normalize(50),
   },
   textInputHeightAutoLimit: {
-    height: normalize(50),
-  },
-  viewFocus: {
-    height: normalize(HEIGHT * 0.26),
+    height: '8%',
   },
   viewBlur: {
-    height: normalize(HEIGHT * 0.069),
+    width: '100%',
+    height: '8%',
   },
   viewFocusSelectImage: {
     height: normalize(HEIGHT * 0.3),
   },
   viewEmoji: {
-    height: normalize(HEIGHT * 0.6),
+    width: '100%',
+    height: '44%',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
   },
   btnPB: {
     paddingBottom: normalize(36),
