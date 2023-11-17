@@ -43,7 +43,9 @@ const ListHotComic = () => {
           ? 'Action'
           : activeIndex == 2
           ? 'Honor'
-          : 'Weekly HOT'}
+          : activeIndex == 0
+          ? 'Weekly HOT'
+          : ''}
       </Text>
       <FlatList
         onScroll={handleScroll}

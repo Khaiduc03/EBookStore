@@ -43,6 +43,9 @@ const ItemRecommend: React.FunctionComponent<ComicTypeRed> = props => {
             {props.data.comic_name}
           </Text>
         </View>
+        <View style={styles.views}>
+          <Text style={styles.textViews}>{props.data.views}K</Text>
+        </View>
       </ImageBackground>
     </TouchableOpacity>
   );

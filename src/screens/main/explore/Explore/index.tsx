@@ -2,11 +2,14 @@ import React, {useEffect} from 'react';
 import {View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {HeaderCustom} from '../../../../components';
+<<<<<<< HEAD
 import CarouselSquareList from './Components/CarouselSquareList';
 import ListHotComic from './Components/ListHotComic';
 import RecommendedSeries from './Components/RecommendedSeries';
 import TrendingComic from './Components/TrendingComic';
 import useStyles from './styles';
+=======
+>>>>>>> 882f5d4 (update expolre)
 
 const data = [
   {
