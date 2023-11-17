@@ -15,7 +15,7 @@ import {NoConversation} from '../../../../assets/svg';
 const ConversationScreen: React.FC = () => {
   const styles = useStyles();
 
-  const [selectedId, setSelectedId] = useState<string>('');
+
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   const dispatch = useAppDispatch();
@@ -63,7 +63,6 @@ const ConversationScreen: React.FC = () => {
               data={listConversation}
               renderItem={({item}) => renderItem(item)}
               keyExtractor={item => item.uuid.toString()}
-              extraData={selectedId}
               ListHeaderComponent={
                 <SearchCustom
                   value={searchTerm}
