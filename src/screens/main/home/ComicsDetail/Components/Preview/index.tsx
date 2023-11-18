@@ -6,7 +6,6 @@ import {HeaderCustom} from '../../../../../../components';
 import {useAppSelector} from '../../../../../../hooks';
 import {getDetailComic} from '../../../../../../redux/selectors/comic.selector';
 import {ComicType} from '../../../../../../redux';
-import {data} from '../../../../message/Conversation/types';
 
 interface Comic {
   data: ComicType;
@@ -14,9 +13,6 @@ interface Comic {
 
 const Preview: React.FC<Comic> = props => {
   const styles = useStyles();
-
-  // const dataComicDetail = useAppSelector(getDetailComic);
-  // const data = dataComicDetail ? dataComicDetail[0] : null;
 
   return (
     <View style={styles.container}>
