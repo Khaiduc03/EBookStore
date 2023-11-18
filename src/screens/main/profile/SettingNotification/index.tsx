@@ -1,12 +1,11 @@
-import {View, Text} from 'react-native';
 import React from 'react';
-import useStyles from './styles';
-import {routes} from '../../../../constants';
-import {NavigationService} from '../../../../navigation';
+import {Text, View} from 'react-native';
 import {HeaderCustom} from '../../../../components';
 import Switch_custom from '../../../../components/customs/Switch';
+import {NavigationService} from '../../../../navigation';
+import useStyles from './styles';
 
-const SettingNotification: React.FC = () => {
+const SettingsNotification: React.FC = () => {
   const styles = useStyles();
   const handlePressGoback = () => {
     NavigationService.goBack();
@@ -32,4 +31,4 @@ const SettingNotification: React.FC = () => {
   );
 };
 
-export default SettingNotification;
+export default SettingsNotification;

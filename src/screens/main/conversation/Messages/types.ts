@@ -1,3 +1,5 @@
+import { MessageI } from '../../../../redux';
+
 export interface IMessage {
   isUser: boolean;
   text: string;

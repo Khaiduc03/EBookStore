@@ -1,12 +1,9 @@
-import {Text, View} from 'react-native';
-
 import React from 'react';
-import {HeaderCustom} from '../../../../../components';
+import {View} from 'react-native';
+import ItemFilters from './components/RenderItem/ItemFilters';
 import useStyles from './styles';
-import ItemFilters from './components/RenderItem/Filters';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {NavigationService} from '../../../../../navigation';
-import {routes} from '../../../../../constants';
+import {HeaderCustom} from '../../../../components';
+import {NavigationService} from '../../../../navigation';
 
 const Filters: React.FC = () => {
   const styles = useStyles();

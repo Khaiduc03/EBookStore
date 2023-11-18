@@ -108,7 +108,7 @@ const Home: FunctionComponent = () => {
           type: 'ionicon',
         })}
         onPressRightIconRight={() =>
-          NavigationService.push(routes.NOTIFICATIONS)
+          NavigationService.navigate(routes.NOTIFICATIONS)
         }
       />
 

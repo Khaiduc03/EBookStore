@@ -1,15 +1,54 @@
-import React, {FunctionComponent} from 'react';
-import {View, FlatList} from 'react-native';
-import useStyles from './styles';
-import ItemListHot from './Components/ListHotComic/components/ItemListHot';
+import React from 'react';
+import {View} from 'react-native';
+
+import CarouselSquareList from './Components/CarouselSquareList';
 import ListHotComic from './Components/ListHotComic';
-import TrendingComic from './Components/TrendingComic';
-import ItemRecommend from './Components/RecommendedSeries/components/ItemRecommend';
 import RecommendedSeries from './Components/RecommendedSeries';
 import {ScrollView} from 'react-native-gesture-handler';
 import {HeaderCustom} from '../../../../components';
+import TrendingComic from './Components/TrendingComic';
+import useStyles from './styles';
 
-const Explore: FunctionComponent = () => {
+const data = [
+  {
+    title: 'Cô sáu mười ngón',
+    category: 'Fantasy',
+    image:
+      'https://img.dtruyen.com/public/images/large/923/kieuthecokhonggiandayconlamgiaugsyQgwG.jpg',
+  },
+  {
+    title: 'Cô chín mặt mu',
+    category: 'Drama',
+    image:
+      'https://img.dtruyen.com/public/images/large/1023/trove80trothanhnuphubancondoiluongthucuWo1Sse.jpg',
+  },
+  {
+    title: 'Cô mười ngự cu',
+    category: 'Action',
+    image:
+      'https://img.dtruyen.com/public/images/large/thapnien70mynhanmemmairuLCZ6p.jpg',
+  },
+  {
+    title: 'Cô hai chai mặt',
+    category: 'Comedy',
+    image:
+      'https://img.dtruyen.com/public/images/large/thapnien90taohuonggiangxemqueCLnJfWG.jpg',
+  },
+  {
+    title: 'Cô ba la ma to',
+    category: 'Mystery',
+    image:
+      'https://img.dtruyen.com/public/images/large/923/trongsinhvethoinguyenthuylamruongZ2bsyDe.jpg',
+  },
+  {
+    title: 'Cô cô nhiều chuyện',
+    category: 'Horror',
+    image:
+      'https://img.dtruyen.com/public/images/large/823/quaphunhanongnuoiconlamgiauDk5ys24.jpg',
+  },
+];
+
+const ExploreScreen: React.FC = () => {
   const styles = useStyles();
 
   return (
@@ -21,6 +60,9 @@ const Explore: FunctionComponent = () => {
         title="Explore"
       />
       <ScrollView>
+        <View style={styles.backgoundPopular}>
+          <CarouselSquareList data={data} autoPlay={false} pagination={true} />
+        </View>
         <RecommendedSeries />
         <TrendingComic />
         <ListHotComic />
@@ -29,4 +71,4 @@ const Explore: FunctionComponent = () => {
   );
 };
 
-export default Explore;
+export default ExploreScreen;

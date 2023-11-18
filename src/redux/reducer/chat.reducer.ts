@@ -1,5 +1,6 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {
+  Accesstoken,
   ConversationI,
   ListConversationStateI,
   MessageI,
@@ -19,7 +20,7 @@ export const reducer = createSlice({
     //get list conversation
     handleGetListConversation: (
       state: ListConversationStateI,
-      action: PayloadAction<String>,
+      _: PayloadAction<String>,
     ) => {
       return state;
     },
@@ -38,6 +39,7 @@ export const reducer = createSlice({
       state: ListConversationStateI,
       _: PayloadAction<RequestJoinConversationI>,
     ) => {
+      console.log('hi');
       return state;
     },
 
@@ -88,7 +90,10 @@ export const reducer = createSlice({
     },
 
     //handle leave conversation
-    handleLeaveConversation: (state: ListConversationStateI) => {
+    handleLeaveConversation: (
+      state: ListConversationStateI,
+      _: PayloadAction<string>,
+    ) => {
       return {
         ...state,
         messages: [],

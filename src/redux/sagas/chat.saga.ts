@@ -1,11 +1,24 @@
 import {PayloadAction} from '@reduxjs/toolkit';
 import {EventChannel, Task, eventChannel} from 'redux-saga';
-import {call, cancel, fork, put, take, takeLatest} from 'redux-saga/effects';
+import {
+  call,
+  cancel,
+  fork,
+  put,
+  race,
+  take,
+  takeLatest,
+} from 'redux-saga/effects';
 import {Socket, io} from 'socket.io-client';
 import {BASE_URL} from '../../environment';
 import {ChatActions} from '../reducer/chat.reducer';
 import {ConversationService} from '../services/conversation.service';
-import {Accesstoken} from '../types';
+import {
+  Accesstoken,
+  MessageI,
+  RequestAddMessageI,
+  RequestJoinConversationI,
+} from '../types';
 import {AuthActions} from '../reducer';
 
 function connect(token: string) {
@@ -26,7 +39,36 @@ function connect(token: string) {
 
 function* handleIO(socket: Socket) {
   yield fork(read, socket);
-  // yield fork(write, socket);
+  yield fork(write, socket);
+}
+
+function* write(socket: Socket) {
+  while (true) {
+    const {join, leave, add} = yield race({
+      join: take(ChatActions.handleJoinConversation.type),
+      add: take(ChatActions.handleAddMessage.type),
+      leave: take(ChatActions.handleLeaveConversation),
+    });
+    // console.log(leave.payload);
+    if (join) {
+      socket.emit('joinConversation', {
+        uuid: join.payload.uuid,
+      });
+    }
+    if (leave) {
+      socket.emit('leaveRoom');
+    }
+    console.log(add);
+    if (add) {
+      socket.emit('addMessage', {
+        conversation_uuid: add.payload.conversation_uuid,
+        message: add.payload.message,
+      });
+    }
+
+    // yield take(ChatActions.handleLeaveConversation.type);
+    // socket.emit('leaveRoom');
+  }
 }
 
 function* read(socket: Socket) {
@@ -48,12 +90,18 @@ function subscribe(socket: Socket) {
       emitter(ChatActions.handleGetListConversationSuccess(conversations));
     });
 
-    socket.on('disconnect', e => {
-      // TODO: handle
-      console.log('disconnect', e);
+    socket.on('messages', (listMessage: MessageI[]) => {
+      console.log(listMessage);
+      emitter(ChatActions.handleJoinConversationSuccess(listMessage));
     });
+
+    socket.on('messageAdd', newMessage => {
+      console.log(newMessage);
+      emitter(ChatActions.handleAddMessageSuccess(newMessage));
+    });
+
     return () => {
-      socket.disconnect();
+      console.log('unsubscribe');
     };
   });
 }
@@ -64,6 +112,18 @@ function* handleGetListConversation(): Generator {
   yield put(ChatActions.handleGetListConversationSuccess(data.data));
 }
 
+function* handleGetListMessages(
+  action: PayloadAction<RequestJoinConversationI>,
+): Generator {
+  console.log(action.payload.uuid);
+  const {data}: any = yield call(
+    ConversationService.getMessage,
+    action.payload.uuid,
+  );
+
+  yield put(ChatActions.handleJoinConversationSuccess(data));
+}
+
 function* flowSocket() {
   console.log('flow socket');
   const data: Accesstoken = yield take(ChatActions.handleGetListConversation);
@@ -71,8 +131,8 @@ function* flowSocket() {
   const socket: Socket = yield call(connect, data.payload);
 
   const task: Task = yield fork(handleIO, socket);
-
-  yield take(ChatActions.handleCreateConversation);
+  yield take(AuthActions.handleLogout);
+  //yield take(ChatActions.handleJoinConversation);
 
   yield cancel(task);
 }
@@ -82,11 +142,12 @@ function* flow(): Generator {
   // console.log(accessToken);
 
   while (true) {
-    const paylaod = yield takeLatest(
+    yield takeLatest(
       ChatActions.handleGetListConversation,
       handleGetListConversation,
     );
-    console.log(paylaod);
+    yield takeLatest(ChatActions.handleJoinConversation, handleGetListMessages);
+
     yield call(flowSocket);
   }
 }
