@@ -32,13 +32,16 @@ const FavoritesList: FunctionComponent = () => {
 
   const [refreshing, setRefreshing] = React.useState(false);
 
-  console.log(page);
+  console.log('============>', page);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-    setPage(1);
+    dispatch(ComicActions.clearListFavorite());
+
     setTimeout(() => {
       setRefreshing(false);
+      dispatch(ComicActions.getListFavorite(1));
+      setPage(1);
     }, 2000);
   }, []);
 
