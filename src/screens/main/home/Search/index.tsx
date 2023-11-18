@@ -14,6 +14,7 @@ import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {Icon} from '@rneui/themed';
 import {
+  getCurrentSearch,
   getDataComicBySeacrh,
   getNextSearch,
 } from '../../../../redux/selectors/comic.selector';
@@ -28,18 +29,11 @@ import {getIsLoadingTopic} from '../../../../redux/selectors/loading.selector';
 const Search = () => {
   const dispatch = useAppDispatch();
   const dataBySearch = useAppSelector(getDataComicBySeacrh);
+  const currentPage = useAppSelector(getCurrentSearch);
   const nextPage = useAppSelector(getNextSearch);
   const [numCols, setNumCols] = useState(3);
-  const [data, setData] = useState<any>([]);
-  const [page, setPage] = useState(2);
 
   const isLoading = useAppSelector(getIsLoadingTopic);
-
-  useEffect(() => {
-    if (dataBySearch && dataBySearch.length !== 0) {
-      setData([...data, ...dataBySearch]);
-    }
-  }, [dataBySearch]);
 
   const styles = useStyles();
   const [search, setSearch] = useState('');
@@ -52,36 +46,23 @@ const Search = () => {
   };
 
   const onPressSearch = () => {
+    dispatch(ComicActions.ClearListBySearch());
     dispatch(ComicActions.getListBySearch({key: search, page: 1}));
-    setData([]);
-    setPage(2);
   };
 
   const loadMoreComic = () => {
-    if (data.length > 0) {
-      if (search) {
-        if (nextPage) {
-          setPage(page + 1);
-          dispatch(ComicActions.getListBySearch({key: search, page: page}));
-        }
-      }
+    if (search && nextPage && !isLoading) {
+      dispatch(
+        ComicActions.getListBySearch({
+          key: search,
+          page: currentPage && currentPage + 1,
+        }),
+      );
     }
   };
   const onPressBackIcon = () => {
     dispatch(ComicActions.ClearListBySearch());
     backScreen();
-  };
-
-  const sortIncreaseDataByViews = () => {
-    const newData = [...data];
-    newData.sort((a, b) => a.views - b.views); // Sắp xếp từ nhỏ đến lớn theo trường views
-    setData(newData);
-  };
-
-  const sortReduceDataByView = () => {
-    const newData = [...data];
-    newData.sort((a, b) => b.views - a.views); // Sắp xếp từ nhỏ đến lớn theo trường views
-    setData(newData);
   };
 
   const listFooterComponent = useCallback(() => {
@@ -123,7 +104,7 @@ const Search = () => {
             />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={sortIncreaseDataByViews}
           style={{backgroundColor: 'yellow'}}>
           <Text style={{fontSize: 30}}>Decrease Data</Text>
@@ -133,9 +114,9 @@ const Search = () => {
           onPress={sortReduceDataByView}
           style={{backgroundColor: 'yellow'}}>
           <Text style={{fontSize: 30}}>Reduce Data</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
-        {data?.length === 0 ? (
+        {dataBySearch?.length === 0 ? (
           <NoSearch />
         ) : (
           <FlatList
@@ -172,7 +153,7 @@ const Search = () => {
                 topicStyle={numCols == 1 ? styles.topicsContainer : null}
               />
             )}
-            data={data}
+            data={dataBySearch}
             key={numCols.toString()}
             numColumns={numCols}
             columnWrapperStyle={

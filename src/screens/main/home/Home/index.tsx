@@ -72,6 +72,7 @@ const Home: FunctionComponent = () => {
     setNumCols(3);
   };
   const handlePressSearch = () => {
+    dispatch(ComicActions.ClearListBySearch());
     NavigationService.navigate(routes.SEARCH);
   };
 
