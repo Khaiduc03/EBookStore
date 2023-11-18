@@ -28,6 +28,7 @@ import {getIsLoadingTopic} from '../../../../redux/selectors/loading.selector';
 import {useRoute} from '@react-navigation/native';
 interface RouteParamsFillter {
   highestView?: boolean;
+  lowestViews?: boolean;
 }
 const Search = () => {
   const route = useRoute();
@@ -36,11 +37,13 @@ const Search = () => {
   const currentPage = useAppSelector(getCurrentSearch);
   const nextPage = useAppSelector(getNextSearch);
   const [numCols, setNumCols] = useState(3);
-  const hightView = (route.params as RouteParamsFillter)?.highestView;
-  const [data, setData] = useState<ComicType[]>([]);
-  const [hight, setHight] = useState(Boolean);
+  const [hightView, setHightView] = useState(Boolean);
 
-  console.log('========>', hight);
+  const [lowView, setLowView] = useState(Boolean);
+
+  const [data, setData] = useState<ComicType[]>([]);
+  console.log('========>hightView', hightView);
+  console.log('========>lowView', lowView);
 
   const isLoading = useAppSelector(getIsLoadingTopic);
 
@@ -54,34 +57,29 @@ const Search = () => {
     setNumCols(3);
   };
 
-  const sortDataByViews = (data: ComicType[]): ComicType[] => {
+  const sortReduceDataByViews = (data: ComicType[]): ComicType[] => {
     return data.slice().sort((a, b) => b.views - a.views);
   };
 
-  useEffect(() => {
-    if (hightView) {
-      setHight(hightView);
-    }
-  }, [hightView]);
-
-  useEffect(() => {
-    if (hight) {
-      setData(sortDataByViews(data));
-    }
-  }, [hight]);
+  const sortIncreaseDataByViews = (data: ComicType[]): ComicType[] => {
+    return data.slice().sort((a, b) => a.views - b.views);
+  };
 
   useEffect(() => {
     if (dataBySearch) {
-      if (hight) {
-        setData(sortDataByViews(dataBySearch));
+      if (hightView) {
+        setData(sortReduceDataByViews(dataBySearch));
+      } else if (lowView) {
+        setData(sortIncreaseDataByViews(dataBySearch));
       } else {
         setData(dataBySearch);
       }
     }
-  }, [dataBySearch]);
+  }, [dataBySearch, hightView, lowView]);
 
   const onPressSearch = () => {
-    setHight(false);
+    setHightView(false);
+    setLowView(false);
     dispatch(ComicActions.ClearListBySearch());
     dispatch(ComicActions.getListBySearch({key: search, page: 1}));
   };
@@ -129,7 +127,10 @@ const Search = () => {
           <TouchableOpacity
             style={styles.btnFilters}
             onPress={() => {
-              NavigationService.push(routes.FILTERS);
+              NavigationService.navigate(routes.FILTERS, {
+                setHightView,
+                setLowView,
+              });
               Keyboard.dismiss();
             }}>
             <Icon
@@ -140,17 +141,6 @@ const Search = () => {
             />
           </TouchableOpacity>
         </View>
-        {/* <TouchableOpacity
-          onPress={sortIncreaseDataByViews}
-          style={{backgroundColor: 'yellow'}}>
-          <Text style={{fontSize: 30}}>Decrease Data</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={sortReduceDataByView}
-          style={{backgroundColor: 'yellow'}}>
-          <Text style={{fontSize: 30}}>Reduce Data</Text>
-        </TouchableOpacity> */}
 
         {data?.length === 0 ? (
           <NoSearch />

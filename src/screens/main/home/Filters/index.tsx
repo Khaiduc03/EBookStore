@@ -4,9 +4,13 @@ import ItemFilters from './components/RenderItem/ItemFilters';
 import useStyles from './styles';
 import {HeaderCustom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
-
-const Filters: React.FC = () => {
+import {RouteProp, useRoute} from '@react-navigation/native';
+interface FiltersProps {
+  route: RouteProp<{params: {setHightView: Function; setLowView: Function}}>;
+}
+const Filters: React.FC<FiltersProps> = ({route}) => {
   const styles = useStyles();
+  const {setHightView, setLowView} = route.params;
 
   return (
     <View style={styles.container}>
@@ -23,7 +27,7 @@ const Filters: React.FC = () => {
           }}
         />
         <View style={styles.viewItemFilters}>
-          <ItemFilters />
+          <ItemFilters setHightView={setHightView} setLowView={setLowView} />
         </View>
       </View>
     </View>

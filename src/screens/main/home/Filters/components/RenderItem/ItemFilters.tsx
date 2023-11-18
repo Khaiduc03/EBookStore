@@ -4,8 +4,15 @@ import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import useStyles from '../../styles';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
+interface ItemFiltersProps {
+  setHightView: Function;
+  setLowView: Function;
+}
 
-const ItemFilters: React.FC = () => {
+const ItemFilters: React.FC<ItemFiltersProps> = ({
+  setHightView,
+  setLowView,
+}) => {
   const styles = useStyles();
 
   // Top Menu Filters
@@ -49,7 +56,8 @@ const ItemFilters: React.FC = () => {
   const [isCbSelected23, setCbSelected23] = useState(true);
 
   const onPressApply = () => {
-    NavigationService.navigate(routes.SEARCH, {highestView: isCbSelected1});
+    NavigationService.navigate(routes.SEARCH);
+    setHightView(isCbSelected1), setLowView(isCbSelected6);
   };
 
   const handleAllClick = () => {
