@@ -9,6 +9,7 @@ const HEIGHT = Device.getDeviceHeight();
 const useStyles = makeStyles(({colors}) => ({
   container: {
     flex: 1,
+    backgroundColor: colors.grey6,
   },
   wrapper: {
     ...StyleSheet.absoluteFillObject,

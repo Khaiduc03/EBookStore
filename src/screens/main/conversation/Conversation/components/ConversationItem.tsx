@@ -11,30 +11,31 @@ import useStyles from './styles';
 
 export const ConversationItem = (item: ConversationI) => {
   const styles = useStyles();
+  const {
+    joined_name,
+    joined_status,
+    joined_url,
+    last_message_time,
+    last_sender_name,
+    message,
+    uuid,
+  } = item;
+  const status = joined_status ? 'online' : 'offline';
+  const [lastMessage, setLastMessage] = useState(
+    last_sender_name === 'You' ? 'You: ' : '',
+  );
+  const [messageText, setMessageText] = useState(
+    message || `Say hihi to ${joined_name}`,
+  );
+  const [name, setName] = useState(joined_name || 'Anonymous');
 
-  const status = item.joined_status ? 'online' : 'offline';
-
-  //if item.last_sender_name === "You" then show "You: message" else show "message"
-  const [lastMessage, setLastMessage] = useState<string>('');
-  const [message, setMessage] = useState(item.message);
-  const [name, setname] = useState(item.joined_name);
-
-  const last_message_time = formatTime(item.created_at);
+  const last_message_time_formatted = formatTime(last_message_time);
 
   useEffect(() => {
-    if (item.last_sender_name === 'You') {
-      setLastMessage('You: ');
-    } else {
-      setLastMessage('');
-    }
-    if (name === '') {
-      setname('Anonymous');
-      setMessage(`Say hihi to anonymous`);
-    }
-    if (message === null) {
-      setMessage(`Say hihi to ${name}`);
-    }
-  }, [message, item.last_sender_name, name]);
+    setName(joined_name || 'Anonymous');
+    setLastMessage(last_sender_name === 'You' ? 'You: ' : '');
+    setMessageText(message || `Say hihi to ${name}`);
+  }, [joined_name, last_sender_name, message]);
 
   return (
     <TouchableOpacity
@@ -63,14 +64,14 @@ export const ConversationItem = (item: ConversationI) => {
           <Text numberOfLines={1} style={styles.nameStyle}>
             {name}
           </Text>
-          <Text style={styles.timeStyle}>{last_message_time}</Text>
+          <Text style={styles.timeStyle}>{last_message_time_formatted}</Text>
         </View>
         <View style={styles.container_message}>
           <Text style={styles.lastmessageStyle}>{lastMessage}</Text>
           <Text
             numberOfLines={1}
             style={[styles.lastmessageStyle, styles.messageStyle]}>
-            {message}
+            {message || messageText}
           </Text>
         </View>
       </View>

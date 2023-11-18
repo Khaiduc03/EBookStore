@@ -41,6 +41,15 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
     marginLeft: normalize(4),
   },
+  bodyNoData: {
+    marginVertical: normalize(16),
+  },
+  imageNoData: {
+    alignSelf: 'center',
+    alignItems: 'center',
+    width: '80%',
+    height: '80%',
+  },
 }));
 
 export default useStyles;

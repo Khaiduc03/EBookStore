@@ -58,7 +58,7 @@ function* write(socket: Socket) {
     if (leave) {
       socket.emit('leaveRoom');
     }
-    console.log(add);
+
     if (add) {
       socket.emit('addMessage', {
         conversation_uuid: add.payload.conversation_uuid,
@@ -86,17 +86,14 @@ function subscribe(socket: Socket) {
   console.log('subscribe');
   return eventChannel(emitter => {
     socket.on('conversations', conversations => {
-      console.log(conversations);
       emitter(ChatActions.handleGetListConversationSuccess(conversations));
     });
 
     socket.on('messages', (listMessage: MessageI[]) => {
-      console.log(listMessage);
       emitter(ChatActions.handleJoinConversationSuccess(listMessage));
     });
 
     socket.on('messageAdd', newMessage => {
-      console.log(newMessage);
       emitter(ChatActions.handleAddMessageSuccess(newMessage));
     });
 

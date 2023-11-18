@@ -1,20 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import {FlatList, Keyboard, TouchableWithoutFeedback, View} from 'react-native';
-import {HeaderCustom, SearchCustom} from '../../../../components';
+import React, { useEffect, useState } from 'react';
+import {
+  FlatList,
+  Keyboard,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native';
+import { HeaderCustom, SearchCustom } from '../../../../components';
 
 import useStyles from './styles';
 
-import {ConversationI, getAuthAccessToken} from '../../../../redux';
-import {ConversationItem} from './components/ConversationItem';
+import { ConversationI, getAuthAccessToken } from '../../../../redux';
+import { ConversationItem } from './components/ConversationItem';
 
-import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {ChatActions} from '../../../../redux/reducer/chat.reducer';
-import {getListConversation} from '../../../../redux/selectors/chat.selector';
-import {NoConversation} from '../../../../assets/svg';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { ChatActions } from '../../../../redux/reducer/chat.reducer';
+import { getListConversation } from '../../../../redux/selectors/chat.selector';
+
 
 const ConversationScreen: React.FC = () => {
   const styles = useStyles();
-
 
   const [searchTerm, setSearchTerm] = useState<string>('');
 
@@ -25,6 +29,15 @@ const ConversationScreen: React.FC = () => {
 
   useEffect(() => {
     dispatch(ChatActions.handleGetListConversation(token));
+    listConversation.sort((a, b) => {
+      return (
+        new Date(b.last_message_time).getTime() -
+        new Date(a.last_message_time).getTime()
+      );
+    });
+    return () => {
+      console.log('unmount ConversationScreen');
+    };
   }, []);
 
   const renderItem = (item: ConversationI) => (
@@ -50,13 +63,13 @@ const ConversationScreen: React.FC = () => {
         </View>
         <View style={styles.body}>
           {listConversation.length === 0 ? (
-            <View>
-                 <SearchCustom
-                  value={searchTerm}
-                  setValue={setSearchTerm}
-                  autoFocus={false}
-                />
-              <NoConversation />
+            <View style={styles.bodyNoData}>
+              <SearchCustom
+                value={searchTerm}
+                setValue={setSearchTerm}
+                autoFocus={false}
+              />
+              <View style={styles.imageNoData}></View>
             </View>
           ) : (
             <FlatList

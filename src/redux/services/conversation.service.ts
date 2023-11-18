@@ -8,7 +8,7 @@ export class ConversationService {
   }
 
   static async getMessage(conversation_uuid: string) {
-    console.log(ENDPOINTS.MESSAGES);
+
     return await apiService.get(
       `${ENDPOINTS.MESSAGES}?conversation_uuid=${conversation_uuid}`,
     );
