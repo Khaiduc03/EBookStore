@@ -59,6 +59,7 @@ const ExploreScreen: React.FC = () => {
         leftIcon={{name: 'id-card', type: 'ionicon'}}
         title="Explore"
       />
+
       <ScrollView>
         <View style={styles.backgoundPopular}>
           <CarouselSquareList data={data} autoPlay={false} pagination={true} />

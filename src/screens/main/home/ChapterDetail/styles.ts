@@ -9,9 +9,11 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: colors.background,
     position: 'relative',
   },
-  imageStyle: {
-    width: WIDTH,
-    height: normalize(4000),
+
+  skeletonStyle: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
   },
 }));
 
