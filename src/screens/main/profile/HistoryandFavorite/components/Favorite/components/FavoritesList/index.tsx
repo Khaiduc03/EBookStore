@@ -5,7 +5,13 @@ import React, {
   useState,
 } from 'react';
 
-import {View, Text, FlatList, ActivityIndicator} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  RefreshControl,
+} from 'react-native';
 import useStyles from './styles';
 import {useAppDispatch, useAppSelector} from '../../../../../../../../hooks';
 import {
@@ -23,6 +29,18 @@ const FavoritesList: FunctionComponent = () => {
   const styles = useStyles();
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(getIsLoadingTopic);
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  console.log(page);
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setPage(1);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
   useEffect(() => {
     dispatch(ComicActions.getListFavorite(page));
@@ -50,6 +68,9 @@ const FavoritesList: FunctionComponent = () => {
   return (
     <View style={styles.container}>
       <FlatList
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
         data={data}
         renderItem={RenderItem}
         keyExtractor={item => item.comic_uuid}
