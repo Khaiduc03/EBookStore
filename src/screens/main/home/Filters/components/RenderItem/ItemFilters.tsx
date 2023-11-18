@@ -2,6 +2,8 @@ import {CheckBox} from '@rneui/themed';
 import React, {useState} from 'react';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import useStyles from '../../styles';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
 
 const ItemFilters: React.FC = () => {
   const styles = useStyles();
@@ -45,6 +47,10 @@ const ItemFilters: React.FC = () => {
   const [isCbSelected21, setCbSelected21] = useState(true);
   const [isCbSelected22, setCbSelected22] = useState(true);
   const [isCbSelected23, setCbSelected23] = useState(true);
+
+  const onPressApply = () => {
+    NavigationService.navigate(routes.SEARCH, {highestView: isCbSelected1});
+  };
 
   const handleAllClick = () => {
     if (isAllSelected) {
@@ -1400,7 +1406,9 @@ const ItemFilters: React.FC = () => {
         <TouchableOpacity style={[styles.btn, styles.backgroundColorBtnReset]}>
           <Text style={styles.textBtnReset}>Reset</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn, styles.backgroundColorBtnApply]}>
+        <TouchableOpacity
+          onPress={onPressApply}
+          style={[styles.btn, styles.backgroundColorBtnApply]}>
           <Text style={styles.textBtnApply}>Apply</Text>
         </TouchableOpacity>
       </View>

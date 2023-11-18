@@ -25,13 +25,22 @@ import {FlatList} from 'react-native-gesture-handler';
 import ErrorSearch from './components/ErrorSearch';
 import NoSearch from './components/NoSearch';
 import {getIsLoadingTopic} from '../../../../redux/selectors/loading.selector';
-
+import {useRoute} from '@react-navigation/native';
+interface RouteParamsFillter {
+  highestView?: boolean;
+}
 const Search = () => {
+  const route = useRoute();
   const dispatch = useAppDispatch();
   const dataBySearch = useAppSelector(getDataComicBySeacrh);
   const currentPage = useAppSelector(getCurrentSearch);
   const nextPage = useAppSelector(getNextSearch);
   const [numCols, setNumCols] = useState(3);
+  const hightView = (route.params as RouteParamsFillter)?.highestView;
+  const [data, setData] = useState<ComicType[]>([]);
+  const [hight, setHight] = useState(Boolean);
+
+  console.log('========>', hight);
 
   const isLoading = useAppSelector(getIsLoadingTopic);
 
@@ -45,7 +54,34 @@ const Search = () => {
     setNumCols(3);
   };
 
+  const sortDataByViews = (data: ComicType[]): ComicType[] => {
+    return data.slice().sort((a, b) => b.views - a.views);
+  };
+
+  useEffect(() => {
+    if (hightView) {
+      setHight(hightView);
+    }
+  }, [hightView]);
+
+  useEffect(() => {
+    if (hight) {
+      setData(sortDataByViews(data));
+    }
+  }, [hight]);
+
+  useEffect(() => {
+    if (dataBySearch) {
+      if (hight) {
+        setData(sortDataByViews(dataBySearch));
+      } else {
+        setData(dataBySearch);
+      }
+    }
+  }, [dataBySearch]);
+
   const onPressSearch = () => {
+    setHight(false);
     dispatch(ComicActions.ClearListBySearch());
     dispatch(ComicActions.getListBySearch({key: search, page: 1}));
   };
@@ -116,7 +152,7 @@ const Search = () => {
           <Text style={{fontSize: 30}}>Reduce Data</Text>
         </TouchableOpacity> */}
 
-        {dataBySearch?.length === 0 ? (
+        {data?.length === 0 ? (
           <NoSearch />
         ) : (
           <FlatList
@@ -153,7 +189,7 @@ const Search = () => {
                 topicStyle={numCols == 1 ? styles.topicsContainer : null}
               />
             )}
-            data={dataBySearch}
+            data={data}
             key={numCols.toString()}
             numColumns={numCols}
             columnWrapperStyle={
