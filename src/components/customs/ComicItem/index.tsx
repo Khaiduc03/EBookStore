@@ -7,7 +7,7 @@ import {NavigationService} from '../../../navigation';
 import {routes} from '../../../constants';
 import FastImage from 'react-native-fast-image';
 import {ComicActions, ComicType} from '../../../redux';
-import {Skeleton} from '@rneui/base';
+import {Image, Skeleton} from '@rneui/base';
 import {useAppDispatch} from '../../../hooks';
 
 const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
