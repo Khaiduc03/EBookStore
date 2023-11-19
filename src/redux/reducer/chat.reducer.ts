@@ -1,9 +1,11 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {
+  Accesstoken,
   ConversationI,
   ListConversationStateI,
   MessageI,
   RequestAddMessageI,
+  RequestCreateConversationI,
   RequestJoinConversationI,
 } from '../types';
 
@@ -19,7 +21,7 @@ export const reducer = createSlice({
     //get list conversation
     handleGetListConversation: (
       state: ListConversationStateI,
-      action: PayloadAction<String>,
+      _: PayloadAction<String>,
     ) => {
       return state;
     },
@@ -65,30 +67,43 @@ export const reducer = createSlice({
     ) => {
       return {
         ...state,
-        messages: [...state.messages, action.payload],
+        messages: [action.payload, ...state.messages],
       };
     },
 
     //handle create conversation
     handleCreateConversation: (
       state: ListConversationStateI,
-      _: PayloadAction<RequestJoinConversationI>,
+      _: PayloadAction<RequestCreateConversationI>,
     ) => {
+      console.log('handleCreateConversation');
       return state;
     },
 
     handleCreateConversationSuccess: (
       state: ListConversationStateI,
-      action: PayloadAction<ConversationI[]>,
+      action: PayloadAction<ConversationI>,
     ) => {
-      return {
-        ...state,
-        conversations: action.payload,
-      };
+      const existingConversation = state.conversations.find(
+        conversation => conversation.uuid === action.payload.uuid,
+      );
+
+      if (!existingConversation) {
+        return {
+          ...state,
+          conversations: [action.payload, ...state.conversations],
+        };
+      }
+
+      // Trả về state hiện tại nếu action.payload đã tồn tại trong mảng
+      return state;
     },
 
     //handle leave conversation
-    handleLeaveConversation: (state: ListConversationStateI) => {
+    handleLeaveConversation: (
+      state: ListConversationStateI,
+      _: PayloadAction<string>,
+    ) => {
       return {
         ...state,
         messages: [],

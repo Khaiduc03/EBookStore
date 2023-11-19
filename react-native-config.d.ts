@@ -42,6 +42,7 @@ declare module 'react-native-config' {
     HISTORY_COMIC: string;
     //CONVERSATION
     CONVERSATION: string;
+    MESSAGES: string;
   }
 
   export const Config: NativeConfig;

@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, Keyboard, TouchableWithoutFeedback, View} from 'react-native';
+import {
+  FlatList,
+  Keyboard,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import {HeaderCustom, SearchCustom} from '../../../../components';
 
 import useStyles from './styles';
@@ -10,12 +16,13 @@ import {ConversationItem} from './components/ConversationItem';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {ChatActions} from '../../../../redux/reducer/chat.reducer';
 import {getListConversation} from '../../../../redux/selectors/chat.selector';
-import {NoConversation} from '../../../../assets/svg';
+import {NavigationService} from '../../../../navigation';
+import {routes} from '../../../../constants';
+import {parseISO} from 'date-fns';
 
 const ConversationScreen: React.FC = () => {
   const styles = useStyles();
 
-  const [selectedId, setSelectedId] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   const dispatch = useAppDispatch();
@@ -25,11 +32,26 @@ const ConversationScreen: React.FC = () => {
 
   useEffect(() => {
     dispatch(ChatActions.handleGetListConversation(token));
+
+    return () => {
+      console.log('unmount ConversationScreen');
+    };
   }, []);
 
   const renderItem = (item: ConversationI) => (
     <ConversationItem {...item} key={item.uuid.toString()} />
   );
+
+  const sortedData = [...listConversation].sort((a, b) => {
+    // Giả sử thời gian được lưu trữ trong trường createdAt
+    const timeA = parseISO(a.last_message_time);
+    const timeB = parseISO(b.last_message_time);
+
+    // Sắp xếp theo thời gian giảm dần (mới nhất đầu tiên)
+
+    // Sắp xếp theo thời gian giảm dần (mới nhất đầu tiên)
+    return timeB.getTime() - timeA.getTime();
+  });
 
   return (
     <TouchableWithoutFeedback
@@ -50,26 +72,36 @@ const ConversationScreen: React.FC = () => {
         </View>
         <View style={styles.body}>
           {listConversation.length === 0 ? (
-            <View>
-                 <SearchCustom
-                  value={searchTerm}
-                  setValue={setSearchTerm}
-                  autoFocus={false}
-                />
-              <NoConversation />
+            <View style={styles.bodyNoData}>
+              <SearchCustom
+                // value={searchTerm}
+                // setValue={setSearchTerm}
+                autoFocus={false}
+                onPress={() => {
+                  console.log('hih');
+                  NavigationService.navigate(routes.SEARCH_USER);
+                }}
+              />
+              <View style={styles.imageNoData}></View>
             </View>
           ) : (
             <FlatList
-              data={listConversation}
+              data={sortedData}
               renderItem={({item}) => renderItem(item)}
               keyExtractor={item => item.uuid.toString()}
-              extraData={selectedId}
               ListHeaderComponent={
-                <SearchCustom
-                  value={searchTerm}
-                  setValue={setSearchTerm}
-                  autoFocus={false}
-                />
+                <TouchableOpacity
+                  onPress={() => {
+                    console.log('hih');
+                    NavigationService.navigate(routes.SEARCH_USER);
+                  }}>
+                  <SearchCustom
+                    onPress={() => {
+                      console.log('hih');
+                      NavigationService.navigate(routes.SEARCH_USER);
+                    }}
+                  />
+                </TouchableOpacity>
               }
               ListHeaderComponentStyle={{paddingVertical: 16}}
               showsVerticalScrollIndicator={false}
