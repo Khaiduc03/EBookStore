@@ -19,6 +19,7 @@ export const ConversationItem = (item: ConversationI) => {
     last_sender_name,
     message,
     uuid,
+    created_at,
   } = item;
   const status = joined_status ? 'online' : 'offline';
   const [lastMessage, setLastMessage] = useState(
@@ -29,7 +30,9 @@ export const ConversationItem = (item: ConversationI) => {
   );
   const [name, setName] = useState(joined_name || 'Anonymous');
 
-  const last_message_time_formatted = formatTime(last_message_time);
+  const last_message_time_formatted = formatTime(
+    last_message_time || created_at,
+  );
 
   useEffect(() => {
     setName(joined_name || 'Anonymous');

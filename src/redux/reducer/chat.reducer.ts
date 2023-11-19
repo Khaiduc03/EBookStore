@@ -5,6 +5,7 @@ import {
   ListConversationStateI,
   MessageI,
   RequestAddMessageI,
+  RequestCreateConversationI,
   RequestJoinConversationI,
 } from '../types';
 
@@ -39,7 +40,6 @@ export const reducer = createSlice({
       state: ListConversationStateI,
       _: PayloadAction<RequestJoinConversationI>,
     ) => {
-      console.log('hi');
       return state;
     },
 
@@ -67,26 +67,36 @@ export const reducer = createSlice({
     ) => {
       return {
         ...state,
-        messages: [...state.messages, action.payload],
+        messages: [action.payload, ...state.messages],
       };
     },
 
     //handle create conversation
     handleCreateConversation: (
       state: ListConversationStateI,
-      _: PayloadAction<RequestJoinConversationI>,
+      _: PayloadAction<RequestCreateConversationI>,
     ) => {
+      console.log('handleCreateConversation');
       return state;
     },
 
     handleCreateConversationSuccess: (
       state: ListConversationStateI,
-      action: PayloadAction<ConversationI[]>,
+      action: PayloadAction<ConversationI>,
     ) => {
-      return {
-        ...state,
-        conversations: action.payload,
-      };
+      const existingConversation = state.conversations.find(
+        conversation => conversation.uuid === action.payload.uuid,
+      );
+
+      if (!existingConversation) {
+        return {
+          ...state,
+          conversations: [action.payload, ...state.conversations],
+        };
+      }
+
+      // Trả về state hiện tại nếu action.payload đã tồn tại trong mảng
+      return state;
     },
 
     //handle leave conversation

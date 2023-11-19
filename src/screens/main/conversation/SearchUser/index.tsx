@@ -13,16 +13,23 @@ import {UserI} from '../../../../redux';
 import apiService from '../../../../redux/services/api.service';
 import UserItem from './components/UserItem';
 import useStyles from './styles';
+import {NavigationService} from '../../../../navigation';
 
 const SearchUserScreen: FunctionComponent = () => {
   const styles = useStyles();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<UserI[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [inputFocused, setInputFocused] = useState(false);
+  const handleInputFocus = () => {
+    setInputFocused(true);
+  };
   useEffect(() => {
     const fetchData = async () => {
       const {data} = await apiService.get(`${ENDPOINTS.GET_ALL_USER}`);
       // console.log(data);
       if (data.code === 200) {
         setData(data.data);
+        handleInputFocus();
       }
     };
 
@@ -31,6 +38,10 @@ const SearchUserScreen: FunctionComponent = () => {
 
   const renderItem = (item: UserI) => (
     <UserItem {...item} key={item.uuid.toString()} />
+  );
+
+  const filteredData = data.filter(item =>
+    (item.fullname ?? '').toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
@@ -44,14 +55,20 @@ const SearchUserScreen: FunctionComponent = () => {
             type="ionicon"
             size={24}
             color={styles.header.color}
+            onPress={() => NavigationService.goBack()}
           />
-          <TextInput placeholder="Search user" style={styles.input} />
+          <TextInput
+            value={searchQuery}
+            onChangeText={text => setSearchQuery(text)}
+            placeholder="Search user"
+            style={styles.input}
+          />
         </View>
         <FlatList
           ListHeaderComponent={
             <Text style={styles.textStyle}>Recommend for you</Text>
           }
-          data={data}
+          data={filteredData}
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => renderItem(item)}
           keyExtractor={(item: UserI) => item.uuid.toString()}

@@ -39,6 +39,10 @@ export interface RequestJoinConversationI {
   uuid: string;
 }
 
+export interface RequestCreateConversationI {
+  joined_uuid:string
+}
+
 export interface RequestAddMessageI {
   //conversation_uuid of the conversation
   conversation_uuid: string;

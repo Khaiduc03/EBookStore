@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   FlatList,
   Keyboard,
+  TouchableOpacity,
   TouchableWithoutFeedback,
-  View
+  View,
 } from 'react-native';
-import { HeaderCustom, SearchCustom } from '../../../../components';
+import {HeaderCustom, SearchCustom} from '../../../../components';
 
 import useStyles from './styles';
 
-import { ConversationI, getAuthAccessToken } from '../../../../redux';
-import { ConversationItem } from './components/ConversationItem';
+import {ConversationI, getAuthAccessToken} from '../../../../redux';
+import {ConversationItem} from './components/ConversationItem';
 
-import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { ChatActions } from '../../../../redux/reducer/chat.reducer';
-import { getListConversation } from '../../../../redux/selectors/chat.selector';
-
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {ChatActions} from '../../../../redux/reducer/chat.reducer';
+import {getListConversation} from '../../../../redux/selectors/chat.selector';
+import {NavigationService} from '../../../../navigation';
+import {routes} from '../../../../constants';
+import {parseISO} from 'date-fns';
 
 const ConversationScreen: React.FC = () => {
   const styles = useStyles();
@@ -29,12 +32,7 @@ const ConversationScreen: React.FC = () => {
 
   useEffect(() => {
     dispatch(ChatActions.handleGetListConversation(token));
-    listConversation.sort((a, b) => {
-      return (
-        new Date(b.last_message_time).getTime() -
-        new Date(a.last_message_time).getTime()
-      );
-    });
+
     return () => {
       console.log('unmount ConversationScreen');
     };
@@ -43,6 +41,17 @@ const ConversationScreen: React.FC = () => {
   const renderItem = (item: ConversationI) => (
     <ConversationItem {...item} key={item.uuid.toString()} />
   );
+
+  const sortedData = [...listConversation].sort((a, b) => {
+    // Giả sử thời gian được lưu trữ trong trường createdAt
+    const timeA = parseISO(a.last_message_time);
+    const timeB = parseISO(b.last_message_time);
+
+    // Sắp xếp theo thời gian giảm dần (mới nhất đầu tiên)
+
+    // Sắp xếp theo thời gian giảm dần (mới nhất đầu tiên)
+    return timeB.getTime() - timeA.getTime();
+  });
 
   return (
     <TouchableWithoutFeedback
@@ -65,23 +74,34 @@ const ConversationScreen: React.FC = () => {
           {listConversation.length === 0 ? (
             <View style={styles.bodyNoData}>
               <SearchCustom
-                value={searchTerm}
-                setValue={setSearchTerm}
+                // value={searchTerm}
+                // setValue={setSearchTerm}
                 autoFocus={false}
+                onPress={() => {
+                  console.log('hih');
+                  NavigationService.navigate(routes.SEARCH_USER);
+                }}
               />
               <View style={styles.imageNoData}></View>
             </View>
           ) : (
             <FlatList
-              data={listConversation}
+              data={sortedData}
               renderItem={({item}) => renderItem(item)}
               keyExtractor={item => item.uuid.toString()}
               ListHeaderComponent={
-                <SearchCustom
-                  value={searchTerm}
-                  setValue={setSearchTerm}
-                  autoFocus={false}
-                />
+                <TouchableOpacity
+                  onPress={() => {
+                    console.log('hih');
+                    NavigationService.navigate(routes.SEARCH_USER);
+                  }}>
+                  <SearchCustom
+                    onPress={() => {
+                      console.log('hih');
+                      NavigationService.navigate(routes.SEARCH_USER);
+                    }}
+                  />
+                </TouchableOpacity>
               }
               ListHeaderComponentStyle={{paddingVertical: 16}}
               showsVerticalScrollIndicator={false}

@@ -4,6 +4,7 @@ import {
   Keyboard,
   Text,
   TextInput,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
@@ -11,13 +12,23 @@ import {
 import {Avatar, Icon} from '@rneui/themed';
 import useStyles from './styles';
 import {UserI} from '../../../../../redux';
+import {useAppDispatch} from '../../../../../hooks';
+import {ChatActions} from '../../../../../redux/reducer/chat.reducer';
 
 const UserItem: FunctionComponent<UserI> = props => {
   const styles = useStyles();
   const status = props.status ? 'online' : 'offline';
   const [name, setName] = useState(props.fullname || 'Anonymous');
+  const dispatch = useAppDispatch();
+  const handleCreateRoom = () => {
+    dispatch(ChatActions.handleCreateConversation({joined_uuid: props.uuid}));
+  };
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={() => {
+        handleCreateRoom();
+      }}
+      style={styles.container}>
       <View style={styles.wrapper}>
         <View style={styles.avatarStyle}>
           <Avatar
@@ -41,7 +52,7 @@ const UserItem: FunctionComponent<UserI> = props => {
         </View>
         <Text style={styles.textStyle}>{name}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
