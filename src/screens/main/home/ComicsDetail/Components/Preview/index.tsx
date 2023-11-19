@@ -1,12 +1,10 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import useStyles from './styles';
-import ReadMore from './components/ReadMore';
+import {Text, View} from 'react-native';
 import {HeaderCustom} from '../../../../../../components';
-import {useAppSelector} from '../../../../../../hooks';
-import {getDetailComic} from '../../../../../../redux/selectors/comic.selector';
 import {ComicType} from '../../../../../../redux';
-import {data} from '../../../../message/Conversation/types';
+import ReadMore from './components/ReadMore';
+import useStyles from './styles';
+import RatingComic from './components/Rating';
 
 interface Comic {
   data: ComicType;
@@ -25,6 +23,7 @@ const Preview: React.FC<Comic> = props => {
         <Text style={styles.textDescribe}>{props.data.description}</Text>
       </View>
       <View>
+        <RatingComic />
         <HeaderCustom titleStyle={styles.textTitle} title="Read more" />
         <ReadMore />
       </View>
