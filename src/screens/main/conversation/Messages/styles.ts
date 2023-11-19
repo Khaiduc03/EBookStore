@@ -9,6 +9,7 @@ const HEIGHT = Device.getDeviceHeight();
 const useStyles = makeStyles(({colors}) => ({
   container: {
     flex: 1,
+    backgroundColor: colors.grey6,
   },
   wrapper: {
     ...StyleSheet.absoluteFillObject,
@@ -25,7 +26,6 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: colors.white,
   },
   containerScrollView: {
-    height: 'auto',
     backgroundColor: colors.grey6,
   },
   viewRow: {
@@ -166,7 +166,7 @@ const useStyles = makeStyles(({colors}) => ({
     height: normalize(50),
   },
   viewFocus: {
-    height: normalize(HEIGHT * 0.44),
+    height: normalize(HEIGHT * 0.26),
   },
   viewBlur: {
     height: normalize(HEIGHT * 0.069),

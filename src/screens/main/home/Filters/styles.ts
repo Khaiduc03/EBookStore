@@ -1,6 +1,6 @@
 import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../../../utils';
-import {fontFamilySetup} from '../../../../../utils/font';
+import {Device} from '../../../../utils';
+import {fontFamilySetup} from '../../../../utils/font';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
@@ -32,14 +32,11 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
   },
   viewItemFilters: {
-    height: normalize(HEIGHT * 0.69),
+    width: '100%',
+    height: '80%',
   },
   colorIcon: {
     color: colors.black,
-  },
-  scrollViewTitle: {
-    width: normalize(WIDTH * 0.9),
-    height: normalize(HEIGHT * 0.06),
   },
   scrollViewItem: {
     width: normalize(WIDTH * 0.9),
@@ -137,8 +134,9 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewBtn: {
     width: normalize(WIDTH * 0.9),
-    height: normalize(HEIGHT * 0.066),
+    height: normalize(HEIGHT * 0.09),
     marginTop: normalize(13),
+    paddingVertical: normalize(23),
     justifyContent: 'space-between',
     alignItems: 'center',
   },

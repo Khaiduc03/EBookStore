@@ -1,15 +1,13 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {makeStyles, useThemeMode} from '@rneui/themed';
+import { NavigationContainer } from '@react-navigation/native';
+import { makeStyles, useThemeMode } from '@rneui/themed';
 import React from 'react';
-import {StatusBar} from 'react-native';
-import {useAppSelector} from '../hooks';
-import {getAuthEnableSignIn} from '../redux/selectors/auth.selector';
-import {getMode} from '../redux/selectors/thems.selector';
-import {navigationRef} from './NavigationService';
+import { StatusBar } from 'react-native';
+import { useAppSelector } from '../hooks';
+import { getAuthEnableSignIn } from '../redux/selectors/auth.selector';
+import { getMode } from '../redux/selectors/thems.selector';
+import { navigationRef } from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
-import { Preview } from '../screens/main/home/ComicsDetail/Components';
-import RatingComic from '../screens/main/home/ComicsDetail/Components/Preview/components/Rating';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -40,7 +38,7 @@ const RootNavigation = () => {
         barStyle={themeMode}
       />
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
-      {/* <RatingComic /> */}
+      {/* <SearchUserScreen /> */}
     </NavigationContainer>
   );
 };

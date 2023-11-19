@@ -16,7 +16,6 @@ const ItemFilters: React.FC = () => {
   // Show menu Selected Filters
   const [showAllSelected, setShowAllSelected] = useState(true);
   const [showSortSelected, setShowSortSelected] = useState(false);
-  const [showPriceSelected, setShowPriceSelected] = useState(false);
   const [showRatingSelected, setShowRatingSelected] = useState(false);
   const [showGenreSelected, setShowGenreSelected] = useState(false);
 
@@ -27,10 +26,6 @@ const ItemFilters: React.FC = () => {
   const [isCbSelected4, setCbSelected4] = useState(false);
   const [isCbSelected5, setCbSelected5] = useState(false);
   const [isCbSelected6, setCbSelected6] = useState(false);
-
-  // Price
-  const [isCbSelected7, setCbSelected7] = useState(true);
-  const [isCbSelected8, setCbSelected8] = useState(false);
 
   // Rating
   const [isCbSelected9, setCbSelected9] = useState(true);
@@ -59,7 +54,6 @@ const ItemFilters: React.FC = () => {
       setAllSelected(true);
       setShowAllSelected(true);
       setShowSortSelected(false);
-      setShowPriceSelected(false);
       setShowRatingSelected(false);
       setShowGenreSelected(false);
     }
@@ -78,7 +72,6 @@ const ItemFilters: React.FC = () => {
       setSortSelected(true);
       setShowSortSelected(true);
       setShowAllSelected(false);
-      setShowPriceSelected(false);
     }
 
     setAllSelected(false);
@@ -90,10 +83,8 @@ const ItemFilters: React.FC = () => {
   const handlePriceClick = () => {
     if (isPriceSelected) {
       setPriceSelected(false);
-      setShowPriceSelected(false);
     } else {
       setPriceSelected(true);
-      setShowPriceSelected(true);
       setShowAllSelected(false);
       setShowSortSelected(false);
       setShowRatingSelected(false);
@@ -115,7 +106,6 @@ const ItemFilters: React.FC = () => {
       setShowRatingSelected(true);
       setShowAllSelected(false);
       setShowSortSelected(false);
-      setShowPriceSelected(false);
       setShowGenreSelected(false);
     }
 
@@ -134,7 +124,6 @@ const ItemFilters: React.FC = () => {
       setShowGenreSelected(true);
       setShowAllSelected(false);
       setShowSortSelected(false);
-      setShowPriceSelected(false);
       setShowRatingSelected(false);
     }
 
@@ -226,26 +215,6 @@ const ItemFilters: React.FC = () => {
     setCbSelected4(false);
     setCbSelected5(false);
     setCbSelected1(false);
-  };
-
-  const handleCbPriceItem7Click = () => {
-    if (isCbSelected7) {
-      setCbSelected7(false);
-    } else {
-      setCbSelected7(true);
-    }
-
-    setCbSelected8(false);
-  };
-
-  const handleCbPriceItem8Click = () => {
-    if (isCbSelected8) {
-      setCbSelected8(false);
-    } else {
-      setCbSelected8(true);
-    }
-
-    setCbSelected7(false);
   };
 
   const handleCbRatingItem9Click = () => {
@@ -412,10 +381,7 @@ const ItemFilters: React.FC = () => {
 
   return (
     <View style={styles.viewItem}>
-      <ScrollView
-        showsHorizontalScrollIndicator={false}
-        horizontal={true}
-        style={styles.scrollViewTitle}>
+      <View>
         <View style={styles.viewRow}>
           <TouchableOpacity
             onPress={handleAllClick}
@@ -459,28 +425,6 @@ const ItemFilters: React.FC = () => {
                 },
               ]}>
               Sort
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handlePriceClick}
-            style={[
-              styles.btnTitle,
-              {
-                backgroundColor: isPriceSelected
-                  ? styles.backgroundBtnTitleFocus.backgroundColor
-                  : styles.backgroundBtnTitleBlur.backgroundColor,
-              },
-            ]}>
-            <Text
-              style={[
-                styles.textTitle,
-                {
-                  color: isPriceSelected
-                    ? styles.colorsTextTitleFocus.color
-                    : styles.colorsTextTitleBlur.color,
-                },
-              ]}>
-              Price
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -528,7 +472,7 @@ const ItemFilters: React.FC = () => {
             </Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
+      </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
         alwaysBounceVertical={true}
@@ -671,58 +615,7 @@ const ItemFilters: React.FC = () => {
                 <Text style={styles.textItem}>Lowest Views</Text>
               </TouchableOpacity>
             </View>
-            {/* Price Items */}
-            <View style={[styles.viewItemPrice, {justifyContent: 'center'}]}>
-              <View
-                style={[
-                  styles.viewRow,
-                  {justifyContent: 'flex-start', alignItems: 'center'},
-                ]}>
-                <Text style={styles.textHeaderItem}>Price</Text>
-              </View>
-              <View style={styles.viewUnderline} />
-              <TouchableOpacity
-                onPress={handleCbPriceItem7Click}
-                style={[
-                  styles.viewRow,
-                  {justifyContent: 'flex-start', alignItems: 'center'},
-                ]}>
-                <CheckBox
-                  checked={isCbSelected7}
-                  onPress={handleCbPriceItem7Click}
-                  checkedIcon="dot-circle-o"
-                  uncheckedIcon="circle-o"
-                  containerStyle={styles.backgroundColorCB}
-                  style={{
-                    backgroundColor: isCbSelected7
-                      ? styles.backgroundBtnTitleFocus.backgroundColor
-                      : styles.backgroundBtnTitleBlur.backgroundColor,
-                  }}
-                />
-                <Text style={styles.textItem}>Price low to high</Text>
-              </TouchableOpacity>
-              <View style={styles.viewUnderline} />
-              <TouchableOpacity
-                onPress={handleCbPriceItem8Click}
-                style={[
-                  styles.viewRow,
-                  {justifyContent: 'flex-start', alignItems: 'center'},
-                ]}>
-                <CheckBox
-                  checked={isCbSelected8}
-                  onPress={handleCbPriceItem8Click}
-                  checkedIcon="dot-circle-o"
-                  uncheckedIcon="circle-o"
-                  containerStyle={styles.backgroundColorCB}
-                  style={{
-                    backgroundColor: isCbSelected8
-                      ? styles.backgroundBtnTitleFocus.backgroundColor
-                      : styles.backgroundBtnTitleBlur.backgroundColor,
-                  }}
-                />
-                <Text style={styles.textItem}>Price high to low</Text>
-              </TouchableOpacity>
-            </View>
+
             {/* Rating Items */}
             <View style={[styles.viewItemRating, {justifyContent: 'center'}]}>
               <View
@@ -1179,62 +1072,7 @@ const ItemFilters: React.FC = () => {
             </View>
           </View>
         ) : null}
-        {showPriceSelected ? (
-          <View>
-            {/* Price Items */}
-            <View style={[styles.viewItemPrice, {justifyContent: 'center'}]}>
-              <View
-                style={[
-                  styles.viewRow,
-                  {justifyContent: 'flex-start', alignItems: 'center'},
-                ]}>
-                <Text style={styles.textHeaderItem}>Price</Text>
-              </View>
-              <View style={styles.viewUnderline} />
-              <TouchableOpacity
-                onPress={handleCbPriceItem7Click}
-                style={[
-                  styles.viewRow,
-                  {justifyContent: 'flex-start', alignItems: 'center'},
-                ]}>
-                <CheckBox
-                  checked={isCbSelected7}
-                  onPress={handleCbPriceItem7Click}
-                  checkedIcon="dot-circle-o"
-                  uncheckedIcon="circle-o"
-                  containerStyle={styles.backgroundColorCB}
-                  style={{
-                    backgroundColor: isCbSelected7
-                      ? styles.backgroundBtnTitleFocus.backgroundColor
-                      : styles.backgroundBtnTitleBlur.backgroundColor,
-                  }}
-                />
-                <Text style={styles.textItem}>Price low to high</Text>
-              </TouchableOpacity>
-              <View style={styles.viewUnderline} />
-              <TouchableOpacity
-                onPress={handleCbPriceItem8Click}
-                style={[
-                  styles.viewRow,
-                  {justifyContent: 'flex-start', alignItems: 'center'},
-                ]}>
-                <CheckBox
-                  checked={isCbSelected8}
-                  onPress={handleCbPriceItem8Click}
-                  checkedIcon="dot-circle-o"
-                  uncheckedIcon="circle-o"
-                  containerStyle={styles.backgroundColorCB}
-                  style={{
-                    backgroundColor: isCbSelected8
-                      ? styles.backgroundBtnTitleFocus.backgroundColor
-                      : styles.backgroundBtnTitleBlur.backgroundColor,
-                  }}
-                />
-                <Text style={styles.textItem}>Price high to low</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        ) : null}
+
         {showRatingSelected ? (
           <View>
             {/* Rating Items */}

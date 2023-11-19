@@ -1,10 +1,10 @@
 import {View, Text, FlatList} from 'react-native';
 import React from 'react';
-import useStyles from '../../../styles';
 import {Icon} from '@rneui/themed';
-import {ItemProps, data} from '../../../types';
+import useStyles from '../../styles';
+import {ItemProps, data} from '../../types';
 
-const Notifications: React.FC = () => {
+const ItemNotifications: React.FC = () => {
   const styles = useStyles();
 
   const NotificationsItem = (itemProps: ItemProps) => (
@@ -64,4 +64,4 @@ const Notifications: React.FC = () => {
   );
 };
 
-export default Notifications;
+export default ItemNotifications;

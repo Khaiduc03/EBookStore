@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import HeaderCustomV1 from '../../../../../../../components/customs/HeaderCustomV1';
-import {NavigationService} from '../../../../../../../navigation';
-import useStyles from '../../../styles';
+import useStyles from './styles';
+import HeaderCustomV1 from '../../../../components/customs/HeaderCustomV1';
+import {NavigationService} from '../../../../navigation';
 
-const SettingsScreen: React.FC = () => {
+const Settings: React.FC = () => {
   const [isEnabled1, setIsEnabled1] = useState(false);
   const [isEnabled2, setIsEnabled2] = useState(false);
   const [isEnabled3, setIsEnabled3] = useState(false);
@@ -103,4 +103,4 @@ const SettingsScreen: React.FC = () => {
   );
 };
 
-export default SettingsScreen;
+export default Settings;
