@@ -80,7 +80,7 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
     />
   );
   const headerIndex = 0;
-  const dataIndices = data.map((_, index) => headerIndex + index + 9);
+  const dataIndices = data.map((_, index) => headerIndex + index + 1);
 
   const renderItem = ({item}: {item: Post}) => (
     <View style={styles.content}>
@@ -169,7 +169,7 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
             <TouchableOpacity
               style={styles.buttonHeader}
               onPress={() => NavigationService.navigate(routes.CREATEPOST)}>
-              <Text>Bạn đang nghĩ gì?</Text>
+              <Text style={styles.textheader}>What are you thinking?</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{justifyContent: 'center'}}

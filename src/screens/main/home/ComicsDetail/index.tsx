@@ -94,7 +94,9 @@ const ComicsDetail = () => {
         viewStyle={{height: 800}}
         titleStyle={styles.titleStyle}
         scrollRef={scrollRef}
+
       />
+      
     </View>
   );
 };

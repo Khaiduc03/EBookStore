@@ -103,7 +103,7 @@ const useStyles = makeStyles(({colors}) => ({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: normalize(19),
+    paddingHorizontal: normalize(17),
     paddingVertical: normalize(10),
     alignItems: 'center',
   },
@@ -114,7 +114,7 @@ const useStyles = makeStyles(({colors}) => ({
   buttonHeader: {
     borderWidth: 0.4,
     borderRadius: normalize(50),
-    width: '65%',
+    width: '68%',
     height: normalize(46),
     borderColor: colors.grey4,
     justifyContent: 'center',
@@ -130,6 +130,11 @@ const useStyles = makeStyles(({colors}) => ({
   img_default: {
     width: normalize(36),
     height: normalize(36),
+  },
+  textheader: {
+    color: colors.black,
+    fontSize: normalize(16),
+    fontFamily: fontFamilySetup.regular,
   },
 }));
 
