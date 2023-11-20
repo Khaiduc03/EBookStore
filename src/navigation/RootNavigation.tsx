@@ -9,6 +9,7 @@ import {navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
 import SearchUserScreen from '../screens/main/conversation/SearchUser';
+import {Explore, Forum} from '../screens/main';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -39,6 +40,7 @@ const RootNavigation = () => {
         barStyle={themeMode}
       />
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
+      {/* <Forum /> */}
       {/* <SearchUserScreen /> */}
     </NavigationContainer>
   );

@@ -20,9 +20,9 @@ const useStyles = makeStyles(({colors}) => ({
   },
   backgoundPopular: {
     width: '100%',
-    height: normalize(HEIGHT * 0.5),
+    height: normalize(HEIGHT * 0.43),
     backgroundColor: colors.black,
-    paddingTop: normalize(39),
+    paddingVertical: normalize(12),
   },
 }));
 
