@@ -1,21 +1,31 @@
 import React, {useState} from 'react';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import useStyles from './styles';
-import {ItemOneStar, ItemThreeStar, ItemTwoStar} from './components';
+import {
+  ItemFiveStar,
+  ItemFourStar,
+  ItemOneStar,
+  ItemThreeStar,
+  ItemTwoStar,
+} from './components';
 import {Icon} from '@rneui/themed';
 
 const ItemRatingStar: React.FC = () => {
   const styles = useStyles();
 
   const [isAllSelected, setAllSelected] = useState(true);
-  const [isSortSelected, setSortSelected] = useState(false);
-  const [isPriceSelected, setPriceSelected] = useState(false);
-  const [isRatingSelected, setRatingSelected] = useState(false);
+  const [isFiveStar, setisFiveStar] = useState(false);
+  const [isFourStar, setisFourStar] = useState(false);
+  const [isThreeStar, setisThreeStar] = useState(false);
+  const [isTwoStar, setisTwoStar] = useState(false);
+  const [isOneStar, setisOneStar] = useState(false);
 
   const [showAllSelected, setShowAllSelected] = useState(true);
-  const [showSortSelected, setShowSortSelected] = useState(false);
-  const [showPriceSelected, setShowPriceSelected] = useState(false);
-  const [showRatingSelected, setShowRatingSelected] = useState(false);
+  const [showFiveStar, setshowFiveStar] = useState(false);
+  const [showFourStar, setshowFourStar] = useState(false);
+  const [showThreeStar, setshowThreeStar] = useState(false);
+  const [showTwoStar, setshowTwoStar] = useState(false);
+  const [showOneStar, setshowOneStar] = useState(false);
 
   const handleAllClick = () => {
     if (isAllSelected) {
@@ -24,64 +34,119 @@ const ItemRatingStar: React.FC = () => {
     } else {
       setAllSelected(true);
       setShowAllSelected(true);
-      setShowSortSelected(false);
-      setShowPriceSelected(false);
-      setShowRatingSelected(false);
+      setshowFiveStar(false);
+      setshowFourStar(false);
+      setshowThreeStar(false);
+      setshowTwoStar(false);
+      setshowOneStar(false);
     }
 
-    setSortSelected(false);
-    setPriceSelected(false);
-    setRatingSelected(false);
+    setisFiveStar(false);
+    setisFourStar(false);
+    setisThreeStar(false);
+    setisTwoStar(false);
+    setisOneStar(false);
   };
 
-  const handleSortClick = () => {
-    if (isSortSelected) {
-      setSortSelected(false);
-      setShowSortSelected(false);
+  const handleFiveStarClick = () => {
+    if (isFiveStar) {
+      setisFiveStar(false);
+      setshowFiveStar(false);
     } else {
-      setSortSelected(true);
-      setShowSortSelected(true);
+      setisFiveStar(true);
+      setshowFiveStar(true);
       setShowAllSelected(false);
-      setShowPriceSelected(false);
+      setshowFourStar(false);
+      setshowThreeStar(false);
+      setshowTwoStar(false);
+      setshowOneStar(false);
     }
 
     setAllSelected(false);
-    setPriceSelected(false);
-    setRatingSelected(false);
+    setisFourStar(false);
+    setisThreeStar(false);
+    setisTwoStar(false);
+    setisOneStar(false);
   };
-
-  const handlePriceClick = () => {
-    if (isPriceSelected) {
-      setPriceSelected(false);
-      setShowPriceSelected(false);
+  const handleFourStarClick = () => {
+    if (isFourStar) {
+      setisFourStar(false);
+      setshowFourStar(false);
     } else {
-      setPriceSelected(true);
-      setShowPriceSelected(true);
+      setisFourStar(true);
+      setshowFourStar(true);
       setShowAllSelected(false);
-      setShowSortSelected(false);
-      setShowRatingSelected(false);
+      setshowFiveStar(false);
+      setshowThreeStar(false);
+      setshowTwoStar(false);
+      setshowOneStar(false);
     }
 
+    setisFiveStar(false);
+    setisOneStar(false);
+    setisThreeStar(false);
+    setisTwoStar(false);
     setAllSelected(false);
-    setSortSelected(false);
-    setRatingSelected(false);
   };
-
-  const handleRatingClick = () => {
-    if (isRatingSelected) {
-      setRatingSelected(false);
-      setShowRatingSelected(false);
+  const handleThreeStarClick = () => {
+    if (isThreeStar) {
+      setisThreeStar(false);
+      setshowThreeStar(false);
     } else {
-      setRatingSelected(true);
-      setShowRatingSelected(true);
+      setisThreeStar(true);
+      setshowThreeStar(true);
       setShowAllSelected(false);
-      setShowSortSelected(false);
-      setShowPriceSelected(false);
+      setshowFiveStar(false);
+      setshowFourStar(false);
+      setshowTwoStar(false);
+      setshowOneStar(false);
     }
 
+    setisFiveStar(false);
+    setisFourStar(false);
+    setisOneStar(false);
+    setisTwoStar(false);
     setAllSelected(false);
-    setSortSelected(false);
-    setPriceSelected(false);
+  };
+  const handleTwoStarClick = () => {
+    if (isTwoStar) {
+      setisTwoStar(false);
+      setshowTwoStar(false);
+    } else {
+      setisTwoStar(true);
+      setshowTwoStar(true);
+      setShowAllSelected(false);
+      setshowFiveStar(false);
+      setshowFourStar(false);
+      setshowThreeStar(false);
+      setshowOneStar(false);
+    }
+
+    setisFiveStar(false);
+    setisFourStar(false);
+    setisThreeStar(false);
+    setisOneStar(false);
+    setAllSelected(false);
+  };
+  const handleOneStarClick = () => {
+    if (isOneStar) {
+      setisOneStar(false);
+      setshowOneStar(false);
+    } else {
+      setisOneStar(true);
+      setshowOneStar(true);
+      setShowAllSelected(false);
+      setshowFiveStar(false);
+      setshowFourStar(false);
+      setshowThreeStar(false);
+      setshowTwoStar(false);
+    }
+
+    setisFiveStar(false);
+    setisFourStar(false);
+    setisThreeStar(false);
+    setisTwoStar(false);
+    setAllSelected(false);
   };
 
   return (
@@ -90,6 +155,7 @@ const ItemRatingStar: React.FC = () => {
       <ScrollView
         showsHorizontalScrollIndicator={false}
         horizontal={true}
+        nestedScrollEnabled={true}
         style={styles.scrollViewTitle}>
         <View style={styles.viewRow}>
           <TouchableOpacity
@@ -115,23 +181,144 @@ const ItemRatingStar: React.FC = () => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={handleSortClick}
+            onPress={handleFiveStarClick}
             style={[
               styles.btnTitle,
               {
-                backgroundColor: isSortSelected
+                backgroundColor: isFiveStar
                   ? styles.backgroundBtnTitleFocus.backgroundColor
                   : styles.backgroundBtnTitleBlur.backgroundColor,
               },
             ]}>
             <View style={styles.btnNextScreen}>
-              <Icon name="star" type="antdesign" />
+              <Icon
+                name={isFiveStar ? 'staro' : 'star'}
+                type="antdesign"
+                color={isFiveStar ? '#ffffff' : '#F89300'}
+              />
 
               <Text
                 style={[
                   styles.textTitle,
                   {
-                    color: isSortSelected
+                    color: isFiveStar
+                      ? styles.colorsTextTitleFocus.color
+                      : styles.colorsTextTitleBlur.color,
+                  },
+                ]}>
+                5
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleFourStarClick}
+            style={[
+              styles.btnTitle,
+              {
+                backgroundColor: isFourStar
+                  ? styles.backgroundBtnTitleFocus.backgroundColor
+                  : styles.backgroundBtnTitleBlur.backgroundColor,
+              },
+            ]}>
+            <View style={styles.btnNextScreen}>
+              <Icon
+                name={isFourStar ? 'staro' : 'star'}
+                type="antdesign"
+                color={isFourStar ? '#ffffff' : '#F89300'}
+              />
+              <Text
+                style={[
+                  styles.textTitle,
+                  {
+                    color: isFourStar
+                      ? styles.colorsTextTitleFocus.color
+                      : styles.colorsTextTitleBlur.color,
+                  },
+                ]}>
+                4
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            onPress={handleThreeStarClick}
+            style={[
+              styles.btnTitle,
+              {
+                backgroundColor: isThreeStar
+                  ? styles.backgroundBtnTitleFocus.backgroundColor
+                  : styles.backgroundBtnTitleBlur.backgroundColor,
+              },
+            ]}>
+            <View style={styles.btnNextScreen}>
+              <Icon
+                name={isThreeStar ? 'staro' : 'star'}
+                type="antdesign"
+                color={isThreeStar ? '#ffffff' : '#F89300'}
+              />
+              <Text
+                style={[
+                  styles.textTitle,
+                  {
+                    color: isThreeStar
+                      ? styles.colorsTextTitleFocus.color
+                      : styles.colorsTextTitleBlur.color,
+                  },
+                ]}>
+                3
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleTwoStarClick}
+            style={[
+              styles.btnTitle,
+              {
+                backgroundColor: isTwoStar
+                  ? styles.backgroundBtnTitleFocus.backgroundColor
+                  : styles.backgroundBtnTitleBlur.backgroundColor,
+              },
+            ]}>
+            <View style={styles.btnNextScreen}>
+              <Icon
+                name={isTwoStar ? 'staro' : 'star'}
+                type="antdesign"
+                color={isTwoStar ? '#ffffff' : '#F89300'}
+              />
+              <Text
+                style={[
+                  styles.textTitle,
+                  {
+                    color: isTwoStar
+                      ? styles.colorsTextTitleFocus.color
+                      : styles.colorsTextTitleBlur.color,
+                  },
+                ]}>
+                2
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleOneStarClick}
+            style={[
+              styles.btnTitle,
+              {
+                backgroundColor: isOneStar
+                  ? styles.backgroundBtnTitleFocus.backgroundColor
+                  : styles.backgroundBtnTitleBlur.backgroundColor,
+              },
+            ]}>
+            <View style={styles.btnNextScreen}>
+              <Icon
+                name={isOneStar ? 'staro' : 'star'}
+                type="antdesign"
+                color={isOneStar ? '#ffffff' : '#F89300'}
+              />
+              <Text
+                style={[
+                  styles.textTitle,
+                  {
+                    color: isOneStar
                       ? styles.colorsTextTitleFocus.color
                       : styles.colorsTextTitleBlur.color,
                   },
@@ -140,100 +327,64 @@ const ItemRatingStar: React.FC = () => {
               </Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handlePriceClick}
-            style={[
-              styles.btnTitle,
-              {
-                backgroundColor: isPriceSelected
-                  ? styles.backgroundBtnTitleFocus.backgroundColor
-                  : styles.backgroundBtnTitleBlur.backgroundColor,
-              },
-            ]}>
-            <Text
-              style={[
-                styles.textTitle,
-                {
-                  color: isPriceSelected
-                    ? styles.colorsTextTitleFocus.color
-                    : styles.colorsTextTitleBlur.color,
-                },
-              ]}>
-              Secutiry
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleRatingClick}
-            style={[
-              styles.btnTitle,
-              {
-                backgroundColor: isRatingSelected
-                  ? styles.backgroundBtnTitleFocus.backgroundColor
-                  : styles.backgroundBtnTitleBlur.backgroundColor,
-              },
-            ]}>
-            <Text
-              style={[
-                styles.textTitle,
-                {
-                  color: isRatingSelected
-                    ? styles.colorsTextTitleFocus.color
-                    : styles.colorsTextTitleBlur.color,
-                },
-              ]}>
-              Service
-            </Text>
-          </TouchableOpacity>
         </View>
       </ScrollView>
       {/* Item in button */}
       <ScrollView
         showsVerticalScrollIndicator={false}
         alwaysBounceVertical={true}
+        nestedScrollEnabled
         style={styles.scrollViewItem}>
         {showAllSelected ? (
           <View style={styles.viewAll}>
-            {/* 1 StarItems */}
-
+            {/* show all star */}
             <View style={styles.viewText}>
-              <Text style={styles.textApp}>1 Star</Text>
+              <Text style={styles.textApp}>5 Star</Text>
             </View>
-            <ItemOneStar />
-
-            {/* Secutiry Items */}
-
+            <ItemFiveStar />
             <View style={styles.viewText}>
-              <Text style={styles.textApp}>2 Star</Text>
+              <Text style={styles.textApp}>4 Star</Text>
             </View>
-            <ItemTwoStar />
-
-            {/* Service Items */}
-
+            <ItemFourStar />
             <View style={styles.viewText}>
               <Text style={styles.textApp}>3 Star</Text>
             </View>
             <ItemThreeStar />
-          </View>
-        ) : null}
-
-        {/* Item 2 */}
-        {showSortSelected ? (
-          <View style={styles.viewItem2}>
+            <View style={styles.viewText}>
+              <Text style={styles.textApp}>2 Star</Text>
+            </View>
+            <ItemTwoStar />
+            <View style={styles.viewText}>
+              <Text style={styles.textApp}>1 Star</Text>
+            </View>
             <ItemOneStar />
           </View>
         ) : null}
 
-        {/* Show Item 3 */}
-        {showPriceSelected ? (
+        {/* show data star */}
+        {showFiveStar ? (
+          <View style={styles.viewItem2}>
+            <ItemFiveStar />
+          </View>
+        ) : null}
+        {showFourStar ? (
+          <View style={styles.viewItem2}>
+            <ItemFourStar />
+          </View>
+        ) : null}
+        {showThreeStar ? (
+          <View style={styles.viewItem2}>
+            <ItemThreeStar />
+          </View>
+        ) : null}
+        {showTwoStar ? (
           <View style={styles.viewItem2}>
             <ItemTwoStar />
           </View>
         ) : null}
-
-        {/* Show Item Rating */}
-        {showRatingSelected ? (
+        {showOneStar ? (
           <View style={styles.viewItem2}>
-            <ItemThreeStar />
+            <ItemOneStar />
           </View>
         ) : null}
       </ScrollView>

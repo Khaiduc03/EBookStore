@@ -25,7 +25,7 @@ const ItemFiveStar: React.FC = () => {
 
         <View style={styles.view1}>
           <View style={styles.btnRating}>
-            <Icon name="star" type="antdesign" color={'#F89300'} />
+            <Icon name="star" type="antdesign" color={'#F89300'} size={20} />
             <Text style={styles.textbtnRating}>5</Text>
           </View>
           <Icon
@@ -35,11 +35,11 @@ const ItemFiveStar: React.FC = () => {
           />
         </View>
       </View>
-      <View style={{paddingHorizontal: 24}}>
-        <Text style={styles.description}>
-          As a person who has hard time picking up a book to read
-        </Text>
-      </View>
+
+      <Text style={styles.description}>
+        As a person who has hard time picking up a book to read
+      </Text>
+
       <View style={styles.footer}>
         <View style={{flexDirection: 'row', gap: 10}}>
           <TouchableOpacity onPress={clickIcon}>

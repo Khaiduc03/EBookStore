@@ -1,8 +1,7 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
-import useStyles from './styles';
 import {Icon} from '@rneui/themed';
-import {theme} from '../../../../../../../../theme';
+import React, {useState} from 'react';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import useStyles from './styles';
 
 const ItemOneStar: React.FC = () => {
   const styles = useStyles();
@@ -25,7 +24,7 @@ const ItemOneStar: React.FC = () => {
 
         <View style={styles.view1}>
           <View style={styles.btnRating}>
-            <Icon name="star" type="antdesign" color={'#F89300'} />
+            <Icon name="star" type="antdesign" color={'#F89300'} size={20} />
             <Text style={styles.textbtnRating}>1</Text>
           </View>
           <Icon
@@ -35,11 +34,11 @@ const ItemOneStar: React.FC = () => {
           />
         </View>
       </View>
-      <View style={{paddingHorizontal: 24}}>
-        <Text style={styles.description}>
-          As a person who has hard time picking up a book to read
-        </Text>
-      </View>
+
+      <Text style={styles.description}>
+        As a person who has hard time picking up a book to read
+      </Text>
+
       <View style={styles.footer}>
         <View style={{flexDirection: 'row', gap: 10}}>
           <TouchableOpacity onPress={clickIcon}>

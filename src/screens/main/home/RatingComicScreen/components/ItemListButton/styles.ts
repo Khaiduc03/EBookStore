@@ -61,7 +61,8 @@ const useStyles = makeStyles(({colors}) => ({
     paddingVertical: normalize(5),
   },
   viewItem2: {
-    paddingVertical: normalize(20),
+    paddingVertical: normalize(10),
+    gap: normalize(20)
   },
   viewAll: {
     gap: normalize(20),
@@ -75,6 +76,7 @@ const useStyles = makeStyles(({colors}) => ({
     gap: normalize(10),
     alignItems: 'center',
   },
+  iconStar: {},
 }));
 
 export default useStyles;
