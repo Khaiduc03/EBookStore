@@ -64,6 +64,8 @@ const useStyles = makeStyles(({colors}) => ({
     color:colors.black,
     fontSize: normalize(15),
     fontFamily: fontFamilySetup.bold,
+    width: normalize(15)
+
   }
 }));
 
