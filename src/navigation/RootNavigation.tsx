@@ -41,7 +41,7 @@ const RootNavigation = () => {
         barStyle={themeMode}
       />
       {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      <RatingComicScreen />
+      <AppNavigator />
     </NavigationContainer>
   );
 };
