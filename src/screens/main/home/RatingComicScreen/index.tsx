@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import React from 'react';
 import useStyles from './styles';
 import {HeaderCustom} from '../../../../components';
@@ -12,23 +12,25 @@ const RatingComicScreen: React.FC = () => {
     NavigationService.goBack();
   };
   return (
-    <View style={styles.container}>
-      <HeaderCustom
-        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
-        title="Rating & Reviews"
-        rightIconRight={{
-          name: 'ellipsis-horizontal-circle-outline',
-          type: 'ionicon',
-        }}
-        onPressLeftIcon={handleGoback}
-      />
-      <View style={{paddingVertical: 30}}>
-        <ItemRating />
+    <ScrollView nestedScrollEnabled>
+      <View style={styles.container}>
+        <HeaderCustom
+          leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
+          title="Rating & Reviews"
+          rightIconRight={{
+            name: 'ellipsis-horizontal-circle-outline',
+            type: 'ionicon',
+          }}
+          onPressLeftIcon={handleGoback}
+        />
+        <View style={{paddingVertical: 30}}>
+          <ItemRating />
+        </View>
+        <View style={styles.content}>
+          <ItemListButton />
+        </View>
       </View>
-      <View style={styles.content}>
-        <ItemListButton />
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 

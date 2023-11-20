@@ -10,6 +10,7 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: colors.background,
     justifyContent: 'center',
     alignItems: 'center',
+    height: HEIGHT,
   },
   viewRow: {
     flexDirection: 'row',
@@ -62,7 +63,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewItem2: {
     paddingVertical: normalize(10),
-    gap: normalize(20)
+    gap: normalize(20),
   },
   viewAll: {
     gap: normalize(20),
