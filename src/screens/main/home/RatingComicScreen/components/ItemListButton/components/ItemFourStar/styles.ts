@@ -49,6 +49,7 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
     fontFamily: fontFamilySetup.regular,
     width: normalize(300),
+    marginStart: normalize(14),
     paddingVertical: normalize(20),
   },
   footer: {

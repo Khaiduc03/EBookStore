@@ -49,7 +49,7 @@ const RatingComic: React.FC = () => {
           <AirbnbRating
             isDisabled={true}
             defaultRating={4}
-            selectedColor="#FEC60F"
+            selectedColor="#F89300"
             showRating={false}
             size={24}
           />
@@ -68,7 +68,7 @@ const RatingComic: React.FC = () => {
       <View style={styles.footer}>
         <AirbnbRating
           defaultRating={0}
-          selectedColor="#FEC60F"
+          selectedColor="#F89300"
           showRating={false}
           size={30}
           onFinishRating={ratingCompleted}
