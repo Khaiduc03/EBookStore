@@ -16,11 +16,6 @@ const ItemRatingStar: React.FC = () => {
   const [showSortSelected, setShowSortSelected] = useState(false);
   const [showPriceSelected, setShowPriceSelected] = useState(false);
   const [showRatingSelected, setShowRatingSelected] = useState(false);
-  const [showStar, setshowStar] = useState(false);
-
-  const clickIcon = () => {
-    setshowStar(!showStar);
-  };
 
   const handleAllClick = () => {
     if (isAllSelected) {
@@ -43,7 +38,6 @@ const ItemRatingStar: React.FC = () => {
     if (isSortSelected) {
       setSortSelected(false);
       setShowSortSelected(false);
-      clickIcon;
     } else {
       setSortSelected(true);
       setShowSortSelected(true);
@@ -131,11 +125,7 @@ const ItemRatingStar: React.FC = () => {
               },
             ]}>
             <View style={styles.btnNextScreen}>
-              <Icon
-                name="star"
-                type="antdesign"
-                color={showStar ? 'white' : 'red'}
-              />
+              <Icon name="star" type="antdesign" />
 
               <Text
                 style={[

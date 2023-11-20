@@ -3,13 +3,13 @@ import {fontFamilySetup} from '../../../../../../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    backgroundColor: colors.background,
+  
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: normalize(14),
-    paddingVertical: normalize(30),
+    paddingVertical: normalize(10),
   },
   textRating: {
     color: colors.black,
@@ -39,7 +39,6 @@ const useStyles = makeStyles(({colors}) => ({
   line: {
     borderWidth: 1,
     borderColor: colors.grey11,
-    
   },
   viewRating1: {
     paddingHorizontal: normalize(20),
@@ -53,11 +52,13 @@ const useStyles = makeStyles(({colors}) => ({
     paddingVertical: normalize(3),
     gap: normalize(10),
   },
-  footer:{
-    paddingVertical: normalize(20)
+  footer: {
+    paddingVertical: normalize(10),
   },
-  starContainer:{
-    backgroundColor:'red'
+  textTitle:{
+    color:colors.black,
+    fontSize: normalize(26),
+    fontFamily: fontFamilySetup.bold,
   }
 }));
 
