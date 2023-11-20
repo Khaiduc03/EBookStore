@@ -40,10 +40,11 @@ const Search = () => {
   const [hightView, setHightView] = useState(Boolean);
 
   const [lowView, setLowView] = useState(Boolean);
+  const [filterArray, setFilterArray] = useState<string[]>([]);
+
+  console.log('==========>fillter', filterArray);
 
   const [data, setData] = useState<ComicType[]>([]);
-  console.log('========>hightView', hightView);
-  console.log('========>lowView', lowView);
 
   const isLoading = useAppSelector(getIsLoadingTopic);
 
@@ -67,18 +68,29 @@ const Search = () => {
 
   useEffect(() => {
     if (dataBySearch) {
-      if (hightView) {
-        setData(sortReduceDataByViews(dataBySearch));
-      } else if (lowView) {
-        setData(sortIncreaseDataByViews(dataBySearch));
-      } else {
-        setData(dataBySearch);
+      let filteredData = [...dataBySearch];
+      if (filterArray.includes('All')) {
+        setData(filteredData);
+        return;
       }
+
+      if (filterArray.length > 0) {
+        filteredData = filteredData.filter(item => {
+          return filterArray.every(topic => item.topics.includes(topic));
+        });
+      }
+      if (hightView) {
+        filteredData = sortReduceDataByViews(filteredData);
+      } else if (lowView) {
+        filteredData = sortIncreaseDataByViews(filteredData);
+      }
+
+      setData(filteredData);
     }
-  }, [dataBySearch, hightView, lowView]);
+  }, [dataBySearch, hightView, lowView, filterArray]);
 
   const onPressSearch = () => {
-    setHightView(false);
+    setFilterArray([]), setHightView(false);
     setLowView(false);
     dispatch(ComicActions.ClearListBySearch());
     dispatch(ComicActions.getListBySearch({key: search, page: 1}));
@@ -130,6 +142,7 @@ const Search = () => {
               NavigationService.navigate(routes.FILTERS, {
                 setHightView,
                 setLowView,
+                setFilterArray,
               });
               Keyboard.dismiss();
             }}>
@@ -146,6 +159,7 @@ const Search = () => {
           <NoSearch />
         ) : (
           <FlatList
+            showsVerticalScrollIndicator
             ListFooterComponent={
               isLoading ? isLoading && listFooterComponent : undefined
             }

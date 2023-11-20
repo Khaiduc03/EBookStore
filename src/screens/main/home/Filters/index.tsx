@@ -6,11 +6,18 @@ import {HeaderCustom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
 import {RouteProp, useRoute} from '@react-navigation/native';
 interface FiltersProps {
-  route: RouteProp<{params: {setHightView: Function; setLowView: Function}}>;
+  route: RouteProp<{
+    params: {
+      setHightView: Function;
+      setLowView: Function;
+      setFilterArray: Function; // Thêm setFilterArray vào props
+    };
+  }>;
 }
+
 const Filters: React.FC<FiltersProps> = ({route}) => {
   const styles = useStyles();
-  const {setHightView, setLowView} = route.params;
+  const {setHightView, setLowView, setFilterArray} = route.params;
 
   return (
     <View style={styles.container}>
@@ -27,7 +34,11 @@ const Filters: React.FC<FiltersProps> = ({route}) => {
           }}
         />
         <View style={styles.viewItemFilters}>
-          <ItemFilters setHightView={setHightView} setLowView={setLowView} />
+          <ItemFilters
+            setFilterArray={setFilterArray}
+            setHightView={setHightView}
+            setLowView={setLowView}
+          />
         </View>
       </View>
     </View>
