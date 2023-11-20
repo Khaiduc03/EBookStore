@@ -5,6 +5,7 @@ import useStyles from './styles';
 import Svg, {Line, Rect} from 'react-native-svg';
 import {NavigationService} from '../../../../../../../../navigation';
 import {routes} from '../../../../../../../../constants';
+import {HeaderCustom} from '../../../../../../../../components';
 
 interface LineComponentProps {
   length: number;
@@ -42,14 +43,6 @@ const RatingComic: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.textRating}>Rating & Reviews</Text>
-        <Icon
-          name="arrow-right"
-          type="font-awesome-5"
-          onPress={() => NavigationService.navigate(routes.RATINGCOMICSCREEN)}
-        />
-      </View>
       <View style={styles.content}>
         <View style={styles.viewRating1}>
           <Text style={styles.numberRating}>4.9</Text>
@@ -77,8 +70,9 @@ const RatingComic: React.FC = () => {
           defaultRating={0}
           selectedColor="#FEC60F"
           showRating={false}
-          size={36}
+          size={30}
           onFinishRating={ratingCompleted}
+          starContainerStyle={{gap: 20}}
         />
       </View>
     </View>
