@@ -28,8 +28,6 @@ const ComicsDetail = () => {
   const data = (route.params as RouteParamsIdComic).data;
   const scrollRef = (route.params as RouteParamsIdComic).scrollRef;
 
-  console.log('===========>', data.topics);
-
   const uuidPost = useAppSelector(getUuidPostFavorite);
 
   useEffect(() => {

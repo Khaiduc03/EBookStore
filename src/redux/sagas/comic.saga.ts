@@ -22,7 +22,6 @@ function* getListDataSaga(action: PayloadAction<number>): Generator {
     }
   } catch (error) {
     console.log('hihi');
-  
   } finally {
     if (action.payload == 1) {
       yield put(LoadingActions.hideLoadingStart());
@@ -38,7 +37,7 @@ function* getComicById(action: PayloadAction<string>): Generator {
 
     if (data.code == 200) {
       console.log('run push tookit');
-      console.log(data);
+
       yield put(ComicActions.setDetailComic(data));
     } else {
       console.log('Server errol !!!');
@@ -76,7 +75,6 @@ function* getListComicByTopicMoreSaga(action: PayloadAction<any>): Generator {
       ComicService.getComicByTopicMore,
       action.payload,
     );
-    console.log('saga=======>', data.data);
 
     if (data.code === 200) {
       yield put(ComicActions.setListByTopicMore(data.data));

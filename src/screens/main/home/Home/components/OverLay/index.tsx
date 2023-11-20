@@ -23,7 +23,7 @@ const OverLay: FunctionComponent = () => {
           <FastImage
             style={styles.imgStyle}
             source={{
-              uri: 'https://static.wixstatic.com/media/1cf3ac_6ea6668ada5d48fe95b269a9177c2e3e~mv2.png/v1/fill/w_480,h_720,al_c,lg_1,q_85/1cf3ac_6ea6668ada5d48fe95b269a9177c2e3e~mv2.png',
+              uri: 'https://m.media-amazon.com/images/I/81-PLxbqw0L._AC_UF1000,1000_QL80_.jpg',
             }}
           />
           <TouchableOpacity style={styles.cancelStyle} onPress={toggleOverlay}>

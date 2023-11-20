@@ -13,25 +13,25 @@ const data = [
     title: 'Exemplary wife',
     category: 'Fantasy',
     image:
-      'https://img.dtruyen.com/public/images/large/923/kieuthecokhonggiandayconlamgiaugsyQgwG.jpg',
+      'https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/10/solo-leveling-1.jpg',
   },
   {
     title: 'Porcelain flower girl',
     category: 'Drama',
     image:
-      'https://img.dtruyen.com/public/images/large/1023/trove80trothanhnuphubancondoiluongthucuWo1Sse.jpg',
+      'https://geekculture.co/wp-content/uploads/2023/03/solo-leveling-anime-trailer.jpg',
   },
   {
     title: 'The eyes of a lover',
     category: 'Action',
     image:
-      'https://img.dtruyen.com/public/images/large/thapnien70mynhanmemmairuLCZ6p.jpg',
+      'https://gamek.mediacdn.vn/133514250583805952/2022/1/2/solo-leveling-1620917554185396197198-16410674690231914720800.jpg',
   },
   {
     title: 'Country girl',
     category: 'Comedy',
     image:
-      'https://img.dtruyen.com/public/images/large/thapnien90taohuonggiangxemqueCLnJfWG.jpg',
+      'https://www.jeumobi.com/wp-content/uploads/2022/11/trailer-solo-leveling-arise.jpg',
   },
   {
     title: 'Young lady saves money to travel',
@@ -43,7 +43,7 @@ const data = [
     title: 'Girl selling chrysanthemums',
     category: 'Horror',
     image:
-      'https://img.dtruyen.com/public/images/large/823/quaphunhanongnuoiconlamgiauDk5ys24.jpg',
+      'https://staticg.sportskeeda.com/editor/2023/01/6d2a5-16739045595947-1920.jpg',
   },
 ];
 

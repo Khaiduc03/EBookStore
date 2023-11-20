@@ -16,8 +16,6 @@ const ReadMore = () => {
   const styles = useStyles();
   const dataReadMore = useAppSelector(getDataByTopicMore);
 
-  console.log('============> read more', dataReadMore);
-
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
     <ItemReadMore data={item} index={index} />
   );

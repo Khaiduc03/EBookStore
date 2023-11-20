@@ -111,20 +111,21 @@ const carouselData: CarouselDataItem[] = [
   {
     id: '2',
     image:
-      'https://photo2.tinhte.vn/data/attachment-files/2021/03/5382277_Melissa-Poldebrat-And-Yuri-Elizabeth1.jpg',
+      'https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/10/solo-leveling-1.jpg',
   },
   {
     id: '3',
     image:
-      'https://photo2.tinhte.vn/data/attachment-files/2021/03/5382259_Cale-Henituse-In-Trash-Of-The-Counts-Family1.jpg',
+      'https://geekculture.co/wp-content/uploads/2023/03/solo-leveling-anime-trailer.jpg',
   },
   {
     id: '4',
-    image: 'https://wallpaperaccess.com/full/10822.jpg',
+    image:
+      'https://www.jeumobi.com/wp-content/uploads/2022/11/trailer-solo-leveling-arise.jpg',
   },
   {
     id: '5',
     image:
-      'https://e0.pxfuel.com/wallpapers/463/451/desktop-wallpaper-lookism.jpg',
+      'https://staticg.sportskeeda.com/editor/2023/01/6d2a5-16739045595947-1920.jpg',
   },
 ];
