@@ -15,7 +15,7 @@ const useStyles = makeStyles(({colors}) => ({
     borderTopWidth: normalize(10),
     borderColor: colors.grey9,
     paddingVertical: normalize(21),
-    backgroundColor: colors.white,
+    backgroundColor: colors.background,
   },
   post: {
     paddingHorizontal: normalize(14),
@@ -57,7 +57,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   iconText: {
     flexDirection: 'row',
-    gap: normalize(10),
+    gap: normalize(7),
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -92,15 +92,45 @@ const useStyles = makeStyles(({colors}) => ({
   },
   dotActive: {
     margin: normalize(3),
-    color: colors.black,
+    color: 'black',
     fontSize: normalize(20),
   },
   dot: {
     margin: normalize(3),
     fontSize: normalize(20),
-    color: colors.white,
+    color: 'white',
   },
-  scrollView: {},
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: normalize(19),
+    paddingVertical: normalize(10),
+    alignItems: 'center',
+  },
+  itemHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  buttonHeader: {
+    borderWidth: 0.4,
+    borderRadius: normalize(50),
+    width: '65%',
+    height: normalize(46),
+    borderColor: colors.grey4,
+    justifyContent: 'center',
+    paddingHorizontal: normalize(15),
+  },
+  textHeader: {
+    fontSize: normalize(15),
+    fontFamily: fontFamilySetup.regular,
+    color: colors.black,
+    lineHeight: normalize(21),
+    letterSpacing: normalize(0.12),
+  },
+  img_default: {
+    width: normalize(36),
+    height: normalize(36),
+  },
 }));
 
 export default useStyles;

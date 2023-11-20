@@ -10,4 +10,5 @@ export const images = {
   cat: require('./cat.json'),
   avata: require('./avatar.jpg'),
   image_default: require('./image_default.png'),
+  no_message: require('./No_notifcations.png'),
 };

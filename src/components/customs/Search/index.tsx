@@ -51,6 +51,7 @@ const SearchCustom: React.FunctionComponent<
       onBlur={handleInputBlur}
       onFocus={handleInputFocus}
       clearIcon={styles.clearIcon}
+      onPressIn={props.onPress}
     />
   );
 };

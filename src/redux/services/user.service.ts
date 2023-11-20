@@ -14,12 +14,15 @@ export class UserService {
   }
 
   static async updateUserAvatar(action: FormData) {
-    console.log(action);
     return await apiService.put(
       `${ENDPOINTS.UPLOAD_AVATAR}`,
       action,
       configFormData,
     );
+  }
+
+  static async getAllUser() {
+    return await apiService.get(`${ENDPOINTS.GET_ALL_USER}`);
   }
 
   static async deleteUserAvatar(): Promise<Http> {

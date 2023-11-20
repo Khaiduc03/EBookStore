@@ -1,6 +1,6 @@
-import { useRoute } from '@react-navigation/native';
-import { Icon, Text } from '@rneui/base';
-import React, { Fragment, useRef, useState } from 'react';
+import {useRoute} from '@react-navigation/native';
+import {Icon, Text} from '@rneui/base';
+import React, {Fragment, useRef, useState} from 'react';
 import {
   Animated,
   FlatList,
@@ -12,15 +12,15 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import EmojiSelector, { Categories } from 'react-native-emoji-selector';
-import { HeaderCustom } from '../../../../components';
-import { useAppDispatch, useAppSelector } from '../../../../hooks';
-import { NavigationService } from '../../../../navigation';
-import { MessageI, RequestAddMessageI } from '../../../../redux';
-import { ChatActions } from '../../../../redux/reducer/chat.reducer';
-import { getListMessage } from '../../../../redux/selectors/chat.selector';
+import EmojiSelector, {Categories} from 'react-native-emoji-selector';
+import {HeaderCustom} from '../../../../components';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {NavigationService} from '../../../../navigation';
+import {MessageI, RequestAddMessageI} from '../../../../redux';
+import {ChatActions} from '../../../../redux/reducer/chat.reducer';
+import {getListMessage} from '../../../../redux/selectors/chat.selector';
 import AvatarComponets from './components/CameraGallery';
-import { ChatBubble } from './components/ChatBubbleItem';
+import {ChatBubble} from './components/ChatBubbleItem';
 import useStyles from './styles';
 
 const MessageScreen: React.FC = () => {
@@ -84,7 +84,7 @@ const MessageScreen: React.FC = () => {
       dispatch(ChatActions.handleAddMessage(newMessageItem));
 
       setNewMessage('');
-      scrollViewRef.current?.scrollToEnd({animated: true});
+      scrollViewRef.current?.scrollToOffset({offset: 0, animated: true});
     }
   };
 
@@ -119,13 +119,13 @@ const MessageScreen: React.FC = () => {
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const offsetY = event.nativeEvent.contentOffset.y;
-    const contentHeight = event.nativeEvent.contentSize.height;
-    const scrollViewHeight = event.nativeEvent.layoutMeasurement.height;
-
-    if (offsetY + scrollViewHeight >= contentHeight - 10) {
-      setShowScrollButton(false);
-    } else {
+    // const contentHeight = event.nativeEvent.contentSize.height;
+    // const scrollViewHeight = event.nativeEvent.layoutMeasurement.height;
+    // console.log(contentHeight);
+    if (offsetY + 50 >= 200) {
       setShowScrollButton(true);
+    } else {
+      setShowScrollButton(false);
     }
     inputRef.current?.setNativeProps(styles.viewBlur);
   };
@@ -134,7 +134,7 @@ const MessageScreen: React.FC = () => {
 
   const handleScrollToEnd = () => {
     console.log('Scroll to end');
-    scrollViewRef.current?.scrollToEnd({animated: true});
+    scrollViewRef.current?.scrollToOffset({offset: 0, animated: true});
     setShowScrollButton(false);
   };
 
@@ -185,11 +185,12 @@ const MessageScreen: React.FC = () => {
           renderItem={({item}) => renderItem(item)}
           keyExtractor={item => item.uuid.toString()}
           ref={scrollViewRef}
+          inverted={true}
           onScroll={handleScroll}
           //onLayout={() => scrollViewRef.current?.scrollToEnd({animated: true})}
-          onContentSizeChange={() =>
-            scrollViewRef.current?.scrollToEnd({animated: true})
-          }
+          // onContentSizeChange={() =>
+          //   scrollViewRef.current?.scrollToEnd({animated: true})
+          // }
         />
 
         {showScrollButton && (
