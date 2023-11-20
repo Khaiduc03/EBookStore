@@ -72,6 +72,15 @@ const RatingComic: React.FC = () => {
           ))}
         </View>
       </View>
+      <View style={styles.footer}>
+        <AirbnbRating
+          defaultRating={0}
+          selectedColor="#FEC60F"
+          showRating={false}
+          size={36}
+          onFinishRating={ratingCompleted}
+        />
+      </View>
     </View>
   );
 };

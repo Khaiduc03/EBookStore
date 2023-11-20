@@ -53,6 +53,12 @@ const useStyles = makeStyles(({colors}) => ({
     paddingVertical: normalize(3),
     gap: normalize(10),
   },
+  footer:{
+    paddingVertical: normalize(20)
+  },
+  starContainer:{
+    backgroundColor:'red'
+  }
 }));
 
 export default useStyles;
