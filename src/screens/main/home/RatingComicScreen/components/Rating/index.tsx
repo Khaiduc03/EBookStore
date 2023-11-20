@@ -48,7 +48,7 @@ const ItemRating: React.FC = () => {
           <AirbnbRating
             isDisabled={true}
             defaultRating={4}
-            selectedColor="#FEC60F"
+            selectedColor="#F89300"
             showRating={false}
             size={24}
           />

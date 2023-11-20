@@ -1,5 +1,5 @@
 import {makeStyles, normalize} from '@rneui/themed';
-import { fontFamilySetup } from '../../../../../../utils/font';
+import {fontFamilySetup} from '../../../../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
@@ -39,7 +39,6 @@ const useStyles = makeStyles(({colors}) => ({
   line: {
     borderWidth: 1,
     borderColor: colors.grey11,
-    
   },
   viewRating1: {
     paddingHorizontal: normalize(20),
@@ -53,11 +52,12 @@ const useStyles = makeStyles(({colors}) => ({
     paddingVertical: normalize(3),
     gap: normalize(10),
   },
-  numberLine:{
-    color:colors.black,
+  numberLine: {
+    color: colors.black,
     fontSize: normalize(15),
     fontFamily: fontFamilySetup.bold,
-  }
+    width: normalize(15),
+  },
 }));
 
 export default useStyles;
