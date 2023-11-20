@@ -23,7 +23,7 @@ const Preview: React.FC<Comic> = props => {
         <Text style={styles.textDescribe}>{props.data.description}</Text>
       </View>
       <View>
-        <RatingComic />
+        <RatingComic/>
         <HeaderCustom titleStyle={styles.textTitle} title="Read more" />
         <ReadMore />
       </View>
