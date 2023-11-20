@@ -47,7 +47,7 @@ const SearchCustom: React.FunctionComponent<
       autoFocus={props.autoFocus}
       returnKeyType="search"
       inputStyle={props.inputStyle || styles.inputStyle}
-      onSubmitEditing={props.onPress}
+      onSubmitEditing={props.onPressSearchComic}
       onBlur={handleInputBlur}
       onFocus={handleInputFocus}
       clearIcon={styles.clearIcon}

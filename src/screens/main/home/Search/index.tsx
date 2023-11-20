@@ -120,7 +120,7 @@ const Search = () => {
             <SearchCustom
               value={search}
               setValue={setSearch}
-              onPress={onPressSearch}
+              onPressSearchComic={onPressSearch}
               autoFocus={true}
             />
           </View>
