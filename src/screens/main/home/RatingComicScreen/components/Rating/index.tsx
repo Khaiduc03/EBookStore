@@ -3,8 +3,8 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import useStyles from './styles';
 import Svg, {Line, Rect} from 'react-native-svg';
-import {NavigationService} from '../../../../../../../../navigation';
-import {routes} from '../../../../../../../../constants';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
 
 interface LineComponentProps {
   length: number;
@@ -27,7 +27,7 @@ const LineComponent: React.FC<LineComponentProps> = ({length, stroke}) => {
   );
 };
 
-const RatingComic: React.FC = () => {
+const ItemRating: React.FC = () => {
   const styles = useStyles();
   const ratingCompleted = (rating: number) => {
     console.log('Rating is: ' + rating);
@@ -42,14 +42,6 @@ const RatingComic: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.textRating}>Rating & Reviews</Text>
-        <Icon
-          name="arrow-right"
-          type="font-awesome-5"
-          onPress={() => NavigationService.navigate(routes.RATINGCOMICSCREEN)}
-        />
-      </View>
       <View style={styles.content}>
         <View style={styles.viewRating1}>
           <Text style={styles.numberRating}>4.9</Text>
@@ -76,4 +68,4 @@ const RatingComic: React.FC = () => {
   );
 };
 
-export default RatingComic;
+export default ItemRating;
