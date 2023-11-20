@@ -6,10 +6,7 @@ const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
+  container: {},
   avatar: {
     width: normalize(53),
     height: normalize(55),
@@ -24,8 +21,7 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: normalize(24),
-    paddingVertical: normalize(10),
+    paddingHorizontal: normalize(5),
   },
   btnRating: {
     width: normalize(70),
@@ -53,12 +49,13 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
     fontFamily: fontFamilySetup.regular,
     width: normalize(300),
+    paddingVertical: normalize(20),
   },
   footer: {
     flexDirection: 'row',
-    padding: normalize(24),
+    paddingHorizontal: normalize(10),
     gap: normalize(20),
-    alignItems:'center',
+    alignItems: 'center',
   },
   iconFooter: {
     color: colors.black,

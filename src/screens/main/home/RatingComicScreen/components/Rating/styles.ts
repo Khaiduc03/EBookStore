@@ -53,6 +53,11 @@ const useStyles = makeStyles(({colors}) => ({
     paddingVertical: normalize(3),
     gap: normalize(10),
   },
+  numberLine:{
+    color:colors.black,
+    fontSize: normalize(15),
+    fontFamily: fontFamilySetup.bold,
+  }
 }));
 
 export default useStyles;

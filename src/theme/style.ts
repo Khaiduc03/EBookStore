@@ -89,6 +89,8 @@ export const theme = createTheme({
     grey0: '#34495E',
     grey2: '#90939B',
     grey8: '#FFFFFF',
+    grey10: '#FFFFFF',
+    grey11: '#FFFFFF',
     white: '#FFFFFF',
     black1: '#000000',
     background: '#181A20',

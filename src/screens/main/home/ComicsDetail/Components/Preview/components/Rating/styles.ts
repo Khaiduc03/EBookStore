@@ -57,7 +57,12 @@ const useStyles = makeStyles(({colors}) => ({
   },
   textTitle:{
     color:colors.black,
-    fontSize: normalize(26),
+    fontSize: normalize(18),
+    fontFamily: fontFamilySetup.bold,
+  },
+  numberLine:{
+    color:colors.black,
+    fontSize: normalize(15),
     fontFamily: fontFamilySetup.bold,
   }
 }));

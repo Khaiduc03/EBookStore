@@ -52,13 +52,13 @@ const ItemRating: React.FC = () => {
             showRating={false}
             size={24}
           />
-          <Text style={styles.numberReviews}>(6.8k reviews)</Text>
+          <Text style={styles.numberReviews}>( 6.8k reviews )</Text>
         </View>
         <View style={styles.line} />
         <View style={styles.viewRating2}>
           {data.map(({value, length}, index) => (
             <View style={styles.lineRating} key={index}>
-              <Text>{value}</Text>
+              <Text style={styles.numberLine}>{value}</Text>
               <LineComponent length={length} stroke="#FAA731" />
             </View>
           ))}
