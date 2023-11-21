@@ -136,6 +136,9 @@ const useStyles = makeStyles(({colors}) => ({
     fontSize: normalize(16),
     fontFamily: fontFamilySetup.regular,
   },
+  iconFooter:{
+    color:colors.black,
+  }
 }));
 
 export default useStyles;

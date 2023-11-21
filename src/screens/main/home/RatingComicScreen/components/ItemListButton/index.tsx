@@ -192,9 +192,9 @@ const ItemRatingStar: React.FC = () => {
             ]}>
             <View style={styles.btnNextScreen}>
               <Icon
-                name={isFiveStar ? 'staro' : 'star'}
+                name="star"
                 type="antdesign"
-                color={isFiveStar ? '#ffffff' : '#F89300'}
+                color={isFiveStar ? 'white' : '#F89300'}
               />
 
               <Text
@@ -222,9 +222,9 @@ const ItemRatingStar: React.FC = () => {
             ]}>
             <View style={styles.btnNextScreen}>
               <Icon
-                name={isFourStar ? 'staro' : 'star'}
+                name="star"
                 type="antdesign"
-                color={isFourStar ? '#ffffff' : '#F89300'}
+                color={isFourStar ? 'white' : '#F89300'}
               />
               <Text
                 style={[
@@ -252,9 +252,9 @@ const ItemRatingStar: React.FC = () => {
             ]}>
             <View style={styles.btnNextScreen}>
               <Icon
-                name={isThreeStar ? 'staro' : 'star'}
+                name="star"
                 type="antdesign"
-                color={isThreeStar ? '#ffffff' : '#F89300'}
+                color={isThreeStar ? 'white' : '#F89300'}
               />
               <Text
                 style={[
@@ -281,9 +281,9 @@ const ItemRatingStar: React.FC = () => {
             ]}>
             <View style={styles.btnNextScreen}>
               <Icon
-                name={isTwoStar ? 'staro' : 'star'}
+                name="star"
                 type="antdesign"
-                color={isTwoStar ? '#ffffff' : '#F89300'}
+                color={isTwoStar ? 'white' : '#F89300'}
               />
               <Text
                 style={[
@@ -310,9 +310,9 @@ const ItemRatingStar: React.FC = () => {
             ]}>
             <View style={styles.btnNextScreen}>
               <Icon
-                name={isOneStar ? 'staro' : 'star'}
+                name="star"
                 type="antdesign"
-                color={isOneStar ? '#ffffff' : '#F89300'}
+                color={isOneStar ? 'white' : '#F89300'}
               />
               <Text
                 style={[

@@ -133,9 +133,8 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
             <Icon
               name={isLike ? 'heart' : 'heart-outline'}
               type="ionicon"
-              color={
-                isLike ? theme.lightColors?.primary : theme.lightColors?.primary
-              }
+              color={isLike ? '#F89300' : ''}
+              style={styles.iconFooter}
             />
             <Text style={styles.textLike}>Like</Text>
           </TouchableOpacity>
@@ -146,7 +145,7 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
             <Text style={styles.textLike}>Comment</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconText} onPress={onShare}>
-            <Icon name="share-social-outline" type="ionicon" />
+            <Icon name="paper-plane" type="font-awesome-5" />
             <Text style={styles.textLike}>Share</Text>
           </TouchableOpacity>
         </View>
