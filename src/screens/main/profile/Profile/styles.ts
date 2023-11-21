@@ -26,7 +26,7 @@ const useStyles = makeStyles(({colors}) => ({
     width: '99%',
   },
   line: {
-    borderBottomWidth: normalize(0.4),
+    borderBottomWidth: normalize(0.2),
     borderColor: 'gray',
     width: '95%',
     marginStart: normalize(10),

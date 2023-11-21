@@ -1,6 +1,6 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {StyleSheet} from 'react-native';
-import { fontFamilySetup } from '../../../../utils/font';
+import {fontFamilySetup} from '../../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
@@ -65,6 +65,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   formContainer: {
     flex: 1,
+    paddingVertical: normalize(40),
   },
   textRM: {
     marginLeft: normalize(-10),
