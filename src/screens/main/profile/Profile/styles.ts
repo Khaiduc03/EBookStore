@@ -26,7 +26,7 @@ const useStyles = makeStyles(({colors}) => ({
     width: '99%',
   },
   line: {
-    borderBottomWidth: normalize(0.4),
+    borderBottomWidth: normalize(0.2),
     borderColor: 'gray',
     width: '95%',
     marginStart: normalize(10),
@@ -44,10 +44,10 @@ const useStyles = makeStyles(({colors}) => ({
   },
   email: {
     color: colors.grey8,
-    fontFamily: fontFamilySetup.medium,
+    fontFamily: fontFamilySetup.regular,
     fontSize: normalize(15),
     lineHeight: normalize(21),
-    letterSpacing: normalize(0.22),
+    letterSpacing: normalize(0.15),
   },
 }));
 

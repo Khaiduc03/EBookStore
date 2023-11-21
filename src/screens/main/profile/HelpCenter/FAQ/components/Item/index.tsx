@@ -13,14 +13,14 @@ const ItemFAQ: React.FC = () => {
   const styles = useStyles();
 
   const [isAllSelected, setAllSelected] = useState(true);
-  const [isSortSelected, setSortSelected] = useState(false);
-  const [isPriceSelected, setPriceSelected] = useState(false);
-  const [isRatingSelected, setRatingSelected] = useState(false);
+  const [isApp, setApp] = useState(false);
+  const [isSecurity, setSecurity] = useState(false);
+  const [isService, setService] = useState(false);
 
   const [showAllSelected, setShowAllSelected] = useState(true);
-  const [showSortSelected, setShowSortSelected] = useState(false);
-  const [showPriceSelected, setShowPriceSelected] = useState(false);
-  const [showRatingSelected, setShowRatingSelected] = useState(false);
+  const [showApp, setShowApp] = useState(false);
+  const [showSecurity, setShowSecurity] = useState(false);
+  const [showService, setShowService] = useState(false);
 
   const handleAllClick = () => {
     if (isAllSelected) {
@@ -29,64 +29,64 @@ const ItemFAQ: React.FC = () => {
     } else {
       setAllSelected(true);
       setShowAllSelected(true);
-      setShowSortSelected(false);
-      setShowPriceSelected(false);
-      setShowRatingSelected(false);
+      setShowApp(false);
+      setShowSecurity(false);
+      setShowService(false);
     }
 
-    setSortSelected(false);
-    setPriceSelected(false);
-    setRatingSelected(false);
+    setApp(false);
+    setSecurity(false);
+    setService(false);
   };
 
-  const handleSortClick = () => {
-    if (isSortSelected) {
-      setSortSelected(false);
-      setShowSortSelected(false);
+  const handleAppClick = () => {
+    if (isApp) {
+      setApp(false);
+      setShowApp(false);
     } else {
-      setSortSelected(true);
-      setShowSortSelected(true);
+      setApp(true);
+      setShowApp(true);
       setShowAllSelected(false);
-      setShowPriceSelected(false);
+      setShowSecurity(false);
     }
 
     setAllSelected(false);
-    setPriceSelected(false);
-    setRatingSelected(false);
+    setSecurity(false);
+    setService(false);
   };
 
-  const handlePriceClick = () => {
-    if (isPriceSelected) {
-      setPriceSelected(false);
-      setShowPriceSelected(false);
+  const handleSecurityClick = () => {
+    if (isSecurity) {
+      setSecurity(false);
+      setShowSecurity(false);
     } else {
-      setPriceSelected(true);
-      setShowPriceSelected(true);
+      setSecurity(true);
+      setShowSecurity(true);
       setShowAllSelected(false);
-      setShowSortSelected(false);
-      setShowRatingSelected(false);
+      setShowApp(false);
+      setShowService(false);
     }
 
     setAllSelected(false);
-    setSortSelected(false);
-    setRatingSelected(false);
+    setApp(false);
+    setService(false);
   };
 
-  const handleRatingClick = () => {
-    if (isRatingSelected) {
-      setRatingSelected(false);
-      setShowRatingSelected(false);
+  const handleServiceClick = () => {
+    if (isService) {
+      setService(false);
+      setShowService(false);
     } else {
-      setRatingSelected(true);
-      setShowRatingSelected(true);
+      setService(true);
+      setShowService(true);
       setShowAllSelected(false);
-      setShowSortSelected(false);
-      setShowPriceSelected(false);
+      setShowApp(false);
+      setShowSecurity(false);
     }
 
     setAllSelected(false);
-    setSortSelected(false);
-    setPriceSelected(false);
+    setApp(false);
+    setSecurity(false);
   };
 
   return (
@@ -120,11 +120,11 @@ const ItemFAQ: React.FC = () => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={handleSortClick}
+            onPress={handleAppClick}
             style={[
               styles.btnTitle,
               {
-                backgroundColor: isSortSelected
+                backgroundColor: isApp
                   ? styles.backgroundBtnTitleFocus.backgroundColor
                   : styles.backgroundBtnTitleBlur.backgroundColor,
               },
@@ -133,7 +133,7 @@ const ItemFAQ: React.FC = () => {
               style={[
                 styles.textTitle,
                 {
-                  color: isSortSelected
+                  color: isApp
                     ? styles.colorsTextTitleFocus.color
                     : styles.colorsTextTitleBlur.color,
                 },
@@ -142,11 +142,11 @@ const ItemFAQ: React.FC = () => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={handlePriceClick}
+            onPress={handleSecurityClick}
             style={[
               styles.btnTitle,
               {
-                backgroundColor: isPriceSelected
+                backgroundColor: isSecurity
                   ? styles.backgroundBtnTitleFocus.backgroundColor
                   : styles.backgroundBtnTitleBlur.backgroundColor,
               },
@@ -155,7 +155,7 @@ const ItemFAQ: React.FC = () => {
               style={[
                 styles.textTitle,
                 {
-                  color: isPriceSelected
+                  color: isSecurity
                     ? styles.colorsTextTitleFocus.color
                     : styles.colorsTextTitleBlur.color,
                 },
@@ -164,11 +164,11 @@ const ItemFAQ: React.FC = () => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={handleRatingClick}
+            onPress={handleServiceClick}
             style={[
               styles.btnTitle,
               {
-                backgroundColor: isRatingSelected
+                backgroundColor: isService
                   ? styles.backgroundBtnTitleFocus.backgroundColor
                   : styles.backgroundBtnTitleBlur.backgroundColor,
               },
@@ -177,7 +177,7 @@ const ItemFAQ: React.FC = () => {
               style={[
                 styles.textTitle,
                 {
-                  color: isRatingSelected
+                  color: isService
                     ? styles.colorsTextTitleFocus.color
                     : styles.colorsTextTitleBlur.color,
                 },
@@ -222,21 +222,21 @@ const ItemFAQ: React.FC = () => {
         ) : null}
 
         {/* Item 2 */}
-        {showSortSelected ? (
+        {showApp ? (
           <View style={styles.viewItem2}>
             <Toggleable_App />
           </View>
         ) : null}
 
         {/* Show Item 3 */}
-        {showPriceSelected ? (
+        {showSecurity ? (
           <View style={styles.viewItem2}>
             <Toggleable_Security />
           </View>
         ) : null}
 
         {/* Show Item Rating */}
-        {showRatingSelected ? (
+        {showService ? (
           <View style={styles.viewItem2}>
             <Toggleable_Service />
           </View>

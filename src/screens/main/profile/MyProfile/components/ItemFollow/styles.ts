@@ -6,8 +6,8 @@ const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 const useStyles = makeStyles(({colors}) => ({
   avatar: {
-    width: normalize(72),
-    height: normalize(72),
+    width: normalize(70),
+    height: normalize(70),
     borderRadius: normalize(50),
   },
   viewAvatarFollow: {
@@ -20,22 +20,22 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
   },
   viewFollow: {
-    width: '25%',
+    width: '27%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginStart: normalize(10),
+    marginStart: normalize(5),
   },
   countNumber: {
     color: colors.black,
-    fontSize: normalize(20),
+    fontSize: normalize(16),
     fontFamily: fontFamilySetup.bold,
     lineHeight: normalize(21),
     letterSpacing: normalize(0.12),
   },
   text: {
-    color: colors.black,
+    color: colors.black2,
     fontFamily: fontFamilySetup.regular,
-    fontSize: normalize(16),
+    fontSize: normalize(14),
     lineHeight: normalize(21),
     letterSpacing: normalize(0.12),
   },

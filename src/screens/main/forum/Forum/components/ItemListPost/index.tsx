@@ -54,7 +54,6 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
       data={images}
       onScroll={({nativeEvent}) => onChange(nativeEvent)}
       horizontal
-      pagingEnabled
       showsHorizontalScrollIndicator={false}
       keyExtractor={(url, index) => index.toString()}
       renderItem={({item: url, index}) => (
@@ -79,8 +78,8 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
       )}
     />
   );
-  const headerIndex = 0;
-  const dataIndices = data.map((_, index) => headerIndex + index + 9);
+ 
+  
 
   const renderItem = ({item}: {item: Post}) => (
     <View style={styles.content}>
@@ -133,9 +132,8 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
             <Icon
               name={isLike ? 'heart' : 'heart-outline'}
               type="ionicon"
-              color={
-                isLike ? theme.lightColors?.primary : theme.lightColors?.primary
-              }
+              color={isLike ? '#F89300' : ''}
+              style={styles.iconFooter}
             />
             <Text style={styles.textLike}>Like</Text>
           </TouchableOpacity>
@@ -146,7 +144,7 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
             <Text style={styles.textLike}>Comment</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconText} onPress={onShare}>
-            <Icon name="share-social-outline" type="ionicon" />
+            <Icon name="paper-plane" type="font-awesome-5" />
             <Text style={styles.textLike}>Share</Text>
           </TouchableOpacity>
         </View>
@@ -169,7 +167,7 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
             <TouchableOpacity
               style={styles.buttonHeader}
               onPress={() => NavigationService.navigate(routes.CREATEPOST)}>
-              <Text>Bạn đang nghĩ gì?</Text>
+              <Text style={styles.textheader}>What are you thinking?</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{justifyContent: 'center'}}
@@ -178,7 +176,6 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
             </TouchableOpacity>
           </View>
         )}
-        stickyHeaderIndices={[headerIndex, ...dataIndices]}
       />
     </View>
   );
