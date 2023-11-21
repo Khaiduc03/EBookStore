@@ -220,9 +220,9 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
     paddingHorizontal: normalize(10),
   },
-  iconFooter:{
-    color:colors.black,
-  }
+  iconFooter: {
+    color: colors.black,
+  },
 }));
 
 export default useStyles;

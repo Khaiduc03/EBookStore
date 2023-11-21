@@ -14,9 +14,6 @@ const MyProfile: React.FC = props => {
   const handlePressGoback = () => {
     NavigationService.goBack();
   };
-  const handlePressGoScreen = () => {
-    NavigationService.navigate(routes.UPDATE_PROFILE2);
-  };
 
   const renderItem = ({item}: {item: (typeof data)[0]}) => (
     <ItemListMyProfile {...item} />
@@ -29,9 +26,16 @@ const MyProfile: React.FC = props => {
         leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="My Profile"
         onPressLeftIcon={handlePressGoback}
-        rightIconleft={{name: 'plus-square', type: 'font-awesome-5'}}
+        rightIconleft={{name: 'plus-square-o', type: 'font-awesome'}}
+        rightIconRight={{
+          name: 'edit',
+          type: 'feather',
+        }}
         onPressRightIconLeft={() =>
           NavigationService.navigate(routes.CREATEPOST)
+        }
+        onPressRightIconRight={() =>
+          NavigationService.navigate(routes.UPDATE_PROFILE2)
         }
       />
       <View>
@@ -39,13 +43,9 @@ const MyProfile: React.FC = props => {
       </View>
       <View style={styles.viewTextName}>
         <Text style={styles.nameUser}>{user.fullname}</Text>
-        <TextCustom textLight title="Biographic this here !!!!! 😎" />
+        <Text style={styles.textBio}>Biographic this here !!</Text>
       </View>
-      <View style={styles.viewButton}>
-        <TouchableOpacity style={styles.button} onPress={handlePressGoScreen}>
-          <Text style={styles.textButton}>Edit Profile</Text>
-        </TouchableOpacity>
-      </View>
+
       <View style={styles.viewExplore}>
         <Text style={styles.textDiscover}>Discover People</Text>
         <TouchableOpacity

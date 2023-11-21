@@ -86,9 +86,43 @@ const ItemListPost: React.FC = () => {
     }
   };
 
+<<<<<<< HEAD
   const handleLikePress = (uuid: string) => {
     // Tìm index của item trong dataForum
     const index = dataForum.findIndex((item: any) => item.uuid === uuid);
+=======
+  const renderImages = (images: string[]) => (
+    <FlatList
+      data={images}
+      onScroll={({nativeEvent}) => onChange(nativeEvent)}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      keyExtractor={(url, index) => index.toString()}
+      renderItem={({item: url, index}) => (
+        <View key={url}>
+          <FastImage
+            resizeMode="stretch"
+            style={styles.imagePost}
+            source={{uri: url}}
+          />
+          <View style={styles.wrapDot}>
+            {images.map((e, dotIndex) => (
+              <Text
+                key={e}
+                style={
+                  imageActive === dotIndex ? styles.dotActive : styles.dot
+                }>
+                ●
+              </Text>
+            ))}
+          </View>
+        </View>
+      )}
+    />
+  );
+ 
+  
+>>>>>>> c0af177 (Fix My Profile)
 
     // Kiểm tra nếu không tìm thấy item
     if (index === -1) return;

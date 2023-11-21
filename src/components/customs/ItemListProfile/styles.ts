@@ -16,15 +16,18 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
   },
   txtCircle: {
-    fontSize: normalize(18),
-    letterSpacing: normalize(0.6),
+    fontSize: normalize(20),
+    letterSpacing: normalize(0.12),
     fontStyle: 'normal',
-    fontFamily: fontFamilySetup.medium,
+    fontFamily: fontFamilySetup.bold,
     color: colors.black,
-    lineHeight: normalize(35.2),
-    marginStart: normalize(10),
+    lineHeight: normalize(21),
+    marginStart: normalize(20),
   },
   rightIcon: {
+    color: colors.black,
+  },
+  leftIcon: {
     color: colors.black,
   },
 }));

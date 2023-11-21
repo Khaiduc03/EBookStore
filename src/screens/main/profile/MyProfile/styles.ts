@@ -23,14 +23,13 @@ const useStyles = makeStyles(({colors}) => ({
     paddingHorizontal: normalize(24),
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: normalize(5),
+    paddingTop: normalize(40),
   },
   textPost: {
     fontSize: normalize(20),
     fontFamily: fontFamilySetup.bold,
     lineHeight: normalize(20),
     color: colors.black,
-    
   },
   viewMyPost: {
     marginTop: normalize(15),
@@ -48,7 +47,6 @@ const useStyles = makeStyles(({colors}) => ({
     justifyContent: 'center',
   },
   viewButton: {
-    flexDirection: 'row',
     paddingHorizontal: normalize(24),
     paddingVertical: normalize(15),
   },
@@ -67,6 +65,13 @@ const useStyles = makeStyles(({colors}) => ({
   text: {
     color: colors.primary,
     fontFamily: fontFamilySetup.bold,
+    fontSize: normalize(15),
+    lineHeight: normalize(21),
+    letterSpacing: normalize(0.12),
+  },
+  textBio: {
+    color: colors.black3,
+    fontFamily: fontFamilySetup.regular,
     fontSize: normalize(15),
     lineHeight: normalize(21),
     letterSpacing: normalize(0.12),
