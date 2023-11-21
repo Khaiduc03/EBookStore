@@ -17,13 +17,13 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
     fontFamily: fontFamilySetup.bold,
     fontSize: normalize(20),
-    paddingVertical: 10,
+    paddingVertical: normalize(10),
     lineHeight: normalize(21),
     letterSpacing: normalize(0.12),
   },
-  iconList:{
+  iconList: {
     color: colors.black,
-  }
+  },
 }));
 
 export default useStyles;

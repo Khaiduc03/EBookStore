@@ -3,15 +3,11 @@ import React, {useEffect, useState} from 'react';
 import {Keyboard, Text, TouchableWithoutFeedback, View} from 'react-native';
 import {BigButton, HeaderCustom} from '../../../../components';
 import InputCustomV1 from '../../../../components/customs/InputCustomV1';
-import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {AuthActions, getAuthUserProfile} from '../../../../redux';
-import {isValidPassword, showToastError} from '../../../../utils';
-import useStyles from './styles';
 import {NavigationService} from '../../../../navigation';
+import useStyles from './styles';
 
 const ChangePassWord: React.FC = () => {
   const styles = useStyles();
-  const dispatch = useAppDispatch();
   const [oldPassword, setoldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmpassword] = useState('');
@@ -22,8 +18,6 @@ const ChangePassWord: React.FC = () => {
     useState<boolean>(true);
   const [isCheckValidateConfirmPassword, setIsCheckValidateConfirmPassword] =
     useState<boolean>(true);
-
-  const user = useAppSelector(getAuthUserProfile);
 
   useEffect(() => {
     if (password !== null && confirmpassword !== null) {
