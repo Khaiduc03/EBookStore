@@ -2,8 +2,20 @@ import {CheckBox} from '@rneui/themed';
 import React, {useState} from 'react';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import useStyles from '../../styles';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
+import App from '../../../../../../../App';
+interface ItemFiltersProps {
+  setHightView: Function;
+  setLowView: Function;
+  setFilterArray: Function;
+}
 
-const ItemFilters: React.FC = () => {
+const ItemFilters: React.FC<ItemFiltersProps> = ({
+  setHightView,
+  setLowView,
+  setFilterArray,
+}) => {
   const styles = useStyles();
 
   // Top Menu Filters
@@ -33,18 +45,150 @@ const ItemFilters: React.FC = () => {
   const [isCbSelected11, setCbSelected11] = useState(false);
 
   // Genre
-  const [isCbSelected12, setCbSelected12] = useState(true);
-  const [isCbSelected13, setCbSelected13] = useState(true);
-  const [isCbSelected14, setCbSelected14] = useState(true);
-  const [isCbSelected15, setCbSelected15] = useState(true);
-  const [isCbSelected16, setCbSelected16] = useState(true);
-  const [isCbSelected17, setCbSelected17] = useState(true);
-  const [isCbSelected18, setCbSelected18] = useState(true);
-  const [isCbSelected19, setCbSelected19] = useState(true);
-  const [isCbSelected20, setCbSelected20] = useState(true);
-  const [isCbSelected21, setCbSelected21] = useState(true);
-  const [isCbSelected22, setCbSelected22] = useState(true);
-  const [isCbSelected23, setCbSelected23] = useState(true);
+  const [isCbSelected12, setCbSelected12] = useState(false);
+  const [isCbSelected13, setCbSelected13] = useState(false);
+  const [isCbSelected14, setCbSelected14] = useState(false);
+  const [isCbSelected15, setCbSelected15] = useState(false);
+  const [isCbSelected16, setCbSelected16] = useState(false);
+  const [isCbSelected17, setCbSelected17] = useState(false);
+  const [isCbSelected18, setCbSelected18] = useState(false);
+  const [isCbSelected19, setCbSelected19] = useState(false);
+  const [isCbSelected20, setCbSelected20] = useState(false);
+  const [isCbSelected21, setCbSelected21] = useState(false);
+  const [isCbSelected22, setCbSelected22] = useState(false);
+  const [isCbSelected23, setCbSelected23] = useState(false);
+
+  const [topcis, setTopics] = useState<string[]>([]);
+
+  const handleTopicSelection = (topic: string) => {
+    switch (topic) {
+      case 'All':
+        setCbSelected12(prevState => !prevState);
+        if (isCbSelected12) {
+          setTopics((prevFilters: string[]) =>
+            prevFilters.filter((item: string) => item !== topic),
+          );
+        } else {
+          setTopics((prevFilters: string[]) => [...prevFilters, topic]);
+        }
+        break;
+      case 'action':
+        setCbSelected13(prevState => !prevState);
+        if (isCbSelected13) {
+          setTopics((prevFilters: string[]) =>
+            prevFilters.filter((item: string) => item !== topic),
+          );
+        } else {
+          setTopics((prevFilters: string[]) => [...prevFilters, topic]);
+        }
+        break;
+
+      case 'comedy':
+        setCbSelected14(prevState => !prevState);
+        if (isCbSelected14) {
+          setTopics((prevFilters: string[]) =>
+            prevFilters.filter((item: string) => item !== topic),
+          );
+        } else {
+          setTopics((prevFilters: string[]) => [...prevFilters, topic]);
+        }
+        break;
+      case 'drama':
+        setCbSelected15(prevState => !prevState);
+        if (isCbSelected15) {
+          setTopics((prevFilters: string[]) =>
+            prevFilters.filter((item: string) => item !== topic),
+          );
+        } else {
+          setTopics((prevFilters: string[]) => [...prevFilters, topic]);
+        }
+        break;
+
+      case 'fantasy':
+        setCbSelected16(prevState => !prevState);
+        if (isCbSelected16) {
+          setTopics((prevFilters: string[]) =>
+            prevFilters.filter((item: string) => item !== topic),
+          );
+        } else {
+          setTopics((prevFilters: string[]) => [...prevFilters, topic]);
+        }
+        break;
+      case 'sports':
+        setCbSelected17(prevState => !prevState);
+        if (isCbSelected17) {
+          setTopics((prevFilters: string[]) =>
+            prevFilters.filter((item: string) => item !== topic),
+          );
+        } else {
+          setTopics((prevFilters: string[]) => [...prevFilters, topic]);
+        }
+        break;
+      case 'mystery':
+        setCbSelected18(prevState => !prevState);
+        if (isCbSelected18) {
+          setTopics((prevFilters: string[]) =>
+            prevFilters.filter((item: string) => item !== topic),
+          );
+        } else {
+          setTopics((prevFilters: string[]) => [...prevFilters, topic]);
+        }
+        break;
+      case 'romance':
+        setCbSelected19(prevState => !prevState);
+        if (isCbSelected19) {
+          setTopics((prevFilters: string[]) =>
+            prevFilters.filter((item: string) => item !== topic),
+          );
+        } else {
+          setTopics((prevFilters: string[]) => [...prevFilters, topic]);
+        }
+        break;
+      case 'thriller':
+        setCbSelected20(prevState => !prevState);
+        if (isCbSelected20) {
+          setTopics((prevFilters: string[]) =>
+            prevFilters.filter((item: string) => item !== topic),
+          );
+        } else {
+          setTopics((prevFilters: string[]) => [...prevFilters, topic]);
+        }
+        break;
+
+      case 'school':
+        setCbSelected21(prevState => !prevState);
+        if (isCbSelected21) {
+          setTopics((prevFilters: string[]) =>
+            prevFilters.filter((item: string) => item !== topic),
+          );
+        } else {
+          setTopics((prevFilters: string[]) => [...prevFilters, topic]);
+        }
+        break;
+
+      case 'horny':
+        setCbSelected22(prevState => !prevState);
+        if (isCbSelected22) {
+          setTopics((prevFilters: string[]) =>
+            prevFilters.filter((item: string) => item !== topic),
+          );
+        } else {
+          setTopics((prevFilters: string[]) => [...prevFilters, topic]);
+        }
+        break;
+
+      // handle other topics similarly
+      default:
+        break;
+    }
+  };
+
+  const onPressApply = () => {
+    NavigationService.navigate(routes.SEARCH);
+    setHightView(isCbSelected1), setLowView(isCbSelected6);
+    setFilterArray(topcis);
+    console.log(topcis);
+  };
 
   const handleAllClick = () => {
     if (isAllSelected) {
@@ -265,6 +409,7 @@ const ItemFilters: React.FC = () => {
       setCbSelected22(false);
       setCbSelected23(false);
     } else {
+      handleTopicSelection('All');
       setCbSelected12(true);
       setCbSelected13(true);
       setCbSelected14(true);
@@ -285,6 +430,7 @@ const ItemFilters: React.FC = () => {
       setCbSelected13(false);
       setCbSelected12(false);
     } else {
+      handleTopicSelection('action');
       setCbSelected13(true);
     }
   };
@@ -294,6 +440,7 @@ const ItemFilters: React.FC = () => {
       setCbSelected14(false);
       setCbSelected12(false);
     } else {
+      handleTopicSelection('comedy');
       setCbSelected14(true);
     }
   };
@@ -303,6 +450,7 @@ const ItemFilters: React.FC = () => {
       setCbSelected15(false);
       setCbSelected12(false);
     } else {
+      handleTopicSelection('drama');
       setCbSelected15(true);
     }
   };
@@ -312,6 +460,7 @@ const ItemFilters: React.FC = () => {
       setCbSelected16(false);
       setCbSelected12(false);
     } else {
+      handleTopicSelection('fantasy');
       setCbSelected16(true);
     }
   };
@@ -321,6 +470,7 @@ const ItemFilters: React.FC = () => {
       setCbSelected17(false);
       setCbSelected12(false);
     } else {
+      handleTopicSelection('sports');
       setCbSelected17(true);
     }
   };
@@ -330,6 +480,7 @@ const ItemFilters: React.FC = () => {
       setCbSelected18(false);
       setCbSelected12(false);
     } else {
+      handleTopicSelection('mystery');
       setCbSelected18(true);
     }
   };
@@ -339,6 +490,7 @@ const ItemFilters: React.FC = () => {
       setCbSelected19(false);
       setCbSelected12(false);
     } else {
+      handleTopicSelection('romance');
       setCbSelected19(true);
     }
   };
@@ -348,6 +500,7 @@ const ItemFilters: React.FC = () => {
       setCbSelected20(false);
       setCbSelected12(false);
     } else {
+      handleTopicSelection('thriller');
       setCbSelected20(true);
     }
   };
@@ -357,6 +510,7 @@ const ItemFilters: React.FC = () => {
       setCbSelected21(false);
       setCbSelected12(false);
     } else {
+      handleTopicSelection('school');
       setCbSelected21(true);
     }
   };
@@ -366,6 +520,7 @@ const ItemFilters: React.FC = () => {
       setCbSelected22(false);
       setCbSelected12(false);
     } else {
+      handleTopicSelection('horny');
       setCbSelected22(true);
     }
   };
@@ -734,7 +889,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Action</Text>
+                <Text style={styles.textItem}>action</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
               <TouchableOpacity
@@ -753,7 +908,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Adventure</Text>
+                <Text style={styles.textItem}>comedy</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
 
@@ -773,7 +928,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Romace</Text>
+                <Text style={styles.textItem}>drama</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
               <TouchableOpacity
@@ -792,7 +947,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Comic</Text>
+                <Text style={styles.textItem}>fantasy</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
               <TouchableOpacity
@@ -811,7 +966,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Comedy</Text>
+                <Text style={styles.textItem}>sports</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
 
@@ -831,7 +986,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Fansty</Text>
+                <Text style={styles.textItem}>mystery</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
               <TouchableOpacity
@@ -850,7 +1005,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Mystery</Text>
+                <Text style={styles.textItem}>romance</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
               <TouchableOpacity
@@ -869,7 +1024,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Horror</Text>
+                <Text style={styles.textItem}>thirller</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
 
@@ -889,7 +1044,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Sco-Fi</Text>
+                <Text style={styles.textItem}>school</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
               <TouchableOpacity
@@ -908,7 +1063,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Thriller</Text>
+                <Text style={styles.textItem}>horny</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
               <TouchableOpacity
@@ -1197,7 +1352,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Action</Text>
+                <Text style={styles.textItem}>action</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
               <TouchableOpacity
@@ -1216,7 +1371,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Adventure</Text>
+                <Text style={styles.textItem}>comedy</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
 
@@ -1236,7 +1391,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Romace</Text>
+                <Text style={styles.textItem}>drama</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
               <TouchableOpacity
@@ -1255,7 +1410,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Comic</Text>
+                <Text style={styles.textItem}>fantasy</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
               <TouchableOpacity
@@ -1274,7 +1429,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Comedy</Text>
+                <Text style={styles.textItem}>sports</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
 
@@ -1294,7 +1449,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Fansty</Text>
+                <Text style={styles.textItem}>mystery</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
               <TouchableOpacity
@@ -1313,7 +1468,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Mystery</Text>
+                <Text style={styles.textItem}>romance</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
               <TouchableOpacity
@@ -1332,7 +1487,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Horror</Text>
+                <Text style={styles.textItem}>thirller</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
 
@@ -1352,7 +1507,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Sco-Fi</Text>
+                <Text style={styles.textItem}>school</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
               <TouchableOpacity
@@ -1371,7 +1526,7 @@ const ItemFilters: React.FC = () => {
                       : styles.backgroundBtnTitleBlur.backgroundColor,
                   }}
                 />
-                <Text style={styles.textItem}>Thriller</Text>
+                <Text style={styles.textItem}>horny</Text>
               </TouchableOpacity>
               <View style={styles.viewUnderline} />
               <TouchableOpacity
@@ -1400,7 +1555,9 @@ const ItemFilters: React.FC = () => {
         <TouchableOpacity style={[styles.btn, styles.backgroundColorBtnReset]}>
           <Text style={styles.textBtnReset}>Reset</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.btn, styles.backgroundColorBtnApply]}>
+        <TouchableOpacity
+          onPress={onPressApply}
+          style={[styles.btn, styles.backgroundColorBtnApply]}>
           <Text style={styles.textBtnApply}>Apply</Text>
         </TouchableOpacity>
       </View>

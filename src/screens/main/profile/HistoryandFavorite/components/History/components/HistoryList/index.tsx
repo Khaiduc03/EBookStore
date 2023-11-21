@@ -26,8 +26,6 @@ const HistoryList: FunctionComponent = () => {
   const data = useAppSelector(getListHistory);
   const nextPage = useAppSelector(nextPageHistory);
 
-  console.log('============>', data);
-
   useEffect(() => {
     dispatch(ComicActions.getListHistotyComic(page));
   }, [page]);

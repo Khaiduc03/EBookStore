@@ -15,9 +15,6 @@ interface Comic {
 const Preview: React.FC<Comic> = props => {
   const styles = useStyles();
 
-  // const dataComicDetail = useAppSelector(getDetailComic);
-  // const data = dataComicDetail ? dataComicDetail[0] : null;
-
   return (
     <ScrollView nestedScrollEnabled>
       <View style={styles.container}>

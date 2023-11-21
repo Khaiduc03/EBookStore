@@ -76,7 +76,7 @@ const ComicByTopic = () => {
     NavigationService.navigate(routes.SEARCH);
   };
   const listFooterComponent = useCallback(() => {
-    return <ActivityIndicator size={'large'} />;
+    return <ActivityIndicator color={'#F89300'} size={'large'} />;
   }, []);
 
   return (

@@ -33,6 +33,8 @@ export const getNextSearch = (state: RootState) =>
 export const getTotalSearch = (state: RootState) =>
   state.comic.listDataBySearch?.totalPage;
 
+export const getCurrentSearch = (state: RootState) =>
+  state.comic.listDataBySearch?.currentPage;
 export const getNextChapter = (state: RootState) =>
   state.comic.listDetailChapter?.next_chapter;
 export const getPreviousChapter = (state: RootState) =>

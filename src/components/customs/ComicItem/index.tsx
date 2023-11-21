@@ -48,6 +48,7 @@ const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
         )}
         {isLoading && (
           <ActivityIndicator
+            color={'#F89300'}
             size={'large'}
             style={{
               position: 'absolute',
