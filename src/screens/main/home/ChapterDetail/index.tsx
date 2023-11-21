@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {View, FlatList, TouchableWithoutFeedback, Image} from 'react-native';
 import {Device} from '../../../../utils';
 import useStyles from './styles';
@@ -21,6 +21,7 @@ interface RouteParamsIdChapter {
 
 const ChapterDetail = () => {
   const dispatch = useAppDispatch();
+  const scrollRef = useRef<FlatList | null>(null);
   const route = useRoute();
   const chapter_number = (route.params as RouteParamsIdChapter).chapter_number;
   const comic_uuid = (route.params as RouteParamsIdChapter).comic_uuid;
@@ -68,10 +69,12 @@ const ChapterDetail = () => {
 
   const incrementChapter = () => {
     setCurrentChapter(currentChapter + 1);
+    scrollRef.current?.scrollToOffset({animated: true, offset: 0});
   };
 
   const decrementChapter = () => {
     setCurrentChapter(currentChapter - 1);
+    scrollRef.current?.scrollToOffset({animated: true, offset: 0});
   };
 
   const styles = useStyles();
@@ -133,6 +136,7 @@ const ChapterDetail = () => {
   return (
     <View style={styles.container}>
       <FlatList
+        ref={scrollRef}
         data={dataDetailChapter}
         renderItem={({item, index}) => renderImageItem({item, index})}
         showsVerticalScrollIndicator={false}

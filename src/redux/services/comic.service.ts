@@ -51,6 +51,9 @@ export class ComicService {
   }
 
   static async getComicBySearch(action: any) {
+    console.log(
+      `${ENDPOINTS.COMIC_BY_NAME}?comic_name=${action.key}&page=${action.page}`,
+    );
     return await apiService.get(
       `${ENDPOINTS.COMIC_BY_NAME}?comic_name=${action.key}&page=${action.page}`,
     );

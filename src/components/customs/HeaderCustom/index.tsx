@@ -26,7 +26,8 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
       leftComponent={
         <View style={styles.viewRow}>
           <TouchableOpacity
-            style={styles.viewCenter}
+            activeOpacity={1}
+            style={props.leftIconStyle || styles.viewCenter}
             onPress={props.onPressLeftIcon}>
             {props.leftIcon?.name && (
               <Icon

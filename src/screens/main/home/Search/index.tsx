@@ -14,6 +14,7 @@ import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {Icon} from '@rneui/themed';
 import {
+  getCurrentSearch,
   getDataComicBySeacrh,
   getNextSearch,
 } from '../../../../redux/selectors/comic.selector';
@@ -24,22 +25,28 @@ import {FlatList} from 'react-native-gesture-handler';
 import ErrorSearch from './components/ErrorSearch';
 import NoSearch from './components/NoSearch';
 import {getIsLoadingTopic} from '../../../../redux/selectors/loading.selector';
-
+import {useRoute} from '@react-navigation/native';
+interface RouteParamsFillter {
+  highestView?: boolean;
+  lowestViews?: boolean;
+}
 const Search = () => {
+  const route = useRoute();
   const dispatch = useAppDispatch();
   const dataBySearch = useAppSelector(getDataComicBySeacrh);
+  const currentPage = useAppSelector(getCurrentSearch);
   const nextPage = useAppSelector(getNextSearch);
   const [numCols, setNumCols] = useState(3);
-  const [data, setData] = useState<any>([]);
-  const [page, setPage] = useState(2);
+  const [hightView, setHightView] = useState(Boolean);
+
+  const [lowView, setLowView] = useState(Boolean);
+  const [filterArray, setFilterArray] = useState<string[]>([]);
+
+  console.log('==========>fillter', filterArray);
+
+  const [data, setData] = useState<ComicType[]>([]);
 
   const isLoading = useAppSelector(getIsLoadingTopic);
-
-  useEffect(() => {
-    if (dataBySearch && dataBySearch.length !== 0) {
-      setData([...data, ...dataBySearch]);
-    }
-  }, [dataBySearch]);
 
   const styles = useStyles();
   const [search, setSearch] = useState('');
@@ -51,37 +58,57 @@ const Search = () => {
     setNumCols(3);
   };
 
+  const sortReduceDataByViews = (data: ComicType[]): ComicType[] => {
+    return data.slice().sort((a, b) => b.views - a.views);
+  };
+
+  const sortIncreaseDataByViews = (data: ComicType[]): ComicType[] => {
+    return data.slice().sort((a, b) => a.views - b.views);
+  };
+
+  useEffect(() => {
+    if (dataBySearch) {
+      let filteredData = [...dataBySearch];
+      if (filterArray.includes('All')) {
+        setData(filteredData);
+        return;
+      }
+
+      if (filterArray.length > 0) {
+        filteredData = filteredData.filter(item => {
+          return filterArray.every(topic => item.topics.includes(topic));
+        });
+      }
+      if (hightView) {
+        filteredData = sortReduceDataByViews(filteredData);
+      } else if (lowView) {
+        filteredData = sortIncreaseDataByViews(filteredData);
+      }
+
+      setData(filteredData);
+    }
+  }, [dataBySearch, hightView, lowView, filterArray]);
+
   const onPressSearch = () => {
+    setFilterArray([]), setHightView(false);
+    setLowView(false);
+    dispatch(ComicActions.ClearListBySearch());
     dispatch(ComicActions.getListBySearch({key: search, page: 1}));
-    setData([]);
-    setPage(2);
   };
 
   const loadMoreComic = () => {
-    if (data.length > 0) {
-      if (search) {
-        if (nextPage) {
-          setPage(page + 1);
-          dispatch(ComicActions.getListBySearch({key: search, page: page}));
-        }
-      }
+    if (search && nextPage && !isLoading) {
+      dispatch(
+        ComicActions.getListBySearch({
+          key: search,
+          page: currentPage && currentPage + 1,
+        }),
+      );
     }
   };
   const onPressBackIcon = () => {
     dispatch(ComicActions.ClearListBySearch());
     backScreen();
-  };
-
-  const sortIncreaseDataByViews = () => {
-    const newData = [...data];
-    newData.sort((a, b) => a.views - b.views); // Sắp xếp từ nhỏ đến lớn theo trường views
-    setData(newData);
-  };
-
-  const sortReduceDataByView = () => {
-    const newData = [...data];
-    newData.sort((a, b) => b.views - a.views); // Sắp xếp từ nhỏ đến lớn theo trường views
-    setData(newData);
   };
 
   const listFooterComponent = useCallback(() => {
@@ -105,14 +132,18 @@ const Search = () => {
             <SearchCustom
               value={search}
               setValue={setSearch}
-              onPress={onPressSearch}
+              onPressSearchComic={onPressSearch}
               autoFocus={true}
             />
           </View>
           <TouchableOpacity
             style={styles.btnFilters}
             onPress={() => {
-              NavigationService.push(routes.FILTERS);
+              NavigationService.navigate(routes.FILTERS, {
+                setHightView,
+                setLowView,
+                setFilterArray,
+              });
               Keyboard.dismiss();
             }}>
             <Icon
@@ -123,22 +154,12 @@ const Search = () => {
             />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          onPress={sortIncreaseDataByViews}
-          style={{backgroundColor: 'yellow'}}>
-          <Text style={{fontSize: 30}}>Decrease Data</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={sortReduceDataByView}
-          style={{backgroundColor: 'yellow'}}>
-          <Text style={{fontSize: 30}}>Reduce Data</Text>
-        </TouchableOpacity>
 
         {data?.length === 0 ? (
           <NoSearch />
         ) : (
           <FlatList
+            showsVerticalScrollIndicator
             ListFooterComponent={
               isLoading ? isLoading && listFooterComponent : undefined
             }

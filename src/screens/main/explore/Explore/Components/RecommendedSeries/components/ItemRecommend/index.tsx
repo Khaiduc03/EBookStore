@@ -8,7 +8,6 @@ import {
 import React from 'react';
 import useStyles from './styles';
 import {ComicActions, ComicType} from '../../../../../../../../redux';
-import {data} from '../../../../../../home/Home/components/Notifications/types';
 import {useAppDispatch} from '../../../../../../../../hooks';
 import {NavigationService} from '../../../../../../../../navigation';
 import {routes} from '../../../../../../../../constants';
@@ -42,6 +41,9 @@ const ItemRecommend: React.FunctionComponent<ComicTypeRed> = props => {
           <Text numberOfLines={2} style={styles.nameComic}>
             {props.data.comic_name}
           </Text>
+        </View>
+        <View style={styles.views}>
+          <Text style={styles.textViews}>{props.data.views}K</Text>
         </View>
       </ImageBackground>
     </TouchableOpacity>
