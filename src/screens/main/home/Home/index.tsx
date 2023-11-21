@@ -5,7 +5,14 @@ import React, {
   useCallback,
   useRef,
 } from 'react';
-import {FlatList, View, ActivityIndicator} from 'react-native';
+import {
+  FlatList,
+  View,
+  ActivityIndicator,
+  Alert,
+  BackHandler,
+  ToastAndroid,
+} from 'react-native';
 import {ComicItem, HeaderCustom} from '../../../../components';
 import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
@@ -38,15 +45,36 @@ const Home: FunctionComponent = () => {
   const flatListRef = useRef<FlatList<ComicType>>(null);
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
+  const [backCount, setBackCount] = useState<number>(0);
+  console.log('========', backCount);
 
-  console.log('==========> fisrt', sizeContent);
-
-  console.log('loading1', isLoading);
+  const handleBackPress = () => {
+    if (backCount !== 1) {
+      ToastAndroid.show('Press back again to exit', ToastAndroid.SHORT);
+      setBackCount(prevCount => prevCount + 1);
+      setTimeout(() => {
+        setBackCount(0);
+      }, 5000);
+    } else {
+      BackHandler.exitApp();
+    }
+    return true;
+  };
 
   useEffect(() => {
-    dispatch(ComicActions.getListData(1));
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      handleBackPress,
+    );
 
-    console.log('===========>page1');
+    return () => {
+      backHandler.remove();
+    };
+  }, [backCount]);
+
+  useEffect(() => {
+    dispatch(ComicActions.clearListData());
+    dispatch(ComicActions.getListData(1));
   }, []);
 
   useEffect(() => {
@@ -77,7 +105,6 @@ const Home: FunctionComponent = () => {
   };
 
   const onContentSizeChange = (contentWidth: number, contentHeight: number) => {
-    console.log('run ===========>sizeeeeee');
     // Update contentSize as needed
     flatListRef.current?.setNativeProps({
       contentSize: {width: contentWidth, height: contentHeight},
@@ -132,11 +159,8 @@ const Home: FunctionComponent = () => {
           const isNearBottom =
             contentOffset.y + layoutMeasurement.height >=
             sizeContent - numberOfPixelsFromBottomThreshold;
-          console.log('1:', contentOffset.y + layoutMeasurement.height);
-          console.log('2:', sizeContent - numberOfPixelsFromBottomThreshold);
+
           if (isNearBottom) {
-            console.log('reached 100 pixels from the bottom of scrollview');
-            console.log('run your custom onEndReached logic here');
             loadMoreComic();
           }
         }}
