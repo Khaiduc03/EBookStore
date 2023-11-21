@@ -24,13 +24,14 @@ const ItemOneStar: React.FC = () => {
 
         <View style={styles.view1}>
           <View style={styles.btnRating}>
-            <Icon name="star" type="antdesign" color={'#F89300'} size={20} />
+            <Icon name="star" type="antdesign" color="#F89300" size={20} />
             <Text style={styles.textbtnRating}>1</Text>
           </View>
           <Icon
             name="ellipsis-horizontal-circle-outline"
             type="ionicon"
             size={24}
+            style={styles.iconFooter}
           />
         </View>
       </View>
@@ -45,6 +46,7 @@ const ItemOneStar: React.FC = () => {
             <Icon
               name={isIcon ? 'heart-outline' : 'heart'}
               type="ionicon"
+              color={isIcon ? '' : '#F89300'}
               style={styles.iconFooter}
             />
           </TouchableOpacity>

@@ -71,6 +71,7 @@ const useStyles = makeStyles(({colors}) => ({
     fontSize: normalize(14),
     fontFamily: fontFamilySetup.regular,
   },
+
 }));
 
 export default useStyles;
