@@ -28,8 +28,8 @@ const Itemlish: React.FC = () => {
           onPress={() => NavigationService.navigate(routes.CHANGEPASSWORD)}>
           <ItemListProfile
             title="Change Password"
-            name="key-outline"
-            type="ionicon"
+            name="key"
+            type="font-awesome-5"
             color="#F89300"
             size={50}
             rightIcon
@@ -73,8 +73,8 @@ const Itemlish: React.FC = () => {
           }}>
           <ItemListProfile
             title="History and Favorites"
-            name="menu-book"
-            type="material"
+            name="history"
+            type="material-community"
             color="#F89300"
             size={50}
             rightIcon
@@ -86,8 +86,8 @@ const Itemlish: React.FC = () => {
 
         <ItemListProfile
           title="Theme"
-          name="paint-brush"
-          type="font-awesome"
+          name="color-palette-sharp"
+          type="ionicon"
           color="#F89300"
           size={50}
           switchRight

@@ -54,7 +54,6 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
       data={images}
       onScroll={({nativeEvent}) => onChange(nativeEvent)}
       horizontal
-      pagingEnabled
       showsHorizontalScrollIndicator={false}
       keyExtractor={(url, index) => index.toString()}
       renderItem={({item: url, index}) => (
@@ -79,8 +78,8 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
       )}
     />
   );
-  const headerIndex = 0;
-  const dataIndices = data.map((_, index) => headerIndex + index + 1);
+ 
+  
 
   const renderItem = ({item}: {item: Post}) => (
     <View style={styles.content}>
@@ -177,7 +176,6 @@ const ItemListPost: React.FC<{data: Post[]}> = ({data}) => {
             </TouchableOpacity>
           </View>
         )}
-        stickyHeaderIndices={[headerIndex, ...dataIndices]}
       />
     </View>
   );

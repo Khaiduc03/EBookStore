@@ -44,10 +44,10 @@ const useStyles = makeStyles(({colors}) => ({
   },
   email: {
     color: colors.grey8,
-    fontFamily: fontFamilySetup.medium,
+    fontFamily: fontFamilySetup.regular,
     fontSize: normalize(15),
     lineHeight: normalize(21),
-    letterSpacing: normalize(0.22),
+    letterSpacing: normalize(0.15),
   },
 }));
 
