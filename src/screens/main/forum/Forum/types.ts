@@ -32,12 +32,11 @@ export const DataForum: ForumData[] = [
     user_uuid: 'abc',
     user_fullname: 'Ronaldo',
     user_avatar:
-      'https://cdnimg.vietnamplus.vn/t660/uploaded/mzdic/2023_03_24/cristiano_ronaldo_portugal_2403.jpg',
+      'https://nld.mediacdn.vn/291774122806476800/2023/8/13/3665085349062225008642913913849963549045693n-16918926488651354781164.jpg',
     images: [
       'https://static01.nyt.com/images/2022/12/30/multimedia/30soccer-ronaldo-1-76fd/30soccer-ronaldo-1-76fd-videoSixteenByNine3000.jpg',
       'https://nld.mediacdn.vn/291774122806476800/2022/12/9/13-ronaldo-16705925694541880121770.jpg',
       'https://vtv1.mediacdn.vn/zoom/640_400/2016/cristiano-ronaldo-gbehmbtwr8d614mr1yuvyofuk-1478966420870.jpg',
-      'https://cdnimg.vietnamplus.vn/t660/uploaded/mzdic/2023_03_24/cristiano_ronaldo_portugal_2403.jpg',
     ],
     like_uuid: 'anh A',
     is_liked: true,

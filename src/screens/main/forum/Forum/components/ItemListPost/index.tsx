@@ -28,6 +28,7 @@ import {NavigationService} from '../../../../../../navigation';
 import {getAuthUserProfile} from '../../../../../../redux';
 import {DataForum, ForumData} from '../../types';
 import useStyles from './styles';
+import FastImage from 'react-native-fast-image';
 
 const ItemListPost: React.FC = () => {
   const scale = new Animated.Value(1);
@@ -47,7 +48,7 @@ const ItemListPost: React.FC = () => {
 
   const [dataForum, setDataForum] = useState(DataForum);
 
-  const {width} = useWindowDimensions();
+  const {width, height} = useWindowDimensions();
   const [showModal, setShowModal] = useState(false);
   const [showImageModal, setShowImageModal] = useState('');
   const [activeIndices, setActiveIndices] = useState({}) as any;
@@ -146,6 +147,7 @@ const ItemListPost: React.FC = () => {
       <View style={styles.description}>
         <Text style={styles.textDescription}>{item.content}</Text>
       </View>
+
       <View>
         <FlatList
           ref={flatListRef}
@@ -154,11 +156,18 @@ const ItemListPost: React.FC = () => {
           renderItem={({item, index}) => (
             <View>
               <Pressable onPress={() => openModal(item)}>
-                <Reanimated.Image
-                  source={{uri: item}}
-                  style={[{width: width, height: 200}]}
-                  resizeMode="contain"
-                />
+                <View>
+                  <Image
+                    source={{uri: item}}
+                    style={[
+                      {
+                        width: width,
+                        height: 200,
+                      },
+                    ]}
+                    resizeMode="contain"
+                  />
+                </View>
               </Pressable>
 
               <Modal
@@ -195,10 +204,11 @@ const ItemListPost: React.FC = () => {
               </Modal>
             </View>
           )}
-          horizontal
           pagingEnabled
           onScroll={handleScroll(item.uuid.toString())}
+          horizontal
           showsHorizontalScrollIndicator={false}
+          style={{backgroundColor: 'black'}}
         />
 
         <View style={styles.viewImagesLengh}>
@@ -207,65 +217,63 @@ const ItemListPost: React.FC = () => {
             {item.images.length}
           </Text>
         </View>
+      </View>
 
-        <View style={styles.viewLikeComment}>
-          <View style={styles.viewNumberCount}>
-            <View style={styles.iconText}>
-              <View style={[styles.iconLike, styles.viewCenter]}>
-                <IconMaterialIcons
-                  name={'thumb-up-alt'}
-                  color={'white'}
-                  size={11}
-                />
-              </View>
-              <Text style={styles.textLikeBlur} key={item.like_count}>
-                {item.like_count}
-              </Text>
+      <View style={styles.viewLikeComment}>
+        <View style={styles.viewNumberCount}>
+          <View style={styles.iconText}>
+            <View style={[styles.iconLike, styles.viewCenter]}>
+              <IconMaterialIcons
+                name={'thumb-up-alt'}
+                color={'white'}
+                size={11}
+              />
             </View>
-            <View style={styles.iconText}>
-              <Text style={styles.textLikeBlur}>{item.comment_count}</Text>
-              <Text style={styles.textLikeBlur}>comment</Text>
-            </View>
+            <Text style={styles.textLikeBlur} key={item.like_count}>
+              {item.like_count}
+            </Text>
+          </View>
+          <View style={styles.iconText}>
+            <Text style={styles.textLikeBlur}>{item.comment_count}</Text>
+            <Text style={styles.textLikeBlur}>comment</Text>
           </View>
         </View>
+      </View>
 
-        <View style={styles.footerPost}>
-          <TouchableOpacity
-            style={styles.iconText}
-            onPress={() => {
-              handleLikePress(item.uuid.toString());
-            }}>
-            <IconMaterialIcons
-              name={item.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'}
-              color={
-                item.is_liked
-                  ? styles.colorIconHeartFocus.color
-                  : styles.colorIconHeartBlur.color
-              }
-              size={24}
-            />
-            <Text
-              style={
-                item.is_liked ? styles.textLikeFocus : styles.textLikeBlur
-              }>
-              Like
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.iconText}
-            onPress={() => NavigationService.navigate(routes.COMMENT_POST)}>
-            <IconFontAwesome5
-              name="comment"
-              color={styles.colorIconHeartBlur.color}
-              size={20}
-            />
-            <Text style={styles.textLikeBlur}>Comment</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.iconText} onPress={onShare}>
-            <Icon name="share-social-outline" type="ionicon" size={22} />
-            <Text style={styles.textLikeBlur}>Share</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.footerPost}>
+        <TouchableOpacity
+          style={styles.iconText}
+          onPress={() => {
+            handleLikePress(item.uuid.toString());
+          }}>
+          <IconMaterialIcons
+            name={item.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'}
+            color={
+              item.is_liked
+                ? styles.colorIconHeartFocus.color
+                : styles.colorIconHeartBlur.color
+            }
+            size={24}
+          />
+          <Text
+            style={item.is_liked ? styles.textLikeFocus : styles.textLikeBlur}>
+            Like
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.iconText}
+          onPress={() => NavigationService.navigate(routes.COMMENT_POST)}>
+          <IconFontAwesome5
+            name="comment"
+            color={styles.colorIconHeartBlur.color}
+            size={20}
+          />
+          <Text style={styles.textLikeBlur}>Comment</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.iconText} onPress={onShare}>
+          <Icon name="share-social-outline" type="ionicon" size={22} />
+          <Text style={styles.textLikeBlur}>Share</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
