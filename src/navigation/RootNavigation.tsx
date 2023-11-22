@@ -11,6 +11,8 @@ import AuthNavigator from './navigators/AuthNavigator';
 import RatingComic from '../screens/main/home/ComicsDetail/Components/Preview/components/Rating';
 import RatingComicScreen from '../screens/main/home/RatingComicScreen';
 import ItemRatingUser from '../screens/main/home/RatingComicScreen/components/ItemListButton/components/ItemFiveStar';
+import SearchUserScreen from '../screens/main/conversation/SearchUser';
+import {Explore, Forum} from '../screens/main';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
