@@ -18,7 +18,7 @@ const ItemCommnent = () => {
         <Text style={styles.nameStyle}>SugarDuckfly</Text>
         <Text style={styles.day}>Jul 13,2020</Text>
         <Text style={styles.commentStyle}>
-          any other unique identifier from your data is used as the key for each
+          Any other unique identifier from your data is used as the key for each
           rendered item.
         </Text>
         <View style={styles.repContent}>

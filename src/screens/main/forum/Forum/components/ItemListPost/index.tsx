@@ -296,7 +296,7 @@ const ItemListPost: React.FC = () => {
               <TouchableOpacity
                 style={styles.buttonHeader}
                 onPress={() => NavigationService.navigate(routes.CREATEPOST)}>
-                <Text>Bạn đang nghĩ gì?</Text>
+                <Text style={styles.textButtonHeader}>Bạn đang nghĩ gì?</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => NavigationService.navigate(routes.CREATEPOST)}>

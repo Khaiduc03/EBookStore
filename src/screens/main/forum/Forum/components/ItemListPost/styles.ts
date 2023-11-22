@@ -46,6 +46,11 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
     lineHeight: normalize(21),
   },
+  textButtonHeader: {
+    color: colors.black,
+    fontSize: normalize(15),
+    fontFamily: fontFamilySetup.regular,
+  },
   createAt: {
     fontSize: normalize(13),
     fontFamily: fontFamilySetup.regular,
@@ -147,7 +152,8 @@ const useStyles = makeStyles(({colors}) => ({
     borderRadius: normalize(50),
     borderColor: colors.grey4,
     justifyContent: 'center',
-    paddingHorizontal: normalize(15),
+    alignItems: 'flex-start',
+    paddingLeft: normalize(16),
   },
   textHeader: {
     fontSize: normalize(15),

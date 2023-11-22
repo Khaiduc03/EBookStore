@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
 import {Image, Text, View} from 'react-native';
-import {useAppSelector} from '../../../../../hooks';
-import {MessageI, getAuthUserUuid} from '../../../../../redux';
-import {formatTime} from '../../../../../utils';
-import useStyles from '../styles';
 import {useRoute} from '@react-navigation/native';
+import useStyles from '../../../styles';
+import {useAppSelector} from '../../../../../../../hooks';
+import {formatTime} from '../../../../../../../utils';
+import {MessageI, getAuthUserUuid} from '../../../../../../../redux';
 
 export const ChatBubble: React.FC<MessageI> = props => {
   const styles = useStyles();
@@ -21,21 +21,20 @@ export const ChatBubble: React.FC<MessageI> = props => {
 
   return (
     <View
-      style={{
-        alignItems: isUser ? styles.user.alignItems : styles.notuser.alignItems,
-      }}>
+      style={[
+        {
+          alignItems: isUser
+            ? styles.user.alignItems
+            : styles.notuser.alignItems,
+        },
+        styles.body,
+      ]}>
       <View>
-        {!uuid ? (
+        {!isUser ? (
           <View style={[styles.viewRow, {alignItems: 'flex-start'}]}>
             <View>
               <Image
-                style={{
-                  borderRadius: 100,
-                  width: 36,
-                  height: 36,
-                  marginTop: 6,
-                  marginRight: 6,
-                }}
+                style={styles.imageNoteUser}
                 source={{
                   uri:
                     params.joined_url ||
@@ -44,20 +43,25 @@ export const ChatBubble: React.FC<MessageI> = props => {
               />
             </View>
             <View>
-              <Text style={styles.textNotUser}>{props.message}</Text>
-
+              <View style={styles.bubbleNotUser}>
+                <Text style={styles.textNotUser}>{props.message}</Text>
+              </View>
               <Text style={styles.textTimeNotUser}>
                 {last_message_time_formatted}
               </Text>
             </View>
           </View>
         ) : (
-          <View style={styles.viewTime}>
-            <Text style={styles.textUser}>{props.message}</Text>
+          <View>
+            <View style={styles.bubbleUser}>
+              <Text style={styles.textUser}>{props.message}</Text>
+            </View>
 
-            <Text style={styles.textTimeUser}>
-              {last_message_time_formatted}
-            </Text>
+            <View style={styles.viewTime}>
+              <Text style={styles.textTimeUser}>
+                {last_message_time_formatted}
+              </Text>
+            </View>
           </View>
         )}
       </View>

@@ -9,18 +9,20 @@ const FooterComment = () => {
     <View style={styles.container}>
       <Input
         containerStyle={{
-          paddingHorizontal: 16,
-          paddingVertical: 10,
-          backgroundColor: '#FFF',
-          borderTopWidth: 1,
-          borderColor: '#E4E4E4',
+          width: '100%',
+          height: 56,
+          backgroundColor: '#F1F1F3',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingHorizontal: 20,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
         }}
         inputStyle={{
-          backgroundColor: '#F1F1F3',
-          paddingVertical: 0,
-          fontSize: 14,
-          borderRadius: 10,
+          paddingHorizontal: 9,
+          fontSize: 16,
         }}
+        // underlineColorAndroid={'black'}
         inputContainerStyle={{borderBottomWidth: 0, paddingVertical: 0}}
         errorStyle={{margin: 0, width: 0, height: 0}}
         placeholder="Shoot your comment..."
