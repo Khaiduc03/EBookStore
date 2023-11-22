@@ -43,6 +43,7 @@ declare module 'react-native-config' {
     //CONVERSATION
     CONVERSATION: string;
     MESSAGES: string;
+    FOLLOWER_USER: string;
   }
 
   export const Config: NativeConfig;

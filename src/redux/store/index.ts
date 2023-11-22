@@ -16,6 +16,7 @@ import {AlertReducer} from '../reducer/alert.reducer';
 import RootSaga from '../sagas';
 import {Redux} from '../types/redux.type';
 import {ChatReducer} from '../reducer/chat.reducer';
+import {UserReducer} from '../reducer/user.reducer';
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
@@ -37,6 +38,7 @@ const rootReducers = combineReducers({
   comic: ComicReducer,
   topic: TopicReducer,
   chat: ChatReducer,
+  user: UserReducer,
 });
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducers);
 
