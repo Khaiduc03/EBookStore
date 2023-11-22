@@ -162,7 +162,7 @@ function* flowSocket() {
   const socket: Socket = yield call(connect, data.payload);
 
   const task: Task = yield fork(handleIO, socket);
-  yield take(AuthActions.handleLogout);
+  yield take(AuthActions.refreshToken);
   //yield take(ChatActions.handleJoinConversation);
 
   yield cancel(task);
