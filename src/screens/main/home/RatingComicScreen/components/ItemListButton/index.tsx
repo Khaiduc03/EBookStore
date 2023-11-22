@@ -1,152 +1,23 @@
-import React, {useState} from 'react';
-import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
-import useStyles from './styles';
-import {
-  ItemFiveStar,
-  ItemFourStar,
-  ItemOneStar,
-  ItemThreeStar,
-  ItemTwoStar,
-} from './components';
 import {Icon} from '@rneui/themed';
+import React, {useState} from 'react';
+import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import useStyles from './styles';
+import {RatingComicProps} from './types';
 
-const ItemRatingStar: React.FC = () => {
+const ItemRatingStar: React.FC<RatingComicProps[]> = props => {
   const styles = useStyles();
 
-  const [isAllSelected, setAllSelected] = useState(true);
-  const [isFiveStar, setisFiveStar] = useState(false);
-  const [isFourStar, setisFourStar] = useState(false);
-  const [isThreeStar, setisThreeStar] = useState(false);
-  const [isTwoStar, setisTwoStar] = useState(false);
-  const [isOneStar, setisOneStar] = useState(false);
+  const [selectedRating, setSelectedRating] = useState<number | null>(null);
+  const [displayedData, setDisplayedData] = useState<RatingComicProps[]>(data);
+  const handleRatingClick = (rating: number | null) => {
+    setSelectedRating(rating);
 
-  const [showAllSelected, setShowAllSelected] = useState(true);
-  const [showFiveStar, setshowFiveStar] = useState(false);
-  const [showFourStar, setshowFourStar] = useState(false);
-  const [showThreeStar, setshowThreeStar] = useState(false);
-  const [showTwoStar, setshowTwoStar] = useState(false);
-  const [showOneStar, setshowOneStar] = useState(false);
-
-  const handleAllClick = () => {
-    if (isAllSelected) {
-      setAllSelected(false);
-      setShowAllSelected(false);
+    if (rating === null) {
+      setDisplayedData(data);
     } else {
-      setAllSelected(true);
-      setShowAllSelected(true);
-      setshowFiveStar(false);
-      setshowFourStar(false);
-      setshowThreeStar(false);
-      setshowTwoStar(false);
-      setshowOneStar(false);
+      const filteredData = data.filter(item => item.rating === rating);
+      setDisplayedData(filteredData);
     }
-
-    setisFiveStar(false);
-    setisFourStar(false);
-    setisThreeStar(false);
-    setisTwoStar(false);
-    setisOneStar(false);
-  };
-
-  const handleFiveStarClick = () => {
-    if (isFiveStar) {
-      setisFiveStar(false);
-      setshowFiveStar(false);
-    } else {
-      setisFiveStar(true);
-      setshowFiveStar(true);
-      setShowAllSelected(false);
-      setshowFourStar(false);
-      setshowThreeStar(false);
-      setshowTwoStar(false);
-      setshowOneStar(false);
-    }
-
-    setAllSelected(false);
-    setisFourStar(false);
-    setisThreeStar(false);
-    setisTwoStar(false);
-    setisOneStar(false);
-  };
-  const handleFourStarClick = () => {
-    if (isFourStar) {
-      setisFourStar(false);
-      setshowFourStar(false);
-    } else {
-      setisFourStar(true);
-      setshowFourStar(true);
-      setShowAllSelected(false);
-      setshowFiveStar(false);
-      setshowThreeStar(false);
-      setshowTwoStar(false);
-      setshowOneStar(false);
-    }
-
-    setisFiveStar(false);
-    setisOneStar(false);
-    setisThreeStar(false);
-    setisTwoStar(false);
-    setAllSelected(false);
-  };
-  const handleThreeStarClick = () => {
-    if (isThreeStar) {
-      setisThreeStar(false);
-      setshowThreeStar(false);
-    } else {
-      setisThreeStar(true);
-      setshowThreeStar(true);
-      setShowAllSelected(false);
-      setshowFiveStar(false);
-      setshowFourStar(false);
-      setshowTwoStar(false);
-      setshowOneStar(false);
-    }
-
-    setisFiveStar(false);
-    setisFourStar(false);
-    setisOneStar(false);
-    setisTwoStar(false);
-    setAllSelected(false);
-  };
-  const handleTwoStarClick = () => {
-    if (isTwoStar) {
-      setisTwoStar(false);
-      setshowTwoStar(false);
-    } else {
-      setisTwoStar(true);
-      setshowTwoStar(true);
-      setShowAllSelected(false);
-      setshowFiveStar(false);
-      setshowFourStar(false);
-      setshowThreeStar(false);
-      setshowOneStar(false);
-    }
-
-    setisFiveStar(false);
-    setisFourStar(false);
-    setisThreeStar(false);
-    setisOneStar(false);
-    setAllSelected(false);
-  };
-  const handleOneStarClick = () => {
-    if (isOneStar) {
-      setisOneStar(false);
-      setshowOneStar(false);
-    } else {
-      setisOneStar(true);
-      setshowOneStar(true);
-      setShowAllSelected(false);
-      setshowFiveStar(false);
-      setshowFourStar(false);
-      setshowThreeStar(false);
-      setshowTwoStar(false);
-    }
-
-    setisFiveStar(false);
-    setisFourStar(false);
-    setisThreeStar(false);
-    setisTwoStar(false);
-    setAllSelected(false);
   };
 
   return (
@@ -158,175 +29,43 @@ const ItemRatingStar: React.FC = () => {
         nestedScrollEnabled={true}
         style={styles.scrollViewTitle}>
         <View style={styles.viewRow}>
-          <TouchableOpacity
-            onPress={handleAllClick}
-            style={[
-              styles.btnTitle,
-              {
-                backgroundColor: isAllSelected
-                  ? styles.backgroundBtnTitleFocus.backgroundColor
-                  : styles.backgroundBtnTitleBlur.backgroundColor,
-              },
-            ]}>
-            <Text
+          {[null, 5, 4, 3, 2, 1].map(rating => (
+            <TouchableOpacity
+              key={rating === null ? 'All' : rating.toString()}
+              onPress={() => handleRatingClick(rating)}
               style={[
-                styles.textTitle,
+                styles.btnTitle,
                 {
-                  color: isAllSelected
-                    ? styles.colorsTextTitleFocus.color
-                    : styles.colorsTextTitleBlur.color,
+                  backgroundColor:
+                    selectedRating === rating
+                      ? styles.backgroundBtnTitleFocus.backgroundColor
+                      : styles.backgroundBtnTitleBlur.backgroundColor,
                 },
               ]}>
-              All
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleFiveStarClick}
-            style={[
-              styles.btnTitle,
-              {
-                backgroundColor: isFiveStar
-                  ? styles.backgroundBtnTitleFocus.backgroundColor
-                  : styles.backgroundBtnTitleBlur.backgroundColor,
-              },
-            ]}>
-            <View style={styles.btnNextScreen}>
-              <Icon
-                name="star"
-                type="antdesign"
-                color={isFiveStar ? 'white' : '#F89300'}
-              />
-
-              <Text
-                style={[
-                  styles.textTitle,
-                  {
-                    color: isFiveStar
-                      ? styles.colorsTextTitleFocus.color
-                      : styles.colorsTextTitleBlur.color,
-                  },
-                ]}>
-                5
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleFourStarClick}
-            style={[
-              styles.btnTitle,
-              {
-                backgroundColor: isFourStar
-                  ? styles.backgroundBtnTitleFocus.backgroundColor
-                  : styles.backgroundBtnTitleBlur.backgroundColor,
-              },
-            ]}>
-            <View style={styles.btnNextScreen}>
-              <Icon
-                name="star"
-                type="antdesign"
-                color={isFourStar ? 'white' : '#F89300'}
-              />
-              <Text
-                style={[
-                  styles.textTitle,
-                  {
-                    color: isFourStar
-                      ? styles.colorsTextTitleFocus.color
-                      : styles.colorsTextTitleBlur.color,
-                  },
-                ]}>
-                4
-              </Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={handleThreeStarClick}
-            style={[
-              styles.btnTitle,
-              {
-                backgroundColor: isThreeStar
-                  ? styles.backgroundBtnTitleFocus.backgroundColor
-                  : styles.backgroundBtnTitleBlur.backgroundColor,
-              },
-            ]}>
-            <View style={styles.btnNextScreen}>
-              <Icon
-                name="star"
-                type="antdesign"
-                color={isThreeStar ? 'white' : '#F89300'}
-              />
-              <Text
-                style={[
-                  styles.textTitle,
-                  {
-                    color: isThreeStar
-                      ? styles.colorsTextTitleFocus.color
-                      : styles.colorsTextTitleBlur.color,
-                  },
-                ]}>
-                3
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleTwoStarClick}
-            style={[
-              styles.btnTitle,
-              {
-                backgroundColor: isTwoStar
-                  ? styles.backgroundBtnTitleFocus.backgroundColor
-                  : styles.backgroundBtnTitleBlur.backgroundColor,
-              },
-            ]}>
-            <View style={styles.btnNextScreen}>
-              <Icon
-                name="star"
-                type="antdesign"
-                color={isTwoStar ? 'white' : '#F89300'}
-              />
-              <Text
-                style={[
-                  styles.textTitle,
-                  {
-                    color: isTwoStar
-                      ? styles.colorsTextTitleFocus.color
-                      : styles.colorsTextTitleBlur.color,
-                  },
-                ]}>
-                2
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={handleOneStarClick}
-            style={[
-              styles.btnTitle,
-              {
-                backgroundColor: isOneStar
-                  ? styles.backgroundBtnTitleFocus.backgroundColor
-                  : styles.backgroundBtnTitleBlur.backgroundColor,
-              },
-            ]}>
-            <View style={styles.btnNextScreen}>
-              <Icon
-                name="star"
-                type="antdesign"
-                color={isOneStar ? 'white' : '#F89300'}
-              />
-              <Text
-                style={[
-                  styles.textTitle,
-                  {
-                    color: isOneStar
-                      ? styles.colorsTextTitleFocus.color
-                      : styles.colorsTextTitleBlur.color,
-                  },
-                ]}>
-                1
-              </Text>
-            </View>
-          </TouchableOpacity>
+              <View style={styles.btnNextScreen}>
+                {rating !== null && (
+                  <Icon
+                    name="star"
+                    type="antdesign"
+                    size={22}
+                    color={selectedRating === rating ? 'white' : '#F89300'}
+                  />
+                )}
+                <Text
+                  style={[
+                    styles.textTitle,
+                    {
+                      color:
+                        selectedRating === rating
+                          ? styles.colorsTextTitleFocus.color
+                          : styles.colorsTextTitleBlur.color,
+                    },
+                  ]}>
+                  {rating === null ? 'All' : rating}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          ))}
         </View>
       </ScrollView>
       {/* Item in button */}
@@ -335,61 +74,98 @@ const ItemRatingStar: React.FC = () => {
         alwaysBounceVertical={true}
         nestedScrollEnabled
         style={styles.scrollViewItem}>
-        {showAllSelected ? (
-          <View style={styles.viewAll}>
-            {/* show all star */}
-            <View style={styles.viewText}>
-              <Text style={styles.textApp}>5 Star</Text>
-            </View>
-            <ItemFiveStar />
-            <View style={styles.viewText}>
-              <Text style={styles.textApp}>4 Star</Text>
-            </View>
-            <ItemFourStar />
-            <View style={styles.viewText}>
-              <Text style={styles.textApp}>3 Star</Text>
-            </View>
-            <ItemThreeStar />
-            <View style={styles.viewText}>
-              <Text style={styles.textApp}>2 Star</Text>
-            </View>
-            <ItemTwoStar />
-            <View style={styles.viewText}>
-              <Text style={styles.textApp}>1 Star</Text>
-            </View>
-            <ItemOneStar />
+        {displayedData.map(item => (
+          <View key={item.uuid} style={styles.viewItem2}>
+            <>
+              <View style={styles.header}>
+                <View style={styles.viewavt}>
+                  <Image
+                    style={styles.avatar}
+                    source={{
+                      uri: item.user_avatar,
+                    }}
+                  />
+                  <Text style={styles.nameUser}>{item.user_name}</Text>
+                </View>
+                <View style={styles.numberStar}>
+                  <Icon
+                    name="star"
+                    type="antdesign"
+                    color={'#F89300'}
+                    size={22}
+                  />
+                  <Text style={styles.numberStarText}>{item.rating}</Text>
+                </View>
+                <Icon
+                  name="ellipsis-horizontal-circle-outline"
+                  type="ionicon"
+                  size={30}
+                />
+              </View>
+              <View style={styles.content}>
+                <Text style={styles.description}>{item.content}</Text>
+              </View>
+              <View style={styles.footer}>
+                <Text style={styles.createAt}>{item.created_at}</Text>
+              </View>
+            </>
           </View>
-        ) : null}
-
-        {/* show data star */}
-        {showFiveStar ? (
-          <View style={styles.viewItem2}>
-            <ItemFiveStar />
-          </View>
-        ) : null}
-        {showFourStar ? (
-          <View style={styles.viewItem2}>
-            <ItemFourStar />
-          </View>
-        ) : null}
-        {showThreeStar ? (
-          <View style={styles.viewItem2}>
-            <ItemThreeStar />
-          </View>
-        ) : null}
-        {showTwoStar ? (
-          <View style={styles.viewItem2}>
-            <ItemTwoStar />
-          </View>
-        ) : null}
-        {showOneStar ? (
-          <View style={styles.viewItem2}>
-            <ItemOneStar />
-          </View>
-        ) : null}
+        ))}
       </ScrollView>
     </View>
   );
 };
 
 export default ItemRatingStar;
+export const data: RatingComicProps[] = [
+  {
+    uuid: '1',
+    user_avatar:
+      'https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt3a48501789cdf113/60db790b47339c0fc01c188c/3e947186d512164cf8dbe0987a865dd2b714eea6.png?auto=webp&format=pjpg&width=3840&quality=60',
+    user_name: 'David Beckham',
+    rating: 5,
+    content: 'As a person who has a hard time picking up a book to read',
+    created_at: '6 months ago',
+    comic_uuid: '123',
+  },
+  {
+    uuid: '2',
+    user_avatar:
+      'https://media.baoquangninh.vn/upload/image/202309/medium/2122032_4265a4a6e7ba65752201d10852302e01.jpg',
+    user_name: 'David De Gea',
+    rating: 4,
+    content: 'As a person who has a hard time picking up a book to read',
+    created_at: '6 months ago',
+    comic_uuid: '123',
+  },
+  {
+    uuid: '3',
+    user_avatar:
+      'https://media.baoquangninh.vn/upload/image/202309/medium/2122032_4265a4a6e7ba65752201d10852302e01.jpg',
+    user_name: 'David Thao',
+    rating: 3,
+    content: 'As a person who has a hard time picking up a book to read',
+    created_at: '6 months ago',
+    comic_uuid: '123',
+  },
+  {
+    uuid: '4',
+    user_avatar:
+      'https://media.baoquangninh.vn/upload/image/202309/medium/2122032_4265a4a6e7ba65752201d10852302e01.jpg',
+    user_name: 'David Huy',
+    rating: 2,
+    content: 'As a person who has a hard time picking up a book to read',
+    created_at: '6 months ago',
+    comic_uuid: '123',
+  },
+  {
+    uuid: '5',
+    user_avatar:
+      'https://media.baoquangninh.vn/upload/image/202309/medium/2122032_4265a4a6e7ba65752201d10852302e01.jpg',
+    user_name: 'David Lam',
+    rating: 1,
+    content: 'As a person who has a hard time picking up a book to read',
+    created_at: '6 months ago',
+    comic_uuid: '123',
+  },
+];

@@ -13,7 +13,7 @@ interface LineComponentProps {
 
 const LineComponent: React.FC<LineComponentProps> = ({length, stroke}) => {
   return (
-    <Svg height="10" width={length.toString()}>
+    <Svg height="4" width={length.toString()}>
       <Line
         x1="0"
         y1="5"
@@ -48,9 +48,9 @@ const ItemRating: React.FC = () => {
           <AirbnbRating
             isDisabled={true}
             defaultRating={4}
-            selectedColor="#F89300"
+            selectedColor="#FFC911"
             showRating={false}
-            size={24}
+            size={20}
           />
           <Text style={styles.numberReviews}>( 6.8k reviews )</Text>
         </View>

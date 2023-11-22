@@ -1,4 +1,4 @@
-import {makeStyles} from '@rneui/themed';
+import {makeStyles, normalize} from '@rneui/themed';
 import {Device} from '../../../../utils';
 const WIDTH = Device.getDeviceWidth();
 
@@ -10,9 +10,10 @@ const useStyles = makeStyles(({colors}) => ({
   iconLeftStyle: {
     color: colors.black,
   },
-  content:{
-    
-  }
+  content: {
+    padding: normalize(15),
+  },
+  footer: {},
 }));
 
 export default useStyles;
