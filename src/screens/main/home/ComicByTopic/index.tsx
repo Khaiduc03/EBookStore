@@ -58,7 +58,6 @@ const ComicByTopic = () => {
       viewStyle={numCols == 1 ? styles.comicItem : null}
       imageStyle={numCols == 1 ? styles.imgComic : null}
       contentStyle={numCols == 1 ? styles.content : null}
-      index={index}
       topicStyle={numCols == 1 ? styles.topicsContainer : null}
     />
   );

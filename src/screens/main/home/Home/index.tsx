@@ -66,7 +66,6 @@ const Home: FunctionComponent = () => {
       'hardwareBackPress',
       handleBackPress,
     );
-
     return () => {
       backHandler.remove();
     };
@@ -140,7 +139,7 @@ const Home: FunctionComponent = () => {
       />
 
       <FlatList
-        ref={flatListRef}
+        initialNumToRender={21}
         onContentSizeChange={onContentSizeChange}
         ListFooterComponent={isLoading ? listFooterComponent() : <View />}
         renderItem={({item, index}) => (
@@ -149,7 +148,6 @@ const Home: FunctionComponent = () => {
             viewStyle={numCols === 1 ? styles.comicItem : undefined}
             imageStyle={numCols === 1 ? styles.imgComic : undefined}
             contentStyle={numCols === 1 ? styles.content : undefined}
-            index={index}
             topicStyle={numCols === 1 ? styles.topicsContainer : undefined}
           />
         )}
