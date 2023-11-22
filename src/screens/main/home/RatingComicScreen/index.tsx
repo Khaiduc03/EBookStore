@@ -6,6 +6,7 @@ import {ItemRating} from './components';
 import ItemRatingStar from './components/ItemListButton';
 import {data} from './components/ItemListButton/index';
 import useStyles from './styles';
+import {routes} from '../../../../constants';
 
 const RatingComicScreen: React.FC = () => {
   const styles = useStyles();
@@ -23,6 +24,9 @@ const RatingComicScreen: React.FC = () => {
             type: 'ionicon',
           }}
           onPressLeftIcon={handleGoback}
+          onPressRightIconRight={() =>
+            NavigationService.navigate(routes.RATINGDETAILCOMIC)
+          }
         />
         <View style={styles.content}>
           <ItemRating />
