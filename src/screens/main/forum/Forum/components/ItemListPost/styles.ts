@@ -175,28 +175,49 @@ const useStyles = makeStyles(({colors}) => ({
     width: '100%',
     height: 'auto',
     overflow: 'hidden',
-    backgroundColor: 'pink',
   },
   imageAspect: {
     width: '100%',
     height: undefined,
-    aspectRatio: 16 / 9,
+    aspectRatio: normalize(16 / 9),
   },
-  paginationContainer: {
-    top: normalize(169),
-    left: normalize(36),
-    right: normalize(36),
-    position: 'absolute',
-    flexDirection: 'row',
-    height: normalize(40),
+  viewIconClose: {
+    backgroundColor: colors.blackDefault,
+    alignItems: 'flex-end',
+  },
+  iconClose: {
+    position: 'relative',
+    marginTop: normalize(10),
+    marginRight: normalize(10),
+    zIndex: normalize(1000),
+  },
+  viewModalImage: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: colors.blackDefault,
   },
-  dots: {
-    height: normalize(10),
-    backgroundColor: colors.whiteDefault,
-    marginHorizontal: normalize(10),
-    borderRadius: normalize(5),
+  viewImagesLengh: {
+    width: normalize(46),
+    height: normalize(24),
+    backgroundColor: colors.blackDefault,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: normalize(26),
+    borderWidth: normalize(0.6),
+    borderColor: colors.whiteDefault,
+    position: 'absolute',
+    top: normalize(3),
+    right: normalize(19),
+  },
+  textImagesLengh: {
+    color: colors.whiteDefault,
+    fontSize: normalize(12),
+    fontFamily: fontFamilySetup.bold,
+  },
+  viewLikeComment: {
+    alignItems: 'center',
+    paddingHorizontal: normalize(10),
   },
 }));
 

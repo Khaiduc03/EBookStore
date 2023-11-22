@@ -3,7 +3,6 @@ import {View} from 'react-native';
 import {HeaderCustom} from '../../../../components';
 import {ItemListPost} from './components';
 import useStyles from './styles';
-import {data} from './components/ItemListPost/types';
 
 const Forum: React.FC = () => {
   const styles = useStyles();
