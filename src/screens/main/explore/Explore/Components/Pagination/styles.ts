@@ -8,6 +8,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   paginationContainer: {
     flexDirection: 'row',
+    width: 'auto',
     height: normalize(40),
     justifyContent: 'center',
     alignItems: 'center',

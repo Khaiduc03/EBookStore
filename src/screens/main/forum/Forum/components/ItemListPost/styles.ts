@@ -7,12 +7,19 @@ const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   image: {
-    width: normalize(55),
-    height: normalize(55),
+    width: normalize(48),
+    height: normalize(48),
+    borderRadius: normalize(50),
+  },
+  imageTitle: {
+    width: normalize(44),
+    height: normalize(44),
     borderRadius: normalize(50),
   },
   content: {
-    borderTopWidth: normalize(10),
+    width: '100%',
+    height: normalize(406),
+    borderTopWidth: normalize(3),
     borderColor: colors.grey9,
     paddingVertical: normalize(21),
     backgroundColor: colors.background,
@@ -24,26 +31,41 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewTextPost: {
     width: '60%',
-    marginStart: normalize(15),
-    marginTop: normalize(3),
+    marginStart: normalize(12),
   },
   viewIconPost: {
     flexDirection: 'row',
     gap: normalize(13),
   },
+  marginTopDate: {
+    marginTop: normalize(3),
+  },
   name: {
-    fontSize: normalize(20),
+    fontSize: normalize(18),
     fontFamily: fontFamilySetup.bold,
     color: colors.black,
     lineHeight: normalize(21),
   },
   createAt: {
-    fontSize: normalize(14),
+    fontSize: normalize(13),
     fontFamily: fontFamilySetup.regular,
     color: colors.grey8,
+    marginEnd: normalize(6),
+  },
+  viewCenter: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  viewImageText: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  viewRow: {
+    flexDirection: 'row',
   },
   description: {
     padding: normalize(10),
+    marginLeft: normalize(3),
   },
   textDescription: {
     fontSize: normalize(16),
@@ -57,17 +79,16 @@ const useStyles = makeStyles(({colors}) => ({
   },
   iconText: {
     flexDirection: 'row',
-    gap: normalize(7),
+    gap: normalize(6),
     justifyContent: 'center',
     alignItems: 'center',
   },
   footerPost: {
+    width: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: normalize(20),
     paddingVertical: normalize(10),
-    width: '100%',
-    alignItems: 'center',
   },
   viewNumberCount: {
     flexDirection: 'row',
@@ -77,7 +98,13 @@ const useStyles = makeStyles(({colors}) => ({
     paddingVertical: normalize(10),
     borderColor: colors.grey8,
   },
-  textLike: {
+  textLikeFocus: {
+    fontSize: normalize(16),
+    fontFamily: fontFamilySetup.regular,
+    color: colors.primary,
+    lineHeight: normalize(21),
+  },
+  textLikeBlur: {
     fontSize: normalize(16),
     fontFamily: fontFamilySetup.regular,
     color: colors.black,
@@ -92,30 +119,31 @@ const useStyles = makeStyles(({colors}) => ({
   },
   dotActive: {
     margin: normalize(3),
-    color: 'black',
+    color: colors.whiteDefault,
     fontSize: normalize(20),
   },
   dot: {
     margin: normalize(3),
     fontSize: normalize(20),
-    color: 'white',
+    color: 'rgba(217, 217, 217, 0.38)',
   },
   header: {
+    width: '100%',
+    height: normalize(66),
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: normalize(17),
-    paddingVertical: normalize(10),
+    justifyContent: 'space-around',
     alignItems: 'center',
+    paddingHorizontal: normalize(10),
   },
   itemHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   buttonHeader: {
-    borderWidth: 0.4,
-    borderRadius: normalize(50),
-    width: '68%',
+    width: '63%',
     height: normalize(46),
+    borderWidth: normalize(0.4),
+    borderRadius: normalize(50),
     borderColor: colors.grey4,
     justifyContent: 'center',
     paddingHorizontal: normalize(15),
@@ -131,13 +159,65 @@ const useStyles = makeStyles(({colors}) => ({
     width: normalize(36),
     height: normalize(36),
   },
-  textheader: {
+  colorIconHeartBlur: {
     color: colors.black,
-    fontSize: normalize(16),
-    fontFamily: fontFamilySetup.regular,
   },
-  iconFooter: {
-    color: colors.black,
+  colorIconHeartFocus: {
+    color: colors.primary,
+  },
+  iconLike: {
+    width: normalize(21),
+    height: normalize(21),
+    borderRadius: normalize(100),
+    backgroundColor: colors.primary,
+  },
+  imageContainer: {
+    width: '100%',
+    height: 'auto',
+    overflow: 'hidden',
+  },
+  imageAspect: {
+    width: '100%',
+    height: undefined,
+    aspectRatio: normalize(16 / 9),
+  },
+  viewIconClose: {
+    backgroundColor: colors.blackDefault,
+    alignItems: 'flex-end',
+  },
+  iconClose: {
+    position: 'relative',
+    marginTop: normalize(10),
+    marginRight: normalize(10),
+    zIndex: normalize(1000),
+  },
+  viewModalImage: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.blackDefault,
+  },
+  viewImagesLengh: {
+    width: normalize(46),
+    height: normalize(24),
+    backgroundColor: colors.blackDefault,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: normalize(26),
+    borderWidth: normalize(0.6),
+    borderColor: colors.whiteDefault,
+    position: 'absolute',
+    top: normalize(3),
+    right: normalize(19),
+  },
+  textImagesLengh: {
+    color: colors.whiteDefault,
+    fontSize: normalize(12),
+    fontFamily: fontFamilySetup.bold,
+  },
+  viewLikeComment: {
+    alignItems: 'center',
+    paddingHorizontal: normalize(10),
   },
 }));
 
