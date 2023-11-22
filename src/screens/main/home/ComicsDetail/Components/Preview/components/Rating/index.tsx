@@ -14,7 +14,7 @@ interface LineComponentProps {
 
 const LineComponent: React.FC<LineComponentProps> = ({length, stroke}) => {
   return (
-    <Svg height="10" width={length.toString()}>
+    <Svg height="4" width={length.toString()}>
       <Line
         x1="0"
         y1="5"
@@ -49,9 +49,10 @@ const RatingComic: React.FC = () => {
           <AirbnbRating
             isDisabled={true}
             defaultRating={4}
-            selectedColor="#F89300"
+            selectedColor="#FFC911"
             showRating={false}
             size={24}
+            ratingContainerStyle={styles.star}
           />
           <Text style={styles.numberReviews}>( 6.8k reviews )</Text>
         </View>
@@ -68,11 +69,11 @@ const RatingComic: React.FC = () => {
       <View style={styles.footer}>
         <AirbnbRating
           defaultRating={0}
-          selectedColor="#F89300"
+          selectedColor="#FFC911"
           showRating={false}
           size={30}
           onFinishRating={ratingCompleted}
-          starContainerStyle={{gap: 20}}
+          starContainerStyle={{gap: 25}}
         />
       </View>
     </View>
