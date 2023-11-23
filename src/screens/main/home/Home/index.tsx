@@ -46,30 +46,29 @@ const Home: FunctionComponent = () => {
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
   const [backCount, setBackCount] = useState<number>(0);
-  console.log('========', backCount);
 
-  const handleBackPress = () => {
-    if (backCount !== 1) {
-      ToastAndroid.show('Press back again to exit', ToastAndroid.SHORT);
-      setBackCount(prevCount => prevCount + 1);
-      setTimeout(() => {
-        setBackCount(0);
-      }, 5000);
-    } else {
-      BackHandler.exitApp();
-    }
-    return true;
-  };
+  // const handleBackPress = () => {
+  //   if (backCount !== 1) {
+  //     ToastAndroid.show('Press back again to exit', ToastAndroid.SHORT);
+  //     setBackCount(prevCount => prevCount + 1);
+  //     setTimeout(() => {
+  //       setBackCount(0);
+  //     }, 5000);
+  //   } else {
+  //     BackHandler.exitApp();
+  //   }
+  //   return true;
+  // };
 
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      handleBackPress,
-    );
-    return () => {
-      backHandler.remove();
-    };
-  }, [backCount]);
+  // useEffect(() => {
+  //   const backHandler = BackHandler.addEventListener(
+  //     'hardwareBackPress',
+  //     handleBackPress,
+  //   );
+  //   return () => {
+  //     backHandler.remove();
+  //   };
+  // }, [backCount]);
 
   useEffect(() => {
     dispatch(ComicActions.clearListData());
@@ -92,28 +91,44 @@ const Home: FunctionComponent = () => {
     }
   };
 
-  const handleListIconPress = () => {
+  const handleListIconPress = useCallback(() => {
     setNumCols(1);
-  };
-  const handleGridIconPress = () => {
+  }, []);
+
+  const handleGridIconPress = useCallback(() => {
     setNumCols(3);
-  };
-  const handlePressSearch = () => {
+  }, []);
+  const handlePressSearch = useCallback(() => {
     dispatch(ComicActions.ClearListBySearch());
     NavigationService.navigate(routes.SEARCH);
-  };
+  }, [dispatch]);
 
-  const onContentSizeChange = (contentWidth: number, contentHeight: number) => {
-    // Update contentSize as needed
-    flatListRef.current?.setNativeProps({
-      contentSize: {width: contentWidth, height: contentHeight},
-    });
-    setSizeContent(contentHeight);
-    if (size) {
-      setSizeContent(sizeContent + 3000);
-      setSize(false);
-    }
-  };
+  const onContentSizeChange = useCallback(
+    (contentWidth: number, contentHeight: number) => {
+      flatListRef.current?.setNativeProps({
+        contentSize: {width: contentWidth, height: contentHeight},
+      });
+      setSizeContent(contentHeight);
+      if (size) {
+        setSizeContent(sizeContent + 3000);
+        setSize(false);
+      }
+    },
+    [size, sizeContent],
+  );
+
+  const renderItem = useCallback(
+    ({item}: {item: ComicType}) => (
+      <ComicItem
+        data={item}
+        viewStyle={numCols === 1 ? styles.comicItem : undefined}
+        imageStyle={numCols === 1 ? styles.imgComic : undefined}
+        contentStyle={numCols === 1 ? styles.content : undefined}
+        topicStyle={numCols === 1 ? styles.topicsContainer : undefined}
+      />
+    ),
+    [numCols],
+  );
 
   const listFooterComponent = useCallback(() => {
     return <ActivityIndicator size={'large'} color={'#F89300'} />;
@@ -142,15 +157,7 @@ const Home: FunctionComponent = () => {
         initialNumToRender={21}
         onContentSizeChange={onContentSizeChange}
         ListFooterComponent={isLoading ? listFooterComponent() : <View />}
-        renderItem={({item, index}) => (
-          <ComicItem
-            data={item}
-            viewStyle={numCols === 1 ? styles.comicItem : undefined}
-            imageStyle={numCols === 1 ? styles.imgComic : undefined}
-            contentStyle={numCols === 1 ? styles.content : undefined}
-            topicStyle={numCols === 1 ? styles.topicsContainer : undefined}
-          />
-        )}
+        renderItem={renderItem}
         onScroll={({nativeEvent}) => {
           const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
           const numberOfPixelsFromBottomThreshold = 100;
@@ -163,12 +170,13 @@ const Home: FunctionComponent = () => {
           }
         }}
         data={dataComic}
-        key={numCols.toString()}
         columnWrapperStyle={
-          numCols === 3 ? {gap: 5, paddingHorizontal: 16} : undefined
+          numCols === 3
+            ? {gap: 5, paddingHorizontal: 16}
+            : {flexDirection: 'column'}
         }
         keyExtractor={item => item.uuid}
-        numColumns={numCols}
+        numColumns={3}
         ListHeaderComponent={() => {
           return (
             <View>

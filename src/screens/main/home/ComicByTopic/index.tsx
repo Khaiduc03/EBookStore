@@ -112,12 +112,13 @@ const ComicByTopic = () => {
             />
           );
         }}
-        columnWrapperStyle={numCols === 3 ? {gap: 5} : null}
+        columnWrapperStyle={
+          numCols === 3 ? {gap: 5} : {flexDirection: 'column'}
+        }
         data={dataComic}
         renderItem={RenderItem}
         keyExtractor={item => item.uuid.toString()}
         showsVerticalScrollIndicator={false}
-        key={numCols.toString()}
         numColumns={numCols}
         onEndReached={loadMoreComic}
         onEndReachedThreshold={0.1}

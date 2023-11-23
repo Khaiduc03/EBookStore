@@ -20,13 +20,14 @@ interface CarouselDataItem {
   image: string;
 }
 
-const BannerComic: React.FC = () => {
+const BannerComic = React.memo(() => {
   const styles = useStyles();
   const flatlistRef = useRef<FlatList | null>(null);
   const screenWidth = Device.getDeviceWidth();
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   useEffect(() => {
+    console.log('===========>', activeIndex);
     let interval = setInterval(() => {
       if (activeIndex === carouselData.length - 1) {
         flatlistRef.current?.scrollToIndex({
@@ -99,7 +100,7 @@ const BannerComic: React.FC = () => {
       </View>
     </View>
   );
-};
+});
 
 export default BannerComic;
 const carouselData: CarouselDataItem[] = [
