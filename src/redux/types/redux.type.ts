@@ -1,4 +1,5 @@
 export enum Redux {
+  commentChapter = 'commentChapter',
   user = 'user',
   auth = 'auth',
   loading = 'loading',

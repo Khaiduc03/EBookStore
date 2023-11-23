@@ -6,6 +6,7 @@ import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {useAppDispatch} from '../../../../hooks';
 import {UserAction} from '../../../../redux/reducer/user.reducer';
+import {CommentChapterAction} from '../../../../redux/reducer/comment.chapter.reducer';
 const Security: React.FC = () => {
   const dispatch = useAppDispatch();
   const styles = useStyles();
@@ -32,7 +33,10 @@ const Security: React.FC = () => {
       <TouchableOpacity
         onPress={() =>
           dispatch(
-            UserAction.postFollow('96c99a18-cf45-430e-9e21-96e0fad286d2'),
+            CommentChapterAction.getCommentChapter({
+              chapter_uuid: '28f168a7-0d75-40b1-b143-e47dfbfcd6d6',
+              page: 1,
+            }),
           )
         }
         style={{
@@ -40,7 +44,7 @@ const Security: React.FC = () => {
           height: 200,
           backgroundColor: '#000',
         }}>
-        <Text>Post</Text>
+        <Text>GET</Text>
       </TouchableOpacity>
     </View>
   );

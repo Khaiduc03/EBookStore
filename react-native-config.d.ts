@@ -44,6 +44,11 @@ declare module 'react-native-config' {
     CONVERSATION: string;
     MESSAGES: string;
     FOLLOWER_USER: string;
+
+    //COMENT_COMIC
+    POST_COMMENT_COMIC: string;
+    GET_COMMENT_COMIC: string;
+    POST_LIKE_COMMENT_COMIC: string;
   }
 
   export const Config: NativeConfig;

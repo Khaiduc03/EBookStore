@@ -17,6 +17,7 @@ import RootSaga from '../sagas';
 import {Redux} from '../types/redux.type';
 import {ChatReducer} from '../reducer/chat.reducer';
 import {UserReducer} from '../reducer/user.reducer';
+import {CommentChapterReducer} from '../reducer/comment.chapter.reducer';
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
@@ -39,6 +40,7 @@ const rootReducers = combineReducers({
   topic: TopicReducer,
   chat: ChatReducer,
   user: UserReducer,
+  commetChapter: CommentChapterReducer,
 });
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducers);
 
