@@ -27,7 +27,6 @@ const BannerComic = React.memo(() => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   useEffect(() => {
-    console.log('===========>', activeIndex);
     let interval = setInterval(() => {
       if (activeIndex === carouselData.length - 1) {
         flatlistRef.current?.scrollToIndex({

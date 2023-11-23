@@ -4,9 +4,13 @@ import useStyles from './styles';
 import {Icon} from '@rneui/base';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {backScreen} from '../../../../../../utils';
+import {useAppSelector} from '../../../../../../hooks';
+import {getTotaComment} from '../../../../../../redux/selectors/comment.chapter.selector';
 
 const HeaderComment = () => {
   const styles = useStyles();
+  const totalComment = useAppSelector(getTotaComment);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => backScreen()} style={{paddingLeft: 16}}>
@@ -17,7 +21,9 @@ const HeaderComment = () => {
           color={styles.iconStylle.color}
         />
       </TouchableOpacity>
-      <Text style={styles.textHeader}>Comments (13)</Text>
+      <Text style={styles.textHeader}>
+        Comments({totalComment ? totalComment : '0'})
+      </Text>
       <View style={{paddingRight: 16}} />
     </View>
   );

@@ -4,6 +4,7 @@ import {ComicActions, ComicReducer, LoadingActions} from '../reducer';
 import {ComicService} from '../services';
 import {showToastSuccess} from '../../utils';
 import {ToastAndroid} from 'react-native';
+import {criticallyDampedSpringCalculations} from 'react-native-reanimated/lib/typescript/reanimated2/animation/springUtils';
 
 function* getListDataSaga(action: PayloadAction<number>): Generator {
   if (action.payload == 1) {
@@ -179,9 +180,10 @@ function* getComicByTop20Saga(): Generator {
   try {
     console.log('run');
     const {data}: any = yield call(ComicService.getComicByTopView);
+
     if (data.code == 200) {
       console.log('run push tookit');
-
+      console.log(data);
       yield put(ComicActions.setListTopView(data));
     } else {
       console.log('Server errol !!!');

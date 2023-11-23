@@ -193,8 +193,7 @@ const Search = () => {
               />
             )}
             data={data}
-            key={numCols.toString()}
-            numColumns={numCols}
+            numColumns={3}
             columnWrapperStyle={
               numCols === 3
                 ? {gap: 5, paddingHorizontal: 16}

@@ -119,7 +119,7 @@ const ComicByTopic = () => {
         renderItem={RenderItem}
         keyExtractor={item => item.uuid.toString()}
         showsVerticalScrollIndicator={false}
-        numColumns={numCols}
+        numColumns={3}
         onEndReached={loadMoreComic}
         onEndReachedThreshold={0.1}
         ListFooterComponent={
