@@ -18,6 +18,7 @@ const useStyles = makeStyles(({colors}) => ({
   input: {
     // padding: normalize(8),
     marginLeft: normalize(16),
+    color: colors.black,
   },
   header: {
     marginTop: normalize(16),

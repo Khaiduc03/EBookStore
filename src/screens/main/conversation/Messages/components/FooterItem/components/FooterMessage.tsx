@@ -142,6 +142,68 @@ const FooterMessage = () => {
         ref={scrollViewRef}
         inverted={true}
         onScroll={handleScroll}
+        ListFooterComponent={() => (
+          <Animated.View ref={footerRef} style={styles.footer}>
+            <View>
+              <View style={styles.viewRow}>
+                <View style={styles.leftContainer}>
+                  <View>
+                    <Icon name="attach-outline" type="ionicon" size={30} />
+                  </View>
+                </View>
+
+                <TextInput
+                  style={[
+                    styles.textInput,
+                    {
+                      height:
+                        newMessage.split('\n').length > 1 ||
+                        selectedEmojis.length > 9
+                          ? styles.textInputHeightAutoLimit.height
+                          : styles.textInputHeightAuto.height,
+                    },
+                  ]}
+                  placeholder="Write your message"
+                  value={newMessage}
+                  onChangeText={text => setNewMessage(text)}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  multiline={true}
+                />
+
+                <View style={styles.rightIconLeft}>
+                  <Pressable onPress={handleIconEmojiPress}>
+                    <Icon name="happy" type="ionicon" size={30} />
+                  </Pressable>
+                </View>
+                <View style={styles.rightIconRight}>
+                  <TouchableOpacity onPress={handleSendMessage}>
+                    <Icon name="send" type="ionicon" size={30} />
+                  </TouchableOpacity>
+                </View>
+              </View>
+              {isShowEmoji && (
+                <View style={styles.viewEmojis}>
+                  <View style={styles.viewClearAll}>
+                    <TouchableOpacity
+                      onPress={handleClearEmoji}
+                      style={styles.btnClearAll}>
+                      <Text style={styles.textClearAll}>Clear All</Text>
+                    </TouchableOpacity>
+                  </View>
+
+                  <EmojiSelector
+                    category={Categories.symbols}
+                    onEmojiSelected={handleEmojiSelected}
+                    placeholder="Search"
+                    columns={10}
+                    showSearchBar={false}
+                  />
+                </View>
+              )}
+            </View>
+          </Animated.View>
+        )}
       />
 
       {showScrollButton && (
@@ -156,67 +218,6 @@ const FooterMessage = () => {
           />
         </TouchableOpacity>
       )}
-
-      <Animated.View ref={footerRef} style={styles.footer}>
-        <View>
-          <View style={styles.viewRow}>
-            <View style={styles.leftContainer}>
-              <View>
-                <Icon name="attach-outline" type="ionicon" size={30} />
-              </View>
-            </View>
-
-            <TextInput
-              style={[
-                styles.textInput,
-                {
-                  height:
-                    newMessage.split('\n').length > 1 ||
-                    selectedEmojis.length > 9
-                      ? styles.textInputHeightAutoLimit.height
-                      : styles.textInputHeightAuto.height,
-                },
-              ]}
-              placeholder="Write your message"
-              value={newMessage}
-              onChangeText={text => setNewMessage(text)}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              multiline={true}
-            />
-
-            <View style={styles.rightIconLeft}>
-              <Pressable onPress={handleIconEmojiPress}>
-                <Icon name="happy" type="ionicon" size={30} />
-              </Pressable>
-            </View>
-            <View style={styles.rightIconRight}>
-              <TouchableOpacity onPress={handleSendMessage}>
-                <Icon name="send" type="ionicon" size={30} />
-              </TouchableOpacity>
-            </View>
-          </View>
-          {isShowEmoji && (
-            <View style={styles.viewEmojis}>
-              <View style={styles.viewClearAll}>
-                <TouchableOpacity
-                  onPress={handleClearEmoji}
-                  style={styles.btnClearAll}>
-                  <Text style={styles.textClearAll}>Clear All</Text>
-                </TouchableOpacity>
-              </View>
-
-              <EmojiSelector
-                category={Categories.symbols}
-                onEmojiSelected={handleEmojiSelected}
-                placeholder="Search"
-                columns={10}
-                showSearchBar={false}
-              />
-            </View>
-          )}
-        </View>
-      </Animated.View>
     </View>
   );
 };

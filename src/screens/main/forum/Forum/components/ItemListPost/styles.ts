@@ -7,8 +7,8 @@ const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   image: {
-    width: normalize(48),
-    height: normalize(48),
+    width: normalize(42),
+    height: normalize(42),
     borderRadius: normalize(50),
   },
   imageTitle: {
@@ -48,7 +48,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   textButtonHeader: {
     color: colors.black,
-    fontSize: normalize(15),
+    fontSize: normalize(13),
     fontFamily: fontFamilySetup.regular,
   },
   createAt: {
@@ -147,7 +147,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   buttonHeader: {
     width: '63%',
-    height: normalize(46),
+    height: normalize(39),
     borderWidth: normalize(0.4),
     borderRadius: normalize(50),
     borderColor: colors.grey4,
@@ -156,7 +156,7 @@ const useStyles = makeStyles(({colors}) => ({
     paddingLeft: normalize(16),
   },
   textHeader: {
-    fontSize: normalize(15),
+    fontSize: normalize(12),
     fontFamily: fontFamilySetup.regular,
     color: colors.black,
     lineHeight: normalize(21),

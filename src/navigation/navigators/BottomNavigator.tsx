@@ -12,6 +12,7 @@ import {Icon} from '@rneui/base';
 import {routes} from '../../constants';
 import {Conversation, Explore, Forum, Home, Profile} from '../../screens/main';
 import {Device} from '../../utils';
+import {useKeyboard} from '@react-native-community/hooks';
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -65,6 +66,7 @@ const useStyles = makeStyles(({colors}) => ({
 }));
 
 const BottomNavigator: FunctionComponent = () => {
+  const keyboard = useKeyboard();
   const styles = useStyles();
   const Tab = ({navigation, descriptors, state}: BottomTabBarProps) => {
     return (
@@ -130,7 +132,9 @@ const BottomNavigator: FunctionComponent = () => {
   return (
     <BottomTabs.Navigator
       screenOptions={screenOptions}
-      tabBar={(props: BottomTabBarProps) => <Tab {...props} />}>
+      tabBar={(props: BottomTabBarProps) =>
+        !keyboard.keyboardShown && <Tab {...props} />
+      }>
       <BottomTabs.Screen name={routes.HOME} component={Home} />
       <BottomTabs.Screen name={routes.EXPLORE} component={Explore} />
       <BottomTabs.Screen name={routes.FORUM} component={Forum} />

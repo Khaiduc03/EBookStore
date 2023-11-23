@@ -62,6 +62,7 @@ const SearchUserScreen: FunctionComponent = () => {
             onChangeText={text => setSearchQuery(text)}
             placeholder="Search user"
             style={styles.input}
+            placeholderTextColor={styles.input.color}
           />
         </View>
         <FlatList

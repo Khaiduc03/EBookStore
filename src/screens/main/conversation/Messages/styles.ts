@@ -151,6 +151,8 @@ const useStyles = makeStyles(({colors}) => ({
     paddingStart: normalize(16),
     paddingEnd: normalize(48),
     marginVertical: normalize(5),
+    borderRadius: normalize(26),
+    borderWidth: 1,
   },
   textInputHeightAuto: {
     height: normalize(50),

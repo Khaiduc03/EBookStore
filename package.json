@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@react-native-community/datetimepicker": "^7.4.1",
+    "@react-native-community/hooks": "^3.0.0",
     "@react-native-firebase/app": "^18.3.0",
     "@react-native-google-signin/google-signin": "^10.0.1",
     "@react-navigation/bottom-tabs": "^6.5.8",
