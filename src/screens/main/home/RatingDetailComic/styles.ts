@@ -51,6 +51,8 @@ const useStyles = makeStyles(({colors}) => ({
     height: normalize(100),
     borderRadius: normalize(15),
     paddingHorizontal: normalize(12),
+    borderColor: colors.black,
+    color: colors.black,
   },
   viewstar: {
     paddingVertical: normalize(30),
@@ -61,6 +63,7 @@ const useStyles = makeStyles(({colors}) => ({
   countText: {
     alignSelf: 'flex-end',
     marginRight: normalize(20),
+    color: colors.black,
   },
 }));
 

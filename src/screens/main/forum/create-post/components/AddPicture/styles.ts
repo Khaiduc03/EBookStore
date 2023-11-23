@@ -35,6 +35,12 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
     gap: normalize(5),
   },
+  selectedImage: {
+    width: normalize(100),
+    height: normalize(100),
+    borderRadius: normalize(10),
+ 
+  },
 }));
 
 export default useStyles;
