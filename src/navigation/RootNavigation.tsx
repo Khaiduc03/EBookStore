@@ -7,6 +7,8 @@ import {getAuthEnableSignIn} from '../redux/selectors/auth.selector';
 import {getMode} from '../redux/selectors/thems.selector';
 import {navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
+import AuthNavigator from './navigators/AuthNavigator';
+import RatingDetailComic from '../screens/main/home/RatingDetailComic';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -37,7 +39,7 @@ const RootNavigation = () => {
         barStyle={themeMode}
       />
       {/* {enableSignIn ? <AppNavigator /> : <AuthNavigator />} */}
-      <AppNavigator />
+      <RatingDetailComic />
     </NavigationContainer>
   );
 };

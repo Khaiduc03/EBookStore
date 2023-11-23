@@ -34,22 +34,23 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.regular,
   },
   detailMore: {
-    color: colors.black,
+    color: colors.blue,
     fontSize: normalize(15),
     fontFamily: fontFamilySetup.regular,
     borderBottomWidth: normalize(1),
     marginStart: normalize(5),
+    borderColor: colors.blue,
   },
   footer: {
     paddingHorizontal: normalize(20),
-    gap: normalize(5)
+    gap: normalize(5),
   },
   textInput: {
     borderWidth: 1,
     width: '100%',
     height: normalize(100),
-    borderRadius: 15,
-    paddingHorizontal: 10,
+    borderRadius: normalize(15),
+    paddingHorizontal: normalize(12),
   },
   viewstar: {
     paddingVertical: normalize(30),

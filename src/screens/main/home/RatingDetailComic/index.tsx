@@ -1,10 +1,16 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
-import useStyles from './styles';
+import {AirbnbRating} from '@rneui/themed';
+import React, {useState} from 'react';
+import {
+  Image,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  Alert,
+} from 'react-native';
 import {HeaderCustom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
-import {TextInput} from 'react-native';
-import {AirbnbRating} from '@rneui/themed';
+import useStyles from './styles';
 
 const RatingDetailComic: React.FC = () => {
   const styles = useStyles();
@@ -14,6 +20,23 @@ const RatingDetailComic: React.FC = () => {
   };
   const ratingCompleted = (rating: number) => {
     console.log('Rating is: ' + rating);
+  };
+  const [inputText, setInputText] = useState('');
+  const [isTextInputEmpty, setIsTextInputEmpty] = useState(true);
+  const maxCharacters = 500;
+
+  const handleTextChange = (text: string) => {
+    setIsTextInputEmpty(text.trim() === '');
+    if (text.length <= maxCharacters) {
+      setInputText(text);
+    }
+  };
+  const handleSend = () => {
+    if (isTextInputEmpty) {
+      Alert.alert('Failed', 'Please enter text before sending rating');
+    } else {
+      Alert.alert('Success', 'Thanks for your rating');
+    }
   };
   return (
     <View style={styles.container}>
@@ -25,6 +48,7 @@ const RatingDetailComic: React.FC = () => {
           type: 'ionicon',
         }}
         onPressLeftIcon={handleGoback}
+        onPressRightIconRight={handleSend}
       />
       <View style={styles.content}>
         <Image
@@ -58,8 +82,13 @@ const RatingDetailComic: React.FC = () => {
           multiline
           style={styles.textInput}
           placeholder="Please update app"
+          value={inputText}
+          onChangeText={handleTextChange}
         />
-        <Text style={styles.countText}>0/150</Text>
+        <Text
+          style={
+            styles.countText
+          }>{`${inputText.length}/${maxCharacters}`}</Text>
       </View>
     </View>
   );
