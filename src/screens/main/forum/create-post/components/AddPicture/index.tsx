@@ -32,18 +32,15 @@ const AddPicture: React.FC<AddPictureProps> = ({onImagesSelected}) => {
         //@ts-ignore
         setSelectedImages(selectedUris);
         //@ts-ignore
-
         onImagesSelected(selectedUris);
       }
     });
   };
 
   return (
-    <View>
-      <TouchableOpacity style={styles.buttonImage} onPress={openGallery}>
-        <Text style={styles.textbtnImage}>+ Add picture</Text>
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity style={styles.buttonImage} onPress={openGallery}>
+      <Text style={styles.textbtnImage}>+ Add picture</Text>
+    </TouchableOpacity>
   );
 };
 

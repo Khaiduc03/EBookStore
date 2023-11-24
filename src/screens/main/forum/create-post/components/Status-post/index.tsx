@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import useStyles from './styles';
 
-const SelectDropDown: React.FC = () => {
+const StatusPost: React.FC = () => {
   const styles = useStyles();
   const [selectedStatus, setSelectedStatus] = useState('Public');
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -58,4 +58,4 @@ const SelectDropDown: React.FC = () => {
   );
 };
 
-export default SelectDropDown;
+export default StatusPost;

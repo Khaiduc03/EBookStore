@@ -6,10 +6,6 @@ const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
-  iconLeftStyle: {
-    color: colors.black,
-  },
-
   buttonImage: {
     width: normalize(140),
     height: normalize(32),
@@ -22,24 +18,6 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
     fontSize: normalize(16),
     fontFamily: fontFamilySetup.bold,
-  },
-  nameUser: {
-    color: colors.black,
-    fontSize: normalize(22),
-    fontFamily: fontFamilySetup.bold,
-  },
-  viewStatus: {
-    marginStart: normalize(20),
-  },
-  buttonClick: {
-    flexDirection: 'row',
-    gap: normalize(5),
-  },
-  selectedImage: {
-    width: normalize(100),
-    height: normalize(100),
-    borderRadius: normalize(10),
- 
   },
 }));
 

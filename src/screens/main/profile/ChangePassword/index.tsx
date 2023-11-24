@@ -1,6 +1,12 @@
 import {CheckBox} from '@rneui/themed';
 import React, {useEffect, useState} from 'react';
-import {Keyboard, Text, TouchableWithoutFeedback, View} from 'react-native';
+import {
+  Keyboard,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+  Alert,
+} from 'react-native';
 import {BigButton, HeaderCustom} from '../../../../components';
 import InputCustomV1 from '../../../../components/customs/InputCustomV1';
 import {NavigationService} from '../../../../navigation';
@@ -20,15 +26,58 @@ const ChangePassWord: React.FC = () => {
     useState<boolean>(true);
 
   useEffect(() => {
-    if (password !== null && confirmpassword !== null) {
+    if (
+      oldPassword === password &&
+      password !== null &&
+      confirmpassword !== null
+    ) {
+      setIsCheckValidateOldPassword(true);
       setIsCheckValidatePassword(true);
       setIsCheckValidateConfirmPassword(true);
     }
-  }, [password, confirmpassword]);
+  }, [oldPassword, password, confirmpassword]);
 
   const [checked, setChecked] = React.useState<boolean>(false);
 
   const toggleCheckbox = () => setChecked(!checked);
+  const validateOldPassword = (inputValue: string) => {
+    return inputValue === oldPassword;
+  };
+
+  const validateInputs = () => {
+    return (
+      oldPassword.length > 0 &&
+      password.length > 0 &&
+      confirmpassword.length > 0
+    );
+  };
+
+  const handleChangePassword = () => {
+    if (validateOldPassword(oldPassword)) {
+      setIsCheckValidateOldPassword(true);
+      if (oldPassword !== password) {
+        setIsCheckValidatePassword(true);
+        if (password === confirmpassword) {
+          setIsCheckValidateConfirmPassword(true);
+          Alert.alert('Change password successfully.');
+        } else {
+          setIsCheckValidateConfirmPassword(false);
+        }
+      } else {
+        setIsCheckValidatePassword(false);
+      }
+    } else {
+      setIsCheckValidateOldPassword(false);
+    }
+  };
+
+  const handleInputChange = () => {
+    if (validateInputs()) {
+      handleChangePassword();
+    } else {
+      Alert.alert('Please fill in all fields.');
+    }
+  };
 
   return (
     <TouchableWithoutFeedback
@@ -55,12 +104,12 @@ const ChangePassWord: React.FC = () => {
               </View>
             ) : (
               <View style={styles.marginError}>
-                <Text style={styles.titleInput}>Password</Text>
+                <Text style={styles.titleInput}>Old Password</Text>
                 <InputCustomV1
-                  placeholder="Enter your password"
+                  placeholder="Enter your old password"
                   secure={true}
-                  value={password}
-                  onChangeText={text => setPassword(text)}
+                  value={oldPassword}
+                  onChangeText={text => setoldPassword(text)}
                   errorMessage="Password must be longer than 6 characters."
                 />
               </View>
@@ -126,6 +175,7 @@ const ChangePassWord: React.FC = () => {
               textButton="Change"
               style={styles.button}
               textStyle={{fontSize: 16}}
+              onPressButton={handleInputChange}
             />
           </View>
         </View>

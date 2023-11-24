@@ -4,7 +4,7 @@ import {HeaderCustom} from '../../../../components';
 import {useAppSelector} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
 import {getAuthUserProfile} from '../../../../redux';
-import {AddPicture, SelectDropDown} from './components';
+import {AddPicture, StatusPost} from './components';
 import useStyles from './styles';
 import {SelectedImages} from './components/AddPicture/components';
 
@@ -42,7 +42,7 @@ const CreatePost: React.FC = () => {
           <View style={styles.viewStatus}>
             <Text style={styles.nameUser}>{user.fullname}</Text>
             <View style={styles.buttonClick}>
-              <SelectDropDown />
+              <StatusPost />
               <AddPicture onImagesSelected={handleImagesSelected} />
             </View>
           </View>
