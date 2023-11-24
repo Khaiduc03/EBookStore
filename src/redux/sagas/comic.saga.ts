@@ -1,5 +1,5 @@
 import {PayloadAction} from '@reduxjs/toolkit';
-import {call, put, takeLatest} from 'redux-saga/effects';
+import {call, delay, put, takeLatest} from 'redux-saga/effects';
 import {ComicActions, ComicReducer, LoadingActions} from '../reducer';
 import {ComicService} from '../services';
 import {showToastSuccess} from '../../utils';
@@ -25,8 +25,10 @@ function* getListDataSaga(action: PayloadAction<number>): Generator {
     console.log('hihi');
   } finally {
     if (action.payload == 1) {
+      yield delay(3000);
       yield put(LoadingActions.hideLoadingStart());
     } else {
+      yield delay(2000);
       yield put(LoadingActions.hideLoadingPage());
     }
   }

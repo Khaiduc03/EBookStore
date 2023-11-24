@@ -42,33 +42,6 @@ const Home: FunctionComponent = () => {
   const isLoading = useAppSelector(getIsLoadingPage);
   const dataTopView = useAppSelector(getListTopView);
   const current = useAppSelector(getCurrentPageHome);
-  const flatListRef = useRef<FlatList<ComicType>>(null);
-  const [sizeContent, setSizeContent] = useState<number>(0);
-  const [size, setSize] = useState<boolean>(false);
-  const [backCount, setBackCount] = useState<number>(0);
-
-  // const handleBackPress = () => {
-  //   if (backCount !== 1) {
-  //     ToastAndroid.show('Press back again to exit', ToastAndroid.SHORT);
-  //     setBackCount(prevCount => prevCount + 1);
-  //     setTimeout(() => {
-  //       setBackCount(0);
-  //     }, 5000);
-  //   } else {
-  //     BackHandler.exitApp();
-  //   }
-  //   return true;
-  // };
-
-  // useEffect(() => {
-  //   const backHandler = BackHandler.addEventListener(
-  //     'hardwareBackPress',
-  //     handleBackPress,
-  //   );
-  //   return () => {
-  //     backHandler.remove();
-  //   };
-  // }, [backCount]);
 
   useEffect(() => {
     dispatch(ComicActions.clearListData());
@@ -87,7 +60,6 @@ const Home: FunctionComponent = () => {
   const loadMoreComic = () => {
     if (nextPage && !isLoading) {
       dispatch(ComicActions.getListData(current ? current + 1 : 1));
-      setSize(true);
     }
   };
 
@@ -102,20 +74,6 @@ const Home: FunctionComponent = () => {
     dispatch(ComicActions.ClearListBySearch());
     NavigationService.navigate(routes.SEARCH);
   }, [dispatch]);
-
-  const onContentSizeChange = useCallback(
-    (contentWidth: number, contentHeight: number) => {
-      flatListRef.current?.setNativeProps({
-        contentSize: {width: contentWidth, height: contentHeight},
-      });
-      setSizeContent(contentHeight);
-      if (size) {
-        setSizeContent(sizeContent + 3000);
-        setSize(false);
-      }
-    },
-    [size, sizeContent],
-  );
 
   const renderItem = useCallback(
     ({item}: {item: ComicType}) => (
@@ -155,7 +113,6 @@ const Home: FunctionComponent = () => {
 
       <FlatList
         initialNumToRender={21}
-        onContentSizeChange={onContentSizeChange}
         ListFooterComponent={isLoading ? listFooterComponent() : <View />}
         renderItem={renderItem}
         onScroll={({nativeEvent}) => {
@@ -163,7 +120,7 @@ const Home: FunctionComponent = () => {
           const numberOfPixelsFromBottomThreshold = 100;
           const isNearBottom =
             contentOffset.y + layoutMeasurement.height >=
-            sizeContent - numberOfPixelsFromBottomThreshold;
+            contentSize.height - numberOfPixelsFromBottomThreshold;
 
           if (isNearBottom) {
             loadMoreComic();
