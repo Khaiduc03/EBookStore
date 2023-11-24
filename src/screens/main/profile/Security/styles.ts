@@ -10,6 +10,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewButton: {
     paddingVertical: normalize(40),
+    paddingHorizontal: normalize(20),
   },
   iconLeftStyle: {
     color: colors.black,

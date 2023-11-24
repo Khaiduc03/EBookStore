@@ -1,10 +1,12 @@
-import {View, Text, ScrollView} from 'react-native';
 import React from 'react';
-import useStyles from './styles';
+import {ScrollView, View} from 'react-native';
 import {HeaderCustom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
-import RatingComic from '../ComicsDetail/Components/Preview/components/Rating';
-import {ItemListButton, ItemRating} from './components';
+import {ItemRating} from './components';
+import ItemRatingStar from './components/ItemListButton';
+import {data} from './components/ItemListButton/index';
+import useStyles from './styles';
+import {routes} from '../../../../constants';
 
 const RatingComicScreen: React.FC = () => {
   const styles = useStyles();
@@ -22,12 +24,15 @@ const RatingComicScreen: React.FC = () => {
             type: 'ionicon',
           }}
           onPressLeftIcon={handleGoback}
+          onPressRightIconRight={() =>
+            NavigationService.navigate(routes.RATINGDETAILCOMIC)
+          }
         />
-        <View style={{paddingVertical: 30}}>
+        <View style={styles.content}>
           <ItemRating />
         </View>
-        <View style={styles.content}>
-          <ItemListButton />
+        <View style={styles.footer}>
+          <ItemRatingStar {...data} />
         </View>
       </View>
     </ScrollView>

@@ -33,7 +33,12 @@ const Icon_Comment: React.FC = props => {
   };
   return (
     <View style={styles.container}>
-      <Image style={styles.avatarDummy} source={images.avata} />
+      <Image
+        style={styles.avatarDummy}
+        source={{
+          uri: 'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
+        }}
+      />
       <View style={styles.viewIcon}>
         <View style={{flexDirection: 'row', gap: 15}}>
           <TouchableOpacity onPress={() => handleIconClick('heart')}>

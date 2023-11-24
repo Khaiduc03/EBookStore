@@ -1,4 +1,5 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, Alert} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import React from 'react';
 import useStyles from './styles';
 import {BigButton, HeaderCustom, Switch_custom} from '../../../../components';
@@ -12,6 +13,28 @@ const Security: React.FC = () => {
   const styles = useStyles();
   const handlePressGoback = () => {
     NavigationService.goBack();
+  };
+  const AlerSave = () => {
+    Alert.alert('Save');
+  };
+  const handleSave = () => {
+    Alert.alert(
+      'Confirmation',
+      'Are you sure you want to save changes?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Save',
+          onPress: () => {
+            AlerSave();
+          },
+        },
+      ],
+      {cancelable: false},
+    );
   };
   return (
     <View style={styles.container}>
@@ -27,7 +50,7 @@ const Security: React.FC = () => {
       <Switch_custom title="Google Authenticator" />
 
       <View style={styles.viewButton}>
-        <BigButton textButton="Save" />
+        <BigButton textButton="Save" onPressButton={handleSave} />
       </View>
 
       <TouchableOpacity

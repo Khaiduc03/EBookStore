@@ -2,9 +2,7 @@ import {makeStyles, normalize} from '@rneui/themed';
 import {fontFamilySetup} from '../../../../../../../../utils/font';
 
 const useStyles = makeStyles(({colors}) => ({
-  container: {
-  
-  },
+  container: {},
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -18,10 +16,11 @@ const useStyles = makeStyles(({colors}) => ({
   },
   content: {
     flexDirection: 'row',
+    width: '100%',
   },
   numberRating: {
     color: colors.black,
-    fontSize: normalize(40),
+    fontSize: normalize(35),
     fontFamily: fontFamilySetup.bold,
     textAlign: 'center',
   },
@@ -31,7 +30,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   numberReviews: {
     color: colors.grey10,
-    fontSize: normalize(16),
+    fontSize: normalize(15),
     fontFamily: fontFamilySetup.bold,
     textAlign: 'center',
     marginTop: normalize(10),
@@ -53,20 +52,23 @@ const useStyles = makeStyles(({colors}) => ({
     gap: normalize(10),
   },
   footer: {
+    paddingTop: normalize(25),
     paddingVertical: normalize(10),
   },
-  textTitle:{
-    color:colors.black,
+  textTitle: {
+    color: colors.black,
     fontSize: normalize(18),
     fontFamily: fontFamilySetup.bold,
   },
-  numberLine:{
-    color:colors.black,
-    fontSize: normalize(15),
+  numberLine: {
+    color: colors.black,
+    fontSize: normalize(14),
     fontFamily: fontFamilySetup.bold,
-    width: normalize(15)
-
-  }
+    width: normalize(15),
+  },
+  star: {
+    paddingTop: normalize(10),
+  },
 }));
 
 export default useStyles;
