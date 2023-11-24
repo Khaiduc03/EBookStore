@@ -13,7 +13,7 @@ function* getListDataForumSaga(action: PayloadAction<number>): Generator {
   try {
     console.log('run');
     const dataForum: any = yield call(ForumService.getAllForum, action.payload);
-    console.log('dataForum ', dataForum.data.data['data']);
+    // console.log('dataForum ', dataForum.data.data['data']);
     if (dataForum.data.code == 200) {
       console.log('run push tookit');
       yield put(ForumActions.setListData(dataForum.data.data));

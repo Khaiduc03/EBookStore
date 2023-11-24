@@ -29,6 +29,7 @@ import {getListForum} from '../../../../../../redux/selectors/forum.selector';
 import {ForumType} from '../../../../../../redux/types/forum.type';
 import useStyles from './styles';
 import FastImage from 'react-native-fast-image';
+import moment from 'moment';
 
 const ItemListPost: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -41,15 +42,13 @@ const ItemListPost: React.FC = () => {
 
   const {width, height} = useWindowDimensions();
   const [showModal, setShowModal] = useState(false);
-  const [showImageModal, setShowImageModal] = useState('');
   const [activeIndices, setActiveIndices] = useState({}) as any;
   const flatListRef = useRef<FlatList | null>(null);
 
-  console.log('datahihi: ', dataAPI);
+  // console.log('datahihi: ', dataAPI);
 
-  const openModal = (item: any) => {
+  const openModal = () => {
     setShowModal(true);
-    setShowImageModal(item);
   };
 
   const closeModal = () => {
@@ -75,8 +74,6 @@ const ItemListPost: React.FC = () => {
     }
   };
 
-  const [dataForum, setDataForum] = useState(dataAPI);
-
   const handleScroll = (id: any) => (event: any) => {
     const scrollPosition = event.nativeEvent.contentOffset.x;
     const index = Math.round(scrollPosition / width);
@@ -98,27 +95,7 @@ const ItemListPost: React.FC = () => {
     }
   };
 
-  // const handleLikePress = (uuid: string) => {
-  //   // Tìm index của item trong dataForum
-  //   const index = dataForum.findIndex((item: any) => item.uuid === uuid);
-
-  //   // Kiểm tra nếu không tìm thấy item
-  //   if (index === -1) return;
-
-  //   // Tạo một bản sao của dataForum
-  //   const newDataForum = [...dataForum];
-
-  //   // Cập nhật like_count và is_liked dựa trên trạng thái hiện tại của is_liked
-  //   newDataForum[index].like_count = newDataForum[index].is_liked
-  //     ? newDataForum[index].like_count - 1
-  //     : newDataForum[index].like_count + 1;
-  //   newDataForum[index].is_liked = !newDataForum[index].is_liked;
-
-  //   // Cập nhật state
-  //   setDataForum(newDataForum);
-
-  //   // console.log('forum: ', dispatch(ForumActions.handleGetListData(data)));
-  // };
+  const handleLikePress = () => {};
 
   const styles = useStyles();
 
@@ -135,14 +112,18 @@ const ItemListPost: React.FC = () => {
               }}
             />
             <View style={styles.viewTextPost}>
-              <Text style={styles.name}>{item.user_fullname}</Text>
+              <Text style={styles.name}>
+                {item.user_fullname || 'Anonymus'}
+              </Text>
               <View
                 style={[
                   styles.viewRow,
                   styles.viewImageText,
                   styles.marginTopDate,
                 ]}>
-                <Text style={styles.createAt}>{item.created_at + ''}</Text>
+                <Text style={styles.createAt}>
+                  {moment(item.created_at).format('YYYY-MM-DD [at] HH:mm')}
+                </Text>
                 <Icon
                   name="public"
                   type="material"
@@ -173,30 +154,20 @@ const ItemListPost: React.FC = () => {
       <View>
         <FlatList
           removeClippedSubviews={false}
-          ref={flatListRef}
-          key={item.uuid}
           data={item.images}
-          renderItem={({item, index}) => (
+          renderItem={item => (
             <View>
-              <Pressable onPress={() => openModal(item)}>
-                <View>
-                  <FastImage
-                    source={{uri: item}}
-                    style={[
-                      {
-                        width: width,
-                        height: 200,
-                      },
-                    ]}
-                    resizeMode={FastImage.resizeMode.contain}
-                  />
-                </View>
+              <Pressable onPress={() => openModal()}>
+                <Animated.Image
+                  key={item.index.toString()}
+                  source={{uri: item.item}}
+                  style={[{width: width, height: 200}]}
+                  resizeMode="contain"
+                />
               </Pressable>
-
-              <Modal
+              {/* <Modal
                 visible={showModal}
                 transparent={true}
-                accessibilityIgnoresInvertColors
                 onRequestClose={closeModal}>
                 <View style={styles.viewIconClose}>
                   <Icon
@@ -214,8 +185,9 @@ const ItemListPost: React.FC = () => {
                     <PinchGestureHandler
                       onGestureEvent={onGestureEvent}
                       onHandlerStateChange={onHandleState}>
-                      <FastImage
-                        source={{uri: item}}
+                      <Animated.Image
+                        key={item.index.toString()}
+                        source={{uri: item.item}}
                         style={[
                           {width: width, height: 200, transform: [{scale}]},
                         ]}
@@ -224,7 +196,7 @@ const ItemListPost: React.FC = () => {
                     </PinchGestureHandler>
                   </GestureHandlerRootView>
                 </View>
-              </Modal>
+              </Modal> */}
             </View>
           )}
           pagingEnabled
@@ -234,14 +206,12 @@ const ItemListPost: React.FC = () => {
           style={{backgroundColor: 'black'}}
         />
 
-        {/* <View style={styles.viewImagesLengh}>
-            <Text style={styles.textImagesLengh}>
-              {activeIndices[item.images.length]
-                ? activeIndices[item.images.length] + 1
-                : 1}
-              /{item.images}
-            </Text>
-          </View> */}
+        <View style={styles.viewImagesLengh}>
+          <Text style={styles.textImagesLengh}>
+            {activeIndices[item.uuid] ? activeIndices[item.uuid] + 1 : 1}/
+            {item.images.length + 0}
+          </Text>
+        </View>
       </View>
 
       <View style={{flex: 1}}>
@@ -270,7 +240,7 @@ const ItemListPost: React.FC = () => {
           <TouchableOpacity
             style={styles.iconText}
             onPress={() => {
-              // handleLikePress(item.uuid.toString());
+              handleLikePress();
             }}>
             <IconMaterialIcons
               name={item.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'}

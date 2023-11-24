@@ -1,12 +1,5 @@
-export interface Post {
-  id: number;
-  name?: string;
-  avatar?: string;
-  images: string[];
-  createAt?: string;
-  description?: string;
-  likeCount?: number;
-  commentCount?: number;
+export interface ImageModalState {
+  [uuid: string]: string; // Assuming the UUID is a string and the value is the image URL
 }
 
 export interface ForumData {
