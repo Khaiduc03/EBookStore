@@ -1,14 +1,18 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
-import useStyles from './styles';
-import {images} from '../../../../../../assets';
+import {Image, TouchableOpacity, View} from 'react-native';
 import TextCustom from '../../../../../../components/customs/Text';
+import useStyles from './styles';
 
 const ItemFollow = () => {
   const styles = useStyles();
   return (
     <View style={styles.viewAvatarFollow}>
-      <Image style={styles.avatar} source={images.avata} />
+      <Image
+        style={styles.avatar}
+        source={{
+          uri: 'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
+        }}
+      />
       <TouchableOpacity style={styles.viewFollow}>
         <TextCustom number={100} />
         <TextCustom textLight title="Follower" />

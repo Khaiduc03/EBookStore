@@ -27,7 +27,7 @@ const ChangePassWord: React.FC = () => {
 
   useEffect(() => {
     if (
-      oldPassword === password &&
+      oldPassword == password &&
       password !== null &&
       confirmpassword !== null
     ) {

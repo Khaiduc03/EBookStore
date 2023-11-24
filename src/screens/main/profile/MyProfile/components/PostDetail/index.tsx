@@ -25,7 +25,12 @@ const PostDetail: React.FC = () => {
       />
       <View style={styles.viewInformation}>
         <View style={styles.viewimage}>
-          <Image style={styles.avatarUser} source={images.avata} />
+          <Image
+            style={styles.avatarUser}
+            source={{
+              uri: 'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
+            }}
+          />
           <TextCustom textBold title="Drake Kun" />
         </View>
         <TouchableOpacity>

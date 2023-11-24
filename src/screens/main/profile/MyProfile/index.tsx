@@ -133,62 +133,77 @@ const data = [
 const data2 = [
   {
     id: '1',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
   {
     id: '2',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
   {
     id: '3',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
   {
     id: '4',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
   {
     id: '5',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
   {
     id: '6',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
   {
     id: '7',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
   {
     id: '8',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
   {
     id: '9',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
   {
     id: '10',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
   {
     id: '11',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
   {
     id: '12',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
   {
     id: '13',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
   {
     id: '14',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
   {
     id: '15',
-    images: require('../../../../assets/images/png/avatar.jpg'),
+    images:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
   },
 ];

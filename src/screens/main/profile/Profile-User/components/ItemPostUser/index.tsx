@@ -22,10 +22,9 @@ const ItemPostUser: React.FC<Props> = props => {
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
-        
       }}>
       <Image
-        source={data.images}
+        source={{uri: data.images}}
         style={{width: itemWidth - 5, height: itemWidth - 5, borderRadius: 10}}
       />
     </TouchableOpacity>
