@@ -11,37 +11,37 @@ import useStyles from './styles';
 
 const data = [
   {
-    title: 'Cô sáu mười ngón',
+    title: 'Exemplary wife',
     category: 'Fantasy',
     image:
       'https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/10/solo-leveling-1.jpg',
   },
   {
-    title: 'Cô chín mặt mu',
+    title: 'Porcelain flower girl',
     category: 'Drama',
     image:
       'https://geekculture.co/wp-content/uploads/2023/03/solo-leveling-anime-trailer.jpg',
   },
   {
-    title: 'Cô mười ngự cu',
+    title: 'The eyes of a lover',
     category: 'Action',
     image:
       'https://gamek.mediacdn.vn/133514250583805952/2022/1/2/solo-leveling-1620917554185396197198-16410674690231914720800.jpg',
   },
   {
-    title: 'Cô hai chai mặt',
+    title: 'Country girl',
     category: 'Comedy',
     image:
       'https://www.jeumobi.com/wp-content/uploads/2022/11/trailer-solo-leveling-arise.jpg',
   },
   {
-    title: 'Cô ba la ma to',
+    title: 'Young lady saves money to travel',
     category: 'Mystery',
     image:
       'https://img.dtruyen.com/public/images/large/923/trongsinhvethoinguyenthuylamruongZ2bsyDe.jpg',
   },
   {
-    title: 'Cô cô nhiều chuyện',
+    title: 'Girl selling chrysanthemums',
     category: 'Horror',
     image:
       'https://staticg.sportskeeda.com/editor/2023/01/6d2a5-16739045595947-1920.jpg',
