@@ -2,6 +2,7 @@ import {uuid, Timestamp} from '../../types';
 
 export type CommentChapterState = Partial<{
   listComment: PayloadHttpListCommentData<CommentChapterType>;
+  listRepComment: PayloadHttpListCommentData<CommentChapterType>;
 }>;
 
 export type CommentChapterType = uuid &
@@ -18,6 +19,12 @@ export type CommentChapterType = uuid &
     like_count: number;
     is_like: boolean;
   };
+
+export type LikeCommentType = {
+  code?: string;
+  message?: string;
+  data?: boolean;
+};
 
 export interface PayloadHttpListCommentData<T> {
   totalData?: number;

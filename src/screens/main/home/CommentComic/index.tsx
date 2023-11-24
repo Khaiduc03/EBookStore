@@ -33,8 +33,6 @@ const CommentComic = () => {
 
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
-  console.log('canNext', canNext);
-  console.log('isLoading', isLoading);
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -53,6 +51,7 @@ const CommentComic = () => {
         comment: value,
       }),
     );
+    setvalue('');
   };
   const loadMoreComic = () => {
     if (canNext && !isLoading) {

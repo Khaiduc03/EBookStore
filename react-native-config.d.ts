@@ -49,6 +49,8 @@ declare module 'react-native-config' {
     POST_COMMENT_COMIC: string;
     GET_COMMENT_COMIC: string;
     POST_LIKE_COMMENT_COMIC: string;
+    GET_REP_COMMENT_CHAPTER: string;
+    DELETE_LIKE_COMMENT_COMIC: string;
   }
 
   export const Config: NativeConfig;

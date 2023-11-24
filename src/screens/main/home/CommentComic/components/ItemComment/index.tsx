@@ -6,6 +6,9 @@ import {Icon} from '@rneui/base';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
 import {CommentChapterType} from '../../../../../../redux/types/comment.chapter.type';
+import {CommentChapterAction} from '../../../../../../redux/reducer/comment.chapter.reducer';
+import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
+
 interface CommentDataProps {
   data: CommentChapterType;
 }
@@ -22,8 +25,23 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
     like_count,
     type,
     uuid,
+    is_like,
   } = props.data;
   const styles = useStyles();
+
+  const dispatch = useAppDispatch();
+
+  const onPressLikeComment = () => {
+    if (is_like) {
+      dispatch(
+        CommentChapterAction.postUnlikeCommentChapter({comment_uuid: uuid}),
+      );
+    } else {
+      dispatch(
+        CommentChapterAction.postLikeCommentChapter({comment_uuid: uuid}),
+      );
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -38,17 +56,39 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
         <Text style={styles.day}>{created_at + ''}</Text>
         <Text style={styles.commentStyle}>{comment}</Text>
         <View style={styles.repContent}>
-          <TouchableOpacity
-            onPress={() => NavigationService.navigate(routes.COMMENT_REP)}
-            style={styles.rep}>
-            <Icon
-              name="chatbox-outline"
-              type="ionicon"
-              color={styles.iconStyle.color}
-              size={15}
-            />
-            <Text style={styles.numberRepStyle}>10</Text>
-          </TouchableOpacity>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <TouchableOpacity
+              onPress={() => {
+                NavigationService.navigate(routes.COMMENT_REP, {
+                  parents_comment_uuid: uuid,
+                  dataFirst: props.data,
+                }),
+                  dispatch(CommentChapterAction.clearRepCommentChapter());
+              }}
+              style={styles.rep}>
+              <Icon
+                name="chatbox-outline"
+                type="ionicon"
+                color={styles.iconStyle.color}
+                size={15}
+              />
+              <Text style={styles.numberRepStyle}>
+                {re_comment_count ? re_comment_count : '0'}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={onPressLikeComment} style={styles.like}>
+              <Icon
+                name="thumbs-up"
+                type="feather"
+                color={is_like ? '#F89300' : styles.iconStyle.color}
+                size={15}
+              />
+              <Text style={styles.numberRepStyle}>
+                {like_count ? like_count : '0'}
+              </Text>
+            </TouchableOpacity>
+          </View>
           <Icon
             name="ellipsis-vertical"
             type="ionicon"
