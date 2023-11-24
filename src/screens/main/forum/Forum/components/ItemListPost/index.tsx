@@ -45,6 +45,8 @@ const ItemListPost: React.FC = () => {
   const [activeIndices, setActiveIndices] = useState({}) as any;
   const flatListRef = useRef<FlatList | null>(null);
 
+  console.log('datahihi: ', dataAPI);
+
   const openModal = (item: any) => {
     setShowModal(true);
     setShowImageModal(item);
@@ -56,10 +58,7 @@ const ItemListPost: React.FC = () => {
 
   useEffect(() => {
     dispatch(ForumActions.handleGetListData(page));
-
-    console.log('ForumActions.handleGetListData(', page, ')');
-    console.log('datahihi: ', dataAPI);
-  }, [page, dispatch]);
+  }, []);
 
   const scale = new Animated.Value(1);
 
@@ -123,9 +122,9 @@ const ItemListPost: React.FC = () => {
 
   const styles = useStyles();
 
-  const renderItem = (item: ForumType) => (
+  const renderItem = ({item}: {item: ForumType}) => (
     // dataAPI?.map(item => (
-    <View style={styles.content} key={item.uuid}>
+    <View style={styles.content}>
       <View>
         <View style={styles.post}>
           <View style={[styles.viewRow, styles.viewImageText]}>
