@@ -32,6 +32,8 @@ declare module 'react-native-config' {
     COMICS_DELETE: string;
     COMIC_UPDATE_IMAGE: string;
 
+    FORUM: string;
+
     CHAPTER: string;
     CHAPTER_UUID: string;
     COMIC_TOP_20: string;

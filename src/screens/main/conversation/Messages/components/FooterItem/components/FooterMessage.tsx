@@ -20,6 +20,7 @@ import {ChatActions} from '../../../../../../../redux/reducer/chat.reducer';
 import {getListMessage} from '../../../../../../../redux/selectors/chat.selector';
 import useStyles from '../../../styles';
 import {ChatBubble} from './ChatBubbleItem';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const FooterMessage = () => {
   const {params} = useRoute() as any;
@@ -29,7 +30,6 @@ const FooterMessage = () => {
   const scrollViewRef = useRef<FlatList>(null);
   const inputRef = useRef<View>(null);
   const [newMessage, setNewMessage] = useState<string>('');
-  const footerRef = useRef<View>(null);
   const translateY = useRef(new Animated.Value(0)).current;
   const dispatch = useAppDispatch();
   const listMessage: MessageI[] = useAppSelector(getListMessage);
@@ -54,7 +54,6 @@ const FooterMessage = () => {
     if (!isShowEmoji) {
       Keyboard.dismiss();
     }
-    footerRef.current?.setNativeProps(styles.viewEmoji);
   };
 
   const handleClearEmoji = () => {
@@ -87,7 +86,6 @@ const FooterMessage = () => {
 
   const handleTouchableWithoutFeedback = () => {
     Keyboard.dismiss();
-    footerRef.current?.setNativeProps(styles.viewBlur);
     setIsShowEmoji(false);
   };
 
@@ -103,7 +101,6 @@ const FooterMessage = () => {
       duration: 300,
       useNativeDriver: false,
     }).start();
-    footerRef.current?.setNativeProps(styles.viewBlur);
     Keyboard.dismiss;
   };
 
@@ -142,69 +139,70 @@ const FooterMessage = () => {
         ref={scrollViewRef}
         inverted={true}
         onScroll={handleScroll}
-        ListFooterComponent={() => (
-          <Animated.View ref={footerRef} style={styles.footer}>
-            <View>
-              <View style={styles.viewRow}>
-                <View style={styles.leftContainer}>
-                  <View>
-                    <Icon name="attach-outline" type="ionicon" size={30} />
-                  </View>
-                </View>
-
-                <TextInput
-                  style={[
-                    styles.textInput,
-                    {
-                      height:
-                        newMessage.split('\n').length > 1 ||
-                        selectedEmojis.length > 9
-                          ? styles.textInputHeightAutoLimit.height
-                          : styles.textInputHeightAuto.height,
-                    },
-                  ]}
-                  placeholder="Write your message"
-                  value={newMessage}
-                  onChangeText={text => setNewMessage(text)}
-                  onFocus={handleFocus}
-                  onBlur={handleBlur}
-                  multiline={true}
-                />
-
-                <View style={styles.rightIconLeft}>
-                  <Pressable onPress={handleIconEmojiPress}>
-                    <Icon name="happy" type="ionicon" size={30} />
-                  </Pressable>
-                </View>
-                <View style={styles.rightIconRight}>
-                  <TouchableOpacity onPress={handleSendMessage}>
-                    <Icon name="send" type="ionicon" size={30} />
-                  </TouchableOpacity>
-                </View>
-              </View>
-              {isShowEmoji && (
-                <View style={styles.viewEmojis}>
-                  <View style={styles.viewClearAll}>
-                    <TouchableOpacity
-                      onPress={handleClearEmoji}
-                      style={styles.btnClearAll}>
-                      <Text style={styles.textClearAll}>Clear All</Text>
-                    </TouchableOpacity>
-                  </View>
-
-                  <EmojiSelector
-                    category={Categories.symbols}
-                    onEmojiSelected={handleEmojiSelected}
-                    placeholder="Search"
-                    columns={10}
-                    showSearchBar={false}
-                  />
-                </View>
-              )}
-            </View>
-          </Animated.View>
-        )}
       />
+
+      <KeyboardAwareScrollView
+        style={styles.footer}
+        keyboardShouldPersistTaps="handled">
+        <View>
+          <View style={styles.viewRow}>
+            <View style={styles.leftContainer}>
+              <View>
+                <Icon name="attach-outline" type="ionicon" size={30} />
+              </View>
+            </View>
+
+            <TextInput
+              style={[
+                styles.textInput,
+                {
+                  height:
+                    newMessage.split('\n').length > 1 ||
+                    selectedEmojis.length > 9
+                      ? styles.textInputHeightAutoLimit.height
+                      : styles.textInputHeightAuto.height,
+                },
+              ]}
+              placeholder="Write your message"
+              value={newMessage}
+              onChangeText={text => setNewMessage(text)}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              multiline={true}
+            />
+
+            <View style={styles.rightIconLeft}>
+              <Pressable onPress={handleIconEmojiPress}>
+                <Icon name="happy" type="ionicon" size={30} />
+              </Pressable>
+            </View>
+            <View style={styles.rightIconRight}>
+              <TouchableOpacity onPress={handleSendMessage}>
+                <Icon name="send" type="ionicon" size={30} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          {isShowEmoji && (
+            <View style={styles.viewEmojis}>
+              <View style={styles.viewClearAll}>
+                <TouchableOpacity
+                  onPress={handleClearEmoji}
+                  style={styles.btnClearAll}>
+                  <Text style={styles.textClearAll}>Clear All</Text>
+                </TouchableOpacity>
+              </View>
+
+              <EmojiSelector
+                category={Categories.symbols}
+                onEmojiSelected={handleEmojiSelected}
+                placeholder="Search"
+                columns={10}
+                showSearchBar={false}
+              />
+            </View>
+          )}
+        </View>
+      </KeyboardAwareScrollView>
 
       {showScrollButton && (
         <TouchableOpacity

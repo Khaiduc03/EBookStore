@@ -1,4 +1,5 @@
 import {Icon} from '@rneui/themed';
+import moment from 'moment';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Animated,
@@ -17,20 +18,36 @@ import {
   PinchGestureHandler,
   State,
 } from 'react-native-gesture-handler';
-import Reanimated from 'react-native-reanimated';
 import Share from 'react-native-share';
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {ImageIcon} from '../../../../../../assets/svg';
 import {routes} from '../../../../../../constants';
-import {useAppSelector} from '../../../../../../hooks';
-import {NavigationService} from '../../../../../../navigation';
-import {getAuthUserProfile} from '../../../../../../redux';
-import {DataForum, ForumData} from '../../types';
+import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
+import {ForumActions, getAuthUserProfile} from '../../../../../../redux';
+import {getListForum} from '../../../../../../redux/selectors/forum.selector';
+import {
+  ForumAllType,
+  ForumType,
+} from '../../../../../../redux/types/forum.type';
+import {DataForum} from '../../types';
 import useStyles from './styles';
-import FastImage from 'react-native-fast-image';
+import {NavigationService} from '../../../../../../navigation';
 
-const ItemListPost: React.FC = () => {
+const ItemListPost: React.FC<ForumType> = props => {
+  const dispatch = useAppDispatch();
+
+  const [page, setPage] = useState(1);
+
+  const dataAPI = useAppSelector(getListForum);
+  const user = useAppSelector(getAuthUserProfile);
+
+  useEffect(() => {
+    dispatch(ForumActions.handleGetListData(page));
+
+    console.log('dataAPI: ', dataAPI);
+  }, [page]);
+
   const scale = new Animated.Value(1);
 
   const onGestureEvent = Animated.event([{nativeEvent: {scale: scale}}], {
@@ -46,7 +63,7 @@ const ItemListPost: React.FC = () => {
     }
   };
 
-  const [dataForum, setDataForum] = useState(DataForum);
+  const [dataForum, setDataForum] = useState(dataAPI);
 
   const {width, height} = useWindowDimensions();
   const [showModal, setShowModal] = useState(false);
@@ -69,8 +86,6 @@ const ItemListPost: React.FC = () => {
     setActiveIndices((prevIndices: any) => ({...prevIndices, [id]: index}));
   };
 
-  const [isLike, setIsLike] = useState(false);
-  const user = useAppSelector(getAuthUserProfile);
   const flatListRefMain = useRef<FlatList | null>(null);
 
   const onShare = async () => {
@@ -86,47 +101,51 @@ const ItemListPost: React.FC = () => {
     }
   };
 
-  const handleLikePress = (uuid: string) => {
-    // Tìm index của item trong dataForum
-    const index = dataForum.findIndex((item: any) => item.uuid === uuid);
+  // const handleLikePress = (uuid: string) => {
+  //   // Tìm index của item trong dataForum
+  //   const index = dataForum.findIndex((item: any) => item.uuid === uuid);
 
-    // Kiểm tra nếu không tìm thấy item
-    if (index === -1) return;
+  //   // Kiểm tra nếu không tìm thấy item
+  //   if (index === -1) return;
 
-    // Tạo một bản sao của dataForum
-    const newDataForum = [...dataForum];
+  //   // Tạo một bản sao của dataForum
+  //   const newDataForum = [...dataForum];
 
-    // Cập nhật like_count và is_liked dựa trên trạng thái hiện tại của is_liked
-    newDataForum[index].like_count = newDataForum[index].is_liked
-      ? newDataForum[index].like_count - 1
-      : newDataForum[index].like_count + 1;
-    newDataForum[index].is_liked = !newDataForum[index].is_liked;
+  //   // Cập nhật like_count và is_liked dựa trên trạng thái hiện tại của is_liked
+  //   newDataForum[index].like_count = newDataForum[index].is_liked
+  //     ? newDataForum[index].like_count - 1
+  //     : newDataForum[index].like_count + 1;
+  //   newDataForum[index].is_liked = !newDataForum[index].is_liked;
 
-    // Cập nhật state
-    setDataForum(newDataForum);
-  };
+  //   // Cập nhật state
+  //   setDataForum(newDataForum);
+
+  //   // console.log('forum: ', dispatch(ForumActions.handleGetListData(data)));
+  // };
 
   const styles = useStyles();
 
-  const renderItem = ({item}: {item: ForumData}) => (
-    <View style={styles.content}>
+  const renderItem = () => (
+    <View style={styles.content} key={props.uuid}>
       <View style={styles.post}>
         <View style={[styles.viewRow, styles.viewImageText]}>
           <Image
             style={styles.imageTitle}
             source={{
-              uri: item.user_avatar || undefined,
+              uri: props.user_avatar || undefined,
             }}
           />
           <View style={styles.viewTextPost}>
-            <Text style={styles.name}>{item.user_fullname}</Text>
+            <Text style={styles.name}>{props.user_fullname}</Text>
             <View
               style={[
                 styles.viewRow,
                 styles.viewImageText,
                 styles.marginTopDate,
               ]}>
-              <Text style={styles.createAt}>{item.created_at}</Text>
+              <Text style={styles.createAt}>
+                {/* {moment(props.created_at).format('MMMM Do YYYY, h:mm:ss a')} */}
+              </Text>
               <Icon name="public" type="material" size={16} color={'#626162'} />
             </View>
           </View>
@@ -139,20 +158,20 @@ const ItemListPost: React.FC = () => {
             type="ionicon"
             size={28}
             onPress={() => {
-              item.deleted_at;
+              props.deleted_at;
             }}
           />
         </View>
       </View>
       <View style={styles.description}>
-        <Text style={styles.textDescription}>{item.content}</Text>
+        <Text style={styles.textDescription}>{props.content}</Text>
       </View>
 
       <View>
         <FlatList
           ref={flatListRef}
-          key={item.uuid}
-          data={item.images}
+          key={props.uuid}
+          data={props.images}
           renderItem={({item, index}) => (
             <View>
               <Pressable onPress={() => openModal(item)}>
@@ -205,7 +224,7 @@ const ItemListPost: React.FC = () => {
             </View>
           )}
           pagingEnabled
-          onScroll={handleScroll(item.uuid.toString())}
+          onScroll={handleScroll(props.uuid)}
           horizontal
           showsHorizontalScrollIndicator={false}
           style={{backgroundColor: 'black'}}
@@ -213,8 +232,8 @@ const ItemListPost: React.FC = () => {
 
         <View style={styles.viewImagesLengh}>
           <Text style={styles.textImagesLengh}>
-            {activeIndices[item.uuid] ? activeIndices[item.uuid] + 1 : 1}/
-            {item.images.length}
+            {activeIndices[props.uuid] ? activeIndices[props.uuid] + 1 : 1}/
+            {props.images}
           </Text>
         </View>
       </View>
@@ -229,12 +248,12 @@ const ItemListPost: React.FC = () => {
                 size={11}
               />
             </View>
-            <Text style={styles.textLikeBlur} key={item.like_count}>
-              {item.like_count}
+            <Text style={styles.textLikeBlur} key={props.like_count}>
+              {props.like_count}
             </Text>
           </View>
           <View style={styles.iconText}>
-            <Text style={styles.textLikeBlur}>{item.comment_count}</Text>
+            <Text style={styles.textLikeBlur}>{props.comment_count}</Text>
             <Text style={styles.textLikeBlur}>comment</Text>
           </View>
         </View>
@@ -244,19 +263,19 @@ const ItemListPost: React.FC = () => {
         <TouchableOpacity
           style={styles.iconText}
           onPress={() => {
-            handleLikePress(item.uuid.toString());
+            // handleLikePress(props.uuid.toString());
           }}>
           <IconMaterialIcons
-            name={item.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'}
+            name={props.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'}
             color={
-              item.is_liked
+              props.is_liked
                 ? styles.colorIconHeartFocus.color
                 : styles.colorIconHeartBlur.color
             }
             size={24}
           />
           <Text
-            style={item.is_liked ? styles.textLikeFocus : styles.textLikeBlur}>
+            style={props.is_liked ? styles.textLikeFocus : styles.textLikeBlur}>
             Like
           </Text>
         </TouchableOpacity>
@@ -282,9 +301,8 @@ const ItemListPost: React.FC = () => {
     <View>
       <FlatList
         ref={flatListRefMain}
-        data={DataForum}
+        data={dataAPI}
         renderItem={renderItem}
-        keyExtractor={(index, item) => index.uuid.toString()}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={() => {
           return (

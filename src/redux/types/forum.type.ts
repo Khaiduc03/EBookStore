@@ -1,6 +1,6 @@
 import {Timestamp, uuid} from '../../types';
 
-type ForumAllType = {
+export type ForumAllType = {
   data: ForumType[];
   totalData: number;
   totalPage: number;
@@ -9,10 +9,10 @@ type ForumAllType = {
   currentDataSize: number;
 };
 
-export interface PayloadHttpListForum<T> {
+export interface PayloadHttpListForum {
   code?: number;
   message?: string;
-  data?: ForumAllType;
+  data?: ForumAllType[];
 }
 
 export interface PayloadHttpListForumData<T> {
@@ -24,8 +24,12 @@ export interface PayloadHttpListForumData<T> {
   data?: T[];
 }
 
+export interface PayloadHttpListForumView<T> {
+  data?: T[];
+}
+
 export type ForumState = Partial<{
-  listData: PayloadHttpListForumData<ForumType>;
+  listDataForum: PayloadHttpListForumData<ForumType>;
 }>;
 
 export interface ForumType extends uuid, Timestamp {

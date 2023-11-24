@@ -26,14 +26,8 @@ const MessageScreen: React.FC = () => {
         }}
         fullName={params.joined_name}
         userStatus="Active now"
-        rightIconleft={{
-          name: 'call-outline',
-          type: 'ionicon',
-          color: styles.iconCall.color,
-          size: 30,
-        }}
         rightIconRight={{
-          name: 'videocam-outline',
+          name: 'alert-circle-outline',
           type: 'ionicon',
           color: styles.iconVideocam.color,
           size: 30,

@@ -1,10 +1,10 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
+import {Redux} from '../types';
 import {
   ForumState,
   ForumType,
   PayloadHttpListForumData,
 } from '../types/forum.type';
-import {Redux} from '../types';
 
 const initialState: ForumState = {};
 
@@ -12,7 +12,7 @@ const reducer = createSlice({
   name: Redux.forum,
   initialState,
   reducers: {
-    getListData: (state: ForumState, action: PayloadAction<ForumType>) => {
+    handleGetListData: (state: ForumState, _: PayloadAction<number>) => {
       return {
         ...state,
       };
@@ -21,12 +21,12 @@ const reducer = createSlice({
       state: ForumState,
       action: PayloadAction<PayloadHttpListForumData<ForumType>>,
     ) => {
-      const currentData: ForumType[] = state.listData?.data || [];
+      const currentData: ForumType[] = state.listDataForum?.data || [];
       const newData = action.payload.data || [];
       const updatedData = [...currentData, ...newData];
       return {
         ...state,
-        listData: {
+        listDataForum: {
           data: updatedData,
           canNext: action.payload.canNext,
           currentDataSize: action.payload.currentDataSize,

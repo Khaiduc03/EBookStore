@@ -24,6 +24,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@rneui/base": "^4.0.0-rc.8",
     "@rneui/themed": "^4.0.0-rc.8",
+    "@types/moment": "^2.13.0",
     "axios": "^1.4.0",
     "date-fns": "^2.30.0",
     "dotenv": "^16.3.1",

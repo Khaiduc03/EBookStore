@@ -28,6 +28,8 @@ export const ENDPOINTS = {
   UPDATE_TOPIC: Config.UPDATE_TOPIC,
   DELETE_TOPIC: Config.DELETE_TOPIC,
 
+  FORUM: Config.FORUM,
+
   COMIC: Config.COMIC,
 
   COMIC_BY_TOPIC: Config.COMIC_BY_TOPIC,

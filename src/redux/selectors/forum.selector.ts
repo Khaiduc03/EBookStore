@@ -1,3 +1,4 @@
 import {RootState} from '../store';
 
-export const getListForum = (state: RootState) => state.forum.listData?.data;
+export const getListForum = (state: RootState) =>
+  state.forum.listDataForum?.data;
