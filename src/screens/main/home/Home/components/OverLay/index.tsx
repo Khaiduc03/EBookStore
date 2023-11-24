@@ -14,7 +14,6 @@ const OverLay: FunctionComponent = () => {
 
   return (
     <View style={styles.container}>
-      <Button title="Open Overlay" onPress={toggleOverlay} />
       <Overlay
         overlayStyle={styles.overLayStyle}
         isVisible={visible}

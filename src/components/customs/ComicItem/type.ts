@@ -7,6 +7,5 @@ export type CustomComicProps = {
   imageStyle?: any | null;
   viewStyle?: ViewStyle | null;
   contentStyle?: ViewStyle | null;
-  index: number;
   topicStyle?: ViewStyle | null;
 };
