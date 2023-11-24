@@ -18,10 +18,11 @@ const useStyles = makeStyles(({colors}) => ({
   },
   content: {
     width: '100%',
-    height: normalize(406),
+    height: 'auto',
+    justifyContent: 'space-around',
     borderTopWidth: normalize(3),
     borderColor: colors.grey9,
-    paddingVertical: normalize(21),
+    paddingTop: normalize(16),
     backgroundColor: colors.background,
   },
   post: {
@@ -90,7 +91,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   footerPost: {
     width: '100%',
-    height: 'auto',
+    height: normalize(50),
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: normalize(20),

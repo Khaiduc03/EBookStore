@@ -1,5 +1,4 @@
 import {Icon} from '@rneui/themed';
-import moment from 'moment';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Animated,
@@ -24,29 +23,43 @@ import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {ImageIcon} from '../../../../../../assets/svg';
 import {routes} from '../../../../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
+import {NavigationService} from '../../../../../../navigation';
 import {ForumActions, getAuthUserProfile} from '../../../../../../redux';
 import {getListForum} from '../../../../../../redux/selectors/forum.selector';
-import {
-  ForumAllType,
-  ForumType,
-} from '../../../../../../redux/types/forum.type';
-import {DataForum} from '../../types';
+import {ForumType} from '../../../../../../redux/types/forum.type';
 import useStyles from './styles';
-import {NavigationService} from '../../../../../../navigation';
+import FastImage from 'react-native-fast-image';
 
-const ItemListPost: React.FC<ForumType> = props => {
+const ItemListPost: React.FC = () => {
   const dispatch = useAppDispatch();
+
+  const dataAPI = useAppSelector(getListForum);
+
+  const user = useAppSelector(getAuthUserProfile);
 
   const [page, setPage] = useState(1);
 
-  const dataAPI = useAppSelector(getListForum);
-  const user = useAppSelector(getAuthUserProfile);
+  const {width, height} = useWindowDimensions();
+  const [showModal, setShowModal] = useState(false);
+  const [showImageModal, setShowImageModal] = useState('');
+  const [activeIndices, setActiveIndices] = useState({}) as any;
+  const flatListRef = useRef<FlatList | null>(null);
+
+  const openModal = (item: any) => {
+    setShowModal(true);
+    setShowImageModal(item);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   useEffect(() => {
     dispatch(ForumActions.handleGetListData(page));
 
-    console.log('dataAPI: ', dataAPI);
-  }, [page]);
+    console.log('ForumActions.handleGetListData(', page, ')');
+    console.log('datahihi: ', dataAPI);
+  }, [page, dispatch]);
 
   const scale = new Animated.Value(1);
 
@@ -64,21 +77,6 @@ const ItemListPost: React.FC<ForumType> = props => {
   };
 
   const [dataForum, setDataForum] = useState(dataAPI);
-
-  const {width, height} = useWindowDimensions();
-  const [showModal, setShowModal] = useState(false);
-  const [showImageModal, setShowImageModal] = useState('');
-  const [activeIndices, setActiveIndices] = useState({}) as any;
-  const flatListRef = useRef<FlatList | null>(null);
-
-  const openModal = (item: any) => {
-    setShowModal(true);
-    setShowImageModal(item);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
 
   const handleScroll = (id: any) => (event: any) => {
     const scrollPosition = event.nativeEvent.contentOffset.x;
@@ -125,58 +123,65 @@ const ItemListPost: React.FC<ForumType> = props => {
 
   const styles = useStyles();
 
-  const renderItem = () => (
-    <View style={styles.content} key={props.uuid}>
-      <View style={styles.post}>
-        <View style={[styles.viewRow, styles.viewImageText]}>
-          <Image
-            style={styles.imageTitle}
-            source={{
-              uri: props.user_avatar || undefined,
-            }}
-          />
-          <View style={styles.viewTextPost}>
-            <Text style={styles.name}>{props.user_fullname}</Text>
-            <View
-              style={[
-                styles.viewRow,
-                styles.viewImageText,
-                styles.marginTopDate,
-              ]}>
-              <Text style={styles.createAt}>
-                {/* {moment(props.created_at).format('MMMM Do YYYY, h:mm:ss a')} */}
-              </Text>
-              <Icon name="public" type="material" size={16} color={'#626162'} />
+  const renderItem = (item: ForumType) => (
+    // dataAPI?.map(item => (
+    <View style={styles.content} key={item.uuid}>
+      <View>
+        <View style={styles.post}>
+          <View style={[styles.viewRow, styles.viewImageText]}>
+            <Image
+              style={styles.imageTitle}
+              source={{
+                uri: item.user_avatar || undefined,
+              }}
+            />
+            <View style={styles.viewTextPost}>
+              <Text style={styles.name}>{item.user_fullname}</Text>
+              <View
+                style={[
+                  styles.viewRow,
+                  styles.viewImageText,
+                  styles.marginTopDate,
+                ]}>
+                <Text style={styles.createAt}>{item.created_at + ''}</Text>
+                <Icon
+                  name="public"
+                  type="material"
+                  size={16}
+                  color={'#626162'}
+                />
+              </View>
             </View>
           </View>
-        </View>
 
-        <View style={styles.viewIconPost}>
-          <Icon name="ellipsis-horizontal" type="ionicon" size={28} />
-          <Icon
-            name="close-outline"
-            type="ionicon"
-            size={28}
-            onPress={() => {
-              props.deleted_at;
-            }}
-          />
+          <View style={styles.viewIconPost}>
+            <Icon name="ellipsis-horizontal" type="ionicon" size={28} />
+            <Icon
+              name="close-outline"
+              type="ionicon"
+              size={28}
+              onPress={() => {
+                item.deleted_at;
+              }}
+            />
+          </View>
         </View>
-      </View>
-      <View style={styles.description}>
-        <Text style={styles.textDescription}>{props.content}</Text>
+        <View style={styles.description}>
+          <Text style={styles.textDescription}>{item.content}</Text>
+        </View>
       </View>
 
       <View>
         <FlatList
+          removeClippedSubviews={false}
           ref={flatListRef}
-          key={props.uuid}
-          data={props.images}
+          key={item.uuid}
+          data={item.images}
           renderItem={({item, index}) => (
             <View>
               <Pressable onPress={() => openModal(item)}>
                 <View>
-                  <Image
+                  <FastImage
                     source={{uri: item}}
                     style={[
                       {
@@ -184,7 +189,7 @@ const ItemListPost: React.FC<ForumType> = props => {
                         height: 200,
                       },
                     ]}
-                    resizeMode="contain"
+                    resizeMode={FastImage.resizeMode.contain}
                   />
                 </View>
               </Pressable>
@@ -210,8 +215,8 @@ const ItemListPost: React.FC<ForumType> = props => {
                     <PinchGestureHandler
                       onGestureEvent={onGestureEvent}
                       onHandlerStateChange={onHandleState}>
-                      <Animated.Image
-                        source={{uri: showImageModal}}
+                      <FastImage
+                        source={{uri: item}}
                         style={[
                           {width: width, height: 200, transform: [{scale}]},
                         ]}
@@ -224,78 +229,85 @@ const ItemListPost: React.FC<ForumType> = props => {
             </View>
           )}
           pagingEnabled
-          onScroll={handleScroll(props.uuid)}
+          onScroll={handleScroll(item.uuid)}
           horizontal
           showsHorizontalScrollIndicator={false}
           style={{backgroundColor: 'black'}}
         />
 
-        <View style={styles.viewImagesLengh}>
-          <Text style={styles.textImagesLengh}>
-            {activeIndices[props.uuid] ? activeIndices[props.uuid] + 1 : 1}/
-            {props.images}
-          </Text>
-        </View>
-      </View>
-
-      <View style={styles.viewLikeComment}>
-        <View style={styles.viewNumberCount}>
-          <View style={styles.iconText}>
-            <View style={[styles.iconLike, styles.viewCenter]}>
-              <IconMaterialIcons
-                name={'thumb-up-alt'}
-                color={'white'}
-                size={11}
-              />
-            </View>
-            <Text style={styles.textLikeBlur} key={props.like_count}>
-              {props.like_count}
+        {/* <View style={styles.viewImagesLengh}>
+            <Text style={styles.textImagesLengh}>
+              {activeIndices[item.images.length]
+                ? activeIndices[item.images.length] + 1
+                : 1}
+              /{item.images}
             </Text>
-          </View>
-          <View style={styles.iconText}>
-            <Text style={styles.textLikeBlur}>{props.comment_count}</Text>
-            <Text style={styles.textLikeBlur}>comment</Text>
-          </View>
-        </View>
+          </View> */}
       </View>
 
-      <View style={styles.footerPost}>
-        <TouchableOpacity
-          style={styles.iconText}
-          onPress={() => {
-            // handleLikePress(props.uuid.toString());
-          }}>
-          <IconMaterialIcons
-            name={props.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'}
-            color={
-              props.is_liked
-                ? styles.colorIconHeartFocus.color
-                : styles.colorIconHeartBlur.color
-            }
-            size={24}
-          />
-          <Text
-            style={props.is_liked ? styles.textLikeFocus : styles.textLikeBlur}>
-            Like
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.iconText}
-          onPress={() => NavigationService.navigate(routes.COMMENT_POST)}>
-          <IconFontAwesome5
-            name="comment"
-            color={styles.colorIconHeartBlur.color}
-            size={20}
-          />
-          <Text style={styles.textLikeBlur}>Comment</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.iconText} onPress={onShare}>
-          <Icon name="share-social-outline" type="ionicon" size={22} />
-          <Text style={styles.textLikeBlur}>Share</Text>
-        </TouchableOpacity>
+      <View style={{flex: 1}}>
+        <View style={styles.viewLikeComment}>
+          <View style={styles.viewNumberCount}>
+            <View style={styles.iconText}>
+              <View style={[styles.iconLike, styles.viewCenter]}>
+                <IconMaterialIcons
+                  name={'thumb-up-alt'}
+                  color={'white'}
+                  size={11}
+                />
+              </View>
+              <Text style={styles.textLikeBlur} key={item.like_count}>
+                {item.like_count}
+              </Text>
+            </View>
+            <View style={styles.iconText}>
+              <Text style={styles.textLikeBlur}>{item.comment_count}</Text>
+              <Text style={styles.textLikeBlur}>comment</Text>
+            </View>
+          </View>
+        </View>
+
+        <View style={styles.footerPost}>
+          <TouchableOpacity
+            style={styles.iconText}
+            onPress={() => {
+              // handleLikePress(item.uuid.toString());
+            }}>
+            <IconMaterialIcons
+              name={item.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'}
+              color={
+                item.is_liked
+                  ? styles.colorIconHeartFocus.color
+                  : styles.colorIconHeartBlur.color
+              }
+              size={24}
+            />
+            <Text
+              style={
+                item.is_liked ? styles.textLikeFocus : styles.textLikeBlur
+              }>
+              Like
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.iconText}
+            onPress={() => NavigationService.navigate(routes.COMMENT_POST)}>
+            <IconFontAwesome5
+              name="comment"
+              color={styles.colorIconHeartBlur.color}
+              size={20}
+            />
+            <Text style={styles.textLikeBlur}>Comment</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.iconText} onPress={onShare}>
+            <Icon name="share-social-outline" type="ionicon" size={22} />
+            <Text style={styles.textLikeBlur}>Share</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
+  // ));
 
   return (
     <View>

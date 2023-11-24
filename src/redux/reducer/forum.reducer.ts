@@ -10,7 +10,7 @@ const initialState: ForumState = {};
 
 const reducer = createSlice({
   name: Redux.forum,
-  initialState,
+  initialState: {...initialState},
   reducers: {
     handleGetListData: (state: ForumState, _: PayloadAction<number>) => {
       return {
@@ -21,13 +21,10 @@ const reducer = createSlice({
       state: ForumState,
       action: PayloadAction<PayloadHttpListForumData<ForumType>>,
     ) => {
-      const currentData: ForumType[] = state.listDataForum?.data || [];
-      const newData = action.payload.data || [];
-      const updatedData = [...currentData, ...newData];
       return {
         ...state,
         listDataForum: {
-          data: updatedData,
+          data: action.payload.data,
           canNext: action.payload.canNext,
           currentDataSize: action.payload.currentDataSize,
           currentPage: action.payload.currentPage,
