@@ -37,6 +37,7 @@ const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
         style={{alignItems: 'center', justifyContent: 'center'}}
         onPress={onPressNavDetail}>
         <FastImage
+          key={comic.uuid}
           onLoadEnd={onLoadEnd}
           onLoadStart={onLoadStart}
           style={props.imageStyle || styles.imgComic}

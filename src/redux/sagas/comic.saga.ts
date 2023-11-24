@@ -1,9 +1,10 @@
 import {PayloadAction} from '@reduxjs/toolkit';
-import {call, put, takeLatest} from 'redux-saga/effects';
+import {call, delay, put, takeLatest} from 'redux-saga/effects';
 import {ComicActions, ComicReducer, LoadingActions} from '../reducer';
 import {ComicService} from '../services';
 import {showToastSuccess} from '../../utils';
 import {ToastAndroid} from 'react-native';
+import {criticallyDampedSpringCalculations} from 'react-native-reanimated/lib/typescript/reanimated2/animation/springUtils';
 
 function* getListDataSaga(action: PayloadAction<number>): Generator {
   if (action.payload == 1) {
@@ -24,8 +25,10 @@ function* getListDataSaga(action: PayloadAction<number>): Generator {
     console.log('hihi');
   } finally {
     if (action.payload == 1) {
+      yield delay(3000);
       yield put(LoadingActions.hideLoadingStart());
     } else {
+      yield delay(2000);
       yield put(LoadingActions.hideLoadingPage());
     }
   }
@@ -179,9 +182,10 @@ function* getComicByTop20Saga(): Generator {
   try {
     console.log('run');
     const {data}: any = yield call(ComicService.getComicByTopView);
+
     if (data.code == 200) {
       console.log('run push tookit');
-
+      console.log(data);
       yield put(ComicActions.setListTopView(data));
     } else {
       console.log('Server errol !!!');

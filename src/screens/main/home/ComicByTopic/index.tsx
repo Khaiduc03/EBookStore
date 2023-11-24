@@ -58,7 +58,6 @@ const ComicByTopic = () => {
       viewStyle={numCols == 1 ? styles.comicItem : null}
       imageStyle={numCols == 1 ? styles.imgComic : null}
       contentStyle={numCols == 1 ? styles.content : null}
-      index={index}
       topicStyle={numCols == 1 ? styles.topicsContainer : null}
     />
   );
@@ -113,13 +112,14 @@ const ComicByTopic = () => {
             />
           );
         }}
-        columnWrapperStyle={numCols === 3 ? {gap: 5} : null}
+        columnWrapperStyle={
+          numCols === 3 ? {gap: 5} : {flexDirection: 'column'}
+        }
         data={dataComic}
         renderItem={RenderItem}
         keyExtractor={item => item.uuid.toString()}
         showsVerticalScrollIndicator={false}
-        key={numCols.toString()}
-        numColumns={numCols}
+        numColumns={3}
         onEndReached={loadMoreComic}
         onEndReachedThreshold={0.1}
         ListFooterComponent={

@@ -10,7 +10,7 @@ import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {ComicActions, ComicType} from '../../../../../../redux';
 import {getListTopView} from '../../../../../../redux/selectors/comic.selector';
 
-const TrendingComic = () => {
+const TrendingComic = React.memo(() => {
   const styles = useStyles();
 
   const data = useAppSelector(getListTopView);
@@ -41,6 +41,6 @@ const TrendingComic = () => {
       />
     </View>
   );
-};
+});
 
 export default TrendingComic;

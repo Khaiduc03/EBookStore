@@ -60,6 +60,7 @@ export class ComicService {
   }
 
   static async getComicByTopView() {
+    console.log(`${ENDPOINTS.COMIC_TOP_20}`);
     return await apiService.get(`${ENDPOINTS.COMIC_TOP_20}`);
   }
 
