@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, KeyboardAvoidingView, Text, View} from 'react-native';
 import {useRoute} from '@react-navigation/native';
-import useStyles from '../../../styles';
-import {useAppSelector} from '../../../../../../../hooks';
-import {formatTime} from '../../../../../../../utils';
-import {MessageI, getAuthUserUuid} from '../../../../../../../redux';
+import useStyles from '../styles';
+import {useAppSelector} from '../../../../../hooks';
+import {formatTime} from '../../../../../utils';
+import {MessageI, getAuthUserUuid} from '../../../../../redux';
 
 export const ChatBubble: React.FC<MessageI> = props => {
   const styles = useStyles();
