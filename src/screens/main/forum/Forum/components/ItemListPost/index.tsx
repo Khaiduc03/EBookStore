@@ -25,7 +25,10 @@ import {routes} from '../../../../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {NavigationService} from '../../../../../../navigation';
 import {ForumActions, getAuthUserProfile} from '../../../../../../redux';
-import {getListForum} from '../../../../../../redux/selectors/forum.selector';
+import {
+  getListForum,
+  likePostForum,
+} from '../../../../../../redux/selectors/forum.selector';
 import {ForumType} from '../../../../../../redux/types/forum.type';
 import useStyles from './styles';
 import FastImage from 'react-native-fast-image';
@@ -44,6 +47,8 @@ const ItemListPost: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [activeIndices, setActiveIndices] = useState({}) as any;
   const flatListRef = useRef<FlatList | null>(null);
+
+  const [isLiked, setIsLiked] = useState(false);
 
   // console.log('datahihi: ', dataAPI);
 
@@ -95,12 +100,11 @@ const ItemListPost: React.FC = () => {
     }
   };
 
-  const handleLikePress = () => {};
+  const handleLikePress = (forum_uuid: any) => {};
 
   const styles = useStyles();
 
   const renderItem = ({item}: {item: ForumType}) => (
-    // dataAPI?.map(item => (
     <View style={styles.content}>
       <View>
         <View style={styles.post}>
@@ -160,7 +164,7 @@ const ItemListPost: React.FC = () => {
               <Pressable onPress={() => openModal()}>
                 <Animated.Image
                   key={item.index.toString()}
-                  source={{uri: item.item}}
+                  source={{uri: item.item || undefined}}
                   style={[{width: width, height: 200}]}
                   resizeMode="contain"
                 />
@@ -240,12 +244,14 @@ const ItemListPost: React.FC = () => {
           <TouchableOpacity
             style={styles.iconText}
             onPress={() => {
-              handleLikePress();
+              handleLikePress(item.uuid);
             }}>
             <IconMaterialIcons
-              name={item.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'}
+              name={
+                isLiked === item.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'
+              }
               color={
-                item.is_liked
+                isLiked === item.is_liked
                   ? styles.colorIconHeartFocus.color
                   : styles.colorIconHeartBlur.color
               }
@@ -253,7 +259,9 @@ const ItemListPost: React.FC = () => {
             />
             <Text
               style={
-                item.is_liked ? styles.textLikeFocus : styles.textLikeBlur
+                isLiked === item.is_liked
+                  ? styles.textLikeFocus
+                  : styles.textLikeBlur
               }>
               Like
             </Text>
@@ -276,7 +284,6 @@ const ItemListPost: React.FC = () => {
       </View>
     </View>
   );
-  // ));
 
   return (
     <View>

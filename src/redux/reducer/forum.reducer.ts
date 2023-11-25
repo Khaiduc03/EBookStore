@@ -25,11 +25,38 @@ const reducer = createSlice({
         ...state,
         listDataForum: {
           data: action.payload.data,
-          canNext: action.payload.canNext,
-          currentDataSize: action.payload.currentDataSize,
-          currentPage: action.payload.currentPage,
-          totalPage: action.payload.totalPage,
-          totalData: action.payload.totalData,
+        },
+      };
+    },
+    handleLikePost: (state: ForumState, _: PayloadAction<string>) => {
+      return {
+        ...state,
+      };
+    },
+    setLikePost: (
+      state: ForumState,
+      action: PayloadAction<PayloadHttpListForumData<ForumType>>,
+    ) => {
+      return {
+        ...state,
+        listDataForum: {
+          data: action.payload.data,
+        },
+      };
+    },
+    handleUnLikePost: (state: ForumState, _: PayloadAction<ForumType>) => {
+      return {
+        ...state,
+      };
+    },
+    setUnLikePost: (
+      state: ForumState,
+      action: PayloadAction<PayloadHttpListForumData<ForumType>>,
+    ) => {
+      return {
+        ...state,
+        listDataForum: {
+          data: action.payload.data,
         },
       };
     },

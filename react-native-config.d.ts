@@ -33,6 +33,10 @@ declare module 'react-native-config' {
     COMIC_UPDATE_IMAGE: string;
 
     FORUM: string;
+    LIKE: string;
+    UNLIKE: string;
+    FORUM_BY_UUID: string;
+    FORUM_DELETE_POST: string;
 
     CHAPTER: string;
     CHAPTER_UUID: string;

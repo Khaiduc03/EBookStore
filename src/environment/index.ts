@@ -29,6 +29,10 @@ export const ENDPOINTS = {
   DELETE_TOPIC: Config.DELETE_TOPIC,
 
   FORUM: Config.FORUM,
+  LIKE: Config.LIKE,
+  UNLIKE: Config.UNLIKE,
+  FORUM_BY_UUID: Config.FORUM_BY_UUID,
+  FORUM_DELETE_POST: Config.FORUM_DELETE_POST,
 
   COMIC: Config.COMIC,
 

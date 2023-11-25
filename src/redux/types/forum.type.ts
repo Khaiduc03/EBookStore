@@ -37,7 +37,6 @@ export interface ForumType extends uuid, Timestamp {
   user_avatar: string | null;
   user_fullname: string | null;
   images: string[];
-  like_uuid: string | null;
   is_liked: boolean;
   like_count: number;
   comment_count: number;

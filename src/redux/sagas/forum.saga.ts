@@ -33,6 +33,51 @@ function* getListDataForumSaga(action: PayloadAction<number>): Generator {
   console.log('action.payload: ', action.payload);
 }
 
+function* likePostForumSaga(
+  action: PayloadAction<string>,
+): Generator<any, void, any> {
+  try {
+    console.log('run');
+    const {data}: any = yield call(ForumService.postLikeForum, action.payload);
+    console.log('data: ', data);
+    if (data.code == 200) {
+      console.log('run push tookit');
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log('error: ', error);
+  } finally {
+  }
+
+  // console.log('action.payload: ', action.payload);
+}
+
+function* unlikePostForumSaga(
+  action: PayloadAction<string>,
+): Generator<any, void, any> {
+  try {
+    console.log('run');
+    const {data}: any = yield call(
+      ForumService.deleteLikeForum,
+      action.payload,
+    );
+    console.log('data: ', data);
+    if (data.code == 200) {
+      console.log('run push tookit');
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log('error: ', error);
+  } finally {
+  }
+
+  // console.log('action.payload: ', action.payload);
+}
+
 export default function* watchForumSaga() {
   yield takeLatest(ForumActions.handleGetListData.type, getListDataForumSaga);
+  yield takeLatest(ForumActions.handleLikePost.type, likePostForumSaga);
+  yield takeLatest(ForumActions.handleUnLikePost.type, unlikePostForumSaga);
 }
