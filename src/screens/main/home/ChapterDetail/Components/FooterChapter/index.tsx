@@ -7,6 +7,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {ComicActions} from '../../../../../../redux';
 import {
+  getDataDetailChapter,
   getNextChapter,
   getPreviousChapter,
 } from '../../../../../../redux/selectors/comic.selector';
@@ -23,6 +24,7 @@ const FooterChapter: React.FC<FooterChapterProps> = props => {
   const Previous = useAppSelector(getPreviousChapter);
   const dispath = useAppDispatch();
   const dispatch = useAppDispatch();
+  const dataDetailChapter = useAppSelector(getDataDetailChapter);
 
   const onPressNext = () => {
     if (Next) {
@@ -53,7 +55,9 @@ const FooterChapter: React.FC<FooterChapterProps> = props => {
           size={24}
           color={styles.iconStyle.color}
         />
-        <Text style={styles.textComment}>5,0555</Text>
+        <Text style={styles.textComment}>
+          {dataDetailChapter ? dataDetailChapter[0].comment_count : 0}
+        </Text>
       </TouchableOpacity>
       <View style={styles.navChapter}>
         <TouchableOpacity style={styles.nextChapter} onPress={onPressPrevious}>

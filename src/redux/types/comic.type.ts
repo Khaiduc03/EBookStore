@@ -110,4 +110,5 @@ export type DetailChapterType = Timestamp & {
   secure_url: string;
   page: number;
   chapter: ChapterType;
+  comment_count: number;
 };
