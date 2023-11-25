@@ -22,7 +22,7 @@ const useStyles = makeStyles(({colors}) => ({
   nameStyle: {
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
-    color: '#737479',
+    color: colors.nameUserComment,
   },
   day: {
     fontSize: normalize(10),
@@ -33,7 +33,7 @@ const useStyles = makeStyles(({colors}) => ({
   commentStyle: {
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.regular,
-    color: '#404040',
+    color: colors.nameComment,
     lineHeight: normalize(18),
   },
   repContent: {
