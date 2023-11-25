@@ -11,8 +11,8 @@ const useStyles = makeStyles(({colors}) => ({
     marginTop: normalize(20),
   },
   avatarStyle: {
-    width: normalize(35),
-    height: normalize(35),
+    width: normalize(39),
+    height: normalize(39),
     borderRadius: 100,
     marginRight: normalize(10),
   },
@@ -33,13 +33,13 @@ const useStyles = makeStyles(({colors}) => ({
   commentStyle: {
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.regular,
-    color: '#404040',
+    color: colors.black,
     lineHeight: normalize(18),
   },
   repContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: normalize(8),
+    marginTop: normalize(8),
   },
   rep: {
     flexDirection: 'row',

@@ -7,8 +7,8 @@ const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   image: {
-    width: normalize(48),
-    height: normalize(48),
+    width: normalize(42),
+    height: normalize(42),
     borderRadius: normalize(50),
   },
   imageTitle: {
@@ -18,10 +18,11 @@ const useStyles = makeStyles(({colors}) => ({
   },
   content: {
     width: '100%',
-    height: normalize(406),
+    height: 'auto',
+    justifyContent: 'space-around',
     borderTopWidth: normalize(3),
     borderColor: colors.grey9,
-    paddingVertical: normalize(21),
+    paddingTop: normalize(16),
     backgroundColor: colors.background,
   },
   post: {
@@ -45,6 +46,11 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.bold,
     color: colors.black,
     lineHeight: normalize(21),
+  },
+  textButtonHeader: {
+    color: colors.black,
+    fontSize: normalize(13),
+    fontFamily: fontFamilySetup.regular,
   },
   createAt: {
     fontSize: normalize(13),
@@ -85,6 +91,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   footerPost: {
     width: '100%',
+    height: normalize(50),
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: normalize(20),
@@ -141,15 +148,16 @@ const useStyles = makeStyles(({colors}) => ({
   },
   buttonHeader: {
     width: '63%',
-    height: normalize(46),
+    height: normalize(39),
     borderWidth: normalize(0.4),
     borderRadius: normalize(50),
     borderColor: colors.grey4,
     justifyContent: 'center',
-    paddingHorizontal: normalize(15),
+    alignItems: 'flex-start',
+    paddingLeft: normalize(16),
   },
   textHeader: {
-    fontSize: normalize(15),
+    fontSize: normalize(12),
     fontFamily: fontFamilySetup.regular,
     color: colors.black,
     lineHeight: normalize(21),
@@ -207,8 +215,8 @@ const useStyles = makeStyles(({colors}) => ({
     borderWidth: normalize(0.6),
     borderColor: colors.whiteDefault,
     position: 'absolute',
-    top: normalize(3),
-    right: normalize(19),
+    top: normalize(6),
+    right: normalize(10),
   },
   textImagesLengh: {
     color: colors.whiteDefault,
@@ -218,6 +226,9 @@ const useStyles = makeStyles(({colors}) => ({
   viewLikeComment: {
     alignItems: 'center',
     paddingHorizontal: normalize(10),
+  },
+  iconFooter: {
+    color: colors.black,
   },
 }));
 

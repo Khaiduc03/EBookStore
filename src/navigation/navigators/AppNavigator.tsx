@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 
 import {
   CardStyleInterpolators,
@@ -38,7 +38,6 @@ const mainScreens: Screen[] = [
 ];
 
 const AppNavigator = () => {
-
   return (
     <AppStack.Navigator
       screenOptions={screenOption}

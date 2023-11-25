@@ -17,19 +17,53 @@ import {
   PinchGestureHandler,
   State,
 } from 'react-native-gesture-handler';
-import Reanimated from 'react-native-reanimated';
 import Share from 'react-native-share';
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {ImageIcon} from '../../../../../../assets/svg';
 import {routes} from '../../../../../../constants';
-import {useAppSelector} from '../../../../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {NavigationService} from '../../../../../../navigation';
-import {getAuthUserProfile} from '../../../../../../redux';
-import {DataForum, ForumData} from '../../types';
+import {ForumActions, getAuthUserProfile} from '../../../../../../redux';
+import {
+  getListForum,
+  likePostForum,
+} from '../../../../../../redux/selectors/forum.selector';
+import {ForumType} from '../../../../../../redux/types/forum.type';
 import useStyles from './styles';
+import FastImage from 'react-native-fast-image';
+import moment from 'moment';
 
 const ItemListPost: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  const dataAPI = useAppSelector(getListForum);
+
+  const user = useAppSelector(getAuthUserProfile);
+
+  const [page, setPage] = useState(1);
+
+  const {width, height} = useWindowDimensions();
+  const [showModal, setShowModal] = useState(false);
+  const [activeIndices, setActiveIndices] = useState({}) as any;
+  const flatListRef = useRef<FlatList | null>(null);
+
+  const [isLiked, setIsLiked] = useState(false);
+
+  // console.log('datahihi: ', dataAPI);
+
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  useEffect(() => {
+    dispatch(ForumActions.handleGetListData(page));
+  }, []);
+
   const scale = new Animated.Value(1);
 
   const onGestureEvent = Animated.event([{nativeEvent: {scale: scale}}], {
@@ -45,31 +79,12 @@ const ItemListPost: React.FC = () => {
     }
   };
 
-  const [dataForum, setDataForum] = useState(DataForum);
-
-  const {width} = useWindowDimensions();
-  const [showModal, setShowModal] = useState(false);
-  const [showImageModal, setShowImageModal] = useState('');
-  const [activeIndices, setActiveIndices] = useState({}) as any;
-  const flatListRef = useRef<FlatList | null>(null);
-
-  const openModal = (item: any) => {
-    setShowModal(true);
-    setShowImageModal(item);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
-
   const handleScroll = (id: any) => (event: any) => {
     const scrollPosition = event.nativeEvent.contentOffset.x;
     const index = Math.round(scrollPosition / width);
     setActiveIndices((prevIndices: any) => ({...prevIndices, [id]: index}));
   };
 
-  const [isLike, setIsLike] = useState(false);
-  const user = useAppSelector(getAuthUserProfile);
   const flatListRefMain = useRef<FlatList | null>(null);
 
   const onShare = async () => {
@@ -85,86 +100,78 @@ const ItemListPost: React.FC = () => {
     }
   };
 
-  const handleLikePress = (uuid: string) => {
-    // Tìm index của item trong dataForum
-    const index = dataForum.findIndex((item: any) => item.uuid === uuid);
-
-    // Kiểm tra nếu không tìm thấy item
-    if (index === -1) return;
-
-    // Tạo một bản sao của dataForum
-    const newDataForum = [...dataForum];
-
-    // Cập nhật like_count và is_liked dựa trên trạng thái hiện tại của is_liked
-    newDataForum[index].like_count = newDataForum[index].is_liked
-      ? newDataForum[index].like_count - 1
-      : newDataForum[index].like_count + 1;
-    newDataForum[index].is_liked = !newDataForum[index].is_liked;
-
-    // Cập nhật state
-    setDataForum(newDataForum);
-  };
+  const handleLikePress = (forum_uuid: any) => {};
 
   const styles = useStyles();
 
-  const renderItem = ({item}: {item: ForumData}) => (
+  const renderItem = ({item}: {item: ForumType}) => (
     <View style={styles.content}>
-      <View style={styles.post}>
-        <View style={[styles.viewRow, styles.viewImageText]}>
-          <Image
-            style={styles.imageTitle}
-            source={{
-              uri: item.user_avatar || undefined,
-            }}
-          />
-          <View style={styles.viewTextPost}>
-            <Text style={styles.name}>{item.user_fullname}</Text>
-            <View
-              style={[
-                styles.viewRow,
-                styles.viewImageText,
-                styles.marginTopDate,
-              ]}>
-              <Text style={styles.createAt}>{item.created_at}</Text>
-              <Icon name="public" type="material" size={16} color={'#626162'} />
+      <View>
+        <View style={styles.post}>
+          <View style={[styles.viewRow, styles.viewImageText]}>
+            <Image
+              style={styles.imageTitle}
+              source={{
+                uri: item.user_avatar || undefined,
+              }}
+            />
+            <View style={styles.viewTextPost}>
+              <Text style={styles.name}>
+                {item.user_fullname || 'Anonymus'}
+              </Text>
+              <View
+                style={[
+                  styles.viewRow,
+                  styles.viewImageText,
+                  styles.marginTopDate,
+                ]}>
+                <Text style={styles.createAt}>
+                  {moment(item.created_at).format('YYYY-MM-DD [at] HH:mm')}
+                </Text>
+                <Icon
+                  name="public"
+                  type="material"
+                  size={16}
+                  color={'#626162'}
+                />
+              </View>
             </View>
           </View>
-        </View>
 
-        <View style={styles.viewIconPost}>
-          <Icon name="ellipsis-horizontal" type="ionicon" size={28} />
-          <Icon
-            name="close-outline"
-            type="ionicon"
-            size={28}
-            onPress={() => {
-              item.deleted_at;
-            }}
-          />
+          <View style={styles.viewIconPost}>
+            <Icon name="ellipsis-horizontal" type="ionicon" size={28} />
+            <Icon
+              name="close-outline"
+              type="ionicon"
+              size={28}
+              onPress={() => {
+                item.deleted_at;
+              }}
+            />
+          </View>
+        </View>
+        <View style={styles.description}>
+          <Text style={styles.textDescription}>{item.content}</Text>
         </View>
       </View>
-      <View style={styles.description}>
-        <Text style={styles.textDescription}>{item.content}</Text>
-      </View>
+
       <View>
         <FlatList
-          ref={flatListRef}
-          key={item.uuid}
+          removeClippedSubviews={false}
           data={item.images}
-          renderItem={({item, index}) => (
+          renderItem={item => (
             <View>
-              <Pressable onPress={() => openModal(item)}>
-                <Reanimated.Image
-                  source={{uri: item}}
+              <Pressable onPress={() => openModal()}>
+                <Animated.Image
+                  key={item.index.toString()}
+                  source={{uri: item.item || undefined}}
                   style={[{width: width, height: 200}]}
                   resizeMode="contain"
                 />
               </Pressable>
-
-              <Modal
+              {/* <Modal
                 visible={showModal}
                 transparent={true}
-                accessibilityIgnoresInvertColors
                 onRequestClose={closeModal}>
                 <View style={styles.viewIconClose}>
                   <Icon
@@ -183,7 +190,8 @@ const ItemListPost: React.FC = () => {
                       onGestureEvent={onGestureEvent}
                       onHandlerStateChange={onHandleState}>
                       <Animated.Image
-                        source={{uri: showImageModal}}
+                        key={item.index.toString()}
+                        source={{uri: item.item}}
                         style={[
                           {width: width, height: 200, transform: [{scale}]},
                         ]}
@@ -192,22 +200,25 @@ const ItemListPost: React.FC = () => {
                     </PinchGestureHandler>
                   </GestureHandlerRootView>
                 </View>
-              </Modal>
+              </Modal> */}
             </View>
           )}
-          horizontal
           pagingEnabled
-          onScroll={handleScroll(item.uuid.toString())}
+          onScroll={handleScroll(item.uuid)}
+          horizontal
           showsHorizontalScrollIndicator={false}
+          style={{backgroundColor: 'black'}}
         />
 
         <View style={styles.viewImagesLengh}>
           <Text style={styles.textImagesLengh}>
             {activeIndices[item.uuid] ? activeIndices[item.uuid] + 1 : 1}/
-            {item.images.length}
+            {item.images.length + 0}
           </Text>
         </View>
+      </View>
 
+      <View style={{flex: 1}}>
         <View style={styles.viewLikeComment}>
           <View style={styles.viewNumberCount}>
             <View style={styles.iconText}>
@@ -233,12 +244,14 @@ const ItemListPost: React.FC = () => {
           <TouchableOpacity
             style={styles.iconText}
             onPress={() => {
-              handleLikePress(item.uuid.toString());
+              handleLikePress(item.uuid);
             }}>
             <IconMaterialIcons
-              name={item.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'}
+              name={
+                isLiked === item.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'
+              }
               color={
-                item.is_liked
+                isLiked === item.is_liked
                   ? styles.colorIconHeartFocus.color
                   : styles.colorIconHeartBlur.color
               }
@@ -246,7 +259,9 @@ const ItemListPost: React.FC = () => {
             />
             <Text
               style={
-                item.is_liked ? styles.textLikeFocus : styles.textLikeBlur
+                isLiked === item.is_liked
+                  ? styles.textLikeFocus
+                  : styles.textLikeBlur
               }>
               Like
             </Text>
@@ -274,9 +289,8 @@ const ItemListPost: React.FC = () => {
     <View>
       <FlatList
         ref={flatListRefMain}
-        data={DataForum}
+        data={dataAPI}
         renderItem={renderItem}
-        keyExtractor={(index, item) => index.uuid.toString()}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={() => {
           return (
@@ -288,7 +302,7 @@ const ItemListPost: React.FC = () => {
               <TouchableOpacity
                 style={styles.buttonHeader}
                 onPress={() => NavigationService.navigate(routes.CREATEPOST)}>
-                <Text>Bạn đang nghĩ gì?</Text>
+                <Text style={styles.textButtonHeader}>Bạn đang nghĩ gì?</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => NavigationService.navigate(routes.CREATEPOST)}>

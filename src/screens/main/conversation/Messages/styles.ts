@@ -18,15 +18,15 @@ const useStyles = makeStyles(({colors}) => ({
   body: {
     flex: 1,
     backgroundColor: colors.grey6,
-    padding: normalize(30),
+    paddingHorizontal: normalize(12),
+    paddingVertical: normalize(3),
   },
   footer: {
     width: '100%',
-    height: normalize(56),
+    height: 'auto',
+    borderTopLeftRadius: normalize(16),
+    borderTopRightRadius: normalize(16),
     backgroundColor: colors.white,
-  },
-  containerScrollView: {
-    backgroundColor: colors.grey6,
   },
   viewRow: {
     flexDirection: 'row',
@@ -114,13 +114,9 @@ const useStyles = makeStyles(({colors}) => ({
     marginVertical: normalize(6),
   },
   btnArrowDown: {
-    borderRadius: normalize(100),
     position: 'absolute',
-    justifyContent: 'center',
-    alignItems: 'center',
-    bottom: normalize(120),
-    right: normalize(10),
-    backgroundColor: colors.white,
+    alignSelf: 'center',
+    bottom: normalize(90),
   },
   btnClearAll: {
     width: normalize(80),
@@ -154,10 +150,9 @@ const useStyles = makeStyles(({colors}) => ({
     paddingVertical: normalize(12),
     paddingStart: normalize(16),
     paddingEnd: normalize(48),
-    borderWidth: normalize(1),
-    borderColor: colors.blackDefault,
-    borderRadius: normalize(25),
     marginVertical: normalize(5),
+    borderRadius: normalize(26),
+    borderWidth: 1,
   },
   textInputHeightAuto: {
     height: normalize(50),
@@ -175,41 +170,20 @@ const useStyles = makeStyles(({colors}) => ({
     height: normalize(HEIGHT * 0.3),
   },
   viewEmoji: {
-    height: normalize(HEIGHT * 0.6),
+    height: normalize(HEIGHT * 0.4),
   },
   btnPB: {
     paddingBottom: normalize(36),
   },
-  modalContainer: {
-    width: '100%',
-    height: '88%',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
+
+  imageNoteUser: {
+    width: normalize(36),
+    height: normalize(36),
+    marginTop: normalize(6),
+    marginRight: normalize(12),
+    borderRadius: normalize(100),
   },
 
-  avatarContainer: {
-    width: normalize(130),
-    height: normalize(90),
-    backgroundColor: 'rgba(256, 256, 256, 1)',
-  },
-
-  overlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 1)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contentStyle: {
-    paddingTop: normalize(16),
-  },
-  modalItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    width: '100%',
-    paddingHorizontal: normalize(24),
-    paddingVertical: normalize(16),
-  },
   textStyle: {
     fontSize: normalize(16),
     marginLeft: normalize(12),
@@ -227,6 +201,10 @@ const useStyles = makeStyles(({colors}) => ({
     height: normalize(HEIGHT * 0.5),
     top: normalize(HEIGHT * 0.09),
     position: 'absolute',
+  },
+
+  iconScroll: {
+    color: colors.black,
   },
 }));
 
