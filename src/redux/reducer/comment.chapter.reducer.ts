@@ -29,7 +29,7 @@ const reducer = createSlice({
         listComment: {
           canNext: state.listComment?.canNext,
           currentPage: state.listComment?.currentPage,
-          totalData: state.listComment?.totalData,
+          totalData: (state.listComment?.totalData || 0) + 1,
           data: [action.payload, ...(state.listComment?.data || [])],
         },
       };
@@ -48,15 +48,35 @@ const reducer = createSlice({
       state: CommentChapterState,
       action: PayloadAction<CommentChapterType>,
     ) => {
-      return {
-        ...state,
-        listRepComment: {
-          canNext: state.listRepComment?.canNext,
-          currentPage: state.listRepComment?.currentPage,
-          totalData: state.listRepComment?.totalData,
-          data: [action.payload, ...(state.listRepComment?.data || [])],
-        },
-      };
+      const uuid = action.payload.parents_comment_uuid;
+      if (state.listComment && state.listComment.data) {
+        const updatedListComment = {
+          ...state.listComment,
+          data: state.listComment.data.map(comment => {
+            if (comment.uuid === uuid) {
+              // Tìm thấy comment cần cập nhật
+              const updatedRepCount = comment.re_comment_count + 1;
+
+              return {
+                ...comment,
+                re_comment_count: updatedRepCount,
+              };
+            }
+            return comment;
+          }),
+        };
+
+        return {
+          ...state,
+          listRepComment: {
+            canNext: state.listRepComment?.canNext,
+            currentPage: state.listRepComment?.currentPage,
+            totalData: (state.listRepComment?.totalData || 0) + 1,
+            data: [action.payload, ...(state.listRepComment?.data || [])],
+          },
+          listComment: updatedListComment,
+        };
+      }
     },
 
     postLikeCommentChapter: (
