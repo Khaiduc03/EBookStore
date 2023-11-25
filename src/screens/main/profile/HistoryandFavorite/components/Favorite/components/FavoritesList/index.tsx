@@ -15,6 +15,7 @@ import {
 import useStyles from './styles';
 import {useAppDispatch, useAppSelector} from '../../../../../../../../hooks';
 import {
+  currentPageFavorite,
   getListFavorite,
   nextPageFavorite,
 } from '../../../../../../../../redux/selectors/comic.selector';
@@ -25,14 +26,13 @@ import ItemFavoritesList from '../ItemFavoritesList';
 const FavoritesList: FunctionComponent = () => {
   const data = useAppSelector(getListFavorite);
   const nextPage = useAppSelector(nextPageFavorite);
-  const [page, setPage] = useState(1);
+
   const styles = useStyles();
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(getIsLoadingTopic);
+  const current = useAppSelector(currentPageFavorite);
 
   const [refreshing, setRefreshing] = React.useState(false);
-
-  console.log('============>', page);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -41,17 +41,16 @@ const FavoritesList: FunctionComponent = () => {
     setTimeout(() => {
       setRefreshing(false);
       dispatch(ComicActions.getListFavorite(1));
-      setPage(1);
     }, 2000);
   }, []);
 
   useEffect(() => {
-    dispatch(ComicActions.getListFavorite(page));
-  }, [page]);
+    dispatch(ComicActions.getListFavorite(1));
+  }, []);
 
   const loadMoreComic = () => {
     if (nextPage && !isLoading) {
-      setPage(page + 1);
+      dispatch(ComicActions.getListFavorite(current ? current + 1 : 1));
     }
   };
 
@@ -78,8 +77,17 @@ const FavoritesList: FunctionComponent = () => {
         renderItem={RenderItem}
         keyExtractor={item => item.comic_uuid}
         showsVerticalScrollIndicator={false}
-        onEndReached={loadMoreComic}
-        onEndReachedThreshold={0.1}
+        onScroll={({nativeEvent}) => {
+          const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
+          const numberOfPixelsFromBottomThreshold = 100;
+          const isNearBottom =
+            contentOffset.y + layoutMeasurement.height >=
+            contentSize.height - numberOfPixelsFromBottomThreshold;
+
+          if (isNearBottom) {
+            loadMoreComic();
+          }
+        }}
         ListFooterComponent={
           isLoading ? isLoading && listFooterComponent : undefined
         }

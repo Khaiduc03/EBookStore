@@ -269,6 +269,7 @@ function* getListFavoriteSaga(action: PayloadAction<number>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
+    yield delay(1000);
     yield put(LoadingActions.hideLoadingTopic());
   }
 }
@@ -287,6 +288,7 @@ function* getListHistoryComicSaga(action: PayloadAction<number>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
+    yield delay(1000);
     yield put(LoadingActions.hideLoadingTopic());
   }
 }

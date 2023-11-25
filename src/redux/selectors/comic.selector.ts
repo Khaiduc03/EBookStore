@@ -48,3 +48,6 @@ export const getListFavorite = (state: RootState) =>
 
 export const nextPageFavorite = (state: RootState) =>
   state.comic.listFavorite?.canNext;
+
+export const currentPageFavorite = (state: RootState) =>
+  state.comic.listFavorite?.currentPage;
