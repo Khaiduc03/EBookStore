@@ -19,15 +19,21 @@ const useStyles = makeStyles(({colors}) => ({
     flex: 1,
     backgroundColor: colors.grey6,
     paddingHorizontal: normalize(12),
-    paddingVertical: normalize(3),
+    paddingTop: normalize(3),
   },
   footer: {
     width: '100%',
-    height: 'auto',
+    // position: 'absolute',
+    // bottom: 0,
     borderTopLeftRadius: normalize(16),
     borderTopRightRadius: normalize(16),
     backgroundColor: colors.white,
   },
+  viewFLatlist: {
+    width: '100%',
+    height: normalize(HEIGHT * 0.84),
+  },
+
   viewRow: {
     flexDirection: 'row',
   },
@@ -110,6 +116,9 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewClearAll: {
     width: '100%',
+    height: normalize(20),
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginVertical: normalize(6),
   },
@@ -121,12 +130,21 @@ const useStyles = makeStyles(({colors}) => ({
   btnClearAll: {
     width: normalize(80),
     backgroundColor: colors.white,
-    marginBottom: normalize(6),
   },
   textClearAll: {
     fontFamily: fontFamilySetup.bold,
-    fontSize: normalize(16),
+    fontSize: normalize(14),
     color: colors.red,
+    textAlign: 'center',
+  },
+  btnClose: {
+    width: normalize(80),
+    backgroundColor: colors.white,
+  },
+  textClose: {
+    fontFamily: fontFamilySetup.bold,
+    fontSize: normalize(14),
+    color: 'blue',
     textAlign: 'center',
   },
   leftContainer: {
@@ -161,7 +179,7 @@ const useStyles = makeStyles(({colors}) => ({
     height: normalize(50),
   },
   viewFocus: {
-    height: normalize(HEIGHT * 0.26),
+    position: 'relative',
   },
   viewBlur: {
     height: normalize(HEIGHT * 0.069),
@@ -198,9 +216,8 @@ const useStyles = makeStyles(({colors}) => ({
 
   viewEmojis: {
     width: '100%',
-    height: normalize(HEIGHT * 0.5),
-    top: normalize(HEIGHT * 0.09),
-    position: 'absolute',
+    height: normalize(HEIGHT * 0.38),
+    // position: 'absolute',
   },
 
   iconScroll: {
