@@ -5,6 +5,8 @@ import watchComicSaga from './comic.saga';
 import watchTopicSaga from './topic.saga';
 import watchChatSaga from './chat.saga';
 import watchForumSaga from './forum.saga';
+import watchUserSaga from './user.saga';
+import watchCommentChapterSaga from './comment.chapter.saga';
 
 export default function* RootSaga() {
   yield all([
@@ -13,5 +15,7 @@ export default function* RootSaga() {
     fork(watchTopicSaga),
     fork(watchChatSaga),
     fork(watchForumSaga),
+    fork(watchUserSaga),
+    fork(watchCommentChapterSaga),
   ]);
 }

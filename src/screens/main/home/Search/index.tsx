@@ -189,15 +189,15 @@ const Search = () => {
                 viewStyle={numCols == 1 ? styles.comicItem : null}
                 imageStyle={numCols == 1 ? styles.imgComic : null}
                 contentStyle={numCols == 1 ? styles.content : null}
-                index={index}
                 topicStyle={numCols == 1 ? styles.topicsContainer : null}
               />
             )}
             data={data}
-            key={numCols.toString()}
-            numColumns={numCols}
+            numColumns={3}
             columnWrapperStyle={
-              numCols === 3 ? {gap: 5, paddingHorizontal: 16} : null
+              numCols === 3
+                ? {gap: 5, paddingHorizontal: 16}
+                : {flexDirection: 'column'}
             }
             onEndReached={loadMoreComic}
             onEndReachedThreshold={0.1}

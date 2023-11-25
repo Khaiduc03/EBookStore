@@ -8,7 +8,8 @@ const useStyles = makeStyles(({colors}) => ({
   container: {
     backgroundColor: colors.background,
     flexDirection: 'row',
-    marginTop: normalize(20),
+    marginTop: normalize(25),
+    paddingHorizontal: normalize(16),
   },
   avatarStyle: {
     width: normalize(35),
@@ -41,9 +42,17 @@ const useStyles = makeStyles(({colors}) => ({
     justifyContent: 'space-between',
     paddingTop: normalize(8),
   },
+  like: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: normalize(60),
+    padding: normalize(5),
+  },
   rep: {
     flexDirection: 'row',
     alignItems: 'center',
+    padding: normalize(5),
+    paddingRight: normalize(60),
   },
   numberRepStyle: {
     paddingLeft: normalize(5),

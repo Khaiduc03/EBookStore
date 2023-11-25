@@ -1,13 +1,40 @@
-import {View, Text} from 'react-native';
+import {View, Text, Alert} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import React from 'react';
 import useStyles from './styles';
 import {BigButton, HeaderCustom, Switch_custom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
+import {useAppDispatch} from '../../../../hooks';
+import {UserAction} from '../../../../redux/reducer/user.reducer';
+import {CommentChapterAction} from '../../../../redux/reducer/comment.chapter.reducer';
 const Security: React.FC = () => {
+  const dispatch = useAppDispatch();
   const styles = useStyles();
   const handlePressGoback = () => {
     NavigationService.goBack();
+  };
+  const AlerSave = () => {
+    Alert.alert('Save');
+  };
+  const handleSave = () => {
+    Alert.alert(
+      'Confirmation',
+      'Are you sure you want to save changes?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Save',
+          onPress: () => {
+            AlerSave();
+          },
+        },
+      ],
+      {cancelable: false},
+    );
   };
   return (
     <View style={styles.container}>
@@ -23,8 +50,25 @@ const Security: React.FC = () => {
       <Switch_custom title="Google Authenticator" />
 
       <View style={styles.viewButton}>
-        <BigButton textButton="Save" />
+        <BigButton textButton="Save" onPressButton={handleSave} />
       </View>
+
+      <TouchableOpacity
+        onPress={() =>
+          dispatch(
+            CommentChapterAction.getCommentChapter({
+              chapter_uuid: '28f168a7-0d75-40b1-b143-e47dfbfcd6d6',
+              page: 1,
+            }),
+          )
+        }
+        style={{
+          width: 200,
+          height: 200,
+          backgroundColor: '#000',
+        }}>
+        <Text>GET</Text>
+      </TouchableOpacity>
     </View>
   );
 };

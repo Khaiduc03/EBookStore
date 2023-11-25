@@ -26,7 +26,12 @@ const ItemListProfileUser: React.FunctionComponent<
     <View style={styles.Squares}>
       {avatarDummy && (
         <TouchableOpacity style={styles.ViewTop} onPress={handlePressUser}>
-          <Image style={styles.Avatar} source={images.avata} />
+          <Image
+            style={styles.Avatar}
+            source={{
+              uri: 'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
+            }}
+          />
         </TouchableOpacity>
       )}
       {closeIcon && (

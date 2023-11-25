@@ -35,4 +35,11 @@ export class UserService {
       ...payload,
     });
   }
+
+  static async postFollow(payload: any) {
+    console.log(`${ENDPOINTS.FOLLOWER_USER}`, payload);
+    return await apiService.post(`${ENDPOINTS.FOLLOWER_USER}`, {
+      follower_uuid: payload,
+    });
+  }
 }

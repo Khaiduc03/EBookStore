@@ -20,7 +20,7 @@ interface CarouselDataItem {
   image: string;
 }
 
-const BannerComic: React.FC = () => {
+const BannerComic = React.memo(() => {
   const styles = useStyles();
   const flatlistRef = useRef<FlatList | null>(null);
   const screenWidth = Device.getDeviceWidth();
@@ -99,7 +99,7 @@ const BannerComic: React.FC = () => {
       </View>
     </View>
   );
-};
+});
 
 export default BannerComic;
 const carouselData: CarouselDataItem[] = [

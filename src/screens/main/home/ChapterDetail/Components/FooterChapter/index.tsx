@@ -12,6 +12,7 @@ import {
 } from '../../../../../../redux/selectors/comic.selector';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
+import {CommentChapterAction} from '../../../../../../redux/reducer/comment.chapter.reducer';
 interface FooterChapterProps {
   incrementChapter: () => void;
   decrementChapter: () => void;
@@ -21,6 +22,7 @@ const FooterChapter: React.FC<FooterChapterProps> = props => {
   const Next = useAppSelector(getNextChapter);
   const Previous = useAppSelector(getPreviousChapter);
   const dispath = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const onPressNext = () => {
     if (Next) {
@@ -40,7 +42,10 @@ const FooterChapter: React.FC<FooterChapterProps> = props => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        onPress={() => NavigationService.navigate(routes.COMMENT_COMIC)}
+        onPress={() => {
+          NavigationService.navigate(routes.COMMENT_COMIC),
+            dispatch(CommentChapterAction.clearCommentChapter());
+        }}
         style={styles.commentButtonStyle}>
         <Icon
           name="chatbubble-ellipses"

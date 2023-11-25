@@ -42,11 +42,17 @@ const useStyles = makeStyles(({colors}) => ({
     gap: normalize(5),
     paddingVertical: normalize(10),
   },
-  content: {},
+  content: {
+    padding: normalize(15),
+  },
   input: {
     fontSize: normalize(18),
     paddingVertical: normalize(10),
-    paddingHorizontal: normalize(17),
+  },
+  viewInput: {
+    paddingVertical: normalize(10),
+
+    marginTop: normalize(10),
   },
 }));
 

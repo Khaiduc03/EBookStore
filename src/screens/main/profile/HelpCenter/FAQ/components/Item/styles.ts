@@ -22,7 +22,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   scrollViewItem: {
     width: normalize(WIDTH * 0.9),
-    height: normalize(HEIGHT * 0.9),
+    height: normalize(HEIGHT * 1),
   },
 
   textTitle: {

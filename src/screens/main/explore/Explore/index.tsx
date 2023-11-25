@@ -1,10 +1,11 @@
 import React from 'react';
 import {View} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
-import {HeaderCustom} from '../../../../components';
+
 import CarouselSquareList from './Components/CarouselSquareList';
 import ListHotComic from './Components/ListHotComic';
 import RecommendedSeries from './Components/RecommendedSeries';
+import {ScrollView} from 'react-native-gesture-handler';
+import {HeaderCustom} from '../../../../components';
 import TrendingComic from './Components/TrendingComic';
 import useStyles from './styles';
 
@@ -53,16 +54,16 @@ const ExploreScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        titleStyle={styles.titleStyle}
+        titleStyle={styles.textTitleHeader}
         leftIconStyle={styles.leftIconStyle}
         leftIcon={{name: 'id-card', type: 'ionicon'}}
         title="Explore"
       />
 
-      <View style={styles.backgoundPopular}>
-        <CarouselSquareList data={data} autoPlay={false} pagination={true} />
-      </View>
       <ScrollView>
+        <View style={styles.backgoundPopular}>
+          <CarouselSquareList data={data} autoPlay={false} pagination={true} />
+        </View>
         <RecommendedSeries />
         <TrendingComic />
         <ListHotComic />

@@ -5,23 +5,13 @@ const useStyles = makeStyles(({colors}) => ({
   container: {
     backgroundColor: colors.background,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: normalize(14),
-    paddingVertical: normalize(30),
-  },
-  textRating: {
-    color: colors.black,
-    fontSize: normalize(24),
-    fontFamily: fontFamilySetup.bold,
-  },
   content: {
     flexDirection: 'row',
+    width: normalize(370),
   },
   numberRating: {
     color: colors.black,
-    fontSize: normalize(40),
+    fontSize: normalize(35),
     fontFamily: fontFamilySetup.bold,
     textAlign: 'center',
   },
@@ -31,20 +21,21 @@ const useStyles = makeStyles(({colors}) => ({
   },
   numberReviews: {
     color: colors.grey10,
-    fontSize: normalize(16),
+    fontSize: normalize(15),
     fontFamily: fontFamilySetup.bold,
     textAlign: 'center',
     marginTop: normalize(10),
   },
   line: {
-    borderWidth: 1,
+    borderWidth: normalize(0.8),
     borderColor: colors.grey11,
+    marginStart: normalize(10),
   },
   viewRating1: {
-    paddingHorizontal: normalize(20),
+    paddingHorizontal: normalize(10),
   },
   viewRating2: {
-    paddingHorizontal: normalize(10),
+    paddingHorizontal: normalize(30),
   },
   lineRating: {
     flexDirection: 'row',

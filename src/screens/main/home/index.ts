@@ -7,6 +7,7 @@ import CommentComic from './CommentComic';
 import Filters from './Filters';
 import Notifications from './Notifications';
 import RatingComicScreen from './RatingComicScreen';
+import RatingDetailComic from './RatingDetailComic';
 import CommentRepComic from './RepComments';
 import Search from './Search';
 import Settings from './Settings';
@@ -62,5 +63,9 @@ export const homeScreens: Screen[] = [
   {
     name: routes.RATINGCOMICSCREEN,
     component: RatingComicScreen,
+  },
+  {
+    name: routes.RATINGDETAILCOMIC,
+    component: RatingDetailComic,
   },
 ];

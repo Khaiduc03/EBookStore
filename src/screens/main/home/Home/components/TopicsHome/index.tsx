@@ -9,7 +9,7 @@ import {TopicActions, TopicType} from '../../../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {getListTopic} from '../../../../../../redux/selectors/topic.selector';
 
-const TopicsHome = () => {
+const TopicsHome = React.memo(() => {
   const dataTopic = useAppSelector(getListTopic);
 
   const styles = useStyles();
@@ -47,6 +47,6 @@ const TopicsHome = () => {
       />
     </View>
   );
-};
+});
 
 export default TopicsHome;

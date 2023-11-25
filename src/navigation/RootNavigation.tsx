@@ -9,6 +9,8 @@ import {navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
 import {Forum} from '../screens/main';
+import RatingDetailComic from '../screens/main/home/RatingDetailComic';
+import {AddPicture} from '../screens/main/forum/create-post/components';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -40,6 +42,7 @@ const RootNavigation = () => {
       />
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
       {/* <Forum /> */}
+      {/* <AppNavigator /> */}
     </NavigationContainer>
   );
 };
