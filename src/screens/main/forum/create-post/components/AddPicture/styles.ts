@@ -7,17 +7,23 @@ const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   buttonImage: {
-    width: normalize(140),
+    width: normalize(126),
     height: normalize(32),
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginLeft: normalize(9),
     borderRadius: normalize(6),
     backgroundColor: colors.primary,
-    justifyContent: 'center',
     paddingHorizontal: normalize(10),
   },
   textbtnImage: {
     color: colors.black,
-    fontSize: normalize(16),
+    fontSize: normalize(14.4),
     fontFamily: fontFamilySetup.bold,
+  },
+  icon: {
+    color: colors.grey10,
   },
 }));
 

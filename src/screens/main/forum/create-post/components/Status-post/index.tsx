@@ -8,7 +8,7 @@ const StatusPost: React.FC = () => {
   const styles = useStyles();
   const [selectedStatus, setSelectedStatus] = useState('Public');
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const status = ['Public', 'Private'];
+  const status = ['Public', ' Private'];
 
   const renderDropdownIcon = () => {
     return (
@@ -18,15 +18,16 @@ const StatusPost: React.FC = () => {
             <Icon
               name="public"
               type="material"
-              size={20}
+              size={16}
               color={styles.icon.color}
             />
           ) : (
             <Icon
               name="lock-closed"
               type="ionicon"
-              size={20}
+              size={14.6}
               color={styles.icon.color}
+              style={{marginLeft: 6}}
             />
           )}
         </View>
@@ -53,6 +54,8 @@ const StatusPost: React.FC = () => {
         rowTextStyle={styles.textrowSelect}
         buttonTextStyle={styles.textButtonSelect}
         defaultButtonText={selectedStatus}
+        rowStyle={styles.viewbackgroundColor}
+        selectedRowTextStyle={{backgroundColor: 'black'}}
       />
     </View>
   );

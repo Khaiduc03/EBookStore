@@ -48,19 +48,21 @@ const CreatePost: React.FC = () => {
           </View>
         </View>
       </View>
-      <View style={styles.content}>
-        <SelectedImages images={selectedImages} />
-        <View style={styles.viewInput}>
-          <TextInput
-            placeholder="What do you think today?"
-            placeholderTextColor={'gray'}
-            style={styles.input}
-            multiline
-            textAlignVertical="top"
-            value={textInputValue}
-            onChangeText={text => setTextInputValue(text)}
-          />
-        </View>
+
+      <View style={styles.viewBorder} />
+
+      <SelectedImages images={selectedImages} />
+
+      <View style={styles.viewInput}>
+        <TextInput
+          placeholder="What do you think today?"
+          placeholderTextColor={styles.placeHolderColor.color}
+          style={styles.input}
+          multiline
+          textAlignVertical="top"
+          value={textInputValue}
+          onChangeText={text => setTextInputValue(text)}
+        />
       </View>
     </View>
   );

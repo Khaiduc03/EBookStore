@@ -78,6 +78,12 @@ function* unlikePostForumSaga(
 
 export default function* watchForumSaga() {
   yield takeLatest(ForumActions.handleGetListData.type, getListDataForumSaga);
-  yield takeLatest(ForumActions.handleLikePost.type, likePostForumSaga);
-  yield takeLatest(ForumActions.handleUnLikePost.type, unlikePostForumSaga);
+  yield takeLatest(
+    ForumActions.handleLike_UnlikeSuccess.type,
+    likePostForumSaga,
+  );
+  yield takeLatest(
+    ForumActions.handleLike_UnlikeSuccess.type,
+    unlikePostForumSaga,
+  );
 }

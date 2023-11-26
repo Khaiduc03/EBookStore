@@ -17,8 +17,8 @@ const useStyles = makeStyles(({colors}) => ({
     borderRadius: normalize(50),
   },
   content: {
-    width: '100%',
-    height: 'auto',
+    width: WIDTH,
+    height: undefined,
     justifyContent: 'space-around',
     borderTopWidth: normalize(3),
     borderColor: colors.grey9,
@@ -180,9 +180,7 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: colors.primary,
   },
   imageContainer: {
-    width: '100%',
-    height: 'auto',
-    overflow: 'hidden',
+    position: 'relative',
   },
   imageAspect: {
     width: '100%',
@@ -215,7 +213,7 @@ const useStyles = makeStyles(({colors}) => ({
     borderWidth: normalize(0.6),
     borderColor: colors.whiteDefault,
     position: 'absolute',
-    top: normalize(6),
+    top: normalize(10),
     right: normalize(10),
   },
   textImagesLengh: {

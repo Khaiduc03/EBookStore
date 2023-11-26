@@ -7,6 +7,7 @@ import {
   launchImageLibrary,
 } from 'react-native-image-picker';
 import useStyles from './styles';
+import {Icon} from '@rneui/themed';
 
 interface AddPictureProps {
   onImagesSelected: (images: string[]) => void;
@@ -19,7 +20,10 @@ const AddPicture: React.FC<AddPictureProps> = ({onImagesSelected}) => {
   const openGallery = () => {
     const options: ImageLibraryOptions = {
       mediaType: 'photo',
+      includeExtra: true,
       selectionLimit: 6,
+      maxWidth: 800,
+      maxHeight: 600,
     };
 
     launchImageLibrary(options, (response: ImagePickerResponse) => {
@@ -39,7 +43,13 @@ const AddPicture: React.FC<AddPictureProps> = ({onImagesSelected}) => {
 
   return (
     <TouchableOpacity style={styles.buttonImage} onPress={openGallery}>
-      <Text style={styles.textbtnImage}>+ Add picture</Text>
+      <Icon
+        name="add-outline"
+        type="ionicon"
+        color={styles.icon.color}
+        size={18}
+      />
+      <Text style={styles.textbtnImage}>Add picture</Text>
     </TouchableOpacity>
   );
 };

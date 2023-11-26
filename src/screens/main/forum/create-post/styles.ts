@@ -14,17 +14,22 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
   },
   header: {
-    paddingHorizontal: normalize(17),
-    borderBottomWidth: normalize(0.4),
-    paddingVertical: normalize(10),
+    paddingHorizontal: normalize(16),
+    paddingVertical: normalize(8),
+  },
+  viewBorder: {
+    borderBottomWidth: normalize(0.3),
     borderColor: colors.grey4,
+    marginHorizontal: normalize(12),
   },
   image: {
     width: normalize(48),
     height: normalize(48),
     borderRadius: normalize(100),
   },
-
+  placeHolderColor: {
+    color: colors.grey8,
+  },
   icon: {
     color: colors.grey10,
   },
@@ -43,16 +48,19 @@ const useStyles = makeStyles(({colors}) => ({
     paddingVertical: normalize(10),
   },
   content: {
-    padding: normalize(15),
+    paddingHorizontal: normalize(6),
+    borderWidth: 1,
   },
   input: {
-    fontSize: normalize(18),
-    paddingVertical: normalize(10),
+    width: '100%',
+    height: '100%',
+    fontSize: normalize(16),
+    fontFamily: fontFamilySetup.medium,
+    color: colors.grey8,
+    padding: normalize(10),
   },
   viewInput: {
-    paddingVertical: normalize(10),
-
-    marginTop: normalize(10),
+    marginHorizontal: normalize(12),
   },
 }));
 

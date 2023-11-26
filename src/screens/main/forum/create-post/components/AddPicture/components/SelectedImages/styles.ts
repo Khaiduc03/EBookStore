@@ -9,6 +9,9 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: normalize(10),
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: normalize(6),
   },
   selectedImage: {
     width: normalize(100),
