@@ -20,11 +20,6 @@ const useStyles = makeStyles(({colors}) => ({
   viewbackgroundColor: {
     backgroundColor: colors.grey6,
   },
-  iconleft: {
-    position: 'absolute',
-    right: normalize(95),
-    top: normalize(4.4),
-  },
   textButtonSelect: {
     color: colors.black,
     fontSize: normalize(14.4),
@@ -37,6 +32,11 @@ const useStyles = makeStyles(({colors}) => ({
   },
   icon: {
     color: colors.grey10,
+  },
+  iconleft: {
+    position: 'absolute',
+    right: normalize(95),
+    top: normalize(4.4),
   },
 }));
 

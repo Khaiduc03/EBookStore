@@ -7,6 +7,7 @@ import {
   PayloadHttpListForum,
   PayloadHttpListForumData,
 } from '../types/forum.type';
+import {data} from '../../screens/main/home/Notifications/types';
 
 const initialState: ForumState = {};
 
@@ -79,7 +80,29 @@ const reducer = createSlice({
       return state; // Trả về state không thay đổi nếu không có listForum hoặc listForum.data
     },
 
-    handleCreatePost: (state: ForumState, _: PayloadAction<ForumType>) => {},
+    handleCreatePost: (state: ForumState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+
+    handleCreatePostSuccess: (
+      state: ForumState,
+      action: PayloadAction<any>,
+    ) => {
+      return {
+        ...state,
+      };
+    },
+    handleCreatePostFailed: (
+      state: ForumState,
+      action: PayloadAction<Pick<ForumType, 'images' | 'status' | 'content'>>,
+    ) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
   },
 });
 

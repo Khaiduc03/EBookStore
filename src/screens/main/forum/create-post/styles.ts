@@ -53,7 +53,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   input: {
     width: '100%',
-    height: '100%',
+    height: '30%',
     fontSize: normalize(16),
     fontFamily: fontFamilySetup.medium,
     color: colors.grey8,
@@ -61,6 +61,47 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewInput: {
     marginHorizontal: normalize(12),
+  },
+  selectedImage: {
+    width: normalize(100),
+    height: normalize(100),
+    borderRadius: normalize(10),
+  },
+  imageContainer: {
+    width: normalize(100),
+    height: normalize(100),
+  },
+  iconleft: {
+    position: 'absolute',
+    right: normalize(95),
+    top: normalize(4.4),
+  },
+  buttonSelect: {
+    backgroundColor: colors.primary,
+    width: normalize(130),
+    height: normalize(32),
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderRadius: normalize(6),
+  },
+  dropdownStyle: {
+    borderRadius: normalize(0),
+  },
+  viewbackgroundColor: {
+    backgroundColor: colors.grey6,
+  },
+  textButtonSelect: {
+    color: colors.black,
+    fontSize: normalize(14.4),
+    fontFamily: fontFamilySetup.bold,
+  },
+  textrowSelect: {
+    color: colors.black,
+    fontSize: normalize(14),
+    fontFamily: fontFamilySetup.bold,
+  },
+  iconStatus: {
+    color: colors.grey10,
   },
 }));
 
