@@ -2,6 +2,7 @@ import {Icon} from '@rneui/themed';
 import moment from 'moment';
 import React, {useEffect, useState} from 'react';
 import {
+  ActivityIndicator,
   Animated,
   Dimensions,
   FlatList,
@@ -40,7 +41,7 @@ const ItemListPost: React.FC = () => {
 
   const user = useAppSelector(getAuthUserProfile);
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(2);
 
   const [showModal, setShowModal] = useState(false);
   const [activeIndices, setActiveIndices] = useState({}) as any;
@@ -169,6 +170,9 @@ const ItemListPost: React.FC = () => {
         <FlatList
           data={item.images}
           renderItem={item => {
+            if (item.item === '' || item.item == null) {
+              return <View />;
+            }
             return (
               <View style={styles.imageContainer}>
                 <Pressable onPress={() => openModal(item)}>
@@ -177,6 +181,7 @@ const ItemListPost: React.FC = () => {
                     source={{
                       uri: item.item,
                     }}
+                    progressiveRenderingEnabled
                     width={screenWidth}
                   />
                 </Pressable>

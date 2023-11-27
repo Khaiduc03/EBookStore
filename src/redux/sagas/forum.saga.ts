@@ -75,7 +75,9 @@ function* unlikePostForumSaga(
   // console.log('action.payload: ', action.payload);
 }
 
-function* postCreatePostForumSaga(action: any): Generator<any, void, any> {
+function* postCreatePostForumSaga(
+  action: PayloadAction<FormData>,
+): Generator<any, void, any> {
   try {
     console.log('run');
     console.log('sagaaaaaa: ', action.payload);

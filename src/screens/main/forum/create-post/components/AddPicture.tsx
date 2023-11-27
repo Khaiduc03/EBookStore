@@ -3,23 +3,19 @@ import {Icon} from '@rneui/themed';
 import React, {useState} from 'react';
 import {ActivityIndicator, Text, TouchableOpacity} from 'react-native';
 import {
+  Asset,
   ImageLibraryOptions,
   ImagePickerResponse,
   launchImageLibrary,
 } from 'react-native-image-picker';
-import useStyles from './styles';
+import useStyles from '../styles';
 
 type AddPictureProps = {
-  onImagesSelected: (images: string[]) => void;
-  formData: FormData;
+  onImagesSelected: (images: Asset[]) => void;
 };
 
-const AddPicture: React.FC<AddPictureProps> = ({
-  onImagesSelected,
-  formData,
-}) => {
+const AddPicture: React.FC<AddPictureProps> = ({onImagesSelected}) => {
   const styles = useStyles();
-  const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
   const options: ImageLibraryOptions = {
@@ -30,18 +26,7 @@ const AddPicture: React.FC<AddPictureProps> = ({
 
   const openGallery = async () => {
     const result = await launchImageLibrary(options);
-    if (result?.assets && result.assets[0].uri) {
-      result.assets.forEach(asset => {
-        formData.append(`images`, {
-          uri: asset.uri,
-          name: asset.fileName,
-          type: asset.type,
-        });
-      });
-      console.log('data library:', formData);
-    } else {
-      console.log('No assets or uri in result:', result);
-    }
+    result && onImagesSelected(result.assets || []);
   };
 
   return (

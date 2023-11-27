@@ -1,54 +1,110 @@
+import {Icon} from '@rneui/themed';
 import React, {useState} from 'react';
 import {Image, Text, TextInput, View} from 'react-native';
+import {Asset} from 'react-native-image-picker';
+import SelectDropdown from 'react-native-select-dropdown';
 import {HeaderCustom} from '../../../../components';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
 import {ForumActions, getAuthUserProfile} from '../../../../redux';
 import {ForumType} from '../../../../redux/types/forum.type';
 import {showToastError, showToastSuccess} from '../../../../utils';
-import {AddPicture, StatusPost} from './components';
-import {SelectedImages} from './components/AddPicture/components';
+import AddPicture from './components/AddPicture';
+import SelectedImages from './components/RenderSelectedImages';
 import useStyles from './styles';
-import {routes} from '../../../../constants';
 
 const CreatePost: React.FC<ForumType> = props => {
   const styles = useStyles();
-
   const user = useAppSelector(getAuthUserProfile);
-
   const dispatch = useAppDispatch();
 
-  const formdata = new FormData();
+  const formData = new FormData();
 
   const [status, setStatus] = useState(true);
-  const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [textInputValue, setTextInputValue] = useState('');
-  const handleImagesSelected = (images: string[]) => {
-    console.log('Add Picture:', images);
-    setSelectedImages(images);
-  };
-  const handleStatusChange = (newStatus: any) => {
-    newStatus = setStatus(!status);
-    // Làm gì đó với newStatus...
-    console.log('New status: ', newStatus);
-  };
+  const [selectedImages, setSelectedImages] = useState<Asset[]>([]);
+
+  const [isDropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState(
+    status ? 'Public' : 'Private',
+  );
+
+  console.log('Status: ', status);
+
+  function handleDropdown(
+    setStatus: React.Dispatch<React.SetStateAction<boolean>>,
+    formData: FormData,
+  ): (selectedItem: any, index: number) => void {
+    return (selectedItem, index) => {
+      const newStatus = selectedItem === 'Public';
+      setStatus(newStatus);
+      formData.append('status', newStatus.toString());
+    };
+  }
 
   const handleSendPost = () => {
-    console.log('================ ', formdata);
-    dispatch(ForumActions.handleCreatePostSuccess(formdata));
+    formData.append('status', status);
+    formData.append('content', textInputValue);
+    if (selectedImages && selectedImages.length > 0) {
+      selectedImages.forEach(item => {
+        formData.append('images', {
+          uri: item.uri,
+          name: item.fileName,
+          type: item.type,
+        });
+      });
+    }
+    // console.log('================ ', formdata);
+    dispatch(ForumActions.handleCreatePostSuccess(formData));
     if (textInputValue.trim() === '') {
       showToastError('Failed!, Please enter text before sending the post.');
     } else {
       showToastSuccess('Success, Post sent successfully!');
       setTextInputValue('');
-      setSelectedImages([]);
     }
-
-    // NavigationService.navigate(routes.FORUM);
+    NavigationService.goBack();
   };
 
-  formdata.append('content', textInputValue);
-  formdata.append('status', status);
+  const handleImagesSelected = async (images: Asset[]) => {
+    try {
+      if (images && images.length > 0) {
+        setSelectedImages(images);
+        console.log('aaaaa ', images);
+      }
+    } catch (error) {
+      console.log('error: ', error);
+    }
+  };
+
+  const renderDropdownIcon = () => {
+    return (
+      <View>
+        <View style={styles.iconleft}>
+          {status === true && selectedStatus === 'Public' ? (
+            <Icon
+              name="public"
+              type="material"
+              size={16}
+              color={styles.icon.color}
+            />
+          ) : (
+            <Icon
+              name="lock-closed"
+              type="ionicon"
+              size={14.6}
+              color={styles.icon.color}
+              style={{marginLeft: 6}}
+            />
+          )}
+        </View>
+
+        <Icon
+          name={isDropdownOpen ? 'caret-up' : 'caret-down'}
+          type="ionicon"
+        />
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -65,11 +121,20 @@ const CreatePost: React.FC<ForumType> = props => {
           <View style={styles.viewStatus}>
             <Text style={styles.nameUser}>{user.fullname}</Text>
             <View style={styles.buttonClick}>
-              <StatusPost status={status} onStatusChange={handleStatusChange} />
-              <AddPicture
-                onImagesSelected={handleImagesSelected}
-                formData={formdata}
+              <SelectDropdown
+                data={['Public', 'Private']}
+                onSelect={handleDropdown(setStatus, formData)}
+                buttonStyle={styles.buttonSelect}
+                dropdownStyle={styles.dropdownStyle}
+                dropdownOverlayColor="nothing"
+                renderDropdownIcon={renderDropdownIcon}
+                rowTextStyle={styles.textrowSelect}
+                buttonTextStyle={styles.textButtonSelect}
+                defaultButtonText={status ? 'Public' : 'Private'}
+                rowStyle={styles.viewbackgroundColor}
+                onFocus={() => setDropdownOpen(!isDropdownOpen)}
               />
+              <AddPicture onImagesSelected={handleImagesSelected} />
             </View>
           </View>
         </View>

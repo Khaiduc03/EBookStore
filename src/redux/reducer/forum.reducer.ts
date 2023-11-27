@@ -88,10 +88,11 @@ const reducer = createSlice({
 
     handleCreatePostSuccess: (
       state: ForumState,
-      action: PayloadAction<any>,
+      action: PayloadAction<FormData>,
     ) => {
       return {
         ...state,
+        ...action.payload,
       };
     },
     handleCreatePostFailed: (

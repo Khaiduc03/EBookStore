@@ -103,6 +103,26 @@ const useStyles = makeStyles(({colors}) => ({
   iconStatus: {
     color: colors.grey10,
   },
+  buttonImage: {
+    width: normalize(126),
+    height: normalize(32),
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginLeft: normalize(9),
+    borderRadius: normalize(6),
+    backgroundColor: colors.primary,
+    paddingHorizontal: normalize(10),
+  },
+  textbtnImage: {
+    color: colors.black,
+    fontSize: normalize(14.4),
+    fontFamily: fontFamilySetup.bold,
+  },
+  viewCenter: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 }));
 
 export default useStyles;

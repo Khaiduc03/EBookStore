@@ -18,11 +18,11 @@ const useStyles = makeStyles(({colors}) => ({
   },
   content: {
     width: WIDTH,
-    height: undefined,
+    height: 'auto',
     justifyContent: 'space-around',
     borderTopWidth: normalize(3),
     borderColor: colors.grey9,
-    paddingTop: normalize(16),
+    paddingVertical: normalize(16),
     backgroundColor: colors.background,
   },
   post: {

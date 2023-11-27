@@ -2,11 +2,12 @@
 import React from 'react';
 import {Dimensions, FlatList, View} from 'react-native';
 import AutoHeightImage from 'react-native-auto-height-image';
-import {ForumType} from '../../../../../../../../redux/types/forum.type';
-import useStyles from './styles';
+import {Asset} from 'react-native-image-picker';
+import {ForumType} from '../../../../../redux/types/forum.type';
+import useStyles from '../styles';
 
 interface SelectedImagesProps {
-  images: string[];
+  images: Asset[];
   forum: ForumType;
 }
 
@@ -21,11 +22,16 @@ const SelectedImages: React.FC<SelectedImagesProps> = props => {
         style={styles.container}
         data={props.images}
         renderItem={({item}) => {
+          if (item.uri === '' || item.uri == null) {
+            return <View />;
+          }
           return (
             <View style={styles.viewCenter}>
               <AutoHeightImage
                 source={{
-                  uri: item,
+                  uri:
+                    item.uri?.toString() ||
+                    'https://static.chotot.com/storage/chotot-kinhnghiem/c2c/2023/01/35b2793b-hinh-nen-dien-thoai-mang-lai-may-man-2-548x1024.jpg',
                 }}
                 width={screenWidth}
               />
