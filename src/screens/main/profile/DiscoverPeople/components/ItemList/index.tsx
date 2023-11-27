@@ -1,44 +1,38 @@
-import {View, Text, Image} from 'react-native';
-import React, {useState} from 'react';
-import useStyles from './styles';
-import {images} from '../../../../../../assets/images/png';
-import {SquaresCustomProps} from './types';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
-import {theme} from '../../../../../../theme';
 import {Icon} from '@rneui/themed';
+import React, {useState} from 'react';
+import {Image, Text, View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {routes} from '../../../../../../constants';
+import {NavigationService} from '../../../../../../navigation';
+import {theme} from '../../../../../../theme';
+import useStyles from './styles';
+import {SquaresCustomProps} from './types';
 
 const ItemList: React.FunctionComponent<SquaresCustomProps> = props => {
-  const {avatarDummy, name, title, button, textButton, deleteUser} = props;
   const styles = useStyles();
   const [isFollowing, setIsFollowing] = useState(false);
-  const [isDetail, setIsDetail] = useState();
   const handleButtonPress = () => {
     setIsFollowing(!isFollowing);
   };
   const handlePressUser = () => {
     NavigationService.navigate(routes.PROFILEUSER);
   };
-  const handlePressGoback = () => {
-    NavigationService.navigate(routes.MYPROFILE);
-  };
+
   return (
     <View style={styles.Squares}>
-      {avatarDummy && (
-        <TouchableOpacity style={styles.ViewTop} onPress={handlePressUser}>
-          <Image style={styles.Avatar} source={images.avata} />
-        </TouchableOpacity>
-      )}
-      {deleteUser && (
+      <TouchableOpacity style={styles.ViewTop} onPress={handlePressUser}>
+        <Image style={styles.Avatar} source={{uri: props.avatarDummy}} />
+      </TouchableOpacity>
+
+      {props.deleteUser && (
         <TouchableOpacity style={styles.iconDelete}>
           <Icon name="close-outline" type="ionicon" size={24} />
         </TouchableOpacity>
       )}
 
-      {name && <Text style={styles.name}>{name}</Text>}
-      {title && <Text style={styles.title}>{title}</Text>}
-      {button && (
+      {props.name && <Text style={styles.name}>{props.name}</Text>}
+      {props.title && <Text style={styles.title}>{props.title}</Text>}
+      {props.button && (
         <TouchableOpacity
           style={[
             styles.Button,
@@ -50,7 +44,7 @@ const ItemList: React.FunctionComponent<SquaresCustomProps> = props => {
           ]}
           onPress={handleButtonPress}>
           <Text style={styles.TextButton}>
-            {isFollowing ? 'Unfollow' : textButton}
+            {isFollowing ? 'Unfollow' : props.textButton}
           </Text>
         </TouchableOpacity>
       )}

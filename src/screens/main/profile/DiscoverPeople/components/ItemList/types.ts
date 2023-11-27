@@ -1,5 +1,5 @@
 export type SquaresCustomProps = {
-    avatarDummy?: boolean;
+    avatarDummy?: string;
     name?: string;
     title?: string;
     button?: boolean;

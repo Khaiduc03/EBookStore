@@ -8,7 +8,7 @@ import useStyles from './styles';
 
 interface ListItem {
   id: string;
-  avatarDummy: boolean;
+  avatarDummy: string;
   name: string;
   title: string;
   button: boolean;
@@ -19,14 +19,14 @@ interface ListItem {
 const DiscoverPeople: React.FC = () => {
   const styles = useStyles();
 
-  const [listData, setListData] = useState(initialData);
+  const [listData, setListData] = useState(data);
 
   const handleGoback = () => {
     NavigationService.goBack();
   };
 
   const refreshList = () => {
-    const refreshedData = [...initialData];
+    const refreshedData = [...data];
     setListData(refreshedData);
     console.log('Refreshed Data Succesfully:', refreshList);
   };
@@ -64,10 +64,11 @@ const DiscoverPeople: React.FC = () => {
 };
 
 export default DiscoverPeople;
-const initialData: ListItem[] = [
+export const data = [
   {
     id: '1',
-    avatarDummy: true,
+    avatarDummy:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
     name: 'Peter 1',
     title: 'Suggestions for you',
     button: true,
@@ -76,7 +77,8 @@ const initialData: ListItem[] = [
   },
   {
     id: '2',
-    avatarDummy: true,
+    avatarDummy:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
     name: 'Peter 2',
     title: 'Suggestions for you',
     button: true,
@@ -85,7 +87,8 @@ const initialData: ListItem[] = [
   },
   {
     id: '3',
-    avatarDummy: true,
+    avatarDummy:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
     name: 'Peter 3',
     title: 'Suggestions for you',
     button: true,
@@ -94,7 +97,8 @@ const initialData: ListItem[] = [
   },
   {
     id: '4',
-    avatarDummy: true,
+    avatarDummy:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
     name: 'Peter 4',
     title: 'Suggestions for you',
     button: true,
@@ -103,7 +107,8 @@ const initialData: ListItem[] = [
   },
   {
     id: '5',
-    avatarDummy: true,
+    avatarDummy:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
     name: 'Peter 5',
     title: 'Suggestions for you',
     button: true,
@@ -112,7 +117,8 @@ const initialData: ListItem[] = [
   },
   {
     id: '6',
-    avatarDummy: true,
+    avatarDummy:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
     name: 'Peter 5',
     title: 'Suggestions for you',
     button: true,
@@ -121,7 +127,8 @@ const initialData: ListItem[] = [
   },
   {
     id: '7',
-    avatarDummy: true,
+    avatarDummy:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
     name: 'Peter 5',
     title: 'Suggestions for you',
     button: true,
@@ -130,7 +137,8 @@ const initialData: ListItem[] = [
   },
   {
     id: '8',
-    avatarDummy: true,
+    avatarDummy:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
     name: 'Peter 5',
     title: 'Suggestions for you',
     button: true,
@@ -139,7 +147,8 @@ const initialData: ListItem[] = [
   },
   {
     id: '9',
-    avatarDummy: true,
+    avatarDummy:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
     name: 'Peter 5',
     title: 'Suggestions for you',
     button: true,
@@ -148,7 +157,8 @@ const initialData: ListItem[] = [
   },
   {
     id: '10',
-    avatarDummy: true,
+    avatarDummy:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
     name: 'Peter 5',
     title: 'Suggestions for you',
     button: true,
@@ -157,7 +167,8 @@ const initialData: ListItem[] = [
   },
   {
     id: '11',
-    avatarDummy: true,
+    avatarDummy:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
     name: 'Peter 5',
     title: 'Suggestions for you',
     button: true,
@@ -166,7 +177,8 @@ const initialData: ListItem[] = [
   },
   {
     id: '12',
-    avatarDummy: true,
+    avatarDummy:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
     name: 'Peter 5',
     title: 'Suggestions for you',
     button: true,
@@ -175,7 +187,8 @@ const initialData: ListItem[] = [
   },
   {
     id: '13',
-    avatarDummy: true,
+    avatarDummy:
+      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
     name: 'Peter 5',
     title: 'Suggestions for you',
     button: true,
