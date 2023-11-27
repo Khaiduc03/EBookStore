@@ -1,5 +1,6 @@
 import apiService from './api.service';
 import {ENDPOINTS} from '../../environment';
+import {configFormData} from './config.service';
 
 export class ForumService {
   static async getAllForum(action: number) {
@@ -25,8 +26,6 @@ export class ForumService {
     console.log(`${ENDPOINTS.FORUM}`, {
       payload,
     });
-    return await apiService.post(`${ENDPOINTS.FORUM}`, {
-      payload,
-    });
+    return await apiService.post(`${ENDPOINTS.FORUM}`, payload, configFormData);
   }
 }

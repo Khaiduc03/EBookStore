@@ -9,10 +9,10 @@ import {
 } from 'react-native-image-picker';
 import useStyles from './styles';
 
-interface AddPictureProps {
+type AddPictureProps = {
   onImagesSelected: (images: string[]) => void;
   formData: FormData;
-}
+};
 
 const AddPicture: React.FC<AddPictureProps> = ({
   onImagesSelected,
@@ -22,34 +22,26 @@ const AddPicture: React.FC<AddPictureProps> = ({
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const openGallery = () => {
-    const options: ImageLibraryOptions = {
-      mediaType: 'photo',
-      quality: 1,
-      selectionLimit: 0,
-    };
+  const options: ImageLibraryOptions = {
+    mediaType: 'photo',
+    quality: 1,
+    selectionLimit: 0,
+  };
 
-    setLoading(true);
-
-    launchImageLibrary(options, (response: ImagePickerResponse) => {
-      setLoading(false);
-
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.errorMessage) {
-        console.log('Error', `ImagePicker Error: ${response.errorMessage}`);
-      } else if (response.assets && response.assets.length > 0) {
-        console.log('abc ', response.assets);
-        response.assets.forEach(asset => {
-          formData.append(`images`, {
-            uri: asset.uri,
-            name: asset.fileName,
-            type: asset.type,
-          });
+  const openGallery = async () => {
+    const result = await launchImageLibrary(options);
+    if (result?.assets && result.assets[0].uri) {
+      result.assets.forEach(asset => {
+        formData.append(`images`, {
+          uri: asset.uri,
+          name: asset.fileName,
+          type: asset.type,
         });
-        console.log('bbbb: ', formData);
-      }
-    });
+      });
+      console.log('data library:', formData);
+    } else {
+      console.log('No assets or uri in result:', result);
+    }
   };
 
   return (

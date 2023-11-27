@@ -75,19 +75,16 @@ function* unlikePostForumSaga(
   // console.log('action.payload: ', action.payload);
 }
 
-function* postCreatePostForumSaga(
-  action: PayloadAction<any>,
-): Generator<any, void, any> {
+function* postCreatePostForumSaga(action: any): Generator<any, void, any> {
   try {
     console.log('run');
-    console.log('action.payload: ', action.payload);
+    console.log('sagaaaaaa: ', action.payload);
     const {data}: any = yield call(
       ForumService.postCreatePostForum,
       action.payload,
     );
-    console.log('data: ', data);
-    if (data.data.code == 200) {
-      console.log('data: ', data);
+    if (data.code == 200) {
+      console.log('data=============: ', data);
     } else {
       console.log('Server errol !!!');
     }

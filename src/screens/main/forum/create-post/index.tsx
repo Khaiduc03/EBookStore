@@ -20,7 +20,7 @@ const CreatePost: React.FC<ForumType> = props => {
 
   const formdata = new FormData();
 
-  const [status, setStatus] = useState(false);
+  const [status, setStatus] = useState(true);
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [textInputValue, setTextInputValue] = useState('');
   const handleImagesSelected = (images: string[]) => {
@@ -34,6 +34,8 @@ const CreatePost: React.FC<ForumType> = props => {
   };
 
   const handleSendPost = () => {
+    console.log('================ ', formdata);
+    dispatch(ForumActions.handleCreatePostSuccess(formdata));
     if (textInputValue.trim() === '') {
       showToastError('Failed!, Please enter text before sending the post.');
     } else {
@@ -41,16 +43,12 @@ const CreatePost: React.FC<ForumType> = props => {
       setTextInputValue('');
       setSelectedImages([]);
     }
-    console.log('================ ', formdata);
-    dispatch(ForumActions.handleCreatePostSuccess(formdata));
 
     // NavigationService.navigate(routes.FORUM);
   };
 
   formdata.append('content', textInputValue);
   formdata.append('status', status);
-
-  console.log('fd: ', formdata);
 
   return (
     <View style={styles.container}>
