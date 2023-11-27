@@ -2,6 +2,7 @@ import React, {
   FunctionComponent,
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 
@@ -31,6 +32,10 @@ const FavoritesList: FunctionComponent = () => {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(getIsLoadingTopic);
   const current = useAppSelector(currentPageFavorite);
+  const flatListRef = useRef<FlatList<ComicType>>(null);
+
+  const [sizeContent, setSizeContent] = useState<number>(0);
+  const [size, setSize] = useState<boolean>(false);
 
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -52,6 +57,7 @@ const FavoritesList: FunctionComponent = () => {
     if (nextPage && !isLoading) {
       dispatch(ComicActions.getListFavorite(current ? current + 1 : 1));
     }
+    setSize(true);
   };
 
   const listFooterComponent = useCallback(() => {
@@ -63,6 +69,19 @@ const FavoritesList: FunctionComponent = () => {
       />
     );
   }, []);
+  const onContentSizeChange = useCallback(
+    (contentWidth: number, contentHeight: number) => {
+      flatListRef.current?.setNativeProps({
+        contentSize: {width: contentWidth, height: contentHeight},
+      });
+      setSizeContent(contentHeight);
+      if (size) {
+        setSizeContent(sizeContent + 3000);
+        setSize(false);
+      }
+    },
+    [size, sizeContent],
+  );
 
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
     <ItemFavoritesList key={index} data={item} />
@@ -70,6 +89,7 @@ const FavoritesList: FunctionComponent = () => {
   return (
     <View style={styles.container}>
       <FlatList
+        onContentSizeChange={onContentSizeChange}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
@@ -82,7 +102,7 @@ const FavoritesList: FunctionComponent = () => {
           const numberOfPixelsFromBottomThreshold = 100;
           const isNearBottom =
             contentOffset.y + layoutMeasurement.height >=
-            contentSize.height - numberOfPixelsFromBottomThreshold;
+            sizeContent - numberOfPixelsFromBottomThreshold;
 
           if (isNearBottom) {
             loadMoreComic();

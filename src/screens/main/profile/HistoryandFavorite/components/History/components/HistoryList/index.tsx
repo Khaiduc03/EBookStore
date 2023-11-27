@@ -2,6 +2,7 @@ import React, {
   FunctionComponent,
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 
@@ -33,6 +34,10 @@ const HistoryList: FunctionComponent = () => {
   const nextPage = useAppSelector(nextPageHistory);
   const [refreshing, setRefreshing] = React.useState(false);
   const current = useAppSelector(currentPageHistory);
+  const flatListRef = useRef<FlatList<ComicType>>(null);
+
+  const [sizeContent, setSizeContent] = useState<number>(0);
+  const [size, setSize] = useState<boolean>(false);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -51,8 +56,22 @@ const HistoryList: FunctionComponent = () => {
   const loadMoreComic = () => {
     if (nextPage && !isLoading) {
       dispatch(ComicActions.getListHistotyComic(current ? current + 1 : 1));
+      setSize(true);
     }
   };
+  const onContentSizeChange = useCallback(
+    (contentWidth: number, contentHeight: number) => {
+      flatListRef.current?.setNativeProps({
+        contentSize: {width: contentWidth, height: contentHeight},
+      });
+      setSizeContent(contentHeight);
+      if (size) {
+        setSizeContent(sizeContent + 3000);
+        setSize(false);
+      }
+    },
+    [size, sizeContent],
+  );
 
   const listFooterComponent = useCallback(() => {
     return (
@@ -77,12 +96,13 @@ const HistoryList: FunctionComponent = () => {
         renderItem={RenderItem}
         keyExtractor={item => item.uuid}
         showsVerticalScrollIndicator={false}
+        onContentSizeChange={onContentSizeChange}
         onScroll={({nativeEvent}) => {
           const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
           const numberOfPixelsFromBottomThreshold = 100;
           const isNearBottom =
             contentOffset.y + layoutMeasurement.height >=
-            contentSize.height - numberOfPixelsFromBottomThreshold;
+            sizeContent - numberOfPixelsFromBottomThreshold;
 
           if (isNearBottom) {
             loadMoreComic();
