@@ -55,7 +55,7 @@ const HeaderCustomV1: React.FunctionComponent<CustomHeaderProps> = props => {
               <Icon
                 type={props.rightIconRight?.type}
                 color={props.rightIconRight.color || styles.rightIcon.color}
-                size={30}
+                size={props.sizeIcon}
                 name={props.rightIconRight?.name}
               />
             )}

@@ -123,6 +123,12 @@ const useStyles = makeStyles(({colors}) => ({
   viewStart: {
     marginLeft: normalize(16),
   },
+  textHeader: {
+    color: colors.black,
+    fontSize: normalize(18.8),
+    fontFamily: fontFamilySetup.bold,
+    marginRight: normalize(16),
+  },
 }));
 
 export default useStyles;

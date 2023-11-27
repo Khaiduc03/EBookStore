@@ -32,29 +32,29 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    // borderWidth: 1,
   },
   viewCenter: {
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
   viewIcon: {
-    width: normalize(63),
-    height: normalize(63),
+    width: normalize(WIDTH * 0.13),
+    height: normalize(WIDTH * 0.13),
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: normalize(100),
     marginEnd: normalize(12),
-    marginBottom: normalize(8),
   },
   textTitle: {
     color: colors.black,
-    fontSize: normalize(18),
+    fontSize: normalize(WIDTH * 0.043),
     fontFamily: fontFamilySetup.bold,
-    marginBottom: normalize(10),
+    marginBottom: normalize(6),
   },
   text: {
     color: colors.grey3,
-    fontSize: normalize(13),
+    fontSize: normalize(WIDTH * 0.032),
     fontFamily: fontFamilySetup.medium,
   },
   viewText: {
@@ -67,8 +67,8 @@ const useStyles = makeStyles(({colors}) => ({
     marginHorizontal: normalize(12),
   },
   textDescription: {
-    color: colors.black,
-    fontSize: normalize(14),
+    color: 'rgba(65, 65,65, 1)',
+    fontSize: normalize(WIDTH * 0.036),
     fontFamily: fontFamilySetup.regular,
     letterSpacing: normalize(0.25),
   },
@@ -122,6 +122,12 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewStart: {
     marginLeft: normalize(16),
+  },
+  textHeader: {
+    color: colors.black,
+    fontSize: normalize(18.8),
+    fontFamily: fontFamilySetup.bold,
+    marginLeft: normalize(6),
   },
 }));
 

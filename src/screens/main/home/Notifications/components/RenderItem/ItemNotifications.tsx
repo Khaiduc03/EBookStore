@@ -9,7 +9,7 @@ const ItemNotifications: React.FC = () => {
 
   const NotificationsItem = (itemProps: ItemProps) => (
     <View style={styles.viewItem}>
-      <View style={styles.viewRowCenter}>
+      <View style={[styles.viewRowCenter, {marginBottom: 6}]}>
         <View
           style={[
             styles.viewIcon,
@@ -22,7 +22,7 @@ const ItemNotifications: React.FC = () => {
             size={24}
           />
         </View>
-        <View>
+        <View style={{marginLeft: 3}}>
           <View>
             <Text style={styles.textTitle}>{itemProps.title}</Text>
           </View>
