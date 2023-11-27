@@ -45,9 +45,15 @@ const CommentRepComic = () => {
   const currentPage = useAppSelector(getCurrenPageRepCommentChapter);
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const [user, setUser] = useState<string>('');
+
+  console.log('======>', open);
 
   console.log('canNext', canNext);
   console.log('isLoading', isLoading);
+  const TextInputRef = useRef<TextInput>(null);
 
   const styles = useStyles();
   const {
@@ -74,6 +80,19 @@ const CommentRepComic = () => {
       }),
     );
   }, []);
+  useEffect(() => {
+    if (open) {
+      TextInputRef.current?.focus();
+    }
+  }, [open]);
+
+  const openInput = () => {
+    setOpen(!open);
+  };
+
+  const setUserRep = (text: string) => {
+    setvalue('Reply ' + '@' + text + ':');
+  };
 
   const onPressPostComment = () => {
     dispatch(
@@ -142,7 +161,9 @@ const CommentRepComic = () => {
     item: CommentChapterType;
     index: number;
   }) => {
-    return <ItemComment data={item} />;
+    return (
+      <ItemComment setUserRep={setUserRep} setOpen={openInput} data={item} />
+    );
   };
 
   return (
@@ -219,14 +240,17 @@ const CommentRepComic = () => {
         renderItem={renderItem}
         contentContainerStyle={{paddingVertical: 65}}
       />
+
       <TextInput
+        ref={TextInputRef}
         value={value}
         onChangeText={text => setvalue(text)}
-        placeholder="Shoot your comment..."
+        placeholder={'Shoot your comment...'}
         onSubmitEditing={onPressPostComment}
         returnKeyType="send"
         style={styles.inputStyle}
       />
+
       <HeaderRepComment />
     </SafeAreaView>
   );

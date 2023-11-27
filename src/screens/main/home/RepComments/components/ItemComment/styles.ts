@@ -52,7 +52,6 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
     alignItems: 'center',
     padding: normalize(5),
-    paddingRight: normalize(60),
   },
   numberRepStyle: {
     paddingLeft: normalize(5),

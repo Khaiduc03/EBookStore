@@ -18,6 +18,7 @@ import {
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {Icon} from '@rneui/base';
 import {ComicActions} from '../../../../../../redux';
+import {CommentChapterAction} from '../../../../../../redux/reducer/comment.chapter.reducer';
 
 const Episodes = () => {
   const styles = useStyles();
@@ -30,6 +31,7 @@ const Episodes = () => {
         {dataChapter?.map(item => (
           <TouchableOpacity
             onPress={() => {
+              dispatch(CommentChapterAction.clearCommentChapter());
               dispatch(ComicActions.clearListChapterDetail());
               NavigationService.navigate(routes.CHAPTER, {
                 chapter_number: item.chapter_number,

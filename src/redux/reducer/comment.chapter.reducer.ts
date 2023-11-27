@@ -132,9 +132,7 @@ const reducer = createSlice({
     clearCommentChapter: (state: CommentChapterState) => {
       return {
         ...state,
-        listComment: {
-          data: [],
-        },
+        listComment: {},
       };
     },
 
