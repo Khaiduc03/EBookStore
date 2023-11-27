@@ -4,7 +4,7 @@ import {UserService} from '../services';
 import {UserAction} from '../reducer/user.reducer';
 import {CommentChapterAction} from '../reducer/comment.chapter.reducer';
 import {CommentChapterService} from '../services/comment.chapter.service';
-import {LoadingActions} from '../reducer';
+import {ComicActions, LoadingActions} from '../reducer';
 
 function* postCommentSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoading());
@@ -16,7 +16,9 @@ function* postCommentSaga(action: PayloadAction<any>): Generator {
     );
     if (data.code == 200) {
       console.log(data.data);
+
       yield put(CommentChapterAction.posCommentChapterSucces(data.data));
+
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');

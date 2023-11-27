@@ -14,6 +14,7 @@ import {
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
 import {CommentChapterAction} from '../../../../../../redux/reducer/comment.chapter.reducer';
+import {getTotaComment} from '../../../../../../redux/selectors/comment.chapter.selector';
 interface FooterChapterProps {
   incrementChapter: () => void;
   decrementChapter: () => void;
@@ -25,6 +26,7 @@ const FooterChapter: React.FC<FooterChapterProps> = props => {
   const dispath = useAppDispatch();
   const dispatch = useAppDispatch();
   const dataDetailChapter = useAppSelector(getDataDetailChapter);
+  const totalComment = useAppSelector(getTotaComment);
 
   const onPressNext = () => {
     if (Next) {
@@ -56,7 +58,11 @@ const FooterChapter: React.FC<FooterChapterProps> = props => {
           color={styles.iconStyle.color}
         />
         <Text style={styles.textComment}>
-          {dataDetailChapter ? dataDetailChapter[0].comment_count : 0}
+          {totalComment
+            ? totalComment
+            : dataDetailChapter
+            ? dataDetailChapter[0].comment_count
+            : '0'}
         </Text>
       </TouchableOpacity>
       <View style={styles.navChapter}>
