@@ -7,14 +7,11 @@ import {NavigationService} from '../../../../../../navigation';
 import {theme} from '../../../../../../theme';
 import useStyles from './styles';
 import {SquaresCustomProps} from './types';
+import {data} from './types';
 
-const ItemListMyProfile: React.FunctionComponent<
-  SquaresCustomProps
-> = props => {
-  const {avatarDummy, name, title, button, textButton, closeIcon} = props;
+const ItemListMyProfile: React.FC<SquaresCustomProps> = props => {
   const styles = useStyles();
   const [isFollowing, setIsFollowing] = useState(false);
-  const [isDetail, setIsDetail] = useState();
   const handleButtonPress = () => {
     setIsFollowing(!isFollowing);
   };
@@ -23,24 +20,23 @@ const ItemListMyProfile: React.FunctionComponent<
   };
   return (
     <View style={styles.Squares}>
-      {avatarDummy && (
-        <TouchableOpacity style={styles.ViewTop} onPress={handlePressUser}>
-          <Image
-            style={styles.Avatar}
-            source={{
-              uri: 'https://images2.thanhnien.vn/528068263637045248/2023/9/30/cristiano-ronaldo--169604187049959114942.jpeg',
-            }}
-          />
-        </TouchableOpacity>
-      )}
-      {closeIcon && (
+      <TouchableOpacity style={styles.ViewTop} onPress={handlePressUser}>
+        <Image
+          style={styles.Avatar}
+          source={{
+            uri: props.avatarDummy,
+          }}
+        />
+      </TouchableOpacity>
+
+      {props.closeIcon && (
         <TouchableOpacity style={styles.iconDelete}>
           <Icon name="close-outline" type="ionicon" size={24} />
         </TouchableOpacity>
       )}
-      {name && <Text style={styles.name}>{name}</Text>}
-      {title && <Text style={styles.title}>{title}</Text>}
-      {button && (
+      {props.name && <Text style={styles.name}>{props.name}</Text>}
+      {props.title && <Text style={styles.title}>{props.title}</Text>}
+      {props.button && (
         <TouchableOpacity
           style={[
             styles.Button,
@@ -52,7 +48,7 @@ const ItemListMyProfile: React.FunctionComponent<
           ]}
           onPress={handleButtonPress}>
           <Text style={styles.TextButton}>
-            {isFollowing ? 'Unfollow' : textButton}
+            {isFollowing ? 'Unfollow' : props.textButton}
           </Text>
         </TouchableOpacity>
       )}

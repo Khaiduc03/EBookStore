@@ -4,10 +4,10 @@ import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
 
 type Props = {
-  data?: any;
+  data2?: any;
 };
 const ItemPost: React.FC<Props> = props => {
-  const {data} = props;
+  const {data2} = props;
   const itemWidth = Dimensions.get('window').width / 3;
   const handleDetailClick = () => {
     NavigationService.navigate(routes.POSTDETAIL);
@@ -24,7 +24,7 @@ const ItemPost: React.FC<Props> = props => {
         borderRadius: 10,
       }}>
       <Image
-        source={{uri: data.images}}
+        source={{uri: data2.images}}
         style={{width: itemWidth - 5, height: itemWidth - 5, borderRadius: 10}}
       />
     </TouchableOpacity>
