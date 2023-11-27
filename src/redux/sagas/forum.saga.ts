@@ -49,7 +49,6 @@ function* likePostForumSaga(
     console.log('error: ', error);
   } finally {
   }
-
   // console.log('action.payload: ', action.payload);
 }
 
@@ -76,8 +75,40 @@ function* unlikePostForumSaga(
   // console.log('action.payload: ', action.payload);
 }
 
+function* postCreatePostForumSaga(
+  action: PayloadAction<any>,
+): Generator<any, void, any> {
+  try {
+    console.log('run');
+    console.log('action.payload: ', action.payload);
+    const {data}: any = yield call(
+      ForumService.postCreatePostForum,
+      action.payload,
+    );
+    console.log('data: ', data);
+    if (data.data.code == 200) {
+      console.log('data: ', data);
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  } finally {
+  }
+}
+
 export default function* watchForumSaga() {
   yield takeLatest(ForumActions.handleGetListData.type, getListDataForumSaga);
-  yield takeLatest(ForumActions.handleLikePost.type, likePostForumSaga);
-  yield takeLatest(ForumActions.handleUnLikePost.type, unlikePostForumSaga);
+  yield takeLatest(
+    ForumActions.handleLike_UnlikeSuccess.type,
+    likePostForumSaga,
+  );
+  yield takeLatest(
+    ForumActions.handleLike_UnlikeSuccess.type,
+    unlikePostForumSaga,
+  );
+  yield takeLatest(
+    ForumActions.handleCreatePostSuccess.type,
+    postCreatePostForumSaga,
+  );
 }

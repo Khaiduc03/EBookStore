@@ -10,28 +10,33 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: colors.primary,
     width: normalize(130),
     height: normalize(32),
+    justifyContent: 'space-between',
+    alignItems: 'center',
     borderRadius: normalize(6),
   },
   dropdownStyle: {
-    borderRadius: normalize(6),
+    borderRadius: normalize(0),
   },
-  iconleft: {
-    position: 'absolute',
-    right: normalize(95),
-    top: normalize(1),
+  viewbackgroundColor: {
+    backgroundColor: colors.grey6,
   },
   textButtonSelect: {
     color: colors.black,
-    fontSize: normalize(16),
+    fontSize: normalize(14.4),
     fontFamily: fontFamilySetup.bold,
   },
   textrowSelect: {
     color: colors.black,
-    fontSize: normalize(16),
+    fontSize: normalize(14),
     fontFamily: fontFamilySetup.bold,
   },
   icon: {
     color: colors.grey10,
+  },
+  iconleft: {
+    position: 'absolute',
+    right: normalize(95),
+    top: normalize(4.4),
   },
 }));
 

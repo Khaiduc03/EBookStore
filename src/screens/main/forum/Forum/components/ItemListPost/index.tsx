@@ -1,7 +1,9 @@
 import {Icon} from '@rneui/themed';
-import React, {useEffect, useRef, useState} from 'react';
+import moment from 'moment';
+import React, {useEffect, useState} from 'react';
 import {
   Animated,
+  Dimensions,
   FlatList,
   Image,
   Modal,
@@ -9,7 +11,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  useWindowDimensions,
 } from 'react-native';
 import {
   GestureEvent,
@@ -25,14 +26,12 @@ import {routes} from '../../../../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {NavigationService} from '../../../../../../navigation';
 import {ForumActions, getAuthUserProfile} from '../../../../../../redux';
-import {
-  getListForum,
-  likePostForum,
-} from '../../../../../../redux/selectors/forum.selector';
+import {getListForum} from '../../../../../../redux/selectors/forum.selector';
 import {ForumType} from '../../../../../../redux/types/forum.type';
+import {Device} from '../../../../../../utils';
 import useStyles from './styles';
-import FastImage from 'react-native-fast-image';
-import moment from 'moment';
+import AutoHeightImage from 'react-native-auto-height-image';
+import {LogBox} from 'react-native';
 
 const ItemListPost: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -43,21 +42,24 @@ const ItemListPost: React.FC = () => {
 
   const [page, setPage] = useState(1);
 
-  const {width, height} = useWindowDimensions();
   const [showModal, setShowModal] = useState(false);
   const [activeIndices, setActiveIndices] = useState({}) as any;
-  const flatListRef = useRef<FlatList | null>(null);
+  const [selectedImage, setSelectedImage] = useState(null) as any;
 
-  const [isLiked, setIsLiked] = useState(false);
+  const {width, height} = Dimensions.get('window');
+
+  const screenWidth = Dimensions.get('window').width;
 
   // console.log('datahihi: ', dataAPI);
 
-  const openModal = () => {
+  const openModal = (image: any) => {
     setShowModal(true);
+    setSelectedImage(image);
   };
 
   const closeModal = () => {
     setShowModal(false);
+    setSelectedImage(null);
   };
 
   useEffect(() => {
@@ -85,8 +87,6 @@ const ItemListPost: React.FC = () => {
     setActiveIndices((prevIndices: any) => ({...prevIndices, [id]: index}));
   };
 
-  const flatListRefMain = useRef<FlatList | null>(null);
-
   const onShare = async () => {
     const options: any = {
       url: 'https://ComicVerse.com',
@@ -100,7 +100,17 @@ const ItemListPost: React.FC = () => {
     }
   };
 
-  const handleLikePress = (forum_uuid: any) => {};
+  const handleLikePress = (forum_uuid: any) => {
+    dispatch(ForumActions.handleLike_UnlikeSuccess(forum_uuid));
+  };
+
+  const WIDTH = Device.getDeviceWidth();
+
+  const [imageSizes, setImageSizes] = useState<{
+    [key: string]: {width: number; height: number};
+  }>({});
+
+  LogBox.ignoreLogs(['ReactImageView: Image source "null" doesn\'t exist']);
 
   const styles = useStyles();
 
@@ -157,65 +167,67 @@ const ItemListPost: React.FC = () => {
 
       <View>
         <FlatList
-          removeClippedSubviews={false}
           data={item.images}
-          renderItem={item => (
-            <View>
-              <Pressable onPress={() => openModal()}>
-                <Animated.Image
-                  key={item.index.toString()}
-                  source={{uri: item.item || undefined}}
-                  style={[{width: width, height: 200}]}
-                  resizeMode="contain"
-                />
-              </Pressable>
-              {/* <Modal
-                visible={showModal}
-                transparent={true}
-                onRequestClose={closeModal}>
-                <View style={styles.viewIconClose}>
-                  <Icon
-                    name="close-circle"
-                    size={30}
-                    color="white"
-                    type="ionicon"
-                    onPress={closeModal}
-                    style={styles.iconClose}
+          renderItem={item => {
+            return (
+              <View style={styles.imageContainer}>
+                <Pressable onPress={() => openModal(item)}>
+                  <AutoHeightImage
+                    key={item.index.toString()}
+                    source={{
+                      uri: item.item,
+                    }}
+                    width={screenWidth}
                   />
-                </View>
+                </Pressable>
 
-                <View style={styles.viewModalImage}>
-                  <GestureHandlerRootView>
-                    <PinchGestureHandler
-                      onGestureEvent={onGestureEvent}
-                      onHandlerStateChange={onHandleState}>
-                      <Animated.Image
-                        key={item.index.toString()}
-                        source={{uri: item.item}}
-                        style={[
-                          {width: width, height: 200, transform: [{scale}]},
-                        ]}
-                        resizeMode="contain"
-                      />
-                    </PinchGestureHandler>
-                  </GestureHandlerRootView>
-                </View>
-              </Modal> */}
-            </View>
-          )}
+                <Modal
+                  visible={showModal}
+                  transparent={true}
+                  onRequestClose={closeModal}>
+                  <View style={styles.viewIconClose}>
+                    <Icon
+                      name="close-circle"
+                      size={30}
+                      color="white"
+                      type="ionicon"
+                      onPress={closeModal}
+                      style={styles.iconClose}
+                    />
+                  </View>
+
+                  <View style={styles.viewModalImage}>
+                    <GestureHandlerRootView>
+                      <PinchGestureHandler
+                        onGestureEvent={onGestureEvent}
+                        onHandlerStateChange={onHandleState}>
+                        <Animated.View style={{transform: [{scale}]}}>
+                          <AutoHeightImage
+                            key={selectedImage?.index.toString()}
+                            source={{uri: selectedImage?.item}}
+                            width={screenWidth}
+                          />
+                        </Animated.View>
+                      </PinchGestureHandler>
+                    </GestureHandlerRootView>
+                  </View>
+                </Modal>
+              </View>
+            );
+          }}
           pagingEnabled
           onScroll={handleScroll(item.uuid)}
           horizontal
           showsHorizontalScrollIndicator={false}
-          style={{backgroundColor: 'black'}}
         />
-
-        <View style={styles.viewImagesLengh}>
-          <Text style={styles.textImagesLengh}>
-            {activeIndices[item.uuid] ? activeIndices[item.uuid] + 1 : 1}/
-            {item.images.length + 0}
-          </Text>
-        </View>
+        {item.images && item.images.some(image => image !== null) && (
+          <View style={styles.viewImagesLengh}>
+            <Text style={styles.textImagesLengh}>
+              {activeIndices[item.uuid] ? activeIndices[item.uuid] + 1 : 1}/
+              {item.images.length + 0}
+            </Text>
+          </View>
+        )}
       </View>
 
       <View style={{flex: 1}}>
@@ -247,11 +259,9 @@ const ItemListPost: React.FC = () => {
               handleLikePress(item.uuid);
             }}>
             <IconMaterialIcons
-              name={
-                isLiked === item.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'
-              }
+              name={item.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'}
               color={
-                isLiked === item.is_liked
+                item.is_liked
                   ? styles.colorIconHeartFocus.color
                   : styles.colorIconHeartBlur.color
               }
@@ -259,9 +269,7 @@ const ItemListPost: React.FC = () => {
             />
             <Text
               style={
-                isLiked === item.is_liked
-                  ? styles.textLikeFocus
-                  : styles.textLikeBlur
+                item.is_liked ? styles.textLikeFocus : styles.textLikeBlur
               }>
               Like
             </Text>
@@ -288,7 +296,6 @@ const ItemListPost: React.FC = () => {
   return (
     <View>
       <FlatList
-        ref={flatListRefMain}
         data={dataAPI}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
