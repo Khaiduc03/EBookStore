@@ -6,10 +6,11 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {backScreen} from '../../../../../../utils';
 import {useAppSelector} from '../../../../../../hooks';
 import {getTotaComment} from '../../../../../../redux/selectors/comment.chapter.selector';
+import {getCountComment} from '../../../../../../redux/selectors/comic.selector';
 
 const HeaderComment = () => {
   const styles = useStyles();
-  const totalComment = useAppSelector(getTotaComment);
+  const totalComment = useAppSelector(getCountComment);
 
   return (
     <View style={styles.container}>

@@ -43,6 +43,7 @@ export interface PayloadHttpDetailChapter<T> {
   next_chapter?: string;
   previous_chapter?: string;
   data_chapter?: T[];
+  totalComment?: number;
 }
 
 export type ComicState = Partial<{

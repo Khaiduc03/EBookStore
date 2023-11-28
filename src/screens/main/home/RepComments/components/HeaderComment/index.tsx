@@ -9,6 +9,7 @@ import {getTotaRepComment} from '../../../../../../redux/selectors/comment.chapt
 
 const HeaderRepComment = () => {
   const totalComment = useAppSelector(getTotaRepComment);
+
   const styles = useStyles();
   return (
     <View style={styles.container}>

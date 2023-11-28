@@ -7,12 +7,15 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {ComicActions} from '../../../../../../redux';
 import {
+  getCountComment,
+  getDataDetailChapter,
   getNextChapter,
   getPreviousChapter,
 } from '../../../../../../redux/selectors/comic.selector';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
 import {CommentChapterAction} from '../../../../../../redux/reducer/comment.chapter.reducer';
+import {getTotaComment} from '../../../../../../redux/selectors/comment.chapter.selector';
 interface FooterChapterProps {
   incrementChapter: () => void;
   decrementChapter: () => void;
@@ -23,6 +26,8 @@ const FooterChapter: React.FC<FooterChapterProps> = props => {
   const Previous = useAppSelector(getPreviousChapter);
   const dispath = useAppDispatch();
   const dispatch = useAppDispatch();
+  const dataDetailChapter = useAppSelector(getDataDetailChapter);
+  const totalComment = useAppSelector(getCountComment);
 
   const onPressNext = () => {
     if (Next) {
@@ -53,7 +58,7 @@ const FooterChapter: React.FC<FooterChapterProps> = props => {
           size={24}
           color={styles.iconStyle.color}
         />
-        <Text style={styles.textComment}>5,0555</Text>
+        <Text style={styles.textComment}>{totalComment}</Text>
       </TouchableOpacity>
       <View style={styles.navChapter}>
         <TouchableOpacity style={styles.nextChapter} onPress={onPressPrevious}>

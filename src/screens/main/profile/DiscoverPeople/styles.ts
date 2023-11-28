@@ -11,20 +11,24 @@ const useStyles = makeStyles(({colors}) => ({
   },
   test: {
     color: colors.black,
-    fontSize: normalize(22),
+    fontSize: normalize(20),
     fontFamily: fontFamilySetup.medium,
   },
   viewRefesh: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderBottomWidth: 1,
-    paddingVertical: normalize(5),
+    paddingHorizontal: normalize(10),
+    paddingBottom: normalize(20),
   },
   testContent: {
     color: colors.black,
-    fontSize: normalize(22),
+    fontSize: normalize(20),
     fontFamily: fontFamilySetup.bold,
     marginStart: normalize(10),
+  },
+  suggestions: {
+    paddingBottom: normalize(10),
   },
 }));
 export default useStyles;

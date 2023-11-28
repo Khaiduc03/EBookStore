@@ -12,7 +12,19 @@ import {Icon} from '@rneui/themed';
 const ItemListProfileUser: React.FunctionComponent<
   SquaresCustomProps
 > = props => {
-  const {avatarDummy, name, title, button, textButton, closeIcon} = props;
+  const {
+    dob,
+    email,
+    followercount,
+    followingcount,
+    fullname,
+    gender,
+    image_url,
+    phone,
+    status,
+    summary,
+    uuid,
+  } = props.data;
   const styles = useStyles();
   const [isFollowing, setIsFollowing] = useState(false);
   const [isDetail, setIsDetail] = useState();
@@ -20,43 +32,44 @@ const ItemListProfileUser: React.FunctionComponent<
     setIsFollowing(!isFollowing);
   };
   const handlePressUser = () => {
-    NavigationService.navigate(routes.PROFILEUSER);
+    NavigationService.navigate(routes.PROFILEUSER, {data: props.data});
   };
   return (
     <View style={styles.Squares}>
-      {avatarDummy && (
-        <TouchableOpacity style={styles.ViewTop} onPress={handlePressUser}>
-          <Image
-            style={styles.Avatar}
-            source={{
-              uri: 'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-            }}
-          />
-        </TouchableOpacity>
-      )}
-      {closeIcon && (
-        <TouchableOpacity style={styles.iconDelete}>
-          <Icon name="close-outline" type="ionicon" size={24} />
-        </TouchableOpacity>
-      )}
-      {name && <Text style={styles.name}>{name}</Text>}
-      {title && <Text style={styles.title}>{title}</Text>}
-      {button && (
-        <TouchableOpacity
-          style={[
-            styles.Button,
-            {
-              backgroundColor: isFollowing
-                ? theme?.lightColors?.grey5
-                : theme?.lightColors?.blue,
-            },
-          ]}
-          onPress={handleButtonPress}>
-          <Text style={styles.TextButton}>
-            {isFollowing ? 'Unfollow' : textButton}
-          </Text>
-        </TouchableOpacity>
-      )}
+      <TouchableOpacity style={styles.ViewTop} onPress={handlePressUser}>
+        <Image
+          style={styles.Avatar}
+          source={{
+            uri: image_url
+              ? image_url
+              : 'https://tuyenquangtv.vn/file/fb9e3a036ab59c2c016ac3618a0d3aec/fb9e3a036e39d22d016f0265c63e3fb1/062020/d1-1591546728964533729328_20200608102321.jpg',
+          }}
+        />
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.iconDelete}>
+        <Icon name="close-outline" type="ionicon" size={24} />
+      </TouchableOpacity>
+
+      <Text style={styles.name} numberOfLines={1}>
+        {fullname ? fullname : 'anonymous'}
+      </Text>
+      <Text style={styles.title}>Sugestions for you</Text>
+
+      <TouchableOpacity
+        style={[
+          styles.Button,
+          {
+            backgroundColor: isFollowing
+              ? theme?.lightColors?.grey5
+              : theme?.lightColors?.blue,
+          },
+        ]}
+        onPress={handleButtonPress}>
+        <Text style={styles.TextButton}>
+          {isFollowing ? 'Unfollow' : 'Follow'}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
