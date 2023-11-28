@@ -73,7 +73,7 @@ const ComicsDetail = () => {
         leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         rightIconleft={{
           name: 'bookmark',
-          color: uuidPost ? 'red' : '',
+          color: uuidPost ? '#F89300' : '',
           type: 'ionicon',
         }}
         onPressRightIconLeft={postFavorite}
@@ -92,9 +92,7 @@ const ComicsDetail = () => {
         viewStyle={{height: 800}}
         titleStyle={styles.titleStyle}
         scrollRef={scrollRef}
-
       />
-      
     </View>
   );
 };

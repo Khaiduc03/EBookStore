@@ -40,6 +40,9 @@ export const getNextChapter = (state: RootState) =>
 export const getPreviousChapter = (state: RootState) =>
   state.comic.listDetailChapter?.previous_chapter;
 
+export const getCountComment = (state: RootState) =>
+  state.comic.listDetailChapter?.totalComment;
+
 export const getListTopView = (state: RootState) =>
   state.comic.listTopView?.data;
 

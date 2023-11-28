@@ -176,6 +176,7 @@ const reducer = createSlice({
           data_chapter: action.payload.data_chapter,
           next_chapter: action.payload.next_chapter,
           previous_chapter: action.payload.previous_chapter,
+          totalComment: action.payload.totalComment,
         },
       };
     },
@@ -338,6 +339,16 @@ const reducer = createSlice({
       return {
         ...state,
         listHistoryComic: {},
+      };
+    },
+
+    setCountComment: (state: ComicState) => {
+      return {
+        ...state,
+        listDetailChapter: {
+          ...state.listDetailChapter,
+          totalComment: (state.listDetailChapter?.totalComment || 0) + 1,
+        },
       };
     },
   },

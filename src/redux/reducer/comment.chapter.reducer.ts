@@ -29,7 +29,6 @@ const reducer = createSlice({
         listComment: {
           canNext: state.listComment?.canNext,
           currentPage: state.listComment?.currentPage,
-          totalData: (state.listComment?.totalData || 0) + 1,
           data: [action.payload, ...(state.listComment?.data || [])],
         },
       };
@@ -73,10 +72,6 @@ const reducer = createSlice({
             currentPage: state.listRepComment?.currentPage,
             totalData: (state.listRepComment?.totalData || 0) + 1,
             data: [action.payload, ...(state.listRepComment?.data || [])],
-          },
-          listComment: {
-            ...updatedListComment,
-            totalData: (updatedListComment.totalData || 0) + 1,
           },
         };
       }

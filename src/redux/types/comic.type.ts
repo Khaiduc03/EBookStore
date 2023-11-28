@@ -43,6 +43,7 @@ export interface PayloadHttpDetailChapter<T> {
   next_chapter?: string;
   previous_chapter?: string;
   data_chapter?: T[];
+  totalComment?: number;
 }
 
 export type ComicState = Partial<{
@@ -110,5 +111,4 @@ export type DetailChapterType = Timestamp & {
   secure_url: string;
   page: number;
   chapter: ChapterType;
-  comment_count: number;
 };

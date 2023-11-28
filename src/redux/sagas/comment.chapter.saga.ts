@@ -16,9 +16,8 @@ function* postCommentSaga(action: PayloadAction<any>): Generator {
     );
     if (data.code == 200) {
       console.log(data.data);
-
       yield put(CommentChapterAction.posCommentChapterSucces(data.data));
-
+      yield put(ComicActions.setCountComment());
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');
@@ -107,6 +106,7 @@ function* postRepCommentSaga(action: PayloadAction<any>): Generator {
     );
     if (data.code == 200) {
       yield put(CommentChapterAction.postRepCommentChapterSucces(data.data));
+      yield put(ComicActions.setCountComment());
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');
