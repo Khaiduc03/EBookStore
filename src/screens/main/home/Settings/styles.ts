@@ -73,8 +73,8 @@ const useStyles = makeStyles(({colors}) => ({
     letterSpacing: normalize(0.25),
   },
   outter: {
-    width: normalize(53),
-    height: normalize(26),
+    width: normalize(WIDTH * 0.12),
+    height: normalize(WIDTH * 0.06),
     borderRadius: normalize(15),
     backgroundColor: colors.grey5,
     alignItems: 'center',
@@ -90,8 +90,8 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: colors.primary,
   },
   innerOFF: {
-    width: normalize(18),
-    height: normalize(18),
+    width: normalize(WIDTH * 0.044),
+    height: normalize(WIDTH * 0.044),
     backgroundColor: colors.whiteDefault,
     borderRadius: normalize(15),
     elevation: normalize(8),
@@ -100,8 +100,8 @@ const useStyles = makeStyles(({colors}) => ({
     shadowRadius: normalize(2),
   },
   innerON: {
-    width: normalize(18),
-    height: normalize(18),
+    width: normalize(WIDTH * 0.044),
+    height: normalize(WIDTH * 0.044),
     backgroundColor: colors.whiteDefault,
     borderRadius: normalize(15),
     elevation: normalize(8),

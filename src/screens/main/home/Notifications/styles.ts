@@ -67,7 +67,7 @@ const useStyles = makeStyles(({colors}) => ({
     marginHorizontal: normalize(12),
   },
   textDescription: {
-    color: 'rgba(65, 65,65, 1)',
+    color: colors.colorDescription,
     fontSize: normalize(WIDTH * 0.036),
     fontFamily: fontFamilySetup.regular,
     letterSpacing: normalize(0.25),
@@ -128,6 +128,12 @@ const useStyles = makeStyles(({colors}) => ({
     fontSize: normalize(18.8),
     fontFamily: fontFamilySetup.bold,
     marginLeft: normalize(6),
+  },
+  marginTimeDate: {
+    marginBottom: normalize(6),
+  },
+  marginTitle: {
+    marginLeft: normalize(3),
   },
 }));
 
