@@ -1,6 +1,14 @@
 import {Icon} from '@rneui/themed';
-import React, {useState} from 'react';
-import {Image, Text, TextInput, View} from 'react-native';
+import React, {Fragment, useState} from 'react';
+import {
+  Image,
+  Keyboard,
+  Pressable,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import {Asset} from 'react-native-image-picker';
 import SelectDropdown from 'react-native-select-dropdown';
 import {HeaderCustom} from '../../../../components';
@@ -24,12 +32,11 @@ const CreatePost: React.FC<ForumType> = props => {
   const [textInputValue, setTextInputValue] = useState('');
   const [selectedImages, setSelectedImages] = useState<Asset[]>([]);
 
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState(
     status ? 'Public' : 'Private',
   );
 
-  console.log('Status: ', status);
+  const [checkSelectDropdown, setCheckSelectDropdown] = useState(false);
 
   function handleDropdown(
     setStatus: React.Dispatch<React.SetStateAction<boolean>>,
@@ -39,6 +46,7 @@ const CreatePost: React.FC<ForumType> = props => {
       const newStatus = selectedItem === 'Public';
       setStatus(newStatus);
       formData.append('status', newStatus.toString());
+      setCheckSelectDropdown(true);
     };
   }
 
@@ -80,7 +88,7 @@ const CreatePost: React.FC<ForumType> = props => {
     return (
       <View>
         <View style={styles.iconleft}>
-          {status === true && selectedStatus === 'Public' ? (
+          {status && selectedStatus === 'Public' ? (
             <Icon
               name="public"
               type="material"
@@ -98,66 +106,74 @@ const CreatePost: React.FC<ForumType> = props => {
           )}
         </View>
 
-        <Icon
-          name={isDropdownOpen ? 'caret-up' : 'caret-down'}
-          type="ionicon"
-        />
+        {checkSelectDropdown ? (
+          <Icon name={'caret-down'} type="ionicon" />
+        ) : (
+          <Icon name={'caret-up'} type="ionicon" />
+        )}
+        {/* <Icon name={'caret-down'} type="ionicon" /> */}
       </View>
     );
   };
 
+  const touchableWithoutFeedback = () => {
+    Keyboard.dismiss();
+  };
+
   return (
-    <View style={styles.container}>
-      <HeaderCustom
-        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
-        title="Create Your Post"
-        rightIconRight={{name: 'checkmark', type: 'ionicon'}}
-        onPressLeftIcon={() => NavigationService.goBack()}
-        onPressRightIconRight={handleSendPost}
-      />
-      <View style={styles.header}>
-        <View style={{flexDirection: 'row'}}>
-          <Image style={styles.image} source={{uri: user.image_url}} />
-          <View style={styles.viewStatus}>
-            <Text style={styles.nameUser}>{user.fullname}</Text>
-            <View style={styles.buttonClick}>
-              <SelectDropdown
-                data={['Public', 'Private']}
-                onSelect={handleDropdown(setStatus, formData)}
-                buttonStyle={styles.buttonSelect}
-                dropdownStyle={styles.dropdownStyle}
-                dropdownOverlayColor="nothing"
-                renderDropdownIcon={renderDropdownIcon}
-                rowTextStyle={styles.textrowSelect}
-                buttonTextStyle={styles.textButtonSelect}
-                defaultButtonText={status ? 'Public' : 'Private'}
-                rowStyle={styles.viewbackgroundColor}
-                onFocus={() => setDropdownOpen(!isDropdownOpen)}
-              />
-              <AddPicture onImagesSelected={handleImagesSelected} />
+    <TouchableWithoutFeedback onPress={touchableWithoutFeedback}>
+      <View style={styles.container}>
+        <HeaderCustom
+          leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
+          title="Create Your Post"
+          rightIconRight={{name: 'checkmark', type: 'ionicon'}}
+          onPressLeftIcon={() => NavigationService.goBack()}
+          onPressRightIconRight={handleSendPost}
+        />
+        <View style={styles.header}>
+          <View style={{flexDirection: 'row'}}>
+            <Image style={styles.image} source={{uri: user.image_url}} />
+            <View style={styles.viewStatus}>
+              <Text style={styles.nameUser}>{user.fullname}</Text>
+              <View style={styles.buttonClick}>
+                <SelectDropdown
+                  data={['Public', 'Private']}
+                  onSelect={handleDropdown(setStatus, formData)}
+                  buttonStyle={styles.buttonSelect}
+                  dropdownStyle={styles.dropdownStyle}
+                  dropdownOverlayColor="nothing"
+                  renderDropdownIcon={renderDropdownIcon}
+                  rowTextStyle={styles.textrowSelect}
+                  buttonTextStyle={styles.textButtonSelect}
+                  defaultButtonText={status ? 'Public' : 'Private'}
+                  rowStyle={styles.viewbackgroundColor}
+                  onFocus={() => setCheckSelectDropdown(!checkSelectDropdown)}
+                />
+                <AddPicture onImagesSelected={handleImagesSelected} />
+              </View>
             </View>
           </View>
         </View>
+
+        <View style={styles.viewBorder} />
+
+        <View style={styles.viewInput}>
+          <TextInput
+            placeholder="What do you think today?"
+            placeholderTextColor={styles.placeHolderColor.color}
+            style={styles.input}
+            multiline
+            textAlignVertical="top"
+            value={textInputValue}
+            onChangeText={text => setTextInputValue(text)}
+          />
+        </View>
+
+        {selectedImages.length > 0 && (
+          <SelectedImages forum={props} images={selectedImages} />
+        )}
       </View>
-
-      <View style={styles.viewBorder} />
-
-      <View style={styles.viewInput}>
-        <TextInput
-          placeholder="What do you think today?"
-          placeholderTextColor={styles.placeHolderColor.color}
-          style={styles.input}
-          multiline
-          textAlignVertical="top"
-          value={textInputValue}
-          onChangeText={text => setTextInputValue(text)}
-        />
-      </View>
-
-      {selectedImages.length > 0 && (
-        <SelectedImages forum={props} images={selectedImages} />
-      )}
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 

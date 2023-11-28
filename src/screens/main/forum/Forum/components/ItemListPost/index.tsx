@@ -2,7 +2,6 @@ import {Icon} from '@rneui/themed';
 import moment from 'moment';
 import React, {useEffect, useState} from 'react';
 import {
-  ActivityIndicator,
   Animated,
   Dimensions,
   FlatList,
@@ -13,6 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import AutoHeightImage from 'react-native-auto-height-image';
 import {
   GestureEvent,
   GestureHandlerRootView,
@@ -29,19 +29,16 @@ import {NavigationService} from '../../../../../../navigation';
 import {ForumActions, getAuthUserProfile} from '../../../../../../redux';
 import {getListForum} from '../../../../../../redux/selectors/forum.selector';
 import {ForumType} from '../../../../../../redux/types/forum.type';
-import {Device} from '../../../../../../utils';
 import useStyles from './styles';
-import AutoHeightImage from 'react-native-auto-height-image';
-import {LogBox} from 'react-native';
 
-const ItemListPost: React.FC = () => {
+const ItemListPost: React.FC<ForumType> = props => {
   const dispatch = useAppDispatch();
 
   const dataAPI = useAppSelector(getListForum);
 
   const user = useAppSelector(getAuthUserProfile);
 
-  const [page, setPage] = useState(2);
+  const [page, setPage] = useState(1);
 
   const [showModal, setShowModal] = useState(false);
   const [activeIndices, setActiveIndices] = useState({}) as any;
@@ -102,16 +99,16 @@ const ItemListPost: React.FC = () => {
   };
 
   const handleLikePress = (forum_uuid: any) => {
-    dispatch(ForumActions.handleLike_UnlikeSuccess(forum_uuid));
+    if (props.is_liked) {
+      dispatch(ForumActions.postUnlikeForumPost(forum_uuid));
+      dispatch(ForumActions.handleLike_UnlikeSuccess(forum_uuid));
+    } else {
+      dispatch(ForumActions.postLikeForumPost(forum_uuid));
+      dispatch(ForumActions.handleLike_UnlikeSuccess(forum_uuid));
+    }
   };
 
-  const WIDTH = Device.getDeviceWidth();
-
-  const [imageSizes, setImageSizes] = useState<{
-    [key: string]: {width: number; height: number};
-  }>({});
-
-  LogBox.ignoreLogs(['ReactImageView: Image source "null" doesn\'t exist']);
+  // LogBox.ignoreLogs(['ReactImageView: Image source "null" doesn\'t exist']);
 
   const styles = useStyles();
 
@@ -246,9 +243,7 @@ const ItemListPost: React.FC = () => {
                   size={11}
                 />
               </View>
-              <Text style={styles.textLikeBlur} key={item.like_count}>
-                {item.like_count}
-              </Text>
+              <Text style={styles.textLikeBlur}>{item.like_count}</Text>
             </View>
             <View style={styles.iconText}>
               <Text style={styles.textLikeBlur}>{item.comment_count}</Text>
