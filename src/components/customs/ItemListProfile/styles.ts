@@ -67,5 +67,8 @@ const useStyles = makeStyles(({colors}) => ({
     shadowOpacity: normalize(0.15),
     shadowRadius: normalize(2),
   },
+  viewBtn: {
+    marginBottom: normalize(4),
+  },
 }));
 export default useStyles;
