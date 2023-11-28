@@ -29,9 +29,7 @@ const LineComponent: React.FC<LineComponentProps> = ({length, stroke}) => {
 
 const ItemRating: React.FC = () => {
   const styles = useStyles();
-  const ratingCompleted = (rating: number) => {
-    console.log('Rating is: ' + rating);
-  };
+
   const data = [
     {value: 5, length: 100},
     {value: 4, length: 80},
