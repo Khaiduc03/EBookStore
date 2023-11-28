@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import {ScrollView, Text, TouchableOpacity, View} from 'react-native';
-import useStyles from './styles';
-import Toggleable_Security from '../Toggleable-list/components/Security';
 import {
   Toggleable_App,
   Toggleable_Service,
+  Toggleable_Security,
 } from '../Toggleable-list/components';
-import {SearchCustom} from '../../../../../../../components';
+import useStyles from './styles';
 
 const ItemFAQ: React.FC = () => {
   const styles = useStyles();

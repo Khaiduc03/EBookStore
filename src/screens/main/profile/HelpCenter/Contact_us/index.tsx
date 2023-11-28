@@ -8,7 +8,7 @@ const Contact_us: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.viewButton}>
-        <View style={{flex: 1}}>
+        <View style={{flex: 1,alignItems:'center'}}>
           <ItemButton />
         </View>
       </View>

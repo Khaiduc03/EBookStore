@@ -22,6 +22,8 @@ import {PostDetailUser} from './Profile-User/components';
 import Security from './Security';
 import SettingsNotification from './SettingNotification';
 import Update_Profile from './Update-profile';
+import CommentPostDetail from './MyProfile/components/PostDetail/components/Comment';
+import {CommentPostUserDetail} from './Profile-User/components/PostDetailUser/components';
 
 export {default as Profile} from './Profile';
 
@@ -105,5 +107,13 @@ export const profileScreens: Screen[] = [
   {
     name: routes.HISTORYANDFAVORITE,
     component: HistoryandFavorite,
+  },
+  {
+    name: routes.COMMENTPOSTDETAIL,
+    component: CommentPostDetail,
+  },
+  {
+    name: routes.COMMENTPOSTUSERDETAIL,
+    component: CommentPostUserDetail,
   },
 ];

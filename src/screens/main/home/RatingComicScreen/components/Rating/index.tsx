@@ -1,10 +1,8 @@
-import {AirbnbRating, Icon, Rating} from '@rneui/themed';
+import {AirbnbRating} from '@rneui/themed';
 import React from 'react';
 import {Text, View} from 'react-native';
+import Svg, {Line} from 'react-native-svg';
 import useStyles from './styles';
-import Svg, {Line, Rect} from 'react-native-svg';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
 
 interface LineComponentProps {
   length: number;

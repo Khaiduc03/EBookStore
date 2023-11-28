@@ -2,11 +2,12 @@ import {Icon} from '@rneui/themed';
 import React from 'react';
 import {Image, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {images} from '../../../../../../assets';
+import {useSelector} from 'react-redux';
 import {HeaderCustom} from '../../../../../../components';
 import TextCustom from '../../../../../../components/customs/Text';
 import {routes} from '../../../../../../constants';
 import {NavigationService} from '../../../../../../navigation';
+import {getAuthUserProfile} from '../../../../../../redux';
 import Icon_Comment from '../Icon-Comment';
 import useStyles from './styles';
 
@@ -15,6 +16,7 @@ const PostDetail: React.FC = () => {
   const handlePressGoback = () => {
     NavigationService.navigate(routes.MYPROFILE);
   };
+  const user = useSelector(getAuthUserProfile);
 
   return (
     <View style={styles.container}>
@@ -28,10 +30,10 @@ const PostDetail: React.FC = () => {
           <Image
             style={styles.avatarUser}
             source={{
-              uri: 'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
+              uri: user.image_url,
             }}
           />
-          <TextCustom textBold title="Drake Kun" />
+          <TextCustom textBold title={user.fullname} />
         </View>
         <TouchableOpacity>
           <Icon name="ellipsis-vertical" type="ionicon" />
