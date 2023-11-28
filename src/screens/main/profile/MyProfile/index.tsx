@@ -1,22 +1,32 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import TextCustom from '../../../../components/customs/Text';
 import {routes} from '../../../../constants';
-import {useAppSelector} from '../../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
 import {getAuthUserProfile} from '../../../../redux';
 import useStyles from '../MyProfile/styles';
 import {ItemFollow, ItemListMyProfile, ItemPost} from './components';
+import {getAllUser} from '../../../../redux/selectors/user.selector';
+import {UserAction} from '../../../../redux/reducer/user.reducer';
+import {UserType} from '../../../../redux/types/user.type';
 
 const MyProfile: React.FC = props => {
   const styles = useStyles();
+  const dispatch = useAppDispatch();
   const handlePressGoback = () => {
     NavigationService.goBack();
   };
 
-  const renderItem = ({item}: {item: (typeof data)[0]}) => (
-    <ItemListMyProfile {...item} />
+  const dataUser = useAppSelector(getAllUser);
+
+  useEffect(() => {
+    dispatch(UserAction.getListUser());
+  }, []);
+
+  const renderItem = ({item}: {item: UserType}) => (
+    <ItemListMyProfile data={item} />
   );
   const user = useAppSelector(getAuthUserProfile);
 
@@ -55,9 +65,9 @@ const MyProfile: React.FC = props => {
       </View>
       <View style={{paddingVertical: 10}}>
         <FlatList
-          data={data}
+          data={dataUser}
           renderItem={renderItem}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.uuid}
           horizontal
           showsHorizontalScrollIndicator={false}
           snapToAlignment="start"
@@ -82,53 +92,6 @@ const MyProfile: React.FC = props => {
 };
 
 export default MyProfile;
-const data = [
-  {
-    id: '1',
-    avatarDummy: true,
-    name: 'Peter 1',
-    title: 'Suggestions for you',
-    button: true,
-    textButton: 'Follow',
-    closeIcon: true,
-  },
-  {
-    id: '2',
-    avatarDummy: true,
-    name: 'Peter 2',
-    title: 'Suggestions for you',
-    button: true,
-    textButton: 'Follow',
-    closeIcon: true,
-  },
-  {
-    id: '3',
-    avatarDummy: true,
-    name: 'Peter 3',
-    title: 'Suggestions for you',
-    button: true,
-    closeIcon: true,
-    textButton: 'Follow',
-  },
-  {
-    id: '4',
-    avatarDummy: true,
-    name: 'Peter 4',
-    title: 'Suggestions for you',
-    button: true,
-    closeIcon: true,
-    textButton: 'Follow',
-  },
-  {
-    id: '5',
-    avatarDummy: true,
-    name: 'Peter 5',
-    title: 'Suggestions for you',
-    button: true,
-    closeIcon: true,
-    textButton: 'Follow',
-  },
-];
 
 const data2 = [
   {

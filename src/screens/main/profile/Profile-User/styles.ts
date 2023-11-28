@@ -28,6 +28,13 @@ const useStyles = makeStyles(({colors}) => ({
   nameUser: {
     paddingHorizontal: normalize(24),
   },
+  countNumber: {
+    color: colors.black,
+    fontSize: normalize(16),
+    fontFamily: fontFamilySetup.bold,
+    lineHeight: normalize(21),
+    letterSpacing: normalize(0.12),
+  },
   textPost: {
     fontSize: normalize(20),
     fontFamily: fontFamilySetup.bold,

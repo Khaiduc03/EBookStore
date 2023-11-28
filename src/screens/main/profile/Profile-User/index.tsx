@@ -12,8 +12,16 @@ import {
 } from './components';
 import useStyles from './styles';
 import {theme} from '../../../../theme';
+import {User} from '../../../../redux';
+import {useRoute} from '@react-navigation/native';
+interface RouteParamsProfile {
+  data: User;
+}
 
 const ProfileUser: React.FC = props => {
+  const route = useRoute();
+  const dataUser = (route.params as RouteParamsProfile).data;
+
   const styles = useStyles();
   const handlePressGoback = () => {
     NavigationService.goBack();
@@ -38,10 +46,10 @@ const ProfileUser: React.FC = props => {
         rightIconRight={{name: 'ellipsis-vertical', type: 'ionicon'}}
       />
       <View>
-        <ItemFollow />
+        <ItemFollow data={dataUser} />
       </View>
       <View style={styles.nameUser}>
-        <TextCustom textBold title="Drake Kun" />
+        <TextCustom textBold title={dataUser.fullname} />
         <TextCustom textLight title="Biographic this here !!!!! 😎" />
       </View>
       <View style={styles.viewbtnFollow}>

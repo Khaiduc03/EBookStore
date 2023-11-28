@@ -1,10 +1,14 @@
 import {Icon} from '@rneui/themed';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {FlatList, Text, View} from 'react-native';
 import {HeaderCustom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
 import {ItemList} from './components';
 import useStyles from './styles';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {UserAction} from '../../../../redux/reducer/user.reducer';
+import {getAllUser} from '../../../../redux/selectors/user.selector';
+import {UserType} from '../../../../redux/types/user.type';
 
 interface ListItem {
   id: string;
@@ -18,20 +22,20 @@ interface ListItem {
 
 const DiscoverPeople: React.FC = () => {
   const styles = useStyles();
-
   const [listData, setListData] = useState(initialData);
+  const dataUser = useAppSelector(getAllUser);
 
   const handleGoback = () => {
     NavigationService.goBack();
   };
 
   const refreshList = () => {
-    const refreshedData = [...initialData];
-    setListData(refreshedData);
-    console.log('Refreshed Data Succesfully:', refreshList);
+    // const refreshedData = [...initialData];
+    // setListData(refreshedData);
+    // console.log('Refreshed Data Succesfully:', refreshList);
   };
 
-  const renderItem = ({item}: {item: ListItem}) => <ItemList {...item} />;
+  const renderItem = ({item}: {item: UserType}) => <ItemList data={item} />;
 
   return (
     <View style={styles.container}>
@@ -40,24 +44,22 @@ const DiscoverPeople: React.FC = () => {
         title="Discover People"
         onPressLeftIcon={handleGoback}
       />
-      <View style={{padding: 24}}>
-        <View style={styles.viewRefesh}>
-          <Text style={styles.test}>Refresh list</Text>
-          <Icon name="reload-outline" type="ionicon" onPress={refreshList} />
-        </View>
+      <View style={styles.viewRefesh}>
+        <Text style={styles.test}>Refresh list</Text>
+        <Icon name="reload-outline" type="ionicon" onPress={refreshList} />
       </View>
-      <View style={{paddingHorizontal: 11}}>
+      <View style={styles.suggestions}>
         <Text style={styles.testContent}>Top Suggestions</Text>
-        <View style={{paddingVertical: 20}}>
-          <FlatList
-            data={listData}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-            showsHorizontalScrollIndicator={false}
-            numColumns={3}
-            columnWrapperStyle={{gap: 10, paddingVertical: 10}}
-          />
-        </View>
+      </View>
+      <View style={{alignItems: 'center', flex: 1}}>
+        <FlatList
+          data={dataUser}
+          renderItem={renderItem}
+          keyExtractor={item => item.uuid}
+          showsVerticalScrollIndicator={false}
+          numColumns={3}
+          columnWrapperStyle={{gap: 10, paddingVertical: 10}}
+        />
       </View>
     </View>
   );
