@@ -126,6 +126,7 @@ function* getDetailChapterSaga(action: PayloadAction<any>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
+    yield delay(2000);
     yield put(LoadingActions.hideLoading());
   }
 }
@@ -166,7 +167,7 @@ function* getDataChapterNavSaga(action: PayloadAction<any>): Generator {
     );
     if (data.code == 200) {
       console.log('run push tookit');
-      console.log(data);
+
       yield put(ComicActions.setListChapterDetail(data.data));
     } else {
       console.log('Server errol !!!');
@@ -174,6 +175,7 @@ function* getDataChapterNavSaga(action: PayloadAction<any>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
+    yield delay(2000);
     yield put(LoadingActions.hideLoading());
   }
 }
@@ -185,7 +187,6 @@ function* getComicByTop20Saga(): Generator {
 
     if (data.code == 200) {
       console.log('run push tookit');
-      console.log(data);
       yield put(ComicActions.setListTopView(data));
     } else {
       console.log('Server errol !!!');

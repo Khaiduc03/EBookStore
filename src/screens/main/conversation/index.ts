@@ -1,5 +1,6 @@
 import {routes} from '../../../constants';
 import {Screen} from '../../../types';
+import InfoUser from './InfoUser';
 import MessageScreen from './Messages';
 import SearchUserScreen from './SearchUser';
 
@@ -12,5 +13,9 @@ export const messageScreens: Screen[] = [
   {
     name: routes.SEARCH_USER,
     component: SearchUserScreen,
+  },
+  {
+    name: routes.INFO_USER,
+    component: InfoUser,
   },
 ];
