@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {HeaderCustom} from '../../../../../../components';
 import TextCustom from '../../../../../../components/customs/Text';
-import {routes} from '../../../../../../constants';
 import {NavigationService} from '../../../../../../navigation';
 import Icon_Comment from '../../../MyProfile/components/Icon-Comment';
 import useStyles from './styles';
@@ -11,7 +10,7 @@ import useStyles from './styles';
 const PostDetailUser: React.FC = props => {
   const styles = useStyles();
   const handlePressGoback = () => {
-    NavigationService.navigate(routes.PROFILEUSER);
+    NavigationService.goBack();
   };
 
   const [isPressed, setIsPressed] = useState(false);
@@ -20,7 +19,7 @@ const PostDetailUser: React.FC = props => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="Post by User"
         onPressLeftIcon={handlePressGoback}
         buttonProps={{
