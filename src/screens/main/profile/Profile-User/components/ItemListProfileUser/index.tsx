@@ -32,7 +32,7 @@ const ItemListProfileUser: React.FunctionComponent<
     setIsFollowing(!isFollowing);
   };
   const handlePressUser = () => {
-    NavigationService.navigate(routes.PROFILEUSER, {uuid: props.data.uuid});
+    NavigationService.navigate(routes.PROFILEUSER, {data: props.data});
   };
   return (
     <View style={styles.Squares}>

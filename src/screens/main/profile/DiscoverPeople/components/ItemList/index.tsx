@@ -30,7 +30,7 @@ const ItemList: React.FunctionComponent<SquaresCustomProps> = props => {
     setIsFollowing(!isFollowing);
   };
   const handlePressUser = () => {
-    NavigationService.navigate(routes.PROFILEUSER, {uuid: props.data.uuid});
+    NavigationService.navigate(routes.PROFILEUSER, {data: props.data});
   };
   const handlePressGoback = () => {
     NavigationService.navigate(routes.MYPROFILE);

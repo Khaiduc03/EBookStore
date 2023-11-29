@@ -22,20 +22,14 @@ import {
 import {UserType} from '../../../../redux/types/user.type';
 import {UserAction} from '../../../../redux/reducer/user.reducer';
 interface RouteParamsProfile {
-  uuid?: string;
+  data?: UserType;
 }
 
 const ProfileUser: React.FC = props => {
   const route = useRoute();
-  const uuid = (route.params as RouteParamsProfile).uuid;
+  const dataUser = (route.params as RouteParamsProfile).data;
   const dataList = useAppSelector(getAllUser);
   const dataById = useAppSelector(getUserById);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(UserAction.clearUserById());
-    dispatch(UserAction.getUserById(uuid ? uuid : ''));
-  }, [uuid]);
 
   const styles = useStyles();
   const handlePressGoback = () => {
@@ -61,13 +55,10 @@ const ProfileUser: React.FC = props => {
         rightIconRight={{name: 'ellipsis-vertical', type: 'ionicon'}}
       />
       <View>
-        <ItemFollow data={dataById ? dataById[0] : undefined} />
+        <ItemFollow data={dataUser} />
       </View>
       <View style={styles.nameUser}>
-        <TextCustom
-          textBold
-          title={dataById ? dataById[0].fullname : undefined}
-        />
+        <TextCustom textBold title={dataUser && dataUser.fullname} />
         <TextCustom textLight title="Biographic this here !!!!! 😎" />
       </View>
       <View style={styles.viewbtnFollow}>
