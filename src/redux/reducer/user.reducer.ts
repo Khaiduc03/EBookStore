@@ -31,6 +31,28 @@ const reducer = createSlice({
         },
       };
     },
+    getUserById: (state: UserState, _: PayloadAction<string>) => {
+      return {
+        ...state,
+      };
+    },
+    setUserById: (
+      state: UserState,
+      action: PayloadAction<PayloadHttpList<UserType>>,
+    ) => {
+      return {
+        ...state,
+        userById: {
+          ...action.payload,
+        },
+      };
+    },
+    clearUserById: (state: UserState) => {
+      return {
+        ...state,
+        userById: {},
+      };
+    },
   },
 });
 

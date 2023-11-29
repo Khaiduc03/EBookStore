@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {MessageI, RequestAddMessageI} from '../../../../redux';
+import {MessageI, RequestAddMessageI, getAuthUserUuid} from '../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import EmojiSelector, {Categories} from 'react-native-emoji-selector';
 import {getListMessage} from '../../../../redux/selectors/chat.selector';
@@ -21,6 +21,7 @@ import {NavigationService} from '../../../../navigation';
 import {HeaderCustom} from '../../../../components';
 import {ChatBubble} from './components/ChatBubbleItem';
 import useStyles from './styles';
+import {routes} from '../../../../constants';
 
 const MessageScreen: React.FC = () => {
   const {params} = useRoute() as any;
@@ -156,6 +157,11 @@ const MessageScreen: React.FC = () => {
             color: styles.iconVideocam.color,
             size: 30,
           }}
+          onPressRightIconRight={() =>
+            NavigationService.navigate(routes.PROFILEUSER, {
+              uuid: params.joined_uuid,
+            })
+          }
           onPressLeftIcon={() => NavigationService.goBack()}
         />
       </View>

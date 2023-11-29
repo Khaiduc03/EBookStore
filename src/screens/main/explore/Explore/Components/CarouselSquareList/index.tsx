@@ -91,10 +91,7 @@ const CarouselSquareList: React.FC<carouselSquareListProps> = ({
                 </TouchableOpacity>
               </Animated.View>
               <View style={styles.viewCenter}>
-                <Text
-                  style={styles.title}
-                  numberOfLines={2}
-                  ellipsizeMode="tail">
+                <Text style={styles.title} numberOfLines={1}>
                   {item.title}
                 </Text>
                 <Text style={styles.category}>{item.category}</Text>

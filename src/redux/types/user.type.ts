@@ -2,6 +2,7 @@ import {uuid, Timestamp, PayloadHttpList} from '../../types';
 
 export type UserState = Partial<{
   listUser: PayloadHttpList<UserType>;
+  userById: PayloadHttpList<UserType>;
 }>;
 export type UserType = uuid & {
   email: string;

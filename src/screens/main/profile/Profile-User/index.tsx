@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import TextCustom from '../../../../components/customs/Text';
@@ -12,20 +12,30 @@ import {
 } from './components';
 import useStyles from './styles';
 import {theme} from '../../../../theme';
-import {User} from '../../../../redux';
+import {AuthActions, User} from '../../../../redux';
 import {useRoute} from '@react-navigation/native';
-import {useAppSelector} from '../../../../hooks';
-import {getAllUser} from '../../../../redux/selectors/user.selector';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {
+  getAllUser,
+  getUserById,
+} from '../../../../redux/selectors/user.selector';
 import {UserType} from '../../../../redux/types/user.type';
+import {UserAction} from '../../../../redux/reducer/user.reducer';
 interface RouteParamsProfile {
-  data: User;
+  uuid?: string;
 }
 
 const ProfileUser: React.FC = props => {
   const route = useRoute();
-  const dataUser = (route.params as RouteParamsProfile).data;
-
+  const uuid = (route.params as RouteParamsProfile).uuid;
   const dataList = useAppSelector(getAllUser);
+  const dataById = useAppSelector(getUserById);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(UserAction.clearUserById());
+    dispatch(UserAction.getUserById(uuid ? uuid : ''));
+  }, [uuid]);
 
   const styles = useStyles();
   const handlePressGoback = () => {
@@ -51,10 +61,13 @@ const ProfileUser: React.FC = props => {
         rightIconRight={{name: 'ellipsis-vertical', type: 'ionicon'}}
       />
       <View>
-        <ItemFollow data={dataUser} />
+        <ItemFollow data={dataById ? dataById[0] : undefined} />
       </View>
       <View style={styles.nameUser}>
-        <TextCustom textBold title={dataUser.fullname} />
+        <TextCustom
+          textBold
+          title={dataById ? dataById[0].fullname : undefined}
+        />
         <TextCustom textLight title="Biographic this here !!!!! 😎" />
       </View>
       <View style={styles.viewbtnFollow}>
