@@ -8,6 +8,7 @@ const initialState: LoadingState = {
   isLoadingPage: false,
   isLoadingTopic: false,
   isLoadingStart: false,
+  isLoadingForum: false,
 };
 
 const reducer = createSlice({
@@ -46,6 +47,12 @@ const reducer = createSlice({
     },
     hideLoadingStart: (state: LoadingState) => {
       state.isLoadingStart = false;
+    },
+    showLoadingForum: (state: LoadingState) => {
+      state.isLoadingForum = true;
+    },
+    hideLoadingForum: (state: LoadingState) => {
+      state.isLoadingForum = false;
     },
   },
 });

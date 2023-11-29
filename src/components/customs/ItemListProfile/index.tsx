@@ -1,5 +1,5 @@
 import {Avatar, Icon, Switch} from '@rneui/themed';
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, View, TouchableOpacity} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {ThemeActions} from '../../../redux';
@@ -22,12 +22,21 @@ const ItemListProfile: React.FC<CustomCirclerProps> = props => {
   const styles = useStyles();
   const dispatch = useAppDispatch();
   const mode = useAppSelector(getMode);
+  const [isEnabled, setIsEnabled] = useState(false);
+
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   const handleTheme = () => {
     if (mode === 'light') {
       dispatch(ThemeActions.setTheme('dark'));
+      setTimeout(() => {
+        setIsEnabled(previousState => !previousState);
+      }, 1460);
     } else {
       dispatch(ThemeActions.setTheme('light'));
+      setTimeout(() => {
+        setIsEnabled(previousState => !previousState);
+      }, 1460);
     }
   };
   return (
@@ -42,11 +51,14 @@ const ItemListProfile: React.FC<CustomCirclerProps> = props => {
         {<Text style={styles.txtCircle}>{title}</Text>}
       </View>
       {switchRight && (
-        <Switch
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={handleTheme}
-          value={mode === 'dark' ? true : false}
-        />
+        <View style={styles.viewBtn}>
+          <TouchableOpacity
+            style={[styles.outter, isEnabled ? styles.off : styles.on]}
+            onPress={handleTheme}
+            activeOpacity={3}>
+            <View style={isEnabled ? styles.innerOFF : styles.innerON} />
+          </TouchableOpacity>
+        </View>
       )}
       {rightIcon && (
         <Icon

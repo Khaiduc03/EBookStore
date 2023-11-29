@@ -12,6 +12,12 @@ const reducer = createSlice({
   name: Redux.forum,
   initialState: {...initialState},
   reducers: {
+    clearListData: (state: ForumState) => {
+      return {
+        ...state,
+        listDataForum: {},
+      };
+    },
     handleGetListData: (state: ForumState, _: PayloadAction<number>) => {
       return {
         ...state,
@@ -21,44 +27,111 @@ const reducer = createSlice({
       state: ForumState,
       action: PayloadAction<PayloadHttpListForumData<ForumType>>,
     ) => {
+      const currentData: ForumType[] = state.listDataForum?.data || [];
+      const newData = action.payload.data || [];
+      const updatedData = [...currentData, ...newData];
       return {
         ...state,
         listDataForum: {
-          data: action.payload.data,
+          data: updatedData,
+          canNext: action.payload.canNext,
+          currentDataSize: action.payload.currentDataSize,
+          currentPage: action.payload.currentPage,
+          totalPage: action.payload.totalPage,
+          totalData: action.payload.totalData,
         },
       };
     },
-    handleLikePost: (state: ForumState, _: PayloadAction<string>) => {
+    postLikeForumPost: (state: ForumState, _: PayloadAction<any>) => {
       return {
         ...state,
       };
     },
-    setLikePost: (
+
+    postUnlikeForumPost: (state: ForumState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+
+    handleLike_UnlikeSuccess: (
       state: ForumState,
-      action: PayloadAction<PayloadHttpListForumData<ForumType>>,
+      action: PayloadAction<string>,
+    ) => {
+      const uuid = action.payload;
+
+      // Kiểm tra listForum có tồn tại và không rỗng
+      if (state.listDataForum && state.listDataForum.data) {
+        const updatedListForum = {
+          ...state.listDataForum,
+          data: state.listDataForum.data.map(item => {
+            if (item.uuid === uuid) {
+              // Tìm thấy item cần cập nhật
+              const updatedIsLike = !item.is_liked;
+              const updatedLikeCount = updatedIsLike
+                ? item.like_count + 1
+                : item.like_count - 1;
+
+              return {
+                ...item,
+                is_liked: updatedIsLike,
+                like_count: updatedLikeCount,
+              };
+            }
+            return item;
+          }),
+        };
+
+        return {
+          ...state,
+          listDataForum: updatedListForum,
+        };
+      }
+
+      return state; // Trả về state không thay đổi nếu không có listForum hoặc listForum.data
+    },
+
+    postCreatePost: (state: ForumState, action: PayloadAction<ForumType>) => {
+      return {
+        ...state,
+        listDataForum: {
+          canNext: state.listDataForum?.canNext,
+          currentPage: state.listDataForum?.currentPage,
+          totalData: state.listDataForum?.totalData,
+          data: [action.payload, ...(state.listDataForum?.data || [])],
+        },
+      };
+    },
+
+    handleCreatePostSuccess: (
+      state: ForumState,
+      action: PayloadAction<FormData>,
     ) => {
       return {
         ...state,
-        listDataForum: {
-          data: action.payload.data,
-        },
+        ...action.payload,
       };
     },
-    handleUnLikePost: (state: ForumState, _: PayloadAction<ForumType>) => {
+
+    deletePost: (state: ForumState, _: PayloadAction<any>) => {
       return {
         ...state,
       };
     },
-    setUnLikePost: (
-      state: ForumState,
-      action: PayloadAction<PayloadHttpListForumData<ForumType>>,
-    ) => {
-      return {
-        ...state,
-        listDataForum: {
-          data: action.payload.data,
-        },
-      };
+
+    deletePostRefesh: (state: ForumState, action: PayloadAction<string>) => {
+      if (state.listDataForum && state.listDataForum.data) {
+        const indexToDelete = state.listDataForum?.data.findIndex(
+          item => item.uuid === action.payload,
+        );
+
+        if (indexToDelete !== -1) {
+          // Tìm thấy item, hãy xóa nó
+          const newData = [...state.listDataForum.data];
+          newData.splice(indexToDelete, 1);
+          state.listDataForum.data = newData;
+        }
+      }
     },
   },
 });

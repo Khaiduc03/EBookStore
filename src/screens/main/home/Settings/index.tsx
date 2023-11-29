@@ -22,6 +22,7 @@ const Settings: React.FC = () => {
         <View style={styles.body}>
           <HeaderCustomV1
             title="Notification"
+            titleStyle={styles.textHeader}
             leftIcon={{
               name: 'arrow-back-outline',
               type: 'ionicon',
