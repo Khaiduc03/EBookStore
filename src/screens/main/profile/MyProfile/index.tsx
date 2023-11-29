@@ -1,22 +1,31 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import {routes} from '../../../../constants';
-import {useAppSelector} from '../../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
 import {getAuthUserProfile} from '../../../../redux';
 import useStyles from '../MyProfile/styles';
 import {ItemFollow, ItemListMyProfile, ItemPost} from './components';
-import {data} from './components/ItemListMyProfile/types';
+import {getAllUser} from '../../../../redux/selectors/user.selector';
+import {UserAction} from '../../../../redux/reducer/user.reducer';
+import {UserType} from '../../../../redux/types/user.type';
 
 const MyProfile: React.FC = props => {
   const styles = useStyles();
+  const dispatch = useAppDispatch();
   const handlePressGoback = () => {
     NavigationService.goBack();
   };
 
-  const renderItem = ({item}: {item: (typeof data)[0]}) => (
-    <ItemListMyProfile {...item} />
+  const dataUser = useAppSelector(getAllUser);
+
+  useEffect(() => {
+    dispatch(UserAction.getListUser());
+  }, []);
+
+  const renderItem = ({item}: {item: UserType}) => (
+    <ItemListMyProfile data={item} />
   );
   const user = useAppSelector(getAuthUserProfile);
 
@@ -55,9 +64,9 @@ const MyProfile: React.FC = props => {
       </View>
       <View style={{paddingVertical: 10}}>
         <FlatList
-          data={data}
+          data={dataUser}
           renderItem={renderItem}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.uuid}
           horizontal
           showsHorizontalScrollIndicator={false}
           snapToAlignment="start"

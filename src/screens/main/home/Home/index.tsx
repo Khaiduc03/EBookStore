@@ -73,7 +73,7 @@ const Home: FunctionComponent = () => {
   const handlePressSearch = useCallback(() => {
     dispatch(ComicActions.ClearListBySearch());
     NavigationService.navigate(routes.SEARCH);
-  }, [dispatch]);
+  }, []);
 
   const renderItem = useCallback(
     ({item}: {item: ComicType}) => (

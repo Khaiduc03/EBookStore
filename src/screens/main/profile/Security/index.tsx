@@ -3,6 +3,7 @@ import {Alert, View} from 'react-native';
 import {BigButton, HeaderCustom, Switch_custom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
 import useStyles from './styles';
+
 const Security: React.FC = () => {
   const styles = useStyles();
   const handlePressGoback = () => {

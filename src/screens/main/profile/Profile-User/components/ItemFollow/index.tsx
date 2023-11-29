@@ -1,28 +1,31 @@
 import React from 'react';
-import {Image, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View, Text} from 'react-native';
 import TextCustom from '../../../../../../components/customs/Text';
 import useStyles from './styles';
-
-const ItemFollow = () => {
+import {UserType} from '../../../../../../redux/types/user.type';
+interface ProfileProps {
+  data: UserType;
+}
+const ItemFollow: React.FunctionComponent<ProfileProps> = props => {
   const styles = useStyles();
   return (
     <View style={styles.viewAvatarFollow}>
       <Image
         style={styles.avatar}
         source={{
-          uri: 'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
+          uri: props.data.image_url,
         }}
       />
       <TouchableOpacity style={styles.viewFollow}>
-        <TextCustom number={100} />
+        <Text style={styles.countNumber}>{props.data.followercount}</Text>
         <TextCustom textLight title="Follower" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.viewFollow}>
-        <TextCustom number={100} />
+        <Text style={styles.countNumber}>{props.data.followingcount}</Text>
         <TextCustom textLight title="Follow" />
       </TouchableOpacity>
       <TouchableOpacity style={styles.viewFollow}>
-        <TextCustom number={100} />
+        <Text style={styles.countNumber}>{props.data.followercount}</Text>
         <TextCustom textLight title="Post" />
       </TouchableOpacity>
     </View>
