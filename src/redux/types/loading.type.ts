@@ -3,5 +3,6 @@ export type LoadingState = {
   isLoadingMain: boolean;
   isLoadingPage: boolean;
   isLoadingTopic: boolean;
+  isLoadingForum: boolean;
   isLoadingStart: boolean;
 };

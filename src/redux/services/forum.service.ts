@@ -28,4 +28,13 @@ export class ForumService {
     });
     return await apiService.post(`${ENDPOINTS.FORUM}`, payload, configFormData);
   }
+
+  static async deletePostForum(forum_uuid: string) {
+    console.log(`${ENDPOINTS.FORUM_DELETE_POST}`, {
+      data: forum_uuid,
+    });
+    return await apiService.delete(`${ENDPOINTS.FORUM_DELETE_POST}`, {
+      data: forum_uuid,
+    });
+  }
 }

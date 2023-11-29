@@ -1,13 +1,10 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {Redux} from '../types';
 import {
-  ForumAllType,
   ForumState,
   ForumType,
-  PayloadHttpListForum,
   PayloadHttpListForumData,
 } from '../types/forum.type';
-import {data} from '../../screens/main/home/Notifications/types';
 
 const initialState: ForumState = {};
 
@@ -15,6 +12,12 @@ const reducer = createSlice({
   name: Redux.forum,
   initialState: {...initialState},
   reducers: {
+    clearListData: (state: ForumState) => {
+      return {
+        ...state,
+        listDataForum: {},
+      };
+    },
     handleGetListData: (state: ForumState, _: PayloadAction<number>) => {
       return {
         ...state,
@@ -24,10 +27,18 @@ const reducer = createSlice({
       state: ForumState,
       action: PayloadAction<PayloadHttpListForumData<ForumType>>,
     ) => {
+      const currentData: ForumType[] = state.listDataForum?.data || [];
+      const newData = action.payload.data || [];
+      const updatedData = [...currentData, ...newData];
       return {
         ...state,
         listDataForum: {
-          data: action.payload.data,
+          data: updatedData,
+          canNext: action.payload.canNext,
+          currentDataSize: action.payload.currentDataSize,
+          currentPage: action.payload.currentPage,
+          totalPage: action.payload.totalPage,
+          totalData: action.payload.totalData,
         },
       };
     },
@@ -80,9 +91,15 @@ const reducer = createSlice({
       return state; // Trả về state không thay đổi nếu không có listForum hoặc listForum.data
     },
 
-    handleCreatePost: (state: ForumState, _: PayloadAction<any>) => {
+    postCreatePost: (state: ForumState, action: PayloadAction<ForumType>) => {
       return {
         ...state,
+        listDataForum: {
+          canNext: state.listDataForum?.canNext,
+          currentPage: state.listDataForum?.currentPage,
+          totalData: state.listDataForum?.totalData,
+          data: [action.payload, ...(state.listDataForum?.data || [])],
+        },
       };
     },
 
@@ -95,14 +112,26 @@ const reducer = createSlice({
         ...action.payload,
       };
     },
-    handleCreatePostFailed: (
-      state: ForumState,
-      action: PayloadAction<Pick<ForumType, 'images' | 'status' | 'content'>>,
-    ) => {
+
+    deletePost: (state: ForumState, _: PayloadAction<any>) => {
       return {
         ...state,
-        ...action.payload,
       };
+    },
+
+    deletePostRefesh: (state: ForumState, action: PayloadAction<string>) => {
+      if (state.listDataForum && state.listDataForum.data) {
+        const indexToDelete = state.listDataForum?.data.findIndex(
+          item => item.uuid === action.payload,
+        );
+
+        if (indexToDelete !== -1) {
+          // Tìm thấy item, hãy xóa nó
+          const newData = [...state.listDataForum.data];
+          newData.splice(indexToDelete, 1);
+          state.listDataForum.data = newData;
+        }
+      }
     },
   },
 });

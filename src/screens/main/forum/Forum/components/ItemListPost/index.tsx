@@ -1,7 +1,8 @@
 import {Icon} from '@rneui/themed';
 import moment from 'moment';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
+  ActivityIndicator,
   Animated,
   Dimensions,
   FlatList,
@@ -27,18 +28,28 @@ import {routes} from '../../../../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {NavigationService} from '../../../../../../navigation';
 import {ForumActions, getAuthUserProfile} from '../../../../../../redux';
-import {getListForum} from '../../../../../../redux/selectors/forum.selector';
+import {
+  getCurrentPageForum,
+  getListForum,
+  getNextForum,
+} from '../../../../../../redux/selectors/forum.selector';
 import {ForumType} from '../../../../../../redux/types/forum.type';
 import useStyles from './styles';
+import {LogBox} from 'react-native';
+import {
+  getIsLoadingForum,
+  getIsLoadingTopic,
+} from '../../../../../../redux/selectors/loading.selector';
 
 const ItemListPost: React.FC<ForumType> = props => {
   const dispatch = useAppDispatch();
 
   const dataAPI = useAppSelector(getListForum);
-
   const user = useAppSelector(getAuthUserProfile);
-
-  const [page, setPage] = useState(1);
+  const currentPage = useAppSelector(getCurrentPageForum);
+  const nextPage = useAppSelector(getNextForum);
+  const isLoading = useAppSelector(getIsLoadingForum);
+  console.log('==========', isLoading);
 
   const [showModal, setShowModal] = useState(false);
   const [activeIndices, setActiveIndices] = useState({}) as any;
@@ -50,6 +61,20 @@ const ItemListPost: React.FC<ForumType> = props => {
 
   // console.log('datahihi: ', dataAPI);
 
+  useEffect(() => {
+    dispatch(ForumActions.clearListData());
+    dispatch(ForumActions.handleGetListData(1));
+  }, []);
+
+  const loadMoreForum = () => {
+    if (nextPage && !isLoading) {
+      dispatch(
+        ForumActions.handleGetListData(currentPage ? currentPage + 1 : 1),
+      );
+      console.log('nextPage', nextPage);
+    }
+  };
+
   const openModal = (image: any) => {
     setShowModal(true);
     setSelectedImage(image);
@@ -59,10 +84,6 @@ const ItemListPost: React.FC<ForumType> = props => {
     setShowModal(false);
     setSelectedImage(null);
   };
-
-  useEffect(() => {
-    dispatch(ForumActions.handleGetListData(page));
-  }, []);
 
   const scale = new Animated.Value(1);
 
@@ -108,7 +129,21 @@ const ItemListPost: React.FC<ForumType> = props => {
     }
   };
 
-  // LogBox.ignoreLogs(['ReactImageView: Image source "null" doesn\'t exist']);
+  const listFooterComponent = useCallback(() => {
+    return (
+      <ActivityIndicator
+        color={'#F89300'}
+        size={'large'}
+        style={{marginBottom: 22}}
+      />
+    );
+  }, []);
+
+  const handleDeletePost = (forum_uuid: any) => {
+    dispatch(ForumActions.deletePost({forum_uuid: forum_uuid}));
+  };
+
+  LogBox.ignoreLogs(['ReactImageView: Image source "null" doesn\'t exist']);
 
   const styles = useStyles();
 
@@ -120,7 +155,9 @@ const ItemListPost: React.FC<ForumType> = props => {
             <Image
               style={styles.imageTitle}
               source={{
-                uri: item.user_avatar || undefined,
+                uri:
+                  item.user_avatar ||
+                  'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
               }}
             />
             <View style={styles.viewTextPost}>
@@ -148,14 +185,12 @@ const ItemListPost: React.FC<ForumType> = props => {
 
           <View style={styles.viewIconPost}>
             <Icon name="ellipsis-horizontal" type="ionicon" size={28} />
-            <Icon
-              name="close-outline"
-              type="ionicon"
-              size={28}
+            <TouchableOpacity
               onPress={() => {
-                item.deleted_at;
-              }}
-            />
+                // handleDeletePost(item.uuid);
+              }}>
+              <Icon name="close-outline" type="ionicon" size={28} />
+            </TouchableOpacity>
           </View>
         </View>
         <View style={styles.description}>
@@ -176,7 +211,9 @@ const ItemListPost: React.FC<ForumType> = props => {
                   <AutoHeightImage
                     key={item.index.toString()}
                     source={{
-                      uri: item.item,
+                      uri:
+                        item.item ||
+                        'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
                     }}
                     progressiveRenderingEnabled
                     width={screenWidth}
@@ -298,6 +335,19 @@ const ItemListPost: React.FC<ForumType> = props => {
       <FlatList
         data={dataAPI}
         renderItem={renderItem}
+        onScroll={({nativeEvent}) => {
+          const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
+          const numberOfPixelsFromBottomThreshold =
+            layoutMeasurement.height / 4;
+          const isNearBottom =
+            contentOffset.y + layoutMeasurement.height >=
+            contentSize.height - numberOfPixelsFromBottomThreshold;
+
+          if (isNearBottom && !isLoading) {
+            loadMoreForum();
+          }
+        }}
+        initialNumToRender={10}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={() => {
           return (
@@ -318,6 +368,7 @@ const ItemListPost: React.FC<ForumType> = props => {
             </View>
           );
         }}
+        ListFooterComponent={isLoading ? listFooterComponent() : <View />}
       />
     </View>
   );
