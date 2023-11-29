@@ -1,8 +1,5 @@
+import {UserType} from '../../../../../../redux/types/user.type';
+
 export type SquaresCustomProps = {
-  avatarDummy?: boolean;
-  name?: string;
-  title?: string;
-  button?: boolean;
-  textButton?: string;
-  closeIcon?: boolean;
+  data: UserType;
 };

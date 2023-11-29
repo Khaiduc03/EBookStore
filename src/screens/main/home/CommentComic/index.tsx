@@ -99,7 +99,6 @@ const CommentComic = () => {
         keyExtractor={item => item.uuid}
         renderItem={renderItem}
         contentContainerStyle={{paddingVertical: 65, paddingHorizontal: 16}}
-        initialNumToRender={21}
         onContentSizeChange={onContentSizeChange}
         onScroll={({nativeEvent}) => {
           const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;

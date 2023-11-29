@@ -290,7 +290,7 @@ const UpdateProfileScreen: FunctionComponent = () => {
             </View>
             <View style={styles.bottom}>
               <BigButton
-                textButton="Continue"
+                textButton="Save"
                 onPressButton={() => {
                   handleUpdateProfile();
                 }}

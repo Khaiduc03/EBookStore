@@ -1,5 +1,5 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import useStyles from './styles';
 import FastImage from 'react-native-fast-image';
 import {Icon} from '@rneui/base';
@@ -10,6 +10,8 @@ import {useAppDispatch} from '../../../../../../hooks';
 import {CommentChapterAction} from '../../../../../../redux/reducer/comment.chapter.reducer';
 interface CommentDataProps {
   data: CommentChapterType;
+  setOpen: () => void;
+  setUserRep: (text: string) => void;
 }
 
 const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
@@ -29,6 +31,13 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
   const styles = useStyles();
   const dispatch = useAppDispatch();
 
+  const commentIncludesFullname = props.data.comment.includes(
+    props.data.fullname,
+  );
+  const fullnameIndex = props.data.comment.indexOf(props.data.fullname);
+
+  const textBeforeFullname = props.data.comment.slice(0, fullnameIndex);
+
   const onPressLikeComment = () => {
     if (is_like) {
       dispatch(
@@ -46,6 +55,11 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
       );
     }
   };
+
+  const onPressRep = (text: string) => {
+    props.setUserRep(text);
+    props.setOpen();
+  };
   return (
     <View style={styles.container}>
       <FastImage
@@ -57,15 +71,33 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
       <View style={styles.content}>
         <Text style={styles.nameStyle}>{fullname}</Text>
         <Text style={styles.day}>{created_at + ''}</Text>
-        <Text style={styles.commentStyle}>{comment}</Text>
+        <Text style={styles.commentStyle}>
+          {commentIncludesFullname ? (
+            <>
+              <Text style={{color: 'blue'}}>{textBeforeFullname}</Text>
+
+              <Text style={{color: 'blue'}}>{props.data.fullname}</Text>
+
+              {props.data.comment.slice(
+                fullnameIndex + props.data.fullname.length,
+              )}
+            </>
+          ) : (
+            props.data.comment
+          )}
+        </Text>
         <View style={styles.repContent}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Icon
-              name="chatbox-outline"
-              type="ionicon"
-              color={styles.iconStyle.color}
-              size={15}
-            />
+            <TouchableOpacity
+              onPress={() => onPressRep(props.data.fullname)}
+              style={styles.rep}>
+              <Icon
+                name="chatbox-outline"
+                type="ionicon"
+                color={styles.iconStyle.color}
+                size={15}
+              />
+            </TouchableOpacity>
 
             <TouchableOpacity onPress={onPressLikeComment} style={styles.like}>
               <Icon

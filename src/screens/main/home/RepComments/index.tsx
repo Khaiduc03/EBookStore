@@ -45,8 +45,16 @@ const CommentRepComic = () => {
   const currentPage = useAppSelector(getCurrenPageRepCommentChapter);
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const [user, setUser] = useState<string>('');
+
+  console.log('======>', open);
+
   console.log('canNext', canNext);
   console.log('isLoading', isLoading);
+  const TextInputRef = useRef<TextInput>(null);
+
   const styles = useStyles();
   const {
     comment,
@@ -60,6 +68,9 @@ const CommentRepComic = () => {
     uuid,
     is_like,
   } = dataFirst;
+  const [countComment, setCountComment] = useState<number>(re_comment_count);
+  const [like, setLike] = useState<Boolean>(is_like);
+  const [countLike, setCountLike] = useState<number>(like_count);
 
   useEffect(() => {
     dispatch(
@@ -69,6 +80,19 @@ const CommentRepComic = () => {
       }),
     );
   }, []);
+  useEffect(() => {
+    if (open) {
+      TextInputRef.current?.focus();
+    }
+  }, [open]);
+
+  const openInput = () => {
+    setOpen(!open);
+  };
+
+  const setUserRep = (text: string) => {
+    setvalue('Reply ' + '@' + text + ':');
+  };
 
   const onPressPostComment = () => {
     dispatch(
@@ -78,6 +102,7 @@ const CommentRepComic = () => {
         parents_comment_uuid: parents_comment_uuid,
       }),
     );
+    setCountComment(countComment + 1);
     setvalue('');
   };
   const loadMoreComic = () => {
@@ -106,18 +131,22 @@ const CommentRepComic = () => {
     [size, sizeContent],
   );
   const onPressLikeComment = () => {
-    if (is_like) {
+    if (like) {
       dispatch(
         CommentChapterAction.postUnlikeCommentChapter({
           comment_uuid: uuid,
         }),
       );
+      setLike(false);
+      setCountLike(countLike - 1);
     } else {
       dispatch(
         CommentChapterAction.postLikeCommentChapter({
           comment_uuid: uuid,
         }),
       );
+      setLike(true);
+      setCountLike(countLike + 1);
     }
   };
 
@@ -132,7 +161,9 @@ const CommentRepComic = () => {
     item: CommentChapterType;
     index: number;
   }) => {
-    return <ItemComment data={item} />;
+    return (
+      <ItemComment setUserRep={setUserRep} setOpen={openInput} data={item} />
+    );
   };
 
   return (
@@ -161,19 +192,18 @@ const CommentRepComic = () => {
                       color={styles.iconStyle.color}
                       size={15}
                     />
+                    <Text style={styles.numberRepStyle}>{countComment}</Text>
 
                     <TouchableOpacity
-                      // onPress={onPressLikeComment}
+                      onPress={onPressLikeComment}
                       style={styles.like}>
                       <Icon
                         name="thumbs-up"
                         type="feather"
-                        color={is_like ? '#F89300' : styles.iconStyle.color}
+                        color={like ? '#F89300' : styles.iconStyle.color}
                         size={15}
                       />
-                      {/* <Text style={styles.numberRepStyle}>
-                        {like_count ? like_count : '0'}
-                      </Text> */}
+                      <Text style={styles.numberRepStyle}>{countLike}</Text>
                     </TouchableOpacity>
                   </View>
                   <Icon
@@ -210,14 +240,17 @@ const CommentRepComic = () => {
         renderItem={renderItem}
         contentContainerStyle={{paddingVertical: 65}}
       />
+
       <TextInput
+        ref={TextInputRef}
         value={value}
         onChangeText={text => setvalue(text)}
-        placeholder="Shoot your comment..."
+        placeholder={'Shoot your comment...'}
         onSubmitEditing={onPressPostComment}
         returnKeyType="send"
         style={styles.inputStyle}
       />
+
       <HeaderRepComment />
     </SafeAreaView>
   );

@@ -24,7 +24,7 @@ const HistoryandFavorite: React.FC = () => {
           type: 'ionicon',
           color: styles.leftIconStyle.color,
         }}
-        title="Favorites List"
+        title="Favorite and History"
         rightIconRight={{
           name: 'notifications-outline',
           type: 'ionicon',

@@ -21,5 +21,12 @@ const useStyles = makeStyles(({colors}) => ({
     justifyContent: 'center',
     marginStart: normalize(10),
   },
+  countNumber: {
+    color: colors.black,
+    fontSize: normalize(16),
+    fontFamily: fontFamilySetup.bold,
+    lineHeight: normalize(21),
+    letterSpacing: normalize(0.12),
+  },
 }));
 export default useStyles;

@@ -28,6 +28,7 @@ const useStyles = makeStyles(({colors}) => ({
   nameUser: {
     paddingHorizontal: normalize(24),
   },
+
   textPost: {
     fontSize: normalize(20),
     fontFamily: fontFamilySetup.bold,

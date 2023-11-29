@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import TextCustom from '../../../../components/customs/Text';
@@ -12,8 +12,25 @@ import {
 } from './components';
 import useStyles from './styles';
 import {theme} from '../../../../theme';
+import {AuthActions, User} from '../../../../redux';
+import {useRoute} from '@react-navigation/native';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {
+  getAllUser,
+  getUserById,
+} from '../../../../redux/selectors/user.selector';
+import {UserType} from '../../../../redux/types/user.type';
+import {UserAction} from '../../../../redux/reducer/user.reducer';
+interface RouteParamsProfile {
+  data?: UserType;
+}
 
 const ProfileUser: React.FC = props => {
+  const route = useRoute();
+  const dataUser = (route.params as RouteParamsProfile).data;
+  const dataList = useAppSelector(getAllUser);
+  const dataById = useAppSelector(getUserById);
+
   const styles = useStyles();
   const handlePressGoback = () => {
     NavigationService.goBack();
@@ -25,8 +42,8 @@ const ProfileUser: React.FC = props => {
   const handleFollowButtonClick = () => {
     setIsFollowed(!isFollowed);
   };
-  const renderItem = ({item}: {item: (typeof data2)[0]}) => (
-    <ItemListProfileUSer {...item} />
+  const renderItem = ({item}: {item: UserType}) => (
+    <ItemListProfileUSer data={item} />
   );
 
   return (
@@ -38,10 +55,10 @@ const ProfileUser: React.FC = props => {
         rightIconRight={{name: 'ellipsis-vertical', type: 'ionicon'}}
       />
       <View>
-        <ItemFollow />
+        <ItemFollow data={dataUser} />
       </View>
       <View style={styles.nameUser}>
-        <TextCustom textBold title="Drake Kun" />
+        <TextCustom textBold title={dataUser && dataUser.fullname} />
         <TextCustom textLight title="Biographic this here !!!!! 😎" />
       </View>
       <View style={styles.viewbtnFollow}>
@@ -68,9 +85,9 @@ const ProfileUser: React.FC = props => {
       </View>
       <View style={styles.viewExplore}>
         <FlatList
-          data={data2}
+          data={dataList}
           renderItem={renderItem}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.uuid}
           horizontal
           showsHorizontalScrollIndicator={false}
           snapToAlignment="start"
