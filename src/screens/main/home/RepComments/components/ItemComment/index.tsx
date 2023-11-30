@@ -8,6 +8,7 @@ import {routes} from '../../../../../../constants';
 import {CommentChapterType} from '../../../../../../redux/types/comment.chapter.type';
 import {useAppDispatch} from '../../../../../../hooks';
 import {CommentChapterAction} from '../../../../../../redux/reducer/comment.chapter.reducer';
+import moment from 'moment';
 interface CommentDataProps {
   data: CommentChapterType;
   setOpen: () => void;
@@ -70,7 +71,9 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
       />
       <View style={styles.content}>
         <Text style={styles.nameStyle}>{fullname}</Text>
-        <Text style={styles.day}>{created_at + ''}</Text>
+        <Text style={styles.day}>
+          {moment(created_at).format('YYYY-MM-DD-HH:mm') + ''}
+        </Text>
         <Text style={styles.commentStyle}>
           {commentIncludesFullname ? (
             <>

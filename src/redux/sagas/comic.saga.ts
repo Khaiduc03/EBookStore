@@ -262,7 +262,6 @@ function* getListFavoriteSaga(action: PayloadAction<number>): Generator {
     );
     if (data.code == 200) {
       console.log('run push tookit');
-
       yield put(ComicActions.setListFavorite(data.data));
     } else {
       console.log('Server errol !!!');

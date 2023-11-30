@@ -7,16 +7,22 @@ const useStyles = makeStyles(({colors}) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    justifyContent: 'center',
+    alignItems: 'center',
   },
   titleStyle: {
     fontFamily: fontFamilySetup.bold,
     fontSize: normalize(15),
+    color: colors.white,
+    position: 'absolute',
+    bottom: normalize(5),
+    left: normalize(10),
   },
   imgContainer: {
     height: Device.getDeviceHeight() * 0.11,
-    width: (WIDTH - 48) / 2,
+    width: (WIDTH - normalize(48)) / 2,
     marginBottom: normalize(16),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   itemContainer: {
     marginBottom: normalize(15),
@@ -33,6 +39,9 @@ const useStyles = makeStyles(({colors}) => ({
   },
   rightLeftIcon: {
     fontSize: 28,
+  },
+  columnStyle: {
+    gap: normalize(16),
   },
 }));
 

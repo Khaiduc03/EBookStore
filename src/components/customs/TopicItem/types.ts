@@ -1,10 +1,8 @@
 import {TextStyle, ViewProps, ViewStyle} from 'react-native';
+import {TopicType} from '../../../redux';
+import {ImageStyle} from 'react-native-fast-image';
 export type CustomTopicsProps = {
-  title?: string;
-  image?: string;
-  titleStyle?: TextStyle;
+  item: TopicType;
   viewStyle?: ViewStyle;
-  containerStyle?: ViewStyle;
-  index: number;
-  uuid: string;
+  textStyle?: TextStyle;
 };
