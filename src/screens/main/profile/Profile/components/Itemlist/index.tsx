@@ -72,7 +72,7 @@ const Itemlish: React.FC = () => {
             }
           }}>
           <ItemListProfile
-            title="History and Favorites"
+            title="Favorite and History"
             name="history"
             type="material-community"
             color="#F89300"

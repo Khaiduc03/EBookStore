@@ -24,6 +24,7 @@ const ItemPost: React.FC<Props> = props => {
         borderRadius: 10,
       }}>
       <Image
+      key={data.id}
         source={{uri: data.images}}
         style={{width: itemWidth - 5, height: itemWidth - 5, borderRadius: 10}}
       />
