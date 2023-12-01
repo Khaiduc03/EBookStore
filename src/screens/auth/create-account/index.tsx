@@ -198,7 +198,7 @@ const CreateAccountScreen: FunctionComponent = () => {
                     onChangeText={text =>
                       setCredentials({...credentials, confirmpassword: text})
                     }
-                    errorMessage="The confirm password must match the previous password."
+                    errorMessage="Confirm password must match the previous password."
                   />
                 </View>
               )}

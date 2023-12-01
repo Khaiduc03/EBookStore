@@ -19,7 +19,7 @@ const Profile: FunctionComponent = () => {
     <View style={styles.container}>
       <HeaderCustom
         leftIcon={{name: 'user', type: 'font-awesome'}}
-        title="My profile"
+        title="Profile"
       />
       <View style={styles.viewAvatar}>
         <Image source={{uri: user.image_url}} style={styles.avatar} />
