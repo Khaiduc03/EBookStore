@@ -10,7 +10,7 @@ interface FiltersProps {
     params: {
       setHightView: Function;
       setLowView: Function;
-      setFilterArray: Function; // Thêm setFilterArray vào props
+      setFilterArray: Function;
     };
   }>;
 }

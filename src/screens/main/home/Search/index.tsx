@@ -7,6 +7,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
+import _ from 'lodash';
 import React, {useState, useEffect, useCallback} from 'react';
 import {ComicItem, HeaderCustom, SearchCustom} from '../../../../components';
 import useStyles from './styles';
@@ -26,18 +27,16 @@ import ErrorSearch from './components/ErrorSearch';
 import NoSearch from './components/NoSearch';
 import {getIsLoadingTopic} from '../../../../redux/selectors/loading.selector';
 import {useRoute} from '@react-navigation/native';
-interface RouteParamsFillter {
-  highestView?: boolean;
-  lowestViews?: boolean;
-}
+import {ToastAndroid} from 'react-native';
 const Search = () => {
-  const route = useRoute();
   const dispatch = useAppDispatch();
   const dataBySearch = useAppSelector(getDataComicBySeacrh);
   const currentPage = useAppSelector(getCurrentSearch);
   const nextPage = useAppSelector(getNextSearch);
   const [numCols, setNumCols] = useState(3);
   const [hightView, setHightView] = useState(Boolean);
+  const [sizeContent, setSizeContent] = useState<number>(0);
+  const [size, setSize] = useState<boolean>(false);
 
   const [lowView, setLowView] = useState(Boolean);
   const [filterArray, setFilterArray] = useState<string[]>([]);
@@ -50,6 +49,20 @@ const Search = () => {
 
   const styles = useStyles();
   const [search, setSearch] = useState('');
+
+  const handleSearch = _.debounce(searchQuery => {
+    if (searchQuery) {
+      setFilterArray([]), setHightView(false);
+      setLowView(false);
+      dispatch(ComicActions.ClearListBySearch());
+      dispatch(ComicActions.getListBySearch({key: searchQuery, page: 1}));
+    }
+  }, 1000);
+
+  const onSearchChange = (text: string) => {
+    setSearch(text);
+    handleSearch(text);
+  };
 
   const handleListIconPress = () => {
     setNumCols(1);
@@ -71,6 +84,10 @@ const Search = () => {
       let filteredData = [...dataBySearch];
       if (filterArray.includes('All')) {
         setData(filteredData);
+        ToastAndroid.show(
+          'Successful comic by fillter !!!!',
+          ToastAndroid.SHORT,
+        );
         return;
       }
 
@@ -104,6 +121,7 @@ const Search = () => {
           page: currentPage && currentPage + 1,
         }),
       );
+      setSize(true);
     }
   };
   const onPressBackIcon = () => {
@@ -120,6 +138,16 @@ const Search = () => {
       />
     );
   }, []);
+  const onContentSizeChange = useCallback(
+    (contentWidth: number, contentHeight: number) => {
+      setSizeContent(contentHeight);
+      if (size) {
+        setSizeContent(sizeContent + 3000);
+        setSize(false);
+      }
+    },
+    [size, sizeContent],
+  );
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -131,7 +159,7 @@ const Search = () => {
           <View style={styles.search}>
             <SearchCustom
               value={search}
-              setValue={setSearch}
+              setValue={onSearchChange}
               onPressSearchComic={onPressSearch}
               autoFocus={true}
             />
@@ -192,6 +220,24 @@ const Search = () => {
                 topicStyle={numCols == 1 ? styles.topicsContainer : null}
               />
             )}
+            onContentSizeChange={onContentSizeChange}
+            onScroll={({nativeEvent}) => {
+              const {contentOffset, contentSize, layoutMeasurement} =
+                nativeEvent;
+              const numberOfPixelsFromBottomThreshold = 100;
+              const isNearBottom =
+                contentOffset.y + layoutMeasurement.height >=
+                sizeContent - numberOfPixelsFromBottomThreshold;
+              console.log(
+                'sỉze scroll',
+                contentOffset.y + layoutMeasurement.height,
+              );
+              console.log('sỉze content', sizeContent);
+
+              if (isNearBottom) {
+                loadMoreComic();
+              }
+            }}
             data={data}
             numColumns={3}
             columnWrapperStyle={
@@ -199,8 +245,6 @@ const Search = () => {
                 ? {gap: 5, paddingHorizontal: 16}
                 : {flexDirection: 'column'}
             }
-            onEndReached={loadMoreComic}
-            onEndReachedThreshold={0.1}
           />
         )}
       </View>

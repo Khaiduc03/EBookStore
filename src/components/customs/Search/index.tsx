@@ -6,7 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {Icon} from '@rneui/base';
+import {Icon, InputProps} from '@rneui/base';
 import useStyles from './styles';
 import {SearchBarComponentProps} from './types';
 
