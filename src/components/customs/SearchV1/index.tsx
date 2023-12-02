@@ -8,11 +8,8 @@ import {
 } from 'react-native';
 import {Icon, InputProps} from '@rneui/base';
 import useStyles from './styles';
-import {SearchBarComponentProps} from './types';
 
-const SearchCustom: React.FunctionComponent<
-  SearchBarComponentProps
-> = props => {
+const SearchCustomV1: React.FunctionComponent<InputProps> = props => {
   const styles = useStyles();
   const [inputFocused, setInputFocused] = useState(false);
 
@@ -26,7 +23,7 @@ const SearchCustom: React.FunctionComponent<
 
   return (
     <SearchBar
-      onChangeText={props.setValue}
+      onChangeText={props.onChangeText}
       placeholder="Search..."
       value={props.value}
       platform="android"
@@ -47,13 +44,12 @@ const SearchCustom: React.FunctionComponent<
       autoFocus={props.autoFocus}
       returnKeyType="search"
       inputStyle={props.inputStyle || styles.inputStyle}
-      onSubmitEditing={props.onPressSearchComic}
+      onSubmitEditing={props.onSubmitEditing}
       onBlur={handleInputBlur}
       onFocus={handleInputFocus}
       clearIcon={styles.clearIcon}
-      onPressIn={props.onPress}
     />
   );
 };
 
-export default SearchCustom;
+export default SearchCustomV1;

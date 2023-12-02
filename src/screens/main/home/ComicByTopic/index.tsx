@@ -5,7 +5,7 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import {ComicItem, HeaderCustom} from '../../../../components';
 import useStyles from './styles';
 import {NavigationService} from '../../../../navigation';
@@ -14,6 +14,7 @@ import {backScreen} from '../../../../utils';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {ComicActions, ComicType, LoadingActions} from '../../../../redux';
 import {
+  getCurrentTopic,
   getDataByTopic,
   getListComic,
   getNextTopic,
@@ -37,20 +38,38 @@ const ComicByTopic = () => {
   const dataComic = useAppSelector(getDataByTopic) || [];
   // console.log('========>', dataComic);
   const nextPage = useAppSelector(getNextTopic);
+  const currentPage = useAppSelector(getCurrentTopic);
   const [numCols, setNumCols] = useState<number>(3);
   const isLoading = useAppSelector(getIsLoadingTopic);
-  const [page, setPage] = useState(1);
-  console.log('nextPage', nextPage);
+  const [sizeContent, setSizeContent] = useState<number>(0);
+  const [size, setSize] = useState<boolean>(false);
 
   useEffect(() => {
-    dispatch(ComicActions.getListByTopic({page: page, name: nameTopic}));
-  }, [page]);
+    dispatch(ComicActions.getListByTopic({page: 1, name: nameTopic}));
+  }, []);
 
   const loadMoreComic = () => {
     if (nextPage && !isLoading) {
-      setPage(page + 1);
+      dispatch(
+        ComicActions.getListByTopic({
+          page: currentPage ? currentPage + 1 : 1,
+          name: nameTopic,
+        }),
+      );
+      setSize(true);
     }
   };
+
+  const onContentSizeChange = useCallback(
+    (contentWidth: number, contentHeight: number) => {
+      setSizeContent(contentHeight);
+      if (size) {
+        setSizeContent(sizeContent + 3000);
+        setSize(false);
+      }
+    },
+    [size, sizeContent],
+  );
 
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
     <ComicItem
@@ -120,8 +139,23 @@ const ComicByTopic = () => {
         keyExtractor={item => item.uuid.toString()}
         showsVerticalScrollIndicator={false}
         numColumns={3}
-        onEndReached={loadMoreComic}
-        onEndReachedThreshold={0.1}
+        onContentSizeChange={onContentSizeChange}
+        onScroll={({nativeEvent}) => {
+          const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
+          const numberOfPixelsFromBottomThreshold = 100;
+          const isNearBottom =
+            contentOffset.y + layoutMeasurement.height >=
+            sizeContent - numberOfPixelsFromBottomThreshold;
+          console.log(
+            'sỉze scroll',
+            contentOffset.y + layoutMeasurement.height,
+          );
+          console.log('sỉze content', sizeContent);
+
+          if (isNearBottom) {
+            loadMoreComic();
+          }
+        }}
         ListFooterComponent={
           isLoading ? isLoading && listFooterComponent : undefined
         }

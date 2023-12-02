@@ -24,6 +24,7 @@ import {
 import {CommentChapterType} from '../../../../redux/types/comment.chapter.type';
 import {getIsLoadingPage} from '../../../../redux/selectors/loading.selector';
 import FastImage from 'react-native-fast-image';
+import moment from 'moment';
 
 interface ParentsUuidComment {
   parents_comment_uuid: string;
@@ -182,7 +183,9 @@ const CommentRepComic = () => {
               />
               <View style={styles.content}>
                 <Text style={styles.nameStyle}>{fullname}</Text>
-                <Text style={styles.day}>{created_at + ''}</Text>
+                <Text style={styles.day}>
+                  {moment(created_at).format('YYYY-MM-DD-HH:mm') + ''}
+                </Text>
                 <Text style={styles.commentStyle}>{comment}</Text>
                 <View style={styles.repContent}>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>

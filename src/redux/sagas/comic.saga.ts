@@ -131,7 +131,7 @@ function* getDetailChapterSaga(action: PayloadAction<any>): Generator {
   }
 }
 
-function* getDataComicBySearchSaga(action: PayloadAction<string>): Generator {
+function* getDataComicBySearchSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoadingTopic());
   try {
     console.log('run');
@@ -142,9 +142,9 @@ function* getDataComicBySearchSaga(action: PayloadAction<string>): Generator {
     if (data.code == 200) {
       console.log('run push tookit');
       yield put(ComicActions.setListBySeacrch(data.data));
-      if (data.data.data.length !== 0) {
+      if (data.data.data.length !== 0 && action.payload.page == 1) {
         ToastAndroid.show('Successful comic search !!!!', ToastAndroid.SHORT);
-      } else {
+      } else if (data.data.data.length == 0) {
         ToastAndroid.show('No comics available !!!!', ToastAndroid.SHORT);
       }
     } else {
@@ -262,7 +262,6 @@ function* getListFavoriteSaga(action: PayloadAction<number>): Generator {
     );
     if (data.code == 200) {
       console.log('run push tookit');
-
       yield put(ComicActions.setListFavorite(data.data));
     } else {
       console.log('Server errol !!!');

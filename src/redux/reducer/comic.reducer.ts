@@ -98,8 +98,8 @@ const reducer = createSlice({
       return {
         ...state,
         listDataByTopic: {
+          ...state.listDataByTopic,
           data: updatedData,
-          canNext: action.payload.canNext,
         },
       };
     },
@@ -291,7 +291,13 @@ const reducer = createSlice({
     ) => {
       const currentData: ComicType[] = state.listFavorite?.data || [];
       const newData = action.payload.data || [];
-      const updatedData = [...currentData, ...newData];
+      const uniqueNewData = newData.filter(
+        newItem =>
+          !currentData.some(
+            oldItem => oldItem.favorite_uuid === newItem.favorite_uuid,
+          ),
+      );
+      const updatedData = [...currentData, ...uniqueNewData];
       return {
         ...state,
         listFavorite: {
@@ -322,7 +328,10 @@ const reducer = createSlice({
     ) => {
       const currentData: ComicType[] = state.listHistoryComic?.data || [];
       const newData = action.payload.data || [];
-      const updatedData = [...currentData, ...newData];
+      const uniqueNewData = newData.filter(
+        newItem => !currentData.some(oldItem => oldItem.uuid === newItem.uuid),
+      );
+      const updatedData = [...currentData, ...uniqueNewData];
       return {
         ...state,
         listHistoryComic: {
