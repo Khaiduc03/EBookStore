@@ -7,13 +7,18 @@ import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import useStyles from './styles';
 import {Itemlish} from './components';
-import {useAppSelector} from '../../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {getAuthUserProfile} from '../../../../redux';
+import {UserAction} from '../../../../redux/reducer/user.reducer';
 
 const Profile: FunctionComponent = () => {
   const user = useAppSelector(getAuthUserProfile);
-  console.log(user);
-  console.log(user.fullname);
+  const dispatch = useAppDispatch();
+  const onPressMyProfile = () => {
+    dispatch(UserAction.clearListPostByUser());
+    NavigationService.navigate(routes.MYPROFILE);
+  };
+
   const styles = useStyles();
   return (
     <View style={styles.container}>
@@ -25,7 +30,7 @@ const Profile: FunctionComponent = () => {
         <Image source={{uri: user.image_url}} style={styles.avatar} />
         <TouchableOpacity
           style={styles.btnMyProfile}
-          onPress={() => NavigationService.navigate(routes.MYPROFILE)}>
+          onPress={onPressMyProfile}>
           <Text style={styles.nameUser}>{user.fullname}</Text>
           <Text style={styles.email}>{user.email}</Text>
         </TouchableOpacity>

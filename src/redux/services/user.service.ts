@@ -7,8 +7,15 @@ import {configFormData} from './config.service';
 
 export class UserService {
   static async getUserById(action: string) {
-    console.log(`${ENDPOINTS.GET_USER_BY_UUID}/${action}`);
+    console.log(`${ENDPOINTS.GET_USER_BY_UUID}${action}`);
     return await apiService.get(`${ENDPOINTS.GET_USER_BY_UUID}${action}`);
+  }
+
+  static async getListPostByUser(payload: any) {
+    console.log(`${ENDPOINTS.ALL_POST_BY_USER}${payload}`);
+    return await apiService.get(
+      `${ENDPOINTS.ALL_POST_BY_USER}?page=${payload}`,
+    );
   }
   static async getUserProfile() {
     return await apiService.get(`${ENDPOINTS.PROFILE}`);
