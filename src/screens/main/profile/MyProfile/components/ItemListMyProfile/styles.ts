@@ -47,6 +47,7 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.medium,
     color: colors.black,
     letterSpacing: normalize(0.12),
+    paddingHorizontal: normalize(3)
   },
   iconDelete: {
     position: 'absolute',
