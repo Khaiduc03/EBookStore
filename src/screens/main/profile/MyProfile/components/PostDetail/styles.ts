@@ -6,6 +6,10 @@ const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
+  container: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
   image: {
     width: normalize(42),
     height: normalize(42),
@@ -27,7 +31,7 @@ const useStyles = makeStyles(({colors}) => ({
     marginLeft: normalize(10),
   },
   content: {
-    flex: 1,
+    width: WIDTH,
     justifyContent: 'space-around',
     backgroundColor: colors.background,
   },
