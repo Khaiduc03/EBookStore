@@ -28,6 +28,7 @@ import NoSearch from './components/NoSearch';
 import {getIsLoadingTopic} from '../../../../redux/selectors/loading.selector';
 import {useRoute} from '@react-navigation/native';
 import {ToastAndroid} from 'react-native';
+import SearchCustomV1 from '../../../../components/customs/SearchV1';
 const Search = () => {
   const dispatch = useAppDispatch();
   const dataBySearch = useAppSelector(getDataComicBySeacrh);
@@ -59,7 +60,7 @@ const Search = () => {
     }
   }, 1000);
 
-  const onSearchChange = (text: string) => {
+  const onSearchChange = (text: any) => {
     setSearch(text);
     handleSearch(text);
   };
@@ -157,10 +158,10 @@ const Search = () => {
             <Icon name="arrow-back" type="ionicon" />
           </TouchableOpacity>
           <View style={styles.search}>
-            <SearchCustom
+            <SearchCustomV1
               value={search}
-              setValue={onSearchChange}
-              onPressSearchComic={onPressSearch}
+              onChangeText={onSearchChange}
+              onSubmitEditing={onPressSearch}
               autoFocus={true}
             />
           </View>
