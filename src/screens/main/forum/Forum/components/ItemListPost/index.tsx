@@ -41,7 +41,7 @@ import {
   getIsLoadingTopic,
 } from '../../../../../../redux/selectors/loading.selector';
 
-const ItemListPost: React.FC<ForumType> = props => {
+const ItemListPost: React.FC<Partial<ForumType>> = props => {
   const dispatch = useAppDispatch();
 
   const dataAPI = useAppSelector(getListForum);

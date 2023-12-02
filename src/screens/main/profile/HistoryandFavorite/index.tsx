@@ -25,10 +25,7 @@ const HistoryandFavorite: React.FC = () => {
           color: styles.leftIconStyle.color,
         }}
         title="Favorite and History"
-        rightIconRight={{
-          name: 'notifications-outline',
-          type: 'ionicon',
-        }}
+      
       />
       <Tab
         containerStyle={styles.container}
