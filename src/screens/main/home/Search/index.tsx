@@ -58,7 +58,7 @@ const Search = () => {
       dispatch(ComicActions.ClearListBySearch());
       dispatch(ComicActions.getListBySearch({key: searchQuery, page: 1}));
     }
-  }, 1000);
+  }, 3000);
 
   const onSearchChange = (text: any) => {
     setSearch(text);
