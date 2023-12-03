@@ -50,7 +50,6 @@ const useStyles = makeStyles(({colors}) => ({
   },
   rightIconRight: {
     marginRight: normalize(10),
-    // marginTop: normalize(3),
   },
   profileImage: {
     width: normalize(36),

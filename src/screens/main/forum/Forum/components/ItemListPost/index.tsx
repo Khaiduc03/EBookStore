@@ -184,7 +184,6 @@ const ItemListPost: React.FC<Partial<ForumType>> = props => {
           </View>
 
           <View style={styles.viewIconPost}>
-            <Icon name="ellipsis-horizontal" type="ionicon" size={28} />
             <TouchableOpacity
               onPress={() => {
                 // handleDeletePost(item.uuid);
