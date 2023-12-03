@@ -85,6 +85,20 @@ const reducer = createSlice({
         listPostByUser: {},
       };
     },
+
+    getPostById: (state: UserState, _: PayloadAction<string>) => {
+      return {
+        ...state,
+      };
+    },
+    setPostById: (state: UserState, action: PayloadAction<ForumType>) => {
+      return {
+        ...state,
+        postById: {
+          ...action.payload,
+        },
+      };
+    },
   },
 });
 

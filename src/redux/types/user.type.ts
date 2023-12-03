@@ -5,6 +5,7 @@ export type UserState = Partial<{
   listUser: PayloadHttpList<UserType>;
   userById: PayloadHttpList<UserType>;
   listPostByUser: PayloadHttpListForumData<ForumType>;
+  postById: ForumType;
 }>;
 export type UserType = uuid & {
   email: string;

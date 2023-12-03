@@ -1,8 +1,11 @@
 import {Dimensions, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
 import {ForumType} from '../../../../../../redux/types/forum.type';
+import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
+import {UserAction} from '../../../../../../redux/reducer/user.reducer';
+import {getPostById} from '../../../../../../redux/selectors/user.selector';
 
 type Props = {
   data?: ForumType;
@@ -11,7 +14,9 @@ const ItemPost: React.FC<Props> = props => {
   const {data} = props;
   const itemWidth = Dimensions.get('window').width / 3;
   const handleDetailClick = () => {
-    NavigationService.navigate(routes.POSTDETAIL, {data: props.data});
+    NavigationService.navigate(routes.POSTDETAIL, {
+      post_uuid: props.data?.uuid,
+    });
   };
   return (
     <TouchableOpacity

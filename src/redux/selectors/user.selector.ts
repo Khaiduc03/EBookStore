@@ -8,3 +8,5 @@ export const nextPagePostByUser = (state: RootState) =>
 
 export const currentPagePostByUser = (state: RootState) =>
   state.user.listPostByUser?.currentPage;
+
+export const getPostById = (state: RootState) => state.user.postById;

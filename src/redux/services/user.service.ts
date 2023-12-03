@@ -11,6 +11,13 @@ export class UserService {
     return await apiService.get(`${ENDPOINTS.GET_USER_BY_UUID}${action}`);
   }
 
+  static async getPostById(payload: string) {
+    console.log(`${ENDPOINTS.FORUM_BY_UUID}${payload}`);
+    return await apiService.get(
+      `${ENDPOINTS.FORUM_BY_UUID}?post_uuid=${payload}`,
+    );
+  }
+
   static async getListPostByUser(payload: any) {
     console.log(`${ENDPOINTS.ALL_POST_BY_USER}${payload}`);
     return await apiService.get(

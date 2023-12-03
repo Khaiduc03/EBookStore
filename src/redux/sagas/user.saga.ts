@@ -74,9 +74,27 @@ function* getPostByUserSaga(action: PayloadAction<any>): Generator {
   }
 }
 
+function* getPostByIdSaga(action: PayloadAction<string>): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    console.log('run===========>');
+    const {data}: any = yield call(UserService.getPostById, action.payload);
+    if (data.code == 200) {
+      yield put(UserAction.setPostById(data.data));
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
 export default function* watchUserSaga() {
   yield takeLatest(UserAction.postFollow.type, postFollowSaga);
   yield takeLatest(UserAction.getListUser.type, getAllUserSaga);
   yield takeLatest(UserAction.getUserById.type, getUserByIdSaga);
   yield takeLatest(UserAction.getListPostByUser.type, getPostByUserSaga);
+  yield takeLatest(UserAction.getPostById.type, getPostByIdSaga);
 }
