@@ -29,8 +29,6 @@ const CommentComic = () => {
   const currentPage = useAppSelector(getCurrenPageCommentChapter);
   const [value, setvalue] = useState('');
   const isLoading = useAppSelector(getIsLoadingPage);
-  const flatListRef = useRef<FlatList<CommentChapterType>>(null);
-
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
 
@@ -66,9 +64,6 @@ const CommentComic = () => {
   };
   const onContentSizeChange = useCallback(
     (contentWidth: number, contentHeight: number) => {
-      flatListRef.current?.setNativeProps({
-        contentSize: {width: contentWidth, height: contentHeight},
-      });
       setSizeContent(contentHeight);
       if (size) {
         setSizeContent(sizeContent + 3000);

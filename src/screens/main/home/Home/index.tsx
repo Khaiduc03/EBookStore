@@ -128,9 +128,7 @@ const Home: FunctionComponent = () => {
         }}
         data={dataComic}
         columnWrapperStyle={
-          numCols === 3
-            ? {gap: 5, paddingHorizontal: 16}
-            : {flexDirection: 'column'}
+          numCols === 3 ? styles.columnStyle : {flexDirection: 'column'}
         }
         keyExtractor={item => item.uuid}
         numColumns={3}

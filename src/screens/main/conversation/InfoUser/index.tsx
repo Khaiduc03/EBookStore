@@ -11,16 +11,15 @@ import {getUserById} from '../../../../redux/selectors/user.selector';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 interface RouteParamsProfile {
-  uuid?: string;
+  joined_uuid?: string;
 }
 
 const InfoUser = () => {
   const styles = useStyles();
   const route = useRoute();
-  const uuid = (route.params as RouteParamsProfile).uuid;
+  const uuid = (route.params as RouteParamsProfile).joined_uuid;
   const dispatch = useAppDispatch();
   const dataById = useAppSelector(getUserById);
-  console.log(dataById);
 
   useEffect(() => {
     dispatch(UserAction.clearUserById());

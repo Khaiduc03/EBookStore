@@ -24,7 +24,7 @@ const TopViewComic = () => {
           color: styles.leftIcon.color,
           size: styles.leftIcon.fontSize,
         }}
-        title="Explore by Genre"
+        title="Trending Now"
         rightIconRight={{name: 'search', size: styles.rightLeftIcon.fontSize}}
         onPressLeftIcon={handlePressBack}
         onPressRightIconRight={handlePressSearch}

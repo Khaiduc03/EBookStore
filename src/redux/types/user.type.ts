@@ -1,8 +1,10 @@
 import {uuid, Timestamp, PayloadHttpList} from '../../types';
+import {ForumType, PayloadHttpListForumData} from './forum.type';
 
 export type UserState = Partial<{
   listUser: PayloadHttpList<UserType>;
   userById: PayloadHttpList<UserType>;
+  listPostByUser: PayloadHttpListForumData<ForumType>;
 }>;
 export type UserType = uuid & {
   email: string;

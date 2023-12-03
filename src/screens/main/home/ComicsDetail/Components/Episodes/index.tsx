@@ -19,6 +19,7 @@ import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {Icon} from '@rneui/base';
 import {ComicActions} from '../../../../../../redux';
 import {CommentChapterAction} from '../../../../../../redux/reducer/comment.chapter.reducer';
+import moment from 'moment';
 
 const Episodes = () => {
   const styles = useStyles();
@@ -50,7 +51,9 @@ const Episodes = () => {
                   size={20}
                   color={'#F89300'}
                 />
-                <Text style={styles.textChapter}>{item.created_at + ''}</Text>
+                <Text style={styles.textChapter}>
+                  {moment(item.created_at).format('YYYY-MM-DD-HH:mm') + ''}
+                </Text>
               </View>
             </View>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>

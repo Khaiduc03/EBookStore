@@ -43,6 +43,10 @@ const useStyles = makeStyles(({colors}) => ({
     width: '100%',
     flexWrap: 'wrap',
   },
+  columnStyle: {
+    paddingHorizontal: normalize(16),
+    gap: normalize(5),
+  },
 }));
 
 export default useStyles;
