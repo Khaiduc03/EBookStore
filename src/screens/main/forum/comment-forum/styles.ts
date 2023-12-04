@@ -1,14 +1,13 @@
 import {StyleSheet} from 'react-native';
-
+import {fontFamilySetup} from '../../../../utils/font';
 import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../../../../utils';
+import {Device} from '../../../../utils';
 const WIDTH = Device.getDeviceWidth();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    width: '100%',
-    position: 'absolute',
-    bottom: normalize(0),
+    flex: 1,
+    backgroundColor: colors.background,
   },
   viewTextInput: {
     width: '100%',

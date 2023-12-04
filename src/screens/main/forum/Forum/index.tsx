@@ -10,7 +10,7 @@ const Forum: React.FC = () => {
     <View style={styles.container}>
       <HeaderCustom
         leftIcon={{name: 'users', type: 'font-awesome'}}
-        leftIconStyle={{marginLeft: 10}}
+        leftIconStyle={styles.leftIcon}
         title="Forum"
       />
 

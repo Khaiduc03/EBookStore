@@ -8,31 +8,38 @@ import {routes} from '../../../../../../constants';
 import {CommentChapterType} from '../../../../../../redux/types/comment.chapter.type';
 import {CommentChapterAction} from '../../../../../../redux/reducer/comment.chapter.reducer';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
+import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {CommentForumType} from '../../../../../../redux/types/comment.forum.type';
 
 interface CommentDataProps {
-  data: CommentChapterType;
+  data: Partial<CommentForumType>;
 }
 
 const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
   const {
-    comment,
+    uuid,
     created_at,
-    fullname,
-    re_comment_count,
-    user_avatar,
+    updated_at,
+    deleted_at,
+    comment,
     parents_comment_uuid,
     chapter_uuid,
-    like_count,
+    user_uuid,
     type,
-    uuid,
-    is_like,
+    forum_uuid,
+    fullname,
+    user_avatar,
+    re_comment_count,
+    like_count,
+    is_liked,
   } = props.data;
+
   const styles = useStyles();
 
   const dispatch = useAppDispatch();
 
   const onPressLikeComment = () => {
-    if (is_like) {
+    if (is_liked) {
       dispatch(
         CommentChapterAction.postUnlikeCommentChapter({comment_uuid: uuid}),
       );
@@ -69,7 +76,7 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
               <Icon
                 name="chatbox-outline"
                 type="ionicon"
-                color={styles.iconStyle.color}
+                color={styles.iconStyleBlur.color}
                 size={15}
               />
               <Text style={styles.numberRepStyle}>
@@ -78,10 +85,13 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={onPressLikeComment} style={styles.like}>
-              <Icon
-                name="thumbs-up"
-                type="feather"
-                color={is_like ? '#F89300' : styles.iconStyle.color}
+              <IconMaterialIcons
+                name={is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'}
+                color={
+                  is_liked
+                    ? styles.iconStyleFocus.color
+                    : styles.iconStyleBlur.color
+                }
                 size={15}
               />
               <Text style={styles.numberRepStyle}>
@@ -93,7 +103,7 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
             name="ellipsis-vertical"
             type="ionicon"
             size={15}
-            color={styles.iconStyle.color}
+            color={styles.iconStyleBlur.color}
           />
         </View>
       </View>

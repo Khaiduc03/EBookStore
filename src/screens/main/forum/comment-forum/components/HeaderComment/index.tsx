@@ -14,7 +14,7 @@ const HeaderComment = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => backScreen()} style={{paddingLeft: 16}}>
+      <TouchableOpacity onPress={() => backScreen()} style={styles.btnBack}>
         <Icon
           name="arrow-back-outline"
           size={24}
@@ -25,7 +25,7 @@ const HeaderComment = () => {
       <Text style={styles.textHeader}>
         Comments({totalComment ? totalComment : '0'})
       </Text>
-      <View style={{paddingRight: 16}} />
+      <View style={styles.viewPDR} />
     </View>
   );
 };

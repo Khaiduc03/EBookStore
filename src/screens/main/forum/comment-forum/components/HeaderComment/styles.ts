@@ -18,6 +18,9 @@ const useStyles = makeStyles(({colors}) => ({
     position: 'absolute',
     top: 0,
   },
+  btnBack: {
+    paddingLeft: normalize(16),
+  },
   textHeader: {
     color: colors.black,
     fontSize: normalize(18),
@@ -25,6 +28,9 @@ const useStyles = makeStyles(({colors}) => ({
   },
   iconStylle: {
     color: colors.black,
+  },
+  viewPDR: {
+    paddingRight: normalize(16),
   },
 }));
 

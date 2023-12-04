@@ -17,7 +17,7 @@ export type CommentForumType = uuid &
     user_avatar: string;
     re_comment_count: number;
     like_count: number;
-    is_like: boolean;
+    is_liked: boolean;
   };
 
 export type LikeCommentType = {

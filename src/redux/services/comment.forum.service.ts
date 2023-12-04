@@ -3,21 +3,21 @@ import apiService from './api.service';
 import {ENDPOINTS} from '../../environment';
 
 export class CommentForumService {
-  // static async postCommentForum(payload: any) {
-  //   console.log(`${ENDPOINTS.COMMENT_FORUM}`, payload);
-  //   return await apiService.post(`${ENDPOINTS.COMMENT_FORUM}`, {
-  //     chapter_uuid: payload.chapter_uuid,
-  //     comment: payload.comment,
-  //   });
-  // }
-  // static async postRepCommentChapter(payload: any) {
-  //   console.log(`${ENDPOINTS.POST_COMMENT_COMIC}`, payload);
-  //   return await apiService.post(`${ENDPOINTS.POST_COMMENT_COMIC}`, {
-  //     chapter_uuid: payload.chapter_uuid,
-  //     comment: payload.comment,
-  //     parents_comment_uuid: payload.parents_comment_uuid,
-  //   });
-  // }
+  static async postCommentForum(payload: any) {
+    console.log(`${ENDPOINTS.COMMENT_FORUM}`, payload);
+    return await apiService.post(`${ENDPOINTS.COMMENT_FORUM}`, {
+      forum_uuid: payload.forum_uuid,
+      comment: payload.comment,
+    });
+  }
+  static async postRepCommentChapter(payload: any) {
+    console.log(`${ENDPOINTS.POST_COMMENT_COMIC}`, payload);
+    return await apiService.post(`${ENDPOINTS.POST_COMMENT_COMIC}`, {
+      forum_uuid: payload.forum_uuid,
+      comment: payload.comment,
+      parents_comment_uuid: payload.parents_comment_uuid,
+    });
+  }
   // static async getCommentChapter(payload: any) {
   //   console.log(
   //     `${ENDPOINTS.GET_COMMENT_COMIC}?chapter_uuid=${payload.chapter_uuid}&page=${payload.page}`,

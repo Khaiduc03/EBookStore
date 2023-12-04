@@ -7,11 +7,8 @@ import {
 } from 'react-native';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {HeaderComment, ItemComment} from './components';
-import useStyles from '../RepComments/styles';
-
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {CommentChapterAction} from '../../../../redux/reducer/comment.chapter.reducer';
-
 import {getDataDetailChapter} from '../../../../redux/selectors/comic.selector';
 import {
   getCurrenPageCommentChapter,
@@ -20,8 +17,9 @@ import {
 } from '../../../../redux/selectors/comment.chapter.selector';
 import {CommentChapterType} from '../../../../redux/types/comment.chapter.type';
 import {getIsLoadingPage} from '../../../../redux/selectors/loading.selector';
+import useStyles from './styles';
 
-const CommentComic = () => {
+const CommentForum = () => {
   const styles = useStyles();
   const dataDetailChapter = useAppSelector(getDataDetailChapter);
   const dataComment = useAppSelector(getListComment);
@@ -118,17 +116,22 @@ const CommentComic = () => {
         }}
         ListFooterComponent={isLoading ? listFooterComponent() : <View />}
       />
-      <TextInput
-        value={value}
-        onChangeText={text => setvalue(text)}
-        placeholder="Shoot your comment..."
-        onSubmitEditing={onPressPostComment}
-        returnKeyType="send"
-        style={styles.inputStyle}
-      />
+
+      <View style={styles.viewTextInput}>
+        <TextInput
+          value={value}
+          onChangeText={text => setvalue(text)}
+          placeholder="Shoot your comment..."
+          placeholderTextColor={'#939297'}
+          onSubmitEditing={onPressPostComment}
+          returnKeyType="send"
+          style={styles.textInput}
+        />
+      </View>
+
       <HeaderComment />
     </SafeAreaView>
   );
 };
 
-export default CommentComic;
+export default CommentForum;
