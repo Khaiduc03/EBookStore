@@ -18,7 +18,7 @@ const reducer = createSlice({
         listDataForum: {},
       };
     },
-    handleGetListData: (state: ForumState, _: PayloadAction<number>) => {
+    getListData: (state: ForumState, _: PayloadAction<number>) => {
       return {
         ...state,
       };
@@ -42,13 +42,13 @@ const reducer = createSlice({
         },
       };
     },
-    postLikeForumPost: (state: ForumState, _: PayloadAction<any>) => {
+    postLikeForum: (state: ForumState, _: PayloadAction<any>) => {
       return {
         ...state,
       };
     },
 
-    postUnlikeForumPost: (state: ForumState, _: PayloadAction<any>) => {
+    deleteLikeForum: (state: ForumState, _: PayloadAction<any>) => {
       return {
         ...state,
       };
