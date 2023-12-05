@@ -19,6 +19,7 @@ import {Redux} from '../types/redux.type';
 import {ChatReducer} from '../reducer/chat.reducer';
 import {UserReducer} from '../reducer/user.reducer';
 import {CommentChapterReducer} from '../reducer/comment.chapter.reducer';
+import {CommentForumReducer} from '../reducer/comment.forum.reducer';
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
@@ -43,6 +44,7 @@ const rootReducers = combineReducers({
   forum: ForumReducer,
   user: UserReducer,
   commetChapter: CommentChapterReducer,
+  commentForum: CommentForumReducer,
 });
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducers);
 

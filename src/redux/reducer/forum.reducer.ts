@@ -133,6 +133,16 @@ const reducer = createSlice({
         }
       }
     },
+
+    setCountComment: (state: ForumState) => {
+      return {
+        ...state,
+        listDetailChapter: {
+          ...state.listDataForum,
+          totalComment: (state.listDataForum?.totalData || 0) + 1,
+        },
+      };
+    },
   },
 });
 

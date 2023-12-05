@@ -306,7 +306,14 @@ const ItemListPost: React.FC = () => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.iconText}
-              onPress={() => NavigationService.navigate(routes.COMMENT_POST)}>
+              onPress={() => {
+                if (item.uuid) {
+                  NavigationService.navigate(routes.COMMENT_FORUM, {
+                    forum_uuid: item.uuid,
+                    comment_count: item.comment_count,
+                  });
+                }
+              }}>
               <IconFontAwesome5
                 name="comment"
                 color={styles.colorIconHeartBlur.color}
@@ -352,11 +359,11 @@ const ItemListPost: React.FC = () => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.buttonHeader}
-                onPress={() => NavigationService.navigate(routes.CREATEPOST)}>
+                onPress={() => NavigationService.navigate(routes.CREATE_POST)}>
                 <Text style={styles.textButtonHeader}>Bạn đang nghĩ gì?</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => NavigationService.navigate(routes.CREATEPOST)}>
+                onPress={() => NavigationService.navigate(routes.CREATE_POST)}>
                 <ImageIcon />
               </TouchableOpacity>
             </View>

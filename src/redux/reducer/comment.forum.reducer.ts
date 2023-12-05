@@ -1,12 +1,12 @@
-import {PayloadAction, createSlice, current} from '@reduxjs/toolkit';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {Redux} from '../types';
-import {CommentForumState, CommentForumType} from '../types/comment.forum.type';
 import {PayloadHttpListCommentData} from '../types/comment.chapter.type';
+import {CommentForumState, CommentForumType} from '../types/comment.forum.type';
 
 const initialState: CommentForumState = {};
 
 const reducer = createSlice({
-  name: Redux.commentChapter,
+  name: Redux.commentForum,
   initialState: initialState,
   reducers: {
     postCommentForum: (state: CommentForumState, _: PayloadAction<any>) => {
@@ -15,7 +15,7 @@ const reducer = createSlice({
       };
     },
 
-    posCommentForumSucces: (
+    postCommentForumSucces: (
       state: CommentForumState,
       action: PayloadAction<CommentForumType>,
     ) => {
@@ -75,7 +75,7 @@ const reducer = createSlice({
       };
     },
 
-    postUnlikeCommentForum: (
+    deleteLikeCommentForum: (
       state: CommentForumState,
       _: PayloadAction<any>,
     ) => {
@@ -157,7 +157,7 @@ const reducer = createSlice({
       };
     },
 
-    handleLikeAndUnlikeSuccess: (
+    handleLike_UnlikeSuccess: (
       state: CommentForumState,
       action: PayloadAction<string>, // UUID của comment
     ) => {
@@ -194,7 +194,7 @@ const reducer = createSlice({
       return state; // Trả về state không thay đổi nếu không có listComment hoặc listComment.data
     },
 
-    handleLikeAndUnlikeRepSuccess: (
+    handleLike_UnlikeRepSuccess: (
       state: CommentForumState,
       action: PayloadAction<string>, // UUID của comment
     ) => {
@@ -214,7 +214,7 @@ const reducer = createSlice({
 
               return {
                 ...comment,
-                is_like: updatedIsLike,
+                is_liked: updatedIsLike,
                 like_count: updatedLikeCount,
               };
             }

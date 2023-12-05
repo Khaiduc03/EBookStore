@@ -1,5 +1,4 @@
 import {RootState} from '../store';
-import {ForumType} from '../types/forum.type';
 
 export const getListForum = (state: RootState) =>
   state.forum.listDataForum?.data;
@@ -9,3 +8,6 @@ export const getCurrentPageForum = (state: RootState) =>
 
 export const getNextForum = (state: RootState) =>
   state.forum.listDataForum?.canNext;
+
+export const getCountCommentForum = (state: RootState) =>
+  state.forum.listDetail?.totalComment;

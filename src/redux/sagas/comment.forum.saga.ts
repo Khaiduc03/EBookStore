@@ -3,20 +3,22 @@ import {call, put, takeLatest} from 'redux-saga/effects';
 import {UserService} from '../services';
 import {UserAction} from '../reducer/user.reducer';
 import {CommentChapterAction} from '../reducer/comment.chapter.reducer';
-import {CommentChapterService} from '../services/comment.chapter.service';
-import {ComicActions, LoadingActions} from '../reducer';
+import {ComicActions, ForumActions, LoadingActions} from '../reducer';
+import {CommentForumService} from '../services/comment.forum.service';
+import {CommentForumAction} from '../reducer/comment.forum.reducer';
+import {CommentForumType} from '../types/comment.forum.type';
 
 function* postCommentSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
     const {data}: any = yield call(
-      CommentChapterService.postCommentChapter,
+      CommentForumService.postCommentForum,
       action.payload,
     );
     if (data.code == 200) {
       console.log(data.data);
-      yield put(CommentChapterAction.posCommentChapterSucces(data.data));
+      yield put(CommentForumAction.postCommentForumSucces(data.data));
       yield put(ComicActions.setCountComment());
       console.log('run push tookit');
     } else {
@@ -34,19 +36,19 @@ function* postLikeCommentSaga(action: PayloadAction<any>): Generator {
   try {
     console.log('run===========>');
     const {data}: any = yield call(
-      CommentChapterService.postLikeCommentChapter,
+      CommentForumService.postLikeCommentForum,
       action.payload,
     );
     if (data.code == 200) {
       if (action.payload.type) {
         yield put(
-          CommentChapterAction.handleLikeAndUnlikeRepSuccess(
+          CommentForumAction.handleLike_UnlikeSuccess(
             action.payload.comment_uuid,
           ),
         );
       } else {
         yield put(
-          CommentChapterAction.handleLikeAndUnlikeSuccess(
+          CommentForumAction.handleLike_UnlikeSuccess(
             action.payload.comment_uuid,
           ),
         );
@@ -62,25 +64,25 @@ function* postLikeCommentSaga(action: PayloadAction<any>): Generator {
   }
 }
 
-function* postUnlikeCommentSaga(action: PayloadAction<any>): Generator {
+function* deleteLikeCommentSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
     const {data}: any = yield call(
-      CommentChapterService.postUnlikeCommentChapter,
+      CommentForumService.deleteLikeCommentForum,
       action.payload,
     );
     console.log(data);
     if (data.code == 200) {
       if (action.payload.type) {
         yield put(
-          CommentChapterAction.handleLikeAndUnlikeRepSuccess(
+          CommentForumAction.handleLike_UnlikeSuccess(
             action.payload.comment_uuid,
           ),
         );
       } else {
         yield put(
-          CommentChapterAction.handleLikeAndUnlikeSuccess(
+          CommentForumAction.handleLike_UnlikeSuccess(
             action.payload.comment_uuid,
           ),
         );
@@ -101,12 +103,12 @@ function* postRepCommentSaga(action: PayloadAction<any>): Generator {
   try {
     console.log('run===========>');
     const {data}: any = yield call(
-      CommentChapterService.postRepCommentChapter,
+      CommentForumService.postRepCommentForum,
       action.payload,
     );
     if (data.code == 200) {
-      yield put(CommentChapterAction.postRepCommentChapterSucces(data.data));
-      yield put(ComicActions.setCountComment());
+      yield put(CommentForumAction.postRepCommentForumSucces(data.data));
+      yield put(ForumActions.setCountComment());
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');
@@ -118,16 +120,17 @@ function* postRepCommentSaga(action: PayloadAction<any>): Generator {
   }
 }
 
-function* getCommentComicSaga(action: PayloadAction<any>): Generator {
+function* getCommentForumSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoadingPage());
   try {
     console.log('run===========>');
     const {data}: any = yield call(
-      CommentChapterService.getCommentChapter,
+      CommentForumService.getCommentForum,
       action.payload,
     );
+    console.log('getCommentForumSaga: ======================>', action.payload);
     if (data.code == 200) {
-      yield put(CommentChapterAction.setCommentChapter(data.data));
+      yield put(CommentForumAction.setCommentForum(data.data));
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');
@@ -139,16 +142,16 @@ function* getCommentComicSaga(action: PayloadAction<any>): Generator {
   }
 }
 
-function* getRepCommentComicSaga(action: PayloadAction<any>): Generator {
+function* getRepCommentForumSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoadingPage());
   try {
     console.log('run===========>');
     const {data}: any = yield call(
-      CommentChapterService.getRepCommentChapter,
+      CommentForumService.getRepCommentForum,
       action.payload,
     );
     if (data.code == 200) {
-      yield put(CommentChapterAction.setRepCommentChapter(data.data));
+      yield put(CommentForumAction.setRepCommentForum(data.data));
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');
@@ -161,31 +164,28 @@ function* getRepCommentComicSaga(action: PayloadAction<any>): Generator {
 }
 
 export default function* watchCommentChapterSaga() {
+  yield takeLatest(CommentForumAction.postCommentForum.type, postCommentSaga);
   yield takeLatest(
-    CommentChapterAction.postCommentChapter.type,
-    postCommentSaga,
-  );
-  yield takeLatest(
-    CommentChapterAction.getCommentChapter.type,
-    getCommentComicSaga,
+    CommentForumAction.getCommentForum.type,
+    getCommentForumSaga,
   );
 
   yield takeLatest(
-    CommentChapterAction.postRepCommentChapter.type,
+    CommentForumAction.postRepCommentForum.type,
     postRepCommentSaga,
   );
 
   yield takeLatest(
-    CommentChapterAction.postLikeCommentChapter.type,
+    CommentForumAction.postLikeCommentForum.type,
     postLikeCommentSaga,
   );
   yield takeLatest(
-    CommentChapterAction.postUnlikeCommentChapter.type,
-    postUnlikeCommentSaga,
+    CommentForumAction.deleteLikeCommentForum.type,
+    deleteLikeCommentSaga,
   );
 
   yield takeLatest(
-    CommentChapterAction.getRepCommentChapter.type,
-    getRepCommentComicSaga,
+    CommentForumAction.getRepCommentForum.type,
+    getRepCommentForumSaga,
   );
 }

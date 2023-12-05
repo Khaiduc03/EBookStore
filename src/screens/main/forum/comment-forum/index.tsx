@@ -1,51 +1,58 @@
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
-  FlatList,
-  TextInput,
-  SafeAreaView,
   ActivityIndicator,
+  FlatList,
+  SafeAreaView,
+  TextInput,
   View,
 } from 'react-native';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {HeaderComment, ItemComment} from './components';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {CommentChapterAction} from '../../../../redux/reducer/comment.chapter.reducer';
-import {getDataDetailChapter} from '../../../../redux/selectors/comic.selector';
+import {CommentForumAction} from '../../../../redux/reducer/comment.forum.reducer';
 import {
-  getCurrenPageCommentChapter,
-  getListComment,
-  getNextPageCommentChapter,
-} from '../../../../redux/selectors/comment.chapter.selector';
-import {CommentChapterType} from '../../../../redux/types/comment.chapter.type';
+  getCurrenPageCommentForum,
+  getListCommentForum,
+  getNextPageCommentForum,
+} from '../../../../redux/selectors/comment.forum.selector';
 import {getIsLoadingPage} from '../../../../redux/selectors/loading.selector';
+import {CommentForumType} from '../../../../redux/types/comment.forum.type';
+import {ForumType} from '../../../../redux/types/forum.type';
+import {HeaderComment, ItemComment} from './components';
 import useStyles from './styles';
+import {useRoute} from '@react-navigation/native';
 
-const CommentForum = () => {
+const CommentForum: React.FC = () => {
   const styles = useStyles();
-  const dataDetailChapter = useAppSelector(getDataDetailChapter);
-  const dataComment = useAppSelector(getListComment);
-  const canNext = useAppSelector(getNextPageCommentChapter);
-  const currentPage = useAppSelector(getCurrenPageCommentChapter);
+
+  const route = useRoute();
+  const forum_uuid = (route.params as {forum_uuid?: CommentForumType})
+    ?.forum_uuid;
+  const dataComment = useAppSelector(getListCommentForum);
+  const canNext = useAppSelector(getNextPageCommentForum);
+  const currentPage = useAppSelector(getCurrenPageCommentForum);
   const [value, setvalue] = useState('');
   const isLoading = useAppSelector(getIsLoadingPage);
-  const flatListRef = useRef<FlatList<CommentChapterType>>(null);
+  const flatListRef = useRef<FlatList<CommentForumType>>(null);
 
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(
-      CommentChapterAction.getCommentChapter({
-        chapter_uuid: dataDetailChapter && dataDetailChapter[0].chapter_uuid,
+      CommentForumAction.getCommentForum({
+        forum_uuid: forum_uuid,
         page: 1,
       }),
     );
   }, []);
 
+  // console.log('forum_uuid============= ', forum_uuid);
+
   const onPressPostComment = () => {
     dispatch(
-      CommentChapterAction.postCommentChapter({
-        chapter_uuid: dataDetailChapter && dataDetailChapter[0].chapter_uuid,
+      CommentForumAction.postCommentForum({
+        forum_uuid: forum_uuid,
         comment: value,
       }),
     );
@@ -54,8 +61,8 @@ const CommentForum = () => {
   const loadMoreComic = () => {
     if (canNext && !isLoading) {
       dispatch(
-        CommentChapterAction.getCommentChapter({
-          chapter_uuid: dataDetailChapter && dataDetailChapter[0].chapter_uuid,
+        CommentForumAction.getCommentForum({
+          forum_uuid: forum_uuid,
           page: currentPage ? currentPage + 1 : 1,
         }),
       );
@@ -84,7 +91,7 @@ const CommentForum = () => {
     item,
     index,
   }: {
-    item: CommentChapterType;
+    item: CommentForumType;
     index: number;
   }) => {
     return <ItemComment data={item} />;
@@ -105,10 +112,10 @@ const CommentForum = () => {
             contentOffset.y + layoutMeasurement.height >=
             sizeContent - numberOfPixelsFromBottomThreshold;
           console.log(
-            'sỉze scroll',
+            'size scroll',
             contentOffset.y + layoutMeasurement.height,
           );
-          console.log('sỉze content', sizeContent);
+          console.log('size content', sizeContent);
 
           if (isNearBottom) {
             loadMoreComic();

@@ -10,6 +10,8 @@ import {CommentChapterAction} from '../../../../../../redux/reducer/comment.chap
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {CommentForumType} from '../../../../../../redux/types/comment.forum.type';
+import {CommentForumAction} from '../../../../../../redux/reducer/comment.forum.reducer';
+import moment from 'moment';
 
 interface CommentDataProps {
   data: Partial<CommentForumType>;
@@ -31,7 +33,7 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
     user_avatar,
     re_comment_count,
     like_count,
-    is_liked,
+    is_like,
   } = props.data;
 
   const styles = useStyles();
@@ -39,14 +41,10 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
   const dispatch = useAppDispatch();
 
   const onPressLikeComment = () => {
-    if (is_liked) {
-      dispatch(
-        CommentChapterAction.postUnlikeCommentChapter({comment_uuid: uuid}),
-      );
+    if (is_like) {
+      dispatch(CommentForumAction.deleteLikeCommentForum({comment_uuid: uuid}));
     } else {
-      dispatch(
-        CommentChapterAction.postLikeCommentChapter({comment_uuid: uuid}),
-      );
+      dispatch(CommentForumAction.postLikeCommentForum({comment_uuid: uuid}));
     }
   };
 
@@ -60,7 +58,9 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
       />
       <View style={styles.content}>
         <Text style={styles.nameStyle}>{fullname}</Text>
-        <Text style={styles.day}>{created_at + ''}</Text>
+        <Text style={styles.day}>
+          {moment(created_at).format('YYYY-MM-DD [at] HH:mm')}
+        </Text>
         <Text style={styles.commentStyle}>{comment}</Text>
         <View style={styles.repContent}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -70,7 +70,7 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
                   parents_comment_uuid: uuid,
                   dataFirst: props.data,
                 }),
-                  dispatch(CommentChapterAction.clearRepCommentChapter());
+                  dispatch(CommentForumAction.clearRepCommentForum());
               }}
               style={styles.rep}>
               <Icon
@@ -86,9 +86,9 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
 
             <TouchableOpacity onPress={onPressLikeComment} style={styles.like}>
               <IconMaterialIcons
-                name={is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'}
+                name={is_like ? 'thumb-up-alt' : 'thumb-up-off-alt'}
                 color={
-                  is_liked
+                  is_like
                     ? styles.iconStyleFocus.color
                     : styles.iconStyleBlur.color
                 }

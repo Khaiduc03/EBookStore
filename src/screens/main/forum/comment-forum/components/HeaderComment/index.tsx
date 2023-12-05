@@ -1,16 +1,23 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import useStyles from './styles';
 import {Icon} from '@rneui/base';
+import React, {useEffect} from 'react';
+import {Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {backScreen} from '../../../../../../utils';
 import {useAppSelector} from '../../../../../../hooks';
-import {getTotaComment} from '../../../../../../redux/selectors/comment.chapter.selector';
-import {getCountComment} from '../../../../../../redux/selectors/comic.selector';
+import {getCountCommentForum} from '../../../../../../redux';
+import {backScreen} from '../../../../../../utils';
+import useStyles from './styles';
+import {useRoute} from '@react-navigation/native';
 
 const HeaderComment = () => {
   const styles = useStyles();
-  const totalComment = useAppSelector(getCountComment);
+
+  const route = useRoute();
+
+  const totalComment = useAppSelector(getCountCommentForum);
+  // Access the comment_count parameter from route.params
+
+  // const totalComment =
+  //   (route.params as {comment_count?: number})?.comment_count || 0;
 
   return (
     <View style={styles.container}>
@@ -24,6 +31,7 @@ const HeaderComment = () => {
       </TouchableOpacity>
       <Text style={styles.textHeader}>
         Comments({totalComment ? totalComment : '0'})
+        {/* Comments({totalComment}) */}
       </Text>
       <View style={styles.viewPDR} />
     </View>
