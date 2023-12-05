@@ -31,22 +31,17 @@ function* getListDataForumSaga(action: PayloadAction<number>): Generator {
   }
 }
 
-function* PostLikeForumSaga(
+function* postLikeForumSaga(
   action: PayloadAction<any>,
 ): Generator<any, void, any> {
+  const uuid = action.payload;
+
   try {
     console.log('run');
-    const {data}: any = yield call(ForumService.postLikeForum, action.payload);
+    const {data}: any = yield call(ForumService.postLikeForum, uuid);
     if (data.code == 200) {
-      if (action.payload.type) {
-        yield put(
-          ForumActions.handleLike_UnlikeSuccess(action.payload.forum_uuid),
-        );
-      } else {
-        yield put(
-          ForumActions.handleLike_UnlikeSuccess(action.payload.forum_uuid),
-        );
-      }
+      yield put(ForumActions.handleLike_UnlikeSuccess(uuid));
+
       console.log('run push tookit');
     }
   } catch (error) {
@@ -55,25 +50,16 @@ function* PostLikeForumSaga(
   }
 }
 
-function* DeleteLikeForumSaga(
+function* deleteLikeForumSaga(
   action: PayloadAction<any>,
 ): Generator<any, void, any> {
+  const uuid = action.payload;
+
   try {
     console.log('run');
-    const {data}: any = yield call(
-      ForumService.deleteLikeForum,
-      action.payload,
-    );
+    const {data}: any = yield call(ForumService.deleteLikeForum, uuid);
     if (data.code == 200) {
-      if (action.payload.type) {
-        yield put(
-          ForumActions.handleLike_UnlikeSuccess(action.payload.forum_uuid),
-        );
-      } else {
-        yield put(
-          ForumActions.handleLike_UnlikeSuccess(action.payload.forum_uuid),
-        );
-      }
+      yield put(ForumActions.handleLike_UnlikeSuccess(uuid));
       console.log('run push tookit');
     }
   } catch (error) {
@@ -126,12 +112,12 @@ function* deletePostForumSaga(
 }
 
 export default function* watchForumSaga() {
-  yield takeLatest(ForumActions.getListData.type, getListDataForumSaga);
-  yield takeLatest(ForumActions.getListData, PostLikeForumSaga);
-  yield takeLatest(ForumActions.getListData, DeleteLikeForumSaga);
+  yield takeLatest(ForumActions.getListData, getListDataForumSaga);
+  yield takeLatest(ForumActions.postLikeForum, postLikeForumSaga);
+  yield takeLatest(ForumActions.deleteLikeForum, deleteLikeForumSaga);
   yield takeLatest(
-    ForumActions.handleCreatePostSuccess.type,
+    ForumActions.handleCreatePostSuccess,
     postCreatePostForumSaga,
   );
-  yield takeLatest(ForumActions.deletePost.type, deletePostForumSaga);
+  yield takeLatest(ForumActions.deletePost, deletePostForumSaga);
 }

@@ -38,7 +38,25 @@ import {getIsLoadingForum} from '../../../../../../redux/selectors/loading.selec
 import {ForumType} from '../../../../../../redux/types/forum.type';
 import useStyles from './styles';
 
-const ItemListPost: React.FC = () => {
+interface ForumDataProps {
+  data?: ForumType;
+  isLoading?: boolean;
+  loadMoreForum?: () => void;
+}
+
+const ItemListPost: React.FC<ForumDataProps> = props => {
+  const {
+    uuid,
+    content,
+    images,
+    like_count,
+    comment_count,
+    created_at,
+    is_liked,
+    user_avatar,
+    user_fullname,
+  } = props.data || {};
+
   const dispatch = useAppDispatch();
 
   const dataAPI = useAppSelector(getListForum);
@@ -131,13 +149,22 @@ const ItemListPost: React.FC = () => {
   const styles = useStyles();
 
   const renderItem = ({item}: {item: ForumType}) => {
-    const handleLikePress = (forum_uuid: any) => {
-      if (item.is_liked) {
-        dispatch(ForumActions.deleteLikeForum(forum_uuid));
-        dispatch(ForumActions.handleLike_UnlikeSuccess(forum_uuid));
-      } else {
-        dispatch(ForumActions.postLikeForum(forum_uuid));
-        dispatch(ForumActions.handleLike_UnlikeSuccess(forum_uuid));
+    const currentItem = dataAPI.find((forum: any) => forum.uuid === item.uuid);
+
+    if (!currentItem) {
+      return null;
+    }
+
+    const handleLike_UnlikePress = async (forum_uuid: any) => {
+      try {
+        if (currentItem.is_liked) {
+          await dispatch(ForumActions.deleteLikeForum(forum_uuid));
+        } else {
+          await dispatch(ForumActions.postLikeForum(forum_uuid));
+        }
+      } catch (error) {
+        console.error('Error during like/unlike:', error);
+      } finally {
       }
     };
 
@@ -195,7 +222,7 @@ const ItemListPost: React.FC = () => {
           <FlatList
             data={item.images}
             renderItem={item => {
-              if (item.item === '' || item.item == null) {
+              if (item.item === null) {
                 return <View />;
               }
               return (
@@ -204,9 +231,7 @@ const ItemListPost: React.FC = () => {
                     <AutoHeightImage
                       key={item.index.toString()}
                       source={{
-                        uri:
-                          item.item ||
-                          'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
+                        uri: item.item,
                       }}
                       progressiveRenderingEnabled
                       width={screenWidth}
@@ -252,11 +277,11 @@ const ItemListPost: React.FC = () => {
             horizontal
             showsHorizontalScrollIndicator={false}
           />
-          {item.images && item.images.some(image => image !== null) && (
+          {images && images.some(image => image !== null) && (
             <View style={styles.viewImagesLengh}>
               <Text style={styles.textImagesLengh}>
                 {activeIndices[item.uuid] ? activeIndices[item.uuid] + 1 : 1}/
-                {item.images.length + 0}
+                {images.length + 0}
               </Text>
             </View>
           )}
@@ -286,7 +311,7 @@ const ItemListPost: React.FC = () => {
             <TouchableOpacity
               style={styles.iconText}
               onPress={() => {
-                handleLikePress(item.uuid);
+                handleLike_UnlikePress(item.uuid);
               }}>
               <IconMaterialIcons
                 name={item.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'}
@@ -304,10 +329,11 @@ const ItemListPost: React.FC = () => {
                 Like
               </Text>
             </TouchableOpacity>
+
             <TouchableOpacity
               style={styles.iconText}
               onPress={() => {
-                if (item.uuid) {
+                if (uuid) {
                   NavigationService.navigate(routes.COMMENT_FORUM, {
                     forum_uuid: item.uuid,
                     comment_count: item.comment_count,

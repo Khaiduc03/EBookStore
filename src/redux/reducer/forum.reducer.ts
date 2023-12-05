@@ -1,10 +1,11 @@
-import {PayloadAction, createSlice} from '@reduxjs/toolkit';
+import {PayloadAction, createAction, createSlice} from '@reduxjs/toolkit';
 import {Redux} from '../types';
 import {
   ForumState,
   ForumType,
   PayloadHttpListForumData,
 } from '../types/forum.type';
+import {produce} from 'immer';
 
 const initialState: ForumState = {};
 
@@ -60,13 +61,11 @@ const reducer = createSlice({
     ) => {
       const uuid = action.payload;
 
-      // Kiểm tra listForum có tồn tại và không rỗng
       if (state.listDataForum && state.listDataForum.data) {
         const updatedListForum = {
           ...state.listDataForum,
           data: state.listDataForum.data.map(item => {
             if (item.uuid === uuid) {
-              // Tìm thấy item cần cập nhật
               const updatedIsLike = !item.is_liked;
               const updatedLikeCount = updatedIsLike
                 ? item.like_count + 1
@@ -88,7 +87,7 @@ const reducer = createSlice({
         };
       }
 
-      return state; // Trả về state không thay đổi nếu không có listForum hoặc listForum.data
+      return state;
     },
 
     postCreatePost: (state: ForumState, action: PayloadAction<ForumType>) => {
