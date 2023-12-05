@@ -53,10 +53,10 @@ const ItemListProfile: React.FC<CustomCirclerProps> = props => {
       {switchRight && (
         <View style={styles.viewBtn}>
           <TouchableOpacity
-            style={[styles.outter, isEnabled ? styles.off : styles.on]}
+            style={[styles.outter, isEnabled ? styles.on : styles.off]}
             onPress={handleTheme}
             activeOpacity={3}>
-            <View style={isEnabled ? styles.innerOFF : styles.innerON} />
+            <View style={isEnabled ? styles.innerON : styles.innerOFF} />
           </TouchableOpacity>
         </View>
       )}

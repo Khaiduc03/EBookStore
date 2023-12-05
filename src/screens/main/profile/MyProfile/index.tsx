@@ -86,7 +86,7 @@ const MyProfile: React.FC = props => {
           type: 'octicon',
         }}
         onPressRightIconLeft={() =>
-          NavigationService.navigate(routes.CREATEPOST)
+          NavigationService.navigate(routes.CREATE_POST)
         }
         onPressRightIconRight={() =>
           NavigationService.navigate(routes.UPDATE_PROFILE2)
