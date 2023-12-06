@@ -44,6 +44,7 @@ const MyProfile: React.FC = props => {
 
   useEffect(() => {
     dispatch(UserAction.getListUser());
+    dispatch(UserAction.clearListPostByUser());
     dispatch(UserAction.getListPostByUser(1));
   }, []);
 
@@ -97,7 +98,15 @@ const MyProfile: React.FC = props => {
       </View>
       <View style={styles.viewTextName}>
         <Text style={styles.nameUser}>{user.fullname}</Text>
-        <Text style={styles.textBio}>Biographic this here !!</Text>
+        <View style={styles.summaryContainer}>
+          <Text style={styles.textBio} numberOfLines={1}>
+            {user.summary || 'I am hacker'}
+          </Text>
+          <TouchableOpacity
+            onPress={() => NavigationService.navigate(routes.UPDATE_BIO)}>
+            <Text style={styles.textEdit}>Edit</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View style={styles.viewExplore}>

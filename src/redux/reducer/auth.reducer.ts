@@ -202,6 +202,15 @@ const reducer = createSlice({
       };
     },
 
+    handleSucessSummary: (state: AuthState, action: PayloadAction<string>) => {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          summary: action.payload,
+        },
+      };
+    },
   },
 });
 

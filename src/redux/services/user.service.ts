@@ -11,6 +11,11 @@ export class UserService {
     return await apiService.get(`${ENDPOINTS.GET_USER_BY_UUID}${action}`);
   }
 
+  static async putSummary(payload: string) {
+    console.log(`${ENDPOINTS.PUT_SUMMARY}${payload}`);
+    return await apiService.put(`${ENDPOINTS.PUT_SUMMARY}`, {summary: payload});
+  }
+
   static async getPostById(payload: string) {
     console.log(`${ENDPOINTS.FORUM_BY_UUID}${payload}`);
     return await apiService.get(

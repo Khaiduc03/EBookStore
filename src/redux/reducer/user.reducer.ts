@@ -99,6 +99,12 @@ const reducer = createSlice({
         },
       };
     },
+
+    putSummary: (state: UserState, _: PayloadAction<string>) => {
+      return {
+        ...state,
+      };
+    },
   },
 });
 

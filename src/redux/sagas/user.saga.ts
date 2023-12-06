@@ -2,7 +2,9 @@ import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeLatest} from 'redux-saga/effects';
 import {UserService} from '../services';
 import {UserAction} from '../reducer/user.reducer';
-import {LoadingActions} from '../reducer';
+import {AuthActions, LoadingActions} from '../reducer';
+import {NavigationService} from '../../navigation';
+import {routes} from '../../constants';
 
 function* postFollowSaga(action: PayloadAction<string>): Generator {
   try {
@@ -91,10 +93,29 @@ function* getPostByIdSaga(action: PayloadAction<string>): Generator {
   }
 }
 
+function* putSummarySaga(action: PayloadAction<any>): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    console.log('run===========>');
+    const {data}: any = yield call(UserService.putSummary, action.payload);
+    if (data.code == 200) {
+      yield put(AuthActions.handleSucessSummary(action.payload));
+      NavigationService.navigate(routes.MYPROFILE);
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
 export default function* watchUserSaga() {
   yield takeLatest(UserAction.postFollow.type, postFollowSaga);
   yield takeLatest(UserAction.getListUser.type, getAllUserSaga);
   yield takeLatest(UserAction.getUserById.type, getUserByIdSaga);
   yield takeLatest(UserAction.getListPostByUser.type, getPostByUserSaga);
   yield takeLatest(UserAction.getPostById.type, getPostByIdSaga);
+  yield takeLatest(UserAction.putSummary.type, putSummarySaga);
 }

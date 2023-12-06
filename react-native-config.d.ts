@@ -15,6 +15,7 @@ declare module 'react-native-config' {
     GET_USER_BY_UUID: string;
     UPLOAD_AVATAR: string;
     DELETE_AVATAR;
+    PUT_SUMMARY: string;
 
     IMAGE: string;
     UPLOAD_IMAGES: string;
