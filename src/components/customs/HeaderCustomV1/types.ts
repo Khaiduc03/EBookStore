@@ -28,4 +28,5 @@ export type CustomHeaderProps = {
   imageUri?: HeaderImage;
   fullName?: string;
   userStatus?: string;
+  sizeIcon?: number;
 };

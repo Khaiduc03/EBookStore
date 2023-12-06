@@ -1,4 +1,4 @@
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {Icon} from '@rneui/themed';
 import useStyles from '../../styles';
@@ -8,8 +8,8 @@ const ItemNotifications: React.FC = () => {
   const styles = useStyles();
 
   const NotificationsItem = (itemProps: ItemProps) => (
-    <View style={styles.viewItem}>
-      <View style={styles.viewRowCenter}>
+    <TouchableOpacity style={styles.viewItem}>
+      <View style={[styles.viewRowCenter, styles.marginTimeDate]}>
         <View
           style={[
             styles.viewIcon,
@@ -22,7 +22,7 @@ const ItemNotifications: React.FC = () => {
             size={24}
           />
         </View>
-        <View>
+        <View style={styles.marginTitle}>
           <View>
             <Text style={styles.textTitle}>{itemProps.title}</Text>
           </View>
@@ -42,7 +42,7 @@ const ItemNotifications: React.FC = () => {
       <View>
         <Text style={styles.textDescription}>{itemProps.description}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (

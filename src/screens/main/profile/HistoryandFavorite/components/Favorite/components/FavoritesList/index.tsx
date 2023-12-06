@@ -95,7 +95,7 @@ const FavoritesList: FunctionComponent = () => {
         }
         data={data}
         renderItem={RenderItem}
-        keyExtractor={item => item.comic_uuid}
+        keyExtractor={item => item.favorite_uuid}
         showsVerticalScrollIndicator={false}
         onScroll={({nativeEvent}) => {
           const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;

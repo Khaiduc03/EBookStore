@@ -18,13 +18,7 @@ const TopicsHome = React.memo(() => {
   };
 
   const RenderItem = ({item, index}: {item: TopicType; index: number}) => (
-    <TopicItem
-      title={item.name}
-      viewStyle={styles.itemTopic}
-      image={item.image_url}
-      index={1.5}
-      uuid={item.uuid}
-    />
+    <TopicItem item={item} />
   );
   return (
     <View style={styles.container}>

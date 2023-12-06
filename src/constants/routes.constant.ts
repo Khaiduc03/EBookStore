@@ -67,4 +67,5 @@ export enum routes {
   MESSAGE = 'MESSAGE',
   CONVERSATION = 'CONVERSATION',
   SEARCH_USER = 'SEARCH_USER',
+  INFO_USER = 'INFO_USER',
 }

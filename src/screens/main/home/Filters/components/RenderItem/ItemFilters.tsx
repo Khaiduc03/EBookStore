@@ -1065,25 +1065,6 @@ const ItemFilters: React.FC<ItemFiltersProps> = ({
                 />
                 <Text style={styles.textItem}>horny</Text>
               </TouchableOpacity>
-              <View style={styles.viewUnderline} />
-              <TouchableOpacity
-                onPress={handleCbGenreItem23Click}
-                style={[
-                  styles.viewRow,
-                  {justifyContent: 'flex-start', alignItems: 'center'},
-                ]}>
-                <CheckBox
-                  checked={isCbSelected23}
-                  onPress={handleCbGenreItem23Click}
-                  containerStyle={styles.backgroundColorCB}
-                  style={{
-                    backgroundColor: isCbSelected23
-                      ? styles.backgroundBtnTitleFocus.backgroundColor
-                      : styles.backgroundBtnTitleBlur.backgroundColor,
-                  }}
-                />
-                <Text style={styles.textItem}>Travel</Text>
-              </TouchableOpacity>
             </View>
           </View>
         ) : null}
@@ -1527,25 +1508,6 @@ const ItemFilters: React.FC<ItemFiltersProps> = ({
                   }}
                 />
                 <Text style={styles.textItem}>horny</Text>
-              </TouchableOpacity>
-              <View style={styles.viewUnderline} />
-              <TouchableOpacity
-                onPress={handleCbGenreItem23Click}
-                style={[
-                  styles.viewRow,
-                  {justifyContent: 'flex-start', alignItems: 'center'},
-                ]}>
-                <CheckBox
-                  checked={isCbSelected23}
-                  onPress={handleCbGenreItem23Click}
-                  containerStyle={styles.backgroundColorCB}
-                  style={{
-                    backgroundColor: isCbSelected23
-                      ? styles.backgroundBtnTitleFocus.backgroundColor
-                      : styles.backgroundBtnTitleBlur.backgroundColor,
-                  }}
-                />
-                <Text style={styles.textItem}>Travel</Text>
               </TouchableOpacity>
             </View>
           </View>

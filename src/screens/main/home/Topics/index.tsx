@@ -10,8 +10,6 @@ import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {TopicActions, TopicType} from '../../../../redux';
 import {getListTopic} from '../../../../redux/selectors/topic.selector';
 
-const gap = 16;
-
 const Topics: React.FunctionComponent = () => {
   const dataTopic = useAppSelector(getListTopic);
 
@@ -25,13 +23,9 @@ const Topics: React.FunctionComponent = () => {
 
   const RenderItem = ({index, item}: {item: TopicType; index: number}) => (
     <TopicItem
-      title={item.name}
-      titleStyle={styles.titleStyle}
+      item={item}
       viewStyle={styles.imgContainer}
-      image={item.image_url}
-      containerStyle={styles.itemContainer}
-      index={index}
-      uuid={item.uuid}
+      textStyle={styles.titleStyle}
     />
   );
   return (
@@ -57,7 +51,7 @@ const Topics: React.FunctionComponent = () => {
           keyExtractor={item => item.uuid.toString()}
           showsVerticalScrollIndicator={false}
           numColumns={2}
-          columnWrapperStyle={{gap}}
+          columnWrapperStyle={styles.columnStyle}
         />
       </View>
     </View>

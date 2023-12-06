@@ -28,6 +28,7 @@ const ConversationScreen: React.FC = () => {
   const dispatch = useAppDispatch();
   const [data, setData] = useState<ConversationI[]>([]);
   const listConversation: ConversationI[] = useAppSelector(getListConversation);
+
   const token = useAppSelector(getAuthAccessToken);
 
   useEffect(() => {

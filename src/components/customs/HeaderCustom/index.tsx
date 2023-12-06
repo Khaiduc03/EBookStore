@@ -120,7 +120,7 @@ const HeaderCustom: React.FunctionComponent<CustomHeaderProps> = props => {
           </TouchableOpacity>
         </View>
       }
-      rightContainerStyle={{justifyContent: 'center'}}
+      rightContainerStyle={{}}
       hideStatusBar={true}
       backgroundColor="transparent"
     />

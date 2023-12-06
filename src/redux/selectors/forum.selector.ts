@@ -1,7 +1,11 @@
 import {RootState} from '../store';
+import {ForumType} from '../types/forum.type';
 
 export const getListForum = (state: RootState) =>
   state.forum.listDataForum?.data;
 
-export const likePostForum = (state: RootState) =>
-  state.forum.listDataForum?.data?.findIndex(index => index.uuid.toString());
+export const getCurrentPageForum = (state: RootState) =>
+  state.forum.listDataForum?.currentPage;
+
+export const getNextForum = (state: RootState) =>
+  state.forum.listDataForum?.canNext;

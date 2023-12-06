@@ -73,6 +73,9 @@ const reducer = createSlice({
             totalData: (state.listRepComment?.totalData || 0) + 1,
             data: [action.payload, ...(state.listRepComment?.data || [])],
           },
+          listComment: {
+            ...updatedListComment,
+          },
         };
       }
     },

@@ -15,6 +15,7 @@ const Notifications: React.FC = () => {
         <View style={styles.body}>
           <HeaderCustomV1
             title="Notification"
+            titleStyle={styles.textHeader}
             leftIcon={{
               name: 'arrow-back-outline',
               type: 'ionicon',
@@ -25,6 +26,7 @@ const Notifications: React.FC = () => {
               name: 'settings-outline',
               type: 'ionicon',
               color: styles.colorIconSetting.color,
+              size: 22,
             }}
             onPressRightIconRight={() =>
               NavigationService.navigate(routes.SETTINGS)

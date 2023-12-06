@@ -61,6 +61,7 @@ const ItemReadMore: React.FunctionComponent<CustomComicProps> = props => {
         {isLoading && (
           <ActivityIndicator
             size={'large'}
+            color={'#F89300'}
             style={{
               position: 'absolute',
             }}
