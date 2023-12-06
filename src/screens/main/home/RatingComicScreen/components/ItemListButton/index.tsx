@@ -1,12 +1,13 @@
 import {Icon} from '@rneui/themed';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import useStyles from './styles';
 import {RatingComicProps} from './types';
+import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
+import {getRatingComic} from '../../../../../../redux/selectors/comic.selector';
 
 const ItemRatingStar: React.FC<RatingComicProps[]> = props => {
   const styles = useStyles();
-
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const [displayedData, setDisplayedData] = useState<RatingComicProps[]>(data);
   const handleRatingClick = (rating: number | null) => {
@@ -19,6 +20,13 @@ const ItemRatingStar: React.FC<RatingComicProps[]> = props => {
       setDisplayedData(filteredData);
     }
   };
+  // Rating this comic
+  const dispatch = useAppDispatch();
+  const listRating = useAppSelector(getRatingComic);
+  console.log('List rating', listRating);
+  useEffect(() => {
+    dispatch({type: 'comic/getRatingComic'});
+  }, [dispatch]);
 
   return (
     <View style={styles.viewItem}>

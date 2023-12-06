@@ -57,3 +57,13 @@ export const nextPageFavorite = (state: RootState) =>
 
 export const currentPageFavorite = (state: RootState) =>
   state.comic.listFavorite?.currentPage;
+
+// Rating comic
+export const getRatingComic = (state: RootState) =>
+  state.comic.ratingComic?.data;
+export const getRatingComicSuccess = (state: RootState) => {
+  return state.comic.ratingComic?.code;
+};
+// get list rating comic
+export const getListRatingComic = (state: RootState) =>
+  state.comic.listRatingComic?.data;

@@ -1,3 +1,4 @@
+import {type} from 'os';
 import {uuid, Timestamp, image, PayloadHttpList} from '../../types';
 import {TopicType} from './topic.type';
 
@@ -59,6 +60,8 @@ export type ComicState = Partial<{
   dataPostFavorite: PayloadHttp<AddFavoriteType>;
   listFavorite: PayloadHttpListComicData<ComicType>;
   listHistoryComic: PayloadHttpListComicData<ComicType>;
+  ratingComic: PayloadHttp<RatingType>;
+  listRatingComic: PayloadHttpListComicData<RatingType>;
 }>;
 
 export type ComicType = uuid &
@@ -112,3 +115,21 @@ export type DetailChapterType = Timestamp & {
   page: number;
   chapter: ChapterType;
 };
+export type RatingType = uuid &
+  Timestamp & {
+    rating: number;
+  };
+// export type listRatingComic = uuid &
+//   Timestamp & {
+//     rating: number;
+//     comic_uuid: string;
+//     user_uuid: string;
+//     created_at: string;
+//     updated_at: string;
+//     comment: string;
+//     user_fullname: string;
+//     user_avatar: string;
+//     is_like: boolean;
+//     like_count: number;
+//   };
+export type listRatingComic = uuid & Timestamp & {rating: number};

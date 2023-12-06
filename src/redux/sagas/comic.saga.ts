@@ -6,6 +6,48 @@ import {showToastSuccess} from '../../utils';
 import {ToastAndroid} from 'react-native';
 import {criticallyDampedSpringCalculations} from 'react-native-reanimated/lib/typescript/reanimated2/animation/springUtils';
 
+// Rating saga
+function* ratingSaga(action: PayloadAction<any>): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    console.log('run');
+    const {data}: any = yield call(ComicService.ratingComic, action.payload);
+    if (data.code == 200) {
+      console.log('run push tookit');
+      console.log(data);
+      yield put(ComicActions.setRatingComic(data));
+      showToastSuccess('Rating successful !!!!');
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+//get list rating comic
+function* getListRatingComicSaga(action: PayloadAction<string>): Generator {
+  try {
+    console.log('run');
+    const {data}: any = yield call(
+      ComicService.getListRatingComic,
+      action.payload,
+    );
+    if (data.code == 200) {
+      console.log('run push tookit');
+      console.log(data);
+      yield put(ComicActions.setListRatingComic(data));
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+  }
+}
+
+
 function* getListDataSaga(action: PayloadAction<number>): Generator {
   if (action.payload == 1) {
     yield put(LoadingActions.showLoadingStart());
@@ -313,4 +355,6 @@ export default function* watchComicSaga() {
     ComicActions.getListByTopicMore,
     getListComicByTopicMoreSaga,
   );
+  yield takeLatest(ComicActions.ratingComic, ratingSaga);
+  yield takeLatest(ComicActions.getListRatingComic, getListRatingComicSaga);
 }
