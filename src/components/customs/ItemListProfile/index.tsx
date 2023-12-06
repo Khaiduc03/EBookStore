@@ -31,12 +31,12 @@ const ItemListProfile: React.FC<CustomCirclerProps> = props => {
       dispatch(ThemeActions.setTheme('dark'));
       setTimeout(() => {
         setIsEnabled(previousState => !previousState);
-      }, 1460);
+      }, 1000);
     } else {
       dispatch(ThemeActions.setTheme('light'));
       setTimeout(() => {
         setIsEnabled(previousState => !previousState);
-      }, 1460);
+      }, 1000);
     }
   };
   return (
@@ -53,10 +53,10 @@ const ItemListProfile: React.FC<CustomCirclerProps> = props => {
       {switchRight && (
         <View style={styles.viewBtn}>
           <TouchableOpacity
-            style={[styles.outter, isEnabled ? styles.on : styles.off ]}
+            style={[styles.outter, isEnabled ? styles.on : styles.off]}
             onPress={handleTheme}
             activeOpacity={3}>
-            <View style={isEnabled ?  styles.innerON : styles.innerOFF } />
+            <View style={isEnabled ? styles.innerON : styles.innerOFF} />
           </TouchableOpacity>
         </View>
       )}

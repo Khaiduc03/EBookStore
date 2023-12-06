@@ -1,20 +1,21 @@
 import {StyleSheet} from 'react-native';
-
+import {fontFamilySetup} from '../../../../utils/font';
 import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../../../../utils';
+import {Device} from '../../../../utils';
 const WIDTH = Device.getDeviceWidth();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    width: '100%',
-    position: 'absolute',
-    bottom: normalize(0),
+    flex: 1,
+    backgroundColor: colors.background,
   },
   viewTextInput: {
     width: '100%',
-    height: normalize(56),
+    height: normalize(60),
     paddingVertical: normalize(9),
     paddingHorizontal: normalize(16),
+    borderTopWidth: normalize(2),
+    borderColor: '#E5E5E5',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',

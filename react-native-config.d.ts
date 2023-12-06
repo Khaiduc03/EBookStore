@@ -55,6 +55,13 @@ declare module 'react-native-config' {
     MESSAGES: string;
     FOLLOWER_USER: string;
 
+    //COMMENT_FORUM
+    GET_COMMENT_FORUM: string;
+    POST_COMMENT_FORUM: string;
+    POST_LIKE_COMMENT_FORUM: string;
+    DELETE_LIKE_COMMENT_FORUM: string;
+    REP_COMMENT_FORUM: string;
+
     //COMENT_COMIC
     POST_COMMENT_COMIC: string;
     GET_COMMENT_COMIC: string;

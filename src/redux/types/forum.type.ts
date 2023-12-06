@@ -28,8 +28,25 @@ export interface PayloadHttpListForumView<T> {
   data?: T[];
 }
 
+export interface PayloadHttpDetailForum<T> {
+  next_chapter?: string;
+  previous_chapter?: string;
+  data_chapter?: T[];
+  totalComment?: number;
+}
+
+export type DetailForumType = Timestamp & {
+  forum_uuid: string;
+  public_id: string;
+  url: string;
+  secure_url: string;
+  page: number;
+  forum: ForumType;
+};
+
 export type ForumState = Partial<{
   listDataForum: PayloadHttpListForumData<ForumType>;
+  listDetail: PayloadHttpDetailForum<DetailForumType>;
 }>;
 
 export interface ForumType extends uuid, Timestamp {

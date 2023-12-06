@@ -38,7 +38,7 @@ const useStyles = makeStyles(({colors}) => ({
     justifyContent: 'space-between',
     paddingHorizontal: normalize(19),
     paddingVertical: normalize(10),
-    alignItems:'center',
+    alignItems: 'center',
   },
   itemHeader: {
     flexDirection: 'row',
@@ -94,6 +94,9 @@ const useStyles = makeStyles(({colors}) => ({
   img_default: {
     width: normalize(36),
     height: normalize(36),
+  },
+  leftIcon: {
+    marginLeft: normalize(10),
   },
 }));
 

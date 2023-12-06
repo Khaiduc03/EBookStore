@@ -1,7 +1,6 @@
 import {RootState} from '../store';
-import {ForumType} from '../types/forum.type';
 
-export const getListForum = (state: RootState) =>
+export const getListForum = (state: RootState): any =>
   state.forum.listDataForum?.data;
 
 export const getCurrentPageForum = (state: RootState) =>

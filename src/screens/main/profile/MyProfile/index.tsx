@@ -83,11 +83,11 @@ const MyProfile: React.FC = props => {
         onPressLeftIcon={handlePressGoback}
         rightIconleft={{name: 'plus-square-o', type: 'font-awesome'}}
         rightIconRight={{
-          name: 'edit',
-          type: 'feather',
+          name: 'pencil',
+          type: 'octicon',
         }}
         onPressRightIconLeft={() =>
-          NavigationService.navigate(routes.CREATEPOST)
+          NavigationService.navigate(routes.CREATE_POST)
         }
         onPressRightIconRight={() =>
           NavigationService.navigate(routes.UPDATE_PROFILE2)

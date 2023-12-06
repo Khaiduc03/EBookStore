@@ -1,5 +1,6 @@
 export enum Redux {
   commentChapter = 'commentChapter',
+  commentForum = 'commentForum',
   user = 'user',
   auth = 'auth',
   loading = 'loading',

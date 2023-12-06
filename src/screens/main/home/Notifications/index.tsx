@@ -23,7 +23,7 @@ const Notifications: React.FC = () => {
             }}
             onPressLeftIcon={() => NavigationService.goBack()}
             rightIconRight={{
-              name: 'settings-outline',
+              name: 'funnel',
               type: 'ionicon',
               color: styles.colorIconSetting.color,
               size: 22,

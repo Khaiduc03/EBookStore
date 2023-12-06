@@ -9,14 +9,16 @@ export class ForumService {
   }
 
   static async postLikeForum(forum_uuid: string) {
-    console.log(`${ENDPOINTS.LIKE}`, {forum_uuid: forum_uuid});
+    // console.log(`${ENDPOINTS.LIKE}`, {
+    //   data: {forum_uuid: forum_uuid},
+    // });
     return await apiService.post(`${ENDPOINTS.LIKE}`, {forum_uuid: forum_uuid});
   }
 
   static async deleteLikeForum(forum_uuid: string) {
-    console.log(`${ENDPOINTS.UNLIKE}`, {
-      data: {forum_uuid: forum_uuid},
-    });
+    // console.log(`${ENDPOINTS.UNLIKE}`, {
+    //   data: {forum_uuid: forum_uuid},
+    // });
     return await apiService.delete(`${ENDPOINTS.UNLIKE}`, {
       data: {forum_uuid: forum_uuid},
     });

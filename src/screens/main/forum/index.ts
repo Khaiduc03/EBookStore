@@ -1,8 +1,9 @@
 import {routes} from '../../../constants';
 import {Screen} from '../../../types';
 import Forum from './Forum';
-import CommentPost from './comment';
 import CreatePost from './create-post';
+import CommentForum from './comment-forum';
+import CommentRepForum from './comment-rep-forum';
 
 export {default as Forum} from './Forum';
 export const forumScreens: Screen[] = [
@@ -11,11 +12,15 @@ export const forumScreens: Screen[] = [
     component: Forum,
   },
   {
-    name: routes.CREATEPOST,
+    name: routes.CREATE_POST,
     component: CreatePost,
   },
   {
-    name: routes.COMMENT_POST,
-    component: CommentPost,
+    name: routes.COMMENT_FORUM,
+    component: CommentForum,
+  },
+  {
+    name: routes.COMMENT_REP_FORUM,
+    component: CommentRepForum,
   },
 ];

@@ -1,18 +1,34 @@
 import {StyleSheet} from 'react-native';
-import {fontFamilySetup} from '../../../../../../utils/font';
+import {fontFamilySetup} from '../../../../utils/font';
 import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../../../../utils';
+import {Device} from '../../../../utils';
 const WIDTH = Device.getDeviceWidth();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
+    flex: 1,
     backgroundColor: colors.background,
+  },
+  parentCommentStyle: {
     flexDirection: 'row',
-    marginTop: normalize(20),
+    borderBottomWidth: 10,
+    paddingHorizontal: normalize(16),
+    paddingVertical: normalize(16),
+    borderColor: '#F1F1F3',
+  },
+  inputStyle: {
+    width: '100%',
+    height: normalize(45),
+    paddingHorizontal: normalize(15),
+    backgroundColor: colors.white,
+    position: 'absolute',
+    bottom: 0,
+    shadowColor: '#000',
+    elevation: 5,
   },
   avatarStyle: {
-    width: normalize(39),
-    height: normalize(39),
+    width: normalize(35),
+    height: normalize(35),
     borderRadius: 100,
     marginRight: normalize(10),
   },
@@ -22,7 +38,7 @@ const useStyles = makeStyles(({colors}) => ({
   nameStyle: {
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
-    color: '#737479',
+    color: colors.nameUserComment,
   },
   day: {
     fontSize: normalize(10),
@@ -33,17 +49,23 @@ const useStyles = makeStyles(({colors}) => ({
   commentStyle: {
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.regular,
-    color: colors.black,
+    color: colors.nameComment,
     lineHeight: normalize(18),
   },
   repContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: normalize(8),
+    paddingTop: normalize(8),
+  },
+  like: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: normalize(60),
   },
   rep: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingRight: normalize(60),
   },
   numberRepStyle: {
     paddingLeft: normalize(5),
