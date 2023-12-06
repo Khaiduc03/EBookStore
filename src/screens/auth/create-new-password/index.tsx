@@ -19,11 +19,14 @@ import {
   showToastError,
 } from '../../../utils';
 import useStyles from './styles';
+import {useRoute} from '@react-navigation/native';
+import {el, is} from 'date-fns/locale';
 
-const CreateNewPassword: React.FC = () => {
+const CreateNewPasswordScreen: React.FC = () => {
   const styles = useStyles();
   const dispatch = useAppDispatch();
-
+  const {params} = useRoute() as any;
+  console.log(params.email);
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmpassword] = useState('');
 
@@ -42,32 +45,8 @@ const CreateNewPassword: React.FC = () => {
   }, [password, confirmpassword]);
 
   const handleContinue = () => {
-    // if (password === '' || rePassword === '') {
-    //   CustomToastBottom('Error, Passwords cannot be empty!');
-    //   return false;
-    // } else if (password !== rePassword) {
-    //   CustomToastBottom('Error, Passwords do not match!');
-    //   return false;
-    // } else {
-    //   CustomToastBottom('Success, Account created successfully!');
-    //   dispatch(
-    //     AuthActions.handleNewPassword({
-    //       email: email || '',
-    //       password: password,
-    //     }),
-    //   );
-    //   return true;
-    // }
-    if (confirmpassword === password) {
-      dispatch(
-        AuthActions.handleNewPassword({
-          email: email || '',
-          password: password,
-        }),
-      );
-    } else {
-      showToastError('An error occurred, please check again!');
-    }
+    console.log(confirmpassword);
+    console.log(password);
 
     !isValidPassword(password)
       ? setIsCheckValidatePassword(false)
@@ -75,6 +54,13 @@ const CreateNewPassword: React.FC = () => {
 
     if (confirmpassword !== password || !isValidPassword(confirmpassword)) {
       setIsCheckValidateConfirmPassword(false);
+    } else {
+      dispatch(
+        AuthActions.handleUpdatePassword({
+          email: params.email,
+          password: password,
+        }),
+      );
     }
   };
 
@@ -90,7 +76,13 @@ const CreateNewPassword: React.FC = () => {
         <View style={styles.body}>
           <Headers
             leftIcon={true}
-            onPressLeftIcon={() => NavigationService.navigate(routes.SEND_OTP)}
+            onPressLeftIcon={() => {
+              Keyboard.dismiss();
+              if (NavigationService.canGoBack()) {
+                return NavigationService.goBack();
+              }
+              return NavigationService.navigate(routes.SEND_OTP);
+            }}
           />
           <View style={styles.Headers}>
             <AuthHeader
@@ -172,4 +164,4 @@ const CreateNewPassword: React.FC = () => {
   );
 };
 
-export default CreateNewPassword;
+export default CreateNewPasswordScreen;

@@ -180,7 +180,7 @@ const reducer = createSlice({
       };
     },
 
-    handleNewPassword: (
+    handleUpdatePassword: (
       state: AuthState,
       _: PayloadAction<NewPasswordPayload>,
     ) => {
@@ -188,17 +188,10 @@ const reducer = createSlice({
         ...state,
       };
     },
-    setNewPassword: (
-      state: AuthState,
-      _: PayloadAction<NewPasswordPayload>,
-    ) => {
+    UpdatePassword: (state: AuthState) => {
       return {
         ...state,
-        user: {
-          ...state.user,
-          email: _.payload.email,
-          password: _.payload.password,
-        },
+        enableSignIn: true,
       };
     },
 

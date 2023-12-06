@@ -54,8 +54,8 @@ function* loginGoogleSaga(
     yield GoogleService.logout();
     const checkLogin = yield GoogleService.checkSignIn();
     if (!checkLogin) {
-      const {idToken}: any = yield GoogleService.login();
-      console.log(idToken);
+      const {idToken, user}: any = yield GoogleService.login();
+      console.log(user.email);
 
       const {data}: any = yield call(AuthService.hanleGGLogin, {
         device_token: action.payload.device_token,
@@ -63,6 +63,21 @@ function* loginGoogleSaga(
       });
 
       if (data.code === 200) {
+        if (data?.data?.isUpdatePassword === false) {
+          yield put(
+            AuthActions.handleLoginSuccess({
+              accessToken: data.data.access_token,
+              refreshToken: data.data.refresh_token,
+              enableSignIn: false,
+            }),
+          );
+
+          showToastSuccess('Login success, Plesae update profile to continue');
+          return NavigationService.navigate(routes.CREATE_NEW_PASSWORD, {
+            email: user.email,
+          });
+        }
+
         yield put(
           AuthActions.handleLoginSuccess({
             accessToken: data.data.access_token,
@@ -286,7 +301,7 @@ function* verifyOTPSaga(action: PayloadAction<SendOTPPayload>): Generator {
 }
 
 ///////////////////////NEW PASSWORD/////////////////////////
-function* newPasswordSaga(
+function* UpdateNewPasswordSaga(
   action: PayloadAction<NewPasswordPayload>,
 ): Generator {
   yield put(LoadingActions.showLoading());
@@ -295,12 +310,13 @@ function* newPasswordSaga(
       AuthService.handleNewPassword,
       action.payload,
     );
-    console.log('data: ', data);
     if (data.code === 200) {
-      yield put(AuthActions.setNewPassword(action.payload));
-      NavigationService.navigate(routes.SIGN_IN);
+      yield put(AuthActions.UpdatePassword());
+      yield call(getProfileUserSaga);
+      CustomToastBottom('Login sucessfull!!');
     } else {
-      CustomToastBottom(data.message);
+      CustomToastBottom('Server sap roi, vui long thu lai sau');
+      return NavigationService.navigate(routes.LOBBY);
     }
   } catch (error: any) {
     console.log(error.message);
@@ -321,5 +337,8 @@ export default function* watchAuthSaga() {
   yield takeLatest(AuthActions.handleForgotPassword.type, forgotPasswordSaga);
   yield takeLatest(AuthActions.handleSendOTP.type, sendOTPSaga);
   yield takeLatest(AuthActions.handleVerifyOTP.type, verifyOTPSaga);
-  yield takeLatest(AuthActions.handleNewPassword.type, newPasswordSaga);
+  yield takeLatest(
+    AuthActions.handleUpdatePassword.type,
+    UpdateNewPasswordSaga,
+  );
 }

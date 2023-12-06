@@ -15,16 +15,16 @@ const ListHotComic = () => {
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const renderSection = ({item, index}: {item: any[]; index: number}) => {
-    const sliceItem = item.slice(0, 5);
+    // const sliceItem = item.slice(0, 5);
     return (
       <View style={styles.ItemContainer}>
-        <FlatList
+        {/* <FlatList
           data={sliceItem}
           keyExtractor={(item, index) => `${item.uuid}_${index}`}
           renderItem={({item, index}) => (
             <ItemListHot data={item} index={index} />
           )}
-        />
+        /> */}
       </View>
     );
   };
