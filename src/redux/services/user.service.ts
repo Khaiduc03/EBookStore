@@ -62,4 +62,9 @@ export class UserService {
       follower_uuid: payload,
     });
   }
+
+  static async getFollow() {
+    console.log(`${ENDPOINTS.FOLLOWER_USER}`);
+    return await apiService.get(`${ENDPOINTS.FOLLOWER_USER}`);
+  }
 }

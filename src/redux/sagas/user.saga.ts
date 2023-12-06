@@ -17,7 +17,7 @@ function* postFollowSaga(action: PayloadAction<string>): Generator {
       console.log('Server errol !!!');
     }
   } catch (error) {
-    console.log('hihi');
+    console.log(error);
   } finally {
   }
 }
@@ -111,6 +111,23 @@ function* putSummarySaga(action: PayloadAction<any>): Generator {
   }
 }
 
+function* getListFollowSaga(action: any): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    console.log('run===========>');
+    const {data}: any = yield call(UserService.getFollow);
+    if (data.code == 200) {
+      yield put(UserAction.setListFollow(data));
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
 export default function* watchUserSaga() {
   yield takeLatest(UserAction.postFollow.type, postFollowSaga);
   yield takeLatest(UserAction.getListUser.type, getAllUserSaga);
@@ -118,4 +135,5 @@ export default function* watchUserSaga() {
   yield takeLatest(UserAction.getListPostByUser.type, getPostByUserSaga);
   yield takeLatest(UserAction.getPostById.type, getPostByIdSaga);
   yield takeLatest(UserAction.putSummary.type, putSummarySaga);
+  yield takeLatest(UserAction.getListFollow.type, getListFollowSaga);
 }

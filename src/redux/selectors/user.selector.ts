@@ -10,3 +10,9 @@ export const currentPagePostByUser = (state: RootState) =>
   state.user.listPostByUser?.currentPage;
 
 export const getPostById = (state: RootState) => state.user.postById;
+
+export const getListFollow = (state: RootState) => state.user.listFollow?.data;
+export const getListFollower = (state: RootState) =>
+  state.user.listFollow?.data?.follower;
+export const getListFollowing = (state: RootState) =>
+  state.user.listFollow?.data?.following;

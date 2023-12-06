@@ -6,6 +6,7 @@ export type UserState = Partial<{
   userById: PayloadHttpList<UserType>;
   listPostByUser: PayloadHttpListForumData<ForumType>;
   postById: ForumType;
+  listFollow: PayloadHttpListFollow<ListFollow>;
 }>;
 export type UserType = uuid & {
   email: string;
@@ -18,4 +19,25 @@ export type UserType = uuid & {
   image_url: string;
   followercount: number;
   followingcount: number;
+};
+
+export interface PayloadHttpListFollow<T> {
+  code?: number;
+  message?: string;
+  data?: T;
+}
+
+export type ListFollow = {
+  follower: ItemFollowType[];
+  following: ItemFollowType[];
+};
+
+export type ItemFollowType = uuid & {
+  user_following_uuid: string;
+  user_follower_uuid: string;
+  fullname: string;
+  image_url: string;
+  email: string;
+  is_following: string;
+  is_follower: true;
 };

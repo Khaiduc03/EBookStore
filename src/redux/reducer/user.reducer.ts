@@ -1,6 +1,11 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {Redux} from '../types';
-import {UserState, UserType} from '../types/user.type';
+import {
+  ListFollow,
+  PayloadHttpListFollow,
+  UserState,
+  UserType,
+} from '../types/user.type';
 import {PayloadHttpList} from '../../types';
 import {ForumType, PayloadHttpListForumData} from '../types/forum.type';
 
@@ -103,6 +108,24 @@ const reducer = createSlice({
     putSummary: (state: UserState, _: PayloadAction<string>) => {
       return {
         ...state,
+      };
+    },
+
+    getListFollow: (state: UserState) => {
+      return {
+        ...state,
+      };
+    },
+
+    setListFollow: (
+      state: UserState,
+      action: PayloadAction<PayloadHttpListFollow<ListFollow>>,
+    ) => {
+      return {
+        ...state,
+        listFollow: {
+          ...action.payload,
+        },
       };
     },
   },
