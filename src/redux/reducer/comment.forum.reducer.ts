@@ -94,16 +94,11 @@ const reducer = createSlice({
       state: CommentForumState,
       action: PayloadAction<PayloadHttpListCommentData<CommentForumType>>,
     ) => {
-      const currentData: CommentForumType[] = state.listComment?.data || [];
       const newData = action.payload.data || [];
-      const uniqueNewData = newData.filter(
-        newItem => !currentData.some(oldItem => oldItem.uuid === newItem.uuid),
-      );
-      const updatedData = [...currentData, ...uniqueNewData];
       return {
         ...state,
         listComment: {
-          data: updatedData,
+          data: newData,
           canNext: action.payload.canNext,
           currentDataSize: action.payload.currentDataSize,
           currentPage: action.payload.currentPage,

@@ -20,10 +20,16 @@ import {HeaderComment, ItemComment} from './components';
 import useStyles from './styles';
 import {useRoute} from '@react-navigation/native';
 
+interface ParentsUuidComment {
+  parents_comment_uuid: string;
+  data: CommentForumType;
+}
+
 const CommentForum: React.FC = () => {
   const styles = useStyles();
-
   const route = useRoute();
+
+  const data = (route.params as ParentsUuidComment).data;
   const forum_uuid = (route.params as {forum_uuid?: CommentForumType})
     ?.forum_uuid;
   const dataComment = useAppSelector(getListCommentForum);
@@ -31,10 +37,23 @@ const CommentForum: React.FC = () => {
   const currentPage = useAppSelector(getCurrenPageCommentForum);
   const [value, setvalue] = useState('');
   const isLoading = useAppSelector(getIsLoadingPage);
-  const flatListRef = useRef<FlatList<CommentForumType>>(null);
+  const flatListRef = useRef<FlatList<CommentForumType>>();
 
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
+
+  const {
+    comment,
+    created_at,
+    fullname,
+    re_comment_count,
+    user_avatar,
+    chapter_uuid,
+    like_count,
+    type,
+    uuid,
+    is_like,
+  } = data || {};
 
   const dispatch = useAppDispatch();
 

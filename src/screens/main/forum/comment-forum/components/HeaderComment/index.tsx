@@ -1,26 +1,34 @@
+import {useRoute} from '@react-navigation/native';
 import {Icon} from '@rneui/base';
 import React, {useEffect} from 'react';
 import {Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useAppSelector} from '../../../../../../hooks';
-import {getCountCommentForum} from '../../../../../../redux';
-import {backScreen} from '../../../../../../utils';
+import {NavigationService} from '../../../../../../navigation';
+import {ForumType} from '../../../../../../redux/types/forum.type';
 import useStyles from './styles';
-import {useRoute} from '@react-navigation/native';
+
+interface ParentsUuidComment {
+  parents_comment_uuid: string;
+  data: ForumType;
+}
 
 const HeaderComment = () => {
   const styles = useStyles();
 
   const route = useRoute();
 
-  // const totalComment = useAppSelector(getCountCommentForum);
+  const totalComment = (route.params as {comment_count?: number})
+    ?.comment_count;
 
-  const totalComment =
-    (route.params as {comment_count?: number})?.comment_count || 0;
+  useEffect(() => {}, [totalComment]);
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => backScreen()} style={styles.btnBack}>
+      <TouchableOpacity
+        onPress={() => {
+          NavigationService.goBack();
+        }}
+        style={styles.btnBack}>
         <Icon
           name="arrow-back-outline"
           size={24}
@@ -29,8 +37,7 @@ const HeaderComment = () => {
         />
       </TouchableOpacity>
       <Text style={styles.textHeader}>
-        {/* Comments({totalComment ? totalComment : '0'}) */}
-        Comments({totalComment ? totalComment : '0'})
+        Comment({totalComment ? totalComment : '0'})
       </Text>
       <View style={styles.viewPDR} />
     </View>

@@ -40,6 +40,7 @@ import {
 import {getIsLoadingForum} from '../../../../../../redux/selectors/loading.selector';
 import {ForumType} from '../../../../../../redux/types/forum.type';
 import useStyles from './styles';
+import {CommentForumAction} from '../../../../../../redux/reducer/comment.forum.reducer';
 
 interface ForumDataProps {
   data?: ForumType;
@@ -81,6 +82,16 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
     dispatch(ForumActions.clearListData());
     dispatch(ForumActions.getListData(1));
   }, []);
+
+  // useEffect(() => {
+  //   // Hàm lấy dữ liệu từ API
+  //   const fetchData = async () => {
+  //     dispatch(ForumActions.getListData(1));
+  //   };
+
+  //   // Gọi hàm fetchData khi comment_count thay đổi
+  //   fetchData();
+  // }, [comment_count]);
 
   const loadMoreForum = () => {
     if (nextPage && !isLoading) {
@@ -132,7 +143,7 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
     dispatch(ForumActions.deletePost({forum_uuid: forum_uuid}));
   };
 
-  // LogBox.ignoreLogs(['ReactImageView: Image source "null" doesn\'t exist']);
+  LogBox.ignoreLogs(['ReactImageView: Image source "null" doesn\'t exist']);
 
   const scale = useSharedValue(1);
   const translationX = useSharedValue(0);
@@ -242,7 +253,6 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
                       source={{
                         uri: item.item,
                       }}
-                      progressiveRenderingEnabled
                       width={screenWidth}
                     />
                   </Pressable>
@@ -274,7 +284,9 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
                               <ReAnimated.View>
                                 <AutoHeightImage
                                   key={selectedImage?.index.toString()}
-                                  source={{uri: selectedImage?.item}}
+                                  source={{
+                                    uri: selectedImage?.item || undefined,
+                                  }}
                                   width={screenWidth}
                                 />
                               </ReAnimated.View>
@@ -348,12 +360,10 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
             <TouchableOpacity
               style={styles.iconText}
               onPress={() => {
-                if (item.uuid && item.comment_count) {
-                  NavigationService.navigate(routes.COMMENT_FORUM, {
-                    forum_uuid: item.uuid,
-                    comment_count: item.comment_count,
-                  });
-                }
+                NavigationService.navigate(routes.COMMENT_FORUM, {
+                  forum_uuid: item.uuid,
+                  comment_count: item.comment_count,
+                });
               }}>
               <IconFontAwesome5
                 name="comment"

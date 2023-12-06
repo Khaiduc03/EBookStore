@@ -7,7 +7,6 @@ import {Text, makeStyles, normalize} from '@rneui/themed';
 import React, {FunctionComponent} from 'react';
 import {View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-
 import {Icon} from '@rneui/base';
 import {routes} from '../../constants';
 import {Conversation, Explore, Forum, Home, Profile} from '../../screens/main';

@@ -20,7 +20,6 @@ function* postCommentSaga(action: PayloadAction<any>): Generator {
     if (data.code == 200) {
       console.log('postCommentSaga: ======================>', data.data);
       yield put(CommentForumAction.postCommentForumSucces(data.data));
-      yield put(ComicActions.setCountComment());
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');
@@ -40,7 +39,7 @@ function* getCommentSaga(action: PayloadAction<any>): Generator {
       action.payload,
     );
     console.log('getCommentSaga: ======================>', action.payload);
-    if (data.data.code == 200) {
+    if (data.code == 200) {
       yield put(CommentForumAction.setCommentForum(data.data));
       console.log('run push tookit');
     } else {
@@ -119,48 +118,47 @@ function* deleteLikeCommentSaga(action: PayloadAction<any>): Generator {
   }
 }
 
-// function* postRepCommentSaga(action: PayloadAction<any>): Generator {
-//   yield put(LoadingActions.showLoading());
-//   try {
-//     console.log('run===========>');
-//     const {data}: any = yield call(
-//       CommentForumService.postRepCommentForum,
-//       action.payload,
-//     );
-//     if (data.code == 200) {
-//       yield put(CommentForumAction.postRepCommentForumSucces(data.data));
-//       yield put(ForumActions.setCountComment());
-//       console.log('run push tookit');
-//     } else {
-//       console.log('Server errol !!!');
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   } finally {
-//     yield put(LoadingActions.hideLoading());
-//   }
-// }
+function* postRepCommentSaga(action: PayloadAction<any>): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    console.log('run===========>');
+    const {data}: any = yield call(
+      CommentForumService.postRepCommentForum,
+      action.payload,
+    );
+    if (data.code == 200) {
+      yield put(CommentForumAction.postRepCommentForumSucces(data.data));
+      console.log('run push tookit');
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
 
-// function* getRepCommentForumSaga(action: PayloadAction<any>): Generator {
-//   yield put(LoadingActions.showLoadingPage());
-//   try {
-//     console.log('run===========>');
-//     const {data}: any = yield call(
-//       CommentForumService.getRepCommentForum,
-//       action.payload,
-//     );
-//     if (data.code == 200) {
-//       yield put(CommentForumAction.setRepCommentForum(data.data));
-//       console.log('run push tookit');
-//     } else {
-//       console.log('Server errol !!!');
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   } finally {
-//     yield put(LoadingActions.hideLoadingPage());
-//   }
-// }
+function* getRepCommentForumSaga(action: PayloadAction<any>): Generator {
+  yield put(LoadingActions.showLoadingPage());
+  try {
+    console.log('run===========>');
+    const {data}: any = yield call(
+      CommentForumService.getRepCommentForum,
+      action.payload,
+    );
+    if (data.code == 200) {
+      yield put(CommentForumAction.setRepCommentForum(data.data));
+      console.log('run push tookit');
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoadingPage());
+  }
+}
 
 export default function* watchCommentChapterSaga() {
   yield takeLatest(CommentForumAction.postCommentForum, postCommentSaga);
@@ -175,13 +173,13 @@ export default function* watchCommentChapterSaga() {
     deleteLikeCommentSaga,
   );
 
-  // yield takeLatest(
-  //   CommentForumAction.postRepCommentForum.type,
-  //   postRepCommentSaga,
-  // );
+  yield takeLatest(
+    CommentForumAction.postRepCommentForum.type,
+    postRepCommentSaga,
+  );
 
-  // yield takeLatest(
-  //   CommentForumAction.getRepCommentForum.type,
-  //   getRepCommentForumSaga,
-  // );
+  yield takeLatest(
+    CommentForumAction.getRepCommentForum.type,
+    getRepCommentForumSaga,
+  );
 }

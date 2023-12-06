@@ -16,6 +16,7 @@ function* getListDataForumSaga(action: PayloadAction<number>): Generator {
     if (data.code == 200) {
       console.log('run push tookit');
       yield put(ForumActions.setListData(data.data));
+      yield put(ForumActions.setCountComment(data.data.comment_count));
     } else {
       console.log('Server errol !!!');
     }
