@@ -9,16 +9,23 @@ const useStyles = makeStyles(({colors}) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  nameContainer: {width: '60%'},
   imgStyle: {
     height: normalize(50),
     width: normalize(50),
     borderRadius: 100,
   },
   name: {
-    width: '60%',
     color: colors.black,
     fontSize: normalize(14),
     fontFamily: fontFamilySetup.bold,
+    marginLeft: normalize(10),
+  },
+  email: {
+    width: '100%',
+    color: colors.grey5,
+    fontSize: normalize(12),
+    fontFamily: fontFamilySetup.medium,
     marginLeft: normalize(10),
   },
   textBtn: {
@@ -30,6 +37,13 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.white,
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
+  },
+  dotStyle: {
+    width: normalize(7),
+    height: normalize(7),
+    backgroundColor: colors.grey6,
+    borderRadius: 100,
+    marginRight: normalize(5),
   },
   btn: {
     height: normalize(30),
@@ -46,6 +60,11 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
+  },
+  textFollow: {
+    color: colors.blue,
+    fontSize: normalize(12),
+    fontFamily: fontFamilySetup.medium,
   },
 }));
 

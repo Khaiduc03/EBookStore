@@ -8,7 +8,6 @@ import useStyles from './styles';
 
 const FollowerList = () => {
   const dataFollwer = useAppSelector(getListFollower);
-  console.log(dataFollwer);
   const styles = useStyles();
   const RenderItem = ({item}: {item: ItemFollowType}) => (
     <ItemListFollow data={item} />

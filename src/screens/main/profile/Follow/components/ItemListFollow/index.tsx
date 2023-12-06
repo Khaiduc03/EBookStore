@@ -14,10 +14,18 @@ const ItemListFollow: React.FunctionComponent<FollowerProps> = props => {
   const styles = useStyles();
   const dispatch = useAppDispatch();
 
-  const onPressUnfollow = () => {
+  const onPressDelete = () => {
     dispatch(
       UserAction.postFollow(
-        props.data?.user_follower_uuid ? props.data?.user_follower_uuid : '',
+        props.data?.user_following_uuid ? props.data?.user_following_uuid : '',
+      ),
+    );
+  };
+
+  const onPressFollow = () => {
+    dispatch(
+      UserAction.postFollow(
+        props.data?.user_following_uuid ? props.data?.user_following_uuid : '',
       ),
     );
   };
@@ -32,17 +40,33 @@ const ItemListFollow: React.FunctionComponent<FollowerProps> = props => {
               'https://static.thenounproject.com/png/5034901-200.png',
           }}
         />
-        <Text numberOfLines={1} style={styles.name}>
-          {props.data?.fullname || 'Anonymous'}
-        </Text>
+        <View style={styles.nameContainer}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              flex: 1,
+              justifyContent: 'space-between',
+            }}>
+            <Text numberOfLines={1} style={styles.name}>
+              {props.data?.fullname || 'Anonymous'}
+            </Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={styles.dotStyle} />
+              <TouchableOpacity onPress={onPressFollow}>
+                <Text style={styles.textFollow}>
+                  {props.data?.is_following ? 'Unfollow' : 'Follow'}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <Text numberOfLines={1} style={styles.email}>
+            {props.data?.email || 'Anonymous'}
+          </Text>
+        </View>
       </View>
-      <TouchableOpacity
-        onPress={onPressUnfollow}
-        style={props.data?.is_following ? styles.btn : styles.btnF}>
-        <Text
-          style={props.data?.is_following ? styles.textBtn : styles.textBtnF}>
-          {props.data?.is_following ? 'Unfollow' : 'Follow'}
-        </Text>
+      <TouchableOpacity onPress={onPressDelete} style={styles.btn}>
+        <Text style={styles.textBtn}>Delete</Text>
       </TouchableOpacity>
     </View>
   );

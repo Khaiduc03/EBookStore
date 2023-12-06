@@ -14,8 +14,15 @@ const useStyles = makeStyles(({colors}) => ({
     width: normalize(50),
     borderRadius: 100,
   },
+  email: {
+    width: '100%',
+    color: colors.grey5,
+    fontSize: normalize(12),
+    fontFamily: fontFamilySetup.medium,
+    marginLeft: normalize(10),
+  },
+  nameContainer: {width: '60%'},
   name: {
-    width: '60%',
     color: colors.black,
     fontSize: normalize(14),
     fontFamily: fontFamilySetup.bold,

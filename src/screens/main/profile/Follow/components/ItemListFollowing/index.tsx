@@ -10,9 +10,10 @@ interface FollowerProps {
   data?: ItemFollowType;
 }
 
-const ItemListFollow: React.FunctionComponent<FollowerProps> = props => {
+const ItemListFollowing: React.FunctionComponent<FollowerProps> = props => {
   const styles = useStyles();
   const dispatch = useAppDispatch();
+  console.log('=============>', props.data);
 
   const onPressUnfollow = () => {
     dispatch(
@@ -32,20 +33,33 @@ const ItemListFollow: React.FunctionComponent<FollowerProps> = props => {
               'https://static.thenounproject.com/png/5034901-200.png',
           }}
         />
-        <Text numberOfLines={1} style={styles.name}>
-          {props.data?.fullname || 'Anonymous'}
-        </Text>
+        <View style={styles.nameContainer}>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              flex: 1,
+              justifyContent: 'space-between',
+            }}>
+            <Text numberOfLines={1} style={styles.name}>
+              {props.data?.fullname || 'Anonymous'}
+            </Text>
+          </View>
+          <Text numberOfLines={1} style={styles.email}>
+            {props.data?.email || 'Anonymous'}
+          </Text>
+        </View>
       </View>
       <TouchableOpacity
         onPress={onPressUnfollow}
-        style={props.data?.is_following ? styles.btn : styles.btnF}>
+        style={props.data?.is_follower ? styles.btn : styles.btnF}>
         <Text
-          style={props.data?.is_following ? styles.textBtn : styles.textBtnF}>
-          {props.data?.is_following ? 'Unfollow' : 'Follow'}
+          style={props.data?.is_follower ? styles.textBtn : styles.textBtnF}>
+          {props.data?.is_follower ? 'Unfollow' : 'Follow'}
         </Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default ItemListFollow;
+export default ItemListFollowing;

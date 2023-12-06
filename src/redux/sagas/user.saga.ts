@@ -6,12 +6,12 @@ import {AuthActions, LoadingActions} from '../reducer';
 import {NavigationService} from '../../navigation';
 import {routes} from '../../constants';
 
-function* postFollowSaga(action: PayloadAction<string>): Generator {
+function* postFollowSaga(action: PayloadAction<any>): Generator {
   try {
     console.log('run===========>');
     const {data}: any = yield call(UserService.postFollow, action.payload);
     if (data.code == 200) {
-      console.log(data);
+      yield put(UserAction.handleSuccerFollower(action.payload));
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');

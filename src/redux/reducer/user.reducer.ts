@@ -15,7 +15,7 @@ const reducer = createSlice({
   name: Redux.user,
   initialState: initialState,
   reducers: {
-    postFollow: (state: UserState, _: PayloadAction<string>) => {
+    postFollow: (state: UserState, _: PayloadAction<any>) => {
       return {
         ...state,
       };
@@ -117,14 +117,39 @@ const reducer = createSlice({
       };
     },
 
+    handleSuccerFollower: (state: UserState, action: PayloadAction<string>) => {
+      const uuid = action.payload;
+
+      if (state.listFollow && state.listFollow.data?.following) {
+        state.listFollow.data.following.forEach(follow => {
+          if (follow.user_follower_uuid === uuid) {
+            // Tìm thấy follow cần cập nhật
+            follow.is_follower = !follow.is_follower;
+          }
+        });
+
+        // Không trả về giá trị mới, chỉ cập nhật draft
+      }
+
+      return state; // Trả về trạng thái mới sau khi đã cập nhật draft
+    },
+
     setListFollow: (
       state: UserState,
       action: PayloadAction<PayloadHttpListFollow<ListFollow>>,
     ) => {
+      const payloadData = action.payload.data;
+      if (payloadData && payloadData.following) {
+        payloadData.following.forEach(followingItem => {
+          followingItem.is_follower = true;
+        });
+      }
+
       return {
         ...state,
         listFollow: {
           ...action.payload,
+          data: payloadData,
         },
       };
     },

@@ -39,5 +39,5 @@ export type ItemFollowType = uuid & {
   image_url: string;
   email: string;
   is_following: string;
-  is_follower: true;
+  is_follower: boolean;
 };
