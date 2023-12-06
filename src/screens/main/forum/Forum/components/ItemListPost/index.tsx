@@ -1,9 +1,8 @@
 import {Icon} from '@rneui/themed';
 import moment from 'moment';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator,
-  Animated,
   Dimensions,
   FlatList,
   Image,
@@ -16,11 +15,15 @@ import {
 } from 'react-native';
 import AutoHeightImage from 'react-native-auto-height-image';
 import {
-  GestureEvent,
   GestureHandlerRootView,
   PinchGestureHandler,
-  State,
+  TapGestureHandler,
 } from 'react-native-gesture-handler';
+import ReAnimated, {
+  useAnimatedGestureHandler,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 import Share from 'react-native-share';
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -96,21 +99,6 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
     setSelectedImage(null);
   };
 
-  const scale = new Animated.Value(1);
-
-  const onGestureEvent = Animated.event([{nativeEvent: {scale: scale}}], {
-    useNativeDriver: true,
-  });
-
-  const onHandleState = (event: GestureEvent) => {
-    if (event.nativeEvent.oldState == State.ACTIVE) {
-      Animated.spring(scale, {
-        toValue: 1,
-        useNativeDriver: true,
-      }).start();
-    }
-  };
-
   const handleScroll = (id: any) => (event: any) => {
     const scrollPosition = event.nativeEvent.contentOffset.x;
     const index = Math.round(scrollPosition / width);
@@ -144,7 +132,28 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
     dispatch(ForumActions.deletePost({forum_uuid: forum_uuid}));
   };
 
-  LogBox.ignoreLogs(['ReactImageView: Image source "null" doesn\'t exist']);
+  // LogBox.ignoreLogs(['ReactImageView: Image source "null" doesn\'t exist']);
+
+  const scale = useSharedValue(1);
+  const translationX = useSharedValue(0);
+  const translationY = useSharedValue(0);
+
+  const pinchHandler = useAnimatedGestureHandler({
+    onActive: event => {
+      scale.value = event.scale < 1 ? 1 : event.scale;
+      translationX.value = withSpring(0);
+      translationY.value = withSpring(0);
+    },
+    onEnd: () => {
+      scale.value = withSpring(scale.value);
+    },
+  });
+
+  const tapHandler = useAnimatedGestureHandler({
+    onActive: event => {
+      scale.value = withSpring(1);
+    },
+  });
 
   const styles = useStyles();
 
@@ -222,8 +231,8 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
           <FlatList
             data={item.images}
             renderItem={item => {
-              if (item.item === null) {
-                return <View />;
+              if (!item.item || selectedImage?.item === null) {
+                return null;
               }
               return (
                 <View style={styles.imageContainer}>
@@ -242,29 +251,35 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
                     visible={showModal}
                     transparent={true}
                     onRequestClose={closeModal}>
-                    <View style={styles.viewIconClose}>
+                    <TouchableOpacity
+                      style={styles.viewIconClose}
+                      onPress={closeModal}>
                       <Icon
                         name="close-circle"
                         size={30}
-                        color="white"
+                        color={styles.colorIconClose.color}
                         type="ionicon"
-                        onPress={closeModal}
                         style={styles.iconClose}
                       />
-                    </View>
+                    </TouchableOpacity>
 
                     <View style={styles.viewModalImage}>
                       <GestureHandlerRootView>
-                        <PinchGestureHandler
-                          onGestureEvent={onGestureEvent}
-                          onHandlerStateChange={onHandleState}>
-                          <Animated.View style={{transform: [{scale}]}}>
-                            <AutoHeightImage
-                              key={selectedImage?.index.toString()}
-                              source={{uri: selectedImage?.item}}
-                              width={screenWidth}
-                            />
-                          </Animated.View>
+                        <PinchGestureHandler onGestureEvent={pinchHandler}>
+                          <ReAnimated.View
+                            style={{transform: [{scale: scale}]}}>
+                            <TapGestureHandler
+                              numberOfTaps={2}
+                              onGestureEvent={tapHandler}>
+                              <ReAnimated.View>
+                                <AutoHeightImage
+                                  key={selectedImage?.index.toString()}
+                                  source={{uri: selectedImage?.item}}
+                                  width={screenWidth}
+                                />
+                              </ReAnimated.View>
+                            </TapGestureHandler>
+                          </ReAnimated.View>
                         </PinchGestureHandler>
                       </GestureHandlerRootView>
                     </View>
@@ -277,11 +292,11 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
             horizontal
             showsHorizontalScrollIndicator={false}
           />
-          {images && images.some(image => image !== null) && (
+          {item.images && item.images.some(image => image !== null) && (
             <View style={styles.viewImagesLengh}>
               <Text style={styles.textImagesLengh}>
                 {activeIndices[item.uuid] ? activeIndices[item.uuid] + 1 : 1}/
-                {images.length + 0}
+                {item.images.length + 0}
               </Text>
             </View>
           )}
@@ -333,7 +348,7 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
             <TouchableOpacity
               style={styles.iconText}
               onPress={() => {
-                if (uuid) {
+                if (item.uuid && item.comment_count) {
                   NavigationService.navigate(routes.COMMENT_FORUM, {
                     forum_uuid: item.uuid,
                     comment_count: item.comment_count,

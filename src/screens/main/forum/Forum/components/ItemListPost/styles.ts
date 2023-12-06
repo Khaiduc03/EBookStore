@@ -188,20 +188,23 @@ const useStyles = makeStyles(({colors}) => ({
     aspectRatio: normalize(16 / 9),
   },
   viewIconClose: {
-    backgroundColor: colors.blackDefault,
+    position: 'absolute',
+    top: normalize(10),
+    right: normalize(10),
+    zIndex: normalize(1000),
     alignItems: 'flex-end',
   },
   iconClose: {
     position: 'relative',
-    marginTop: normalize(10),
-    marginRight: normalize(10),
-    zIndex: normalize(1000),
+  },
+  colorIconClose: {
+    color: colors.primary,
   },
   viewModalImage: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.blackDefault,
+    backgroundColor: colors.white,
   },
   viewImagesLengh: {
     width: normalize(46),

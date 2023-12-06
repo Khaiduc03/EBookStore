@@ -52,9 +52,10 @@ declare module 'react-native-config' {
     FOLLOWER_USER: string;
 
     //COMMENT_FORUM
-    COMMENT_FORUM: string;
-    LIKE_COMMENT_FORUM: string;
-    UNLIKE_COMMENT_FORUM: string;
+    GET_COMMENT_FORUM: string;
+    POST_COMMENT_FORUM: string;
+    POST_LIKE_COMMENT_FORUM: string;
+    DELETE_LIKE_COMMENT_FORUM: string;
     REP_COMMENT_FORUM: string;
 
     //COMENT_COMIC

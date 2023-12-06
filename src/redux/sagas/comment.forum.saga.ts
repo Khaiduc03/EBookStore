@@ -7,6 +7,7 @@ import {ComicActions, ForumActions, LoadingActions} from '../reducer';
 import {CommentForumService} from '../services/comment.forum.service';
 import {CommentForumAction} from '../reducer/comment.forum.reducer';
 import {CommentForumType} from '../types/comment.forum.type';
+import {PayloadHttpListCommentData} from '../types/comment.chapter.type';
 
 function* postCommentSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoading());
@@ -17,7 +18,7 @@ function* postCommentSaga(action: PayloadAction<any>): Generator {
       action.payload,
     );
     if (data.code == 200) {
-      console.log(data.data);
+      console.log('postCommentSaga: ======================>', data.data);
       yield put(CommentForumAction.postCommentForumSucces(data.data));
       yield put(ComicActions.setCountComment());
       console.log('run push tookit');
@@ -28,6 +29,26 @@ function* postCommentSaga(action: PayloadAction<any>): Generator {
     console.log(error);
   } finally {
     yield put(LoadingActions.hideLoading());
+  }
+}
+
+function* getCommentSaga(action: PayloadAction<any>): Generator {
+  try {
+    console.log('run===========>');
+    const {data}: any = yield call(
+      CommentForumService.getCommentForum,
+      action.payload,
+    );
+    console.log('getCommentSaga: ======================>', action.payload);
+    if (data.data.code == 200) {
+      yield put(CommentForumAction.setCommentForum(data.data));
+      console.log('run push tookit');
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
   }
 }
 
@@ -98,94 +119,69 @@ function* deleteLikeCommentSaga(action: PayloadAction<any>): Generator {
   }
 }
 
-function* postRepCommentSaga(action: PayloadAction<any>): Generator {
-  yield put(LoadingActions.showLoading());
-  try {
-    console.log('run===========>');
-    const {data}: any = yield call(
-      CommentForumService.postRepCommentForum,
-      action.payload,
-    );
-    if (data.code == 200) {
-      yield put(CommentForumAction.postRepCommentForumSucces(data.data));
-      yield put(ForumActions.setCountComment());
-      console.log('run push tookit');
-    } else {
-      console.log('Server errol !!!');
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    yield put(LoadingActions.hideLoading());
-  }
-}
+// function* postRepCommentSaga(action: PayloadAction<any>): Generator {
+//   yield put(LoadingActions.showLoading());
+//   try {
+//     console.log('run===========>');
+//     const {data}: any = yield call(
+//       CommentForumService.postRepCommentForum,
+//       action.payload,
+//     );
+//     if (data.code == 200) {
+//       yield put(CommentForumAction.postRepCommentForumSucces(data.data));
+//       yield put(ForumActions.setCountComment());
+//       console.log('run push tookit');
+//     } else {
+//       console.log('Server errol !!!');
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   } finally {
+//     yield put(LoadingActions.hideLoading());
+//   }
+// }
 
-function* getCommentForumSaga(action: PayloadAction<any>): Generator {
-  yield put(LoadingActions.showLoadingPage());
-  try {
-    console.log('run===========>');
-    const {data}: any = yield call(
-      CommentForumService.getCommentForum,
-      action.payload,
-    );
-    console.log('getCommentForumSaga: ======================>', action.payload);
-    if (data.code == 200) {
-      yield put(CommentForumAction.setCommentForum(data.data));
-      console.log('run push tookit');
-    } else {
-      console.log('Server errol !!!');
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    yield put(LoadingActions.hideLoadingPage());
-  }
-}
-
-function* getRepCommentForumSaga(action: PayloadAction<any>): Generator {
-  yield put(LoadingActions.showLoadingPage());
-  try {
-    console.log('run===========>');
-    const {data}: any = yield call(
-      CommentForumService.getRepCommentForum,
-      action.payload,
-    );
-    if (data.code == 200) {
-      yield put(CommentForumAction.setRepCommentForum(data.data));
-      console.log('run push tookit');
-    } else {
-      console.log('Server errol !!!');
-    }
-  } catch (error) {
-    console.log(error);
-  } finally {
-    yield put(LoadingActions.hideLoadingPage());
-  }
-}
+// function* getRepCommentForumSaga(action: PayloadAction<any>): Generator {
+//   yield put(LoadingActions.showLoadingPage());
+//   try {
+//     console.log('run===========>');
+//     const {data}: any = yield call(
+//       CommentForumService.getRepCommentForum,
+//       action.payload,
+//     );
+//     if (data.code == 200) {
+//       yield put(CommentForumAction.setRepCommentForum(data.data));
+//       console.log('run push tookit');
+//     } else {
+//       console.log('Server errol !!!');
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   } finally {
+//     yield put(LoadingActions.hideLoadingPage());
+//   }
+// }
 
 export default function* watchCommentChapterSaga() {
-  yield takeLatest(CommentForumAction.postCommentForum.type, postCommentSaga);
-  yield takeLatest(
-    CommentForumAction.getCommentForum.type,
-    getCommentForumSaga,
-  );
+  yield takeLatest(CommentForumAction.postCommentForum, postCommentSaga);
+  yield takeLatest(CommentForumAction.getCommentForum, getCommentSaga);
 
   yield takeLatest(
-    CommentForumAction.postRepCommentForum.type,
-    postRepCommentSaga,
-  );
-
-  yield takeLatest(
-    CommentForumAction.postLikeCommentForum.type,
+    CommentForumAction.postLikeCommentForum,
     postLikeCommentSaga,
   );
   yield takeLatest(
-    CommentForumAction.deleteLikeCommentForum.type,
+    CommentForumAction.deleteLikeCommentForum,
     deleteLikeCommentSaga,
   );
 
-  yield takeLatest(
-    CommentForumAction.getRepCommentForum.type,
-    getRepCommentForumSaga,
-  );
+  // yield takeLatest(
+  //   CommentForumAction.postRepCommentForum.type,
+  //   postRepCommentSaga,
+  // );
+
+  // yield takeLatest(
+  //   CommentForumAction.getRepCommentForum.type,
+  //   getRepCommentForumSaga,
+  // );
 }

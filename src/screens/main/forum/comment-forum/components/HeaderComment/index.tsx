@@ -13,11 +13,10 @@ const HeaderComment = () => {
 
   const route = useRoute();
 
-  const totalComment = useAppSelector(getCountCommentForum);
-  // Access the comment_count parameter from route.params
+  // const totalComment = useAppSelector(getCountCommentForum);
 
-  // const totalComment =
-  //   (route.params as {comment_count?: number})?.comment_count || 0;
+  const totalComment =
+    (route.params as {comment_count?: number})?.comment_count || 0;
 
   return (
     <View style={styles.container}>
@@ -30,8 +29,8 @@ const HeaderComment = () => {
         />
       </TouchableOpacity>
       <Text style={styles.textHeader}>
+        {/* Comments({totalComment ? totalComment : '0'}) */}
         Comments({totalComment ? totalComment : '0'})
-        {/* Comments({totalComment}) */}
       </Text>
       <View style={styles.viewPDR} />
     </View>

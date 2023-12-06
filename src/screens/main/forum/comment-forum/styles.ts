@@ -11,9 +11,11 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewTextInput: {
     width: '100%',
-    height: normalize(56),
+    height: normalize(60),
     paddingVertical: normalize(9),
     paddingHorizontal: normalize(16),
+    borderTopWidth: normalize(2),
+    borderColor: '#E5E5E5',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
