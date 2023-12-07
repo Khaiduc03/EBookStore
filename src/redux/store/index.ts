@@ -20,6 +20,7 @@ import {ChatReducer} from '../reducer/chat.reducer';
 import {UserReducer} from '../reducer/user.reducer';
 import {CommentChapterReducer} from '../reducer/comment.chapter.reducer';
 import {CommentForumReducer} from '../reducer/comment.forum.reducer';
+import {RatingReducer} from '../reducer/rating.reducer';
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
@@ -29,7 +30,13 @@ const persistConfig: PersistConfig<RootState> = {
   debug: true, // enable logs - default is false
   stateReconciler: autoMergeLevel2,
   whitelist: [Redux.auth, Redux.theme, Redux.app, Redux.topic],
-  blacklist: [Redux.loading, Redux.comic, Redux.chat, Redux.forum],
+  blacklist: [
+    Redux.loading,
+    Redux.comic,
+    Redux.chat,
+    Redux.forum,
+    Redux.rating,
+  ],
 };
 
 const rootReducers = combineReducers({
@@ -45,6 +52,7 @@ const rootReducers = combineReducers({
   user: UserReducer,
   commetChapter: CommentChapterReducer,
   commentForum: CommentForumReducer,
+  rating: RatingReducer,
 });
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducers);
 
