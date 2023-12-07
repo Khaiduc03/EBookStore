@@ -3,18 +3,7 @@ import apiService from './api.service';
 import {configFormData, configNoCache} from './config.service';
 
 export class ComicService {
-  //Rating comic
-  static async ratingComic(action: any) {
-    console.log(`${ENDPOINTS.RATING_COMIC}`, action);
-    return await apiService.post(`${ENDPOINTS.RATING_COMIC}`, action);
-  }
-  // get list rating comic
-  static async getListRatingComic(action: any) {
-    console.log(`${ENDPOINTS.LISTRATING_COMIC}?comic_uuid=${action}`);
-    return await apiService.get(
-      `${ENDPOINTS.LISTRATING_COMIC}?comic_uuid=${action}`,
-    );
-  }
+
 
   //get data
   static async getComic(action: number) {
