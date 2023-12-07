@@ -20,6 +20,7 @@ import {routes} from '../../../../../../constants';
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {NavigationService} from '../../../../../../navigation';
+import {getAuthUserProfile} from '../../../../../../redux';
 import Icon_Comment from '../Icon-Comment';
 import useStyles from './styles';
 import Share from 'react-native-share';

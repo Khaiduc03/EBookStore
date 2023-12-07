@@ -1,11 +1,8 @@
-import {View, Text, Alert} from 'react-native';
-import {TouchableOpacity} from 'react-native';
 import React from 'react';
-import useStyles from './styles';
+import {Alert, View} from 'react-native';
 import {BigButton, HeaderCustom, Switch_custom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
-import {useAppDispatch} from '../../../../hooks';
+import useStyles from './styles';
 
 const Security: React.FC = () => {
   const styles = useStyles();

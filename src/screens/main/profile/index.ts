@@ -24,6 +24,8 @@ import SettingsNotification from './SettingNotification';
 import Update_Profile from './Update-profile';
 import UpdateBio from './UpdateBio';
 import Follow from './Follow';
+import CommentPostDetail from './MyProfile/components/PostDetail/components/Comment';
+import {CommentPostUserDetail} from './Profile-User/components/PostDetailUser/components';
 
 export {default as Profile} from './Profile';
 
@@ -117,5 +119,13 @@ export const profileScreens: Screen[] = [
   {
     name: routes.LIST_FOLLOW,
     component: Follow,
+  },
+  {
+    name: routes.COMMENTPOSTDETAIL,
+    component: CommentPostDetail,
+  },
+  {
+    name: routes.COMMENTPOSTUSERDETAIL,
+    component: CommentPostUserDetail,
   },
 ];

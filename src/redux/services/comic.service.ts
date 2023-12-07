@@ -3,6 +3,8 @@ import apiService from './api.service';
 import {configFormData, configNoCache} from './config.service';
 
 export class ComicService {
+
+
   //get data
   static async getComic(action: number) {
     console.log(`${ENDPOINTS.COMIC}?page=${action}`);

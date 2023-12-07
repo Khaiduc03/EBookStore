@@ -63,3 +63,4 @@ export const nextPageFavorite = (state: RootState) =>
 
 export const currentPageFavorite = (state: RootState) =>
   state.comic.listFavorite?.currentPage;
+

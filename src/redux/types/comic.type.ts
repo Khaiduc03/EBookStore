@@ -1,3 +1,4 @@
+import {type} from 'os';
 import {uuid, Timestamp, image, PayloadHttpList} from '../../types';
 import {TopicType} from './topic.type';
 

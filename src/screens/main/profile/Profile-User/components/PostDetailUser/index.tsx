@@ -1,32 +1,25 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
-import {HeaderCustom} from '../../../../../../components';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
-import TextCustom from '../../../../../../components/customs/Text';
 import {Icon} from '@rneui/themed';
-import useStyles from './styles';
-import {images} from '../../../../../../assets';
+import React, {useState} from 'react';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {HeaderCustom} from '../../../../../../components';
+import TextCustom from '../../../../../../components/customs/Text';
+import {NavigationService} from '../../../../../../navigation';
 import Icon_Comment from '../../../MyProfile/components/Icon-Comment';
+import useStyles from './styles';
 
 const PostDetailUser: React.FC = props => {
   const styles = useStyles();
   const handlePressGoback = () => {
-    NavigationService.navigate(routes.PROFILEUSER);
+    NavigationService.goBack();
   };
 
-  const [selectedIcon, setSelectedIcon] = useState('');
-
-  const handleIconClick = (iconName: string) => {
-    setSelectedIcon(iconName);
-  };
   const [isPressed, setIsPressed] = useState(false);
   const [buttonText, setButtonText] = useState('Follow');
 
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="Post by User"
         onPressLeftIcon={handlePressGoback}
         buttonProps={{

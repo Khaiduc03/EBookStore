@@ -1,10 +1,8 @@
 import {PayloadAction} from '@reduxjs/toolkit';
-import {call, delay, put, takeLatest} from 'redux-saga/effects';
-import {ComicActions, ComicReducer, LoadingActions} from '../reducer';
-import {ComicService} from '../services';
-import {showToastSuccess} from '../../utils';
 import {ToastAndroid} from 'react-native';
-import {criticallyDampedSpringCalculations} from 'react-native-reanimated/lib/typescript/reanimated2/animation/springUtils';
+import {call, delay, put, takeLatest} from 'redux-saga/effects';
+import {ComicActions, LoadingActions} from '../reducer';
+import {ComicService} from '../services';
 
 function* getListDataSaga(action: PayloadAction<number>): Generator {
   if (action.payload == 1) {

@@ -1,15 +1,14 @@
-import {View, Text, Image} from 'react-native';
-import React, {useState} from 'react';
-import useStyles from './styles';
-import {images} from '../../../../../../assets/images/png';
-import {SquaresCustomProps} from './types';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
-import {theme} from '../../../../../../theme';
 import {Icon} from '@rneui/themed';
 import {useAppDispatch} from '../../../../../../hooks';
 import {UserAction} from '../../../../../../redux/reducer/user.reducer';
+import React, {useState} from 'react';
+import {Image, Text, View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {routes} from '../../../../../../constants';
+import {NavigationService} from '../../../../../../navigation';
+import {theme} from '../../../../../../theme';
+import useStyles from './styles';
+import {SquaresCustomProps} from './types';
 
 const ItemList: React.FunctionComponent<SquaresCustomProps> = props => {
   const {
@@ -35,9 +34,7 @@ const ItemList: React.FunctionComponent<SquaresCustomProps> = props => {
   const handlePressUser = () => {
     NavigationService.navigate(routes.PROFILEUSER, {data: props.data});
   };
-  const handlePressGoback = () => {
-    NavigationService.navigate(routes.MYPROFILE);
-  };
+
   return (
     <View style={styles.Squares}>
       <TouchableOpacity style={styles.ViewTop} onPress={handlePressUser}>

@@ -7,7 +7,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
-import TextCustom from '../../../../components/customs/Text';
 import {routes} from '../../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
