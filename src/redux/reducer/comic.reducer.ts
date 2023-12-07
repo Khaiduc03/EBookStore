@@ -22,42 +22,6 @@ const reducer = createSlice({
   name: Redux.comic,
   initialState: initialState,
   reducers: {
-    // Rating comic
-    ratingComic: (state: ComicState, _: PayloadAction<any>) => {
-      return {
-        ...state,
-      };
-    },
-    setRatingComic: (
-      state: ComicState,
-      action: PayloadAction<PayloadHttp<ComicType>>,
-    ) => {
-      return {
-        ...state,
-        ratingData: {
-          data: action.payload.data,
-          code: action.payload.code,
-          message: action.payload.message,
-        },
-      };
-    },
-    // get list rating comic
-    getListRatingComic: (state: ComicState, _: PayloadAction<any>) => {
-      return {
-        ...state,
-      };
-    },
-    setListRatingComic: (
-      state: ComicState,
-      action: PayloadAction<PayloadHttpList<ComicType>>,
-    ) => {
-      return {
-        ...state,
-        listRatingData: {
-          data: action.payload.data,
-        },
-      };
-    },
     //comic
     clearListData: (state: ComicState) => {
       return {

@@ -4,7 +4,6 @@ import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import useStyles from './styles';
 import {RatingComicProps} from './types';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
-import {getRatingComic} from '../../../../../../redux/selectors/comic.selector';
 
 const ItemRatingStar: React.FC<RatingComicProps[]> = props => {
   const styles = useStyles();
@@ -20,14 +19,7 @@ const ItemRatingStar: React.FC<RatingComicProps[]> = props => {
       setDisplayedData(filteredData);
     }
   };
-  // Rating this comic
-  const dispatch = useAppDispatch();
-  const listRating = useAppSelector(getRatingComic);
-  console.log('List rating', listRating);
-  useEffect(() => {
-    dispatch({type: 'comic/getRatingComic'});
-  }, [dispatch]);
-
+ 
   return (
     <View style={styles.viewItem}>
       {/* Button */}

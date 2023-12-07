@@ -132,4 +132,7 @@ export type RatingType = uuid &
 //     is_like: boolean;
 //     like_count: number;
 //   };
-export type listRatingComic = uuid & Timestamp & {rating: number};
+export type listRatingComic = uuid &
+  Timestamp & {
+    rating: number;
+  };

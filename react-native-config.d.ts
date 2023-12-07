@@ -46,8 +46,6 @@ declare module 'react-native-config' {
     CHECK_FAVORITE: string;
     ALL_FAVORITE: string;
     HISTORY_COMIC: string;
-    RATING_COMIC: string;
-    LISTRATING_COMIC: string;
     //CONVERSATION
     CONVERSATION: string;
     MESSAGES: string;
