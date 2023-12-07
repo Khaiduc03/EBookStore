@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import TextCustom from '../../../../components/customs/Text';
@@ -16,11 +16,16 @@ import {AuthActions, User} from '../../../../redux';
 import {useRoute} from '@react-navigation/native';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {
+  currentPageAllPostByIdUser,
+  getAllPostByIdUser,
   getAllUser,
   getUserById,
+  nextPageAllPostIdByUser,
 } from '../../../../redux/selectors/user.selector';
 import {UserType} from '../../../../redux/types/user.type';
 import {UserAction} from '../../../../redux/reducer/user.reducer';
+import {getIsLoadingTopic} from '../../../../redux/selectors/loading.selector';
+import {ActivityIndicator} from 'react-native';
 interface RouteParamsProfile {
   data?: UserType;
 }
@@ -28,18 +33,59 @@ interface RouteParamsProfile {
 const ProfileUser: React.FC = props => {
   const route = useRoute();
   const dataUser = (route.params as RouteParamsProfile).data;
-  const dataList = useAppSelector(getAllUser);
+  const dataList = useAppSelector(getAllPostByIdUser);
   const dataById = useAppSelector(getUserById);
+  const dispatch = useAppDispatch();
+
+  console.log(dataUser?.is_follower);
+
+  const isLoading = useAppSelector(getIsLoadingTopic);
+  const [sizeContent, setSizeContent] = useState<number>(0);
+  const [size, setSize] = useState<boolean>(false);
+  const currentpage = useAppSelector(currentPageAllPostByIdUser);
+  const nextPage = useAppSelector(nextPageAllPostIdByUser);
 
   const styles = useStyles();
+
+  useEffect(() => {
+    dispatch(UserAction.clearListAllPostByUser());
+    dispatch(
+      UserAction.getListAllPostByIdUser({page: 1, user_uuid: dataUser?.uuid}),
+    );
+  }, []);
+
+  const loadMoreComic = () => {
+    if (nextPage && !isLoading) {
+      dispatch(UserAction.getListPostByUser(currentpage ? currentpage + 1 : 1));
+      setSize(true);
+    }
+  };
+
+  const onContentSizeChange = useCallback(
+    (contentWidth: number, contentHeight: number) => {
+      setSizeContent(contentHeight);
+      if (size) {
+        setSizeContent(sizeContent + 3000);
+        setSize(false);
+      }
+    },
+    [size, sizeContent],
+  );
+  const listFooterComponent = useCallback(() => {
+    return <ActivityIndicator color={'#F89300'} size={'large'} />;
+  }, []);
+
   const handlePressGoback = () => {
     NavigationService.goBack();
   };
   const handlePressMessage = () => {
     NavigationService.navigate(routes.MESSAGE);
   };
-  const [isFollowed, setIsFollowed] = useState(true);
+  const [isFollowed, setIsFollowed] = useState<Boolean>(
+    dataUser?.is_follower ? dataUser?.is_follower : true,
+  );
   const handleFollowButtonClick = () => {
+    dispatch(UserAction.postFollowRandom(dataUser?.uuid));
     setIsFollowed(!isFollowed);
   };
   const renderItem = ({item}: {item: UserType}) => (
@@ -59,7 +105,9 @@ const ProfileUser: React.FC = props => {
       </View>
       <View style={styles.nameUser}>
         <TextCustom textBold title={dataUser && dataUser.fullname} />
-        <TextCustom textLight title="Biographic this here !!!!! 😎" />
+        <Text style={styles.textBio} numberOfLines={1}>
+          {dataUser?.summary || 'I am hacker'}
+        </Text>
       </View>
       <View style={styles.viewbtnFollow}>
         <TouchableOpacity
@@ -67,23 +115,23 @@ const ProfileUser: React.FC = props => {
             styles.btnFollow,
             {
               backgroundColor: isFollowed
-                ? theme?.lightColors?.blue
-                : theme?.lightColors?.grey5,
+                ? theme?.lightColors?.grey5
+                : theme?.lightColors?.blue,
             },
           ]}
           onPress={handleFollowButtonClick}>
           <Text style={styles.textFollow}>
-            {isFollowed ? 'Follow' : 'unFollow'}
+            {isFollowed ? 'Unfollow' : 'Follow'}
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnFollow} onPress={handlePressMessage}>
+        <TouchableOpacity style={styles.btnMess} onPress={handlePressMessage}>
           <Text style={styles.textFollow}>Messenger</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btnAddUser}>
+        {/* <TouchableOpacity style={styles.btnAddUser}>
           <AddFriend />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
-      <View style={styles.viewExplore}>
+      {/* <View style={styles.viewExplore}>
         <FlatList
           data={dataList}
           renderItem={renderItem}
@@ -94,18 +142,36 @@ const ProfileUser: React.FC = props => {
           snapToInterval={10}
           decelerationRate={0.5}
         />
-      </View>
+      </View> */}
 
-      <View style={styles.viewMyPost}>
-        <Text style={styles.textPost}>Post by User</Text>
-      </View>
       <View style={{flex: 1}}>
+        <View style={styles.viewMyPost}>
+          <Text style={styles.textPost}>Post by User</Text>
+        </View>
         <FlatList
-          data={data}
+          data={dataList}
           renderItem={({item}) => <ItemPostUser data={item} />}
           numColumns={3}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.uuid}
           showsVerticalScrollIndicator
+          onContentSizeChange={onContentSizeChange}
+          onScroll={({nativeEvent}) => {
+            const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
+            const numberOfPixelsFromBottomThreshold = 100;
+            const isNearBottom =
+              contentOffset.y + layoutMeasurement.height >=
+              sizeContent - numberOfPixelsFromBottomThreshold;
+            console.log(
+              'sỉze scroll',
+              contentOffset.y + layoutMeasurement.height,
+            );
+            console.log('sỉze content', sizeContent);
+
+            if (isNearBottom) {
+              loadMoreComic();
+            }
+          }}
+          ListFooterComponent={isLoading ? listFooterComponent() : <View />}
         />
       </View>
     </View>

@@ -64,6 +64,16 @@ export class ComicService {
     return await apiService.get(`${ENDPOINTS.COMIC_TOP_20}`);
   }
 
+  static async getComicByTopRating() {
+    console.log(`${ENDPOINTS.TOP_RATING}`);
+    return await apiService.get(`${ENDPOINTS.TOP_RATING}`);
+  }
+
+  static async getComicByTopFavorite() {
+    console.log(`${ENDPOINTS.TOP_FAVORITE}`);
+    return await apiService.get(`${ENDPOINTS.TOP_FAVORITE}`);
+  }
+
   static async postFavorite(payload: string) {
     console.log(`${ENDPOINTS.POST_FAVORITE}`, payload);
     return await apiService.post(`${ENDPOINTS.POST_FAVORITE}`, {

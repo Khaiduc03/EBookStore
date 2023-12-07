@@ -56,6 +56,8 @@ export type ComicState = Partial<{
   listDetailChapter: PayloadHttpDetailChapter<DetailChapterType>;
   listChapter: PayloadHttpListChapter<ChapterType>;
   listTopView: PayloadHttpListTopView<ComicType>;
+  listTopRating: PayloadHttpListTopView<ComicType>;
+  listTopFavorite: PayloadHttpListTopView<ComicType>;
   dataPostFavorite: PayloadHttp<AddFavoriteType>;
   listFavorite: PayloadHttpListComicData<ComicType>;
   listHistoryComic: PayloadHttpListComicData<ComicType>;
@@ -76,6 +78,7 @@ export type ComicType = uuid &
     isfavorite: boolean;
     last_chapter_number: number;
     average_rating: number;
+    total_favorite: number;
   };
 
 export type ComicDetailType = uuid &

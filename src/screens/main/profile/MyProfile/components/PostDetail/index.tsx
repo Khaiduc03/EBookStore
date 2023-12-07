@@ -38,6 +38,7 @@ import {ForumActions} from '../../../../../../redux';
 import {data} from '../../../../home/RatingComicScreen/components/ItemListButton/types';
 import {UserAction} from '../../../../../../redux/reducer/user.reducer';
 import {getPostById} from '../../../../../../redux/selectors/user.selector';
+import {backScreen} from '../../../../../../utils';
 interface PostDataDeatilRoute {
   post_uuid: string;
 }
@@ -51,7 +52,7 @@ const PostDetail = () => {
   const dataDetail = useAppSelector(getPostById);
 
   const handlePressGoback = () => {
-    NavigationService.navigate(routes.MYPROFILE);
+    backScreen();
   };
 
   useEffect(() => {

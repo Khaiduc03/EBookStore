@@ -22,6 +22,22 @@ function* postFollowSaga(action: PayloadAction<any>): Generator {
   }
 }
 
+function* postFollwRandom(action: PayloadAction<any>): Generator {
+  try {
+    console.log('run===========>');
+    const {data}: any = yield call(UserService.postFollow, action.payload);
+    if (data.code == 200) {
+      yield put(UserAction.handleSuccerFollowRandom(action.payload));
+      console.log('run push tookit');
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+  }
+}
+
 function* getAllUserSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoading());
   try {
@@ -66,6 +82,27 @@ function* getPostByUserSaga(action: PayloadAction<any>): Generator {
     );
     if (data.code == 200) {
       yield put(UserAction.setListPostByUser(data.data));
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoadingTopic());
+  }
+}
+
+function* getPostAllByIdUserSaga(action: PayloadAction<any>): Generator {
+  yield put(LoadingActions.showLoadingTopic());
+  try {
+    console.log('run===========>');
+    const {data}: any = yield call(
+      UserService.getListAllPostByIdUser,
+      action.payload,
+    );
+    if (data.code == 200) {
+      console.log(data.data);
+      yield put(UserAction.setListAllPostByIdUser(data.data));
     } else {
       console.log('Server errol !!!');
     }
@@ -128,6 +165,39 @@ function* getListFollowSaga(action: any): Generator {
   }
 }
 
+function* deleteFollowerSaga(action: PayloadAction<any>): Generator {
+  try {
+    console.log('run===========>');
+    const {data}: any = yield call(UserService.deleteFollow, action.payload);
+    if (data.code == 200) {
+      yield put(UserAction.handleDeleteFollowerSuccess(action.payload));
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+  }
+}
+
+function* getListUserRandomSaga(action: any): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    console.log('run===========>');
+    const {data}: any = yield call(UserService.getUserRandom);
+    if (data.code == 200) {
+      yield put(AuthActions.getUserInfo());
+      yield put(UserAction.setListUserRandom(data));
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
 export default function* watchUserSaga() {
   yield takeLatest(UserAction.postFollow.type, postFollowSaga);
   yield takeLatest(UserAction.getListUser.type, getAllUserSaga);
@@ -136,4 +206,11 @@ export default function* watchUserSaga() {
   yield takeLatest(UserAction.getPostById.type, getPostByIdSaga);
   yield takeLatest(UserAction.putSummary.type, putSummarySaga);
   yield takeLatest(UserAction.getListFollow.type, getListFollowSaga);
+  yield takeLatest(UserAction.getUserRandom.type, getListUserRandomSaga);
+  yield takeLatest(UserAction.deleteFollwer.type, deleteFollowerSaga);
+  yield takeLatest(
+    UserAction.getListAllPostByIdUser.type,
+    getPostAllByIdUserSaga,
+  );
+  yield takeLatest(UserAction.postFollowRandom.type, postFollwRandom);
 }

@@ -6,6 +6,7 @@ import {ForumType} from '../../../../../../redux/types/forum.type';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {UserAction} from '../../../../../../redux/reducer/user.reducer';
 import {getPostById} from '../../../../../../redux/selectors/user.selector';
+import FastImage from 'react-native-fast-image';
 
 type Props = {
   data?: ForumType;
@@ -29,7 +30,7 @@ const ItemPost: React.FC<Props> = props => {
         alignItems: 'center',
         borderRadius: 10,
       }}>
-      <Image
+      <FastImage
         source={{
           uri: data?.images[0]
             ? data?.images[0]

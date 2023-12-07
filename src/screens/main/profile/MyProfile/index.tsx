@@ -17,6 +17,7 @@ import {ItemFollow, ItemListMyProfile, ItemPost} from './components';
 import {
   currentPagePostByUser,
   getAllUser,
+  getListUserRandom,
   getPostByUser,
   nextPagePostByUser,
 } from '../../../../redux/selectors/user.selector';
@@ -41,8 +42,10 @@ const MyProfile: React.FC = props => {
 
   const dataUser = useAppSelector(getAllUser);
   const dataPost = useAppSelector(getPostByUser);
+  const dataRandom = useAppSelector(getListUserRandom);
 
   useEffect(() => {
+    dispatch(UserAction.getUserRandom());
     dispatch(UserAction.getListUser());
     dispatch(UserAction.clearListPostByUser());
     dispatch(UserAction.getListPostByUser(1));
@@ -118,7 +121,7 @@ const MyProfile: React.FC = props => {
       </View>
       <View style={{paddingVertical: 10}}>
         <FlatList
-          data={dataUser}
+          data={dataRandom}
           renderItem={renderItem}
           keyExtractor={item => item.uuid}
           horizontal

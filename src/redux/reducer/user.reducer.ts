@@ -87,6 +87,7 @@ const reducer = createSlice({
 
     clearListPostByUser: (state: UserState) => {
       return {
+        ...state,
         listPostByUser: {},
       };
     },
@@ -127,11 +128,9 @@ const reducer = createSlice({
             follow.is_follower = !follow.is_follower;
           }
         });
-
-        // Không trả về giá trị mới, chỉ cập nhật draft
       }
 
-      return state; // Trả về trạng thái mới sau khi đã cập nhật draft
+      return state;
     },
 
     setListFollow: (
@@ -151,6 +150,115 @@ const reducer = createSlice({
           ...action.payload,
           data: payloadData,
         },
+      };
+    },
+    getUserRandom: (state: UserState) => {
+      return {
+        ...state,
+      };
+    },
+
+    setListUserRandom: (
+      state: UserState,
+      action: PayloadAction<PayloadHttpList<UserType>>,
+    ) => {
+      const payloadData = action.payload.data;
+      if (payloadData && payloadData) {
+        payloadData.forEach(followingItem => {
+          followingItem.is_follower = true;
+        });
+      }
+
+      return {
+        ...state,
+        listUserRandom: {
+          ...action.payload,
+          data: payloadData,
+        },
+      };
+    },
+
+    deleteFollwer: (state: UserState, _: PayloadAction<string>) => {
+      return {
+        ...state,
+      };
+    },
+
+    handleDeleteFollowerSuccess: (
+      state: UserState,
+      action: PayloadAction<string>,
+    ) => {
+      if (state.listFollow && state.listFollow.data) {
+        const updatedFollower = state.listFollow.data.follower.filter(
+          followerItem => followerItem.user_following_uuid !== action.payload,
+        );
+
+        return {
+          ...state,
+          listFollow: {
+            ...state.listFollow,
+            data: {
+              ...state.listFollow.data,
+              follower: updatedFollower,
+            },
+          },
+        };
+      }
+      return state;
+    },
+
+    getListAllPostByIdUser: (state: UserState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+    setListAllPostByIdUser: (
+      state: UserState,
+      action: PayloadAction<PayloadHttpListForumData<ForumType>>,
+    ) => {
+      const currentData: ForumType[] = state.listAllPostByIdUser?.data || [];
+      const newData = action.payload.data || [];
+      const updatedData = [...currentData, ...newData];
+      return {
+        ...state,
+        listAllPostByIdUser: {
+          data: updatedData,
+          canNext: action.payload.canNext,
+          currentDataSize: action.payload.currentDataSize,
+          currentPage: action.payload.currentPage,
+          totalPage: action.payload.totalPage,
+          totalData: action.payload.totalData,
+        },
+      };
+    },
+    clearListAllPostByUser: (state: UserState) => {
+      return {
+        ...state,
+        listAllPostByIdUser: {},
+      };
+    },
+
+    handleSuccerFollowRandom: (
+      state: UserState,
+      action: PayloadAction<string>,
+    ) => {
+      const uuid = action.payload;
+
+      if (state.listUserRandom && state.listUserRandom.data) {
+        state.listUserRandom.data.forEach(follow => {
+          if (follow.uuid === uuid) {
+            // Tìm thấy follow cần cập nhật
+            follow.is_follower = !follow.is_follower;
+          }
+        });
+      }
+
+      return state;
+    },
+
+    postFollowRandom: (state: UserState, _: PayloadAction<any>) => {
+      return {
+        ...state,
       };
     },
   },

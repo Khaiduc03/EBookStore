@@ -38,6 +38,7 @@ declare module 'react-native-config' {
     UNLIKE: string;
     FORUM_BY_UUID: string;
     FORUM_DELETE_POST: string;
+    GET_ALLPOST_BY_ID: string;
 
     CHAPTER: string;
     CHAPTER_UUID: string;
@@ -49,6 +50,7 @@ declare module 'react-native-config' {
     HISTORY_COMIC: string;
     TOP_FAVORITE: string;
     TOP_RATING: string;
+    GET_USER_RANDOM: string;
 
     //CONVERSATION
     CONVERSATION: string;

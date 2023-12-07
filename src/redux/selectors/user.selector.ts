@@ -16,3 +16,14 @@ export const getListFollower = (state: RootState) =>
   state.user.listFollow?.data?.follower;
 export const getListFollowing = (state: RootState) =>
   state.user.listFollow?.data?.following;
+
+export const getListUserRandom = (state: RootState) =>
+  state.user.listUserRandom?.data;
+
+export const getAllPostByIdUser = (state: RootState) =>
+  state.user.listAllPostByIdUser?.data;
+export const nextPageAllPostIdByUser = (state: RootState) =>
+  state.user.listAllPostByIdUser?.canNext;
+
+export const currentPageAllPostByIdUser = (state: RootState) =>
+  state.user.listAllPostByIdUser?.currentPage;
