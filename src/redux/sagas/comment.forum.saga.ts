@@ -10,7 +10,7 @@ import {CommentForumType} from '../types/comment.forum.type';
 import {PayloadHttpListCommentData} from '../types/comment.chapter.type';
 
 function* postCommentSaga(action: PayloadAction<any>): Generator {
-  yield put(LoadingActions.showLoading());
+  // yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
     const {data}: any = yield call(
@@ -27,7 +27,7 @@ function* postCommentSaga(action: PayloadAction<any>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoading());
+    // yield put(LoadingActions.hideLoading());
   }
 }
 
@@ -115,13 +115,14 @@ function* deleteLikeCommentSaga(action: PayloadAction<any>): Generator {
 }
 
 function* postRepCommentSaga(action: PayloadAction<any>): Generator {
-  yield put(LoadingActions.showLoading());
+  // yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
     const {data}: any = yield call(
       CommentForumService.postRepCommentForum,
       action.payload,
     );
+    console.log('postRepCommentSaga: ======================>', action.payload);
     if (data.code == 200) {
       yield put(CommentForumAction.postRepCommentForumSucces(data.data));
       console.log('run push tookit');
@@ -131,7 +132,7 @@ function* postRepCommentSaga(action: PayloadAction<any>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoading());
+    // yield put(LoadingActions.hideLoading());
   }
 }
 

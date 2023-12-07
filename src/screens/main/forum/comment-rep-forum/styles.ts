@@ -73,8 +73,30 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.medium,
     color: '#A5A6AA',
   },
-  iconStyle: {
+  iconStyleFocus: {
+    color: colors.primary,
+  },
+  iconStyleBlur: {
     color: '#A5A6AA',
+  },
+  viewTextInput: {
+    width: '100%',
+    height: normalize(60),
+    paddingVertical: normalize(9),
+    paddingHorizontal: normalize(16),
+    borderTopWidth: normalize(2),
+    borderColor: '#E5E5E5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  textInput: {
+    width: '100%',
+    height: normalize(39),
+    paddingHorizontal: normalize(12),
+    fontSize: normalize(14),
+    borderRadius: normalize(12),
+    backgroundColor: '#F1F1F3',
   },
 }));
 

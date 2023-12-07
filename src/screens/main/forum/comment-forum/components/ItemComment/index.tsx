@@ -34,6 +34,8 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
     is_like,
   } = props.data;
 
+  console.log('hihi ', uuid);
+
   const styles = useStyles();
 
   const dispatch = useAppDispatch();
@@ -80,11 +82,11 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
         </Text>
         <Text style={styles.commentStyle}>{comment}</Text>
         <View style={styles.repContent}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={styles.viewItemBtn}>
             <TouchableOpacity
               onPress={() => {
                 NavigationService.navigate(routes.COMMENT_REP_FORUM, {
-                  parents_comment_uuid: parents_comment_uuid,
+                  parents_comment_uuid: uuid,
                   data: props.data,
                 }),
                   dispatch(CommentForumAction.clearRepCommentForum());
@@ -115,16 +117,18 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
                 {like_count ? like_count : '0'}
               </Text>
             </TouchableOpacity>
-          </View>
 
-          <TouchableOpacity onPress={onPressDeleteComment}>
-            <Icon
-              name="ellipsis-vertical"
-              type="ionicon"
-              size={25}
-              color={styles.iconStyleBlur.color}
-            />
-          </TouchableOpacity>
+            {uuid && (
+              <TouchableOpacity onPress={onPressDeleteComment}>
+                <Icon
+                  name="ellipsis-vertical"
+                  type="ionicon"
+                  size={15}
+                  color={styles.iconStyleBlur.color}
+                />
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
       </View>
     </View>

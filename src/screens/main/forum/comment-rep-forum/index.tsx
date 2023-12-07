@@ -36,6 +36,9 @@ const CommentRepForum = () => {
   const route = useRoute();
   const parents_comment_uuid = (route.params as ParentsUuidComment)
     .parents_comment_uuid;
+
+  console.log('parents_comment_uuid: ========', parents_comment_uuid);
+
   const data = (route.params as ParentsUuidComment).data;
   const [value, setvalue] = useState('');
 
@@ -100,7 +103,7 @@ const CommentRepForum = () => {
   const onPressPostComment = () => {
     dispatch(
       CommentChapterAction.postRepCommentChapter({
-        chapter_uuid: dataDetailChapter && dataDetailChapter[0].chapter_uuid,
+        uuid: uuid,
         comment: value,
         parents_comment_uuid: parents_comment_uuid,
       }),
@@ -194,7 +197,7 @@ const CommentRepForum = () => {
                     <Icon
                       name="chatbox-outline"
                       type="ionicon"
-                      color={styles.iconStyle.color}
+                      color={styles.iconStyleBlur.color}
                       size={15}
                     />
                     <Text style={styles.numberRepStyle}>{countComment}</Text>
@@ -203,9 +206,13 @@ const CommentRepForum = () => {
                       onPress={onPressLikeComment}
                       style={styles.like}>
                       <Icon
-                        name="thumbs-up"
-                        type="feather"
-                        color={like ? '#F89300' : styles.iconStyle.color}
+                        name={is_like ? 'thumb-up-alt' : 'thumb-up-off-alt'}
+                        color={
+                          is_like
+                            ? styles.iconStyleFocus.color
+                            : styles.iconStyleBlur.color
+                        }
+                        type="materialicon"
                         size={15}
                       />
                       <Text style={styles.numberRepStyle}>{countLike}</Text>
@@ -215,7 +222,7 @@ const CommentRepForum = () => {
                     name="ellipsis-vertical"
                     type="ionicon"
                     size={15}
-                    color={styles.iconStyle.color}
+                    color={styles.iconStyleBlur.color}
                   />
                 </View>
               </View>
@@ -246,15 +253,18 @@ const CommentRepForum = () => {
         contentContainerStyle={{paddingVertical: 65}}
       />
 
-      <TextInput
-        ref={TextInputRef}
-        value={value}
-        onChangeText={text => setvalue(text)}
-        placeholder={'Shoot your comment...'}
-        onSubmitEditing={onPressPostComment}
-        returnKeyType="send"
-        style={styles.inputStyle}
-      />
+      <View style={styles.viewTextInput}>
+        <TextInput
+          ref={TextInputRef}
+          value={value}
+          onChangeText={text => setvalue(text)}
+          placeholder="Shoot your comment..."
+          placeholderTextColor={'#939297'}
+          onSubmitEditing={onPressPostComment}
+          returnKeyType="send"
+          style={styles.textInput}
+        />
+      </View>
 
       <HeaderRepComment />
     </SafeAreaView>

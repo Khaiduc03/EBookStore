@@ -44,7 +44,7 @@ const useStyles = makeStyles(({colors}) => ({
   like: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: normalize(5),
+    paddingRight: normalize(60),
   },
   rep: {
     flexDirection: 'row',
@@ -63,6 +63,12 @@ const useStyles = makeStyles(({colors}) => ({
   },
   iconStyleBlur: {
     color: '#A5A6AA',
+  },
+  viewItemBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
 }));
 

@@ -59,7 +59,10 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.medium,
     color: '#A5A6AA',
   },
-  iconStyle: {
+  iconStyleFocus: {
+    color: colors.primary,
+  },
+  iconStyleBlur: {
     color: '#A5A6AA',
   },
 }));

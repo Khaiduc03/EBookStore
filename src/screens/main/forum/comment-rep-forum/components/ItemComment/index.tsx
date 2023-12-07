@@ -10,6 +10,7 @@ import {useAppDispatch} from '../../../../../../hooks';
 import {CommentChapterAction} from '../../../../../../redux/reducer/comment.chapter.reducer';
 import moment from 'moment';
 import {CommentForumAction} from '../../../../../../redux/reducer/comment.forum.reducer';
+import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 interface CommentDataProps {
   data: CommentChapterType;
   setOpen: () => void;
@@ -30,7 +31,9 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
     uuid,
     is_like,
   } = props.data;
+
   const styles = useStyles();
+
   const dispatch = useAppDispatch();
 
   const commentIncludesFullname = comment.includes(fullname);
@@ -93,16 +96,19 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
               <Icon
                 name="chatbox-outline"
                 type="ionicon"
-                color={styles.iconStyle.color}
+                color={styles.iconStyleBlur.color}
                 size={15}
               />
             </TouchableOpacity>
 
             <TouchableOpacity onPress={onPressLikeComment} style={styles.like}>
-              <Icon
-                name="thumbs-up"
-                type="feather"
-                color={is_like ? '#F89300' : styles.iconStyle.color}
+              <IconMaterialIcons
+                name={is_like ? 'thumb-up-alt' : 'thumb-up-off-alt'}
+                color={
+                  is_like
+                    ? styles.iconStyleFocus.color
+                    : styles.iconStyleBlur.color
+                }
                 size={15}
               />
               <Text style={styles.numberRepStyle}>
@@ -114,7 +120,7 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
             name="ellipsis-vertical"
             type="ionicon"
             size={15}
-            color={styles.iconStyle.color}
+            color={styles.iconStyleBlur.color}
           />
         </View>
       </View>
