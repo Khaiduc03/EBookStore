@@ -37,13 +37,16 @@ const ProfileUser: React.FC = props => {
   const dataById = useAppSelector(getUserById);
   const dispatch = useAppDispatch();
 
-  console.log(dataUser?.is_follower);
+  console.log(dataUser);
 
   const isLoading = useAppSelector(getIsLoadingTopic);
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
   const currentpage = useAppSelector(currentPageAllPostByIdUser);
   const nextPage = useAppSelector(nextPageAllPostIdByUser);
+  const [isFollowed, setIsFollowed] = useState<Boolean>(
+    dataUser ? dataUser?.is_follower : true,
+  );
 
   const styles = useStyles();
 
@@ -81,9 +84,7 @@ const ProfileUser: React.FC = props => {
   const handlePressMessage = () => {
     NavigationService.navigate(routes.MESSAGE);
   };
-  const [isFollowed, setIsFollowed] = useState<Boolean>(
-    dataUser?.is_follower ? dataUser?.is_follower : true,
-  );
+
   const handleFollowButtonClick = () => {
     dispatch(UserAction.postFollowRandom(dataUser?.uuid));
     setIsFollowed(!isFollowed);
@@ -115,13 +116,13 @@ const ProfileUser: React.FC = props => {
             styles.btnFollow,
             {
               backgroundColor: isFollowed
-                ? theme?.lightColors?.grey5
-                : theme?.lightColors?.blue,
+                ? theme?.lightColors?.blue
+                : theme?.lightColors?.grey5,
             },
           ]}
           onPress={handleFollowButtonClick}>
           <Text style={styles.textFollow}>
-            {isFollowed ? 'Unfollow' : 'Follow'}
+            {isFollowed ? 'Follow' : 'UnFollow'}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btnMess} onPress={handlePressMessage}>

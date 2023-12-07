@@ -14,7 +14,9 @@ const ItemFollow: React.FunctionComponent<ProfileProps> = props => {
         <Image
           style={styles.avatar}
           source={{
-            uri: props.data?.image_url,
+            uri:
+              'https://static.thenounproject.com/png/5034901-200.png' ||
+              props.data?.image_url,
           }}
         />
       )}
