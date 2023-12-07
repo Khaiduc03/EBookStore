@@ -7,7 +7,10 @@ import {ItemList} from './components';
 import useStyles from './styles';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {UserAction} from '../../../../redux/reducer/user.reducer';
-import {getAllUser} from '../../../../redux/selectors/user.selector';
+import {
+  getAllUser,
+  getListUserRandom,
+} from '../../../../redux/selectors/user.selector';
 import {UserType} from '../../../../redux/types/user.type';
 
 interface ListItem {
@@ -22,6 +25,7 @@ interface ListItem {
 
 const DiscoverPeople: React.FC = () => {
   const styles = useStyles();
+  const dataRandom = useAppSelector(getListUserRandom);
 
   const dataUser = useAppSelector(getAllUser);
 
@@ -53,7 +57,7 @@ const DiscoverPeople: React.FC = () => {
       </View>
       <View style={{alignItems: 'center', flex: 1}}>
         <FlatList
-          data={dataUser}
+          data={dataRandom}
           renderItem={renderItem}
           keyExtractor={item => item.uuid}
           showsVerticalScrollIndicator={false}
