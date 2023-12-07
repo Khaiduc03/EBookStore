@@ -7,20 +7,14 @@ import {NavigationService} from '../../../../../../navigation';
 import {ForumType} from '../../../../../../redux/types/forum.type';
 import useStyles from './styles';
 
-interface ParentsUuidComment {
-  parents_comment_uuid: string;
-  data: ForumType;
+interface HeaderCommentProps {
+  currentCommentCount: number; // new prop
 }
 
-const HeaderComment = () => {
+const HeaderComment: React.FC<HeaderCommentProps> = ({currentCommentCount}) => {
   const styles = useStyles();
 
   const route = useRoute();
-
-  const totalComment = (route.params as {comment_count?: number})
-    ?.comment_count;
-
-  useEffect(() => {}, [totalComment]);
 
   return (
     <View style={styles.container}>
@@ -37,7 +31,7 @@ const HeaderComment = () => {
         />
       </TouchableOpacity>
       <Text style={styles.textHeader}>
-        Comment({totalComment ? totalComment : '0'})
+        Comment({currentCommentCount ? currentCommentCount : '0'})
       </Text>
       <View style={styles.viewPDR} />
     </View>

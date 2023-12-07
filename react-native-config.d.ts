@@ -57,6 +57,7 @@ declare module 'react-native-config' {
     POST_LIKE_COMMENT_FORUM: string;
     DELETE_LIKE_COMMENT_FORUM: string;
     REP_COMMENT_FORUM: string;
+    DELETE_COMMENT_FORUM: string;
 
     //COMENT_COMIC
     POST_COMMENT_COMIC: string;

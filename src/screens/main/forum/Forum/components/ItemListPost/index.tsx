@@ -40,7 +40,7 @@ import {
 import {getIsLoadingForum} from '../../../../../../redux/selectors/loading.selector';
 import {ForumType} from '../../../../../../redux/types/forum.type';
 import useStyles from './styles';
-import {CommentForumAction} from '../../../../../../redux/reducer/comment.forum.reducer';
+import {RefreshControl} from 'react-native';
 
 interface ForumDataProps {
   data?: ForumType;
@@ -49,18 +49,6 @@ interface ForumDataProps {
 }
 
 const ItemListPost: React.FC<ForumDataProps> = props => {
-  const {
-    uuid,
-    content,
-    images,
-    like_count,
-    comment_count,
-    created_at,
-    is_liked,
-    user_avatar,
-    user_fullname,
-  } = props.data || {};
-
   const dispatch = useAppDispatch();
 
   const dataAPI = useAppSelector(getListForum);
@@ -78,20 +66,23 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
 
   const screenWidth = Dimensions.get('window').width;
 
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    dispatch(ForumActions.clearListData());
+    try {
+      await dispatch(ForumActions.getListData(1));
+      setRefreshing(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     dispatch(ForumActions.clearListData());
     dispatch(ForumActions.getListData(1));
   }, []);
-
-  // useEffect(() => {
-  //   // Hàm lấy dữ liệu từ API
-  //   const fetchData = async () => {
-  //     dispatch(ForumActions.getListData(1));
-  //   };
-
-  //   // Gọi hàm fetchData khi comment_count thay đổi
-  //   fetchData();
-  // }, [comment_count]);
 
   const loadMoreForum = () => {
     if (nextPage && !isLoading) {
@@ -143,7 +134,7 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
     dispatch(ForumActions.deletePost({forum_uuid: forum_uuid}));
   };
 
-  LogBox.ignoreLogs(['ReactImageView: Image source "null" doesn\'t exist']);
+  // LogBox.ignoreLogs(['ReactImageView: Image source "null" doesn\'t exist']);
 
   const scale = useSharedValue(1);
   const translationX = useSharedValue(0);
@@ -197,7 +188,7 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
                 style={styles.imageTitle}
                 source={{
                   uri:
-                    item.user_avatar ||
+                    item.user_avatar?.toString() ||
                     'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
                 }}
               />
@@ -242,19 +233,18 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
           <FlatList
             data={item.images}
             renderItem={item => {
-              if (!item.item || selectedImage?.item === null) {
-                return null;
-              }
               return (
                 <View style={styles.imageContainer}>
                   <Pressable onPress={() => openModal(item)}>
-                    <AutoHeightImage
-                      key={item.index.toString()}
-                      source={{
-                        uri: item.item,
-                      }}
-                      width={screenWidth}
-                    />
+                    {item.item && (
+                      <AutoHeightImage
+                        key={item.index.toString()}
+                        source={{
+                          uri: item.item,
+                        }}
+                        width={screenWidth}
+                      />
+                    )}
                   </Pressable>
 
                   <Modal
@@ -285,7 +275,7 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
                                 <AutoHeightImage
                                   key={selectedImage?.index.toString()}
                                   source={{
-                                    uri: selectedImage?.item || undefined,
+                                    uri: selectedImage?.item,
                                   }}
                                   width={screenWidth}
                                 />
@@ -389,8 +379,7 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
         renderItem={renderItem}
         onScroll={({nativeEvent}) => {
           const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
-          const numberOfPixelsFromBottomThreshold =
-            layoutMeasurement.height / 4;
+          const numberOfPixelsFromBottomThreshold = 100;
           const isNearBottom =
             contentOffset.y + layoutMeasurement.height >=
             contentSize.height - numberOfPixelsFromBottomThreshold;
@@ -406,7 +395,12 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
             <View style={styles.header}>
               <TouchableOpacity
                 onPress={() => NavigationService.navigate(routes.MYPROFILE)}>
-                <Image style={styles.image} source={{uri: user.image_url}} />
+                {user.image_url && (
+                  <Image
+                    style={styles.image}
+                    source={{uri: user.image_url.toString()}}
+                  />
+                )}
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.buttonHeader}
@@ -421,6 +415,13 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
           );
         }}
         ListFooterComponent={isLoading ? listFooterComponent() : <View />}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={['#F89300']}
+          />
+        }
       />
     </View>
   );

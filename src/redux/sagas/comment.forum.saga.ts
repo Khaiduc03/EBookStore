@@ -52,7 +52,6 @@ function* getCommentSaga(action: PayloadAction<any>): Generator {
 }
 
 function* postLikeCommentSaga(action: PayloadAction<any>): Generator {
-  yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
     const {data}: any = yield call(
@@ -80,12 +79,10 @@ function* postLikeCommentSaga(action: PayloadAction<any>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoading());
   }
 }
 
 function* deleteLikeCommentSaga(action: PayloadAction<any>): Generator {
-  yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
     const {data}: any = yield call(
@@ -114,7 +111,6 @@ function* deleteLikeCommentSaga(action: PayloadAction<any>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoading());
   }
 }
 
@@ -160,6 +156,25 @@ function* getRepCommentForumSaga(action: PayloadAction<any>): Generator {
   }
 }
 
+function* deleteCommentSaga(action: PayloadAction<any>): Generator {
+  try {
+    const {data}: any = yield call(
+      CommentForumService.deleteCommentForum,
+      action.payload,
+    );
+
+    if (data.code == 200) {
+      yield put(CommentForumAction.handleDeleteCommentSuccess(action.payload));
+    } else {
+      console.log('Server error !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    // Any cleanup code if needed
+  }
+}
+
 export default function* watchCommentChapterSaga() {
   yield takeLatest(CommentForumAction.postCommentForum, postCommentSaga);
   yield takeLatest(CommentForumAction.getCommentForum, getCommentSaga);
@@ -182,4 +197,6 @@ export default function* watchCommentChapterSaga() {
     CommentForumAction.getRepCommentForum.type,
     getRepCommentForumSaga,
   );
+
+  yield takeLatest(CommentForumAction.deleteCommentForum, deleteCommentSaga);
 }

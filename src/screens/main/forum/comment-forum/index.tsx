@@ -19,6 +19,7 @@ import {ForumType} from '../../../../redux/types/forum.type';
 import {HeaderComment, ItemComment} from './components';
 import useStyles from './styles';
 import {useRoute} from '@react-navigation/native';
+import {ForumActions} from '../../../../redux';
 
 interface ParentsUuidComment {
   parents_comment_uuid: string;
@@ -41,6 +42,9 @@ const CommentForum: React.FC = () => {
 
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
+
+  const totalComment =
+    (route.params as {comment_count?: number})?.comment_count || 0;
 
   const {
     comment,
@@ -65,8 +69,6 @@ const CommentForum: React.FC = () => {
       }),
     );
   }, []);
-
-  // console.log('forum_uuid============= ', forum_uuid);
 
   const onPressPostComment = () => {
     dispatch(
@@ -119,6 +121,7 @@ const CommentForum: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
+        key={dataComment?.length}
         data={dataComment}
         keyExtractor={item => item.uuid}
         renderItem={renderItem}
@@ -130,11 +133,11 @@ const CommentForum: React.FC = () => {
           const isNearBottom =
             contentOffset.y + layoutMeasurement.height >=
             sizeContent - numberOfPixelsFromBottomThreshold;
-          console.log(
-            'size scroll',
-            contentOffset.y + layoutMeasurement.height,
-          );
-          console.log('size content', sizeContent);
+          // console.log(
+          //   'size scroll',
+          //   contentOffset.y + layoutMeasurement.height,
+          // );
+          // console.log('size content', sizeContent);
 
           if (isNearBottom) {
             loadMoreComic();
@@ -155,7 +158,7 @@ const CommentForum: React.FC = () => {
         />
       </View>
 
-      <HeaderComment />
+      <HeaderComment currentCommentCount={dataComment?.length ?? 0} />
     </SafeAreaView>
   );
 };

@@ -22,7 +22,7 @@ const useStyles = makeStyles(({colors}) => ({
     justifyContent: 'space-around',
     borderTopWidth: normalize(3),
     borderColor: colors.grey9,
-    paddingVertical: normalize(16),
+    paddingTop: normalize(16),
     backgroundColor: colors.background,
   },
   post: {
