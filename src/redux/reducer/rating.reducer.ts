@@ -35,6 +35,12 @@ const reducer = createSlice({
         ...state,
       };
     },
+
+    postRating: (state: RatingState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
     setListRating: (
       state: RatingState,
       action: PayloadAction<PayloadHttpList<RatingType>>,
