@@ -360,6 +360,40 @@ const reducer = createSlice({
         },
       };
     },
+
+    getListTopRating: (state: ComicState) => {
+      return {
+        ...state,
+      };
+    },
+    setListTopRating: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpListTopView<ComicType>>,
+    ) => {
+      return {
+        ...state,
+        listTopRating: {
+          data: action.payload.data,
+        },
+      };
+    },
+
+    getListTopFavorite: (state: ComicState) => {
+      return {
+        ...state,
+      };
+    },
+    setListTopFavorite: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpListTopView<ComicType>>,
+    ) => {
+      return {
+        ...state,
+        listTopFavorite: {
+          data: action.payload.data,
+        },
+      };
+    },
   },
 });
 
