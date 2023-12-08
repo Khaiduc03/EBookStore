@@ -1,40 +1,49 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useState, useEffect} from 'react';
-import useStyles from './styles';
-import FastImage from 'react-native-fast-image';
 import {Icon} from '@rneui/base';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
-import {CommentChapterType} from '../../../../../../redux/types/comment.chapter.type';
-import {useAppDispatch} from '../../../../../../hooks';
-import {CommentChapterAction} from '../../../../../../redux/reducer/comment.chapter.reducer';
+import React, {useState} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import useStyles from './styles';
 import moment from 'moment';
-import {CommentForumAction} from '../../../../../../redux/reducer/comment.forum.reducer';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
+import {CommentForumAction} from '../../../../../../redux/reducer/comment.forum.reducer';
+import {CommentForumType} from '../../../../../../redux/types/comment.forum.type';
+import {getAuthUserProfile} from '../../../../../../redux';
+import AwesomeAlert from 'react-native-awesome-alerts';
+
 interface CommentDataProps {
-  data: CommentChapterType;
+  data: CommentForumType;
   setOpen: () => void;
   setUserRep: (text: string) => void;
 }
 
-const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
+const ItemRepCommnent: React.FC<CommentDataProps> = props => {
   const {
     comment,
     created_at,
     fullname,
     re_comment_count,
     user_avatar,
-    parents_comment_uuid,
-    chapter_uuid,
     like_count,
-    type,
     uuid,
     is_like,
-  } = props.data;
+    user_uuid,
+  } = props.data || {};
 
   const styles = useStyles();
 
   const dispatch = useAppDispatch();
+
+  const [showAlert, setShowAlert] = useState(false);
+
+  const user = useAppSelector(getAuthUserProfile);
+
+  const [like, setLike] = useState<Boolean>(is_like);
+  const [countLike, setCountLike] = useState<number>(like_count);
+
+  const onPressDeleteComment = () => {
+    dispatch(CommentForumAction.deleteCommentForum({comment_uuid: uuid}));
+  };
 
   const commentIncludesFullname = comment.includes(fullname);
   const fullnameIndex = comment.indexOf(fullname);
@@ -42,18 +51,22 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
   const textBeforeFullname = comment.slice(0, fullnameIndex);
 
   const onPressLikeComment = () => {
-    if (is_like) {
+    if (like) {
       dispatch(
         CommentForumAction.deleteLikeCommentForum({
           comment_uuid: uuid,
         }),
       );
+      setLike(false);
+      setCountLike(countLike - 1);
     } else {
       dispatch(
         CommentForumAction.postLikeCommentForum({
           comment_uuid: uuid,
         }),
       );
+      setLike(true);
+      setCountLike(countLike + 1);
     }
   };
 
@@ -89,7 +102,7 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
           )}
         </Text>
         <View style={styles.repContent}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={styles.viewItemBtn}>
             <TouchableOpacity
               onPress={() => onPressRep(fullname)}
               style={styles.rep}>
@@ -101,31 +114,68 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
               />
             </TouchableOpacity>
 
+            <Text style={styles.numberRepStyle}>
+              {re_comment_count ? re_comment_count : 0}
+            </Text>
+
             <TouchableOpacity onPress={onPressLikeComment} style={styles.like}>
               <IconMaterialIcons
-                name={is_like ? 'thumb-up-alt' : 'thumb-up-off-alt'}
+                name={like ? 'thumb-up-alt' : 'thumb-up-off-alt'}
                 color={
-                  is_like
+                  like
                     ? styles.iconStyleFocus.color
                     : styles.iconStyleBlur.color
                 }
                 size={15}
               />
               <Text style={styles.numberRepStyle}>
-                {like_count ? like_count : '0'}
+                {countLike ? countLike : '0'}
               </Text>
             </TouchableOpacity>
+
+            {user.uuid === user_uuid && (
+              <TouchableOpacity
+                onPress={() => {
+                  setShowAlert(!showAlert);
+                }}>
+                <Icon
+                  name="trash-outline"
+                  type="ionicon"
+                  size={15}
+                  color={styles.iconStyleBlur.color}
+                />
+                <AwesomeAlert
+                  show={showAlert}
+                  showProgress={false}
+                  title="Delete Your Comment 😕"
+                  message="Are you sure you want to delete your comment?"
+                  closeOnTouchOutside={true}
+                  closeOnHardwareBackPress={false}
+                  showCancelButton={true}
+                  showConfirmButton={true}
+                  cancelText="No, cancel"
+                  cancelButtonColor="blue"
+                  confirmText="Yes, delete it"
+                  confirmButtonColor="red"
+                  onCancelPressed={() => {
+                    setShowAlert(false);
+                  }}
+                  onConfirmPressed={() => {
+                    setShowAlert(false);
+                    onPressDeleteComment();
+                  }}
+                  titleStyle={styles.textTitleAlert}
+                  messageStyle={styles.textMessageAlert}
+                  cancelButtonTextStyle={styles.textCancelAlert}
+                  confirmButtonTextStyle={styles.textConfirmAlert}
+                />
+              </TouchableOpacity>
+            )}
           </View>
-          <Icon
-            name="ellipsis-vertical"
-            type="ionicon"
-            size={15}
-            color={styles.iconStyleBlur.color}
-          />
         </View>
       </View>
     </View>
   );
 };
 
-export default ItemCommnent;
+export default ItemRepCommnent;

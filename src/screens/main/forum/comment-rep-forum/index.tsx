@@ -1,31 +1,32 @@
-import {
-  FlatList,
-  TextInput,
-  SafeAreaView,
-  ActivityIndicator,
-  View,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {ItemComment} from './components';
-import useStyles from './styles';
-import {Icon, Input} from '@rneui/themed';
-import {HeaderRepComment} from './components';
 import {useRoute} from '@react-navigation/native';
-import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {CommentChapterAction} from '../../../../redux/reducer/comment.chapter.reducer';
-import {getDataDetailChapter} from '../../../../redux/selectors/comic.selector';
-import {
-  getCurrenPageRepCommentChapter,
-  getListRepCommentChapter,
-  getNextPageRepCommentChapter,
-} from '../../../../redux/selectors/comment.chapter.selector';
-import {CommentChapterType} from '../../../../redux/types/comment.chapter.type';
-import {getIsLoadingPage} from '../../../../redux/selectors/loading.selector';
-import FastImage from 'react-native-fast-image';
+import {Icon} from '@rneui/themed';
 import moment from 'moment';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {
+  ActivityIndicator,
+  FlatList,
+  SafeAreaView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import FastImage from 'react-native-fast-image';
+import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {CommentForumAction} from '../../../../redux/reducer/comment.forum.reducer';
+import {
+  getCurrenPageRepCommentForum,
+  getListRepCommentForum,
+  getNextPageRepCommentForum,
+} from '../../../../redux/selectors/comment.forum.selector';
+import {getIsLoadingPage} from '../../../../redux/selectors/loading.selector';
 import {CommentForumType} from '../../../../redux/types/comment.forum.type';
+import {HeaderRepComment} from './components';
+import ItemRepCommnent from './components/ItemComment';
+import useStyles from './styles';
+import AwesomeAlert from 'react-native-awesome-alerts';
+import {getAuthUserProfile} from '../../../../redux';
 
 interface ParentsUuidComment {
   parents_comment_uuid: string;
@@ -34,26 +35,24 @@ interface ParentsUuidComment {
 
 const CommentRepForum = () => {
   const route = useRoute();
-  const parents_comment_uuid = (route.params as ParentsUuidComment)
-    .parents_comment_uuid;
-
-  console.log('parents_comment_uuid: ========', parents_comment_uuid);
 
   const data = (route.params as ParentsUuidComment).data;
+
   const [value, setvalue] = useState('');
 
   const dispatch = useAppDispatch();
-  const dataDetailChapter = useAppSelector(getDataDetailChapter);
-  const dataRepComment = useAppSelector(getListRepCommentChapter);
+  const dataRepComment = useAppSelector(getListRepCommentForum);
   const isLoading = useAppSelector(getIsLoadingPage);
-  const flatListRef = useRef<FlatList<CommentChapterType>>(null);
-  const canNext = useAppSelector(getNextPageRepCommentChapter);
-  const currentPage = useAppSelector(getCurrenPageRepCommentChapter);
+  const flatListRef = useRef<FlatList<CommentForumType>>(null);
+  const canNext = useAppSelector(getNextPageRepCommentForum);
+  const currentPage = useAppSelector(getCurrenPageRepCommentForum);
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
 
-  const [user, setUser] = useState<string>('');
+  const [showAlert, setShowAlert] = useState(false);
+
+  const user = useAppSelector(getAuthUserProfile);
 
   console.log('======>', open);
 
@@ -62,26 +61,30 @@ const CommentRepForum = () => {
   const TextInputRef = useRef<TextInput>(null);
 
   const styles = useStyles();
+
   const {
     comment,
     created_at,
     fullname,
     re_comment_count,
     user_avatar,
-    chapter_uuid,
     like_count,
+    user_uuid,
+    parents_comment_uuid,
+    forum_uuid,
     type,
     uuid,
     is_like,
   } = data;
+
   const [countComment, setCountComment] = useState<number>(re_comment_count);
   const [like, setLike] = useState<Boolean>(is_like);
   const [countLike, setCountLike] = useState<number>(like_count);
 
   useEffect(() => {
     dispatch(
-      CommentChapterAction.getRepCommentChapter({
-        parents_comment_uuid: parents_comment_uuid,
+      CommentForumAction.getRepCommentForum({
+        parents_comment_uuid: forum_uuid,
         page: 1,
       }),
     );
@@ -97,25 +100,44 @@ const CommentRepForum = () => {
   };
 
   const setUserRep = (text: string) => {
-    setvalue('Reply ' + '@' + text + ':');
+    setvalue('Reply ' + '@' + text + ': ');
   };
 
   const onPressPostComment = () => {
     dispatch(
-      CommentChapterAction.postRepCommentChapter({
-        uuid: uuid,
+      CommentForumAction.postRepCommentForum({
+        forum_uuid: forum_uuid,
         comment: value,
-        parents_comment_uuid: parents_comment_uuid,
+        parents_comment_uuid: forum_uuid,
       }),
     );
     setCountComment(countComment + 1);
     setvalue('');
+    console.log(
+      'forum_uuid:  ' +
+        forum_uuid +
+        '\ncomment:  ' +
+        value +
+        '\nparents_comment_uuid:  ' +
+        forum_uuid,
+    );
   };
+
+  const onPressDeleteComment = () => {
+    dispatch(CommentForumAction.deleteCommentForum({comment_uuid: uuid}));
+    dispatch(
+      CommentForumAction.getRepCommentForum({
+        parents_comment_uuid: forum_uuid,
+        page: currentPage ? currentPage + 1 : 1,
+      }),
+    );
+  };
+
   const loadMoreComic = () => {
     if (canNext && !isLoading) {
       dispatch(
-        CommentChapterAction.getRepCommentChapter({
-          parents_comment_uuid: parents_comment_uuid,
+        CommentForumAction.getRepCommentForum({
+          parents_comment_uuid: forum_uuid,
           page: currentPage ? currentPage + 1 : 1,
         }),
       );
@@ -139,7 +161,7 @@ const CommentRepForum = () => {
   const onPressLikeComment = () => {
     if (like) {
       dispatch(
-        CommentChapterAction.postUnlikeCommentChapter({
+        CommentForumAction.deleteLikeCommentForum({
           comment_uuid: uuid,
         }),
       );
@@ -147,7 +169,7 @@ const CommentRepForum = () => {
       setCountLike(countLike - 1);
     } else {
       dispatch(
-        CommentChapterAction.postLikeCommentChapter({
+        CommentForumAction.postLikeCommentForum({
           comment_uuid: uuid,
         }),
       );
@@ -164,11 +186,15 @@ const CommentRepForum = () => {
     item,
     index,
   }: {
-    item: CommentChapterType;
+    item: CommentForumType;
     index: number;
   }) => {
     return (
-      <ItemComment setUserRep={setUserRep} setOpen={openInput} data={item} />
+      <ItemRepCommnent
+        setUserRep={setUserRep}
+        setOpen={openInput}
+        data={item}
+      />
     );
   };
 
@@ -193,7 +219,7 @@ const CommentRepForum = () => {
                 </Text>
                 <Text style={styles.commentStyle}>{comment}</Text>
                 <View style={styles.repContent}>
-                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <View style={styles.viewItemBtn}>
                     <Icon
                       name="chatbox-outline"
                       type="ionicon"
@@ -205,25 +231,57 @@ const CommentRepForum = () => {
                     <TouchableOpacity
                       onPress={onPressLikeComment}
                       style={styles.like}>
-                      <Icon
-                        name={is_like ? 'thumb-up-alt' : 'thumb-up-off-alt'}
+                      <IconMaterialIcons
+                        name={like ? 'thumb-up-alt' : 'thumb-up-off-alt'}
                         color={
-                          is_like
+                          like
                             ? styles.iconStyleFocus.color
                             : styles.iconStyleBlur.color
                         }
-                        type="materialicon"
                         size={15}
                       />
                       <Text style={styles.numberRepStyle}>{countLike}</Text>
                     </TouchableOpacity>
+
+                    {user.uuid === user_uuid && (
+                      <TouchableOpacity
+                        onPress={() => {
+                          setShowAlert(!showAlert);
+                        }}>
+                        <Icon
+                          name="trash-outline"
+                          type="ionicon"
+                          size={15}
+                          color={styles.iconStyleBlur.color}
+                        />
+                        <AwesomeAlert
+                          show={showAlert}
+                          showProgress={false}
+                          title="Delete Your Comment 😕"
+                          message="Are you sure you want to delete your comment?"
+                          closeOnTouchOutside={true}
+                          closeOnHardwareBackPress={false}
+                          showCancelButton={true}
+                          showConfirmButton={true}
+                          cancelText="No, cancel"
+                          cancelButtonColor="blue"
+                          confirmText="Yes, delete it"
+                          confirmButtonColor="red"
+                          onCancelPressed={() => {
+                            setShowAlert(false);
+                          }}
+                          onConfirmPressed={() => {
+                            setShowAlert(false);
+                            onPressDeleteComment();
+                          }}
+                          titleStyle={styles.textTitleAlert}
+                          messageStyle={styles.textMessageAlert}
+                          cancelButtonTextStyle={styles.textCancelAlert}
+                          confirmButtonTextStyle={styles.textConfirmAlert}
+                        />
+                      </TouchableOpacity>
+                    )}
                   </View>
-                  <Icon
-                    name="ellipsis-vertical"
-                    type="ionicon"
-                    size={15}
-                    color={styles.iconStyleBlur.color}
-                  />
                 </View>
               </View>
             </View>
@@ -237,7 +295,7 @@ const CommentRepForum = () => {
             contentOffset.y + layoutMeasurement.height >=
             sizeContent - numberOfPixelsFromBottomThreshold;
           console.log(
-            'sỉze scroll',
+            'size scroll',
             contentOffset.y + layoutMeasurement.height,
           );
           console.log('sỉze content', sizeContent);
@@ -266,7 +324,7 @@ const CommentRepForum = () => {
         />
       </View>
 
-      <HeaderRepComment />
+      <HeaderRepComment currentRepCommentCount={dataRepComment?.length ?? 0} />
     </SafeAreaView>
   );
 };

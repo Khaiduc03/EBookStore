@@ -1,13 +1,8 @@
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeLatest} from 'redux-saga/effects';
-import {UserService} from '../services';
-import {UserAction} from '../reducer/user.reducer';
-import {CommentChapterAction} from '../reducer/comment.chapter.reducer';
-import {ComicActions, ForumActions, LoadingActions} from '../reducer';
-import {CommentForumService} from '../services/comment.forum.service';
+import {LoadingActions} from '../reducer';
 import {CommentForumAction} from '../reducer/comment.forum.reducer';
-import {CommentForumType} from '../types/comment.forum.type';
-import {PayloadHttpListCommentData} from '../types/comment.chapter.type';
+import {CommentForumService} from '../services/comment.forum.service';
 
 function* postCommentSaga(action: PayloadAction<any>): Generator {
   // yield put(LoadingActions.showLoading());
@@ -176,7 +171,7 @@ function* deleteCommentSaga(action: PayloadAction<any>): Generator {
   }
 }
 
-export default function* watchCommentChapterSaga() {
+export default function* watchCommentForumSaga() {
   yield takeLatest(CommentForumAction.postCommentForum, postCommentSaga);
   yield takeLatest(CommentForumAction.getCommentForum, getCommentSaga);
 
@@ -189,13 +184,10 @@ export default function* watchCommentChapterSaga() {
     deleteLikeCommentSaga,
   );
 
-  yield takeLatest(
-    CommentForumAction.postRepCommentForum.type,
-    postRepCommentSaga,
-  );
+  yield takeLatest(CommentForumAction.postRepCommentForum, postRepCommentSaga);
 
   yield takeLatest(
-    CommentForumAction.getRepCommentForum.type,
+    CommentForumAction.getRepCommentForum,
     getRepCommentForumSaga,
   );
 

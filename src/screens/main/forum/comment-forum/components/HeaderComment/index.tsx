@@ -16,8 +16,6 @@ interface HeaderCommentProps {
 const HeaderComment: React.FC<HeaderCommentProps> = ({currentCommentCount}) => {
   const styles = useStyles();
 
-  const dispatch = useAppDispatch();
-
   return (
     <View style={styles.container}>
       <TouchableOpacity

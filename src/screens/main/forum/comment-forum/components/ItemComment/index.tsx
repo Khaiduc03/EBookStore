@@ -1,15 +1,17 @@
 import {Icon} from '@rneui/base';
 import moment from 'moment';
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {routes} from '../../../../../../constants';
-import {useAppDispatch} from '../../../../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {NavigationService} from '../../../../../../navigation';
 import {CommentForumAction} from '../../../../../../redux/reducer/comment.forum.reducer';
 import {CommentForumType} from '../../../../../../redux/types/comment.forum.type';
 import useStyles from './styles';
+import {getAuthUserProfile} from '../../../../../../redux';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 interface CommentDataProps {
   data: Partial<CommentForumType>;
@@ -34,11 +36,13 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
     is_like,
   } = props.data;
 
-  console.log('hihi ', uuid);
-
   const styles = useStyles();
 
   const dispatch = useAppDispatch();
+
+  const [showAlert, setShowAlert] = useState(false);
+
+  const user = useAppSelector(getAuthUserProfile);
 
   const onPressLikeComment = () => {
     if (is_like) {
@@ -118,13 +122,41 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
               </Text>
             </TouchableOpacity>
 
-            {uuid && (
-              <TouchableOpacity onPress={onPressDeleteComment}>
+            {user.uuid === user_uuid && (
+              <TouchableOpacity
+                onPress={() => {
+                  setShowAlert(!showAlert);
+                }}>
                 <Icon
-                  name="ellipsis-vertical"
+                  name="trash-outline"
                   type="ionicon"
                   size={15}
                   color={styles.iconStyleBlur.color}
+                />
+                <AwesomeAlert
+                  show={showAlert}
+                  showProgress={false}
+                  title="Delete Your Comment 😕"
+                  message="Are you sure you want to delete your comment?"
+                  closeOnTouchOutside={true}
+                  closeOnHardwareBackPress={false}
+                  showCancelButton={true}
+                  showConfirmButton={true}
+                  cancelText="No, cancel"
+                  cancelButtonColor="blue"
+                  confirmText="Yes, delete it"
+                  confirmButtonColor="red"
+                  onCancelPressed={() => {
+                    setShowAlert(false);
+                  }}
+                  onConfirmPressed={() => {
+                    setShowAlert(false);
+                    onPressDeleteComment();
+                  }}
+                  titleStyle={styles.textTitleAlert}
+                  messageStyle={styles.textMessageAlert}
+                  cancelButtonTextStyle={styles.textCancelAlert}
+                  confirmButtonTextStyle={styles.textConfirmAlert}
                 />
               </TouchableOpacity>
             )}

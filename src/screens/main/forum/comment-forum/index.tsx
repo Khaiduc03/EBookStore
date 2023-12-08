@@ -21,18 +21,12 @@ import useStyles from './styles';
 import {useRoute} from '@react-navigation/native';
 import {ForumActions} from '../../../../redux';
 
-interface ParentsUuidComment {
-  parents_comment_uuid: string;
-  data: CommentForumType;
-}
-
 const CommentForum: React.FC = () => {
   const styles = useStyles();
   const route = useRoute();
 
-  const data = (route.params as ParentsUuidComment).data;
-  const forum_uuid = (route.params as {forum_uuid?: CommentForumType})
-    ?.forum_uuid;
+  const uuid = (route.params as {uuid?: CommentForumType})?.uuid;
+
   const dataComment = useAppSelector(getListCommentForum);
   const canNext = useAppSelector(getNextPageCommentForum);
   const currentPage = useAppSelector(getCurrenPageCommentForum);
@@ -43,28 +37,12 @@ const CommentForum: React.FC = () => {
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
 
-  const totalComment =
-    (route.params as {comment_count?: number})?.comment_count || 0;
-
-  const {
-    comment,
-    created_at,
-    fullname,
-    re_comment_count,
-    user_avatar,
-    chapter_uuid,
-    like_count,
-    type,
-    uuid,
-    is_like,
-  } = data || {};
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(
       CommentForumAction.getCommentForum({
-        forum_uuid: forum_uuid,
+        forum_uuid: uuid,
         page: 1,
       }),
     );
@@ -73,17 +51,19 @@ const CommentForum: React.FC = () => {
   const onPressPostComment = () => {
     dispatch(
       CommentForumAction.postCommentForum({
-        forum_uuid: forum_uuid,
+        forum_uuid: uuid,
         comment: value,
       }),
     );
+    console.log('forum_uuid: ', uuid, '\ncomment: ', value);
     setvalue('');
   };
+
   const loadMoreComic = () => {
     if (canNext && !isLoading) {
       dispatch(
         CommentForumAction.getCommentForum({
-          forum_uuid: forum_uuid,
+          forum_uuid: uuid,
           page: currentPage ? currentPage + 1 : 1,
         }),
       );

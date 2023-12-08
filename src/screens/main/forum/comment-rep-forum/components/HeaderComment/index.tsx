@@ -6,14 +6,15 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {backScreen} from '../../../../../../utils';
 import useStyles from './styles';
 
-const HeaderRepComment = () => {
+interface HeaderRepCommentProps {
+  currentRepCommentCount: number; // new prop
+}
+
+const HeaderRepComment: React.FC<HeaderRepCommentProps> = ({
+  currentRepCommentCount,
+}) => {
   const styles = useStyles();
   const route = useRoute();
-
-  // const totalComment = useAppSelector(getTotaRepComment);
-
-  const totalComment =
-    (route.params as {comment_count?: number})?.comment_count || 0;
 
   return (
     <View style={styles.container}>
@@ -26,7 +27,7 @@ const HeaderRepComment = () => {
         />
       </TouchableOpacity>
       <Text style={styles.textHeader}>
-        Replies({totalComment ? totalComment : '0'})
+        Reply({currentRepCommentCount ? currentRepCommentCount : '0'})
       </Text>
       <View style={styles.viewPDR} />
     </View>

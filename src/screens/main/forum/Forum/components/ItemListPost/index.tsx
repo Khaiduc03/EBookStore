@@ -3,6 +3,7 @@ import moment from 'moment';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator,
+  Alert,
   Dimensions,
   FlatList,
   Image,
@@ -41,6 +42,7 @@ import {getIsLoadingForum} from '../../../../../../redux/selectors/loading.selec
 import {ForumType} from '../../../../../../redux/types/forum.type';
 import useStyles from './styles';
 import {RefreshControl} from 'react-native';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 interface ForumDataProps {
   data?: ForumType;
@@ -134,8 +136,6 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
     dispatch(ForumActions.deletePost({forum_uuid: forum_uuid}));
   };
 
-  // LogBox.ignoreLogs(['ReactImageView: Image source "null" doesn\'t exist']);
-
   const scale = useSharedValue(1);
   const translationX = useSharedValue(0);
   const translationY = useSharedValue(0);
@@ -156,6 +156,8 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
       scale.value = withSpring(1);
     },
   });
+
+  const [showAlert, setShowAlert] = useState(false);
 
   const styles = useStyles();
 
@@ -215,14 +217,41 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
               </View>
             </View>
 
-            <View style={styles.viewIconPost}>
-              <TouchableOpacity
-                onPress={() => {
-                  // handleDeletePost(item.uuid);
-                }}>
-                <Icon name="close-outline" type="ionicon" size={28} />
-              </TouchableOpacity>
-            </View>
+            {user.uuid === item.user_uuid && (
+              <View style={styles.viewIconPost}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setShowAlert(!showAlert);
+                  }}>
+                  <Icon name="close-outline" type="ionicon" size={24} />
+                  <AwesomeAlert
+                    show={showAlert}
+                    showProgress={false}
+                    title="Delete Your Post 😕"
+                    message="Are you sure you want to delete your post?"
+                    closeOnTouchOutside={true}
+                    closeOnHardwareBackPress={false}
+                    showCancelButton={true}
+                    showConfirmButton={true}
+                    cancelText="No, cancel"
+                    cancelButtonColor="blue"
+                    confirmText="Yes, delete it"
+                    confirmButtonColor="red"
+                    onCancelPressed={() => {
+                      setShowAlert(false);
+                    }}
+                    onConfirmPressed={() => {
+                      setShowAlert(false);
+                      handleDeletePost(item.uuid);
+                    }}
+                    titleStyle={styles.textTitleAlert}
+                    messageStyle={styles.textMessageAlert}
+                    cancelButtonTextStyle={styles.textCancelAlert}
+                    confirmButtonTextStyle={styles.textConfirmAlert}
+                  />
+                </TouchableOpacity>
+              </View>
+            )}
           </View>
           <View style={styles.description}>
             <Text style={styles.textDescription}>{item.content}</Text>
@@ -351,9 +380,15 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
               style={styles.iconText}
               onPress={() => {
                 NavigationService.navigate(routes.COMMENT_FORUM, {
-                  forum_uuid: item.uuid,
+                  uuid: item.uuid,
                   comment_count: item.comment_count,
                 });
+                console.log(
+                  'uuid: ',
+                  item.uuid,
+                  '\ncomment_count: ',
+                  item.comment_count,
+                );
               }}>
               <IconFontAwesome5
                 name="comment"

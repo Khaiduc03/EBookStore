@@ -39,18 +39,18 @@ const useStyles = makeStyles(({colors}) => ({
   repContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingTop: normalize(8),
+    marginTop: normalize(8),
   },
   like: {
+    width: normalize(WIDTH * 0.2),
     flexDirection: 'row',
     alignItems: 'center',
-    paddingRight: normalize(60),
+    marginHorizontal: normalize(60),
   },
   rep: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: normalize(5),
-    paddingRight: normalize(60),
+    margin: normalize(5),
   },
   numberRepStyle: {
     paddingLeft: normalize(5),
@@ -65,10 +65,39 @@ const useStyles = makeStyles(({colors}) => ({
     color: '#A5A6AA',
   },
   viewItemBtn: {
-    flex: 1,
+    width: normalize(WIDTH / 2 - 20),
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  textTitleAlert: {
+    color: colors.black,
+    fontSize: normalize(19),
+    fontFamily: fontFamilySetup.bold,
+    lineHeight: normalize(21),
+    textAlign: 'center',
+  },
+  textMessageAlert: {
+    color: colors.black,
+    fontSize: normalize(12),
+    fontFamily: fontFamilySetup.medium,
+    textAlign: 'center',
+  },
+  textCancelAlert: {
+    color: colors.whiteDefault,
+    fontSize: normalize(11),
+    fontFamily: fontFamilySetup.regular,
+    lineHeight: normalize(21),
+    textAlign: 'center',
+    marginHorizontal: normalize(10),
+  },
+  textConfirmAlert: {
+    color: colors.whiteDefault,
+    fontSize: normalize(11),
+    fontFamily: fontFamilySetup.regular,
+    lineHeight: normalize(21),
+    textAlign: 'center',
+    marginHorizontal: normalize(10),
   },
 }));
 
