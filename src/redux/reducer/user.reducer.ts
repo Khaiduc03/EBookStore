@@ -199,6 +199,26 @@ const reducer = createSlice({
       return state;
     },
 
+    handleDeleteItemRandom: (
+      state: UserState,
+      action: PayloadAction<string>,
+    ) => {
+      if (state.listUserRandom && state.listUserRandom.data) {
+        const updatedFollower = state.listUserRandom.data.filter(
+          followerItem => followerItem.uuid !== action.payload,
+        );
+
+        return {
+          ...state,
+          listUserRandom: {
+            ...state.listUserRandom,
+            data: updatedFollower,
+          },
+        };
+      }
+      return state;
+    },
+
     getListAllPostByIdUser: (state: UserState, _: PayloadAction<any>) => {
       return {
         ...state,

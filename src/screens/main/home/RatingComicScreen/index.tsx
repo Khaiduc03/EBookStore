@@ -4,7 +4,6 @@ import {HeaderCustom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
 import {ItemRating} from './components';
 import ItemRatingStar from './components/ItemListButton';
-import {data} from './components/ItemListButton/index';
 import useStyles from './styles';
 import {routes} from '../../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
@@ -46,7 +45,9 @@ const RatingComicScreen: React.FC<RouteParamsIdComic> = () => {
         <ItemRating />
       </View>
 
-      <ItemRatingStar {...data} />
+      <View style={{flex: 1}}>
+        <ItemRatingStar />
+      </View>
     </View>
   );
 };

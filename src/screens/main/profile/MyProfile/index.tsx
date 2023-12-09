@@ -41,7 +41,8 @@ const MyProfile: React.FC = props => {
 
   const dataUser = useAppSelector(getAllUser);
   const dataPost = useAppSelector(getPostByUser);
-  const dataRandom = useAppSelector(getListUserRandom);
+  let dataRandom = useAppSelector(getListUserRandom);
+  const dataDiscover = dataRandom?.slice(0, 10);
 
   useEffect(() => {
     dispatch(UserAction.getUserRandom());
@@ -50,9 +51,9 @@ const MyProfile: React.FC = props => {
     dispatch(UserAction.getListPostByUser(1));
   }, []);
 
-  const renderItem = ({item}: {item: UserType}) => (
-    <ItemListMyProfile data={item} />
-  );
+  const renderItem = ({item, index}: {item: UserType; index: number}) => {
+    return <ItemListMyProfile data={item} />;
+  };
   const user = useAppSelector(getAuthUserProfile);
 
   const loadMoreComic = () => {
@@ -120,7 +121,7 @@ const MyProfile: React.FC = props => {
       </View>
       <View style={{paddingVertical: 10}}>
         <FlatList
-          data={dataRandom}
+          data={dataDiscover}
           renderItem={renderItem}
           keyExtractor={item => item.uuid}
           horizontal

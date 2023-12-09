@@ -48,7 +48,11 @@ const ItemList: React.FunctionComponent<SquaresCustomProps> = props => {
         />
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.iconDelete}>
+      <TouchableOpacity
+        onPress={() =>
+          dispatch(UserAction.handleDeleteItemRandom(props.data.uuid))
+        }
+        style={styles.iconDelete}>
         <Icon name="close-outline" type="ionicon" size={24} />
       </TouchableOpacity>
 
