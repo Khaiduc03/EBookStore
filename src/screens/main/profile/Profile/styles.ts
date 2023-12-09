@@ -34,6 +34,7 @@ const useStyles = makeStyles(({colors}) => ({
 
   viewList: {
     flex: 1,
+    marginTop: normalize(WIDTH * 0.03),
   },
   nameUser: {
     color: colors.black,

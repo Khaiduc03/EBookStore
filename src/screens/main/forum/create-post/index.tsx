@@ -91,7 +91,7 @@ const CreatePost: React.FC<ForumType> = props => {
     try {
       if (images && images.length > 0) {
         setSelectedImages(images);
-        console.log('aaaaa ', images);
+        console.log('SelectedImages: ', images);
       }
     } catch (error) {
       console.log('error: ', error);
@@ -130,23 +130,22 @@ const CreatePost: React.FC<ForumType> = props => {
     );
   };
 
-  const touchableWithoutFeedback = () => {
-    Keyboard.dismiss();
-  };
-
   return (
-    <TouchableWithoutFeedback onPress={touchableWithoutFeedback}>
-      <View style={styles.container}>
-        <HeaderCustom
-          leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
-          title="Create Your Post"
-          rightIconRight={{name: 'checkmark', type: 'ionicon'}}
-          onPressLeftIcon={() => NavigationService.goBack()}
-          onPressRightIconRight={handleSendPost}
-        />
+    <View style={styles.container}>
+      <HeaderCustom
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
+        title="Create Your Post"
+        rightIconRight={{name: 'checkmark', type: 'ionicon'}}
+        onPressLeftIcon={() => NavigationService.goBack()}
+        onPressRightIconRight={handleSendPost}
+      />
+      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={styles.header}>
           <View style={{flexDirection: 'row'}}>
-            <Image style={styles.image} source={{uri: user.image_url}} />
+            {user.image_url && (
+              <Image style={styles.image} source={{uri: user.image_url}} />
+            )}
+
             <View style={styles.viewStatus}>
               <Text style={styles.nameUser}>{user.fullname}</Text>
               <View style={styles.buttonClick}>
@@ -154,7 +153,6 @@ const CreatePost: React.FC<ForumType> = props => {
                   data={['Public', 'Private']}
                   onSelect={handleDropdown(setStatus, formData)}
                   buttonStyle={styles.buttonSelect}
-                  dropdownStyle={styles.dropdownStyle}
                   dropdownOverlayColor="nothing"
                   renderDropdownIcon={renderDropdownIcon}
                   rowTextStyle={styles.textrowSelect}
@@ -168,26 +166,24 @@ const CreatePost: React.FC<ForumType> = props => {
             </View>
           </View>
         </View>
+      </TouchableWithoutFeedback>
 
-        <View style={styles.viewBorder} />
+      <View style={styles.viewBorder} />
 
-        <View style={styles.viewInput}>
-          <TextInput
-            placeholder="What do you think today?"
-            placeholderTextColor={styles.placeHolderColor.color}
-            style={styles.input}
-            multiline
-            textAlignVertical="top"
-            value={textInputValue}
-            onChangeText={text => setTextInputValue(text)}
-          />
-        </View>
-
-        {selectedImages.length > 0 && (
-          <SelectedImages forum={props} images={selectedImages} />
-        )}
+      <View style={styles.viewInput}>
+        <TextInput
+          placeholder="What do you think today?"
+          placeholderTextColor={styles.placeHolderColor.color}
+          style={styles.input}
+          multiline
+          textAlignVertical="top"
+          value={textInputValue}
+          onChangeText={text => setTextInputValue(text)}
+        />
       </View>
-    </TouchableWithoutFeedback>
+
+      {selectedImages.length > 0 && <SelectedImages images={selectedImages} />}
+    </View>
   );
 };
 

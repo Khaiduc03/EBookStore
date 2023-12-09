@@ -45,7 +45,7 @@ const useStyles = makeStyles(({colors}) => ({
   buttonClick: {
     flexDirection: 'row',
     gap: normalize(5),
-    paddingVertical: normalize(10),
+    marginVertical: normalize(9),
   },
   content: {
     paddingHorizontal: normalize(6),
@@ -73,27 +73,25 @@ const useStyles = makeStyles(({colors}) => ({
   },
   iconleft: {
     position: 'absolute',
-    right: normalize(95),
-    top: normalize(4.4),
+    top: normalize(WIDTH * 0.0121),
+    right: normalize(WIDTH * 0.212),
   },
   buttonSelect: {
+    width: normalize(WIDTH * 0.3),
+    height: normalize(HEIGHT * 0.039),
     backgroundColor: colors.primary,
-    width: normalize(130),
-    height: normalize(32),
     justifyContent: 'space-between',
     alignItems: 'center',
     borderRadius: normalize(6),
-  },
-  dropdownStyle: {
-    borderRadius: normalize(0),
   },
   viewbackgroundColor: {
     backgroundColor: colors.grey6,
   },
   textButtonSelect: {
     color: colors.black,
-    fontSize: normalize(14.4),
+    fontSize: normalize(13.3),
     fontFamily: fontFamilySetup.bold,
+    marginLeft: normalize(WIDTH * 0.039),
   },
   textrowSelect: {
     color: colors.black,
@@ -104,20 +102,21 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.grey10,
   },
   buttonImage: {
-    width: normalize(126),
-    height: normalize(32),
+    width: normalize(WIDTH * 0.3),
+    height: normalize(HEIGHT * 0.039),
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginLeft: normalize(9),
+    marginLeft: normalize(13),
     borderRadius: normalize(6),
     backgroundColor: colors.primary,
     paddingHorizontal: normalize(10),
   },
-  textbtnImage: {
+  textbtnAddImage: {
     color: colors.black,
-    fontSize: normalize(14.4),
+    fontSize: normalize(13),
     fontFamily: fontFamilySetup.bold,
+    paddingHorizontal: normalize(6),
   },
   viewCenter: {
     justifyContent: 'center',

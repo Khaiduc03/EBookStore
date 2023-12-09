@@ -1,15 +1,13 @@
 import React, {FunctionComponent} from 'react';
-import {Image, TouchableOpacity, View, Text} from 'react-native';
-import {images} from '../../../../assets';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {HeaderCustom} from '../../../../components';
-import TextCustom from '../../../../components/customs/Text';
 import {routes} from '../../../../constants';
-import {NavigationService} from '../../../../navigation';
-import useStyles from './styles';
-import {Itemlish} from './components';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {NavigationService} from '../../../../navigation';
 import {getAuthUserProfile} from '../../../../redux';
 import {UserAction} from '../../../../redux/reducer/user.reducer';
+import {Itemlist} from './components';
+import useStyles from './styles';
 
 const Profile: FunctionComponent = () => {
   const user = useAppSelector(getAuthUserProfile);
@@ -35,9 +33,8 @@ const Profile: FunctionComponent = () => {
           <Text style={styles.email}>{user.email}</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.line} />
       <View style={styles.viewList}>
-        <Itemlish />
+        <Itemlist />
       </View>
     </View>
   );

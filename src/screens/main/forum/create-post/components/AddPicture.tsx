@@ -44,7 +44,7 @@ const AddPicture: React.FC<AddPictureProps> = ({onImagesSelected}) => {
             color={styles.icon.color}
             size={18}
           />
-          <Text style={styles.textbtnImage}>Add picture</Text>
+          <Text style={styles.textbtnAddImage}>Add picture</Text>
         </>
       )}
     </TouchableOpacity>
