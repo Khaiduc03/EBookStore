@@ -8,6 +8,7 @@ import watchForumSaga from './forum.saga';
 import watchUserSaga from './user.saga';
 import watchCommentChapterSaga from './comment.chapter.saga';
 import watchCommentForumSaga from './comment.forum.saga';
+import watchRatingSaga from './rating.saga';
 
 export default function* RootSaga() {
   yield all([
@@ -19,5 +20,6 @@ export default function* RootSaga() {
     fork(watchUserSaga),
     fork(watchCommentChapterSaga),
     fork(watchCommentForumSaga),
+    fork(watchRatingSaga),
   ]);
 }

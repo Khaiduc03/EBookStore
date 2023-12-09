@@ -32,6 +32,9 @@ declare module 'react-native-config' {
     COMIC_UPDATE: string;
     COMICS_DELETE: string;
     COMIC_UPDATE_IMAGE: string;
+    ALL_RATING_COMIC: string;
+    RATING_CHART: string;
+    RATING_BY_UUID: string;
 
     FORUM: string;
     LIKE: string;

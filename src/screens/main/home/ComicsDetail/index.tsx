@@ -16,6 +16,8 @@ import {
 } from '../../../../redux';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Alert} from 'react-native';
+import {RatingActions} from '../../../../redux/reducer/rating.reducer';
+import {getChartRating} from '../../../../redux/selectors/rating.selector';
 
 interface RouteParamsIdComic {
   data: ComicType;
@@ -29,8 +31,11 @@ const ComicsDetail = () => {
   const scrollRef = (route.params as RouteParamsIdComic).scrollRef;
 
   const uuidPost = useAppSelector(getUuidPostFavorite);
+  const dataChart = useAppSelector(getChartRating);
+  console.log(dataChart);
 
   useEffect(() => {
+    dispatch(RatingActions.getRatingChart(data.comic_uuid || data.uuid));
     dispatch(ComicActions.checkFavorite(data.comic_uuid || data.uuid));
     dispatch(ComicActions.getListChapter(data.comic_uuid || data.uuid));
     dispatch(ComicActions.getListByTopicMore({name: data.topics}));

@@ -11,4 +11,5 @@ export enum Redux {
   topic = 'topic',
   chat = 'chat',
   forum = 'forum',
+  rating = 'rating',
 }

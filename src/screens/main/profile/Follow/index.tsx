@@ -3,16 +3,18 @@ import React, {useEffect} from 'react';
 import useStyles from './styles';
 import {HeaderCustom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
-import {useAppDispatch} from '../../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {UserAction} from '../../../../redux/reducer/user.reducer';
 import {Tab, TabView} from '@rneui/base';
 import {ItemListFollow} from './components';
 import FollowerList from './components/FollowerList';
 import FollowingList from './components/FollowingList';
+import {getAuthUserProfile} from '../../../../redux';
 
 const Follow = () => {
   const styles = useStyles();
   const dispatch = useAppDispatch();
+  const user = useAppSelector(getAuthUserProfile);
 
   useEffect(() => {
     dispatch(UserAction.getListFollow());
@@ -25,7 +27,7 @@ const Follow = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom
-        title="Follwing"
+        title={user.fullname}
         leftIcon={{
           name: 'close',
           color: styles.iconLeftStyle.color,
@@ -35,7 +37,6 @@ const Follow = () => {
       />
       <Tab
         containerStyle={styles.container}
-        // buttonStyle={{backgroundColor: '#181A20'}}
         value={index}
         onChange={e => setIndex(e)}
         indicatorStyle={styles.indicatorStyle}

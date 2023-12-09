@@ -1,5 +1,5 @@
 import {AirbnbRating} from '@rneui/themed';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Alert,
   Image,
@@ -13,8 +13,15 @@ import {HeaderCustom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
 import {getAuthUserProfile} from '../../../../redux';
 import useStyles from './styles';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {RatingActions} from '../../../../redux/reducer/rating.reducer';
+import {useRoute} from '@react-navigation/native';
+import {getListRating} from '../../../../redux/selectors/rating.selector';
+interface RouteParamsIdComic {
+  uuid: string;
+}
 
-const RatingDetailComic: React.FC = () => {
+const RatingDetailComic: React.FC<RouteParamsIdComic> = () => {
   const styles = useStyles();
 
   const handleGoback = () => {

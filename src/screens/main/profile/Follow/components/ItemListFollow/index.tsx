@@ -15,18 +15,12 @@ const ItemListFollow: React.FunctionComponent<FollowerProps> = props => {
   const dispatch = useAppDispatch();
 
   const onPressDelete = () => {
-    dispatch(
-      UserAction.deleteFollwer(
-        props.data?.user_following_uuid ? props.data?.user_following_uuid : '',
-      ),
-    );
+    dispatch(UserAction.deleteFollwer(props.data?.user_following_uuid!));
   };
 
   const onPressFollow = () => {
     dispatch(
-      UserAction.postFollow(
-        props.data?.user_following_uuid ? props.data?.user_following_uuid : '',
-      ),
+      UserAction.postFollowListFollower(props.data?.user_following_uuid!),
     );
   };
   return (

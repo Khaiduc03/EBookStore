@@ -3,6 +3,8 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import Svg, {Line} from 'react-native-svg';
 import useStyles from './styles';
+import {getChartRating} from '../../../../../../redux/selectors/rating.selector';
+import {useAppSelector} from '../../../../../../hooks';
 
 interface LineComponentProps {
   length: number;
@@ -28,22 +30,27 @@ const LineComponent: React.FC<LineComponentProps> = ({length, stroke}) => {
 const ItemRating: React.FC = () => {
   const styles = useStyles();
 
+  const dataChart = useAppSelector(getChartRating);
   const data = [
-    {value: 5, length: 100},
-    {value: 4, length: 80},
-    {value: 3, length: 70},
-    {value: 2, length: 60},
-    {value: 1, length: 50},
+    {value: 5, length: dataChart ? dataChart?.rating_5 : 5},
+    {value: 4, length: dataChart ? dataChart?.rating_4 : 4},
+    {value: 3, length: dataChart ? dataChart?.rating_3 : 3},
+    {value: 2, length: dataChart ? dataChart?.rating_2 : 2},
+    {value: 1, length: dataChart ? dataChart?.rating_1 : 1},
   ];
 
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <View style={styles.viewRating1}>
-          <Text style={styles.numberRating}>4.9</Text>
+          <Text style={styles.numberRating}>
+            {dataChart?.average_rating.toFixed(1)}
+          </Text>
           <AirbnbRating
             isDisabled={true}
-            defaultRating={4}
+            defaultRating={
+              dataChart ? parseInt(dataChart.average_rating.toFixed(1)) : 4
+            }
             selectedColor="#FFC911"
             showRating={false}
             size={20}

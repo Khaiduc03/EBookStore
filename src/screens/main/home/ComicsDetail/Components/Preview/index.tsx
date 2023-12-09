@@ -29,7 +29,9 @@ const Preview: React.FC<Comic> = props => {
             title="Rating & Reviews"
             rightIconRight={{name: 'arrow-right', type: 'font-awesome-5'}}
             onPressRightIconRight={() =>
-              NavigationService.navigate(routes.RATINGCOMICSCREEN)
+              NavigationService.navigate(routes.RATINGCOMICSCREEN, {
+                uuid: props.data.comic_uuid || props.data.uuid,
+              })
             }
           />
           <RatingComic />

@@ -61,14 +61,14 @@ const ItemList: React.FunctionComponent<SquaresCustomProps> = props => {
         style={[
           styles.Button,
           {
-            backgroundColor: props.data.is_follower
-              ? theme?.lightColors?.primary
-              : theme?.lightColors?.grey5,
+            backgroundColor: props.data.is_following
+              ? theme?.lightColors?.grey5
+              : theme?.lightColors?.primary,
           },
         ]}
         onPress={handleButtonPress}>
         <Text style={styles.TextButton}>
-          {props.data.is_follower ? 'Follow' : 'Unfollow'}
+          {props.data.is_following ? 'Unfollow' : 'Follow'}
         </Text>
       </TouchableOpacity>
     </View>
