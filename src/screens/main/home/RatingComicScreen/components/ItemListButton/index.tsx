@@ -2,12 +2,11 @@ import {Icon} from '@rneui/themed';
 import React, {useEffect, useState} from 'react';
 import {Image, Text, TouchableOpacity, View, FlatList} from 'react-native';
 import useStyles from './styles';
-import {RatingComicProps} from './types';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {getListRating} from '../../../../../../redux/selectors/rating.selector';
 import {RatingType} from '../../../../../../redux/types/rating.type';
 
-const ItemRatingStar: React.FC<RatingComicProps[]> = props => {
+const ItemRatingStar = () => {
   const dataRating = useAppSelector(getListRating);
   const styles = useStyles();
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
@@ -77,6 +76,7 @@ const ItemRatingStar: React.FC<RatingComicProps[]> = props => {
       {/* Item in button */}
 
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={displayedData}
         keyExtractor={item => item.uuid}
         renderItem={({item}) => (

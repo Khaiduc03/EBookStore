@@ -1,82 +1,31 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React from 'react';
 import {
+  ActivityIndicator,
   FlatList,
   Text,
   TouchableOpacity,
   View,
-  ActivityIndicator,
 } from 'react-native';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import {routes} from '../../../../constants';
-import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
-import {getAuthUserProfile} from '../../../../redux';
 import useStyles from '../MyProfile/styles';
 import {ItemFollow, ItemListMyProfile, ItemPost} from './components';
-import {
-  currentPagePostByUser,
-  getAllUser,
-  getListUserRandom,
-  getPostByUser,
-  nextPagePostByUser,
-} from '../../../../redux/selectors/user.selector';
-import {UserAction} from '../../../../redux/reducer/user.reducer';
-import {UserType} from '../../../../redux/types/user.type';
-import {
-  getIsLoading,
-  getIsLoadingTopic,
-} from '../../../../redux/selectors/loading.selector';
+import {useUser} from './hook/useMyProfile.hook';
 
-const MyProfile: React.FC = props => {
+const MyProfile: React.FC = () => {
   const styles = useStyles();
-  const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(getIsLoadingTopic);
-  const [sizeContent, setSizeContent] = useState<number>(0);
-  const [size, setSize] = useState<boolean>(false);
-  const currentpage = useAppSelector(currentPagePostByUser);
-  const nextPage = useAppSelector(nextPagePostByUser);
-  const handlePressGoback = () => {
-    NavigationService.goBack();
-  };
 
-  const dataUser = useAppSelector(getAllUser);
-  const dataPost = useAppSelector(getPostByUser);
-  let dataRandom = useAppSelector(getListUserRandom);
-  const dataDiscover = dataRandom?.slice(0, 10);
-
-  useEffect(() => {
-    dispatch(UserAction.getUserRandom());
-    dispatch(UserAction.getListUser());
-    dispatch(UserAction.clearListPostByUser());
-    dispatch(UserAction.getListPostByUser(1));
-  }, []);
-
-  const renderItem = ({item, index}: {item: UserType; index: number}) => {
-    return <ItemListMyProfile data={item} />;
-  };
-  const user = useAppSelector(getAuthUserProfile);
-
-  const loadMoreComic = () => {
-    if (nextPage && !isLoading) {
-      dispatch(UserAction.getListPostByUser(currentpage ? currentpage + 1 : 1));
-      setSize(true);
-    }
-  };
-
-  const onContentSizeChange = useCallback(
-    (contentWidth: number, contentHeight: number) => {
-      setSizeContent(contentHeight);
-      if (size) {
-        setSizeContent(sizeContent + 3000);
-        setSize(false);
-      }
-    },
-    [size, sizeContent],
-  );
-
-  const listFooterComponent = useCallback(() => {
-    return <ActivityIndicator color={'#F89300'} size={'large'} />;
-  }, []);
+  const {
+    dataDiscover,
+    dataPost,
+    isLoading,
+    loadMoreComic,
+    onContentSizeChange,
+    sizeContent,
+    user,
+    handlePressGoback,
+  } = useUser();
 
   return (
     <View style={styles.container}>
@@ -122,7 +71,7 @@ const MyProfile: React.FC = props => {
       <View style={{paddingVertical: 10}}>
         <FlatList
           data={dataDiscover}
-          renderItem={renderItem}
+          renderItem={({item}) => <ItemListMyProfile data={item} />}
           keyExtractor={item => item.uuid}
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -158,7 +107,13 @@ const MyProfile: React.FC = props => {
               loadMoreComic();
             }
           }}
-          ListFooterComponent={isLoading ? listFooterComponent() : <View />}
+          ListFooterComponent={
+            isLoading ? (
+              <ActivityIndicator color={'#F89300'} size={'large'} />
+            ) : (
+              <View />
+            )
+          }
         />
       </View>
     </View>

@@ -14,6 +14,7 @@ type Props = {
 const ItemPost: React.FC<Props> = props => {
   const {data} = props;
   const itemWidth = Dimensions.get('window').width / 3;
+
   const handleDetailClick = () => {
     NavigationService.navigate(routes.POSTDETAIL, {
       post_uuid: props.data?.uuid,

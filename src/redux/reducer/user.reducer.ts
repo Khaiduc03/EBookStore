@@ -105,6 +105,12 @@ const reducer = createSlice({
         },
       };
     },
+    deletePostById: (state: UserState) => {
+      return {
+        ...state,
+        postById: undefined,
+      };
+    },
 
     putSummary: (state: UserState, _: PayloadAction<string>) => {
       return {
