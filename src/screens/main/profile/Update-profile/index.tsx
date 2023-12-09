@@ -237,7 +237,7 @@ const UpdateProfileScreen: FunctionComponent = () => {
                   onChange={handleDateChange}
                 />
               )}
-              {isCheckValidateFullName ? (
+              {/* {isCheckValidateFullName ? (
                 <View>
                   <Text style={styles.titleInput}>Biography</Text>
                   <InputCustomV1
@@ -260,7 +260,7 @@ const UpdateProfileScreen: FunctionComponent = () => {
                     errorMessage="Biography cannot be empty !"
                   />
                 </View>
-              )}
+              )} */}
 
               <Text style={styles.titleInput}>Gender</Text>
               <View style={styles.checkBoxContainer}>

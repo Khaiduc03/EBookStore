@@ -7,6 +7,8 @@ import {NavigationService} from '../../../../../../navigation';
 import {theme} from '../../../../../../theme';
 import useStyles from './styles';
 import {SquaresCustomProps} from './types';
+import {useAppDispatch} from '../../../../../../hooks';
+import {UserAction} from '../../../../../../redux/reducer/user.reducer';
 
 const ItemListMyProfile: React.FunctionComponent<
   SquaresCustomProps
@@ -27,8 +29,10 @@ const ItemListMyProfile: React.FunctionComponent<
   const styles = useStyles();
   const [isFollowing, setIsFollowing] = useState(false);
   const [isDetail, setIsDetail] = useState();
+  const dispatch = useAppDispatch();
+
   const handleButtonPress = () => {
-    setIsFollowing(!isFollowing);
+    dispatch(UserAction.postFollowRandom(props.data.uuid));
   };
   const handlePressUser = () => {
     NavigationService.navigate(routes.PROFILEUSER, {data: props.data});
@@ -59,14 +63,14 @@ const ItemListMyProfile: React.FunctionComponent<
         style={[
           styles.Button,
           {
-            backgroundColor: isFollowing
-              ? theme?.lightColors?.grey5
-              : theme?.lightColors?.blue,
+            backgroundColor: props.data.is_follower
+              ? theme?.lightColors?.blue
+              : theme?.lightColors?.grey5,
           },
         ]}
         onPress={handleButtonPress}>
         <Text style={styles.TextButton}>
-          {isFollowing ? 'Unfollow' : 'Follow'}
+          {props.data.is_follower ? 'Follow' : 'Unfollw'}
         </Text>
       </TouchableOpacity>
     </View>

@@ -12,6 +12,7 @@ export const ChatBubble: React.FC<MessageI> = props => {
   const {params} = useRoute() as any;
   const [isUser, setIsUser] = useState(false);
   const uuid = useAppSelector(getAuthUserUuid);
+  console.log(uuid);
   const last_message_time_formatted = formatTime(props.created_at);
   useEffect(() => {
     if (props.user_uuid === uuid) {

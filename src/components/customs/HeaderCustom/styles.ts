@@ -43,6 +43,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   rightContainer: {
     justifyContent: 'center',
+    alignItems: 'center',
     flexDirection: 'row',
   },
   rightIconLeft: {
@@ -50,6 +51,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   rightIconRight: {
     marginRight: normalize(10),
+    // marginTop: normalize(3),
   },
   profileImage: {
     width: normalize(36),

@@ -44,7 +44,7 @@ const ChapterDetail = () => {
         comic_uuid: comic_uuid,
       }),
     );
-  }, [currentChapter, comic_uuid]);
+  }, [comic_uuid]);
 
   useEffect(() => {
     // Get size of each image in the data
@@ -127,7 +127,7 @@ const ChapterDetail = () => {
                 ? imageSize.width / imageSize.height
                 : 1,
           }}
-          resizeMode={FastImage.resizeMode.cover}
+          resizeMode={FastImage.resizeMode.stretch}
         />
       </TouchableWithoutFeedback>
     );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View} from 'react-native';
 
 import CarouselSquareList from './Components/CarouselSquareList';
@@ -8,6 +8,14 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {HeaderCustom} from '../../../../components';
 import TrendingComic from './Components/TrendingComic';
 import useStyles from './styles';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {ComicActions} from '../../../../redux';
+import {
+  getListTopFavorite,
+  getListTopRating,
+} from '../../../../redux/selectors/comic.selector';
+import TopListRating from './Components/TopListRating';
+import TopListFavorite from './Components/TopListFavorite';
 
 const data = [
   {
@@ -49,6 +57,17 @@ const data = [
 ];
 
 const ExploreScreen: React.FC = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(ComicActions.getListTopRating());
+    dispatch(ComicActions.getListTopFavorite());
+  }, []);
+
+  const dataRating = useAppSelector(getListTopRating);
+  const dataFavorite = useAppSelector(getListTopFavorite);
+
+  console.log('=======================', dataRating);
+
   const styles = useStyles();
 
   return (
@@ -65,7 +84,9 @@ const ExploreScreen: React.FC = () => {
           <CarouselSquareList data={data} autoPlay={false} pagination={true} />
         </View>
         <RecommendedSeries />
+        <TopListFavorite />
         <TrendingComic />
+        <TopListRating />
         <ListHotComic />
       </ScrollView>
     </View>

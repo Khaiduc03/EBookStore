@@ -1,10 +1,8 @@
 import {PayloadAction} from '@reduxjs/toolkit';
-import {call, delay, put, takeLatest} from 'redux-saga/effects';
-import {ComicActions, ComicReducer, LoadingActions} from '../reducer';
-import {ComicService} from '../services';
-import {showToastSuccess} from '../../utils';
 import {ToastAndroid} from 'react-native';
-import {criticallyDampedSpringCalculations} from 'react-native-reanimated/lib/typescript/reanimated2/animation/springUtils';
+import {call, delay, put, takeLatest} from 'redux-saga/effects';
+import {ComicActions, LoadingActions} from '../reducer';
+import {ComicService} from '../services';
 
 function* getListDataSaga(action: PayloadAction<number>): Generator {
   if (action.payload == 1) {
@@ -197,6 +195,40 @@ function* getComicByTop20Saga(): Generator {
   }
 }
 
+function* getComicByTopRatingSaga(): Generator {
+  try {
+    console.log('run');
+    const {data}: any = yield call(ComicService.getComicByTopRating);
+
+    if (data.code == 200) {
+      console.log('run push tookit');
+      yield put(ComicActions.setListTopRating(data));
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+  }
+}
+
+function* getComicByTopFavoriteSaga(): Generator {
+  try {
+    console.log('run');
+    const {data}: any = yield call(ComicService.getComicByTopFavorite);
+
+    if (data.code == 200) {
+      console.log('run push tookit');
+      yield put(ComicActions.setListTopFavorite(data));
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+  }
+}
+
 function* postFavoriteSaga(action: PayloadAction<string>): Generator {
   yield put(LoadingActions.showLoading());
   try {
@@ -304,6 +336,8 @@ export default function* watchComicSaga() {
   yield takeLatest(ComicActions.getListBySearch.type, getDataComicBySearchSaga);
   yield takeLatest(ComicActions.getListDetailChapterNav, getDataChapterNavSaga);
   yield takeLatest(ComicActions.getListTopView, getComicByTop20Saga);
+  yield takeLatest(ComicActions.getListTopRating, getComicByTopRatingSaga);
+  yield takeLatest(ComicActions.getListTopFavorite, getComicByTopFavoriteSaga);
   yield takeLatest(ComicActions.postFavorite, postFavoriteSaga);
   yield takeLatest(ComicActions.deleteFavorite, deleteFavoriteSaga);
   yield takeLatest(ComicActions.checkFavorite, checkFavoriteSaga);

@@ -51,18 +51,18 @@ const Search = () => {
   const styles = useStyles();
   const [search, setSearch] = useState('');
 
-  const handleSearch = _.debounce(searchQuery => {
-    if (searchQuery) {
-      setFilterArray([]), setHightView(false);
-      setLowView(false);
-      dispatch(ComicActions.ClearListBySearch());
-      dispatch(ComicActions.getListBySearch({key: searchQuery, page: 1}));
-    }
-  }, 1000);
+  // const handleSearch = _.debounce(searchQuery => {
+  //   if (searchQuery) {
+  //     setFilterArray([]), setHightView(false);
+  //     setLowView(false);
+  //     dispatch(ComicActions.ClearListBySearch());
+  //     dispatch(ComicActions.getListBySearch({key: searchQuery, page: 1}));
+  //   }
+  // }, 3000);
 
   const onSearchChange = (text: any) => {
     setSearch(text);
-    handleSearch(text);
+    // handleSearch(text);
   };
 
   const handleListIconPress = () => {

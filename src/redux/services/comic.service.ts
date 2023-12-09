@@ -3,6 +3,8 @@ import apiService from './api.service';
 import {configFormData, configNoCache} from './config.service';
 
 export class ComicService {
+
+
   //get data
   static async getComic(action: number) {
     console.log(`${ENDPOINTS.COMIC}?page=${action}`);
@@ -62,6 +64,16 @@ export class ComicService {
   static async getComicByTopView() {
     console.log(`${ENDPOINTS.COMIC_TOP_20}`);
     return await apiService.get(`${ENDPOINTS.COMIC_TOP_20}`);
+  }
+
+  static async getComicByTopRating() {
+    console.log(`${ENDPOINTS.TOP_RATING}`);
+    return await apiService.get(`${ENDPOINTS.TOP_RATING}`);
+  }
+
+  static async getComicByTopFavorite() {
+    console.log(`${ENDPOINTS.TOP_FAVORITE}`);
+    return await apiService.get(`${ENDPOINTS.TOP_FAVORITE}`);
   }
 
   static async postFavorite(payload: string) {

@@ -9,6 +9,10 @@ const useStyles = makeStyles(({colors}) => ({
     flex: 1,
     backgroundColor: colors.background,
   },
+  summaryContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   viewTextName: {
     paddingHorizontal: normalize(24),
   },
@@ -35,6 +39,7 @@ const useStyles = makeStyles(({colors}) => ({
     marginTop: normalize(15),
     paddingHorizontal: normalize(24),
   },
+
   iconLeftStyle: {
     color: colors.black,
   },
@@ -72,6 +77,13 @@ const useStyles = makeStyles(({colors}) => ({
   textBio: {
     color: colors.black3,
     fontFamily: fontFamilySetup.regular,
+    fontSize: normalize(15),
+    lineHeight: normalize(21),
+    letterSpacing: normalize(0.12),
+  },
+  textEdit: {
+    color: colors.primary,
+    fontFamily: fontFamilySetup.medium,
     fontSize: normalize(15),
     lineHeight: normalize(21),
     letterSpacing: normalize(0.12),

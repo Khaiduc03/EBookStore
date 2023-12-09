@@ -7,7 +7,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
-import TextCustom from '../../../../components/customs/Text';
 import {routes} from '../../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
@@ -17,6 +16,7 @@ import {ItemFollow, ItemListMyProfile, ItemPost} from './components';
 import {
   currentPagePostByUser,
   getAllUser,
+  getListUserRandom,
   getPostByUser,
   nextPagePostByUser,
 } from '../../../../redux/selectors/user.selector';
@@ -41,9 +41,12 @@ const MyProfile: React.FC = props => {
 
   const dataUser = useAppSelector(getAllUser);
   const dataPost = useAppSelector(getPostByUser);
+  const dataRandom = useAppSelector(getListUserRandom);
 
   useEffect(() => {
+    dispatch(UserAction.getUserRandom());
     dispatch(UserAction.getListUser());
+    dispatch(UserAction.clearListPostByUser());
     dispatch(UserAction.getListPostByUser(1));
   }, []);
 
@@ -97,7 +100,15 @@ const MyProfile: React.FC = props => {
       </View>
       <View style={styles.viewTextName}>
         <Text style={styles.nameUser}>{user.fullname}</Text>
-        <Text style={styles.textBio}>Biographic this here !!</Text>
+        <View style={styles.summaryContainer}>
+          <Text style={styles.textBio} numberOfLines={1}>
+            {user.summary || 'I am hacker'}
+          </Text>
+          <TouchableOpacity
+            onPress={() => NavigationService.navigate(routes.UPDATE_BIO)}>
+            <Text style={styles.textEdit}>Edit</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <View style={styles.viewExplore}>
@@ -109,7 +120,7 @@ const MyProfile: React.FC = props => {
       </View>
       <View style={{paddingVertical: 10}}>
         <FlatList
-          data={dataUser}
+          data={dataRandom}
           renderItem={renderItem}
           keyExtractor={item => item.uuid}
           horizontal

@@ -20,6 +20,7 @@ import {routes} from '../../../../../../constants';
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {NavigationService} from '../../../../../../navigation';
+import {getAuthUserProfile} from '../../../../../../redux';
 import Icon_Comment from '../Icon-Comment';
 import useStyles from './styles';
 import Share from 'react-native-share';
@@ -33,21 +34,32 @@ import {
 } from 'react-native-gesture-handler';
 import {ForumType} from '../../../../../../redux/types/forum.type';
 import {useRoute} from '@react-navigation/native';
-import {useAppDispatch} from '../../../../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {ForumActions} from '../../../../../../redux';
 import {data} from '../../../../home/RatingComicScreen/components/ItemListButton/types';
+import {UserAction} from '../../../../../../redux/reducer/user.reducer';
+import {getPostById} from '../../../../../../redux/selectors/user.selector';
+import {backScreen} from '../../../../../../utils';
 interface PostDataDeatilRoute {
-  data: ForumType;
+  post_uuid: string;
 }
 
 const PostDetail = () => {
   const styles = useStyles();
   const dispatch = useAppDispatch();
   const route = useRoute();
-  const dataDetail = (route.params as PostDataDeatilRoute).data;
+  const post_uuid = (route.params as PostDataDeatilRoute).post_uuid;
+
+  const dataDetail = useAppSelector(getPostById);
+
   const handlePressGoback = () => {
-    NavigationService.navigate(routes.MYPROFILE);
+    backScreen();
   };
+
+  useEffect(() => {
+    dispatch(UserAction.getPostById(post_uuid));
+  }, [post_uuid]);
+
   const {width, height} = Dimensions.get('window');
 
   const screenWidth = Dimensions.get('window').width;
@@ -121,13 +133,13 @@ const PostDetail = () => {
                 style={styles.imageTitle}
                 source={{
                   uri:
-                    dataDetail.user_avatar ||
+                    (dataDetail && dataDetail && dataDetail.user_avatar) ||
                     'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
                 }}
               />
               <View style={styles.viewTextPost}>
                 <Text style={styles.name}>
-                  {dataDetail.user_fullname || 'Anonymus'}
+                  {(dataDetail && dataDetail.user_fullname) || 'Anonymus'}
                 </Text>
                 <View
                   style={[
@@ -136,7 +148,7 @@ const PostDetail = () => {
                     styles.marginTopDate,
                   ]}>
                   <Text style={styles.createAt}>
-                    {moment(dataDetail.created_at).format(
+                    {moment(dataDetail && dataDetail.created_at).format(
                       'YYYY-MM-DD [at] HH:mm',
                     )}
                   </Text>
@@ -161,13 +173,15 @@ const PostDetail = () => {
             </View>
           </View>
           <View style={styles.description}>
-            <Text style={styles.textDescription}>{dataDetail.content}</Text>
+            <Text style={styles.textDescription}>
+              {dataDetail && dataDetail.content}
+            </Text>
           </View>
         </View>
 
         <View>
           <FlatList
-            data={dataDetail.images}
+            data={dataDetail && dataDetail.images}
             renderItem={item => {
               if (item.item === '' || item.item == null) {
                 return <View />;
@@ -222,18 +236,20 @@ const PostDetail = () => {
               );
             }}
             pagingEnabled
-            onScroll={handleScroll(dataDetail.uuid)}
+            onScroll={handleScroll(dataDetail && dataDetail.uuid)}
             horizontal
             showsHorizontalScrollIndicator={false}
           />
-          {dataDetail.images &&
+          {dataDetail &&
+            dataDetail.images &&
+            dataDetail &&
             dataDetail.images.some(image => image !== null) && (
               <View style={styles.viewImagesLengh}>
                 <Text style={styles.textImagesLengh}>
-                  {activeIndices[dataDetail.uuid]
-                    ? activeIndices[dataDetail.uuid] + 1
+                  {activeIndices[dataDetail && dataDetail.uuid]
+                    ? activeIndices[dataDetail && dataDetail.uuid] + 1
                     : 1}
-                  /{dataDetail.images.length + 0}
+                  /{dataDetail && dataDetail.images.length + 0}
                 </Text>
               </View>
             )}
@@ -250,11 +266,13 @@ const PostDetail = () => {
                     size={11}
                   />
                 </View>
-                <Text style={styles.textLikeBlur}>{dataDetail.like_count}</Text>
+                <Text style={styles.textLikeBlur}>
+                  {dataDetail && dataDetail.like_count}
+                </Text>
               </View>
               <View style={styles.iconText}>
                 <Text style={styles.textLikeBlur}>
-                  {dataDetail.comment_count}
+                  {dataDetail && dataDetail.comment_count}
                 </Text>
                 <Text style={styles.textLikeBlur}>comment</Text>
               </View>
@@ -265,12 +283,16 @@ const PostDetail = () => {
             <TouchableOpacity
               style={styles.iconText}
               onPress={() => {
-                handleLikePress(dataDetail.uuid);
+                handleLikePress(dataDetail && dataDetail.uuid);
               }}>
               <IconMaterialIcons
-                name={dataDetail.is_liked ? 'thumb-up-alt' : 'thumb-up-off-alt'}
+                name={
+                  dataDetail && dataDetail.is_liked
+                    ? 'thumb-up-alt'
+                    : 'thumb-up-off-alt'
+                }
                 color={
-                  dataDetail.is_liked
+                  dataDetail && dataDetail.is_liked
                     ? styles.colorIconHeartFocus.color
                     : styles.colorIconHeartBlur.color
                 }
@@ -278,7 +300,7 @@ const PostDetail = () => {
               />
               <Text
                 style={
-                  dataDetail.is_liked
+                  dataDetail && dataDetail.is_liked
                     ? styles.textLikeFocus
                     : styles.textLikeBlur
                 }>

@@ -49,6 +49,12 @@ export const getCountComment = (state: RootState) =>
 export const getListTopView = (state: RootState) =>
   state.comic.listTopView?.data;
 
+export const getListTopRating = (state: RootState) =>
+  state.comic.listTopRating?.data;
+
+export const getListTopFavorite = (state: RootState) =>
+  state.comic.listTopFavorite?.data;
+
 export const getListFavorite = (state: RootState) =>
   state.comic.listFavorite?.data;
 
@@ -57,3 +63,4 @@ export const nextPageFavorite = (state: RootState) =>
 
 export const currentPageFavorite = (state: RootState) =>
   state.comic.listFavorite?.currentPage;
+

@@ -1,15 +1,17 @@
 import {AirbnbRating} from '@rneui/themed';
 import React, {useState} from 'react';
 import {
+  Alert,
   Image,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  Alert,
 } from 'react-native';
+import {useSelector} from 'react-redux';
 import {HeaderCustom} from '../../../../components';
 import {NavigationService} from '../../../../navigation';
+import {getAuthUserProfile} from '../../../../redux';
 import useStyles from './styles';
 
 const RatingDetailComic: React.FC = () => {
@@ -38,6 +40,7 @@ const RatingDetailComic: React.FC = () => {
       Alert.alert('Success', 'Thanks for your rating');
     }
   };
+  const user = useSelector(getAuthUserProfile);
   return (
     <View style={styles.container}>
       <HeaderCustom
@@ -54,11 +57,11 @@ const RatingDetailComic: React.FC = () => {
         <Image
           style={styles.avatar}
           source={{
-            uri: 'https://media.baoquangninh.vn/upload/image/202309/medium/2122032_4265a4a6e7ba65752201d10852302e01.jpg',
+            uri: user.image_url,
           }}
         />
         <View style={{gap: 5}}>
-          <Text style={styles.nameUser}>Ronaldo</Text>
+          <Text style={styles.nameUser}>{user.fullname}</Text>
           <Text style={styles.description}>
             Edits are public unless you delete the review.
             <TouchableOpacity>

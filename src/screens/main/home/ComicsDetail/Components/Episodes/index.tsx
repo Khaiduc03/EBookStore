@@ -33,7 +33,6 @@ const Episodes = () => {
           <TouchableOpacity
             onPress={() => {
               dispatch(CommentChapterAction.clearCommentChapter());
-              dispatch(ComicActions.clearListChapterDetail());
               NavigationService.navigate(routes.CHAPTER, {
                 chapter_number: item.chapter_number,
                 comic_uuid: item.comic_uuid,

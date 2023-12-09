@@ -1,13 +1,14 @@
-import {View, Text, Image} from 'react-native';
-import React, {useState} from 'react';
-import useStyles from './styles';
-import {images} from '../../../../../../assets/images/png';
-import {SquaresCustomProps} from './types';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
-import {theme} from '../../../../../../theme';
 import {Icon} from '@rneui/themed';
+import {useAppDispatch} from '../../../../../../hooks';
+import {UserAction} from '../../../../../../redux/reducer/user.reducer';
+import React, {useState} from 'react';
+import {Image, Text, View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {routes} from '../../../../../../constants';
+import {NavigationService} from '../../../../../../navigation';
+import {theme} from '../../../../../../theme';
+import useStyles from './styles';
+import {SquaresCustomProps} from './types';
 
 const ItemList: React.FunctionComponent<SquaresCustomProps> = props => {
   const {
@@ -26,15 +27,14 @@ const ItemList: React.FunctionComponent<SquaresCustomProps> = props => {
   const styles = useStyles();
   const [isFollowing, setIsFollowing] = useState(false);
   const [isDetail, setIsDetail] = useState();
+  const dispatch = useAppDispatch();
   const handleButtonPress = () => {
-    setIsFollowing(!isFollowing);
+    dispatch(UserAction.postFollowRandom(props.data.uuid));
   };
   const handlePressUser = () => {
     NavigationService.navigate(routes.PROFILEUSER, {data: props.data});
   };
-  const handlePressGoback = () => {
-    NavigationService.navigate(routes.MYPROFILE);
-  };
+
   return (
     <View style={styles.Squares}>
       <TouchableOpacity style={styles.ViewTop} onPress={handlePressUser}>
@@ -61,14 +61,14 @@ const ItemList: React.FunctionComponent<SquaresCustomProps> = props => {
         style={[
           styles.Button,
           {
-            backgroundColor: isFollowing
-              ? theme?.lightColors?.grey5
-              : theme?.lightColors?.primary,
+            backgroundColor: props.data.is_follower
+              ? theme?.lightColors?.primary
+              : theme?.lightColors?.grey5,
           },
         ]}
         onPress={handleButtonPress}>
         <Text style={styles.TextButton}>
-          {isFollowing ? 'Unfollow' : 'Follow'}
+          {props.data.is_follower ? 'Follow' : 'Unfollow'}
         </Text>
       </TouchableOpacity>
     </View>
