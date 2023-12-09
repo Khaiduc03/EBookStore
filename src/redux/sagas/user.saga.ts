@@ -12,6 +12,7 @@ function* postFollowSaga(action: PayloadAction<any>): Generator {
     const {data}: any = yield call(UserService.postFollow, action.payload);
     if (data.code == 200) {
       yield put(UserAction.handleSuccerFollower(action.payload));
+      yield put(UserAction.handleSuccerFollowRandom(action.payload));
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');
@@ -28,6 +29,22 @@ function* postFollwRandom(action: PayloadAction<any>): Generator {
     const {data}: any = yield call(UserService.postFollow, action.payload);
     if (data.code == 200) {
       yield put(UserAction.handleSuccerFollowRandom(action.payload));
+      console.log('run push tookit');
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+  }
+}
+
+function* postFollowListFollowerSaga(action: PayloadAction<any>): Generator {
+  try {
+    console.log('run===========>');
+    const {data}: any = yield call(UserService.postFollow, action.payload);
+    if (data.code == 200) {
+      yield put(UserAction.handleSuccerPostFollowListFollower(action.payload));
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');
@@ -213,4 +230,8 @@ export default function* watchUserSaga() {
     getPostAllByIdUserSaga,
   );
   yield takeLatest(UserAction.postFollowRandom.type, postFollwRandom);
+  yield takeLatest(
+    UserAction.postFollowListFollower,
+    postFollowListFollowerSaga,
+  );
 }

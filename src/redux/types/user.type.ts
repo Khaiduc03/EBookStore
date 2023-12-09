@@ -22,6 +22,7 @@ export type UserType = uuid & {
   followercount: number;
   followingcount: number;
   is_follower: boolean;
+  is_following: boolean;
 };
 
 export interface PayloadHttpListFollow<T> {
@@ -41,6 +42,6 @@ export type ItemFollowType = uuid & {
   fullname: string;
   image_url: string;
   email: string;
-  is_following: string;
+  is_following: boolean;
   is_follower: boolean;
 };

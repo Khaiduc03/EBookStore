@@ -27,8 +27,7 @@ const ItemListMyProfile: React.FunctionComponent<
     uuid,
   } = props.data;
   const styles = useStyles();
-  const [isFollowing, setIsFollowing] = useState(false);
-  const [isDetail, setIsDetail] = useState();
+
   const dispatch = useAppDispatch();
 
   const handleButtonPress = () => {
@@ -63,14 +62,14 @@ const ItemListMyProfile: React.FunctionComponent<
         style={[
           styles.Button,
           {
-            backgroundColor: props.data.is_follower
-              ? theme?.lightColors?.blue
-              : theme?.lightColors?.grey5,
+            backgroundColor: props.data.is_following
+              ? theme?.lightColors?.grey5
+              : theme?.lightColors?.blue,
           },
         ]}
         onPress={handleButtonPress}>
         <Text style={styles.TextButton}>
-          {props.data.is_follower ? 'Follow' : 'Unfollw'}
+          {props.data.is_following ? 'Unfollow' : 'Follow'}
         </Text>
       </TouchableOpacity>
     </View>

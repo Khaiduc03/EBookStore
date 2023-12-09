@@ -162,18 +162,10 @@ const reducer = createSlice({
       state: UserState,
       action: PayloadAction<PayloadHttpList<UserType>>,
     ) => {
-      const payloadData = action.payload.data;
-      if (payloadData && payloadData) {
-        payloadData.forEach(followingItem => {
-          followingItem.is_follower = true;
-        });
-      }
-
       return {
         ...state,
         listUserRandom: {
           ...action.payload,
-          data: payloadData,
         },
       };
     },
@@ -248,7 +240,7 @@ const reducer = createSlice({
         state.listUserRandom.data.forEach(follow => {
           if (follow.uuid === uuid) {
             // Tìm thấy follow cần cập nhật
-            follow.is_follower = !follow.is_follower;
+            follow.is_following = !follow.is_following;
           }
         });
       }
@@ -260,6 +252,30 @@ const reducer = createSlice({
       return {
         ...state,
       };
+    },
+
+    postFollowListFollower: (state: UserState, _: PayloadAction<string>) => {
+      return {
+        ...state,
+      };
+    },
+
+    handleSuccerPostFollowListFollower: (
+      state: UserState,
+      action: PayloadAction<string>,
+    ) => {
+      const uuid = action.payload;
+
+      if (state.listFollow && state.listFollow.data?.follower) {
+        state.listFollow.data.follower.forEach(follow => {
+          if (follow.user_following_uuid === uuid) {
+            // Tìm thấy follow cần cập nhật
+            follow.is_following = !follow.is_following;
+          }
+        });
+      }
+
+      return state;
     },
   },
 });

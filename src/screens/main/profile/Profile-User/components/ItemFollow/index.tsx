@@ -10,30 +10,21 @@ const ItemFollow: React.FunctionComponent<ProfileProps> = props => {
   const styles = useStyles();
   return (
     <View style={styles.viewAvatarFollow}>
-      {props.data?.image_url && (
-        <Image
-          style={styles.avatar}
-          source={{
-            uri:
-              'https://static.thenounproject.com/png/5034901-200.png' ||
-              props.data?.image_url,
-          }}
-        />
-      )}
-      <TouchableOpacity style={styles.viewFollow}>
-        <Text style={styles.countNumber}>{props.data?.followercount || 1}</Text>
-        <TextCustom textLight title="Follower" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.viewFollow}>
-        <Text style={styles.countNumber}>
-          {props.data?.followingcount || 1}
-        </Text>
-        <TextCustom textLight title="Follow" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.viewFollow}>
-        <Text style={styles.countNumber}>{props.data?.followercount || 1}</Text>
-        <TextCustom textLight title="Post" />
-      </TouchableOpacity>
+      <Image style={styles.avatar} source={{uri: props.data?.image_url}} />
+      <View style={styles.viewAll}>
+        <TouchableOpacity style={styles.viewFollow}>
+          <Text style={styles.countNumber}>100</Text>
+          <Text style={styles.text}>Post</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.viewFollow}>
+          <Text style={styles.countNumber}>{props.data?.followercount}</Text>
+          <Text style={styles.text}>Follower</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.viewFollow}>
+          <Text style={styles.countNumber}>{props.data?.followingcount}</Text>
+          <Text style={styles.text}>Following</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

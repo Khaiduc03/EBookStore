@@ -34,23 +34,23 @@ const ProfileUser: React.FC = props => {
   const route = useRoute();
   const dataUser = (route.params as RouteParamsProfile).data;
   const dataList = useAppSelector(getAllPostByIdUser);
-  const dataById = useAppSelector(getUserById);
   const dispatch = useAppDispatch();
-
-  console.log(dataUser);
 
   const isLoading = useAppSelector(getIsLoadingTopic);
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
   const currentpage = useAppSelector(currentPageAllPostByIdUser);
   const nextPage = useAppSelector(nextPageAllPostIdByUser);
+
+  const dataUserById = useAppSelector(getUserById);
   const [isFollowed, setIsFollowed] = useState<Boolean>(
-    dataUser ? dataUser?.is_follower : true,
+    dataUser ? dataUser?.is_following : true,
   );
 
   const styles = useStyles();
 
   useEffect(() => {
+    dispatch(UserAction.getUserById(dataUser?.uuid!));
     dispatch(UserAction.clearListAllPostByUser());
     dispatch(
       UserAction.getListAllPostByIdUser({page: 1, user_uuid: dataUser?.uuid}),
@@ -102,10 +102,13 @@ const ProfileUser: React.FC = props => {
         rightIconRight={{name: 'ellipsis-vertical', type: 'ionicon'}}
       />
       <View>
-        <ItemFollow data={dataUser} />
+        <ItemFollow data={dataUserById && dataUserById[0]} />
       </View>
       <View style={styles.nameUser}>
-        <TextCustom textBold title={dataUser && dataUser.fullname} />
+        <TextCustom
+          textBold
+          title={(dataUser && dataUser.fullname) || 'Anonymo'}
+        />
         <Text style={styles.textBio} numberOfLines={1}>
           {dataUser?.summary || 'I am hacker'}
         </Text>
@@ -116,13 +119,13 @@ const ProfileUser: React.FC = props => {
             styles.btnFollow,
             {
               backgroundColor: isFollowed
-                ? theme?.lightColors?.blue
-                : theme?.lightColors?.grey5,
+                ? theme?.lightColors?.grey5
+                : theme?.lightColors?.blue,
             },
           ]}
           onPress={handleFollowButtonClick}>
           <Text style={styles.textFollow}>
-            {isFollowed ? 'Follow' : 'UnFollow'}
+            {isFollowed ? 'Unfollow' : 'Follow'}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.btnMess} onPress={handlePressMessage}>
