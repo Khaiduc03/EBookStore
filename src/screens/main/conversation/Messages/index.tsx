@@ -36,6 +36,8 @@ const MessageScreen: React.FC = () => {
   const listMessage: MessageI[] = useAppSelector(getListMessage);
   console.log('========>', params);
 
+  console.log('params.joined_summary: ', params.joined_summary ); // thử log và bị undefined hihi
+
   useEffect(() => {
     scrollViewRef.current?.scrollToOffset({animated: true, offset: 0});
     setShowScrollButton(false);
@@ -161,6 +163,9 @@ const MessageScreen: React.FC = () => {
           onPressRightIconRight={() =>
             NavigationService.navigate(routes.INFO_USER, {
               joined_uuid: params.joined_uuid,
+              joined_name: params.joined_name,
+              joined_url: params.joined_url,
+              joined_summary: params.joined_summary,
             })
           }
           onPressLeftIcon={() => NavigationService.goBack()}

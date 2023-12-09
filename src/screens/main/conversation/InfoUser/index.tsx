@@ -1,30 +1,43 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React, {useEffect} from 'react';
-import {useRoute} from '@react-navigation/native';
-import useStyles from './styles';
-import {HeaderCustom} from '../../../../components';
-import {backScreen} from '../../../../utils';
+import { useRoute } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {UserAction} from '../../../../redux/reducer/user.reducer';
-import {getUserById} from '../../../../redux/selectors/user.selector';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
+import { HeaderCustom } from '../../../../components';
+import { routes } from '../../../../constants';
+import { useAppDispatch, useAppSelector } from '../../../../hooks';
+import { NavigationService } from '../../../../navigation';
+import { UserAction } from '../../../../redux/reducer/user.reducer';
+import { getUserById } from '../../../../redux/selectors/user.selector';
+import { backScreen } from '../../../../utils';
+import useStyles from './styles';
+
 interface RouteParamsProfile {
-  joined_uuid?: string;
+  joined_uuid?: any;
+  joined_url?: any;
+  joined_name?: any;
+  joined_summary?: any;
 }
 
 const InfoUser = () => {
   const styles = useStyles();
+
   const route = useRoute();
-  const uuid = (route.params as RouteParamsProfile).joined_uuid;
+  
+  const joined_uuid = (route.params as RouteParamsProfile).joined_uuid;
+  const joined_name = (route.params as RouteParamsProfile).joined_name;
+  const joined_url = (route.params as RouteParamsProfile).joined_url;
+  const joined_summary = (route.params as RouteParamsProfile).joined_summary;
+
   const dispatch = useAppDispatch();
+
   const dataById = useAppSelector(getUserById);
 
   useEffect(() => {
-    dispatch(UserAction.clearUserById());
-    dispatch(UserAction.getUserById(uuid ? uuid : ''));
-  }, [uuid]);
+    if (joined_uuid) {
+      dispatch(UserAction.clearUserById());
+      dispatch(UserAction.getUserById(joined_uuid));
+    }
+  }, [joined_uuid]);
 
   return (
     <View style={styles.container}>
@@ -37,26 +50,30 @@ const InfoUser = () => {
         <FastImage
           style={styles.imgStyle}
           source={{
-            uri: dataById ? dataById[0].image_url : 'anonymous',
+            uri: dataById ? joined_url : 'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
           }}
         />
-        <Text style={styles.name}>
-          {dataById ? dataById[0].fullname : 'anonymous'}
-        </Text>
-        <Text style={styles.nameApp}>Comic verse</Text>
+        <Text style={styles.name}>{dataById ? joined_name : 'anonymous'}</Text>
+        <Text style={styles.nameApp}>Comic Verse</Text>
         <Text style={styles.title}>You guys are friends on Comic verse</Text>
         <Text style={styles.title}>
-          {dataById && dataById[0].summary !== null
-            ? dataById[0].summary
+          {dataById && joined_summary !== ''
+            ? joined_summary
             : 'Welcome to my profile page'}
         </Text>
         <TouchableOpacity
           style={styles.buttonStyle}
           onPress={() =>
             NavigationService.navigate(routes.PROFILEUSER, {
-              data: dataById && dataById[0],
+              data: {
+                joined_uuid,
+                joined_url,
+                joined_name,
+                joined_summary,
+              },
             })
-          }>
+          }
+          >
           <Text style={styles.textButton}>View profile page</Text>
         </TouchableOpacity>
       </View>

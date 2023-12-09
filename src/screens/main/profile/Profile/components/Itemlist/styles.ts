@@ -27,7 +27,7 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.grey3,
   },
   iconSize: {
-    fontSize: normalize(22),
+    fontSize: normalize(24),
   },
   textBtn: {
     color: colors.black,
@@ -43,18 +43,16 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginVertical: normalize(WIDTH * 0.01),
+    marginVertical: normalize(WIDTH * 0.013),
   },
   viewIconLeftText: {
     width: normalize(WIDTH * 0.6),
+    alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
   },
-  marginIconLeft: {
-    marginLeft: normalize(WIDTH * 0.019),
-  },
-  viewBtn: {
-    marginRight: normalize(WIDTH * 0.01),
+  viewIconLeft: {
+    width: normalize(WIDTH * 0.12),
+    // borderWidth: 1
   },
   outter: {
     width: normalize(WIDTH * 0.12),

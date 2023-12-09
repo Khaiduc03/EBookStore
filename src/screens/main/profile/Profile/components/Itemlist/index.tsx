@@ -38,6 +38,7 @@ const Itemlist: React.FC = () => {
   }, [mode]);
 
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
+  
   const handleLogout = () => {
     dispatch(ComicActions.clearListData());
     dispatch(AuthActions.handleLogout());
@@ -55,7 +56,7 @@ const Itemlist: React.FC = () => {
                 type="feather"
                 color="#F89300"
                 size={styles.iconSize.fontSize}
-                style={styles.marginIconLeft}
+                style={styles.viewIconLeft}
               />
               <Text style={styles.textBtn}>Change Password</Text>
             </View>
@@ -64,7 +65,7 @@ const Itemlist: React.FC = () => {
               name="chevron-forward-outline"
               type="ionicon"
               color={styles.iconColor.color}
-              size={24}
+              size={19}
             />
           </View>
         </TouchableOpacity>
@@ -112,7 +113,7 @@ const Itemlist: React.FC = () => {
                 type="material-community"
                 color="#F89300"
                 size={styles.iconSize.fontSize}
-                style={styles.marginIconLeft}
+                style={styles.viewIconLeft}
               />
               <Text style={styles.textBtn}>Favorite and History</Text>
             </View>
@@ -121,7 +122,7 @@ const Itemlist: React.FC = () => {
               name="chevron-forward-outline"
               type="ionicon"
               color={styles.iconColor.color}
-              size={24}
+              size={19}
             />
           </View>
         </TouchableOpacity>
@@ -135,7 +136,7 @@ const Itemlist: React.FC = () => {
               type="ionicon"
               color="#F89300"
               size={styles.iconSize.fontSize}
-              style={styles.marginIconLeft}
+              style={styles.viewIconLeft}
             />
             <Text style={styles.textBtn}>Theme</Text>
           </View>
@@ -183,7 +184,7 @@ const Itemlist: React.FC = () => {
                 type="antdesign"
                 color="#F89300"
                 size={styles.iconSize.fontSize}
-                style={styles.marginIconLeft}
+                style={styles.viewIconLeft}
               />
               <Text style={styles.textBtn}>Help Center</Text>
             </View>
@@ -192,7 +193,7 @@ const Itemlist: React.FC = () => {
               name="chevron-forward-outline"
               type="ionicon"
               color={styles.iconColor.color}
-              size={24}
+              size={19}
             />
           </View>
         </TouchableOpacity>
@@ -205,7 +206,7 @@ const Itemlist: React.FC = () => {
                 type="font-awesome"
                 color="#F89300"
                 size={styles.iconSize.fontSize}
-                style={styles.marginIconLeft}
+                style={styles.viewIconLeft}
               />
               <Text style={styles.textBtn}>About this app</Text>
             </View>
@@ -214,7 +215,7 @@ const Itemlist: React.FC = () => {
               name="chevron-forward-outline"
               type="ionicon"
               color={styles.iconColor.color}
-              size={24}
+              size={19}
             />
           </View>
         </TouchableOpacity>
@@ -226,7 +227,7 @@ const Itemlist: React.FC = () => {
                 type="font-awesome-5"
                 color="#F89300"
                 size={styles.iconSize.fontSize}
-                style={styles.marginIconLeft}
+                style={styles.viewIconLeft}
               />
               <Text style={styles.textBtn}>Logout</Text>
             </View>
@@ -235,7 +236,7 @@ const Itemlist: React.FC = () => {
               name="log-out-outline"
               type="ionicon"
               color={styles.iconColor.color}
-              size={24}
+              size={19}
             />
           </View>
         </TouchableOpacity>
