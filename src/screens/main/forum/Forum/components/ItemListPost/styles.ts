@@ -22,7 +22,7 @@ const useStyles = makeStyles(({colors}) => ({
     justifyContent: 'space-around',
     borderTopWidth: normalize(3),
     borderColor: colors.grey9,
-    paddingVertical: normalize(16),
+    paddingTop: normalize(16),
     backgroundColor: colors.background,
   },
   post: {
@@ -230,6 +230,35 @@ const useStyles = makeStyles(({colors}) => ({
   },
   iconFooter: {
     color: colors.black,
+  },
+  textTitleAlert: {
+    color: colors.black,
+    fontSize: normalize(19),
+    fontFamily: fontFamilySetup.bold,
+    lineHeight: normalize(21),
+    textAlign: 'center',
+  },
+  textMessageAlert: {
+    color: colors.black,
+    fontSize: normalize(12),
+    fontFamily: fontFamilySetup.medium,
+    textAlign: 'center',
+  },
+  textCancelAlert: {
+    color: colors.whiteDefault,
+    fontSize: normalize(11),
+    fontFamily: fontFamilySetup.regular,
+    lineHeight: normalize(21),
+    textAlign: 'center',
+    marginHorizontal: normalize(10),
+  },
+  textConfirmAlert: {
+    color: colors.whiteDefault,
+    fontSize: normalize(11),
+    fontFamily: fontFamilySetup.regular,
+    lineHeight: normalize(21),
+    textAlign: 'center',
+    marginHorizontal: normalize(10),
   },
 }));
 

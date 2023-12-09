@@ -143,6 +143,7 @@ const reducer = createSlice({
         },
       };
     },
+
     clearRepCommentForum: (state: CommentForumState) => {
       return {
         ...state,
@@ -224,6 +225,28 @@ const reducer = createSlice({
       }
 
       return state; // Trả về state không thay đổi nếu không có listComment hoặc listComment.data
+    },
+
+    deleteCommentForum: (state: CommentForumState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+
+    handleDeleteCommentSuccess: (
+      state: CommentForumState,
+      action: PayloadAction<any>,
+    ) => {
+      return {
+        ...state,
+        listComment: {
+          ...state.listComment,
+          data:
+            state.listComment?.data?.filter(
+              comment => comment.uuid !== action.payload,
+            ) || [],
+        },
+      };
     },
   },
 });

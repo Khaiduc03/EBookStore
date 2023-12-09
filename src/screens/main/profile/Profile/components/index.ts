@@ -1,1 +1,1 @@
-export {default as Itemlish} from './Itemlist';
+export {default as Itemlist} from './Itemlist';
