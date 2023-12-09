@@ -81,7 +81,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   textFollow: {
     fontSize: normalize(15),
-    fontFamily: fontFamilySetup.bold,
+    fontFamily: fontFamilySetup.medium,
     lineHeight: normalize(20),
     color: colors.white,
   },

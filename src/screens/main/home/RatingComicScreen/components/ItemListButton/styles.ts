@@ -10,7 +10,6 @@ const useStyles = makeStyles(({colors}) => ({
     backgroundColor: colors.background,
     justifyContent: 'center',
     alignItems: 'center',
-    height: HEIGHT,
   },
   viewRow: {
     flexDirection: 'row',
@@ -59,7 +58,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
 
   viewItem2: {
-    paddingVertical: normalize(20),
+    paddingTop: normalize(20),
   },
   btnNextScreen: {
     flexDirection: 'row',
