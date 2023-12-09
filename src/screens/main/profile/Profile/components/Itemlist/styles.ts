@@ -1,6 +1,6 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../../../../utils';
-import {fontFamilySetup} from '../../../../../../utils/font';
+import { makeStyles, normalize } from '@rneui/themed';
+import { Device } from '../../../../../../utils';
+import { fontFamilySetup } from '../../../../../../utils/font';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
@@ -27,26 +27,28 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.grey3,
   },
   iconSize: {
-    fontSize: normalize(WIDTH * 0.05),
+    fontSize: normalize(22),
   },
   textBtn: {
-    color: colors.grey3,
+    color: colors.black,
     fontSize: normalize(WIDTH * 0.044),
-    fontFamily: fontFamilySetup.bold,
+    fontFamily: fontFamilySetup.medium,
     letterSpacing: normalize(0.12),
     lineHeight: normalize(21),
-    marginLeft: normalize(WIDTH * 0.039),
+    marginLeft: normalize(WIDTH * 0.044),
   },
   viewItemBtn: {
+    width: (WIDTH * 0.9),
+    height: normalize(HEIGHT * 0.06),
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginVertical: normalize(WIDTH * 0.039),
+    marginVertical: normalize(WIDTH * 0.01),
   },
   viewIconLeftText: {
     width: normalize(WIDTH * 0.6),
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'flex-start',
   },
   marginIconLeft: {
     marginLeft: normalize(WIDTH * 0.019),
@@ -56,41 +58,38 @@ const useStyles = makeStyles(({colors}) => ({
   },
   outter: {
     width: normalize(WIDTH * 0.12),
-    height: normalize(WIDTH * 0.053),
+    height: normalize(WIDTH * 0.036),
     borderRadius: normalize(15),
     backgroundColor: colors.grey5,
+    justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
     paddingHorizontal: normalize(2),
   },
   off: {
     justifyContent: 'flex-start',
-    backgroundColor: '#C8C8C8',
+    backgroundColor: '#C8C8C878',
   },
   on: {
     justifyContent: 'flex-end',
     backgroundColor: colors.primary,
   },
-  innerOFF: {
-    width: normalize(WIDTH * 0.04),
-    height: normalize(WIDTH * 0.04),
-    backgroundColor: colors.whiteDefault,
-    borderRadius: normalize(15),
-    elevation: normalize(8),
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: normalize(0.15),
-    shadowRadius: normalize(2),
+  innerSunny: {
+    backgroundColor: '#000000',
+    borderRadius: normalize(100),
+    padding: normalize(4.6),
   },
-  innerON: {
-    width: normalize(WIDTH * 0.04),
-    height: normalize(WIDTH * 0.04),
+  innerDarkMode: {
     backgroundColor: colors.whiteDefault,
-    borderRadius: normalize(15),
-    elevation: normalize(8),
-    shadowOffset: {width: 0, height: 0},
-    shadowOpacity: normalize(0.15),
-    shadowRadius: normalize(2),
+    borderRadius: normalize(100),
+    padding: normalize(4.6),
   },
+  colorIconDarkMode: {
+    color: colors.blackDefault
+  },
+  colorIconSunny: {
+    color: colors.whiteDefault
+  }
 }));
 
 export default useStyles;

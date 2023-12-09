@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {ScrollView, TouchableOpacity, View} from 'react-native';
 import {ItemListProfile} from '../../../../../../components';
 import {routes} from '../../../../../../constants';
@@ -23,7 +23,7 @@ const Itemlist: React.FC = () => {
 
   const [isEnabled, setIsEnabled] = useState(false);
 
-  const handleTheme = () => {
+  const handleTheme = useCallback(() => {
     if (mode === 'light') {
       dispatch(ThemeActions.setTheme('dark'));
       setTimeout(() => {
@@ -35,7 +35,8 @@ const Itemlist: React.FC = () => {
         setIsEnabled(previousState => !previousState);
       }, 1000);
     }
-  };
+  }, [mode]);
+
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
   const handleLogout = () => {
     dispatch(ComicActions.clearListData());
@@ -51,7 +52,7 @@ const Itemlist: React.FC = () => {
             <View style={styles.viewIconLeftText}>
               <Icon
                 name="key"
-                type="font-awesome-5"
+                type="feather"
                 color="#F89300"
                 size={styles.iconSize.fontSize}
                 style={styles.marginIconLeft}
@@ -139,14 +140,38 @@ const Itemlist: React.FC = () => {
             <Text style={styles.textBtn}>Theme</Text>
           </View>
 
-          <View style={styles.viewBtn}>
             <TouchableOpacity
               style={[styles.outter, isEnabled ? styles.on : styles.off]}
               onPress={handleTheme}
               activeOpacity={3}>
-              <View style={isEnabled ? styles.innerON : styles.innerOFF} />
+              <View
+                style={[
+                  {position: 'absolute'},
+                ]}>
+                {isEnabled ? (
+                  <>
+                    <Icon
+                       name={'moon'}
+                       type="ionicon"
+                      color={styles.colorIconDarkMode.color}
+                      size={16}
+                      style={styles.innerDarkMode}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <Icon
+                      name={'sunny'}
+                      type="ionicon"
+                      color={styles.colorIconSunny.color}
+                      size={16}
+                      style={styles.innerSunny}
+                    />
+                  </>
+                )}
+              </View>
             </TouchableOpacity>
-          </View>
+
         </View>
 
         <TouchableOpacity
