@@ -7,9 +7,13 @@ import {getListRating} from '../../../../../../redux/selectors/rating.selector';
 import {RatingType} from '../../../../../../redux/types/rating.type';
 import moment from 'moment';
 import {useRating} from '../../hook/useRating.hook';
+import {getAuthUserProfile} from '../../../../../../redux';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 const ItemRatingStar = () => {
   const styles = useStyles();
+
+  const user = useAppSelector(getAuthUserProfile);
 
   const {
     dataRating,
@@ -17,6 +21,8 @@ const ItemRatingStar = () => {
     handleRatingClick,
     onPressLikeRating,
     selectedRating,
+    setShowAlert,
+    showAlert,
     onPressDeleteRating,
   } = useRating();
 
@@ -99,12 +105,16 @@ const ItemRatingStar = () => {
                 />
                 <Text style={styles.numberStarText}>{item.rating}</Text>
               </View>
-              <Icon
-                onPress={() => onPressDeleteRating(item.uuid)}
-                name="ellipsis-horizontal-circle-outline"
-                type="ionicon"
-                size={30}
-              />
+              {user.uuid == item.user_uuid ? (
+                <Icon
+                  onPress={() => onPressDeleteRating(item.uuid)}
+                  name="close"
+                  type="ionicon"
+                  size={25}
+                />
+              ) : (
+                <View />
+              )}
             </View>
             <View style={styles.content}>
               <Text style={styles.description}>{item.comment}</Text>
@@ -126,6 +136,28 @@ const ItemRatingStar = () => {
                 {moment(item.created_at).format('YYYY-MM-DD-HH:mm') + ''}
               </Text>
             </View>
+            {/* <AwesomeAlert
+              show={showAlert}
+              showProgress={false}
+              title="Post rating 😕"
+              message="Are you sure you want to post your rating?"
+              closeOnTouchOutside={true}
+              closeOnHardwareBackPress={false}
+              showCancelButton={true}
+              showConfirmButton={true}
+              cancelText="No, cancel"
+              cancelButtonColor="blue"
+              confirmText="Yes, post"
+              confirmButtonColor="red"
+              onCancelPressed={() => {
+                setShowAlert(false);
+              }}
+              onConfirmPressed={() => onPressDeleteRating(item.uuid)}
+              titleStyle={styles.textTitleAlert}
+              messageStyle={styles.textMessageAlert}
+              cancelButtonTextStyle={styles.textCancelAlert}
+              confirmButtonTextStyle={styles.textConfirmAlert}
+            /> */}
           </View>
         )}
       />

@@ -55,7 +55,7 @@ const ProfileUser: React.FC = props => {
     dispatch(
       UserAction.getListAllPostByIdUser({page: 1, user_uuid: dataUser?.uuid}),
     );
-  }, []);
+  }, [dataUser?.uuid!]);
 
   const loadMoreComic = () => {
     if (nextPage && !isLoading) {

@@ -101,6 +101,36 @@ const reducer = createSlice({
 
       return state;
     },
+
+    deleteRatingSucces: (state: RatingState, action: PayloadAction<string>) => {
+      if (state.listAllRating && state.listAllRating.data) {
+        const updateRating = state.listAllRating.data.filter(
+          ratingItem => ratingItem.uuid !== action.payload,
+        );
+
+        return {
+          ...state,
+          listAllRating: {
+            ...state,
+            data: updateRating,
+          },
+        };
+      }
+      return state;
+    },
+
+    postRatingSuccess: (
+      state: RatingState,
+      action: PayloadAction<RatingType>,
+    ) => {
+      return {
+        ...state,
+        listAllRating: {
+          ...state.listAllRating,
+          data: [action.payload, ...(state.listAllRating?.data || [])],
+        },
+      };
+    },
   },
 });
 

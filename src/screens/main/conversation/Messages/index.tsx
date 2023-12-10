@@ -34,7 +34,6 @@ const MessageScreen: React.FC = () => {
   const [newMessage, setNewMessage] = useState<string>('');
   const dispatch = useAppDispatch();
   const listMessage: MessageI[] = useAppSelector(getListMessage);
-  console.log('========>', params);
 
   useEffect(() => {
     scrollViewRef.current?.scrollToOffset({animated: true, offset: 0});
@@ -160,7 +159,7 @@ const MessageScreen: React.FC = () => {
           }}
           onPressRightIconRight={() =>
             NavigationService.navigate(routes.INFO_USER, {
-              joined_uuid: params.joined_uuid,
+              data: params,
             })
           }
           onPressLeftIcon={() => NavigationService.goBack()}

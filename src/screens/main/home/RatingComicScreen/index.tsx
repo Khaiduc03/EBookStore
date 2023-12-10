@@ -39,7 +39,7 @@ const RatingComicScreen: React.FC<RouteParamsIdComic> = () => {
         }}
         onPressLeftIcon={handleGoback}
         onPressRightIconRight={() =>
-          NavigationService.navigate(routes.RATINGDETAILCOMIC)
+          NavigationService.navigate(routes.RATINGDETAILCOMIC, {uuid: uuid})
         }
       />
       <View style={styles.content}>

@@ -9,6 +9,7 @@ export const useRating = () => {
 
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const [displayedData, setDisplayedData] = useState<RatingType[]>();
+  const [showAlert, setShowAlert] = useState(false);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -38,6 +39,7 @@ export const useRating = () => {
   const onPressDeleteRating = (uuid: string) => {
     console.log('===========>', uuid);
     dispatch(RatingActions.deleteRating(uuid));
+    setShowAlert(false);
   };
 
   return {
@@ -47,5 +49,7 @@ export const useRating = () => {
     displayedData,
     onPressLikeRating,
     onPressDeleteRating,
+    showAlert,
+    setShowAlert,
   };
 };
