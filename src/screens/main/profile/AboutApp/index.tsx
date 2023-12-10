@@ -19,9 +19,9 @@ const AboutApp: React.FC = () => {
         onPressLeftIcon={handlePressGoback}
       />
       <View style={styles.viewTextBig}>
-        <Text style={styles.name}>Comic Verse V9.9.9</Text>
+        <Text style={styles.name}>COMIC VERSE</Text>
       </View>
-      <View>
+      <View style={styles.listContent}>
         <ItemListAbout />
       </View>
     </View>
