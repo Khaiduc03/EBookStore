@@ -1,6 +1,6 @@
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeLatest} from 'redux-saga/effects';
-import {LoadingActions} from '../reducer';
+import {ForumActions, LoadingActions} from '../reducer';
 import {CommentForumAction} from '../reducer/comment.forum.reducer';
 import {CommentForumService} from '../services/comment.forum.service';
 
@@ -15,6 +15,7 @@ function* postCommentSaga(action: PayloadAction<any>): Generator {
     if (data.code == 200) {
       console.log('postCommentSaga: ======================>', data.data);
       yield put(CommentForumAction.postCommentForumSucces(data.data));
+      yield put(ForumActions.handleSuccessCount(action.payload.forum_uuid));
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');

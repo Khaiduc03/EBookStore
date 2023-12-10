@@ -96,6 +96,7 @@ function subscribe(socket: Socket) {
   return eventChannel(emitter => {
     socket.on('conversations', conversations => {
       if (conversations) {
+        console.log('error at here');
         emitter(ChatActions.handleGetListConversationSuccess(conversations));
       }
     });
@@ -126,7 +127,7 @@ function subscribe(socket: Socket) {
 
 function* handleGetListConversation(): Generator {
   const {data}: any = yield call(ConversationService.getConversation);
-
+  console.log(data);
   yield put(ChatActions.handleGetListConversationSuccess(data.data));
 }
 

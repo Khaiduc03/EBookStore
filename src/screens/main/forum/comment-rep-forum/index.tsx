@@ -84,7 +84,7 @@ const CommentRepForum = () => {
   useEffect(() => {
     dispatch(
       CommentForumAction.getRepCommentForum({
-        parents_comment_uuid: forum_uuid,
+        parents_comment_uuid: uuid,
         page: 1,
       }),
     );
@@ -108,7 +108,7 @@ const CommentRepForum = () => {
       CommentForumAction.postRepCommentForum({
         forum_uuid: forum_uuid,
         comment: value,
-        parents_comment_uuid: forum_uuid,
+        parents_comment_uuid: uuid,
       }),
     );
     setCountComment(countComment + 1);
@@ -190,11 +190,13 @@ const CommentRepForum = () => {
     index: number;
   }) => {
     return (
-      <ItemRepCommnent
-        setUserRep={setUserRep}
-        setOpen={openInput}
-        data={item}
-      />
+      <View>
+        <ItemRepCommnent
+          setUserRep={setUserRep}
+          setOpen={openInput}
+          data={item}
+        />
+      </View>
     );
   };
 
@@ -202,6 +204,7 @@ const CommentRepForum = () => {
     <SafeAreaView style={styles.container}>
       <FlatList
         data={dataRepComment}
+        keyExtractor={item => item.uuid}
         initialNumToRender={21}
         ListHeaderComponent={() => {
           return (
@@ -306,7 +309,6 @@ const CommentRepForum = () => {
         }}
         ListFooterComponent={isLoading ? listFooterComponent() : <View />}
         showsVerticalScrollIndicator={false}
-        keyExtractor={item => item.uuid}
         renderItem={renderItem}
         contentContainerStyle={{paddingVertical: 65}}
       />

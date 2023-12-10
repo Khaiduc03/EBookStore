@@ -1,3 +1,4 @@
+import {useRoute} from '@react-navigation/native';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator,
@@ -15,11 +16,8 @@ import {
 } from '../../../../redux/selectors/comment.forum.selector';
 import {getIsLoadingPage} from '../../../../redux/selectors/loading.selector';
 import {CommentForumType} from '../../../../redux/types/comment.forum.type';
-import {ForumType} from '../../../../redux/types/forum.type';
 import {HeaderComment, ItemComment} from './components';
 import useStyles from './styles';
-import {useRoute} from '@react-navigation/native';
-import {ForumActions} from '../../../../redux';
 
 const CommentForum: React.FC = () => {
   const styles = useStyles();

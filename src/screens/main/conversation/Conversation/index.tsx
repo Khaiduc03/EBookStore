@@ -32,6 +32,7 @@ const ConversationScreen: React.FC = () => {
   const token = useAppSelector(getAuthAccessToken);
 
   useEffect(() => {
+    console.log(listConversation);
     dispatch(ChatActions.handleGetListConversation(token));
 
     return () => {
