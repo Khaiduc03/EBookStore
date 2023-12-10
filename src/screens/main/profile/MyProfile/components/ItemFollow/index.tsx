@@ -18,7 +18,7 @@ const ItemFollow = () => {
       <Image style={styles.avatar} source={{uri: user.image_url}} />
       <View style={styles.viewAll}>
         <TouchableOpacity style={styles.viewFollow}>
-          <Text style={styles.countNumber}>100</Text>
+          <Text style={styles.countNumber}>{user.post_count}</Text>
           <Text style={styles.text}>Post</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={onPressFollow} style={styles.viewFollow}>

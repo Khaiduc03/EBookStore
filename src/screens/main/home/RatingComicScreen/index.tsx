@@ -24,8 +24,9 @@ const RatingComicScreen: React.FC<RouteParamsIdComic> = () => {
   const uuid = (route.params as RouteParamsIdComic).uuid;
 
   useEffect(() => {
+    dispatch(RatingActions.deleListRating());
     dispatch(RatingActions.getListRating(uuid));
-  }, []);
+  }, [uuid]);
 
   return (
     <View style={styles.container}>

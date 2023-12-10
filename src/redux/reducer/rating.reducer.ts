@@ -41,6 +41,24 @@ const reducer = createSlice({
         ...state,
       };
     },
+
+    likeRating: (state: RatingState, _: PayloadAction<String>) => {
+      return {
+        ...state,
+      };
+    },
+
+    unLikeRating: (state: RatingState, _: PayloadAction<String>) => {
+      return {
+        ...state,
+      };
+    },
+
+    deleteRating: (state: RatingState, _: PayloadAction<String>) => {
+      return {
+        ...state,
+      };
+    },
     setListRating: (
       state: RatingState,
       action: PayloadAction<PayloadHttpList<RatingType>>,
@@ -52,6 +70,36 @@ const reducer = createSlice({
           ...action.payload,
         },
       };
+    },
+
+    deleListRating: (state: RatingState) => {
+      return {
+        ...state,
+        listAllRating: {},
+      };
+    },
+
+    handleSuccerLikeRating: (
+      state: RatingState,
+      action: PayloadAction<string>,
+    ) => {
+      const uuid = action.payload;
+
+      if (state.listAllRating && state.listAllRating.data) {
+        state.listAllRating.data.forEach(rating => {
+          if (rating.uuid === uuid) {
+            // Tìm thấy follow cần cập nhật
+            rating.is_like = !rating.is_like;
+            if (rating.is_like) {
+              rating.like_count = rating.like_count + 1;
+            } else {
+              rating.like_count = rating.like_count - 1;
+            }
+          }
+        });
+      }
+
+      return state;
     },
   },
 });

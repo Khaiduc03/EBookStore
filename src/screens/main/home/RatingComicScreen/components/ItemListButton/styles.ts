@@ -126,6 +126,16 @@ const useStyles = makeStyles(({colors}) => ({
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.regular,
   },
+  likeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  textLike: {
+    color: colors.black,
+    fontSize: normalize(13),
+    fontFamily: fontFamilySetup.medium,
+    marginLeft: normalize(5),
+  },
 }));
 
 export default useStyles;

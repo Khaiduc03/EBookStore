@@ -5,23 +5,20 @@ import useStyles from './styles';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {getListRating} from '../../../../../../redux/selectors/rating.selector';
 import {RatingType} from '../../../../../../redux/types/rating.type';
+import moment from 'moment';
+import {useRating} from '../../hook/useRating.hook';
 
 const ItemRatingStar = () => {
-  const dataRating = useAppSelector(getListRating);
   const styles = useStyles();
-  const [selectedRating, setSelectedRating] = useState<number | null>(null);
-  const [displayedData, setDisplayedData] = useState<RatingType[]>(dataRating!);
 
-  const handleRatingClick = (rating: number | null) => {
-    setSelectedRating(rating);
-
-    if (rating === null) {
-      setDisplayedData(dataRating!);
-    } else {
-      const filteredData = dataRating!.filter(item => item.rating === rating);
-      setDisplayedData(filteredData);
-    }
-  };
+  const {
+    dataRating,
+    displayedData,
+    handleRatingClick,
+    onPressLikeRating,
+    selectedRating,
+    onPressDeleteRating,
+  } = useRating();
 
   return (
     <View style={styles.viewItem}>
@@ -103,6 +100,7 @@ const ItemRatingStar = () => {
                 <Text style={styles.numberStarText}>{item.rating}</Text>
               </View>
               <Icon
+                onPress={() => onPressDeleteRating(item.uuid)}
                 name="ellipsis-horizontal-circle-outline"
                 type="ionicon"
                 size={30}
@@ -112,7 +110,21 @@ const ItemRatingStar = () => {
               <Text style={styles.description}>{item.comment}</Text>
             </View>
             <View style={styles.footer}>
-              <Text style={styles.createAt}>{item.created_at + ''}</Text>
+              <View style={styles.likeContainer}>
+                <Icon
+                  onPress={() => onPressLikeRating(item)}
+                  activeOpacity={0.5}
+                  name="heart"
+                  type="ionicon"
+                  size={20}
+                  color={item.is_like ? '#F89300' : '#000'}
+                />
+                <Text style={styles.textLike}>{item.like_count}</Text>
+              </View>
+
+              <Text style={styles.createAt}>
+                {moment(item.created_at).format('YYYY-MM-DD-HH:mm') + ''}
+              </Text>
             </View>
           </View>
         )}
