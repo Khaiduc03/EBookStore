@@ -36,6 +36,7 @@ declare module '@rneui/themed' {
     colorDescription: string;
     nameComment: string;
     nameUserComment: string;
+    unRead: string;
   }
 }
 
@@ -83,6 +84,7 @@ export const theme = createTheme({
     colorDescription: 'rgba(65, 65,65, 1)',
     nameComment: '#404040',
     nameUserComment: '#737479',
+    unRead: '#181A20',
   },
   darkColors: {
     primary: '#F89300',
@@ -121,11 +123,12 @@ export const theme = createTheme({
     whiteDefault: '#FFF',
     grayDefault: '#4E4B66',
     grey3: '#FFFFFF',
-    chatText: '#FFFFFF',
+    chatText: '#464951',
     colorTextExplore: '#887C7C',
     colorDescription: 'rgba(255, 255, 255, 0.6)',
     nameComment: '#FFF',
     nameUserComment: '#FFF',
+    unRead: '#FFF',
   },
   components: {
     Button: (props, theme) => ({

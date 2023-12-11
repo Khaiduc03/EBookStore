@@ -34,7 +34,7 @@ const useStyles = makeStyles(({colors}) => ({
   nameStyle: {
     fontFamily: fontFamilySetup.medium,
     fontSize: normalize(15),
-    color: colors.black,
+    color: colors.chatText,
   },
   container_message: {
     flexDirection: 'row',
@@ -56,6 +56,10 @@ const useStyles = makeStyles(({colors}) => ({
   messageStyle: {
     paddingRight: normalize(8),
     flexWrap: 'wrap',
+  },
+  style_unread: {
+    color: colors.unRead,
+    fontFamily: fontFamilySetup.bold,
   },
 }));
 

@@ -15,6 +15,7 @@ export interface ConversationI {
   message: string;
   last_sender_name: string | 'You';
   last_message_time: string;
+  is_seen: boolean | null;
 }
 
 export interface MessageI {
@@ -37,10 +38,11 @@ export interface RequsetCreateConversationI {
 export interface RequestJoinConversationI {
   //conversation_uuid of the conversation
   uuid: string;
+  last_message_uuid?: string;
 }
 
 export interface RequestCreateConversationI {
-  joined_uuid:string
+  joined_uuid: string;
 }
 
 export interface RequestAddMessageI {

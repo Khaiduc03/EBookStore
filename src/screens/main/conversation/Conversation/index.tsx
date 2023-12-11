@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import {
   FlatList,
   Keyboard,
@@ -20,13 +20,11 @@ import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {parseISO} from 'date-fns';
 
+const ConversationItemMemoized = memo(ConversationItem);
+
 const ConversationScreen: React.FC = () => {
   const styles = useStyles();
-
-  const [searchTerm, setSearchTerm] = useState<string>('');
-
   const dispatch = useAppDispatch();
-  const [data, setData] = useState<ConversationI[]>([]);
   const listConversation: ConversationI[] = useAppSelector(getListConversation);
 
   const token = useAppSelector(getAuthAccessToken);
@@ -40,7 +38,7 @@ const ConversationScreen: React.FC = () => {
   }, []);
 
   const renderItem = (item: ConversationI) => (
-    <ConversationItem {...item} key={item.uuid.toString()} />
+    <ConversationItemMemoized {...item} key={item.uuid.toString()} />
   );
 
   const sortedData = [...listConversation].sort((a, b) => {
