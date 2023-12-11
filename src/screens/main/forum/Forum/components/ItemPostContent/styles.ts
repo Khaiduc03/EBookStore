@@ -1,25 +1,26 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {fontFamilySetup} from '../../../../../../utils/font';
-import {Device} from '../../../../../../utils';
+import { makeStyles, normalize } from '@rneui/themed';
+import { fontFamilySetup } from '../../../../../../utils/font';
+import { Device } from '../../../../../../utils';
+import { Dimensions } from 'react-native';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
-const useStyles = makeStyles(({colors}) => ({
+const screenWidth = Dimensions.get('window').width;
+
+const useStyles = makeStyles(({ colors }) => ({
   description: {
     padding: normalize(10),
+    paddingBottom: normalize(9),
     marginLeft: normalize(3),
   },
   textDescription: {
-    fontSize: normalize(16),
+    fontSize: normalize(13.9),
     fontFamily: fontFamilySetup.regular,
     color: colors.black,
     lineHeight: normalize(21),
   },
-    imageContainer: {
-    position: 'relative',
-  },
-    viewImagesLength: {
+  viewImagesLength: {
     width: normalize(46),
     height: normalize(24),
     backgroundColor: colors.blackDefault,
@@ -37,7 +38,7 @@ const useStyles = makeStyles(({colors}) => ({
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.bold,
   },
-    viewIconClose: {
+  viewIconClose: {
     position: 'absolute',
     top: normalize(10),
     right: normalize(10),
@@ -50,7 +51,7 @@ const useStyles = makeStyles(({colors}) => ({
   colorIconClose: {
     color: colors.primary,
   },
-    viewModalImage: {
+  viewModalImage: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

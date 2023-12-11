@@ -1,54 +1,57 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {fontFamilySetup} from '../../../../../../utils/font';
-import {Device} from '../../../../../../utils';
+import { makeStyles, normalize } from '@rneui/themed';
+import { fontFamilySetup } from '../../../../../../utils/font';
+import { Device } from '../../../../../../utils';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
-const useStyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({ colors }) => ({
   viewRow: {
     flexDirection: 'row',
   },
-    imageTitle: {
+  imageTitle: {
     width: normalize(44),
     height: normalize(44),
     borderRadius: normalize(50),
   },
-    viewTextPost: {
+  viewTextPost: {
     width: '60%',
     marginStart: normalize(12),
+    justifyContent: 'center',
   },
-    name: {
-    fontSize: normalize(18),
+  name: {
+    fontSize: normalize(16),
     fontFamily: fontFamilySetup.bold,
     color: colors.black,
     lineHeight: normalize(21),
   },
-    viewImageText: {
+  viewImageText: {
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
-    marginTopDate: {
-    marginTop: normalize(3),
+  viewCreateAt: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginTop: normalize(WIDTH * 0.01),
   },
-    createAt: {
+  createAt: {
     fontSize: normalize(13),
     fontFamily: fontFamilySetup.regular,
-    color: colors.grey8,
-    marginEnd: normalize(6),
+    color: '#666666',
+    marginEnd: normalize(3),
   },
   leftIcon: {
     left: normalize(WIDTH * 0.16),
   },
   textTitleAlert: {
-    color: colors.black,
+    color: colors.alertTextTitleMessage,
     fontSize: normalize(19),
     fontFamily: fontFamilySetup.bold,
     lineHeight: normalize(21),
     textAlign: 'center',
   },
   textMessageAlert: {
-    color: colors.black,
+    color: colors.alertTextTitleMessage,
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
     textAlign: 'center',
@@ -69,6 +72,9 @@ const useStyles = makeStyles(({colors}) => ({
     textAlign: 'center',
     marginHorizontal: normalize(10),
   },
+  contentContainerStyle: {
+    backgroundColor: colors.black1,
+  }
 }));
 
 export default useStyles;

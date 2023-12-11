@@ -28,6 +28,22 @@ const PostHeader: React.FC<PostHeaderProps> = ({
 
   const [showAlert, setShowAlert] = useState(false);
 
+  const getTimeElapsed = () => {
+    const now = moment();
+    const postTime = moment(createdAt);
+    const duration = moment.duration(now.diff(postTime));
+
+    if (duration.asMinutes() < 1) {
+      return 'Just now';
+    } else if (duration.asHours() < 1) {
+      return `${Math.floor(duration.asMinutes())}m ago`;
+    } else if (duration.asDays() < 1) {
+      return `${Math.floor(duration.asHours())}h ago`;
+    } else {
+      return `${Math.floor(duration.asDays())}d ago`;
+    }
+  };
+
   return (
     <View style={styles.viewRow}>
       <Image
@@ -40,12 +56,9 @@ const PostHeader: React.FC<PostHeaderProps> = ({
       />
       <View style={styles.viewTextPost}>
         <Text style={styles.name}>{userFullName || 'Anonymous'}</Text>
-        <View
-          style={[styles.viewRow, styles.viewImageText, styles.marginTopDate]}>
-          <Text style={styles.createAt}>
-            {moment(createdAt).format('YYYY-MM-DD [at] HH:mm')}
-          </Text>
-          <Icon name="public" type="material" size={16} color={'#626162'} />
+        <View style={[styles.viewRow, styles.viewCreateAt]}>
+          <Text style={styles.createAt}>{getTimeElapsed()} •</Text>
+          <Icon name="public" type="material" size={14} color={'#b3b3b3'} />
         </View>
       </View>
 
@@ -87,6 +100,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({
             messageStyle={styles.textMessageAlert}
             cancelButtonTextStyle={styles.textCancelAlert}
             confirmButtonTextStyle={styles.textConfirmAlert}
+            contentContainerStyle={styles.contentContainerStyle}
           />
         </View>
       )}

@@ -1,11 +1,11 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../../utils';
-import {fontFamilySetup} from '../../../../utils/font';
+import { makeStyles, normalize } from '@rneui/themed';
+import { Device } from '../../../../utils';
+import { fontFamilySetup } from '../../../../utils/font';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
-const useStyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({ colors }) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
@@ -53,7 +53,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
   input: {
     width: '100%',
-    height: '30%',
+    height: 'auto',
     fontSize: normalize(16),
     fontFamily: fontFamilySetup.medium,
     color: colors.grey8,
@@ -122,6 +122,10 @@ const useStyles = makeStyles(({colors}) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  viewFlatList: {
+    width: normalize(WIDTH),
+    height: normalize(HEIGHT * 0.69),
+  }
 }));
 
 export default useStyles;

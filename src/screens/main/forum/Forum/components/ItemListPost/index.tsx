@@ -43,23 +43,15 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
   const isLoading = useAppSelector(getIsLoadingForum);
 
   const [showModal, setShowModal] = useState(false);
-  const [activeIndices, setActiveIndices] = useState({}) as any;
   const [selectedImage, setSelectedImage] = useState(null) as any;
-
-  const {width, height} = Dimensions.get('window');
-  const screenWidth = Dimensions.get('window').width;
-
   const [refreshing, setRefreshing] = useState(false);
 
-  const onRefresh = async () => {
+  const onRefresh = () => {
     setRefreshing(true);
     dispatch(ForumActions.clearListData());
-    try {
-      await dispatch(ForumActions.getListData(1));
-      setRefreshing(false);
-    } catch (error) {
-      console.error(error);
-    }
+
+    dispatch(ForumActions.getListData(1));
+    setRefreshing(false);
   };
 
   useEffect(() => {
@@ -113,16 +105,11 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
   const styles = useStyles();
 
   const renderItem = ({item}: {item: ForumType}) => {
-    const handleLike_UnlikePress = async (forum_uuid: any) => {
-      try {
-        if (item.is_liked) {
-          await dispatch(ForumActions.deleteLikeForum(forum_uuid));
-        } else {
-          await dispatch(ForumActions.postLikeForum(forum_uuid));
-        }
-      } catch (error) {
-        console.error('Error during like/unlike:', error);
-      } finally {
+    const handleLike_UnlikePress = (forum_uuid: any) => {
+      if (item.is_liked) {
+        dispatch(ForumActions.deleteLikeForum(forum_uuid));
+      } else {
+        dispatch(ForumActions.postLikeForum(forum_uuid));
       }
     };
 

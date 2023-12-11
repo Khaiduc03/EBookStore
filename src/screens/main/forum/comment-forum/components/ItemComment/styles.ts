@@ -1,10 +1,10 @@
-import {StyleSheet} from 'react-native';
-import {fontFamilySetup} from '../../../../../../utils/font';
-import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../../../../utils';
+import { StyleSheet } from 'react-native';
+import { fontFamilySetup } from '../../../../../../utils/font';
+import { makeStyles, normalize } from '@rneui/themed';
+import { Device } from '../../../../../../utils';
 const WIDTH = Device.getDeviceWidth();
 
-const useStyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({ colors }) => ({
   container: {
     backgroundColor: colors.background,
     flexDirection: 'row',
@@ -71,14 +71,14 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
   },
   textTitleAlert: {
-    color: colors.black,
+    color: colors.alertTextTitleMessage,
     fontSize: normalize(19),
     fontFamily: fontFamilySetup.bold,
     lineHeight: normalize(21),
     textAlign: 'center',
   },
   textMessageAlert: {
-    color: colors.black,
+    color: colors.alertTextTitleMessage,
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
     textAlign: 'center',
@@ -99,6 +99,9 @@ const useStyles = makeStyles(({colors}) => ({
     textAlign: 'center',
     marginHorizontal: normalize(10),
   },
+  contentContainerStyle: {
+    backgroundColor: colors.black1,
+  }
 }));
 
 export default useStyles;

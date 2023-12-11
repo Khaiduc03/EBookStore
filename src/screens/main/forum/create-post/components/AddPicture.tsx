@@ -5,7 +5,6 @@ import {ActivityIndicator, Text, TouchableOpacity} from 'react-native';
 import {
   Asset,
   ImageLibraryOptions,
-  ImagePickerResponse,
   launchImageLibrary,
 } from 'react-native-image-picker';
 import useStyles from '../styles';

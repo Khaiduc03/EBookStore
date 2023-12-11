@@ -169,11 +169,11 @@ const CreatePost: React.FC<ForumType> = props => {
         <TextInput
           placeholder="What do you think today?"
           placeholderTextColor={styles.placeHolderColor.color}
-          style={styles.input}
           multiline
           textAlignVertical="top"
           value={textInputValue}
           onChangeText={text => setTextInputValue(text)}
+          style={styles.input}
         />
       </View>
 

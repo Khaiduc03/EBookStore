@@ -1,11 +1,11 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {fontFamilySetup} from '../../../../../../utils/font';
-import {Device} from '../../../../../../utils';
+import { makeStyles, normalize } from '@rneui/themed';
+import { fontFamilySetup } from '../../../../../../utils/font';
+import { Device } from '../../../../../../utils';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
-const useStyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({ colors }) => ({
   content: {
     width: WIDTH,
     height: 'auto',
@@ -16,7 +16,7 @@ const useStyles = makeStyles(({colors}) => ({
     paddingHorizontal: normalize(WIDTH * 0.024),
     backgroundColor: colors.background,
   },
-    header: {
+  header: {
     width: '100%',
     height: normalize(66),
     flexDirection: 'row',
@@ -24,12 +24,12 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'center',
     paddingHorizontal: normalize(10),
   },
-    image: {
+  image: {
     width: normalize(38),
     height: normalize(38),
     borderRadius: normalize(50),
   },
-    buttonHeader: {
+  buttonHeader: {
     width: normalize(WIDTH * 0.66),
     height: normalize(WIDTH * 0.09),
     borderWidth: normalize(0.4),
@@ -39,7 +39,7 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'flex-start',
     paddingLeft: normalize(16),
   },
-    textButtonHeader: {
+  textButtonHeader: {
     color: colors.black,
     fontSize: normalize(13),
     fontFamily: fontFamilySetup.regular,

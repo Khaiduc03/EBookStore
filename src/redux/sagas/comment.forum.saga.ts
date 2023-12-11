@@ -15,7 +15,7 @@ function* postCommentSaga(action: PayloadAction<any>): Generator {
     if (data.code == 200) {
       console.log('postCommentSaga: ======================>', data.data);
       yield put(CommentForumAction.postCommentForumSucces(data.data));
-      yield put(ForumActions.handleSuccessCount(action.payload.forum_uuid));
+      // yield put(ForumActions.handleSuccessCount(action.payload.forum_uuid));
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');

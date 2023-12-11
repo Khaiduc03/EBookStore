@@ -15,7 +15,7 @@ const SelectedImages: React.FC<SelectedImagesProps> = props => {
   const screenHeight = Dimensions.get('window').height;
 
   return (
-    <View style={{width: screenWidth, height: 500}}>
+    <View style={styles.viewFlatList}>
       <FlatList
         data={props.images}
         keyExtractor={(item, index) => item.uri || index.toString()}
@@ -24,10 +24,7 @@ const SelectedImages: React.FC<SelectedImagesProps> = props => {
             return <View />;
           }
           return (
-            <AutoHeightImage
-              source={{uri: item.uri.toString()}}
-              width={screenWidth}
-            />
+            <AutoHeightImage source={{uri: item.uri}} width={screenWidth} />
           );
         }}
         style={styles.container}

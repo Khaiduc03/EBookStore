@@ -73,6 +73,23 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
   const onPressRep = (text: string) => {
     props.setUserRep(text);
     props.setOpen();
+    setShowAlert(false);
+  };
+
+  const getTimeElapsed = () => {
+    const now = moment();
+    const postTime = moment(created_at);
+    const duration = moment.duration(now.diff(postTime));
+
+    if (duration.asMinutes() < 1) {
+      return 'Just now';
+    } else if (duration.asHours() < 1) {
+      return `${Math.floor(duration.asMinutes())}m ago`;
+    } else if (duration.asDays() < 1) {
+      return `${Math.floor(duration.asHours())}h ago`;
+    } else {
+      return `${Math.floor(duration.asDays())}d ago`;
+    }
   };
 
   return (
@@ -85,9 +102,7 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
       />
       <View style={styles.content}>
         <Text style={styles.nameStyle}>{fullname}</Text>
-        <Text style={styles.day}>
-          {moment(created_at).format('YYYY-MM-DD-HH:mm') + ''}
-        </Text>
+        <Text style={styles.day}>{getTimeElapsed()}</Text>
         <Text style={styles.commentStyle}>
           {commentIncludesFullname ? (
             <>
@@ -168,6 +183,7 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
                   messageStyle={styles.textMessageAlert}
                   cancelButtonTextStyle={styles.textCancelAlert}
                   confirmButtonTextStyle={styles.textConfirmAlert}
+                  contentContainerStyle={styles.contentContainerStyle}
                 />
               </TouchableOpacity>
             )}

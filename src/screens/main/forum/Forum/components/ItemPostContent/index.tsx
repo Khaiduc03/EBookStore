@@ -46,6 +46,7 @@ const PostContent: React.FC<PostContentProps> = ({
   const styles = useStyles();
 
   const screenWidth = Dimensions.get('window').width;
+  const screenHeight = Dimensions.get('window').height;
 
   console.log('image: =========', images);
 
@@ -70,6 +71,12 @@ const PostContent: React.FC<PostContentProps> = ({
     },
   });
 
+  const calculateImageHeight = (aspectRatio: number) => {
+    const imageWidth = screenWidth;
+    const imageHeight = imageWidth / aspectRatio;
+    return imageHeight;
+  };
+
   return (
     <View>
       <View style={styles.description}>
@@ -78,12 +85,12 @@ const PostContent: React.FC<PostContentProps> = ({
       <FlatList
         data={images}
         renderItem={({item, index}) => (
-          <View style={styles.imageContainer}>
+          <View>
             <Pressable onPress={() => onImagePress(index)}>
               {item && (
                 <AutoHeightImage source={{uri: item}} width={screenWidth} />
               )}
-              {images && images.some(image => image !== null) && (
+              {images && (
                 <View style={styles.viewImagesLength}>
                   <Text style={styles.textImagesLength}>
                     {images ? index + 1 : 0}/{images.length}
