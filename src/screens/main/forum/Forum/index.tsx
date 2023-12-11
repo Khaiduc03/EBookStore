@@ -14,7 +14,7 @@ const Forum: React.FC = () => {
         title="Forum"
       />
 
-      <View style={{flex: 1}}>
+      <View style={styles.container}>
         <ItemListPost />
       </View>
     </View>
