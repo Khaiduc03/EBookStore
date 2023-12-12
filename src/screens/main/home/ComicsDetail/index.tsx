@@ -6,7 +6,6 @@ import {Episodes, HeaderDetail, Preview} from './Components';
 import {NavigationService} from '../../../../navigation';
 import {useRoute} from '@react-navigation/native';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import Share from 'react-native-share';
 
 import {
   ComicActions,
@@ -18,58 +17,26 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {Alert} from 'react-native';
 import {RatingActions} from '../../../../redux/reducer/rating.reducer';
 import {getChartRating} from '../../../../redux/selectors/rating.selector';
-
-interface RouteParamsIdComic {
-  data: ComicType;
-  scrollRef: React.RefObject<ScrollView>;
-}
+import {Button, Dialog} from '@rneui/base';
+import {routes} from '../../../../constants';
+import {useComicDetail} from './hook/useComicDetail.hook';
+import Awesome from '../../../../components/customs/Awesome';
 
 const ComicsDetail = () => {
-  const dispatch = useAppDispatch();
-  const route = useRoute();
-  const data = (route.params as RouteParamsIdComic).data;
-  const scrollRef = (route.params as RouteParamsIdComic).scrollRef;
-
-  const uuidPost = useAppSelector(getUuidPostFavorite);
-  const dataChart = useAppSelector(getChartRating);
-  console.log(dataChart);
-
-  useEffect(() => {
-    dispatch(RatingActions.getRatingChart(data.comic_uuid || data.uuid));
-    dispatch(ComicActions.checkFavorite(data.comic_uuid || data.uuid));
-    dispatch(ComicActions.getListChapter(data.comic_uuid || data.uuid));
-    dispatch(ComicActions.getListByTopicMore({name: data.topics}));
-  }, [data]);
-
   const styles = useStyles();
-  const handlePressBack = () => {
-    NavigationService.goBack();
-  };
 
-  const postFavorite = () => {
-    if (uuidPost) {
-      dispatch(ComicActions.deleteFavorite(uuidPost));
-    } else {
-      dispatch(ComicActions.postFavorite(data.comic_uuid || data.uuid));
-    }
-  };
-
-  const onShare = async () => {
-    const options: any = {
-      url: data.image_url,
-      message:
-        'ComicVerse app đọc truyện hàng đầu Việt Nam hihi : \n' +
-        data.comic_name +
-        '\n',
-    };
-
-    try {
-      const res = await Share.open(options);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const {
+    data,
+    dataChart,
+    handlePressBack,
+    onShare,
+    postFavorite,
+    scrollRef,
+    setVisible2,
+    visible2,
+    uuidPost,
+  } = useComicDetail();
+  console.log(visible2);
 
   return (
     <View style={styles.container}>
@@ -82,7 +49,7 @@ const ComicsDetail = () => {
           type: 'ionicon',
         }}
         onPressRightIconLeft={postFavorite}
-        onPressRightIconRight={onShare}
+        onPressRightIconRight={() => setVisible2(!visible2)}
         rightIconMiddle={{name: 'document-outline', type: 'ionicon'}}
         rightIconRight={{name: 'paper-plane-outline', type: 'ionicon'}}
       />
@@ -97,6 +64,19 @@ const ComicsDetail = () => {
         viewStyle={{height: 800}}
         titleStyle={styles.titleStyle}
         scrollRef={scrollRef}
+      />
+
+      <Awesome
+        title="Share comics everywhere"
+        show={visible2}
+        cancelText="Friends"
+        confirmText="Social"
+        message="Please select your sharing preferences"
+        confirmButtonColor="#00BFFF"
+        onConfirmPressed={onShare}
+        onCancelPressed={() => NavigationService.navigate(routes.SHARE_USER)}
+        cancelButtonColor="#F89300"
+        onDismiss={() => setVisible2(false)}
       />
     </View>
   );

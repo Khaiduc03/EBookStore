@@ -13,10 +13,6 @@ interface Comic {
 }
 
 const HeaderDetail: React.FC<Comic> = props => {
-  // const dataComicDetail = useAppSelector(getDetailComic);
-
-  // const data = dataComicDetail ? dataComicDetail[0] : null;
-
   const styles = useStyles();
 
   if (!props.data) {

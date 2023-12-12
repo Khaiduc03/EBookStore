@@ -60,13 +60,12 @@ export const useComicHome = () => {
 
   function onScroll(nativeEvent: NativeScrollEvent) {
     const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
-    const numberOfPixelsFromBottomThreshold = 800;
+    const numberOfPixelsFromBottomThreshold = 100;
     const isNearBottom =
       contentOffset.y + layoutMeasurement.height >=
       contentSize.height - numberOfPixelsFromBottomThreshold;
 
     if (isNearBottom) {
-      console.log('LOAD O DAY');
       loadMoreComic();
     }
   }
