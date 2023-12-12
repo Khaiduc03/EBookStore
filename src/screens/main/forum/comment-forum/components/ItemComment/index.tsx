@@ -69,6 +69,22 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
     );
   };
 
+  const getTimeElapsed = () => {
+    const now = moment();
+    const postTime = moment(created_at);
+    const duration = moment.duration(now.diff(postTime));
+
+    if (duration.asMinutes() < 1) {
+      return 'Just now';
+    } else if (duration.asHours() < 1) {
+      return `${Math.floor(duration.asMinutes())}m ago`;
+    } else if (duration.asDays() < 1) {
+      return `${Math.floor(duration.asHours())}h ago`;
+    } else {
+      return `${Math.floor(duration.asDays())}d ago`;
+    }
+  };
+
   return (
     <View style={styles.container}>
       <FastImage
@@ -81,9 +97,7 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
       />
       <View style={styles.content}>
         <Text style={styles.nameStyle}>{fullname}</Text>
-        <Text style={styles.day}>
-          {moment(created_at).format('YYYY-MM-DD [at] HH:mm')}
-        </Text>
+        <Text style={styles.day}>{getTimeElapsed()}</Text>
         <Text style={styles.commentStyle}>{comment}</Text>
         <View style={styles.repContent}>
           <View style={styles.viewItemBtn}>
@@ -157,6 +171,7 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
                   messageStyle={styles.textMessageAlert}
                   cancelButtonTextStyle={styles.textCancelAlert}
                   confirmButtonTextStyle={styles.textConfirmAlert}
+                  contentContainerStyle={styles.contentContainerStyle}
                 />
               </TouchableOpacity>
             )}

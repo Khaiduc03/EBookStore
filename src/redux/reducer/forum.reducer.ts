@@ -132,6 +132,20 @@ const reducer = createSlice({
         }
       }
     },
+
+    handleSuccessCount: (state: ForumState, action: PayloadAction<string>) => {
+      const uuid = action.payload;
+
+      if (state.listDataForum && state.listDataForum.data) {
+        state.listDataForum.data.forEach(forum => {
+          if (forum.uuid === uuid) {
+            forum.comment_count = forum.comment_count + 1;
+          }
+        });
+      }
+
+      return state;
+    },
   },
 });
 
