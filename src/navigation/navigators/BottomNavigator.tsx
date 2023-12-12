@@ -135,6 +135,7 @@ const BottomNavigator: FunctionComponent = () => {
         !keyboard.keyboardShown && <Tab {...props} />
       }>
       <BottomTabs.Screen name={routes.HOME} component={Home} />
+      <BottomTabs.Screen name={routes.FORUM} component={Forum} />
       <BottomTabs.Screen name={routes.EXPLORE} component={Explore} />
       <BottomTabs.Screen name={routes.FORUM} component={Forum} />
       <BottomTabs.Screen name={routes.MESSAGE} component={Conversation} />
