@@ -29,6 +29,7 @@ function* postFollwRandom(action: PayloadAction<any>): Generator {
     const {data}: any = yield call(UserService.postFollow, action.payload);
     if (data.code == 200) {
       yield put(UserAction.handleSuccerFollowRandom(action.payload));
+      yield put(AuthActions.getUserInfo());
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');

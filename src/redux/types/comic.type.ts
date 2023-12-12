@@ -80,6 +80,9 @@ export type ComicType = uuid &
     last_chapter_number: number;
     average_rating: number;
     total_favorite: number;
+    rating: number;
+    favorite: number;
+    page: number;
   };
 
 export type ComicDetailType = uuid &

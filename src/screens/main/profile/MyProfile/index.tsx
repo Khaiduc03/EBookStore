@@ -2,6 +2,7 @@ import React from 'react';
 import {
   ActivityIndicator,
   FlatList,
+  ScrollView,
   Text,
   TouchableOpacity,
   View,
@@ -28,7 +29,23 @@ const MyProfile: React.FC = () => {
   } = useUser();
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      onContentSizeChange={onContentSizeChange}
+      nestedScrollEnabled
+      onScroll={({nativeEvent}) => {
+        const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
+        const numberOfPixelsFromBottomThreshold = 100;
+        const isNearBottom =
+          contentOffset.y + layoutMeasurement.height >=
+          sizeContent - numberOfPixelsFromBottomThreshold;
+        console.log('sỉze scroll', contentOffset.y + layoutMeasurement.height);
+        console.log('sỉze content', sizeContent);
+
+        if (isNearBottom) {
+          loadMoreComic();
+        }
+      }}
+      style={styles.container}>
       <HeaderCustom
         title="My Profile"
         leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
@@ -85,28 +102,12 @@ const MyProfile: React.FC = () => {
       </View>
       <View style={{flex: 1}}>
         <FlatList
+          scrollEnabled={false}
           data={dataPost}
           renderItem={({item}) => <ItemPost data={item} />}
           numColumns={3}
           keyExtractor={item => item.uuid}
           showsVerticalScrollIndicator
-          onContentSizeChange={onContentSizeChange}
-          onScroll={({nativeEvent}) => {
-            const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
-            const numberOfPixelsFromBottomThreshold = 100;
-            const isNearBottom =
-              contentOffset.y + layoutMeasurement.height >=
-              sizeContent - numberOfPixelsFromBottomThreshold;
-            console.log(
-              'sỉze scroll',
-              contentOffset.y + layoutMeasurement.height,
-            );
-            console.log('sỉze content', sizeContent);
-
-            if (isNearBottom) {
-              loadMoreComic();
-            }
-          }}
           ListFooterComponent={
             isLoading ? (
               <ActivityIndicator color={'#F89300'} size={'large'} />
@@ -116,7 +117,7 @@ const MyProfile: React.FC = () => {
           }
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

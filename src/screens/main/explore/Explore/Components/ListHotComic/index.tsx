@@ -9,13 +9,12 @@ import {Device} from '../../../../../../utils';
 
 const ListHotComic = () => {
   const styles = useStyles();
-
   const data = useAppSelector(getListTopView);
   const screenWidth = Device.getDeviceWidth();
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const renderSection = ({item, index}: {item: any[]; index: number}) => {
-    const sliceItem = item.slice(0, 5);
+    const sliceItem = item ? item.slice(0, 5) : [];
     return (
       <View style={styles.ItemContainer}>
         <FlatList
@@ -47,15 +46,19 @@ const ListHotComic = () => {
           ? 'Weekly HOT'
           : ''}
       </Text>
-      <FlatList
-        onScroll={handleScroll}
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        data={combinedData}
-        keyExtractor={(item, index) => `${index}`}
-        renderItem={renderSection}
-      />
+      {combinedData ? (
+        <FlatList
+          onScroll={handleScroll}
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          data={combinedData}
+          keyExtractor={(item, index) => `${index}`}
+          renderItem={renderSection}
+        />
+      ) : (
+        <View />
+      )}
     </View>
   );
 };

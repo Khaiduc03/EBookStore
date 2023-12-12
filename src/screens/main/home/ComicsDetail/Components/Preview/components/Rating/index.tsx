@@ -46,7 +46,7 @@ const RatingComic: React.FC = () => {
       <View style={styles.content}>
         <View style={styles.viewRating1}>
           <Text style={styles.numberRating}>
-            {dataChart?.average_rating.toFixed(1)}
+            {dataChart ? dataChart?.average_rating.toFixed(1) : 0}
           </Text>
           <AirbnbRating
             isDisabled={true}
@@ -59,7 +59,7 @@ const RatingComic: React.FC = () => {
             ratingContainerStyle={styles.star}
           />
           <Text style={styles.numberReviews}>
-            ({dataChart?.total_rating} reviews )
+            ({dataChart?.total_rating ? dataChart.total_rating : 0} reviews )
           </Text>
         </View>
         <View style={styles.line} />

@@ -22,7 +22,9 @@ const ItemTrending: React.FunctionComponent<ComicTypeTreding> = props => {
     NavigationService.navigate(routes.COMICDETAIL, {data: props.data});
   };
 
-  const truncatedValue = comic.total_favorite.toFixed(0);
+  const truncatedValue = comic.total_favorite
+    ? comic.total_favorite.toFixed(0)
+    : 0;
 
   const styles = useStyles();
   return (

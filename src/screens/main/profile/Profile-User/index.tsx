@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import TextCustom from '../../../../components/customs/Text';
 import {routes} from '../../../../constants';
@@ -46,6 +46,8 @@ const ProfileUser: React.FC = props => {
   const [isFollowed, setIsFollowed] = useState<Boolean>(
     dataUser ? dataUser?.is_following : true,
   );
+
+  console.log(dataUser?.uuid);
 
   const styles = useStyles();
 
@@ -94,7 +96,22 @@ const ProfileUser: React.FC = props => {
   );
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      onContentSizeChange={onContentSizeChange}
+      onScroll={({nativeEvent}) => {
+        const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
+        const numberOfPixelsFromBottomThreshold = 100;
+        const isNearBottom =
+          contentOffset.y + layoutMeasurement.height >=
+          sizeContent - numberOfPixelsFromBottomThreshold;
+        console.log('sỉze scroll', contentOffset.y + layoutMeasurement.height);
+        console.log('sỉze content', sizeContent);
+
+        if (isNearBottom) {
+          loadMoreComic();
+        }
+      }}
+      style={styles.container}>
       <HeaderCustom
         leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="Profile User"
@@ -156,29 +173,13 @@ const ProfileUser: React.FC = props => {
           data={dataList}
           renderItem={({item}) => <ItemPostUser data={item} />}
           numColumns={3}
+          scrollEnabled={false}
           keyExtractor={item => item.uuid}
           showsVerticalScrollIndicator
-          onContentSizeChange={onContentSizeChange}
-          onScroll={({nativeEvent}) => {
-            const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
-            const numberOfPixelsFromBottomThreshold = 100;
-            const isNearBottom =
-              contentOffset.y + layoutMeasurement.height >=
-              sizeContent - numberOfPixelsFromBottomThreshold;
-            console.log(
-              'sỉze scroll',
-              contentOffset.y + layoutMeasurement.height,
-            );
-            console.log('sỉze content', sizeContent);
-
-            if (isNearBottom) {
-              loadMoreComic();
-            }
-          }}
           ListFooterComponent={isLoading ? listFooterComponent() : <View />}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
