@@ -51,40 +51,35 @@ const CreatePost: React.FC<ForumType> = props => {
   }
 
   const handleSendPost = () => {
-    // Check if text input is empty
-    if (textInputValue.trim() === '') {
-      showToastError('Failed! Please enter text before sending the post.');
-    } else {
-      // Create a new FormData
-      const formData = new FormData();
-      formData.append('status', status);
-      formData.append('content', textInputValue);
+    // Create a new FormData
+    const formData = new FormData();
+    formData.append('status', status);
+    formData.append('content', textInputValue);
 
-      // Check if selectedImages is not null and has items
-      if (selectedImages && selectedImages.length > 0) {
-        selectedImages.forEach(item => {
-          // Check if the selected image has necessary properties
-          if (item.uri && item.fileName && item.type) {
-            formData.append('images', {
-              uri: item.uri,
-              name: item.fileName,
-              type: item.type,
-            });
-          } else {
-            showToastError('Failed! Image data is incomplete.');
-            return; // Exit the function if image data is incomplete
-          }
-        });
-      }
-
-      // Dispatch the action with formData
-      dispatch(ForumActions.handleCreatePostSuccess(formData));
-
-      // Show success message and reset textInputValue
-      showToastSuccess('Success! Post sent successfully!');
-      setTextInputValue('');
-      NavigationService.goBack();
+    // Check if selectedImages is not null and has items
+    if (selectedImages && selectedImages.length > 0) {
+      selectedImages.forEach(item => {
+        // Check if the selected image has necessary properties
+        if (item.uri && item.fileName && item.type) {
+          formData.append('images', {
+            uri: item.uri,
+            name: item.fileName,
+            type: item.type,
+          });
+        } else {
+          showToastError('Failed! Image data is incomplete.');
+          return; // Exit the function if image data is incomplete
+        }
+      });
     }
+
+    // Dispatch the action with formData
+    dispatch(ForumActions.handleCreatePostSuccess(formData));
+
+    // Show success message and reset textInputValue
+    showToastSuccess('Success! Post sent successfully!');
+    setTextInputValue('');
+    NavigationService.goBack();
   };
 
   const handleImagesSelected = async (images: Asset[]) => {
@@ -174,11 +169,11 @@ const CreatePost: React.FC<ForumType> = props => {
         <TextInput
           placeholder="What do you think today?"
           placeholderTextColor={styles.placeHolderColor.color}
-          style={styles.input}
           multiline
           textAlignVertical="top"
           value={textInputValue}
           onChangeText={text => setTextInputValue(text)}
+          style={styles.input}
         />
       </View>
 

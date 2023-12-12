@@ -42,6 +42,7 @@ const MessageScreen: React.FC = () => {
     dispatch(
       ChatActions.handleJoinConversation({
         uuid: params.uuid,
+        last_message_uuid: params.last_message_uuid,
       }),
     );
     return () => {

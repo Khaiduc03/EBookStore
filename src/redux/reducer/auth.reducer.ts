@@ -55,9 +55,7 @@ const reducer = createSlice({
         enableSignIn: false,
         accessToken: '',
         refreshToken: '',
-        enableBiometric: false,
         user: {},
-        isGoogle: false,
       };
     },
 

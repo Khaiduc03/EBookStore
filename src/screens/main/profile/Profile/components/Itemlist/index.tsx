@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import {Icon, Text} from '@rneui/themed';
+import React, {useCallback, useEffect, useState} from 'react';
 import {ScrollView, TouchableOpacity, View} from 'react-native';
-import {ItemListProfile} from '../../../../../../components';
 import {routes} from '../../../../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {NavigationService} from '../../../../../../navigation';
@@ -10,9 +10,8 @@ import {
   ThemeActions,
   getAuthEnableSignIn,
 } from '../../../../../../redux';
-import useStyles from './styles';
-import {Icon, Text} from '@rneui/themed';
 import {getMode} from '../../../../../../redux/selectors/thems.selector';
+import useStyles from './styles';
 
 const Itemlist: React.FC = () => {
   const styles = useStyles();
@@ -23,20 +22,27 @@ const Itemlist: React.FC = () => {
 
   const [isEnabled, setIsEnabled] = useState(false);
 
-  const handleTheme = () => {
+  const handleTheme = useCallback(() => {
     if (mode === 'light') {
-      dispatch(ThemeActions.setTheme('dark'));
       setTimeout(() => {
-        setIsEnabled(previousState => !previousState);
-      }, 1000);
+        dispatch(ThemeActions.setTheme('dark'));
+        setIsEnabled(false);
+      }, 1200);
     } else {
-      dispatch(ThemeActions.setTheme('light'));
       setTimeout(() => {
-        setIsEnabled(previousState => !previousState);
-      }, 1000);
+        dispatch(ThemeActions.setTheme('light'));
+        setIsEnabled(true);
+      }, 1200);
     }
-  };
+  }, [mode]);
+
+  useEffect(() => {
+    // Update UI based on theme change
+    setIsEnabled(mode === 'dark');
+  }, [mode]);
+
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
+
   const handleLogout = () => {
     dispatch(ComicActions.clearListData());
     dispatch(AuthActions.handleLogout());
@@ -51,10 +57,10 @@ const Itemlist: React.FC = () => {
             <View style={styles.viewIconLeftText}>
               <Icon
                 name="key"
-                type="font-awesome-5"
+                type="feather"
                 color="#F89300"
                 size={styles.iconSize.fontSize}
-                style={styles.marginIconLeft}
+                style={styles.viewIconLeft}
               />
               <Text style={styles.textBtn}>Change Password</Text>
             </View>
@@ -63,7 +69,7 @@ const Itemlist: React.FC = () => {
               name="chevron-forward-outline"
               type="ionicon"
               color={styles.iconColor.color}
-              size={24}
+              size={19}
             />
           </View>
         </TouchableOpacity>
@@ -111,7 +117,7 @@ const Itemlist: React.FC = () => {
                 type="material-community"
                 color="#F89300"
                 size={styles.iconSize.fontSize}
-                style={styles.marginIconLeft}
+                style={styles.viewIconLeft}
               />
               <Text style={styles.textBtn}>Favorite and History</Text>
             </View>
@@ -120,7 +126,7 @@ const Itemlist: React.FC = () => {
               name="chevron-forward-outline"
               type="ionicon"
               color={styles.iconColor.color}
-              size={24}
+              size={19}
             />
           </View>
         </TouchableOpacity>
@@ -134,19 +140,39 @@ const Itemlist: React.FC = () => {
               type="ionicon"
               color="#F89300"
               size={styles.iconSize.fontSize}
-              style={styles.marginIconLeft}
+              style={styles.viewIconLeft}
             />
             <Text style={styles.textBtn}>Theme</Text>
           </View>
 
-          <View style={styles.viewBtn}>
-            <TouchableOpacity
-              style={[styles.outter, isEnabled ? styles.on : styles.off]}
-              onPress={handleTheme}
-              activeOpacity={3}>
-              <View style={isEnabled ? styles.innerON : styles.innerOFF} />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            style={[styles.outter, mode && isEnabled ? styles.on : styles.off]}
+            onPress={handleTheme}
+            activeOpacity={3}>
+            <View style={[{position: 'absolute'}]}>
+              {isEnabled ? (
+                <>
+                  <Icon
+                    name={'moon'}
+                    type="ionicon"
+                    color={styles.colorIconDarkMode.color}
+                    size={16}
+                    style={styles.innerDarkMode}
+                  />
+                </>
+              ) : (
+                <>
+                  <Icon
+                    name={'sunny'}
+                    type="ionicon"
+                    color={styles.colorIconSunny.color}
+                    size={16}
+                    style={styles.innerSunny}
+                  />
+                </>
+              )}
+            </View>
+          </TouchableOpacity>
         </View>
 
         <TouchableOpacity
@@ -158,7 +184,7 @@ const Itemlist: React.FC = () => {
                 type="antdesign"
                 color="#F89300"
                 size={styles.iconSize.fontSize}
-                style={styles.marginIconLeft}
+                style={styles.viewIconLeft}
               />
               <Text style={styles.textBtn}>Help Center</Text>
             </View>
@@ -167,7 +193,7 @@ const Itemlist: React.FC = () => {
               name="chevron-forward-outline"
               type="ionicon"
               color={styles.iconColor.color}
-              size={24}
+              size={19}
             />
           </View>
         </TouchableOpacity>
@@ -180,7 +206,7 @@ const Itemlist: React.FC = () => {
                 type="font-awesome"
                 color="#F89300"
                 size={styles.iconSize.fontSize}
-                style={styles.marginIconLeft}
+                style={styles.viewIconLeft}
               />
               <Text style={styles.textBtn}>About this app</Text>
             </View>
@@ -189,7 +215,7 @@ const Itemlist: React.FC = () => {
               name="chevron-forward-outline"
               type="ionicon"
               color={styles.iconColor.color}
-              size={24}
+              size={19}
             />
           </View>
         </TouchableOpacity>
@@ -201,7 +227,7 @@ const Itemlist: React.FC = () => {
                 type="font-awesome-5"
                 color="#F89300"
                 size={styles.iconSize.fontSize}
-                style={styles.marginIconLeft}
+                style={styles.viewIconLeft}
               />
               <Text style={styles.textBtn}>Logout</Text>
             </View>
@@ -210,7 +236,7 @@ const Itemlist: React.FC = () => {
               name="log-out-outline"
               type="ionicon"
               color={styles.iconColor.color}
-              size={24}
+              size={19}
             />
           </View>
         </TouchableOpacity>
