@@ -20,6 +20,7 @@ export const ConversationItem = (item: ConversationI) => {
     message,
     uuid,
     created_at,
+    is_seen,
   } = item;
   const status = joined_status ? 'online' : 'offline';
   const [lastMessage, setLastMessage] = useState(
@@ -29,7 +30,7 @@ export const ConversationItem = (item: ConversationI) => {
     message || `Say hihi to ${joined_name}`,
   );
   const [name, setName] = useState(joined_name || 'Anonymous');
-
+  console.log('is_seen: ' + is_seen);
   const last_message_time_formatted = formatTime(
     last_message_time || created_at,
   );
@@ -64,16 +65,29 @@ export const ConversationItem = (item: ConversationI) => {
       </View>
       <View style={styles.contentStyle}>
         <View style={{flexDirection: 'row'}}>
-          <Text numberOfLines={1} style={styles.nameStyle}>
+          <Text
+            numberOfLines={1}
+            style={[styles.nameStyle, is_seen ? null : styles.style_unread]}>
             {name}
           </Text>
           <Text style={styles.timeStyle}>{last_message_time_formatted}</Text>
         </View>
         <View style={styles.container_message}>
-          <Text style={styles.lastmessageStyle}>{lastMessage}</Text>
+          <Text
+            style={[
+              styles.lastmessageStyle,
+
+              is_seen ? null : styles.style_unread,
+            ]}>
+            {lastMessage}
+          </Text>
           <Text
             numberOfLines={1}
-            style={[styles.lastmessageStyle, styles.messageStyle]}>
+            style={[
+              styles.lastmessageStyle,
+              styles.messageStyle,
+              is_seen ? null : styles.style_unread,
+            ]}>
             {message || messageText}
           </Text>
         </View>

@@ -1,21 +1,21 @@
-import {PayloadAction} from '@reduxjs/toolkit';
-import {call, put, takeLatest} from 'redux-saga/effects';
-import {ForumActions, LoadingActions} from '../reducer';
-import {CommentForumAction} from '../reducer/comment.forum.reducer';
-import {CommentForumService} from '../services/comment.forum.service';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { ForumActions, LoadingActions } from '../reducer';
+import { CommentForumAction } from '../reducer/comment.forum.reducer';
+import { CommentForumService } from '../services/comment.forum.service';
 
 function* postCommentSaga(action: PayloadAction<any>): Generator {
   // yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentForumService.postCommentForum,
       action.payload,
     );
     if (data.code == 200) {
       console.log('postCommentSaga: ======================>', data.data);
       yield put(CommentForumAction.postCommentForumSucces(data.data));
-      // yield put(ForumActions.handleSuccessCount(action.payload.forum_uuid));
+      yield put(ForumActions.handleSuccessCount(action.payload.forum_uuid));
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');
@@ -30,7 +30,7 @@ function* postCommentSaga(action: PayloadAction<any>): Generator {
 function* getCommentSaga(action: PayloadAction<any>): Generator {
   try {
     console.log('run===========>');
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentForumService.getCommentForum,
       action.payload,
     );
@@ -50,7 +50,7 @@ function* getCommentSaga(action: PayloadAction<any>): Generator {
 function* postLikeCommentSaga(action: PayloadAction<any>): Generator {
   try {
     console.log('run===========>');
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentForumService.postLikeCommentForum,
       action.payload,
     );
@@ -81,7 +81,7 @@ function* postLikeCommentSaga(action: PayloadAction<any>): Generator {
 function* deleteLikeCommentSaga(action: PayloadAction<any>): Generator {
   try {
     console.log('run===========>');
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentForumService.deleteLikeCommentForum,
       action.payload,
     );
@@ -114,7 +114,7 @@ function* postRepCommentSaga(action: PayloadAction<any>): Generator {
   // yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentForumService.postRepCommentForum,
       action.payload,
     );
@@ -136,7 +136,7 @@ function* getRepCommentForumSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoadingPage());
   try {
     console.log('run===========>');
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentForumService.getRepCommentForum,
       action.payload,
     );
@@ -155,7 +155,7 @@ function* getRepCommentForumSaga(action: PayloadAction<any>): Generator {
 
 function* deleteCommentSaga(action: PayloadAction<any>): Generator {
   try {
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentForumService.deleteCommentForum,
       action.payload,
     );

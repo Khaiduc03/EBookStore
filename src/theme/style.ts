@@ -123,7 +123,7 @@ export const theme = createTheme({
     whiteDefault: '#FFF',
     grayDefault: '#4E4B66',
     grey3: '#FFFFFF',
-    chatText: '#FFFFFF',
+    chatText: '#464951',
     colorTextExplore: '#887C7C',
     colorDescription: 'rgba(255, 255, 255, 0.6)',
     nameComment: '#FFF',

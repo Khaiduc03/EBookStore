@@ -58,6 +58,7 @@ function* write(socket: Socket) {
     if (join) {
       socket.emit('joinConversation', {
         uuid: join.payload.uuid,
+        last_message_uuid: join.payload.last_message_uuid,
       });
     }
     if (leave) {
@@ -131,17 +132,17 @@ function* handleGetListConversation(): Generator {
   yield put(ChatActions.handleGetListConversationSuccess(data.data));
 }
 
-function* handleGetListMessages(
-  action: PayloadAction<RequestJoinConversationI>,
-): Generator {
-  console.log(action.payload.uuid);
-  const {data}: any = yield call(
-    ConversationService.getMessage,
-    action.payload.uuid,
-  );
+// function* handleGetListMessages(
+//   action: PayloadAction<RequestJoinConversationI>,
+// ): Generator {
+//   console.log('payload:            ' + action.payload.last_message_uuid);
+//   const {data}: any = yield call(
+//     ConversationService.getMessage,
+//     action.payload.uuid,
+//   );
 
-  yield put(ChatActions.handleJoinConversationSuccess(data));
-}
+//   yield put(ChatActions.handleJoinConversationSuccess(data));
+// }
 
 function* handleAddNewConversationSuccess(
   action: PayloadAction<ConversationI>,
@@ -163,7 +164,7 @@ function* flowSocket() {
   const socket: Socket = yield call(connect, data.payload);
 
   const task: Task = yield fork(handleIO, socket);
-  yield take(AuthActions.refreshToken);
+  yield take(AuthActions.handleLogout);
   //yield take(ChatActions.handleJoinConversation);
 
   yield cancel(task);
@@ -178,7 +179,7 @@ function* flow(): Generator {
       ChatActions.handleGetListConversation,
       handleGetListConversation,
     );
-    yield takeLatest(ChatActions.handleJoinConversation, handleGetListMessages);
+    // yield takeLatest(ChatActions.handleJoinConversation, handleGetListMessages);
     yield takeLatest(
       ChatActions.handleCreateConversationSuccess,
       handleAddNewConversationSuccess,
