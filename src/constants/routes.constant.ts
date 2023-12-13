@@ -10,7 +10,7 @@ export enum routes {
   SEND_OTP = 'SEND_OTP',
   CREATE_NEW_PASSWORD = 'CREATE_NEW_PASSWORD',
 
-  BOTTOM_TAB = 'BOTTOM_TAB',
+  BOTTOM_TAB = 'bottom_tab',
   HOME = 'HOME',
 
   FORUM = 'FORUM',
