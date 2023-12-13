@@ -28,11 +28,13 @@ const ItemTopFavoriteList: React.FunctionComponent<
     <View>
       {props.index == 0 ? (
         <View style={styles.oneContainer}>
-          <FastImage
-            resizeMode="cover"
-            source={{uri: comic.image_url}}
-            style={styles.imgOneStyle}
-          />
+          <TouchableOpacity activeOpacity={0.5} onPress={onPressDetail}>
+            <FastImage
+              resizeMode="cover"
+              source={{uri: comic.image_url}}
+              style={styles.imgOneStyle}
+            />
+          </TouchableOpacity>
           <View style={styles.textOne}>
             <TopOneImage />
             <Text style={styles.textNumberOne}>1</Text>
@@ -45,12 +47,14 @@ const ItemTopFavoriteList: React.FunctionComponent<
               <View style={styles.iconContainer}>
                 <View style={styles.iconItem}>
                   <Icon
-                    name="eye-sharp"
+                    name="heart"
                     type="ionicon"
                     color={'#F89300'}
                     size={15}
                   />
-                  <Text style={styles.textNumberStyle}>{comic.views || 0}</Text>
+                  <Text style={styles.textNumberStyle}>
+                    {comic.favorite || 0}
+                  </Text>
                 </View>
 
                 <View style={styles.iconItem}>
@@ -93,12 +97,14 @@ const ItemTopFavoriteList: React.FunctionComponent<
               <View style={styles.iconContainer}>
                 <View style={styles.iconItem}>
                   <Icon
-                    name="eye-sharp"
+                    name="heart"
                     type="ionicon"
                     color={'#F89300'}
                     size={15}
                   />
-                  <Text style={styles.textNumberStyle}>{comic.views || 0}</Text>
+                  <Text style={styles.textNumberStyle}>
+                    {comic.favorite || 0}
+                  </Text>
                 </View>
 
                 <View style={styles.iconItem}>

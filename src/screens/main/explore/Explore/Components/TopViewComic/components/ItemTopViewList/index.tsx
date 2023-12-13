@@ -26,10 +26,13 @@ const ItemTopRatingList: React.FunctionComponent<CustomComicProps> = props => {
     <View>
       {props.index == 0 ? (
         <View style={styles.oneContainer}>
-          <FastImage
-            source={{uri: comic.image_url}}
-            style={styles.imgOneStyle}
-          />
+          <TouchableOpacity activeOpacity={0.5} onPress={onPressDetail}>
+            <FastImage
+              resizeMode="cover"
+              source={{uri: comic.image_url}}
+              style={styles.imgOneStyle}
+            />
+          </TouchableOpacity>
           <View style={styles.textOne}>
             <TopOneImage />
             <Text style={styles.textNumberOne}>1</Text>

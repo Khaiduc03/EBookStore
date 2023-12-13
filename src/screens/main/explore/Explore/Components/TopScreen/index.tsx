@@ -12,11 +12,6 @@ import {useAppDispatch} from '../../../../../../hooks';
 import {ComicActions} from '../../../../../../redux';
 
 const TopScreen: React.FC = () => {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(ComicActions.getListTopRating());
-    dispatch(ComicActions.getListTopFavorite());
-  }, []);
   const [index, setIndex] = React.useState(0);
   const styles = useStyles();
   const handlePressGoback = () => {

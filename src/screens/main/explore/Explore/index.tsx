@@ -58,6 +58,11 @@ const data = [
 ];
 
 const ExploreScreen: React.FC = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(ComicActions.getListTopRating());
+    dispatch(ComicActions.getListTopFavorite());
+  }, []);
   const styles = useStyles();
 
   return (

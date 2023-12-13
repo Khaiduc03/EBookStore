@@ -83,6 +83,7 @@ const ListHotComic = () => {
           onPress={() => NavigationService.navigate(routes.TOP_SCREEN)}
           name="arrow-forward-outline"
           type="ionicon"
+          color={styles.iconStyle.color}
         />
       </View>
       {combinedData ? (

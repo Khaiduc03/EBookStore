@@ -25,6 +25,9 @@ const useStyles = makeStyles(({colors}) => ({
     paddingLeft: normalize(10),
     paddingRight: normalize(16),
   },
+  iconStyle: {
+    color: colors.black,
+  },
 }));
 
 export default useStyles;

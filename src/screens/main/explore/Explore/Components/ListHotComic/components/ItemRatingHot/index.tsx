@@ -55,7 +55,7 @@ const ItemRatingHot: React.FC<ItemListHotProps> = props => {
           <Text style={styles.nameComic}>{comic.comic_name}</Text>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Icon name="star" type="fontawesome" size={13} color={'#F89300'} />
-            <Text style={styles.topic}>{comic.views}</Text>
+            <Text style={styles.topic}>{comic.rating.toFixed(2) || 0}</Text>
           </View>
         </View>
       </View>

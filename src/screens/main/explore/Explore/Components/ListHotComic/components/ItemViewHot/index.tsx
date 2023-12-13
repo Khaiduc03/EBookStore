@@ -55,7 +55,7 @@ const ItemViewHot: React.FC<ItemListHotProps> = props => {
           <Text style={styles.nameComic}>{comic.comic_name}</Text>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Icon name="eye-sharp" type="ionicon" size={13} color={'#F89300'} />
-            <Text style={styles.topic}>{comic.views}</Text>
+            <Text style={styles.topic}>{comic.views || 0}</Text>
           </View>
         </View>
       </View>
