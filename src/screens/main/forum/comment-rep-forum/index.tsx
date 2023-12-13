@@ -84,7 +84,7 @@ const CommentRepForum = () => {
   useEffect(() => {
     dispatch(
       CommentForumAction.getRepCommentForum({
-        parents_comment_uuid: forum_uuid,
+        parents_comment_uuid: uuid,
         page: 1,
       }),
     );
@@ -108,7 +108,7 @@ const CommentRepForum = () => {
       CommentForumAction.postRepCommentForum({
         forum_uuid: forum_uuid,
         comment: value,
-        parents_comment_uuid: forum_uuid,
+        parents_comment_uuid: uuid,
       }),
     );
     setCountComment(countComment + 1);
@@ -158,6 +158,7 @@ const CommentRepForum = () => {
     },
     [size, sizeContent],
   );
+
   const onPressLikeComment = () => {
     if (like) {
       dispatch(
@@ -190,18 +191,37 @@ const CommentRepForum = () => {
     index: number;
   }) => {
     return (
-      <ItemRepCommnent
-        setUserRep={setUserRep}
-        setOpen={openInput}
-        data={item}
-      />
+      <View>
+        <ItemRepCommnent
+          setUserRep={setUserRep}
+          setOpen={openInput}
+          data={item}
+        />
+      </View>
     );
+  };
+
+  const getTimeElapsed = () => {
+    const now = moment();
+    const postTime = moment(created_at);
+    const duration = moment.duration(now.diff(postTime));
+
+    if (duration.asMinutes() < 1) {
+      return 'Just now';
+    } else if (duration.asHours() < 1) {
+      return `${Math.floor(duration.asMinutes())}m ago`;
+    } else if (duration.asDays() < 1) {
+      return `${Math.floor(duration.asHours())}h ago`;
+    } else {
+      return `${Math.floor(duration.asDays())}d ago`;
+    }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={dataRepComment}
+        keyExtractor={item => item.uuid}
         initialNumToRender={21}
         ListHeaderComponent={() => {
           return (
@@ -214,9 +234,7 @@ const CommentRepForum = () => {
               />
               <View style={styles.content}>
                 <Text style={styles.nameStyle}>{fullname}</Text>
-                <Text style={styles.day}>
-                  {moment(created_at).format('YYYY-MM-DD-HH:mm') + ''}
-                </Text>
+                <Text style={styles.day}>{getTimeElapsed()}</Text>
                 <Text style={styles.commentStyle}>{comment}</Text>
                 <View style={styles.repContent}>
                   <View style={styles.viewItemBtn}>
@@ -278,6 +296,7 @@ const CommentRepForum = () => {
                           messageStyle={styles.textMessageAlert}
                           cancelButtonTextStyle={styles.textCancelAlert}
                           confirmButtonTextStyle={styles.textConfirmAlert}
+                          contentContainerStyle={styles.contentContainerStyle}
                         />
                       </TouchableOpacity>
                     )}
@@ -306,7 +325,6 @@ const CommentRepForum = () => {
         }}
         ListFooterComponent={isLoading ? listFooterComponent() : <View />}
         showsVerticalScrollIndicator={false}
-        keyExtractor={item => item.uuid}
         renderItem={renderItem}
         contentContainerStyle={{paddingVertical: 65}}
       />
