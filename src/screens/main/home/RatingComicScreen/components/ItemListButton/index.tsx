@@ -2,27 +2,29 @@ import {Icon} from '@rneui/themed';
 import React, {useEffect, useState} from 'react';
 import {Image, Text, TouchableOpacity, View, FlatList} from 'react-native';
 import useStyles from './styles';
-import {RatingComicProps} from './types';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {getListRating} from '../../../../../../redux/selectors/rating.selector';
+import {RatingType} from '../../../../../../redux/types/rating.type';
+import moment from 'moment';
+import {useRating} from '../../hook/useRating.hook';
+import {getAuthUserProfile} from '../../../../../../redux';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
-const ItemRatingStar: React.FC<RatingComicProps[]> = props => {
+const ItemRatingStar = () => {
   const styles = useStyles();
-  const [selectedRating, setSelectedRating] = useState<number | null>(null);
-  const [displayedData, setDisplayedData] = useState<RatingComicProps[]>(data);
 
-  const dataRating = useAppSelector(getListRating);
+  const user = useAppSelector(getAuthUserProfile);
 
-  const handleRatingClick = (rating: number | null) => {
-    setSelectedRating(rating);
-
-    if (rating === null) {
-      setDisplayedData(data);
-    } else {
-      const filteredData = data.filter(item => item.rating === rating);
-      setDisplayedData(filteredData);
-    }
-  };
+  const {
+    dataRating,
+    displayedData,
+    handleRatingClick,
+    onPressLikeRating,
+    selectedRating,
+    setShowAlert,
+    showAlert,
+    onPressDeleteRating,
+  } = useRating();
 
   return (
     <View style={styles.viewItem}>
@@ -77,7 +79,8 @@ const ItemRatingStar: React.FC<RatingComicProps[]> = props => {
       {/* Item in button */}
 
       <FlatList
-        data={dataRating}
+        showsVerticalScrollIndicator={false}
+        data={displayedData}
         keyExtractor={item => item.uuid}
         renderItem={({item}) => (
           <View key={item.uuid} style={styles.viewItem2}>
@@ -102,18 +105,59 @@ const ItemRatingStar: React.FC<RatingComicProps[]> = props => {
                 />
                 <Text style={styles.numberStarText}>{item.rating}</Text>
               </View>
-              <Icon
-                name="ellipsis-horizontal-circle-outline"
-                type="ionicon"
-                size={30}
-              />
+              {user.uuid == item.user_uuid ? (
+                <Icon
+                  onPress={() => onPressDeleteRating(item.uuid)}
+                  name="close"
+                  type="ionicon"
+                  size={25}
+                />
+              ) : (
+                <View />
+              )}
             </View>
             <View style={styles.content}>
               <Text style={styles.description}>{item.comment}</Text>
             </View>
             <View style={styles.footer}>
-              <Text style={styles.createAt}>{item.created_at + ''}</Text>
+              <View style={styles.likeContainer}>
+                <Icon
+                  onPress={() => onPressLikeRating(item)}
+                  activeOpacity={0.5}
+                  name="heart"
+                  type="ionicon"
+                  size={20}
+                  color={item.is_like ? '#F89300' : '#000'}
+                />
+                <Text style={styles.textLike}>{item.like_count}</Text>
+              </View>
+
+              <Text style={styles.createAt}>
+                {moment(item.created_at).format('YYYY-MM-DD-HH:mm') + ''}
+              </Text>
             </View>
+            {/* <AwesomeAlert
+              show={showAlert}
+              showProgress={false}
+              title="Post rating 😕"
+              message="Are you sure you want to post your rating?"
+              closeOnTouchOutside={true}
+              closeOnHardwareBackPress={false}
+              showCancelButton={true}
+              showConfirmButton={true}
+              cancelText="No, cancel"
+              cancelButtonColor="blue"
+              confirmText="Yes, post"
+              confirmButtonColor="red"
+              onCancelPressed={() => {
+                setShowAlert(false);
+              }}
+              onConfirmPressed={() => onPressDeleteRating(item.uuid)}
+              titleStyle={styles.textTitleAlert}
+              messageStyle={styles.textMessageAlert}
+              cancelButtonTextStyle={styles.textCancelAlert}
+              confirmButtonTextStyle={styles.textConfirmAlert}
+            /> */}
           </View>
         )}
       />
@@ -122,96 +166,3 @@ const ItemRatingStar: React.FC<RatingComicProps[]> = props => {
 };
 
 export default ItemRatingStar;
-
-export const data: RatingComicProps[] = [
-  {
-    uuid: '1',
-    user_avatar:
-      'https://assets.goal.com/v3/assets/bltcc7a7ffd2fbf71f5/blt3a48501789cdf113/60db790b47339c0fc01c188c/3e947186d512164cf8dbe0987a865dd2b714eea6.png?auto=webp&format=pjpg&width=3840&quality=60',
-    user_name: 'David Beckham',
-    rating: 5,
-    content: 'As a person who has a hard time picking up a book to read',
-    created_at: '6 months ago',
-    comic_uuid: '123',
-  },
-  {
-    uuid: '2',
-    user_avatar:
-      'https://media.baoquangninh.vn/upload/image/202309/medium/2122032_4265a4a6e7ba65752201d10852302e01.jpg',
-    user_name: 'David De Gea',
-    rating: 4,
-    content: 'As a person who has a hard time picking up a book to read',
-    created_at: '6 months ago',
-    comic_uuid: '123',
-  },
-  {
-    uuid: '3',
-    user_avatar:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-    user_name: 'David Thao',
-    rating: 3,
-    content: 'As a person who has a hard time picking up a book to read',
-    created_at: '6 months ago',
-    comic_uuid: '123',
-  },
-  {
-    uuid: '4',
-    user_avatar:
-      'https://baodongnai.com.vn/file/e7837c02876411cd0187645a2551379f/102023/14_2_20231017230847.jpg',
-    user_name: 'David Huy',
-    rating: 2,
-    content: 'As a person who has a hard time picking up a book to read',
-    created_at: '6 months ago',
-    comic_uuid: '123',
-  },
-  {
-    uuid: '5',
-    user_avatar:
-      'https://toquoc.mediacdn.vn/280518851207290880/2023/11/14/cristiano-ronaldo-signs-for-al-n-16999414521651175458061.jpg',
-    user_name: 'David Lam',
-    rating: 1,
-    content: 'As a person who has a hard time picking up a book to read',
-    created_at: '6 months ago',
-    comic_uuid: '123',
-  },
-  {
-    uuid: '6',
-    user_avatar:
-      'https://media.baoquangninh.vn/upload/image/202309/medium/2122032_4265a4a6e7ba65752201d10852302e01.jpg',
-    user_name: 'David Thao',
-    rating: 1,
-    content: 'As a person who has a hard time picking up a book to read',
-    created_at: '6 months ago',
-    comic_uuid: '123',
-  },
-  {
-    uuid: '7',
-    user_avatar:
-      'https://media.baoquangninh.vn/upload/image/202309/medium/2122032_4265a4a6e7ba65752201d10852302e01.jpg',
-    user_name: 'David Lam',
-    rating: 2,
-    content: 'As a person who has a hard time picking up a book to read',
-    created_at: '6 months ago',
-    comic_uuid: '123',
-  },
-  {
-    uuid: '8',
-    user_avatar:
-      'https://media.baoquangninh.vn/upload/image/202309/medium/2122032_4265a4a6e7ba65752201d10852302e01.jpg',
-    user_name: 'David Lam',
-    rating: 5,
-    content: 'As a person who has a hard time picking up a book to read',
-    created_at: '6 months ago',
-    comic_uuid: '123',
-  },
-  {
-    uuid: '9',
-    user_avatar:
-      'https://baodongnai.com.vn/file/e7837c02876411cd0187645a2551379f/102023/14_2_20231017230847.jpg',
-    user_name: 'David Dat',
-    rating: 5,
-    content: 'As a person who has a hard time picking up a book to read',
-    created_at: '6 months ago',
-    comic_uuid: '123',
-  },
-];

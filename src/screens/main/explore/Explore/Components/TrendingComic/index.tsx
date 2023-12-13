@@ -32,13 +32,17 @@ const TrendingComic = () => {
         }}
         onPressRightIconRight={handlePressTrending}
       />
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{paddingHorizontal: 16, gap: 5}}
-        data={data}
-        renderItem={RenderItem}
-      />
+      {data ? (
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{paddingHorizontal: 16, gap: 5}}
+          data={data}
+          renderItem={RenderItem}
+        />
+      ) : (
+        <View />
+      )}
     </View>
   );
 };

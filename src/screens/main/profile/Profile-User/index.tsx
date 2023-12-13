@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
 import TextCustom from '../../../../components/customs/Text';
 import {routes} from '../../../../constants';
@@ -47,6 +47,8 @@ const ProfileUser: React.FC = props => {
     dataUser ? dataUser?.is_following : true,
   );
 
+  console.log(dataUser?.uuid);
+
   const styles = useStyles();
 
   useEffect(() => {
@@ -55,7 +57,7 @@ const ProfileUser: React.FC = props => {
     dispatch(
       UserAction.getListAllPostByIdUser({page: 1, user_uuid: dataUser?.uuid}),
     );
-  }, []);
+  }, [dataUser?.uuid!]);
 
   const loadMoreComic = () => {
     if (nextPage && !isLoading) {
@@ -94,7 +96,22 @@ const ProfileUser: React.FC = props => {
   );
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      onContentSizeChange={onContentSizeChange}
+      onScroll={({nativeEvent}) => {
+        const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
+        const numberOfPixelsFromBottomThreshold = 100;
+        const isNearBottom =
+          contentOffset.y + layoutMeasurement.height >=
+          sizeContent - numberOfPixelsFromBottomThreshold;
+        console.log('sỉze scroll', contentOffset.y + layoutMeasurement.height);
+        console.log('sỉze content', sizeContent);
+
+        if (isNearBottom) {
+          loadMoreComic();
+        }
+      }}
+      style={styles.container}>
       <HeaderCustom
         leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         title="Profile User"
@@ -110,7 +127,7 @@ const ProfileUser: React.FC = props => {
           title={(dataUser && dataUser.fullname) || 'Anonymo'}
         />
         <Text style={styles.textBio} numberOfLines={1}>
-          {dataUser?.summary || 'I am hacker'}
+          {(dataUserById && dataUserById[0].summary) || 'I am hacker'}
         </Text>
       </View>
       <View style={styles.viewbtnFollow}>
@@ -156,155 +173,14 @@ const ProfileUser: React.FC = props => {
           data={dataList}
           renderItem={({item}) => <ItemPostUser data={item} />}
           numColumns={3}
+          scrollEnabled={false}
           keyExtractor={item => item.uuid}
           showsVerticalScrollIndicator
-          onContentSizeChange={onContentSizeChange}
-          onScroll={({nativeEvent}) => {
-            const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
-            const numberOfPixelsFromBottomThreshold = 100;
-            const isNearBottom =
-              contentOffset.y + layoutMeasurement.height >=
-              sizeContent - numberOfPixelsFromBottomThreshold;
-            console.log(
-              'sỉze scroll',
-              contentOffset.y + layoutMeasurement.height,
-            );
-            console.log('sỉze content', sizeContent);
-
-            if (isNearBottom) {
-              loadMoreComic();
-            }
-          }}
           ListFooterComponent={isLoading ? listFooterComponent() : <View />}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 export default ProfileUser;
-
-const data = [
-  {
-    id: '1',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-  {
-    id: '2',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-  {
-    id: '3',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-  {
-    id: '4',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-  {
-    id: '5',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-  {
-    id: '6',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-  {
-    id: '7',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-  {
-    id: '8',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-  {
-    id: '9',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-  {
-    id: '10',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-  {
-    id: '11',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-  {
-    id: '12',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-  {
-    id: '13',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-  {
-    id: '14',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-  {
-    id: '15',
-    images:
-      'https://cdn.tuoitre.vn/thumb_w/480/2022/10/21/27958068910656830706859984149185904941451476n-16663380420601714216182.jpeg',
-  },
-];
-const data2 = [
-  {
-    id: '1',
-    avatarDummy: true,
-    name: 'Peter 1',
-    title: 'Suggestions for you',
-    button: true,
-    textButton: 'Follow',
-    closeIcon: true,
-  },
-  {
-    id: '2',
-    avatarDummy: true,
-    name: 'Peter 2',
-    title: 'Suggestions for you',
-    button: true,
-    closeIcon: true,
-    textButton: 'Follow',
-  },
-  {
-    id: '3',
-    avatarDummy: true,
-    name: 'Peter 3',
-    title: 'Suggestions for you',
-    button: true,
-    textButton: 'Follow',
-    closeIcon: true,
-  },
-  {
-    id: '4',
-    avatarDummy: true,
-    name: 'Peter 4',
-    title: 'Suggestions for you',
-    button: true,
-    textButton: 'Follow',
-    closeIcon: true,
-  },
-  {
-    id: '5',
-    avatarDummy: true,
-    name: 'Peter 5',
-    title: 'Suggestions for you',
-    button: true,
-    textButton: 'Follow',
-    closeIcon: true,
-  },
-];

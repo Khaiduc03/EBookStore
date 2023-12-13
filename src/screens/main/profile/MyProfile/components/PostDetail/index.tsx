@@ -1,7 +1,8 @@
+import {useRoute} from '@react-navigation/native';
 import {Icon} from '@rneui/themed';
 import moment from 'moment';
+import React, {useState} from 'react';
 import {
-  ActivityIndicator,
   Animated,
   Dimensions,
   FlatList,
@@ -9,22 +10,10 @@ import {
   Modal,
   Pressable,
   Text,
-  View,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import AutoHeightImage from 'react-native-auto-height-image';
-import {images} from '../../../../../../assets';
-import {HeaderCustom} from '../../../../../../components';
-import TextCustom from '../../../../../../components/customs/Text';
-import {routes} from '../../../../../../constants';
-import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {NavigationService} from '../../../../../../navigation';
-import {getAuthUserProfile} from '../../../../../../redux';
-import Icon_Comment from '../Icon-Comment';
-import useStyles from './styles';
-import Share from 'react-native-share';
-import React, {useCallback, useEffect, useState} from 'react';
 import {
   GestureEvent,
   GestureHandlerRootView,
@@ -32,40 +21,44 @@ import {
   ScrollView,
   State,
 } from 'react-native-gesture-handler';
-import {ForumType} from '../../../../../../redux/types/forum.type';
-import {useRoute} from '@react-navigation/native';
-import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
-import {ForumActions} from '../../../../../../redux';
-import {data} from '../../../../home/RatingComicScreen/components/ItemListButton/types';
-import {UserAction} from '../../../../../../redux/reducer/user.reducer';
-import {getPostById} from '../../../../../../redux/selectors/user.selector';
+import Share from 'react-native-share';
+import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {HeaderCustom} from '../../../../../../components';
+import {routes} from '../../../../../../constants';
+import {useAppDispatch} from '../../../../../../hooks';
+import {NavigationService} from '../../../../../../navigation';
 import {backScreen} from '../../../../../../utils';
+import {useGetPostDetail} from './hook/useGetPostDetail.hook';
+import useStyles from './styles';
+import {useModalPostDetail} from './hook/useModalPostDetail.hook';
 interface PostDataDeatilRoute {
   post_uuid: string;
 }
 
 const PostDetail = () => {
   const styles = useStyles();
-  const dispatch = useAppDispatch();
+
   const route = useRoute();
   const post_uuid = (route.params as PostDataDeatilRoute).post_uuid;
 
-  const dataDetail = useAppSelector(getPostById);
+  const {postData, onPressLike, count, like} = useGetPostDetail({
+    post_id: post_uuid,
+    forum_uuid: post_uuid,
+  });
+
+  const {onPressCloseModal, onPressOpenModal, selectedImage, showModal} =
+    useModalPostDetail();
 
   const handlePressGoback = () => {
     backScreen();
   };
 
-  useEffect(() => {
-    dispatch(UserAction.getPostById(post_uuid));
-  }, [post_uuid]);
-
   const {width, height} = Dimensions.get('window');
 
   const screenWidth = Dimensions.get('window').width;
-  const [showModal, setShowModal] = useState(false);
+
   const [activeIndices, setActiveIndices] = useState({}) as any;
-  const [selectedImage, setSelectedImage] = useState(null) as any;
 
   const scale = new Animated.Value(1);
 
@@ -88,16 +81,6 @@ const PostDetail = () => {
     setActiveIndices((prevIndices: any) => ({...prevIndices, [id]: index}));
   };
 
-  const openModal = (image: any) => {
-    setShowModal(true);
-    setSelectedImage(image);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-    setSelectedImage(null);
-  };
-
   const onShare = async () => {
     const options: any = {
       url: 'https://ComicVerse.com',
@@ -110,8 +93,6 @@ const PostDetail = () => {
       console.log(error);
     }
   };
-
-  const handleLikePress = (forum_uuid: any) => {};
 
   return (
     <ScrollView style={styles.container}>
@@ -133,13 +114,13 @@ const PostDetail = () => {
                 style={styles.imageTitle}
                 source={{
                   uri:
-                    (dataDetail && dataDetail && dataDetail.user_avatar) ||
+                    (postData && postData && postData.user_avatar) ||
                     'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
                 }}
               />
               <View style={styles.viewTextPost}>
                 <Text style={styles.name}>
-                  {(dataDetail && dataDetail.user_fullname) || 'Anonymus'}
+                  {(postData && postData.user_fullname) || 'Anonymus'}
                 </Text>
                 <View
                   style={[
@@ -148,7 +129,7 @@ const PostDetail = () => {
                     styles.marginTopDate,
                   ]}>
                   <Text style={styles.createAt}>
-                    {moment(dataDetail && dataDetail.created_at).format(
+                    {moment(postData && postData.created_at).format(
                       'YYYY-MM-DD [at] HH:mm',
                     )}
                   </Text>
@@ -174,21 +155,21 @@ const PostDetail = () => {
           </View>
           <View style={styles.description}>
             <Text style={styles.textDescription}>
-              {dataDetail && dataDetail.content}
+              {postData && postData.content}
             </Text>
           </View>
         </View>
 
         <View>
           <FlatList
-            data={dataDetail && dataDetail.images}
+            data={postData && postData.images}
             renderItem={item => {
               if (item.item === '' || item.item == null) {
                 return <View />;
               }
               return (
                 <View style={styles.imageContainer}>
-                  <Pressable onPress={() => openModal(item)}>
+                  <Pressable onPress={() => onPressOpenModal(item)}>
                     <AutoHeightImage
                       key={item.index.toString()}
                       source={{
@@ -204,14 +185,14 @@ const PostDetail = () => {
                   <Modal
                     visible={showModal}
                     transparent={true}
-                    onRequestClose={closeModal}>
+                    onRequestClose={onPressCloseModal}>
                     <View style={styles.viewIconClose}>
                       <Icon
                         name="close-circle"
                         size={30}
                         color="white"
                         type="ionicon"
-                        onPress={closeModal}
+                        onPress={onPressCloseModal}
                         style={styles.iconClose}
                       />
                     </View>
@@ -236,20 +217,20 @@ const PostDetail = () => {
               );
             }}
             pagingEnabled
-            onScroll={handleScroll(dataDetail && dataDetail.uuid)}
+            onScroll={handleScroll(postData && postData.uuid)}
             horizontal
             showsHorizontalScrollIndicator={false}
           />
-          {dataDetail &&
-            dataDetail.images &&
-            dataDetail &&
-            dataDetail.images.some(image => image !== null) && (
+          {postData &&
+            postData.images &&
+            postData &&
+            postData.images.some(image => image !== null) && (
               <View style={styles.viewImagesLengh}>
                 <Text style={styles.textImagesLengh}>
-                  {activeIndices[dataDetail && dataDetail.uuid]
-                    ? activeIndices[dataDetail && dataDetail.uuid] + 1
+                  {activeIndices[postData && postData.uuid]
+                    ? activeIndices[postData && postData.uuid] + 1
                     : 1}
-                  /{dataDetail && dataDetail.images.length + 0}
+                  /{postData && postData.images.length + 0}
                 </Text>
               </View>
             )}
@@ -266,13 +247,11 @@ const PostDetail = () => {
                     size={11}
                   />
                 </View>
-                <Text style={styles.textLikeBlur}>
-                  {dataDetail && dataDetail.like_count}
-                </Text>
+                <Text style={styles.textLikeBlur}>{count}</Text>
               </View>
               <View style={styles.iconText}>
                 <Text style={styles.textLikeBlur}>
-                  {dataDetail && dataDetail.comment_count}
+                  {postData && postData.comment_count}
                 </Text>
                 <Text style={styles.textLikeBlur}>comment</Text>
               </View>
@@ -280,36 +259,23 @@ const PostDetail = () => {
           </View>
 
           <View style={styles.footerPost}>
-            <TouchableOpacity
-              style={styles.iconText}
-              onPress={() => {
-                handleLikePress(dataDetail && dataDetail.uuid);
-              }}>
+            <TouchableOpacity style={styles.iconText} onPress={onPressLike}>
               <IconMaterialIcons
-                name={
-                  dataDetail && dataDetail.is_liked
-                    ? 'thumb-up-alt'
-                    : 'thumb-up-off-alt'
-                }
+                name={like ? 'thumb-up-alt' : 'thumb-up-off-alt'}
                 color={
-                  dataDetail && dataDetail.is_liked
+                  like
                     ? styles.colorIconHeartFocus.color
                     : styles.colorIconHeartBlur.color
                 }
                 size={24}
               />
-              <Text
-                style={
-                  dataDetail && dataDetail.is_liked
-                    ? styles.textLikeFocus
-                    : styles.textLikeBlur
-                }>
+              <Text style={like ? styles.textLikeFocus : styles.textLikeBlur}>
                 Like
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.iconText}
-              onPress={() => NavigationService.navigate(routes.COMMENT_POST)}>
+              onPress={() => NavigationService.navigate(routes.COMMENT_FORUM)}>
               <IconFontAwesome5
                 name="comment"
                 color={styles.colorIconHeartBlur.color}

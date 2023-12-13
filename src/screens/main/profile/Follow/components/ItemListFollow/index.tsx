@@ -6,6 +6,7 @@ import {ItemFollowType} from '../../../../../../redux/types/user.type';
 import {images} from '../../../../../../assets';
 import {useAppDispatch} from '../../../../../../hooks';
 import {UserAction} from '../../../../../../redux/reducer/user.reducer';
+import AwesomeAlert from 'react-native-awesome-alerts';
 interface FollowerProps {
   data?: ItemFollowType;
 }
@@ -13,9 +14,11 @@ interface FollowerProps {
 const ItemListFollow: React.FunctionComponent<FollowerProps> = props => {
   const styles = useStyles();
   const dispatch = useAppDispatch();
+  const [showAlert, setShowAlert] = useState(false);
 
   const onPressDelete = () => {
     dispatch(UserAction.deleteFollwer(props.data?.user_following_uuid!));
+    setShowAlert(false);
   };
 
   const onPressFollow = () => {
@@ -59,9 +62,35 @@ const ItemListFollow: React.FunctionComponent<FollowerProps> = props => {
           </Text>
         </View>
       </View>
-      <TouchableOpacity onPress={onPressDelete} style={styles.btn}>
+      <TouchableOpacity
+        onPress={() => {
+          setShowAlert(!showAlert);
+        }}
+        style={styles.btn}>
         <Text style={styles.textBtn}>Delete</Text>
       </TouchableOpacity>
+      <AwesomeAlert
+        show={showAlert}
+        showProgress={false}
+        title="Delete Your Comment 😕"
+        message="Are you sure you want to delete your comment?"
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={false}
+        showCancelButton={true}
+        showConfirmButton={true}
+        cancelText="No, cancel"
+        cancelButtonColor="blue"
+        confirmText="Yes, delete it"
+        confirmButtonColor="red"
+        onCancelPressed={() => {
+          setShowAlert(false);
+        }}
+        onConfirmPressed={onPressDelete}
+        titleStyle={styles.textTitleAlert}
+        messageStyle={styles.textMessageAlert}
+        cancelButtonTextStyle={styles.textCancelAlert}
+        confirmButtonTextStyle={styles.textConfirmAlert}
+      />
     </View>
   );
 };

@@ -40,6 +40,7 @@ function* postLikeForumSaga(
     console.log('run');
     const {data}: any = yield call(ForumService.postLikeForum, uuid);
     if (data.code == 200) {
+      console.log(data);
       yield put(ForumActions.handleLike_UnlikeSuccess(uuid));
 
       console.log('run push tookit');
@@ -59,6 +60,7 @@ function* deleteLikeForumSaga(
     console.log('run');
     const {data}: any = yield call(ForumService.deleteLikeForum, uuid);
     if (data.code == 200) {
+      console.log(data);
       yield put(ForumActions.handleLike_UnlikeSuccess(uuid));
       console.log('run push tookit');
     }

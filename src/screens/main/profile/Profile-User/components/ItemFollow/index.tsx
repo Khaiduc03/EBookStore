@@ -13,7 +13,7 @@ const ItemFollow: React.FunctionComponent<ProfileProps> = props => {
       <Image style={styles.avatar} source={{uri: props.data?.image_url}} />
       <View style={styles.viewAll}>
         <TouchableOpacity style={styles.viewFollow}>
-          <Text style={styles.countNumber}>100</Text>
+          <Text style={styles.countNumber}>{props.data?.post_count}</Text>
           <Text style={styles.text}>Post</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.viewFollow}>

@@ -53,6 +53,7 @@ export type User = uuid &
     wallet: string;
     followercount: number;
     followingcount: number;
+    post_count: string;
   };
 
 export enum USER_ROLE {
