@@ -4,24 +4,56 @@ import useStyles from './styles';
 import {ComicType} from '../../../../../../redux';
 import ItemListHot from './components/ItemListHot';
 import {useAppSelector} from '../../../../../../hooks';
-import {getListTopView} from '../../../../../../redux/selectors/comic.selector';
+import {
+  getListFavorite,
+  getListTopFavorite,
+  getListTopRating,
+  getListTopView,
+} from '../../../../../../redux/selectors/comic.selector';
 import {Device} from '../../../../../../utils';
+import ItemRatingHot from './components/ItemRatingHot';
+import {Icon} from '@rneui/base';
+import ItemViewHot from './components/ItemViewHot';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
 
 const ListHotComic = () => {
   const styles = useStyles();
   const data = useAppSelector(getListTopView);
+  const dataRating = useAppSelector(getListTopRating);
+  const dataFavorite = useAppSelector(getListTopFavorite);
   const screenWidth = Device.getDeviceWidth();
 
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const renderSection = ({item, index}: {item: any[]; index: number}) => {
     const sliceItem = item ? item.slice(0, 5) : [];
-    return (
+    return index == 0 ? (
       <View style={styles.ItemContainer}>
         <FlatList
           data={sliceItem}
           keyExtractor={(item, index) => `${item.uuid}_${index}`}
           renderItem={({item, index}) => (
             <ItemListHot data={item} index={index} />
+          )}
+        />
+      </View>
+    ) : index == 1 ? (
+      <View style={styles.ItemContainer}>
+        <FlatList
+          data={sliceItem}
+          keyExtractor={(item, index) => `${item.uuid}_${index}`}
+          renderItem={({item, index}) => (
+            <ItemRatingHot data={item} index={index} />
+          )}
+        />
+      </View>
+    ) : (
+      <View style={styles.ItemContainer}>
+        <FlatList
+          data={sliceItem}
+          keyExtractor={(item, index) => `${item.uuid}_${index}`}
+          renderItem={({item, index}) => (
+            <ItemViewHot data={item} index={index} />
           )}
         />
       </View>
@@ -34,18 +66,25 @@ const ListHotComic = () => {
     setActiveIndex(index);
   };
 
-  const combinedData: any = [data, data, data];
+  const combinedData: any = [dataFavorite, dataRating, data];
   return (
     <View style={styles.container}>
-      <Text style={styles.titleStyle}>
-        {activeIndex == 1
-          ? 'Action'
-          : activeIndex == 2
-          ? 'Honor'
-          : activeIndex == 0
-          ? 'Weekly HOT'
-          : ''}
-      </Text>
+      <View style={styles.header}>
+        <Text style={styles.titleStyle}>
+          {activeIndex == 1
+            ? 'Top Rating'
+            : activeIndex == 2
+            ? 'Top View'
+            : activeIndex == 0
+            ? 'Top Favorite'
+            : ''}
+        </Text>
+        <Icon
+          onPress={() => NavigationService.navigate(routes.TOP_SCREEN)}
+          name="arrow-forward-outline"
+          type="ionicon"
+        />
+      </View>
       {combinedData ? (
         <FlatList
           onScroll={handleScroll}

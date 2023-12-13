@@ -11,7 +11,9 @@ import {NavigationService} from '../../../../../../../../navigation';
 import {ComicActions, ComicType} from '../../../../../../../../redux';
 import {TopOneImage} from '../../../../../../../../assets/svg';
 
-const ItemTopRatingList: React.FunctionComponent<CustomComicProps> = props => {
+const ItemTopFavoriteList: React.FunctionComponent<
+  CustomComicProps
+> = props => {
   const styles = useStyles();
   const dispatch = useAppDispatch();
   const onPressDetail = () => {
@@ -27,6 +29,7 @@ const ItemTopRatingList: React.FunctionComponent<CustomComicProps> = props => {
       {props.index == 0 ? (
         <View style={styles.oneContainer}>
           <FastImage
+            resizeMode="cover"
             source={{uri: comic.image_url}}
             style={styles.imgOneStyle}
           />
@@ -118,4 +121,4 @@ const ItemTopRatingList: React.FunctionComponent<CustomComicProps> = props => {
   );
 };
 
-export default ItemTopRatingList;
+export default ItemTopFavoriteList;

@@ -13,11 +13,17 @@ const useStyles = makeStyles(({colors}) => ({
     width: WIDTH,
   },
   titleStyle: {
-    paddingLeft: normalize(10),
     fontSize: normalize(18),
     color: colors.black,
     fontFamily: fontFamilySetup.bold,
     paddingBottom: normalize(10),
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingLeft: normalize(10),
+    paddingRight: normalize(16),
   },
 }));
 

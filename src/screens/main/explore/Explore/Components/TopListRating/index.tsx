@@ -2,7 +2,7 @@ import {StyleSheet, Text, View, FlatList} from 'react-native';
 import React, {useEffect} from 'react';
 import useStyles from './styles';
 import FastImage from 'react-native-fast-image';
-import ItemTrending from './components/ItemTrending';
+
 import {HeaderCustom} from '../../../../../../components';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
@@ -12,6 +12,8 @@ import {
   getListTopRating,
   getListTopView,
 } from '../../../../../../redux/selectors/comic.selector';
+import ItemTopViewList from '../TopViewComic/components/ItemTopViewList';
+import ItemTopRatingList from './components/ItemTopRatingList';
 
 const TopListRating = () => {
   const styles = useStyles();
@@ -19,26 +21,12 @@ const TopListRating = () => {
   const data = useAppSelector(getListTopRating);
 
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
-    <ItemTrending index={index} data={item} />
+    <ItemTopRatingList index={index} data={item} />
   );
 
   return (
     <View style={styles.container}>
-      <HeaderCustom
-        titleStyle={styles.textTitle}
-        title="Top rating  "
-        rightIconRight={{
-          name: 'arrow-forward-outline',
-          type: 'ionicon',
-        }}
-      />
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{paddingHorizontal: 16, gap: 5}}
-        data={data}
-        renderItem={RenderItem}
-      />
+      <FlatList data={data} renderItem={RenderItem} />
     </View>
   );
 };
