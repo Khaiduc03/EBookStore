@@ -248,6 +248,64 @@ const reducer = createSlice({
 
       return state; // Trả về state không thay đổi nếu không có listComment hoặc listComment.data
     },
+
+    deleteCommentChater: (
+      state: CommentChapterState,
+      _: PayloadAction<string>,
+    ) => {
+      return {
+        ...state,
+      };
+    },
+
+    deleteCommentChapterSuccess: (
+      state: CommentChapterState,
+      action: PayloadAction<string>,
+    ) => {
+      if (state.listComment && state.listComment.data) {
+        const updateComment = state.listComment.data.filter(
+          commentItem => commentItem.uuid !== action.payload,
+        );
+
+        return {
+          ...state,
+          listComment: {
+            ...state.listComment,
+            data: updateComment,
+          },
+        };
+      }
+      return state;
+    },
+
+    deleteRepCommentChater: (
+      state: CommentChapterState,
+      _: PayloadAction<string>,
+    ) => {
+      return {
+        ...state,
+      };
+    },
+
+    deleteRepCommentChapterSuccess: (
+      state: CommentChapterState,
+      action: PayloadAction<string>,
+    ) => {
+      if (state.listRepComment && state.listRepComment.data) {
+        const updateComment = state.listRepComment.data.filter(
+          commentItem => commentItem.uuid !== action.payload,
+        );
+
+        return {
+          ...state,
+          listRepComment: {
+            ...state.listRepComment,
+            data: updateComment,
+          },
+        };
+      }
+      return state;
+    },
   },
 });
 

@@ -6,6 +6,7 @@ import {LoadingActions} from '../reducer';
 import {pull} from 'lodash';
 import {NavigationService} from '../../navigation';
 import {routes} from '../../constants';
+import {ToastAndroid} from 'react-native';
 
 function* getListDataRatingSaga(action: PayloadAction<string>): Generator {
   try {
@@ -80,19 +81,24 @@ function* unLikeRatingSaga(action: PayloadAction<string>): Generator {
 
 function* postRatingSaga(action: PayloadAction<any>): Generator {
   try {
+    yield put(LoadingActions.showLoading());
     console.log('run');
     const {data}: any = yield call(RatingService.postRating, action.payload);
     if (data.code == 200) {
       yield put(RatingActions.postRatingSuccess(data.data));
-
+      NavigationService.navigate(routes.RATINGCOMICSCREEN, {
+        uuid: action.payload.comic_uuid,
+      });
       console.log(data);
       console.log('run push tookit');
     } else {
+      ToastAndroid.show('You can only rate once !!!', ToastAndroid.SHORT);
       console.log('Server errol !!!');
     }
   } catch (error) {
     console.log(error);
   } finally {
+    yield put(LoadingActions.hideLoading());
   }
 }
 

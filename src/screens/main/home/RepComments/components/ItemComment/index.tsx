@@ -6,9 +6,11 @@ import {Icon} from '@rneui/base';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
 import {CommentChapterType} from '../../../../../../redux/types/comment.chapter.type';
-import {useAppDispatch} from '../../../../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {CommentChapterAction} from '../../../../../../redux/reducer/comment.chapter.reducer';
 import moment from 'moment';
+import {getAuthUserProfile} from '../../../../../../redux';
+import Awesome from '../../../../../../components/customs/Awesome';
 interface CommentDataProps {
   data: CommentChapterType;
   setOpen: () => void;
@@ -28,9 +30,13 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
     type,
     uuid,
     is_like,
+    user_uuid,
   } = props.data;
   const styles = useStyles();
   const dispatch = useAppDispatch();
+  const [show, setShow] = useState(false);
+
+  const dataUser = useAppSelector(getAuthUserProfile);
 
   const commentIncludesFullname = props.data.comment.includes(
     props.data.fullname,
@@ -57,6 +63,11 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
     }
   };
 
+  const onPressDeleteComment = () => {
+    dispatch(CommentChapterAction.deleteRepCommentChapterSuccess(uuid));
+    setShow(false);
+  };
+
   const onPressRep = (text: string) => {
     props.setUserRep(text);
     props.setOpen();
@@ -66,7 +77,9 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
       <FastImage
         style={styles.avatarStyle}
         source={{
-          uri: user_avatar,
+          uri:
+            user_avatar ||
+            'https://static.thenounproject.com/png/5034901-200.png',
         }}
       />
       <View style={styles.content}>
@@ -114,11 +127,29 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
               </Text>
             </TouchableOpacity>
           </View>
-          <Icon
-            name="ellipsis-vertical"
-            type="ionicon"
-            size={15}
-            color={styles.iconStyle.color}
+          {dataUser.uuid == user_uuid ? (
+            <Icon
+              onPress={() => setShow(!show)}
+              name="trash-outline"
+              type="ionicon"
+              size={15}
+              color={styles.iconStyle.color}
+            />
+          ) : (
+            <View />
+          )}
+
+          <Awesome
+            show={show}
+            title="Do you want to delete your comment?"
+            message="Please choose yes or no"
+            cancelText="No, later"
+            confirmText="Yes,delete it"
+            confirmButtonColor="#00BFFF"
+            onConfirmPressed={onPressDeleteComment}
+            onCancelPressed={() => setShow(!show)}
+            cancelButtonColor="#F89300"
+            onDismiss={() => setShow(false)}
           />
         </View>
       </View>

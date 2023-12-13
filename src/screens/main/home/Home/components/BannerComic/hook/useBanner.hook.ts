@@ -11,6 +11,7 @@ export const useBanner = () => {
   const screenWidth = Device.getDeviceWidth();
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const flatlistRef = useRef<FlatList | null>(null);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     let interval = setInterval(() => {
@@ -42,12 +43,23 @@ export const useBanner = () => {
     setActiveIndex(index);
   };
 
+  const onLoadStart = () => {
+    setLoading(true);
+  };
+  const onLoadEnd = () => {
+    setLoading(false);
+  };
+
   return {
     handleScroll,
     getItemLayout,
     screenWidth,
     activeIndex,
     flatlistRef,
+    isLoading,
+    setLoading,
+    onLoadEnd,
+    onLoadStart,
   };
 };
 

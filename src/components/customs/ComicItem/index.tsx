@@ -13,7 +13,7 @@ import {useAppDispatch} from '../../../hooks';
 const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
   const styles = useStyles();
   const comic: ComicType = props.data;
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
 
   const onLoadStart = () => {

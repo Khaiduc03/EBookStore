@@ -139,6 +139,52 @@ function* getCommentComicSaga(action: PayloadAction<any>): Generator {
   }
 }
 
+function* deleteCommentSaga(action: PayloadAction<string>): Generator {
+  try {
+    yield put(LoadingActions.showLoading());
+    console.log('run===========>');
+    const {data}: any = yield call(
+      CommentChapterService.deleteCommentChapter,
+      action.payload,
+    );
+    if (data.code == 200) {
+      yield put(
+        CommentChapterAction.deleteCommentChapterSuccess(action.payload),
+      );
+      console.log('run push tookit');
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
+function* deleteRepCommentSaga(action: PayloadAction<string>): Generator {
+  try {
+    yield put(LoadingActions.showLoading());
+    console.log('run===========>');
+    const {data}: any = yield call(
+      CommentChapterService.deleteCommentChapter,
+      action.payload,
+    );
+    if (data.code == 200) {
+      yield put(
+        CommentChapterAction.deleteRepCommentChapterSuccess(action.payload),
+      );
+      console.log('run push tookit');
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
 function* getRepCommentComicSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoadingPage());
   try {
@@ -187,5 +233,15 @@ export default function* watchCommentChapterSaga() {
   yield takeLatest(
     CommentChapterAction.getRepCommentChapter.type,
     getRepCommentComicSaga,
+  );
+
+  yield takeLatest(
+    CommentChapterAction.deleteCommentChater.type,
+    deleteCommentSaga,
+  );
+
+  yield takeLatest(
+    CommentChapterAction.deleteRepCommentChater.type,
+    deleteRepCommentSaga,
   );
 }

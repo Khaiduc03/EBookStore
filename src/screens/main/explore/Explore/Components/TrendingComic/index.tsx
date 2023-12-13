@@ -19,7 +19,7 @@ const TrendingComic = () => {
     <ItemTrending index={index} data={item} />
   );
   const handlePressTrending = () => {
-    NavigationService.navigate(routes.TREDING_COMIC);
+    NavigationService.navigate(routes.VIEW_EXPLORE);
   };
   return (
     <View style={styles.container}>
