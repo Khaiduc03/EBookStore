@@ -104,9 +104,8 @@ const ComicByTopic = () => {
         leftIconStyle={styles.leftIconStyle}
         leftIcon={{name: 'arrow-back', color: styles.leftIconStyle.color}}
         onPressLeftIcon={() => backScreen()}
-        rightIconleft={{name: 'search', type: 'ionicon'}}
-        onPressRightIconLeft={handlePressSearch}
-        rightIconRight={{name: 'tune'}}
+        rightIconRight={{name: 'search', type: 'ionicon'}}
+        onPressRightIconRight={handlePressSearch}
       />
 
       <FlatList
