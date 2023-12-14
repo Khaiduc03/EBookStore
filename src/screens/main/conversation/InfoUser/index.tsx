@@ -10,21 +10,29 @@ import {UserAction} from '../../../../redux/reducer/user.reducer';
 import {getUserById} from '../../../../redux/selectors/user.selector';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
+import {ConversationI, getAuthUserProfile} from '../../../../redux';
 interface RouteParamsProfile {
-  joined_uuid?: string;
+  data: ConversationI;
 }
 
 const InfoUser = () => {
   const styles = useStyles();
   const route = useRoute();
-  const uuid = (route.params as RouteParamsProfile).joined_uuid;
+  const data = (route.params as RouteParamsProfile).data;
   const dispatch = useAppDispatch();
   const dataById = useAppSelector(getUserById);
 
+  console.log(data);
+
+  const user = useAppSelector(getAuthUserProfile);
   useEffect(() => {
     dispatch(UserAction.clearUserById());
-    dispatch(UserAction.getUserById(uuid ? uuid : ''));
-  }, [uuid]);
+    dispatch(
+      UserAction.getUserById(
+        data.joined_uuid == user.uuid ? data.user_uuid : data.joined_uuid,
+      ),
+    );
+  }, [data.joined_uuid == user.uuid ? data.user_uuid : data.joined_uuid]);
 
   return (
     <View style={styles.container}>

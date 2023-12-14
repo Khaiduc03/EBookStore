@@ -29,7 +29,7 @@ const Follow = () => {
       <HeaderCustom
         title={user.fullname}
         leftIcon={{
-          name: 'close',
+          name: 'arrow-back',
           color: styles.iconLeftStyle.color,
           type: 'ionicon',
         }}

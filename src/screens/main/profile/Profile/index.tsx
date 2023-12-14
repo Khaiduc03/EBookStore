@@ -25,7 +25,14 @@ const Profile: FunctionComponent = () => {
         title="Profile"
       />
       <View style={styles.viewAvatar}>
-        <Image source={{uri: user.image_url}} style={styles.avatar} />
+        <Image
+          source={{
+            uri:
+              user.image_url ||
+              'https://static.thenounproject.com/png/5034901-200.png',
+          }}
+          style={styles.avatar}
+        />
         <TouchableOpacity
           style={styles.btnMyProfile}
           onPress={onPressMyProfile}>

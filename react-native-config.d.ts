@@ -45,6 +45,8 @@ declare module 'react-native-config' {
     FORUM_BY_UUID: string;
     FORUM_DELETE_POST: string;
     GET_ALLPOST_BY_ID: string;
+    LIKE_RATING: string;
+    UNLIKE_RATING: string;
 
     CHAPTER: string;
     CHAPTER_UUID: string;

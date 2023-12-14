@@ -26,6 +26,7 @@ interface ListItem {
 const DiscoverPeople: React.FC = () => {
   const styles = useStyles();
   const dataRandom = useAppSelector(getListUserRandom);
+  const dispatch = useAppDispatch();
 
   const dataUser = useAppSelector(getAllUser);
 
@@ -33,11 +34,9 @@ const DiscoverPeople: React.FC = () => {
     NavigationService.goBack();
   };
 
-  const refreshList = () => {
-    // const refreshedData = [...initialData];
-    // setListData(refreshedData);
-    // console.log('Refreshed Data Succesfully:', refreshList);
-  };
+  const onRefresh = React.useCallback(() => {
+    dispatch(UserAction.getUserRandom());
+  }, []);
 
   const renderItem = ({item}: {item: UserType}) => <ItemList data={item} />;
 
@@ -50,7 +49,7 @@ const DiscoverPeople: React.FC = () => {
       />
       <View style={styles.viewRefesh}>
         <Text style={styles.test}>Refresh list</Text>
-        <Icon name="reload-outline" type="ionicon" onPress={refreshList} />
+        <Icon name="reload-outline" type="ionicon" onPress={onRefresh} />
       </View>
       <View style={styles.suggestions}>
         <Text style={styles.testContent}>Top Suggestions</Text>

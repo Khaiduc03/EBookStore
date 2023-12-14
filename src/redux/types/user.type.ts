@@ -23,6 +23,7 @@ export type UserType = uuid & {
   followingcount: number;
   is_follower: boolean;
   is_following: boolean;
+  post_count: number;
 };
 
 export interface PayloadHttpListFollow<T> {

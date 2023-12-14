@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
   CommonActions,
+  LinkingOptions,
   NavigationContainerRef,
   StackActions,
 } from '@react-navigation/native';
@@ -72,3 +73,20 @@ export class NavigationService {
     navigationRef.current?.dispatch(resetAction);
   }
 }
+
+export const linking: LinkingOptions<any> = {
+  prefixes: ['comicverse://'],
+  config: {
+    screens: {
+      bottom_tab: {
+        screens: {
+          [routes.PROFILE]: 'profile',
+          [routes.MESSAGE]: 'message',
+          [routes.COMICDETAIL]: 'comicdetail',
+          [routes.HOME]:'home'
+        },
+      },
+      [routes.COMICDETAIL]: 'comicdetail/:id',
+    },
+  },
+};
