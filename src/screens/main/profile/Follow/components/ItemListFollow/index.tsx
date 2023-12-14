@@ -7,6 +7,8 @@ import {images} from '../../../../../../assets';
 import {useAppDispatch} from '../../../../../../hooks';
 import {UserAction} from '../../../../../../redux/reducer/user.reducer';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
 interface FollowerProps {
   data?: ItemFollowType;
 }
@@ -29,14 +31,21 @@ const ItemListFollow: React.FunctionComponent<FollowerProps> = props => {
   return (
     <View style={styles.container}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <FastImage
-          style={styles.imgStyle}
-          source={{
-            uri:
-              props.data?.image_url ||
-              'https://static.thenounproject.com/png/5034901-200.png',
-          }}
-        />
+        <TouchableOpacity
+          onPress={() =>
+            NavigationService.navigate(routes.PROFILEUSER, {
+              dataFollwer: props.data,
+            })
+          }>
+          <FastImage
+            style={styles.imgStyle}
+            source={{
+              uri:
+                props.data?.image_url ||
+                'https://static.thenounproject.com/png/5034901-200.png',
+            }}
+          />
+        </TouchableOpacity>
         <View style={styles.nameContainer}>
           <View
             style={{

@@ -26,7 +26,7 @@ import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {HeaderCustom} from '../../../../../../components';
 import {routes} from '../../../../../../constants';
-import {useAppDispatch} from '../../../../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {NavigationService} from '../../../../../../navigation';
 import {backScreen} from '../../../../../../utils';
 import {useGetPostDetail} from './hook/useGetPostDetail.hook';
@@ -34,6 +34,7 @@ import useStyles from './styles';
 import {useModalPostDetail} from './hook/useModalPostDetail.hook';
 import {ItemComment} from '../../../../home/CommentComic/components';
 import Awesome from '../../../../../../components/customs/Awesome';
+import {getAuthUserProfile} from '../../../../../../redux';
 interface PostDataDeatilRoute {
   post_uuid: string;
 }
@@ -43,6 +44,7 @@ const PostDetail = () => {
 
   const route = useRoute();
   const post_uuid = (route.params as PostDataDeatilRoute).post_uuid;
+  const user = useAppSelector(getAuthUserProfile);
 
   const {
     postData,
@@ -155,9 +157,13 @@ const PostDetail = () => {
               </View>
 
               <View style={styles.viewIconPost}>
-                <TouchableOpacity onPress={() => setShowAlert(!showAlert)}>
-                  <Icon name="close-outline" type="ionicon" size={28} />
-                </TouchableOpacity>
+                {user.uuid == postData.user_uuid ? (
+                  <TouchableOpacity onPress={() => setShowAlert(!showAlert)}>
+                    <Icon name="close-outline" type="ionicon" size={28} />
+                  </TouchableOpacity>
+                ) : (
+                  <View />
+                )}
 
                 <Awesome
                   show={showAlert}

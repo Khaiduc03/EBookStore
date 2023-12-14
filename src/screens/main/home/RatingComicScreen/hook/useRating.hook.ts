@@ -31,8 +31,10 @@ export const useRating = () => {
 
   const onPressLikeRating = (item: RatingType) => {
     if (item.is_like) {
+      dispatch(RatingActions.handleSuccerLikeRating(item.uuid));
       dispatch(RatingActions.unLikeRating(item.uuid));
     } else {
+      dispatch(RatingActions.handleSuccerLikeRating(item.uuid));
       dispatch(RatingActions.likeRating(item.uuid));
     }
   };

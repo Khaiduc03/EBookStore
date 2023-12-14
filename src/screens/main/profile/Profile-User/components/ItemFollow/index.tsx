@@ -10,18 +10,29 @@ const ItemFollow: React.FunctionComponent<ProfileProps> = props => {
   const styles = useStyles();
   return (
     <View style={styles.viewAvatarFollow}>
-      <Image style={styles.avatar} source={{uri: props.data?.image_url}} />
+      <Image
+        style={styles.avatar}
+        source={{
+          uri:
+            props.data?.image_url ||
+            'https://static.thenounproject.com/png/5034901-200.png',
+        }}
+      />
       <View style={styles.viewAll}>
         <TouchableOpacity style={styles.viewFollow}>
-          <Text style={styles.countNumber}>{props.data?.post_count}</Text>
+          <Text style={styles.countNumber}>{props.data?.post_count || 0}</Text>
           <Text style={styles.text}>Post</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.viewFollow}>
-          <Text style={styles.countNumber}>{props.data?.followercount}</Text>
+          <Text style={styles.countNumber}>
+            {props.data?.followercount || 0}
+          </Text>
           <Text style={styles.text}>Follower</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.viewFollow}>
-          <Text style={styles.countNumber}>{props.data?.followingcount}</Text>
+          <Text style={styles.countNumber}>
+            {props.data?.followingcount || 0}
+          </Text>
           <Text style={styles.text}>Following</Text>
         </TouchableOpacity>
       </View>

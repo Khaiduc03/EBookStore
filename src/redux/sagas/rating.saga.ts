@@ -50,7 +50,7 @@ function* likeRatingSaga(action: PayloadAction<string>): Generator {
     console.log('run');
     const {data}: any = yield call(RatingService.likeRating, action.payload);
     if (data.code == 200) {
-      yield put(RatingActions.handleSuccerLikeRating(action.payload));
+      // yield put(RatingActions.handleSuccerLikeRating(action.payload));
       console.log(data);
       console.log('run push tookit');
     } else {
@@ -67,7 +67,7 @@ function* unLikeRatingSaga(action: PayloadAction<string>): Generator {
     console.log('run');
     const {data}: any = yield call(RatingService.unLikeRating, action.payload);
     if (data.code == 200) {
-      yield put(RatingActions.handleSuccerLikeRating(action.payload));
+      // yield put(RatingActions.handleSuccerLikeRating(action.payload));
       console.log(data);
       console.log('run push tookit');
     } else {
