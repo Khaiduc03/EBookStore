@@ -36,6 +36,7 @@ const useStyles = makeStyles(({colors}) => ({
   rate: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   textRate: {
     color: colors.grey4,

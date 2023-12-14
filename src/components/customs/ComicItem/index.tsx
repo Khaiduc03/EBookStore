@@ -66,8 +66,14 @@ const ComicItem: React.FunctionComponent<CustomComicProps> = props => {
           {comic.comic_name}
         </Text>
         <View style={styles.rate}>
-          <Icon name="eye-sharp" type="ionicon" color={'#F89300'} size={18} />
-          <Text style={styles.textRate}>{comic.views}</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Icon name="eye-sharp" type="ionicon" color={'#F89300'} size={18} />
+            <Text style={styles.textRate}>{comic.views}</Text>
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Icon name="star" type="fontawesome" color={'#F89300'} size={16} />
+            <Text style={styles.textRate}>{comic.rating.toFixed(2)}</Text>
+          </View>
         </View>
         {props.topicStyle && (
           <View style={props.topicStyle}>
