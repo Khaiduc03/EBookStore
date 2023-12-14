@@ -6,7 +6,11 @@ import {
   getListTopView,
   getCurrentPageHome,
 } from '../../../../../../redux/selectors/comic.selector';
-import {getIsLoadingPage} from '../../../../../../redux/selectors/loading.selector';
+import {
+  getIsLoadingHome,
+  getIsLoadingPage,
+  getIsLoadingStart,
+} from '../../../../../../redux/selectors/loading.selector';
 import {getListTopic} from '../../../../../../redux/selectors/topic.selector';
 import {ComicActions, TopicActions} from '../../../../../../redux';
 import useStyles from '../../styles';
@@ -24,6 +28,8 @@ export const useComicHome = () => {
   const isLoading = useAppSelector(getIsLoadingPage);
   const dataTopView = useAppSelector(getListTopView);
   const current = useAppSelector(getCurrentPageHome);
+
+  const isLoadingHome = useAppSelector(getIsLoadingHome);
 
   useEffect(() => {
     dispatch(ComicActions.clearListData());
@@ -82,5 +88,6 @@ export const useComicHome = () => {
     handlePressSearch,
     current,
     onScroll,
+    isLoadingHome,
   };
 };

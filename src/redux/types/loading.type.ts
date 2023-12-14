@@ -5,4 +5,5 @@ export type LoadingState = {
   isLoadingTopic: boolean;
   isLoadingForum: boolean;
   isLoadingStart: boolean;
+  isLoadingHome: boolean;
 };

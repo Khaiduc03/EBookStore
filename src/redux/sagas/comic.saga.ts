@@ -6,7 +6,7 @@ import {ComicService} from '../services';
 
 function* getListDataSaga(action: PayloadAction<number>): Generator {
   if (action.payload == 1) {
-    yield put(LoadingActions.showLoadingStart());
+    yield put(LoadingActions.showLoadingHome());
   } else {
     yield put(LoadingActions.showLoadingPage());
   }
@@ -24,7 +24,7 @@ function* getListDataSaga(action: PayloadAction<number>): Generator {
   } finally {
     if (action.payload == 1) {
       yield delay(3000);
-      yield put(LoadingActions.hideLoadingStart());
+      yield put(LoadingActions.hideLoadingHome());
     } else {
       yield delay(2000);
       yield put(LoadingActions.hideLoadingPage());
