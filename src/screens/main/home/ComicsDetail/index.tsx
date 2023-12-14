@@ -16,7 +16,7 @@ const ComicsDetail = () => {
     data,
     dataChart,
     handlePressBack,
-
+    onShare,
     postFavorite,
     scrollRef,
     setVisible2,
@@ -51,33 +51,25 @@ const ComicsDetail = () => {
     }
   };
 
-  const handleDynamicLink = async () => {
-    const unsubscribe = dynamicLinks().onLink(link => {
-      // Xử lý thông tin từ liên kết động ở đây khi ứng dụng đã mở
-      console.log('Link opened:', link.url);
-    });
 
-    return () => unsubscribe(); // Hủy đăng ký lắng nghe khi component bị unmount
-  };
 
-  const onShare = async () => {
-    const getLink = await generateLink();
-    await handleDynamicLink();
-    // const initialUrl = await Linking.getInitialURL();
-    // console.log(initialUrl);
-    // const {url: initialUrl, processing} = useInitialURL();
-    const options: any = {
-      url: getLink,
-    };
+  // const onShare = async () => {
+  //   const getLink = await generateLink();
+  //   // const initialUrl = await Linking.getInitialURL();
+  //   // console.log(initialUrl);
+  //   // const {url: initialUrl, processing} = useInitialURL();
+  //   const options: any = {
+  //     url: getLink,
+  //   };
 
-    try {
-      const res = await Share.open(options);
-      setVisible2(false);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //   try {
+  //     const res = await Share.open(options);
+  //     setVisible2(false);
+  //     console.log(res);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <View style={styles.container}>

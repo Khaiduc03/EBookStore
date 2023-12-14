@@ -9,9 +9,11 @@ import {NavigationService, linking, navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
 import dynamicLinks from '@react-native-firebase/dynamic-links';
-import {includes} from 'lodash';
+
 import {ComicService} from '../redux';
 import {routes} from '../constants';
+
+import {CustomToastBottom} from '../utils';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -34,14 +36,19 @@ const RootNavigation = () => {
   }, [mode]);
 
   const handleDynamicLink = async (link: any) => {
-    console.log('link', link);
-    // Handle dynamic link inside your own application
-    if (link.url.includes('comicverse2.page.link/V9Hh/comicdetail')) {
-      console.log('hi');
-      if (enableSignIn) {
-        const uuid = link.url.split('comic_uuid=')[1];
-        const {data} = await ComicService.getComicById(uuid);
-        NavigationService.navigate(routes.COMICDETAIL, {data: data.data[0]});
+    if (link) {
+      if (link.url.includes('comicverse2.page.link/V9Hh/comicdetail')) {
+        if (enableSignIn) {
+          const uuid = link.url.split('comic_uuid=')[1];
+          const {data} = await ComicService.getComicById(uuid);
+          if (data.code === 200) {
+            NavigationService.navigate(routes.COMICDETAIL, {
+              data: data.data[0],
+            });
+          } else {
+            CustomToastBottom('Comic not found');
+          }
+        }
       }
     }
   };
@@ -56,23 +63,6 @@ const RootNavigation = () => {
     // When the component is unmounted, remove the listener
     return () => unsubscribe();
   }, []);
-
-  const handleDynamicLink1 = async () => {
-    const initialLink = await dynamicLinks().getInitialLink();
-
-    if (initialLink) {
-      // Xử lý thông tin từ liên kết động ở đây
-      console.log('Initial link:', initialLink.url);
-    }
-    console.log('Initial link:', initialLink);
-
-    const unsubscribe = dynamicLinks().onLink(link => {
-      // Xử lý thông tin từ liên kết động ở đây khi ứng dụng đã mở
-      console.log('Link opened:', link.url);
-    });
-
-    return () => unsubscribe(); // Hủy đăng ký lắng nghe khi component bị unmount
-  };
 
   return (
     <NavigationContainer linking={linking} ref={navigationRef}>
