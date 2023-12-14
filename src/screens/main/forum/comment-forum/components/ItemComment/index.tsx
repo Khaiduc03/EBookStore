@@ -1,27 +1,20 @@
 import {Icon} from '@rneui/base';
 import moment from 'moment';
-import React, {useCallback, useRef, useState} from 'react';
-import {FlatList, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import AwesomeAlert from 'react-native-awesome-alerts';
+import React, {useState} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {routes} from '../../../../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
-import {getAuthUserProfile} from '../../../../../../redux';
+import {NavigationService} from '../../../../../../navigation';
 import {CommentForumAction} from '../../../../../../redux/reducer/comment.forum.reducer';
-import {getListRepCommentForum} from '../../../../../../redux/selectors/comment.forum.selector';
 import {CommentForumType} from '../../../../../../redux/types/comment.forum.type';
 import useStyles from './styles';
-import ItemRepCommnent from '../../../comment-rep-forum/components/ItemComment';
+import {getAuthUserProfile} from '../../../../../../redux';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 interface CommentDataProps {
   data: Partial<CommentForumType>;
-  replyText: string;
-  showTextInput: boolean;
-  showTextInputRep: boolean;
-  onReplyPress: () => void;
-  onFocusTextInput: () => void;
-  onBlurTextInput: () => void;
-  onChangeText: (text: string) => void;
 }
 
 const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
@@ -44,27 +37,12 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
   } = props.data;
 
   const styles = useStyles();
-  const dispatch = useAppDispatch();
-  const [showAlert, setShowAlert] = useState(false);
-  const user = useAppSelector(getAuthUserProfile);
-  const flatListRef = useRef<FlatList<CommentForumType>>(null);
-  const [sizeContent, setSizeContent] = useState<number>(0);
-  const [size, setSize] = useState<boolean>(false);
-  const dataRepComment = useAppSelector(getListRepCommentForum);
 
-  const onContentSizeChange = useCallback(
-    (contentWidth: number, contentHeight: number) => {
-      flatListRef.current?.setNativeProps({
-        contentSize: {width: contentWidth, height: contentHeight},
-      });
-      setSizeContent(contentHeight);
-      if (size) {
-        setSizeContent(sizeContent + 3000);
-        setSize(false);
-      }
-    },
-    [size, sizeContent],
-  );
+  const dispatch = useAppDispatch();
+
+  const [showAlert, setShowAlert] = useState(false);
+
+  const user = useAppSelector(getAuthUserProfile);
 
   const onPressLikeComment = () => {
     if (is_like) {
@@ -107,86 +85,6 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
     }
   };
 
-  const [showTextInputRep, setShowTextInputRep] = useState(props.showTextInput);
-  const [reply, setReply] = useState(props.replyText);
-
-  const onChangeText = (text: string) => {
-    setReply(text);
-    // If the onChangeText callback is provided, call it to notify the parent.
-    props.onChangeText && props.onChangeText(text);
-    console.log('abc  ===', text);
-  };
-
-  const onFocusTextInput = () => {
-    // Call the parent onFocusTextInput when TextInput is focused
-    props.onFocusTextInput();
-  };
-
-  const onBlurTextInput = () => {
-    // Call the parent onBlurTextInput when TextInput loses focus
-    props.onBlurTextInput();
-  };
-
-  const setUserRep = (text: string) => {
-    setReply('Reply ' + '@' + text + ': ');
-  };
-
-  const renderItem = ({
-    item,
-    index,
-  }: {
-    item: CommentForumType;
-    index: number;
-  }) => {
-    return (
-      <View>
-        <ItemRepCommnent setUserRep={setUserRep} data={item} />
-      </View>
-    );
-  };
-
-  const renderReplies = () => {
-    return (
-      <FlatList
-        data={dataRepComment}
-        renderItem={renderItem}
-        keyExtractor={item => item.uuid}
-        initialNumToRender={21}
-        onContentSizeChange={onContentSizeChange}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{paddingVertical: 65}}
-      />
-    );
-  };
-
-  const renderTextInput = () => {
-    return (
-      <View>
-        <View style={styles.textInputReply}>
-          <Icon
-            name="arrow-undo-outline"
-            type="ionicon"
-            size={22}
-            color={styles.iconStyleBlur.color}
-            style={{transform: [{rotate: '180deg'}]}}
-          />
-          <TextInput
-            onFocus={onFocusTextInput}
-            onBlur={onBlurTextInput}
-            style={{borderBottomWidth: 1, borderColor: 'gray', flex: 1}}
-            placeholder="Reply..."
-            placeholderTextColor={styles.iconStyleBlur.color}
-            value={reply}
-            onChangeText={onChangeText}
-            onSubmitEditing={props.onReplyPress}
-          />
-        </View>
-      </View>
-    );
-  };
-
-  console.log('reply ', reply);
-
   return (
     <View style={styles.container}>
       <FastImage
@@ -205,7 +103,11 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
           <View style={styles.viewItemBtn}>
             <TouchableOpacity
               onPress={() => {
-                setShowTextInputRep(!showTextInputRep);
+                NavigationService.navigate(routes.COMMENT_REP_FORUM, {
+                  parents_comment_uuid: uuid,
+                  data: props.data,
+                }),
+                  dispatch(CommentForumAction.clearRepCommentForum());
               }}
               style={styles.rep}>
               <Icon
@@ -275,8 +177,6 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
             )}
           </View>
         </View>
-        {renderTextInput()}
-        {!showTextInputRep && renderReplies()}
       </View>
     </View>
   );

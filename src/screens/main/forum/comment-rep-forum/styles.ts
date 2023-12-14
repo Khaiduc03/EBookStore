@@ -1,15 +1,30 @@
 import { StyleSheet } from 'react-native';
-import { fontFamilySetup } from '../../../../../../utils/font';
+import { fontFamilySetup } from '../../../../utils/font';
 import { makeStyles, normalize } from '@rneui/themed';
-import { Device } from '../../../../../../utils';
+import { Device } from '../../../../utils';
 const WIDTH = Device.getDeviceWidth();
 
 const useStyles = makeStyles(({ colors }) => ({
   container: {
+    flex: 1,
     backgroundColor: colors.background,
+  },
+  parentCommentStyle: {
     flexDirection: 'row',
-    marginTop: normalize(25),
+    borderBottomWidth: 10,
     paddingHorizontal: normalize(16),
+    paddingVertical: normalize(16),
+    borderColor: '#F1F1F3',
+  },
+  inputStyle: {
+    width: '100%',
+    height: normalize(45),
+    paddingHorizontal: normalize(15),
+    backgroundColor: colors.white,
+    position: 'absolute',
+    bottom: 0,
+    shadowColor: '#000',
+    elevation: 5,
   },
   avatarStyle: {
     width: normalize(35),
@@ -23,7 +38,7 @@ const useStyles = makeStyles(({ colors }) => ({
   nameStyle: {
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
-    color: colors.black,
+    color: colors.nameUserComment,
   },
   day: {
     fontSize: normalize(10),
@@ -63,6 +78,25 @@ const useStyles = makeStyles(({ colors }) => ({
   },
   iconStyleBlur: {
     color: '#A5A6AA',
+  },
+  viewTextInput: {
+    width: '100%',
+    height: normalize(60),
+    paddingVertical: normalize(9),
+    paddingHorizontal: normalize(16),
+    borderTopWidth: normalize(2),
+    borderColor: '#E5E5E5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  textInput: {
+    width: '100%',
+    height: normalize(39),
+    paddingHorizontal: normalize(12),
+    fontSize: normalize(14),
+    borderRadius: normalize(12),
+    backgroundColor: '#F1F1F3',
   },
   viewItemBtn: {
     width: normalize(WIDTH / 2 - 20),

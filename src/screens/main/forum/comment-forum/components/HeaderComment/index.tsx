@@ -1,9 +1,13 @@
+import {useRoute} from '@react-navigation/native';
 import {Icon} from '@rneui/base';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {NavigationService} from '../../../../../../navigation';
+import {ForumType} from '../../../../../../redux/types/forum.type';
 import useStyles from './styles';
+import {ForumActions, getListForum} from '../../../../../../redux';
+import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 
 interface HeaderCommentProps {
   currentCommentCount: number; // new prop
