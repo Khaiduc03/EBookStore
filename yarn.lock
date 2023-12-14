@@ -1912,6 +1912,11 @@
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
 
+"@react-native-firebase/dynamic-links@^18.7.3":
+  version "18.7.3"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/dynamic-links/-/dynamic-links-18.7.3.tgz#c9e1ce4df5e71bc15531531806ed04a8174b07ac"
+  integrity sha512-Q22+3ZXsUfSdYGmhQHE1BiJJFx53SK/OpsrxytyV6PJz4acA8bN/ADh84mCbYTr0Mz6JiwSGrjBkDVkOS9Co7w==
+
 "@react-native-google-signin/google-signin@^10.0.1":
   version "10.0.1"
   resolved "https://registry.yarnpkg.com/@react-native-google-signin/google-signin/-/google-signin-10.0.1.tgz#5ca5208c6677aca7e8b12f73699de3048d9a5a31"

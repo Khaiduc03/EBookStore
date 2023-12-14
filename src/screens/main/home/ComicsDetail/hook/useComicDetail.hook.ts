@@ -1,4 +1,4 @@
-import {ScrollView} from 'react-native';
+import {ScrollView, Linking} from 'react-native';
 import {
   ComicActions,
   ComicType,
@@ -11,6 +11,8 @@ import {NavigationService} from '../../../../../navigation';
 import {RatingActions} from '../../../../../redux/reducer/rating.reducer';
 import {getChartRating} from '../../../../../redux/selectors/rating.selector';
 import Share from 'react-native-share';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
+import {err} from 'react-native-svg/lib/typescript/xml';
 
 interface RouteParamsIdComic {
   data: ComicType;
@@ -45,13 +47,17 @@ export const useComicDetail = () => {
     NavigationService.goBack();
   };
 
+ 
+
   const onShare = async () => {
+   // const getLink = await generateLink();
+
+    // const initialUrl = await Linking.getInitialURL();
+    // console.log(initialUrl);
+    // const {url: initialUrl, processing} = useInitialURL();
     const options: any = {
-      url: data.image_url,
-      message:
-        'ComicVerse app đọc truyện hàng đầu Việt Nam hihi : \n' +
-        data.comic_name +
-        '\n',
+      url: 'getLink',
+      message: 'getLink',
     };
 
     try {
@@ -66,7 +72,7 @@ export const useComicDetail = () => {
   return {
     handlePressBack,
     data,
-    onShare,
+
     postFavorite,
     scrollRef,
     dataChart,

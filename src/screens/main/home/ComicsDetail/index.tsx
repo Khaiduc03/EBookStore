@@ -1,27 +1,14 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
+import React from 'react';
+import {View} from 'react-native';
+import Share from 'react-native-share';
 import {HeaderCustom, TabViewItem} from '../../../../components';
-import useStyles from './styles';
-import {Episodes, HeaderDetail, Preview} from './Components';
-import {NavigationService} from '../../../../navigation';
-import {useRoute} from '@react-navigation/native';
-import {useAppDispatch, useAppSelector} from '../../../../hooks';
-
-import {
-  ComicActions,
-  ComicType,
-  getCodePostFavorite,
-  getUuidPostFavorite,
-} from '../../../../redux';
-import {ScrollView} from 'react-native-gesture-handler';
-import {Alert} from 'react-native';
-import {RatingActions} from '../../../../redux/reducer/rating.reducer';
-import {getChartRating} from '../../../../redux/selectors/rating.selector';
-import {Button, Dialog} from '@rneui/base';
-import {routes} from '../../../../constants';
-import {useComicDetail} from './hook/useComicDetail.hook';
 import Awesome from '../../../../components/customs/Awesome';
-
+import {routes} from '../../../../constants';
+import {NavigationService} from '../../../../navigation';
+import {Episodes, HeaderDetail, Preview} from './Components';
+import {useComicDetail} from './hook/useComicDetail.hook';
+import useStyles from './styles';
 const ComicsDetail = () => {
   const styles = useStyles();
 
@@ -29,7 +16,7 @@ const ComicsDetail = () => {
     data,
     dataChart,
     handlePressBack,
-    onShare,
+
     postFavorite,
     scrollRef,
     setVisible2,
@@ -37,6 +24,60 @@ const ComicsDetail = () => {
     uuidPost,
   } = useComicDetail();
   console.log(visible2);
+
+  const generateLink = async () => {
+    try {
+      const link = await dynamicLinks().buildShortLink(
+        {
+          link: `https://comicverse2.page.link/V9Hh/comicdetail?comic_uuid=${data?.uuid}`,
+          domainUriPrefix: 'https://comicverse2.page.link',
+          android: {
+            packageName: 'com.comicverse',
+          },
+          analytics: {
+            campaign: 'comicdetail',
+          },
+          navigation: {
+            // Lấy đường dẫn của màn hình chi tiết truyện tranh
+            forcedRedirectEnabled: true,
+          },
+        },
+        dynamicLinks.ShortLinkType.DEFAULT,
+      );
+      console.log('LINK', link);
+      return link;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDynamicLink = async () => {
+    const unsubscribe = dynamicLinks().onLink(link => {
+      // Xử lý thông tin từ liên kết động ở đây khi ứng dụng đã mở
+      console.log('Link opened:', link.url);
+    });
+
+    return () => unsubscribe(); // Hủy đăng ký lắng nghe khi component bị unmount
+  };
+
+  const onShare = async () => {
+    const getLink = await generateLink();
+    await handleDynamicLink();
+    // const initialUrl = await Linking.getInitialURL();
+    // console.log(initialUrl);
+    // const {url: initialUrl, processing} = useInitialURL();
+    const options: any = {
+      url: getLink,
+    };
+
+    try {
+      const res = await Share.open(options);
+      setVisible2(false);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <View style={styles.container}>
