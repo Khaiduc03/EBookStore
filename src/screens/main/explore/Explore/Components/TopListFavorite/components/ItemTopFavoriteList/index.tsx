@@ -9,7 +9,7 @@ import {routes} from '../../../../../../../../constants';
 import {useAppDispatch} from '../../../../../../../../hooks';
 import {NavigationService} from '../../../../../../../../navigation';
 import {ComicActions, ComicType} from '../../../../../../../../redux';
-import {TopOneImage} from '../../../../../../../../assets/svg';
+import {IconTopScreen, TopOneImage} from '../../../../../../../../assets/svg';
 
 const ItemTopFavoriteList: React.FunctionComponent<
   CustomComicProps
@@ -36,7 +36,7 @@ const ItemTopFavoriteList: React.FunctionComponent<
             />
           </TouchableOpacity>
           <View style={styles.textOne}>
-            <TopOneImage />
+            <IconTopScreen />
             <Text style={styles.textNumberOne}>1</Text>
           </View>
           <View style={styles.contentOne}>

@@ -13,9 +13,9 @@ const useStyles = makeStyles(({colors}) => ({
     paddingVertical: normalize(10),
   },
   textNumberOne: {
-    fontSize: normalize(12),
+    fontSize: normalize(15),
     color: colors.white,
-    fontFamily: fontFamilySetup.medium,
+    fontWeight: 'bold',
     position: 'absolute',
   },
   textOne: {

@@ -318,9 +318,7 @@ export const useFillter = () => {
   };
 
   const handleCbSortItem6Click = () => {
-    if (isCbSelected6) {
-      setCbSelected6(false);
-    } else {
+    if (!isCbSelected6) {
       setCbSelected6(true);
     }
 
