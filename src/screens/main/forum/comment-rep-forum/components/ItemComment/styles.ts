@@ -7,9 +7,7 @@ const WIDTH = Device.getDeviceWidth();
 const useStyles = makeStyles(({ colors }) => ({
   container: {
     backgroundColor: colors.background,
-    flexDirection: 'row',
     marginTop: normalize(25),
-    paddingHorizontal: normalize(16),
   },
   avatarStyle: {
     width: normalize(35),
@@ -23,7 +21,7 @@ const useStyles = makeStyles(({ colors }) => ({
   nameStyle: {
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
-    color: colors.nameUserComment,
+    color: colors.black,
   },
   day: {
     fontSize: normalize(10),
@@ -46,7 +44,7 @@ const useStyles = makeStyles(({ colors }) => ({
     width: normalize(WIDTH * 0.2),
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: normalize(60),
+    marginLeft: normalize(48),
   },
   rep: {
     flexDirection: 'row',
@@ -101,6 +99,16 @@ const useStyles = makeStyles(({ colors }) => ({
   },
   contentContainerStyle: {
     backgroundColor: colors.black1,
+  },
+  viewCenter: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  viewRow: {
+    flexDirection: 'row',
+  },
+  iconStyle: {
+    color: colors.black,
   }
 }));
 

@@ -76,7 +76,7 @@ const PostFooter: React.FC<PostFooterProps> = ({
         </TouchableOpacity>
         <TouchableOpacity onPress={onSharePress}>
           <View style={styles.iconText}>
-            <Icon name="share-social-outline" type="ionicon" size={22} />
+            <Icon name="arrow-redo-outline" type="ionicon" size={22} />
             <Text style={styles.textBlur}>Share</Text>
           </View>
         </TouchableOpacity>

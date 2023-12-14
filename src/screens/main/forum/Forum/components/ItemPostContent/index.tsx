@@ -7,6 +7,7 @@ import {
   Modal,
   Image,
   ActivityIndicator,
+  StatusBar,
 } from 'react-native';
 import AutoHeightImage from 'react-native-auto-height-image';
 import useStyles from './styles';
@@ -45,11 +46,6 @@ const PostContent: React.FC<PostContentProps> = ({
 }) => {
   const styles = useStyles();
 
-  const screenWidth = Dimensions.get('window').width;
-  const screenHeight = Dimensions.get('window').height;
-
-  console.log('image: =========', images);
-
   const scale = useSharedValue(1);
   const translationX = useSharedValue(0);
   const translationY = useSharedValue(0);
@@ -71,71 +67,113 @@ const PostContent: React.FC<PostContentProps> = ({
     },
   });
 
-  const calculateImageHeight = (aspectRatio: number) => {
-    const imageWidth = screenWidth;
-    const imageHeight = imageWidth / aspectRatio;
-    return imageHeight;
-  };
+  const screenWidth = Dimensions.get('window').width;
+  const screenHeight = Dimensions.get('window').height;
+
+  const [imageHeights, setImageHeights] = useState<number[]>([]);
+
+  useEffect(() => {
+    const promises = images?.map(image => {
+      return new Promise<number>((resolve, reject) => {
+        if (image) {
+          Image.getSize(
+            image,
+            (width, height) => {
+              const imgHeight = (screenWidth * height) / width;
+              resolve(imgHeight);
+            },
+            reject,
+          );
+        } else {
+          resolve(0);
+        }
+      });
+    });
+
+    if (promises) {
+      Promise.all(promises).then(setImageHeights);
+    }
+  }, [images]);
 
   return (
     <View>
       <View style={styles.description}>
         {content && <Text style={styles.textDescription}>{content}</Text>}
       </View>
+
       <FlatList
         data={images}
         renderItem={({item, index}) => (
           <View>
-            <Pressable onPress={() => onImagePress(index)}>
-              {item && (
-                <AutoHeightImage source={{uri: item}} width={screenWidth} />
-              )}
-              {images && (
-                <View style={styles.viewImagesLength}>
-                  <Text style={styles.textImagesLength}>
-                    {images ? index + 1 : 0}/{images.length}
-                  </Text>
-                </View>
-              )}
-            </Pressable>
-            <Modal
-              visible={showModal}
-              transparent={true}
-              onRequestClose={onClosePress}>
-              <TouchableOpacity
-                style={styles.viewIconClose}
-                onPress={onClosePress}>
-                <Icon
-                  name="close-circle"
-                  size={30}
-                  color={styles.colorIconClose.color}
-                  type="ionicon"
-                  style={styles.iconClose}
-                />
-              </TouchableOpacity>
+            {item && (
+              <View
+                onLayout={event => {
+                  const {height} = event.nativeEvent.layout;
+                  setImageHeights(prevHeights => {
+                    const newHeights = [...prevHeights];
+                    newHeights[index] = height;
+                    return newHeights;
+                  });
+                }}
+                style={{
+                  width: screenWidth,
+                  height: screenHeight / 1.8,
+                }}>
+                <Pressable onPress={() => onImagePress(index)}>
+                  {item && (
+                    <Image
+                      source={{uri: item}}
+                      style={{height: imageHeights[index]}}
+                    />
+                  )}
+                  {images && (
+                    <View style={styles.viewImagesLength}>
+                      <Text style={styles.textImagesLength}>
+                        {images ? index + 1 : 0}/{images.length}
+                      </Text>
+                    </View>
+                  )}
+                </Pressable>
+                <Modal
+                  visible={showModal}
+                  transparent={true}
+                  onRequestClose={onClosePress}>
+                  <TouchableOpacity
+                    style={styles.viewIconClose}
+                    onPress={onClosePress}>
+                    <Icon
+                      name="close-circle"
+                      size={30}
+                      color={styles.colorIconClose.color}
+                      type="ionicon"
+                      style={styles.iconClose}
+                    />
+                  </TouchableOpacity>
 
-              <View style={styles.viewModalImage}>
-                <GestureHandlerRootView>
-                  <PinchGestureHandler onGestureEvent={pinchHandler}>
-                    <Animated.View style={{transform: [{scale: scale}]}}>
-                      <TapGestureHandler
-                        numberOfTaps={2}
-                        onGestureEvent={tapHandler}>
-                        <Animated.View>
-                          <AutoHeightImage
-                            key={selectedImage}
-                            source={{
-                              uri: selectedImage,
-                            }}
-                            width={screenWidth}
-                          />
+                  <View style={styles.viewModalImage}>
+                    <GestureHandlerRootView>
+                      <PinchGestureHandler onGestureEvent={pinchHandler}>
+                        <Animated.View style={{transform: [{scale: scale}]}}>
+                          <TapGestureHandler
+                            numberOfTaps={2}
+                            onGestureEvent={tapHandler}>
+                            <Animated.View>
+                              <AutoHeightImage
+                                key={selectedImage}
+                                source={{
+                                  uri: selectedImage,
+                                }}
+                                width={screenWidth}
+                              />
+                            </Animated.View>
+                          </TapGestureHandler>
                         </Animated.View>
-                      </TapGestureHandler>
-                    </Animated.View>
-                  </PinchGestureHandler>
-                </GestureHandlerRootView>
+                      </PinchGestureHandler>
+                    </GestureHandlerRootView>
+                  </View>
+                </Modal>
               </View>
-            </Modal>
+            )}
           </View>
         )}
         pagingEnabled

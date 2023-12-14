@@ -13,10 +13,7 @@ const Forum: React.FC = () => {
         leftIconStyle={styles.leftIcon}
         title="Forum"
       />
-
-      <View style={styles.container}>
-        <ItemListPost />
-      </View>
+      <ItemListPost />
     </View>
   );
 };

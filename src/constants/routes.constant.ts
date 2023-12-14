@@ -63,7 +63,6 @@ export enum routes {
   // Forum
   CREATE_POST = 'CREATE_POST',
   COMMENT_FORUM = 'COMMENT_FORUM',
-  COMMENT_REP_FORUM = 'COMMENT_REP_FORUM',
 
   // Message
   CHAT = 'CHAT',

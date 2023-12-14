@@ -53,13 +53,11 @@ const useStyles = makeStyles(({ colors }) => ({
   },
   input: {
     width: '100%',
-    height: 'auto',
+    height: normalize(HEIGHT * 0.3),
     fontSize: normalize(16),
     fontFamily: fontFamilySetup.medium,
     color: colors.grey8,
     padding: normalize(10),
-  },
-  viewInput: {
     marginHorizontal: normalize(12),
   },
   selectedImage: {
@@ -122,10 +120,6 @@ const useStyles = makeStyles(({ colors }) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  viewFlatList: {
-    width: normalize(WIDTH),
-    height: normalize(HEIGHT * 0.69),
-  }
 }));
 
 export default useStyles;
