@@ -4,6 +4,7 @@ import {ENDPOINTS} from '../../environment';
 import {Http} from '../../types';
 import {UpdateProfileDto} from '../dto';
 import {configFormData} from './config.service';
+import { ChangePasswordType } from '../types/user.type';
 
 export class UserService {
   static async getUserById(action: string) {
@@ -88,9 +89,8 @@ export class UserService {
     return await apiService.get(`${ENDPOINTS.GET_USER_RANDOM}`);
   }
   // Change password
-  static async changePassword(payload: any) {
-    console.log(`${ENDPOINTS.CHANGE_PASSWORD}`, payload);
-    return await apiService.put(`${ENDPOINTS.CHANGE_PASSWORD}`, payload);
+  static async changePassword(payload: ChangePasswordType) {
+    console.log(`${ENDPOINTS.UPLOAD_PASSWORD}`, payload);
+    return await apiService.put(`${ENDPOINTS.UPLOAD_PASSWORD}`,   payload);
   }
-  
 }

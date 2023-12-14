@@ -25,7 +25,7 @@ const reducer = createSlice({
     // Change password
     changePassword: (
       state: UserState,
-      _: PayloadAction<ChangePasswordType>,
+      _: PayloadAction<any>,
     ) => {
       return {
         ...state,

@@ -48,7 +48,6 @@ export type ItemFollowType = uuid & {
 };
 // Change password
 export interface ChangePasswordType {
-  old_password: string;
-  new_password: string;
-  confirm_password: string;
+  oldPassword: string;
+  newPassword: string;
 }

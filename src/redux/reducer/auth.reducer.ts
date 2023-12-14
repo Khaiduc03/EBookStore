@@ -202,12 +202,7 @@ const reducer = createSlice({
         },
       };
     },
-    // Change password success
-    changePasswordSuccess: (state: AuthState) => {
-      return {
-        ...state,
-      };
-    },
+  
 
   },
 });

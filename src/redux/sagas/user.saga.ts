@@ -6,6 +6,7 @@ import {AuthActions, LoadingActions} from '../reducer';
 import {NavigationService} from '../../navigation';
 import {routes} from '../../constants';
 import {ChangePasswordType} from '../types/user.type';
+import { da } from 'date-fns/locale';
 
 function* postFollowSaga(action: PayloadAction<any>): Generator {
   try {
@@ -30,7 +31,6 @@ function* postFollwRandom(action: PayloadAction<any>): Generator {
     const {data}: any = yield call(UserService.postFollow, action.payload);
     if (data.code == 200) {
       yield put(UserAction.handleSuccerFollowRandom(action.payload));
-      yield put(AuthActions.getUserInfo());
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');
@@ -216,16 +216,16 @@ function* getListUserRandomSaga(action: any): Generator {
     yield put(LoadingActions.hideLoading());
   }
 }
-
+// Change password
 function* changePasswordSaga(
-  action: PayloadAction<ChangePasswordType>,
+  action: any,
 ): Generator {
   yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
     const {data}: any = yield call(UserService.changePassword, action.payload);
+    console.log('data =================', data)
     if (data.code == 200) {
-      yield put(AuthActions.changePasswordSuccess());
       NavigationService.navigate(routes.MYPROFILE);
     } else {
       console.log('Server errol !!!');
