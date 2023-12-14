@@ -5,6 +5,7 @@ import {UserAction} from '../reducer/user.reducer';
 import {AuthActions, LoadingActions} from '../reducer';
 import {NavigationService} from '../../navigation';
 import {routes} from '../../constants';
+import {ChangePasswordType} from '../types/user.type';
 
 function* postFollowSaga(action: PayloadAction<any>): Generator {
   try {
@@ -215,6 +216,26 @@ function* getListUserRandomSaga(action: any): Generator {
   }
 }
 
+function* changePasswordSaga(
+  action: PayloadAction<ChangePasswordType>,
+): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    console.log('run===========>');
+    const {data}: any = yield call(UserService.changePassword, action.payload);
+    if (data.code == 200) {
+      yield put(AuthActions.changePasswordSuccess());
+      NavigationService.navigate(routes.MYPROFILE);
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
 export default function* watchUserSaga() {
   yield takeLatest(UserAction.postFollow.type, postFollowSaga);
   yield takeLatest(UserAction.getListUser.type, getAllUserSaga);
@@ -234,4 +255,5 @@ export default function* watchUserSaga() {
     UserAction.postFollowListFollower,
     postFollowListFollowerSaga,
   );
+  yield takeLatest(UserAction.changePassword.type, changePasswordSaga);
 }

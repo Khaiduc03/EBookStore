@@ -11,9 +11,11 @@ import {BigButton, HeaderCustom} from '../../../../components';
 import InputCustomV1 from '../../../../components/customs/InputCustomV1';
 import {NavigationService} from '../../../../navigation';
 import useStyles from './styles';
+import {AuthActions} from '../../../../redux';
 
 const ChangePassWord: React.FC = () => {
   const styles = useStyles();
+
   const [oldPassword, setoldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmpassword] = useState('');
@@ -51,6 +53,15 @@ const ChangePassWord: React.FC = () => {
       confirmpassword.length > 0
     );
   };
+  const [credentials, setCredentials] = React.useState<{
+    oldPassword: string;
+    password: string;
+    cofirm_password: string;
+  }>({
+    oldPassword: '',
+    password: '',
+    cofirm_password: '',
+  });
 
   const handleChangePassword = () => {
     if (validateOldPassword(oldPassword)) {
@@ -78,6 +89,8 @@ const ChangePassWord: React.FC = () => {
       Alert.alert('Please fill in all fields.');
     }
   };
+
+  
 
   return (
     <TouchableWithoutFeedback

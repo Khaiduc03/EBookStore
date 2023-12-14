@@ -87,4 +87,10 @@ export class UserService {
     console.log(`${ENDPOINTS.GET_USER_RANDOM}`);
     return await apiService.get(`${ENDPOINTS.GET_USER_RANDOM}`);
   }
+  // Change password
+  static async changePassword(payload: any) {
+    console.log(`${ENDPOINTS.CHANGE_PASSWORD}`, payload);
+    return await apiService.put(`${ENDPOINTS.CHANGE_PASSWORD}`, payload);
+  }
+  
 }

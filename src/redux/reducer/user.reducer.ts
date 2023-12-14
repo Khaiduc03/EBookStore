@@ -1,6 +1,7 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 import {Redux} from '../types';
 import {
+  ChangePasswordType,
   ListFollow,
   PayloadHttpListFollow,
   UserState,
@@ -16,6 +17,16 @@ const reducer = createSlice({
   initialState: initialState,
   reducers: {
     postFollow: (state: UserState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+
+    // Change password
+    changePassword: (
+      state: UserState,
+      _: PayloadAction<ChangePasswordType>,
+    ) => {
       return {
         ...state,
       };
