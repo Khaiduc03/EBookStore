@@ -46,6 +46,9 @@ const ProfileUser: React.FC = props => {
   const currentpage = useAppSelector(currentPageAllPostByIdUser);
   const nextPage = useAppSelector(nextPageAllPostIdByUser);
 
+  console.log(nextPage);
+  console.log(currentpage);
+
   const dataUserById = useAppSelector(getUserById);
   const [isFollowed, setIsFollowed] = useState<boolean>(
     dataFollow
@@ -56,8 +59,6 @@ const ProfileUser: React.FC = props => {
       ? dataFollwer.is_following
       : true,
   );
-
-  console.log(dataFollwer);
 
   const styles = useStyles();
 
@@ -87,7 +88,12 @@ const ProfileUser: React.FC = props => {
 
   const loadMoreComic = () => {
     if (nextPage && !isLoading) {
-      dispatch(UserAction.getListPostByUser(currentpage ? currentpage + 1 : 1));
+      dispatch(
+        UserAction.getListAllPostByIdUser({
+          page: currentpage ? currentpage + 1 : 1,
+          user_uuid: dataUserById ? dataUserById[0].uuid : '',
+        }),
+      );
       setSize(true);
     }
   };
@@ -136,8 +142,6 @@ const ProfileUser: React.FC = props => {
         const isNearBottom =
           contentOffset.y + layoutMeasurement.height >=
           sizeContent - numberOfPixelsFromBottomThreshold;
-        console.log('sỉze scroll', contentOffset.y + layoutMeasurement.height);
-        console.log('sỉze content', sizeContent);
 
         if (isNearBottom) {
           loadMoreComic();

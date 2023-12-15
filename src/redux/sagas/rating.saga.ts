@@ -17,7 +17,7 @@ function* getListDataRatingSaga(action: PayloadAction<string>): Generator {
       console.log('run push tookit');
       yield put(RatingActions.setListRating(data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -37,7 +37,7 @@ function* getChartRatingSaga(action: PayloadAction<string>): Generator {
       console.log('run push tookit');
       yield put(RatingActions.setRatingChart(data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -54,7 +54,7 @@ function* likeRatingSaga(action: PayloadAction<string>): Generator {
       console.log(data);
       console.log('run push tookit');
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -71,7 +71,7 @@ function* unLikeRatingSaga(action: PayloadAction<string>): Generator {
       console.log(data);
       console.log('run push tookit');
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -93,7 +93,7 @@ function* postRatingSaga(action: PayloadAction<any>): Generator {
       console.log('run push tookit');
     } else {
       ToastAndroid.show('You can only rate once !!!', ToastAndroid.SHORT);
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -111,7 +111,7 @@ function* deleteRatingSaga(action: PayloadAction<string>): Generator {
       console.log(data);
       console.log('run push tookit');
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);

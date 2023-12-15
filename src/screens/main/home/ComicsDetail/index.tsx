@@ -1,26 +1,13 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import {View} from 'react-native';
 import {HeaderCustom, TabViewItem} from '../../../../components';
-import useStyles from './styles';
-import {Episodes, HeaderDetail, Preview} from './Components';
 import {NavigationService} from '../../../../navigation';
-import {useRoute} from '@react-navigation/native';
-import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {Episodes, HeaderDetail, Preview} from './Components';
+import useStyles from './styles';
 
-import {
-  ComicActions,
-  ComicType,
-  getCodePostFavorite,
-  getUuidPostFavorite,
-} from '../../../../redux';
-import {ScrollView} from 'react-native-gesture-handler';
-import {Alert} from 'react-native';
-import {RatingActions} from '../../../../redux/reducer/rating.reducer';
-import {getChartRating} from '../../../../redux/selectors/rating.selector';
-import {Button, Dialog} from '@rneui/base';
+import Awesome from '../../../../components/customs/Awesome';
 import {routes} from '../../../../constants';
 import {useComicDetail} from './hook/useComicDetail.hook';
-import Awesome from '../../../../components/customs/Awesome';
 
 const ComicsDetail = () => {
   const styles = useStyles();
@@ -36,7 +23,6 @@ const ComicsDetail = () => {
     visible2,
     uuidPost,
   } = useComicDetail();
-  console.log(visible2);
 
   return (
     <View style={styles.container}>

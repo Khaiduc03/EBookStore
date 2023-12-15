@@ -360,6 +360,16 @@ const reducer = createSlice({
       };
     },
 
+    reduceCountComment: (state: ComicState) => {
+      return {
+        ...state,
+        listDetailChapter: {
+          ...state.listDetailChapter,
+          totalComment: (state.listDetailChapter?.totalComment || 0) - 1,
+        },
+      };
+    },
+
     getListTopRating: (state: ComicState) => {
       return {
         ...state,

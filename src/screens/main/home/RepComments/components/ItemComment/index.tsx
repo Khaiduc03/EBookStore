@@ -15,6 +15,7 @@ interface CommentDataProps {
   data: CommentChapterType;
   setOpen: () => void;
   setUserRep: (text: string) => void;
+  reduceCountComment: () => void;
 }
 
 const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
@@ -39,7 +40,7 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
   const dataUser = useAppSelector(getAuthUserProfile);
 
   const commentIncludesFullname = props.data.comment.includes(
-    props.data.fullname,
+    props.data.fullname || 'null',
   );
   const fullnameIndex = props.data.comment.indexOf(props.data.fullname);
 
@@ -64,7 +65,13 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
   };
 
   const onPressDeleteComment = () => {
-    dispatch(CommentChapterAction.deleteRepCommentChapterSuccess(uuid));
+    dispatch(
+      CommentChapterAction.deleteRepCommentChater({
+        uuid: uuid,
+        parents_comment_uuid: parents_comment_uuid,
+      }),
+    );
+    props.reduceCountComment();
     setShow(false);
   };
 

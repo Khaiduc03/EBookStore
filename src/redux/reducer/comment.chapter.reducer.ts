@@ -280,7 +280,7 @@ const reducer = createSlice({
 
     deleteRepCommentChater: (
       state: CommentChapterState,
-      _: PayloadAction<string>,
+      _: PayloadAction<any>,
     ) => {
       return {
         ...state,
@@ -289,11 +289,11 @@ const reducer = createSlice({
 
     deleteRepCommentChapterSuccess: (
       state: CommentChapterState,
-      action: PayloadAction<string>,
+      action: PayloadAction<any>,
     ) => {
       if (state.listRepComment && state.listRepComment.data) {
         const updateComment = state.listRepComment.data.filter(
-          commentItem => commentItem.uuid !== action.payload,
+          commentItem => commentItem.uuid !== action.payload.uuid,
         );
 
         return {
@@ -305,6 +305,43 @@ const reducer = createSlice({
         };
       }
       return state;
+    },
+
+    reduceCountRep: (
+      state: CommentChapterState,
+      action: PayloadAction<any>,
+    ) => {
+      const uuid = action.payload.parents_comment_uuid;
+      if (state.listComment && state.listComment.data) {
+        const updatedListComment = {
+          ...state.listComment,
+          data: state.listComment.data.map(comment => {
+            if (comment.uuid === uuid) {
+              // Tìm thấy comment cần cập nhật
+              const updatedRepCount = comment.re_comment_count - 1;
+
+              return {
+                ...comment,
+                re_comment_count: updatedRepCount,
+              };
+            }
+            return comment;
+          }),
+        };
+
+        return {
+          ...state,
+          listRepComment: {
+            canNext: state.listRepComment?.canNext,
+            currentPage: state.listRepComment?.currentPage,
+            totalData: (state.listRepComment?.totalData || 0) - 1,
+            data: state.listRepComment?.data,
+          },
+          listComment: {
+            ...updatedListComment,
+          },
+        };
+      }
     },
   },
 });
