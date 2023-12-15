@@ -1,5 +1,5 @@
 import dynamicLinks from '@react-native-firebase/dynamic-links';
-import React from 'react';
+import React, {useCallback, useRef} from 'react';
 import {View} from 'react-native';
 import Share from 'react-native-share';
 import {HeaderCustom, TabViewItem} from '../../../../components';
@@ -9,6 +9,9 @@ import {NavigationService} from '../../../../navigation';
 import {Episodes, HeaderDetail, Preview} from './Components';
 import {useComicDetail} from './hook/useComicDetail.hook';
 import useStyles from './styles';
+
+import ItemShare from './Components/ItemShare';
+import BottomSheetFlatList from '../../../../components/shared/BottomSheer/components/BottomSheetFlatList';
 const ComicsDetail = () => {
   const styles = useStyles();
 
@@ -22,6 +25,9 @@ const ComicsDetail = () => {
     setVisible2,
     visible2,
     uuidPost,
+    pressHandler4,
+    bottomSheetRef4,
+    dataUser,
   } = useComicDetail();
 
   const generateLink = async () => {
@@ -104,9 +110,20 @@ const ComicsDetail = () => {
         message="Please select your sharing preferences"
         confirmButtonColor="#00BFFF"
         onConfirmPressed={onShare}
-        onCancelPressed={() => NavigationService.navigate(routes.SHARE_USER)}
+        onCancelPressed={() => pressHandler4()}
         cancelButtonColor="#F89300"
         onDismiss={() => setVisible2(false)}
+      />
+
+      <BottomSheetFlatList
+        ref={bottomSheetRef4}
+        data={dataUser}
+        renderItem={({item, index}) => {
+          return <ItemShare {...item} key={index} />;
+        }}
+        snapTo={'60%'}
+        backgroundColor={styles.bottomSheetStyle.backgroundColor}
+        backDropColor={'black'}
       />
     </View>
   );

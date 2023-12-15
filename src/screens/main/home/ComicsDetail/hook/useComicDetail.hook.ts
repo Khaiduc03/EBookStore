@@ -5,7 +5,7 @@ import {
   getUuidPostFavorite,
 } from '../../../../../redux';
 import {useRoute} from '@react-navigation/native';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../../../hooks';
 import {NavigationService} from '../../../../../navigation';
 import {RatingActions} from '../../../../../redux/reducer/rating.reducer';
@@ -13,6 +13,10 @@ import {getChartRating} from '../../../../../redux/selectors/rating.selector';
 import Share from 'react-native-share';
 import dynamicLinks from '@react-native-firebase/dynamic-links';
 import {err} from 'react-native-svg/lib/typescript/xml';
+
+import {UserAction} from '../../../../../redux/reducer/user.reducer';
+import {getAllUser} from '../../../../../redux/selectors/user.selector';
+import {BottomSheetMethods} from '../../../../../components/shared/BottomSheer/components/BottomSheetFlatList';
 
 interface RouteParamsIdComic {
   data: ComicType;
@@ -23,7 +27,9 @@ export const useComicDetail = () => {
   const route = useRoute();
   const uuidPost = useAppSelector(getUuidPostFavorite);
   const dataChart = useAppSelector(getChartRating);
+  const dataUser = useAppSelector(getAllUser);
   const [visible2, setVisible2] = useState(false);
+  const bottomSheetRef4 = useRef<BottomSheetMethods>(null);
 
   const data = (route.params as RouteParamsIdComic).data;
   const scrollRef = (route.params as RouteParamsIdComic).scrollRef;
@@ -35,6 +41,12 @@ export const useComicDetail = () => {
     dispatch(ComicActions.getListByTopicMore({name: data.topics}));
   }, [data]);
 
+  useEffect(() => {
+    dispatch(UserAction.getListUser());
+
+    return () => {};
+  }, []);
+
   const postFavorite = () => {
     if (uuidPost) {
       dispatch(ComicActions.deleteFavorite(uuidPost));
@@ -42,6 +54,11 @@ export const useComicDetail = () => {
       dispatch(ComicActions.postFavorite(data.comic_uuid || data.uuid));
     }
   };
+
+  const pressHandler4 = useCallback(() => {
+    bottomSheetRef4.current?.expand();
+    setVisible2(false);
+  }, []);
 
   const handlePressBack = () => {
     NavigationService.goBack();
@@ -64,9 +81,10 @@ export const useComicDetail = () => {
             forcedRedirectEnabled: true,
           },
         },
+
         dynamicLinks.ShortLinkType.DEFAULT,
       );
-      console.log('LINK', link);
+      setVisible2(false), console.log('LINK', link);
       return link;
     } catch (error) {
       console.log(error);
@@ -98,5 +116,8 @@ export const useComicDetail = () => {
     visible2,
     setVisible2,
     uuidPost,
+    pressHandler4,
+    bottomSheetRef4,
+    dataUser,
   };
 };
