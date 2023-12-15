@@ -22,7 +22,7 @@ import {HeaderCustom} from '../../../../components';
 import {ChatBubble} from './components/ChatBubbleItem';
 import useStyles from './styles';
 import {routes} from '../../../../constants';
-
+import dynamicLinks from '@react-native-firebase/dynamic-links';
 const MessageScreen: React.FC = () => {
   const {params} = useRoute() as any;
   const [selectedEmojis, setSelectedEmojis] = useState<string[]>([]);

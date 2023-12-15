@@ -1,4 +1,4 @@
-import {ScrollView} from 'react-native';
+import {ScrollView, Linking} from 'react-native';
 import {
   ComicActions,
   ComicType,
@@ -11,6 +11,8 @@ import {NavigationService} from '../../../../../navigation';
 import {RatingActions} from '../../../../../redux/reducer/rating.reducer';
 import {getChartRating} from '../../../../../redux/selectors/rating.selector';
 import Share from 'react-native-share';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
+import {err} from 'react-native-svg/lib/typescript/xml';
 
 interface RouteParamsIdComic {
   data: ComicType;
@@ -45,13 +47,36 @@ export const useComicDetail = () => {
     NavigationService.goBack();
   };
 
+  const generateLink = async () => {
+    try {
+      const link = await dynamicLinks().buildShortLink(
+        {
+          link: `https://comicverse2.page.link/V9Hh/comicdetail?comic_uuid=${data?.uuid}`,
+          domainUriPrefix: 'https://comicverse2.page.link',
+          android: {
+            packageName: 'com.comicverse',
+          },
+          analytics: {
+            campaign: 'comicdetail',
+          },
+          navigation: {
+            // Lấy đường dẫn của màn hình chi tiết truyện tranh
+            forcedRedirectEnabled: true,
+          },
+        },
+        dynamicLinks.ShortLinkType.DEFAULT,
+      );
+      console.log('LINK', link);
+      return link;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const onShare = async () => {
+    const getLink = await generateLink();
     const options: any = {
-      url: data.image_url,
-      message:
-        'ComicVerse app đọc truyện hàng đầu Việt Nam hihi : \n' +
-        data.comic_name +
-        '\n',
+      url: getLink,
     };
 
     try {

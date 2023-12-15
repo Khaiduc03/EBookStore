@@ -1,22 +1,24 @@
-import {useCallback, useEffect, useState} from 'react';
-import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
+import { useCallback, useEffect, useState } from 'react';
+import { NativeScrollEvent } from 'react-native';
+import { routes } from '../../../../../../constants';
+import { useAppDispatch, useAppSelector } from '../../../../../../hooks';
+import { NavigationService } from '../../../../../../navigation';
+import { ComicActions, TopicActions } from '../../../../../../redux';
 import {
-  getListComic,
-  getNextPage,
-  getListTopView,
   getCurrentPageHome,
+  getListComic,
+  getListTopView,
+  getNextPage,
 } from '../../../../../../redux/selectors/comic.selector';
 import {
   getIsLoadingHome,
   getIsLoadingPage,
   getIsLoadingStart,
 } from '../../../../../../redux/selectors/loading.selector';
-import {getListTopic} from '../../../../../../redux/selectors/topic.selector';
-import {ComicActions, TopicActions} from '../../../../../../redux';
+import { getListTopic } from '../../../../../../redux/selectors/topic.selector';
+
 import useStyles from '../../styles';
-import {NavigationService} from '../../../../../../navigation';
-import {routes} from '../../../../../../constants';
-import {NativeScrollEvent} from 'react-native';
+
 
 export const useComicHome = () => {
   const dispatch = useAppDispatch();
@@ -65,7 +67,7 @@ export const useComicHome = () => {
   }, []);
 
   function onScroll(nativeEvent: NativeScrollEvent) {
-    const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
+    const { contentOffset, contentSize, layoutMeasurement } = nativeEvent;
     const numberOfPixelsFromBottomThreshold = 100;
     const isNearBottom =
       contentOffset.y + layoutMeasurement.height >=
