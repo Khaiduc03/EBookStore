@@ -64,9 +64,10 @@ export const useComicDetail = () => {
             forcedRedirectEnabled: true,
           },
         },
+
         dynamicLinks.ShortLinkType.DEFAULT,
       );
-      console.log('LINK', link);
+      setVisible2(false), console.log('LINK', link);
       return link;
     } catch (error) {
       console.log(error);
