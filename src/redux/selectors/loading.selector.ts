@@ -11,3 +11,6 @@ export const getIsLoadingForum = (state: RootState) =>
   state.loading.isLoadingForum;
 export const getIsLoadingStart = (state: RootState) =>
   state.loading.isLoadingStart;
+
+export const getIsLoadingHome = (state: RootState) =>
+  state.loading.isLoadingHome;

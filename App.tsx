@@ -12,6 +12,7 @@ import {toastConfig} from './src/utils/toastConfig';
 import Slider from './src/screens/auth/onboard';
 import LoadingMain from './src/components/shared/LoadingMain';
 import LoadingStart from './src/components/shared/LoadingStart';
+import LoadingHome from './src/components/shared/LoadingHome';
 import BottomSheetCustomScreen from './src/components/shared/BottomSheetFlatlist';
 
 const App: FunctionComponent = () => {
@@ -32,6 +33,8 @@ const App: FunctionComponent = () => {
           <Loading />
           <LoadingMain />
           <LoadingStart />
+          <LoadingHome />
+
           {/* <BottomSheetCustomScreen /> */}
           {/* MAIN APP */}
           <Slider />

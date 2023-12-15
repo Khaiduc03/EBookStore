@@ -8,6 +8,7 @@ import useStyles from './styles';
 import {createIcon} from '../../../../utils';
 import {BannerComic, TopicsHome, TrendingComic} from './components';
 import {useComicHome} from './components/hook/useComicHome.hook';
+import OverLay from './components/OverLay';
 
 const Home: FunctionComponent = () => {
   const styles = useStyles();
@@ -24,6 +25,7 @@ const Home: FunctionComponent = () => {
     numCols,
     current,
     onScroll,
+    isLoadingHome,
   } = useComicHome();
 
   return (
@@ -31,7 +33,7 @@ const Home: FunctionComponent = () => {
       style={styles.container}
       onScroll={e => onScroll(e.nativeEvent)}
       nestedScrollEnabled>
-      {/* {current == 1 ? <OverLay /> : <View />} */}
+      {!isLoadingHome ? <OverLay /> : <View />}
       <HeaderCustom
         titleStyle={styles.textTitleHeader}
         onPressRightIconMiddle={handlePressSearch}

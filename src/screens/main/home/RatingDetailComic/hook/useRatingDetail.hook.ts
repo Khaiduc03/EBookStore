@@ -43,7 +43,7 @@ export const useRatingDetail = (props: useRatingDetailProp) => {
           comic_uuid: props.uuid,
         }),
       );
-      NavigationService.navigate(routes.RATINGCOMICSCREEN, {uuid: props.uuid});
+
       setShowAlert(false);
     } else {
       ToastAndroid.show('Please enter rating !!!', ToastAndroid.SHORT);

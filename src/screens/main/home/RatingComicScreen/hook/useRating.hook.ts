@@ -6,6 +6,7 @@ import {RatingActions} from '../../../../../redux/reducer/rating.reducer';
 
 export const useRating = () => {
   const dataRating = useAppSelector(getListRating);
+  const [show, setShow] = useState(false);
 
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const [displayedData, setDisplayedData] = useState<RatingType[]>();
@@ -30,8 +31,10 @@ export const useRating = () => {
 
   const onPressLikeRating = (item: RatingType) => {
     if (item.is_like) {
+      dispatch(RatingActions.handleSuccerLikeRating(item.uuid));
       dispatch(RatingActions.unLikeRating(item.uuid));
     } else {
+      dispatch(RatingActions.handleSuccerLikeRating(item.uuid));
       dispatch(RatingActions.likeRating(item.uuid));
     }
   };
@@ -39,7 +42,7 @@ export const useRating = () => {
   const onPressDeleteRating = (uuid: string) => {
     console.log('===========>', uuid);
     dispatch(RatingActions.deleteRating(uuid));
-    setShowAlert(false);
+    setShow(false);
   };
 
   return {
@@ -51,5 +54,7 @@ export const useRating = () => {
     onPressDeleteRating,
     showAlert,
     setShowAlert,
+    show,
+    setShow,
   };
 };

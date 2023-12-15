@@ -8,6 +8,11 @@ const useStyles = makeStyles(({colors}) => ({
     position: 'absolute',
     bottom: 5,
   },
+  skeletonStyle: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
   dotActive: {
     color: colors.white,
     marginRight: normalize(10),

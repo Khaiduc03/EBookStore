@@ -1,6 +1,6 @@
-import { createTheme } from '@rneui/themed';
-import { useAppSelector } from '../hooks';
-import { getMode } from '../redux/selectors/thems.selector';
+import {createTheme} from '@rneui/themed';
+import {useAppSelector} from '../hooks';
+import {getMode} from '../redux/selectors/thems.selector';
 
 const mode = useAppSelector(getMode);
 
@@ -37,6 +37,7 @@ declare module '@rneui/themed' {
     nameComment: string;
     nameUserComment: string;
     alertTextTitleMessage: string;
+    colorTopExplore: string;
   }
 }
 
@@ -84,7 +85,8 @@ export const theme = createTheme({
     colorDescription: 'rgba(65, 65,65, 1)',
     nameComment: '#404040',
     nameUserComment: '#737479',
-    alertTextTitleMessage: '#000'
+    alertTextTitleMessage: '#000',
+    colorTopExplore: '#F8F8F8',
   },
   darkColors: {
     primary: '#F89300',
@@ -128,7 +130,8 @@ export const theme = createTheme({
     colorDescription: 'rgba(255, 255, 255, 0.6)',
     nameComment: '#FFF',
     nameUserComment: '#FFF',
-    alertTextTitleMessage: '#FFF'
+    alertTextTitleMessage: '#FFF',
+    colorTopExplore: '#000',
   },
   components: {
     Button: (props, theme) => ({

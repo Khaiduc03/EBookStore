@@ -12,6 +12,7 @@ import {
   getListUserRandom,
 } from '../../../../redux/selectors/user.selector';
 import {UserType} from '../../../../redux/types/user.type';
+import {getAuthUserProfile} from '../../../../redux';
 
 interface ListItem {
   id: string;
@@ -27,6 +28,7 @@ const DiscoverPeople: React.FC = () => {
   const styles = useStyles();
   const dataRandom = useAppSelector(getListUserRandom);
   const dispatch = useAppDispatch();
+  const user = useAppSelector(getAuthUserProfile);
 
   const dataUser = useAppSelector(getAllUser);
 
@@ -35,7 +37,7 @@ const DiscoverPeople: React.FC = () => {
   };
 
   const onRefresh = React.useCallback(() => {
-    dispatch(UserAction.getUserRandom());
+    dispatch(UserAction.getUserRandom(user.uuid!));
   }, []);
 
   const renderItem = ({item}: {item: UserType}) => <ItemList data={item} />;

@@ -23,7 +23,6 @@ const ComicsDetail = () => {
     visible2,
     uuidPost,
   } = useComicDetail();
-  console.log(visible2);
 
   const generateLink = async () => {
     try {
@@ -50,8 +49,6 @@ const ComicsDetail = () => {
       console.log(error);
     }
   };
-
-
 
   // const onShare = async () => {
   //   const getLink = await generateLink();

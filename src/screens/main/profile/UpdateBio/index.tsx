@@ -9,6 +9,15 @@ import {UserAction} from '../../../../redux/reducer/user.reducer';
 const UpdateBio = () => {
   const styles = useStyles();
   const [value, setvalue] = useState('');
+  const maxCharacters = 120;
+  const [isTextInputEmpty, setIsTextInputEmpty] = useState(true);
+
+  const handleTextChange = (text: string) => {
+    setIsTextInputEmpty(text.trim() === '');
+    if (text.length <= maxCharacters) {
+      setvalue(text);
+    }
+  };
 
   const dispatch = useAppDispatch();
 
@@ -36,9 +45,10 @@ const UpdateBio = () => {
       />
       <TextInput
         value={value}
-        onChangeText={text => setvalue(text)}
+        onChangeText={handleTextChange}
         style={styles.inputStyle}
       />
+      <Text style={styles.countText}>{`${value.length}/${maxCharacters}`}</Text>
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../../../hooks';
 import {UserAction} from '../../../../../redux/reducer/user.reducer';
 import {
@@ -9,7 +9,7 @@ import {
   nextPagePostByUser,
 } from '../../../../../redux/selectors/user.selector';
 import {getIsLoadingTopic} from '../../../../../redux/selectors/loading.selector';
-import {getAuthUserProfile} from '../../../../../redux';
+import {AuthActions, getAuthUserProfile} from '../../../../../redux';
 import {NavigationService} from '../../../../../navigation';
 
 export const useUser = () => {
@@ -25,14 +25,23 @@ export const useUser = () => {
   const [size, setSize] = useState<boolean>(false);
   const [sizeContent, setSizeContent] = useState<number>(0);
   const user = useAppSelector(getAuthUserProfile);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   useEffect(() => {
-    dispatch(UserAction.getUserRandom());
+    dispatch(UserAction.getUserRandom(user.uuid!));
     dispatch(UserAction.getListUser());
     dispatch(UserAction.clearListPostByUser());
     dispatch(UserAction.getListPostByUser(1));
 
     return () => {};
+  }, []);
+
+  const onRefresh = React.useCallback(() => {
+    dispatch(UserAction.clearListPostByUser());
+    dispatch(AuthActions.getUserInfo());
+    dispatch(UserAction.getListPostByUser(1));
+
+    setRefreshing(false);
   }, []);
 
   const loadMoreComic = () => {
@@ -68,5 +77,7 @@ export const useUser = () => {
     sizeContent,
     user,
     handlePressGoback,
+    onRefresh,
+    refreshing,
   };
 };

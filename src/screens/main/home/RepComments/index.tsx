@@ -151,6 +151,9 @@ const CommentRepComic = () => {
     }
   };
 
+  const reduceCountComment = () => {
+    setCountComment(countComment - 1);
+  };
   const listFooterComponent = useCallback(() => {
     return <ActivityIndicator color={'#F89300'} size={'large'} />;
   }, []);
@@ -163,7 +166,12 @@ const CommentRepComic = () => {
     index: number;
   }) => {
     return (
-      <ItemComment setUserRep={setUserRep} setOpen={openInput} data={item} />
+      <ItemComment
+        reduceCountComment={reduceCountComment}
+        setUserRep={setUserRep}
+        setOpen={openInput}
+        data={item}
+      />
     );
   };
 

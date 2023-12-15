@@ -1,5 +1,4 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import produce from 'immer';
 
 import {
   Redux,
@@ -357,6 +356,16 @@ const reducer = createSlice({
         listDetailChapter: {
           ...state.listDetailChapter,
           totalComment: (state.listDetailChapter?.totalComment || 0) + 1,
+        },
+      };
+    },
+
+    reduceCountComment: (state: ComicState) => {
+      return {
+        ...state,
+        listDetailChapter: {
+          ...state.listDetailChapter,
+          totalComment: (state.listDetailChapter?.totalComment || 0) - 1,
         },
       };
     },

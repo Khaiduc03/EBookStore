@@ -136,28 +136,6 @@ const ItemRatingStar = () => {
                 {moment(item.created_at).format('YYYY-MM-DD-HH:mm') + ''}
               </Text>
             </View>
-            {/* <AwesomeAlert
-              show={showAlert}
-              showProgress={false}
-              title="Post rating 😕"
-              message="Are you sure you want to post your rating?"
-              closeOnTouchOutside={true}
-              closeOnHardwareBackPress={false}
-              showCancelButton={true}
-              showConfirmButton={true}
-              cancelText="No, cancel"
-              cancelButtonColor="blue"
-              confirmText="Yes, post"
-              confirmButtonColor="red"
-              onCancelPressed={() => {
-                setShowAlert(false);
-              }}
-              onConfirmPressed={() => onPressDeleteRating(item.uuid)}
-              titleStyle={styles.textTitleAlert}
-              messageStyle={styles.textMessageAlert}
-              cancelButtonTextStyle={styles.textCancelAlert}
-              confirmButtonTextStyle={styles.textConfirmAlert}
-            /> */}
           </View>
         )}
       />

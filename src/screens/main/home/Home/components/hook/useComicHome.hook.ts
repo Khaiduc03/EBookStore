@@ -10,8 +10,15 @@ import {
   getListTopView,
   getNextPage,
 } from '../../../../../../redux/selectors/comic.selector';
-import { getIsLoadingPage } from '../../../../../../redux/selectors/loading.selector';
+import {
+  getIsLoadingHome,
+  getIsLoadingPage,
+  getIsLoadingStart,
+} from '../../../../../../redux/selectors/loading.selector';
 import { getListTopic } from '../../../../../../redux/selectors/topic.selector';
+
+import useStyles from '../../styles';
+
 
 export const useComicHome = () => {
   const dispatch = useAppDispatch();
@@ -23,6 +30,8 @@ export const useComicHome = () => {
   const isLoading = useAppSelector(getIsLoadingPage);
   const dataTopView = useAppSelector(getListTopView);
   const current = useAppSelector(getCurrentPageHome);
+
+  const isLoadingHome = useAppSelector(getIsLoadingHome);
 
   useEffect(() => {
     dispatch(ComicActions.clearListData());
@@ -58,7 +67,7 @@ export const useComicHome = () => {
   }, []);
 
   function onScroll(nativeEvent: NativeScrollEvent) {
-    const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
+    const { contentOffset, contentSize, layoutMeasurement } = nativeEvent;
     const numberOfPixelsFromBottomThreshold = 100;
     const isNearBottom =
       contentOffset.y + layoutMeasurement.height >=
@@ -81,5 +90,6 @@ export const useComicHome = () => {
     handlePressSearch,
     current,
     onScroll,
+    isLoadingHome,
   };
 };

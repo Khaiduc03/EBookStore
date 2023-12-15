@@ -35,7 +35,7 @@ const Preview: React.FC<Comic> = props => {
             }
           />
           <RatingComic />
-          <HeaderCustom titleStyle={styles.textTitle} title="Read more" />
+
           <ReadMore />
         </View>
       </View>
