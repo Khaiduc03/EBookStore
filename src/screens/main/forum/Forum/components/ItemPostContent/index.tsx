@@ -1,29 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import {Icon} from '@rneui/themed';
+import React, {useState} from 'react';
 import {
-  View,
-  Text,
+  Dimensions,
   FlatList,
-  TouchableOpacity,
   Modal,
-  Image,
-  ActivityIndicator,
-  StatusBar,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+  Animated,
 } from 'react-native';
 import AutoHeightImage from 'react-native-auto-height-image';
-import useStyles from './styles';
-import {Dimensions} from 'react-native';
-import {Pressable} from 'react-native';
-import {Icon} from '@rneui/themed';
+import FBCollage from 'react-native-fb-collage';
 import {
   GestureHandlerRootView,
   PinchGestureHandler,
   TapGestureHandler,
 } from 'react-native-gesture-handler';
-import Animated, {
+import ReAnimated, {
   useAnimatedGestureHandler,
   useSharedValue,
   withSpring,
+  useAnimatedStyle,
 } from 'react-native-reanimated';
+import useStyles from './styles';
 
 interface PostContentProps {
   content: string;
@@ -61,6 +61,12 @@ const PostContent: React.FC<PostContentProps> = ({
     },
   });
 
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{scale: scale.value}],
+    };
+  });
+
   const tapHandler = useAnimatedGestureHandler({
     onActive: event => {
       scale.value = withSpring(1);
@@ -71,29 +77,6 @@ const PostContent: React.FC<PostContentProps> = ({
   const screenHeight = Dimensions.get('window').height;
 
   const [imageHeights, setImageHeights] = useState<number[]>([]);
-
-  useEffect(() => {
-    const promises = images?.map(image => {
-      return new Promise<number>((resolve, reject) => {
-        if (image) {
-          Image.getSize(
-            image,
-            (width, height) => {
-              const imgHeight = (screenWidth * height) / width;
-              resolve(imgHeight);
-            },
-            reject,
-          );
-        } else {
-          resolve(0);
-        }
-      });
-    });
-
-    if (promises) {
-      Promise.all(promises).then(setImageHeights);
-    }
-  }, [images]);
 
   return (
     <View>
@@ -106,78 +89,68 @@ const PostContent: React.FC<PostContentProps> = ({
         renderItem={({item, index}) => (
           <View>
             {item && (
-              <View
-                onLayout={event => {
-                  const {height} = event.nativeEvent.layout;
-                  setImageHeights(prevHeights => {
-                    const newHeights = [...prevHeights];
-                    newHeights[index] = height;
-                    return newHeights;
-                  });
-                }}
-                style={{
-                  width: screenWidth,
-                  height: screenHeight / 1.8,
-                }}>
-                <Pressable onPress={() => onImagePress(index)}>
-                  {item && (
-                    <Image
-                      source={{uri: item}}
-                      style={{height: imageHeights[index]}}
-                    />
-                  )}
-                  {images && (
-                    <View style={styles.viewImagesLength}>
-                      <Text style={styles.textImagesLength}>
-                        {images ? index + 1 : 0}/{images.length}
-                      </Text>
-                    </View>
-                  )}
-                </Pressable>
-                <Modal
-                  visible={showModal}
-                  transparent={true}
-                  onRequestClose={onClosePress}>
-                  <TouchableOpacity
-                    style={styles.viewIconClose}
-                    onPress={onClosePress}>
-                    <Icon
-                      name="close-circle"
-                      size={30}
-                      color={styles.colorIconClose.color}
-                      type="ionicon"
-                      style={styles.iconClose}
-                    />
-                  </TouchableOpacity>
-
-                  <View style={styles.viewModalImage}>
-                    <GestureHandlerRootView>
-                      <PinchGestureHandler onGestureEvent={pinchHandler}>
-                        <Animated.View style={{transform: [{scale: scale}]}}>
-                          <TapGestureHandler
-                            numberOfTaps={2}
-                            onGestureEvent={tapHandler}>
-                            <Animated.View>
-                              <AutoHeightImage
-                                key={selectedImage}
-                                source={{
-                                  uri: selectedImage,
-                                }}
-                                width={screenWidth}
-                              />
-                            </Animated.View>
-                          </TapGestureHandler>
-                        </Animated.View>
-                      </PinchGestureHandler>
-                    </GestureHandlerRootView>
+              <>
+                <FBCollage
+                  images={[{uri: item}] as any}
+                  style={{
+                    flex: 1,
+                    width: screenWidth,
+                    height: screenWidth,
+                    alignItems: 'center',
+                  }}
+                  borderRadius={6}
+                  imageOnPress={() => onImagePress(index)}
+                />
+                {images && (
+                  <View style={styles.viewImagesLength}>
+                    <Text style={styles.textImagesLength}>
+                      {images ? index + 1 : 0}/{images.length}
+                    </Text>
                   </View>
-                </Modal>
-              </View>
+                )}
+              </>
             )}
+
+            <Modal
+              visible={showModal}
+              transparent={true}
+              onRequestClose={onClosePress}>
+              <TouchableOpacity
+                style={styles.viewIconClose}
+                onPress={onClosePress}>
+                <Icon
+                  name="close-circle"
+                  size={30}
+                  color={styles.colorIconClose.color}
+                  type="ionicon"
+                  style={styles.iconClose}
+                />
+              </TouchableOpacity>
+
+              <View style={styles.viewModalImage}>
+                <GestureHandlerRootView>
+                  <PinchGestureHandler onGestureEvent={pinchHandler}>
+                    <ReAnimated.View style={animatedStyle}>
+                      <TapGestureHandler
+                        numberOfTaps={2}
+                        onGestureEvent={tapHandler}>
+                        <Animated.View>
+                          <AutoHeightImage
+                            key={selectedImage}
+                            source={{uri: selectedImage}}
+                            width={screenWidth}
+                          />
+                        </Animated.View>
+                      </TapGestureHandler>
+                    </ReAnimated.View>
+                  </PinchGestureHandler>
+                </GestureHandlerRootView>
+              </View>
+            </Modal>
           </View>
         )}
-        pagingEnabled
         horizontal
+        pagingEnabled
         showsHorizontalScrollIndicator={false}
       />
     </View>

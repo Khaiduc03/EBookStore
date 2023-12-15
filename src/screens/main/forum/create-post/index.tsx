@@ -175,7 +175,7 @@ const CreatePost: React.FC<ForumType> = props => {
         <View style={styles.viewBorder} />
 
         <TextInput
-          placeholder="What do you think today?"
+          placeholder="What are you thinking?"
           placeholderTextColor={styles.placeHolderColor.color}
           multiline
           textAlignVertical="top"

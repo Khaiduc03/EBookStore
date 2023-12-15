@@ -120,6 +120,24 @@ const useStyles = makeStyles(({ colors }) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  viewImagesLength: {
+    width: normalize(46),
+    height: normalize(24),
+    backgroundColor: colors.blackDefault,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: normalize(26),
+    borderWidth: normalize(0.6),
+    borderColor: colors.whiteDefault,
+    position: 'absolute',
+    top: normalize(16),
+    right: normalize(16),
+  },
+  textImagesLength: {
+    color: colors.whiteDefault,
+    fontSize: normalize(12),
+    fontFamily: fontFamilySetup.bold,
+  },
 }));
 
 export default useStyles;

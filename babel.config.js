@@ -7,5 +7,6 @@ module.exports = {
         relativeSourceLocation: true,
       },
     ],
+    ['react-native-reanimated/plugin', { disableInlineStylesWarning: true }],
   ],
 };

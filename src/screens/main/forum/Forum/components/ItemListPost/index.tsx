@@ -193,7 +193,9 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
             <TouchableOpacity
               style={styles.buttonHeader}
               onPress={() => NavigationService.navigate(routes.CREATE_POST)}>
-              <Text style={styles.textButtonHeader}>Bạn đang nghĩ gì?</Text>
+              <Text style={styles.textButtonHeader}>
+                What are you thinking?
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => NavigationService.navigate(routes.CREATE_POST)}>
