@@ -12,6 +12,7 @@ export {default as CalendarImage} from './components/CalendarImage';
 export {default as Default_avatar} from './components/Default_avatar';
 export {default as TopOneImage} from './components/TopOneImage';
 export {default as ImageIcon} from './components/ImageIcon';
+export {default as IconTopScreen} from './components/IconTopScreen';
 
 export {default as CreditCard} from './components/CreditCard';
 export const SvgImages = {};

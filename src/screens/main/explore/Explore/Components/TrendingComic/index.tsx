@@ -19,7 +19,7 @@ const TrendingComic = () => {
     <ItemTrending index={index} data={item} />
   );
   const handlePressTrending = () => {
-    NavigationService.navigate(routes.TREDING_COMIC);
+    NavigationService.navigate(routes.VIEW_EXPLORE);
   };
   return (
     <View style={styles.container}>
@@ -32,13 +32,17 @@ const TrendingComic = () => {
         }}
         onPressRightIconRight={handlePressTrending}
       />
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{paddingHorizontal: 16, gap: 5}}
-        data={data}
-        renderItem={RenderItem}
-      />
+      {data ? (
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{paddingHorizontal: 16, gap: 5}}
+          data={data}
+          renderItem={RenderItem}
+        />
+      ) : (
+        <View />
+      )}
     </View>
   );
 };

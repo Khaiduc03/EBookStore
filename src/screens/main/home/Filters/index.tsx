@@ -11,13 +11,16 @@ interface FiltersProps {
       setHightView: Function;
       setLowView: Function;
       setFilterArray: Function;
+      setLowRate: Function;
+      setHighRate: Function;
     };
   }>;
 }
 
 const Filters: React.FC<FiltersProps> = ({route}) => {
   const styles = useStyles();
-  const {setHightView, setLowView, setFilterArray} = route.params;
+  const {setHightView, setLowView, setFilterArray, setHighRate, setLowRate} =
+    route.params;
 
   return (
     <View style={styles.container}>
@@ -38,6 +41,8 @@ const Filters: React.FC<FiltersProps> = ({route}) => {
             setFilterArray={setFilterArray}
             setHightView={setHightView}
             setLowView={setLowView}
+            setHighRate={setHighRate}
+            setLowRate={setLowRate}
           />
         </View>
       </View>

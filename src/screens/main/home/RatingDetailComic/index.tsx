@@ -17,36 +17,29 @@ import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {RatingActions} from '../../../../redux/reducer/rating.reducer';
 import {useRoute} from '@react-navigation/native';
 import {getListRating} from '../../../../redux/selectors/rating.selector';
+import AwesomeAlert from 'react-native-awesome-alerts';
+import {useRatingDetail} from './hook/useRatingDetail.hook';
 interface RouteParamsIdComic {
-  uuid: string;
+  uuid?: string;
 }
 
 const RatingDetailComic: React.FC<RouteParamsIdComic> = () => {
+  const route = useRoute();
+  const uuid = (route.params as RouteParamsIdComic).uuid;
   const styles = useStyles();
 
-  const handleGoback = () => {
-    NavigationService.goBack();
-  };
-  const ratingCompleted = (rating: number) => {
-    console.log('Rating is: ' + rating);
-  };
-  const [inputText, setInputText] = useState('');
-  const [isTextInputEmpty, setIsTextInputEmpty] = useState(true);
-  const maxCharacters = 500;
+  const {
+    handleGoback,
+    handleSend,
+    handleTextChange,
+    inputText,
+    isTextInputEmpty,
+    ratingCompleted,
+    showAlert,
+    maxCharacters,
+    setShowAlert,
+  } = useRatingDetail({uuid: uuid});
 
-  const handleTextChange = (text: string) => {
-    setIsTextInputEmpty(text.trim() === '');
-    if (text.length <= maxCharacters) {
-      setInputText(text);
-    }
-  };
-  const handleSend = () => {
-    if (isTextInputEmpty) {
-      Alert.alert('Failed', 'Please enter text before sending rating');
-    } else {
-      Alert.alert('Success', 'Thanks for your rating');
-    }
-  };
   const user = useSelector(getAuthUserProfile);
   return (
     <View style={styles.container}>
@@ -58,7 +51,9 @@ const RatingDetailComic: React.FC<RouteParamsIdComic> = () => {
           type: 'ionicon',
         }}
         onPressLeftIcon={handleGoback}
-        onPressRightIconRight={handleSend}
+        onPressRightIconRight={() => {
+          setShowAlert(!showAlert);
+        }}
       />
       <View style={styles.content}>
         <Image
@@ -100,6 +95,28 @@ const RatingDetailComic: React.FC<RouteParamsIdComic> = () => {
             styles.countText
           }>{`${inputText.length}/${maxCharacters}`}</Text>
       </View>
+      <AwesomeAlert
+        show={showAlert}
+        showProgress={false}
+        title="Post rating 😕"
+        message="Are you sure you want to post your rating?"
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={false}
+        showCancelButton={true}
+        showConfirmButton={true}
+        cancelText="No, cancel"
+        cancelButtonColor="blue"
+        confirmText="Yes, post"
+        confirmButtonColor="red"
+        onCancelPressed={() => {
+          setShowAlert(false);
+        }}
+        onConfirmPressed={handleSend}
+        titleStyle={styles.textTitleAlert}
+        messageStyle={styles.textMessageAlert}
+        cancelButtonTextStyle={styles.textCancelAlert}
+        confirmButtonTextStyle={styles.textConfirmAlert}
+      />
     </View>
   );
 };

@@ -10,7 +10,9 @@ import {getListTopView} from '../../../../../../redux/selectors/comic.selector';
 
 const TopViewList: FunctionComponent = () => {
   const styles = useStyles();
-  const RenderItem = ({item}: any) => <ItemTopViewList data={item} />;
+  const RenderItem = ({item, index}: any) => (
+    <ItemTopViewList data={item} index={index} />
+  );
   const data = useAppSelector(getListTopView);
 
   return (

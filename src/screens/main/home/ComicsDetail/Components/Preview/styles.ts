@@ -32,8 +32,6 @@ const useStyles = makeStyles(({colors}) => ({
   content: {
     paddingHorizontal: normalize(10),
   },
- 
- 
 }));
 
 export default useStyles;

@@ -6,7 +6,7 @@ import {ComicService} from '../services';
 
 function* getListDataSaga(action: PayloadAction<number>): Generator {
   if (action.payload == 1) {
-    yield put(LoadingActions.showLoadingStart());
+    yield put(LoadingActions.showLoadingHome());
   } else {
     yield put(LoadingActions.showLoadingPage());
   }
@@ -17,14 +17,14 @@ function* getListDataSaga(action: PayloadAction<number>): Generator {
       console.log('run push tookit');
       yield put(ComicActions.setListData(data.data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log('hihi');
   } finally {
     if (action.payload == 1) {
       yield delay(3000);
-      yield put(LoadingActions.hideLoadingStart());
+      yield put(LoadingActions.hideLoadingHome());
     } else {
       yield delay(2000);
       yield put(LoadingActions.hideLoadingPage());
@@ -41,7 +41,7 @@ function* getComicById(action: PayloadAction<string>): Generator {
 
       yield put(ComicActions.setDetailComic(data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -100,7 +100,7 @@ function* getChapterByComicSaga(action: PayloadAction<string>): Generator {
       console.log('run push tookit');
       yield put(ComicActions.setListChapter(data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -119,7 +119,7 @@ function* getDetailChapterSaga(action: PayloadAction<any>): Generator {
       console.log('run push tookit');
       yield put(ComicActions.setListChapterDetail(data.data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -146,7 +146,7 @@ function* getDataComicBySearchSaga(action: PayloadAction<any>): Generator {
         ToastAndroid.show('No comics available !!!!', ToastAndroid.SHORT);
       }
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -168,7 +168,7 @@ function* getDataChapterNavSaga(action: PayloadAction<any>): Generator {
 
       yield put(ComicActions.setListChapterDetail(data.data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -187,7 +187,7 @@ function* getComicByTop20Saga(): Generator {
       console.log('run push tookit');
       yield put(ComicActions.setListTopView(data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -204,7 +204,7 @@ function* getComicByTopRatingSaga(): Generator {
       console.log('run push tookit');
       yield put(ComicActions.setListTopRating(data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -221,7 +221,7 @@ function* getComicByTopFavoriteSaga(): Generator {
       console.log('run push tookit');
       yield put(ComicActions.setListTopFavorite(data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -239,7 +239,7 @@ function* postFavoriteSaga(action: PayloadAction<string>): Generator {
       console.log(data);
       yield put(ComicActions.setPostFavorite(data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -258,7 +258,7 @@ function* deleteFavoriteSaga(action: PayloadAction<string>): Generator {
       console.log(data);
       yield put(ComicActions.setPostFavorite(data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -276,7 +276,7 @@ function* checkFavoriteSaga(action: PayloadAction<string>): Generator {
       console.log(data);
       yield put(ComicActions.setPostFavorite(data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -296,7 +296,7 @@ function* getListFavoriteSaga(action: PayloadAction<number>): Generator {
       console.log('run push tookit');
       yield put(ComicActions.setListFavorite(data.data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -314,7 +314,7 @@ function* getListHistoryComicSaga(action: PayloadAction<number>): Generator {
       console.log('run push tookit');
       yield put(ComicActions.setListHistotyComic(data.data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);

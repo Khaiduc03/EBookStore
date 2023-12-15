@@ -4,7 +4,7 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-} from 'react-native'; // Thêm ScrollView vào danh sách import
+} from 'react-native';
 
 import React from 'react';
 

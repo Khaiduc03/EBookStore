@@ -6,6 +6,9 @@ import {ItemFollowType} from '../../../../../../redux/types/user.type';
 import {images} from '../../../../../../assets';
 import {useAppDispatch} from '../../../../../../hooks';
 import {UserAction} from '../../../../../../redux/reducer/user.reducer';
+import AwesomeAlert from 'react-native-awesome-alerts';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
 interface FollowerProps {
   data?: ItemFollowType;
 }
@@ -13,9 +16,11 @@ interface FollowerProps {
 const ItemListFollow: React.FunctionComponent<FollowerProps> = props => {
   const styles = useStyles();
   const dispatch = useAppDispatch();
+  const [showAlert, setShowAlert] = useState(false);
 
   const onPressDelete = () => {
     dispatch(UserAction.deleteFollwer(props.data?.user_following_uuid!));
+    setShowAlert(false);
   };
 
   const onPressFollow = () => {
@@ -26,14 +31,21 @@ const ItemListFollow: React.FunctionComponent<FollowerProps> = props => {
   return (
     <View style={styles.container}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <FastImage
-          style={styles.imgStyle}
-          source={{
-            uri:
-              props.data?.image_url ||
-              'https://static.thenounproject.com/png/5034901-200.png',
-          }}
-        />
+        <TouchableOpacity
+          onPress={() =>
+            NavigationService.navigate(routes.PROFILEUSER, {
+              dataFollwer: props.data,
+            })
+          }>
+          <FastImage
+            style={styles.imgStyle}
+            source={{
+              uri:
+                props.data?.image_url ||
+                'https://static.thenounproject.com/png/5034901-200.png',
+            }}
+          />
+        </TouchableOpacity>
         <View style={styles.nameContainer}>
           <View
             style={{
@@ -59,9 +71,35 @@ const ItemListFollow: React.FunctionComponent<FollowerProps> = props => {
           </Text>
         </View>
       </View>
-      <TouchableOpacity onPress={onPressDelete} style={styles.btn}>
+      <TouchableOpacity
+        onPress={() => {
+          setShowAlert(!showAlert);
+        }}
+        style={styles.btn}>
         <Text style={styles.textBtn}>Delete</Text>
       </TouchableOpacity>
+      <AwesomeAlert
+        show={showAlert}
+        showProgress={false}
+        title="Delete Your Comment 😕"
+        message="Are you sure you want to delete your comment?"
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={false}
+        showCancelButton={true}
+        showConfirmButton={true}
+        cancelText="No, cancel"
+        cancelButtonColor="blue"
+        confirmText="Yes, delete it"
+        confirmButtonColor="red"
+        onCancelPressed={() => {
+          setShowAlert(false);
+        }}
+        onConfirmPressed={onPressDelete}
+        titleStyle={styles.textTitleAlert}
+        messageStyle={styles.textMessageAlert}
+        cancelButtonTextStyle={styles.textCancelAlert}
+        confirmButtonTextStyle={styles.textConfirmAlert}
+      />
     </View>
   );
 };

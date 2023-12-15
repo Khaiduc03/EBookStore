@@ -51,4 +51,18 @@ export class CommentChapterService {
       `${ENDPOINTS.GET_REP_COMMENT_CHAPTER}?parents_comment_uuid=${payload.parents_comment_uuid}&page=${payload.page}`,
     );
   }
+
+  static async deleteCommentRepChapter(payload: any) {
+    console.log(`${ENDPOINTS.DELETE_COMMENT_FORUM}`, payload);
+    return await apiService.delete(`${ENDPOINTS.DELETE_COMMENT_FORUM}`, {
+      data: {comment_uuid: payload.uuid},
+    });
+  }
+
+  static async deleteCommentChapter(payload: any) {
+    console.log(`${ENDPOINTS.DELETE_COMMENT_FORUM}`, payload);
+    return await apiService.delete(`${ENDPOINTS.DELETE_COMMENT_FORUM}`, {
+      data: {comment_uuid: payload},
+    });
+  }
 }

@@ -19,13 +19,17 @@ const RecommendedSeries = () => {
   return (
     <View style={styles.container}>
       <HeaderCustom titleStyle={styles.textTitle} title="Recommended Series " />
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        data={data}
-        renderItem={RenderItem}
-        contentContainerStyle={{paddingHorizontal: 10, gap: 10}}
-      />
+      {data ? (
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={data}
+          renderItem={RenderItem}
+          contentContainerStyle={{paddingHorizontal: 10, gap: 10}}
+        />
+      ) : (
+        <View />
+      )}
     </View>
   );
 };

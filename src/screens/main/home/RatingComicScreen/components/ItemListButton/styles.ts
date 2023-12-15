@@ -58,7 +58,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
 
   viewItem2: {
-    paddingTop: normalize(20),
+    paddingBottom: normalize(30),
   },
   btnNextScreen: {
     flexDirection: 'row',
@@ -125,6 +125,45 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.regular,
+  },
+  likeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  textLike: {
+    color: colors.black,
+    fontSize: normalize(13),
+    fontFamily: fontFamilySetup.medium,
+    marginLeft: normalize(5),
+  },
+  textTitleAlert: {
+    color: colors.black,
+    fontSize: normalize(19),
+    fontFamily: fontFamilySetup.bold,
+    lineHeight: normalize(21),
+    textAlign: 'center',
+  },
+  textMessageAlert: {
+    color: colors.black,
+    fontSize: normalize(12),
+    fontFamily: fontFamilySetup.medium,
+    textAlign: 'center',
+  },
+  textCancelAlert: {
+    color: colors.whiteDefault,
+    fontSize: normalize(11),
+    fontFamily: fontFamilySetup.regular,
+    lineHeight: normalize(21),
+    textAlign: 'center',
+    marginHorizontal: normalize(10),
+  },
+  textConfirmAlert: {
+    color: colors.whiteDefault,
+    fontSize: normalize(11),
+    fontFamily: fontFamilySetup.regular,
+    lineHeight: normalize(21),
+    textAlign: 'center',
+    marginHorizontal: normalize(10),
   },
 }));
 

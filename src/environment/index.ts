@@ -1,4 +1,4 @@
-import {config} from 'dotenv';
+import { config } from 'dotenv';
 import Config from 'react-native-config';
 
 // //URL
@@ -58,6 +58,8 @@ export const ENDPOINTS = {
   RATING_BY_UUID: Config.RATING_BY_UUID,
   ALL_RATING_COMIC: Config.ALL_RATING_COMIC,
   TOP_RATING: Config.TOP_RATING,
+  LIKE_RATING: Config.LIKE_RATING,
+  UNLIKE_RATING: Config.UNLIKE_RATING,
 
   //CONVERSATION
   CONVERSATION: Config.CONVERSATION,

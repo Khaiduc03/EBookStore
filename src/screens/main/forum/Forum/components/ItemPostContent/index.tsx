@@ -83,7 +83,6 @@ const PostContent: React.FC<PostContentProps> = ({
       <View style={styles.description}>
         {content && <Text style={styles.textDescription}>{content}</Text>}
       </View>
-
       <FlatList
         data={images}
         renderItem={({item, index}) => (
