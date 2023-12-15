@@ -1,5 +1,5 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import useStyles from './styles';
 import FastImage from 'react-native-fast-image';
 import {Icon} from '@rneui/base';
@@ -9,6 +9,8 @@ import {CommentChapterType} from '../../../../../../redux/types/comment.chapter.
 import {CommentChapterAction} from '../../../../../../redux/reducer/comment.chapter.reducer';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import moment from 'moment';
+import {getAuthUserProfile} from '../../../../../../redux';
+import Awesome from '../../../../../../components/customs/Awesome';
 
 interface CommentDataProps {
   data: CommentChapterType;
@@ -27,10 +29,14 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
     type,
     uuid,
     is_like,
+    user_uuid,
   } = props.data;
   const styles = useStyles();
 
   const dispatch = useAppDispatch();
+  const [show, setShow] = useState(false);
+
+  const dataUser = useAppSelector(getAuthUserProfile);
 
   const onPressLikeComment = () => {
     if (is_like) {
@@ -44,18 +50,27 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
     }
   };
 
+  const onPressDeleteComment = () => {
+    dispatch(CommentChapterAction.deleteCommentChater(uuid));
+    setShow(false);
+  };
+
   return (
     <View style={styles.container}>
       <FastImage
         style={styles.avatarStyle}
         source={{
-          uri: user_avatar,
+          uri:
+            user_avatar ||
+            'https://static.thenounproject.com/png/5034901-200.png',
         }}
       />
       <View style={styles.content}>
-        <Text style={styles.nameStyle}>{fullname}</Text>
+        <Text style={styles.nameStyle}>{fullname || 'Anonymous'}</Text>
         <Text style={styles.day}>
-          {moment(created_at).format('YYYY-MM-DD-HH:mm') + ''}
+          {created_at
+            ? moment(created_at).format('YYYY-MM-DD-HH:mm') + ''
+            : '2023-12-12-22:56'}
         </Text>
         <Text style={styles.commentStyle}>{comment}</Text>
         <View style={styles.repContent}>
@@ -92,11 +107,28 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
               </Text>
             </TouchableOpacity>
           </View>
-          <Icon
-            name="ellipsis-vertical"
-            type="ionicon"
-            size={15}
-            color={styles.iconStyle.color}
+          {dataUser.uuid == user_uuid ? (
+            <Icon
+              onPress={() => setShow(!show)}
+              name="trash-outline"
+              type="ionicon"
+              size={15}
+              color={styles.iconStyle.color}
+            />
+          ) : (
+            <View />
+          )}
+          <Awesome
+            show={show}
+            title="Do you want to delete your comment?"
+            message="Please choose yes or no"
+            cancelText="No, later"
+            confirmText="Yes,delete it"
+            confirmButtonColor="#00BFFF"
+            onConfirmPressed={onPressDeleteComment}
+            onCancelPressed={() => setShow(!show)}
+            cancelButtonColor="#F89300"
+            onDismiss={() => setShow(false)}
           />
         </View>
       </View>

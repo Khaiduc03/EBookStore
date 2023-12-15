@@ -1,134 +1,47 @@
+import {Icon} from '@rneui/themed';
+import React, {useCallback} from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
   ActivityIndicator,
   Keyboard,
+  TouchableOpacity,
   TouchableWithoutFeedback,
+  View,
 } from 'react-native';
-import _ from 'lodash';
-import React, {useState, useEffect, useCallback} from 'react';
-import {ComicItem, HeaderCustom, SearchCustom} from '../../../../components';
-import useStyles from './styles';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
-import {Icon} from '@rneui/themed';
-import {
-  getCurrentSearch,
-  getDataComicBySeacrh,
-  getNextSearch,
-} from '../../../../redux/selectors/comic.selector';
-import {ComicActions, ComicType, TopicActions} from '../../../../redux';
-import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {backScreen} from '../../../../utils';
 import {FlatList} from 'react-native-gesture-handler';
-import ErrorSearch from './components/ErrorSearch';
-import NoSearch from './components/NoSearch';
-import {getIsLoadingTopic} from '../../../../redux/selectors/loading.selector';
-import {useRoute} from '@react-navigation/native';
-import {ToastAndroid} from 'react-native';
+import {ComicItem, HeaderCustom} from '../../../../components';
 import SearchCustomV1 from '../../../../components/customs/SearchV1';
+import {routes} from '../../../../constants';
+import {NavigationService} from '../../../../navigation';
+import {ComicType} from '../../../../redux';
+import NoSearch from './components/NoSearch';
+import {useSearch} from './hook/useSearch.hook';
+import useStyles from './styles';
 const Search = () => {
-  const dispatch = useAppDispatch();
-  const dataBySearch = useAppSelector(getDataComicBySeacrh);
-  const currentPage = useAppSelector(getCurrentSearch);
-  const nextPage = useAppSelector(getNextSearch);
-  const [numCols, setNumCols] = useState(3);
-  const [hightView, setHightView] = useState(Boolean);
-  const [sizeContent, setSizeContent] = useState<number>(0);
-  const [size, setSize] = useState<boolean>(false);
-
-  const [lowView, setLowView] = useState(Boolean);
-  const [filterArray, setFilterArray] = useState<string[]>([]);
-
-  console.log('==========>fillter', filterArray);
-
-  const [data, setData] = useState<ComicType[]>([]);
-
-  const isLoading = useAppSelector(getIsLoadingTopic);
-
   const styles = useStyles();
-  const [search, setSearch] = useState('');
 
-  // const handleSearch = _.debounce(searchQuery => {
-  //   if (searchQuery) {
-  //     setFilterArray([]), setHightView(false);
-  //     setLowView(false);
-  //     dispatch(ComicActions.ClearListBySearch());
-  //     dispatch(ComicActions.getListBySearch({key: searchQuery, page: 1}));
-  //   }
-  // }, 3000);
+  const {
+    data,
+    handleGridIconPress,
+    handleListIconPress,
+    isLoading,
+    loadMoreComic,
+    numCols,
+    onContentSizeChange,
+    onPressBackIcon,
+    onPressSearch,
+    onSearchChange,
 
-  const onSearchChange = (text: any) => {
-    setSearch(text);
-    // handleSearch(text);
-  };
+    setHightView,
 
-  const handleListIconPress = () => {
-    setNumCols(1);
-  };
-  const handleGridIconPress = () => {
-    setNumCols(3);
-  };
-
-  const sortReduceDataByViews = (data: ComicType[]): ComicType[] => {
-    return data.slice().sort((a, b) => b.views - a.views);
-  };
-
-  const sortIncreaseDataByViews = (data: ComicType[]): ComicType[] => {
-    return data.slice().sort((a, b) => a.views - b.views);
-  };
-
-  useEffect(() => {
-    if (dataBySearch) {
-      let filteredData = [...dataBySearch];
-      if (filterArray.includes('All')) {
-        setData(filteredData);
-        ToastAndroid.show(
-          'Successful comic by fillter !!!!',
-          ToastAndroid.SHORT,
-        );
-        return;
-      }
-
-      if (filterArray.length > 0) {
-        filteredData = filteredData.filter(item => {
-          return filterArray.every(topic => item.topics.includes(topic));
-        });
-      }
-      if (hightView) {
-        filteredData = sortReduceDataByViews(filteredData);
-      } else if (lowView) {
-        filteredData = sortIncreaseDataByViews(filteredData);
-      }
-
-      setData(filteredData);
-    }
-  }, [dataBySearch, hightView, lowView, filterArray]);
-
-  const onPressSearch = () => {
-    setFilterArray([]), setHightView(false);
-    setLowView(false);
-    dispatch(ComicActions.ClearListBySearch());
-    dispatch(ComicActions.getListBySearch({key: search, page: 1}));
-  };
-
-  const loadMoreComic = () => {
-    if (search && nextPage && !isLoading) {
-      dispatch(
-        ComicActions.getListBySearch({
-          key: search,
-          page: currentPage && currentPage + 1,
-        }),
-      );
-      setSize(true);
-    }
-  };
-  const onPressBackIcon = () => {
-    dispatch(ComicActions.ClearListBySearch());
-    backScreen();
-  };
+    search,
+    setFilterArray,
+    setLowView,
+    sizeContent,
+    highRate,
+    setHighRate,
+    lowRate,
+    setLowRate,
+  } = useSearch();
 
   const listFooterComponent = useCallback(() => {
     return (
@@ -139,16 +52,6 @@ const Search = () => {
       />
     );
   }, []);
-  const onContentSizeChange = useCallback(
-    (contentWidth: number, contentHeight: number) => {
-      setSizeContent(contentHeight);
-      if (size) {
-        setSizeContent(sizeContent + 3000);
-        setSize(false);
-      }
-    },
-    [size, sizeContent],
-  );
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -172,6 +75,8 @@ const Search = () => {
                 setHightView,
                 setLowView,
                 setFilterArray,
+                setLowRate,
+                setHighRate,
               });
               Keyboard.dismiss();
             }}>

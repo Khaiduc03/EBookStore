@@ -15,12 +15,21 @@ import {TouchableOpacity} from 'react-native';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
 import {CarouselDataItem, carouselData, useBanner} from './hook/useBanner.hook';
+import {Skeleton} from '@rneui/base';
 
 const BannerComic = React.memo(() => {
   const styles = useStyles();
 
-  const {activeIndex, flatlistRef, getItemLayout, handleScroll, screenWidth} =
-    useBanner();
+  const {
+    activeIndex,
+    flatlistRef,
+    getItemLayout,
+    handleScroll,
+    screenWidth,
+    isLoading,
+    onLoadStart,
+    onLoadEnd,
+  } = useBanner();
 
   const renderItem = ({
     item,
@@ -30,11 +39,27 @@ const BannerComic = React.memo(() => {
     index: number;
   }) => {
     return (
-      <TouchableOpacity activeOpacity={0.5}>
+      <TouchableOpacity
+        style={{alignItems: 'center', justifyContent: 'center'}}
+        activeOpacity={0.5}>
         <FastImage
+          onLoadStart={onLoadStart}
+          onLoadEnd={onLoadEnd}
           source={{uri: item.image}}
           style={{height: screenWidth * 0.5, width: screenWidth}}
         />
+        {isLoading && (
+          <Skeleton animation="wave" style={styles.skeletonStyle}></Skeleton>
+        )}
+        {isLoading && (
+          <ActivityIndicator
+            color={'#F89300'}
+            size={'large'}
+            style={{
+              position: 'absolute',
+            }}
+          />
+        )}
       </TouchableOpacity>
     );
   };

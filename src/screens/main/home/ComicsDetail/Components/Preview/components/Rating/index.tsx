@@ -23,7 +23,7 @@ const LineComponent: React.FC<LineComponentProps> = ({length, stroke}) => {
         x2={length.toString()}
         y2="5"
         stroke={stroke}
-        strokeWidth="80"
+        strokeWidth="100"
         strokeLinecap="butt"
       />
     </Svg>
@@ -51,7 +51,7 @@ const RatingComic: React.FC = () => {
           <AirbnbRating
             isDisabled={true}
             defaultRating={
-              dataChart ? parseInt(dataChart.average_rating.toFixed(1)) : 4
+              dataChart ? parseInt(dataChart.average_rating.toFixed(0)) : 4
             }
             selectedColor="#FFC911"
             showRating={false}

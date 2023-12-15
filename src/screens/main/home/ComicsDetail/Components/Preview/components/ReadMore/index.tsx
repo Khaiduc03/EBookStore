@@ -1,7 +1,7 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import useStyles from './styles';
-import {ComicItem} from '../../../../../../../../components';
+import {ComicItem, HeaderCustom} from '../../../../../../../../components';
 import {ComicType} from '../../../../../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../../../../../hooks';
 import {
@@ -21,6 +21,7 @@ const ReadMore = () => {
   );
   return (
     <View style={styles.container}>
+      <HeaderCustom titleStyle={styles.textTitle} title="Read more" />
       <FlatList
         nestedScrollEnabled
         contentContainerStyle={{gap: 5, paddingHorizontal: 10}}

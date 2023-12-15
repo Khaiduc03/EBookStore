@@ -16,6 +16,7 @@ export const useGetPostDetail = (props: UseGetPostDetailType) => {
   const postData = useAppSelector(getPostById);
   const [like, setLike] = useState(false);
   const [count, setCount] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     dispatch(UserAction.getPostById(post_id));
@@ -40,10 +41,19 @@ export const useGetPostDetail = (props: UseGetPostDetailType) => {
     }
   };
 
+  const handleDeletePost = (forum_uuid: any) => {
+    dispatch(ForumActions.deletePost({forum_uuid: forum_uuid}));
+    dispatch(UserAction.deletePost(forum_uuid));
+    setShowAlert(false);
+  };
+
   return {
     postData,
     onPressLike,
     like,
     count,
+    handleDeletePost,
+    showAlert,
+    setShowAlert,
   };
 };

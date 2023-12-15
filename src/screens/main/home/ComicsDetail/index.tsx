@@ -1,27 +1,17 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
+import React, {useCallback, useRef} from 'react';
+import {View} from 'react-native';
+import Share from 'react-native-share';
 import {HeaderCustom, TabViewItem} from '../../../../components';
-import useStyles from './styles';
-import {Episodes, HeaderDetail, Preview} from './Components';
-import {NavigationService} from '../../../../navigation';
-import {useRoute} from '@react-navigation/native';
-import {useAppDispatch, useAppSelector} from '../../../../hooks';
-
-import {
-  ComicActions,
-  ComicType,
-  getCodePostFavorite,
-  getUuidPostFavorite,
-} from '../../../../redux';
-import {ScrollView} from 'react-native-gesture-handler';
-import {Alert} from 'react-native';
-import {RatingActions} from '../../../../redux/reducer/rating.reducer';
-import {getChartRating} from '../../../../redux/selectors/rating.selector';
-import {Button, Dialog} from '@rneui/base';
-import {routes} from '../../../../constants';
-import {useComicDetail} from './hook/useComicDetail.hook';
 import Awesome from '../../../../components/customs/Awesome';
+import {routes} from '../../../../constants';
+import {NavigationService} from '../../../../navigation';
+import {Episodes, HeaderDetail, Preview} from './Components';
+import {useComicDetail} from './hook/useComicDetail.hook';
+import useStyles from './styles';
 
+import ItemShare from './Components/ItemShare';
+import BottomSheetFlatList from '../../../../components/shared/BottomSheer/components/BottomSheetFlatList';
 const ComicsDetail = () => {
   const styles = useStyles();
 
@@ -35,8 +25,54 @@ const ComicsDetail = () => {
     setVisible2,
     visible2,
     uuidPost,
+    pressHandler4,
+    bottomSheetRef4,
+    dataUser,
   } = useComicDetail();
-  console.log(visible2);
+
+  const generateLink = async () => {
+    try {
+      const link = await dynamicLinks().buildShortLink(
+        {
+          link: `https://comicverse2.page.link/V9Hh/comicdetail?comic_uuid=${data?.uuid}`,
+          domainUriPrefix: 'https://comicverse2.page.link',
+          android: {
+            packageName: 'com.comicverse',
+          },
+          analytics: {
+            campaign: 'comicdetail',
+          },
+          navigation: {
+            // Lấy đường dẫn của màn hình chi tiết truyện tranh
+            forcedRedirectEnabled: true,
+          },
+        },
+        dynamicLinks.ShortLinkType.DEFAULT,
+      );
+      console.log('LINK', link);
+      return link;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const onShare = async () => {
+  //   const getLink = await generateLink();
+  //   // const initialUrl = await Linking.getInitialURL();
+  //   // console.log(initialUrl);
+  //   // const {url: initialUrl, processing} = useInitialURL();
+  //   const options: any = {
+  //     url: getLink,
+  //   };
+
+  //   try {
+  //     const res = await Share.open(options);
+  //     setVisible2(false);
+  //     console.log(res);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <View style={styles.container}>
@@ -74,9 +110,20 @@ const ComicsDetail = () => {
         message="Please select your sharing preferences"
         confirmButtonColor="#00BFFF"
         onConfirmPressed={onShare}
-        onCancelPressed={() => NavigationService.navigate(routes.SHARE_USER)}
+        onCancelPressed={() => pressHandler4()}
         cancelButtonColor="#F89300"
         onDismiss={() => setVisible2(false)}
+      />
+
+      <BottomSheetFlatList
+        ref={bottomSheetRef4}
+        data={dataUser}
+        renderItem={({item, index}) => {
+          return <ItemShare {...item} key={index} />;
+        }}
+        snapTo={'60%'}
+        backgroundColor={styles.bottomSheetStyle.backgroundColor}
+        backDropColor={'black'}
       />
     </View>
   );

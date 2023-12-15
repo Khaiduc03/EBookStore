@@ -58,7 +58,7 @@ const useStyles = makeStyles(({colors}) => ({
   },
 
   viewItem2: {
-    paddingTop: normalize(20),
+    paddingBottom: normalize(30),
   },
   btnNextScreen: {
     flexDirection: 'row',

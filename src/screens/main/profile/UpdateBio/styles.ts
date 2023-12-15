@@ -23,5 +23,10 @@ const useStyles = makeStyles(({colors}) => ({
     borderBottomColor: colors.primary,
     borderBottomWidth: 1,
   },
+  countText: {
+    alignSelf: 'flex-end',
+    marginRight: normalize(20),
+    color: colors.black,
+  },
 }));
 export default useStyles;

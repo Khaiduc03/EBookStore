@@ -19,7 +19,7 @@ import {getListConversation} from '../../../../redux/selectors/chat.selector';
 import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {parseISO} from 'date-fns';
-
+import dynamicLinks from '@react-native-firebase/dynamic-links';
 const ConversationItemMemoized = memo(ConversationItem);
 
 const ConversationScreen: React.FC = () => {

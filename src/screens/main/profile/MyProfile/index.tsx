@@ -2,6 +2,7 @@ import React from 'react';
 import {
   ActivityIndicator,
   FlatList,
+  RefreshControl,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -26,12 +27,17 @@ const MyProfile: React.FC = () => {
     sizeContent,
     user,
     handlePressGoback,
+    onRefresh,
+    refreshing,
   } = useUser();
 
   return (
     <ScrollView
       onContentSizeChange={onContentSizeChange}
       nestedScrollEnabled
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
       onScroll={({nativeEvent}) => {
         const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
         const numberOfPixelsFromBottomThreshold = 100;

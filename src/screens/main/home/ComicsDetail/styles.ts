@@ -12,6 +12,10 @@ const useStyles = makeStyles(({colors}) => ({
   tabStyle: {
     backgroundColor: colors.grey1,
   },
+
+  bottomSheetStyle: {
+    backgroundColor: colors.background,
+  },
   titleStyle: {
     color: colors.white,
     fontSize: normalize(12),

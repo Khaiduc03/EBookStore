@@ -4,4 +4,5 @@ import {ComicType} from '../../../../../../redux';
 
 export type CustomComicProps = {
   data: ComicType;
+  index?: number;
 };

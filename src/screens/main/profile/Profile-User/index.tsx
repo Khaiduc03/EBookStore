@@ -22,17 +22,21 @@ import {
   getUserById,
   nextPageAllPostIdByUser,
 } from '../../../../redux/selectors/user.selector';
-import {UserType} from '../../../../redux/types/user.type';
+import {ItemFollowType, UserType} from '../../../../redux/types/user.type';
 import {UserAction} from '../../../../redux/reducer/user.reducer';
 import {getIsLoadingTopic} from '../../../../redux/selectors/loading.selector';
 import {ActivityIndicator} from 'react-native';
 interface RouteParamsProfile {
   data?: UserType;
+  dataFollow?: ItemFollowType;
+  dataFollwer?: ItemFollowType;
 }
 
 const ProfileUser: React.FC = props => {
   const route = useRoute();
   const dataUser = (route.params as RouteParamsProfile).data;
+  const dataFollow = (route.params as RouteParamsProfile).dataFollow;
+  const dataFollwer = (route.params as RouteParamsProfile).dataFollwer;
   const dataList = useAppSelector(getAllPostByIdUser);
   const dispatch = useAppDispatch();
 
@@ -42,26 +46,54 @@ const ProfileUser: React.FC = props => {
   const currentpage = useAppSelector(currentPageAllPostByIdUser);
   const nextPage = useAppSelector(nextPageAllPostIdByUser);
 
-  const dataUserById = useAppSelector(getUserById);
-  const [isFollowed, setIsFollowed] = useState<Boolean>(
-    dataUser ? dataUser?.is_following : true,
-  );
+  console.log(nextPage);
+  console.log(currentpage);
 
-  console.log(dataUser?.uuid);
+  const dataUserById = useAppSelector(getUserById);
+  const [isFollowed, setIsFollowed] = useState<boolean>(
+    dataFollow
+      ? dataFollow?.is_follower
+      : dataUser
+      ? dataUser.is_following
+      : dataFollwer
+      ? dataFollwer.is_following
+      : true,
+  );
 
   const styles = useStyles();
 
   useEffect(() => {
-    dispatch(UserAction.getUserById(dataUser?.uuid!));
+    dispatch(
+      UserAction.getUserById(
+        dataUser?.uuid! ||
+          dataFollow?.user_follower_uuid! ||
+          dataFollwer?.user_following_uuid!,
+      ),
+    );
     dispatch(UserAction.clearListAllPostByUser());
     dispatch(
-      UserAction.getListAllPostByIdUser({page: 1, user_uuid: dataUser?.uuid}),
+      UserAction.getListAllPostByIdUser({
+        page: 1,
+        user_uuid:
+          dataUser?.uuid ||
+          dataFollow?.user_follower_uuid ||
+          dataFollwer?.user_following_uuid!,
+      }),
     );
-  }, [dataUser?.uuid!]);
+  }, [
+    dataUser?.uuid! ||
+      dataFollow?.user_follower_uuid ||
+      dataFollwer?.user_following_uuid!,
+  ]);
 
   const loadMoreComic = () => {
     if (nextPage && !isLoading) {
-      dispatch(UserAction.getListPostByUser(currentpage ? currentpage + 1 : 1));
+      dispatch(
+        UserAction.getListAllPostByIdUser({
+          page: currentpage ? currentpage + 1 : 1,
+          user_uuid: dataUserById ? dataUserById[0].uuid : '',
+        }),
+      );
       setSize(true);
     }
   };
@@ -88,7 +120,13 @@ const ProfileUser: React.FC = props => {
   };
 
   const handleFollowButtonClick = () => {
-    dispatch(UserAction.postFollowRandom(dataUser?.uuid));
+    dispatch(
+      UserAction.postFollowRandom(
+        dataUser?.uuid ||
+          dataFollow?.user_follower_uuid ||
+          dataFollwer?.user_following_uuid,
+      ),
+    );
     setIsFollowed(!isFollowed);
   };
   const renderItem = ({item}: {item: UserType}) => (
@@ -104,8 +142,6 @@ const ProfileUser: React.FC = props => {
         const isNearBottom =
           contentOffset.y + layoutMeasurement.height >=
           sizeContent - numberOfPixelsFromBottomThreshold;
-        console.log('sỉze scroll', contentOffset.y + layoutMeasurement.height);
-        console.log('sỉze content', sizeContent);
 
         if (isNearBottom) {
           loadMoreComic();
@@ -124,7 +160,7 @@ const ProfileUser: React.FC = props => {
       <View style={styles.nameUser}>
         <TextCustom
           textBold
-          title={(dataUser && dataUser.fullname) || 'Anonymo'}
+          title={(dataUserById && dataUserById[0].fullname) || 'Anonymo'}
         />
         <Text style={styles.textBio} numberOfLines={1}>
           {(dataUserById && dataUserById[0].summary) || 'I am hacker'}

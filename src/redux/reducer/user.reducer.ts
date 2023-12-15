@@ -169,7 +169,7 @@ const reducer = createSlice({
         },
       };
     },
-    getUserRandom: (state: UserState) => {
+    getUserRandom: (state: UserState, _: PayloadAction<string>) => {
       return {
         ...state,
       };
@@ -185,6 +185,23 @@ const reducer = createSlice({
           ...action.payload,
         },
       };
+    },
+
+    deleteSameUserRandom: (state: UserState, action: PayloadAction<string>) => {
+      if (state.listUserRandom && state.listUserRandom.data) {
+        const updateRandom = state.listUserRandom.data.filter(
+          random => random.uuid !== action.payload,
+        );
+
+        return {
+          ...state,
+          listUserRandom: {
+            ...state.listUserRandom,
+            data: updateRandom,
+          },
+        };
+      }
+      return state;
     },
 
     deleteFollwer: (state: UserState, _: PayloadAction<string>) => {
@@ -295,6 +312,23 @@ const reducer = createSlice({
       return {
         ...state,
       };
+    },
+    deletePost: (state: UserState, action: PayloadAction<string>) => {
+      if (state.listPostByUser && state.listPostByUser.data) {
+        const updatedFollower = state.listPostByUser.data.filter(
+          postItem => postItem.uuid !== action.payload,
+        );
+
+        return {
+          ...state,
+          listPostByUser: {
+            ...state.listPostByUser,
+            data: updatedFollower,
+          },
+          postById: undefined,
+        };
+      }
+      return state;
     },
 
     handleSuccerPostFollowListFollower: (

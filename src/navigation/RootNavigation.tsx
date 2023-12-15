@@ -1,13 +1,20 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { makeStyles, useThemeMode } from '@rneui/themed';
-import React from 'react';
-import { StatusBar } from 'react-native';
-import { useAppSelector } from '../hooks';
-import { getAuthEnableSignIn } from '../redux/selectors/auth.selector';
-import { getMode } from '../redux/selectors/thems.selector';
-import { linking, navigationRef } from './NavigationService';
+import {NavigationContainer} from '@react-navigation/native';
+import {makeStyles, useThemeMode} from '@rneui/themed';
+import React, {useEffect} from 'react';
+import {StatusBar} from 'react-native';
+import {useAppSelector} from '../hooks';
+import {getAuthEnableSignIn} from '../redux/selectors/auth.selector';
+import {getMode} from '../redux/selectors/thems.selector';
+import {NavigationService, linking, navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
+
+import {ComicService} from '../redux';
+import {routes} from '../constants';
+
+import {CustomToastBottom} from '../utils';
+import BottomSheetScreenScroll from '../components/shared/BottomSheer/BottomSheetScreenScroll';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -29,6 +36,35 @@ const RootNavigation = () => {
     }
   }, [mode]);
 
+  const handleDynamicLink = async (link: any) => {
+    if (link) {
+      if (link.url.includes('comicverse2.page.link/V9Hh/comicdetail')) {
+        if (enableSignIn) {
+          const uuid = link.url.split('comic_uuid=')[1];
+          const {data} = await ComicService.getComicById(uuid);
+          if (data.code === 200) {
+            NavigationService.navigate(routes.COMICDETAIL, {
+              data: data.data[0],
+            });
+          } else {
+            CustomToastBottom('Comic not found');
+          }
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    dynamicLinks().getInitialLink().then(handleDynamicLink);
+  }, []);
+
+  useEffect(() => {
+    console.log('hi');
+    const unsubscribe = dynamicLinks().onLink(handleDynamicLink);
+    // When the component is unmounted, remove the listener
+    return () => unsubscribe();
+  }, []);
+
   return (
     <NavigationContainer linking={linking} ref={navigationRef}>
       <StatusBar
@@ -39,6 +75,7 @@ const RootNavigation = () => {
       />
       {/* <AppNavigator />  */}
       {/* <CreateNewPasswordScreen /> */}
+      {/* <BottomSheetScreenScroll /> */}
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
       {/* <RatingComicScreen /> */}
       {/* <AppNavigator /> */}

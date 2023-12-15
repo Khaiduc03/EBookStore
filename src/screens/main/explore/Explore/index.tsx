@@ -16,6 +16,7 @@ import {
 } from '../../../../redux/selectors/comic.selector';
 import TopListRating from './Components/TopListRating';
 import TopListFavorite from './Components/TopListFavorite';
+import TopViewList from './Components/TopViewComic/components/TopViewList';
 
 const data = [
   {
@@ -62,12 +63,6 @@ const ExploreScreen: React.FC = () => {
     dispatch(ComicActions.getListTopRating());
     dispatch(ComicActions.getListTopFavorite());
   }, []);
-
-  const dataRating = useAppSelector(getListTopRating);
-  const dataFavorite = useAppSelector(getListTopFavorite);
-
-  console.log('=======================', dataRating);
-
   const styles = useStyles();
 
   return (
@@ -84,9 +79,7 @@ const ExploreScreen: React.FC = () => {
           <CarouselSquareList data={data} autoPlay={false} pagination={true} />
         </View>
         <RecommendedSeries />
-        <TopListFavorite />
         <TrendingComic />
-        <TopListRating />
         <ListHotComic />
       </ScrollView>
     </View>

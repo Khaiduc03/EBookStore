@@ -12,6 +12,7 @@ import {toastConfig} from './src/utils/toastConfig';
 import Slider from './src/screens/auth/onboard';
 import LoadingMain from './src/components/shared/LoadingMain';
 import LoadingStart from './src/components/shared/LoadingStart';
+import LoadingHome from './src/components/shared/LoadingHome';
 
 const App: FunctionComponent = () => {
   useEffect(() => {
@@ -31,7 +32,9 @@ const App: FunctionComponent = () => {
           <Loading />
           <LoadingMain />
           <LoadingStart />
+          <LoadingHome />
 
+          {/* <BottomSheetCustomScreen /> */}
           {/* MAIN APP */}
           <Slider />
           <RootNavigation />

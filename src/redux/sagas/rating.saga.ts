@@ -6,6 +6,7 @@ import {LoadingActions} from '../reducer';
 import {pull} from 'lodash';
 import {NavigationService} from '../../navigation';
 import {routes} from '../../constants';
+import {ToastAndroid} from 'react-native';
 
 function* getListDataRatingSaga(action: PayloadAction<string>): Generator {
   try {
@@ -16,7 +17,7 @@ function* getListDataRatingSaga(action: PayloadAction<string>): Generator {
       console.log('run push tookit');
       yield put(RatingActions.setListRating(data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -36,7 +37,7 @@ function* getChartRatingSaga(action: PayloadAction<string>): Generator {
       console.log('run push tookit');
       yield put(RatingActions.setRatingChart(data));
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -49,11 +50,11 @@ function* likeRatingSaga(action: PayloadAction<string>): Generator {
     console.log('run');
     const {data}: any = yield call(RatingService.likeRating, action.payload);
     if (data.code == 200) {
-      yield put(RatingActions.handleSuccerLikeRating(action.payload));
+      // yield put(RatingActions.handleSuccerLikeRating(action.payload));
       console.log(data);
       console.log('run push tookit');
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -66,11 +67,11 @@ function* unLikeRatingSaga(action: PayloadAction<string>): Generator {
     console.log('run');
     const {data}: any = yield call(RatingService.unLikeRating, action.payload);
     if (data.code == 200) {
-      yield put(RatingActions.handleSuccerLikeRating(action.payload));
+      // yield put(RatingActions.handleSuccerLikeRating(action.payload));
       console.log(data);
       console.log('run push tookit');
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
@@ -80,19 +81,24 @@ function* unLikeRatingSaga(action: PayloadAction<string>): Generator {
 
 function* postRatingSaga(action: PayloadAction<any>): Generator {
   try {
+    yield put(LoadingActions.showLoading());
     console.log('run');
     const {data}: any = yield call(RatingService.postRating, action.payload);
     if (data.code == 200) {
       yield put(RatingActions.postRatingSuccess(data.data));
-
+      NavigationService.navigate(routes.RATINGCOMICSCREEN, {
+        uuid: action.payload.comic_uuid,
+      });
       console.log(data);
       console.log('run push tookit');
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('You can only rate once !!!', ToastAndroid.SHORT);
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
   } finally {
+    yield put(LoadingActions.hideLoading());
   }
 }
 
@@ -105,7 +111,7 @@ function* deleteRatingSaga(action: PayloadAction<string>): Generator {
       console.log(data);
       console.log('run push tookit');
     } else {
-      console.log('Server errol !!!');
+      ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
   } catch (error) {
     console.log(error);
