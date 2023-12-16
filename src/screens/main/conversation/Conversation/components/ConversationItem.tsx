@@ -4,6 +4,7 @@ import {routes} from '../../../../../constants';
 import {NavigationService} from '../../../../../navigation';
 
 import {Avatar} from '@rneui/themed';
+import moment from 'moment';
 import React, {useEffect, useState} from 'react';
 import {ConversationI} from '../../../../../redux';
 import {formatTime} from '../../../../../utils';
@@ -23,6 +24,10 @@ export const ConversationItem = (item: ConversationI) => {
     is_seen,
   } = item;
   const status = joined_status ? 'online' : 'offline';
+  const last_message_time_formatted = moment(
+    last_message_time || created_at,
+  ).format('HH:mm');
+
   const [lastMessage, setLastMessage] = useState(
     last_sender_name === 'You' ? 'You: ' : '',
   );
@@ -31,15 +36,29 @@ export const ConversationItem = (item: ConversationI) => {
   );
   const [name, setName] = useState(joined_name || 'Anonymous');
   console.log('is_seen: ' + is_seen);
-  const last_message_time_formatted = formatTime(
-    last_message_time || created_at,
-  );
+
+  const getTimeElapsed = () => {
+    const now = moment();
+    const postTime = moment(last_message_time || created_at);
+    const duration = moment.duration(now.diff(postTime));
+
+    if (duration.asMinutes() < 1) {
+      return 'Just now';
+    } else if (duration.asHours() < 1) {
+      return `${Math.floor(duration.asMinutes())}m ago`;
+    } else if (duration.asDays() < 1) {
+      return `${Math.floor(duration.asHours())}h ago`;
+    } else {
+      return `${Math.floor(duration.asDays())}d ago`;
+    }
+  };
 
   useEffect(() => {
     setName(joined_name || 'Anonymous');
     setLastMessage(last_sender_name === 'You' ? 'You: ' : '');
     setMessageText(message || `Say hihi to ${name}`);
-  }, [joined_name, last_sender_name, message]);
+    moment(last_message_time || created_at).format('HH:mm');
+  }, [joined_name, last_sender_name, message, last_message_time]);
 
   return (
     <TouchableOpacity
@@ -70,7 +89,13 @@ export const ConversationItem = (item: ConversationI) => {
             style={[styles.nameStyle, is_seen ? null : styles.style_unread]}>
             {name}
           </Text>
-          <Text style={styles.timeStyle}>{last_message_time_formatted}</Text>
+          <View style={styles.viewTime}>
+            <Text style={styles.timeStyle}>
+              {'At '}
+              {last_message_time_formatted}
+            </Text>
+            <Text style={styles.timeStyle}>{getTimeElapsed()} </Text>
+          </View>
         </View>
         <View style={styles.container_message}>
           <Text

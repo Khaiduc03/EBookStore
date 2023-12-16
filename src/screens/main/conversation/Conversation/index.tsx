@@ -20,6 +20,7 @@ import {NavigationService} from '../../../../navigation';
 import {routes} from '../../../../constants';
 import {parseISO} from 'date-fns';
 import dynamicLinks from '@react-native-firebase/dynamic-links';
+import moment from 'moment';
 const ConversationItemMemoized = memo(ConversationItem);
 
 const ConversationScreen: React.FC = () => {
@@ -43,14 +44,30 @@ const ConversationScreen: React.FC = () => {
   );
 
   const sortedData = [...listConversation].sort((a, b) => {
-    // Giả sử thời gian được lưu trữ trong trường createdAt
-    const timeA = parseISO(a.last_message_time);
-    const timeB = parseISO(b.last_message_time);
+    const now = moment();
+    const postTimeA = moment(a.last_message_time || a.created_at);
+    const postTimeB = moment(b.last_message_time || b.created_at);
 
-    // Sắp xếp theo thời gian giảm dần (mới nhất đầu tiên)
+    const durationA = moment.duration(now.diff(postTimeA));
+    const durationB = moment.duration(now.diff(postTimeB));
 
-    // Sắp xếp theo thời gian giảm dần (mới nhất đầu tiên)
-    return timeB.getTime() - timeA.getTime();
+    const getTimeElapsed = (duration: any) => {
+      if (duration.asMinutes() < 1) {
+        return 'Just now';
+      } else if (duration.asHours() < 1) {
+        return `${Math.floor(duration.asMinutes())}m ago`;
+      } else if (duration.asDays() < 1) {
+        return `${Math.floor(duration.asHours())}h ago`;
+      } else {
+        return `${Math.floor(duration.asDays())}d ago`;
+      }
+    };
+
+    // Compare the actual durations to determine the order
+    return (
+      durationA.asMilliseconds() - durationB.asMilliseconds() &&
+      postTimeB.valueOf() - postTimeA.valueOf()
+    );
   });
 
   return (
