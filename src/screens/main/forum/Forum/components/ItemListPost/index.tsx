@@ -46,7 +46,7 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
   const isLoading = useAppSelector(getIsLoadingForum);
 
   const [showModal, setShowModal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null) as any;
+  const [selectedImage, setSelectedImage] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = () => {

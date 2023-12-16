@@ -1,5 +1,5 @@
 import {Icon} from '@rneui/themed';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   Dimensions,
   FlatList,
@@ -8,7 +8,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Animated,
 } from 'react-native';
 import AutoHeightImage from 'react-native-auto-height-image';
 import FBCollage from 'react-native-fb-collage';
@@ -17,11 +16,11 @@ import {
   PinchGestureHandler,
   TapGestureHandler,
 } from 'react-native-gesture-handler';
-import ReAnimated, {
+import Animated, {
   useAnimatedGestureHandler,
+  useAnimatedStyle,
   useSharedValue,
   withSpring,
-  useAnimatedStyle,
 } from 'react-native-reanimated';
 import useStyles from './styles';
 
@@ -61,22 +60,20 @@ const PostContent: React.FC<PostContentProps> = ({
     },
   });
 
+  const tapHandler = useAnimatedGestureHandler({
+    onActive: event => {
+      console.log('Double tap detected!');
+      scale.value = withSpring(1);
+    },
+  });
+
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{scale: scale.value}],
     };
   });
 
-  const tapHandler = useAnimatedGestureHandler({
-    onActive: event => {
-      scale.value = withSpring(1);
-    },
-  });
-
   const screenWidth = Dimensions.get('window').width;
-  const screenHeight = Dimensions.get('window').height;
-
-  const [imageHeights, setImageHeights] = useState<number[]>([]);
 
   return (
     <View>
@@ -95,7 +92,6 @@ const PostContent: React.FC<PostContentProps> = ({
                     flex: 1,
                     width: screenWidth,
                     height: screenWidth,
-                    alignItems: 'center',
                   }}
                   borderRadius={6}
                   imageOnPress={() => onImagePress(index)}
@@ -129,19 +125,18 @@ const PostContent: React.FC<PostContentProps> = ({
               <View style={styles.viewModalImage}>
                 <GestureHandlerRootView>
                   <PinchGestureHandler onGestureEvent={pinchHandler}>
-                    <ReAnimated.View style={animatedStyle}>
+                    <Animated.View style={animatedStyle}>
                       <TapGestureHandler
                         numberOfTaps={2}
                         onGestureEvent={tapHandler}>
                         <Animated.View>
                           <AutoHeightImage
-                            key={selectedImage}
                             source={{uri: selectedImage}}
                             width={screenWidth}
                           />
                         </Animated.View>
                       </TapGestureHandler>
-                    </ReAnimated.View>
+                    </Animated.View>
                   </PinchGestureHandler>
                 </GestureHandlerRootView>
               </View>

@@ -58,7 +58,6 @@ const CreatePost: React.FC<ForumType> = props => {
       showToastError('Failed! Please enter text or select images.');
       return;
     }
-
     // Create a new FormData
     const formData = new FormData();
     formData.append('status', status);
@@ -80,14 +79,9 @@ const CreatePost: React.FC<ForumType> = props => {
         }
       });
     }
-
     // Dispatch the action with formData
     dispatch(ForumActions.handleCreatePostSuccess(formData));
-
-    // Show success message and reset textInputValue
-    showToastSuccess('Success! Post sent successfully!');
     setTextInputValue('');
-    NavigationService.goBack();
   };
 
   const handleImagesSelected = async (images: Asset[]) => {

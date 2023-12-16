@@ -5,7 +5,6 @@ import { CommentForumAction } from '../reducer/comment.forum.reducer';
 import { CommentForumService } from '../services/comment.forum.service';
 
 function* postCommentSaga(action: PayloadAction<any>): Generator {
-  // yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
     const { data }: any = yield call(
@@ -23,7 +22,6 @@ function* postCommentSaga(action: PayloadAction<any>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    // yield put(LoadingActions.hideLoading());
   }
 }
 
