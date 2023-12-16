@@ -14,7 +14,6 @@ import {ComicService} from '../redux';
 import {routes} from '../constants';
 
 import {CustomToastBottom} from '../utils';
-import BottomSheetScreenScroll from '../components/shared/BottomSheer/BottomSheetScreenScroll';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -73,12 +72,9 @@ const RootNavigation = () => {
         backgroundColor={usestyles().Mode.backgroundColor}
         barStyle={themeMode}
       />
-      {/* <AppNavigator />  */}
-      {/* <CreateNewPasswordScreen /> */}
-      {/* <BottomSheetScreenScroll /> */}
+   
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
-      {/* <RatingComicScreen /> */}
-      {/* <AppNavigator /> */}
+   
     </NavigationContainer>
   );
 };

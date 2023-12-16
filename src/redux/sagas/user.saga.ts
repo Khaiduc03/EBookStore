@@ -227,7 +227,7 @@ function* changePasswordSaga(
     const {data}: any = yield call(UserService.changePassword, action.payload);
     console.log('data =================', data)
     if (data.code == 200) {
-      NavigationService.navigate(routes.MYPROFILE);
+      NavigationService.navigate(routes.PROFILE);
     } else {
       console.log('Server errol !!!');
     }

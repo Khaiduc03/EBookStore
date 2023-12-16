@@ -13,6 +13,8 @@ import {useAppDispatch} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
 import {UserAction} from '../../../../redux/reducer/user.reducer';
 import useStyles from './styles';
+import {AlertActions} from '../../../../redux/reducer/alert.reducer';
+import Toast from 'react-native-toast-message';
 
 const ChangePassWord: React.FC = () => {
   const styles = useStyles();
@@ -42,13 +44,6 @@ const ChangePassWord: React.FC = () => {
 
   const [checked, setChecked] = React.useState<boolean>(false);
 
-  console.log(
-    'oldPassword ',
-    oldPassword,
-    '\nconfirmpassword: ',
-    confirmpassword,
-  );
-
   const toggleCheckbox = () => setChecked(!checked);
 
   const validateInputs = () => {
@@ -64,7 +59,7 @@ const ChangePassWord: React.FC = () => {
       UserAction.changePassword({
         oldPassword: oldPassword,
         newPassword: newPassword,
-        confirmPassword: newPassword,
+        confirmPassword: confirmpassword,
       }),
     );
   };
@@ -72,8 +67,39 @@ const ChangePassWord: React.FC = () => {
   const handleInputChange = () => {
     if (validateInputs()) {
       handleChangePassword();
+      Toast.show({
+        type: 'success',
+        text1: 'Change password successfully!',
+        visibilityTime: 2000,
+      });
     } else {
-      Alert.alert('Please fill in all fields.');
+      setIsCheckValidateOldPassword(true);
+      setIsCheckValidatePassword(true);
+      setIsCheckValidateConfirmPassword(true);
+      if (oldPassword.length === 0) {
+        setIsCheckValidateOldPassword(false);
+        Toast.show({
+          type: 'error',
+          text1: 'Please enter the old password',
+          visibilityTime: 2000,
+        });
+      }
+      if (newPassword.length !== 0) {
+        setIsCheckValidatePassword(false);
+        Toast.show({
+          type: 'error',
+          text1: 'Please enter the new password',
+          visibilityTime: 2000,
+        });
+      }
+      if (confirmpassword !== newPassword) {
+        setIsCheckValidateConfirmPassword(false);
+        Toast.show({
+          type: 'error',
+          text1: 'Passwords do not match',
+          visibilityTime: 2000,
+        });
+      }
     }
   };
 
