@@ -122,7 +122,7 @@ const ComicsDetail = () => {
         renderItem={({item, index}) => {
           return <ItemShare {...item} key={index} />;
         }}
-        snapTo={'60%'}
+        snapTo={'70%'}
         backgroundColor={styles.bottomSheetStyle.backgroundColor}
         backDropColor={'black'}
       />

@@ -18,6 +18,13 @@ export const reducer = createSlice({
   initialState,
   name: 'chat',
   reducers: {
+    handleGetStatus: (
+      state: ListConversationStateI,
+      _: PayloadAction<Boolean>,
+    ) => {
+      return state;
+    },
+
     //get list conversation
     handleGetListConversation: (
       state: ListConversationStateI,

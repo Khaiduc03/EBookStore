@@ -15,12 +15,15 @@ interface LineComponentProps {
 }
 
 const LineComponent: React.FC<LineComponentProps> = ({length, stroke}) => {
+  const maxWidth = 100;
+  const adjustedLength = Math.min(length, maxWidth);
+
   return (
-    <Svg height="4" width={length.toString()}>
+    <Svg height="4" width={`${adjustedLength}%`}>
       <Line
         x1="0"
         y1="5"
-        x2={length.toString()}
+        x2="120"
         y2="5"
         stroke={stroke}
         strokeWidth="100"
@@ -30,16 +33,31 @@ const LineComponent: React.FC<LineComponentProps> = ({length, stroke}) => {
   );
 };
 
+const extractRatings = (dataChart: any) => {
+  const totalRatings = dataChart?.total_rating || 1;
+  const ratings = [
+    {value: 5, length: (dataChart?.rating_5 / totalRatings) * 100 || 0},
+    {value: 4, length: (dataChart?.rating_4 / totalRatings) * 100 || 0},
+    {value: 3, length: (dataChart?.rating_3 / totalRatings) * 100 || 0},
+    {value: 2, length: (dataChart?.rating_2 / totalRatings) * 100 || 0},
+    {value: 1, length: (dataChart?.rating_1 / totalRatings) * 100 || 0},
+  ];
+
+  return ratings;
+};
+
 const RatingComic: React.FC = () => {
   const styles = useStyles();
   const dataChart = useAppSelector(getChartRating);
-  const data = [
-    {value: 5, length: dataChart ? dataChart?.rating_5 : 5},
-    {value: 4, length: dataChart ? dataChart?.rating_4 : 4},
-    {value: 3, length: dataChart ? dataChart?.rating_3 : 3},
-    {value: 2, length: dataChart ? dataChart?.rating_2 : 2},
-    {value: 1, length: dataChart ? dataChart?.rating_1 : 1},
-  ];
+
+  const ratings = extractRatings(dataChart);
+  // const data = [
+  //   {value: 5, length: dataChart ? dataChart?.rating_5 : 5},
+  //   {value: 4, length: dataChart ? dataChart?.rating_4 : 4},
+  //   {value: 3, length: dataChart ? dataChart?.rating_3 : 3},
+  //   {value: 2, length: dataChart ? dataChart?.rating_2 : 2},
+  //   {value: 1, length: dataChart ? dataChart?.rating_1 : 1},
+  // ];
 
   return (
     <View style={styles.container}>
@@ -64,7 +82,7 @@ const RatingComic: React.FC = () => {
         </View>
         <View style={styles.line} />
         <View style={styles.viewRating2}>
-          {data.map(({value, length}, index) => (
+          {ratings.map(({value, length}, index) => (
             <View style={styles.lineRating} key={index}>
               <Text style={styles.numberLine}>{value}</Text>
               <LineComponent length={length} stroke="#FAA731" />

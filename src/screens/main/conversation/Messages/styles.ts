@@ -88,6 +88,13 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.medium,
     fontSize: normalize(12),
   },
+  styleTextLink: {
+    color: colors.blue,
+    textDecorationLine: 'underline',
+    textDecorationColor: colors.blue,
+    textDecorationStyle: 'dashed',
+  },
+
   viewTime: {
     width: 'auto',
   },
