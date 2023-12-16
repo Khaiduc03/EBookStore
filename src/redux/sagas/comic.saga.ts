@@ -220,6 +220,7 @@ function* getComicByTopFavoriteSaga(): Generator {
     if (data.code == 200) {
       console.log('run push tookit');
       yield put(ComicActions.setListTopFavorite(data));
+      console.log(data);
     } else {
       ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
     }
@@ -339,7 +340,7 @@ export default function* watchComicSaga() {
   yield takeLatest(ComicActions.getListTopRating, getComicByTopRatingSaga);
   yield takeLatest(ComicActions.getListTopFavorite, getComicByTopFavoriteSaga);
   yield takeLatest(ComicActions.postFavorite, postFavoriteSaga);
-  yield takeLatest(ComicActions.deleteFavorite, deleteFavoriteSaga);
+
   yield takeLatest(ComicActions.checkFavorite, checkFavoriteSaga);
   yield takeLatest(ComicActions.getListFavorite, getListFavoriteSaga);
   yield takeLatest(ComicActions.getListHistotyComic, getListHistoryComicSaga);

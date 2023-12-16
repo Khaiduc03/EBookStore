@@ -67,14 +67,14 @@ const useStyles = makeStyles(({colors}) => ({
     fontFamily: fontFamilySetup.medium,
   },
   textTitleAlert: {
-    color: colors.black,
+    color: colors.primary,
     fontSize: normalize(19),
     fontFamily: fontFamilySetup.bold,
     lineHeight: normalize(21),
     textAlign: 'center',
   },
   textMessageAlert: {
-    color: colors.black,
+    color: colors.blackDefault,
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
     textAlign: 'center',

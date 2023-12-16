@@ -7,40 +7,9 @@ const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   container: {
-    flex: normalize(1),
+    flex: 1,
     backgroundColor: colors.background,
-  },
-  viewTextBig: {
-    width: '90%',
-    height: normalize(90),
-    borderBottomWidth: normalize(1),
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginStart: normalize(24),
-    borderColor: '#6F6969',
-  },
-  name: {
-    fontSize: normalize(HEIGHT * 0.04),
-    letterSpacing: normalize(0.5),
-    fontStyle: 'normal',
-    fontFamily: fontFamilySetup.bold,
-    color: colors.black,
-  },
-  colorBlack: {
-    color: colors.black,
-  },
-  viewTitle: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: normalize(24),
-    paddingVertical: normalize(18),
-  },
-  text: {
-    fontSize: normalize(HEIGHT * 0.021),
-    letterSpacing: normalize(0.5),
-    fontStyle: 'normal',
-    fontFamily: fontFamilySetup.bold,
-    color: colors.grey5,
+    gap: normalize(20),
   },
 }));
 export default useStyles;

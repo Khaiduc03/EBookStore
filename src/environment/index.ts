@@ -4,7 +4,7 @@ import Config from 'react-native-config';
 // //URL
 // export const BASE_URL = process.env.REACT_APP_BASE_URL;
 export const BASE_URL = Config.BASE_URL;
-
+// export const BASE_URL = `http://192.168.1.5:8002/`;
 export const ENDPOINTS = {
   LOGIN: Config.LOGIN,
   REGISTER: Config.REGISTER,
@@ -25,7 +25,8 @@ export const ENDPOINTS = {
 
   IMAGE: Config.IMAGE,
   UPLOAD_IMAGES: Config.UPLOAD_IMAGES,
-
+  //Change password
+  UPLOAD_PASSWORD: Config.UPLOAD_PASSWORD,
   TOPIC: Config.TOPIC,
   GET_TOPIC_BY_UUID: Config.GET_TOPIC_BY_UUID,
   UPDATE_TOPIC: Config.UPDATE_TOPIC,

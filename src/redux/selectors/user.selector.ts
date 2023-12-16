@@ -27,3 +27,6 @@ export const nextPageAllPostIdByUser = (state: RootState) =>
 
 export const currentPageAllPostByIdUser = (state: RootState) =>
   state.user.listAllPostByIdUser?.currentPage;
+// Change password
+// export const getChangePassword = (state: RootState) =>
+//   state.user.changePassword;

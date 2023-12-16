@@ -19,9 +19,10 @@ const useStyles = makeStyles(({colors}) => ({
     width: '100%',
     height: normalize(45),
     paddingHorizontal: normalize(15),
-    backgroundColor: colors.white,
+    // backgroundColor: colors.white,
     borderBottomColor: colors.primary,
     borderBottomWidth: 1,
+    color: colors.black,
   },
   countText: {
     alignSelf: 'flex-end',

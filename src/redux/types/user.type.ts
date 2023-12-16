@@ -24,6 +24,8 @@ export type UserType = uuid & {
   is_follower: boolean;
   is_following: boolean;
   post_count: number;
+  message?: string;
+  links?: string;
 };
 
 export interface PayloadHttpListFollow<T> {
@@ -46,3 +48,8 @@ export type ItemFollowType = uuid & {
   is_following: boolean;
   is_follower: boolean;
 };
+// Change password
+export interface ChangePasswordType {
+  oldPassword: string;
+  newPassword: string;
+}

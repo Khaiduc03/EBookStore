@@ -10,20 +10,24 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 import {Socket, io} from 'socket.io-client';
+import {routes} from '../../constants';
 import {BASE_URL} from '../../environment';
+import {NavigationService} from '../../navigation';
+import {AuthActions, LoadingActions} from '../reducer';
 import {ChatActions} from '../reducer/chat.reducer';
 import {ConversationService} from '../services/conversation.service';
 import {
   Accesstoken,
   ConversationI,
   MessageI,
-  RequestAddMessageI,
-  RequestJoinConversationI,
+  MessageType,
+  PayloadHttp,
+  ShareLinkI,
 } from '../types';
-import {AuthActions, LoadingActions} from '../reducer';
-import {NavigationService} from '../../navigation';
-import {routes} from '../../constants';
-
+import {store} from '../store';
+import {Http} from '../../types';
+import dynamicLinks from '@react-native-firebase/dynamic-links';
+import {CustomToastBottom} from '../../utils';
 function connect(token: string) {
   //const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcmVhdGVkX2F0IjoiMjAyMy0xMC0xOSAyMDo0NCIsInV1aWQiOiJjZmY2NDkyZi02MzdiLTRmZDItODc0Yi0wZTNiNTMyZTIxZmMiLCJ1cGRhdGVkX2F0IjoiMjAyMy0xMC0xOSAyMDo0NCIsImRlbGV0ZWRfYXQiOm51bGwsImVtYWlsIjoicDNuaG94OTlAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkMmc3dnFVdzFwM2x3TmxNRlVXOGhlLnYwUlRBZm5IVHNmRHpQMjFoSUw1VC52SWo2NTVwaW0iLCJyb2xlcyI6InVzZXIiLCJmdWxsbmFtZSI6ImtoYWkiLCJwaG9uZSI6IjA5NDIzODQyIiwic3VtbWFyeSI6bnVsbCwiZ2VuZGVyIjoiZmFtYWxlIiwic3RhdHVzIjpmYWxzZSwiZG9iIjoiMjAwMy0wMy0wMyIsImRldmljZV90b2tlbiI6IjExMTEiLCJpbWFnZV91cmwiOiJodHRwOi8vcmVzLmNsb3VkaW5hcnkuY29tL2R6eWNpYnB1Yy9pbWFnZS91cGxvYWQvdjE2OTc4ODM1NzAvYXZhdGFyL3AzbmhveDk5JTQwZ21haWwuY29tL2ZpbGVfenowamxpLmpwZyIsInB1YmxpY19pZCI6ImF2YXRhci9wM25ob3g5OUBnbWFpbC5jb20vZmlsZV96ejBqbGkiLCJpc1VwZGF0ZSI6dHJ1ZSwiaXNQYXNzd29yZCI6dHJ1ZSwiaWF0IjoxNzAwMDcwMjA3LCJleHAiOjE3MDAwNzM4MDd9.uoTqfm5ScgHkd0tOhMT95WttPmF5MUtEt3i3aOYLRYI`;
   const socket = io(BASE_URL, {
@@ -76,6 +80,7 @@ function* write(socket: Socket) {
       socket.emit('addMessage', {
         conversation_uuid: add.payload.conversation_uuid,
         message: add.payload.message,
+        type: add.payload.type,
       });
     }
   }
@@ -170,21 +175,61 @@ function* flowSocket() {
   yield cancel(task);
 }
 
+function* shareLinkMessage(action: PayloadAction<ShareLinkI>): Generator {
+  try {
+    const link = action.payload.message;
+    console.log('link', link['_j']);
+    console.log('test' + action.payload.message);
+    yield put(LoadingActions.showLoading());
+    const {data}: any = yield call(ConversationService.createConversation, {
+      joined_uuid: action.payload.joined_uuid,
+    });
+    console.log(data);
+    let conversation_uuid = data.data.uuid;
+    if (data.code === 200) {
+      const {data}: any = yield call(ConversationService.addMessage, {
+        conversation_uuid: conversation_uuid,
+        message: link['_j'],
+        type: MessageType.LINK,
+      });
+      console.log('data: ', data);
+      if (data.code === 200) {
+        console.log('hi');
+      } else {
+        console.log('fail');
+      }
+      //yield put(ChatActions.handleCreateConversationSuccess(data.data));
+    }
+    // yield put(ChatActions.handleCreateConversationSuccess(data.data));
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
 function* flow(): Generator {
   // const accessToken = store.getState().auth.accessToken;
   // console.log(accessToken);
 
   while (true) {
-    yield takeLatest(
-      ChatActions.handleGetListConversation,
-      handleGetListConversation,
-    );
-    // yield takeLatest(ChatActions.handleJoinConversation, handleGetListMessages);
-    yield takeLatest(
-      ChatActions.handleCreateConversationSuccess,
-      handleAddNewConversationSuccess,
-    );
-    yield call(flowSocket);
+    const data: any = yield take(ChatActions.handleGetStatus);
+    if (data.payload) {
+      console.log('come');
+
+      yield takeLatest(ChatActions.handleShareLink, shareLinkMessage);
+      yield takeLatest(
+        ChatActions.handleGetListConversation,
+        handleGetListConversation,
+      );
+      // yield takeLatest(ChatActions.handleJoinConversation, handleGetListMessages);
+      yield takeLatest(
+        ChatActions.handleCreateConversationSuccess,
+        handleAddNewConversationSuccess,
+      );
+
+      yield call(flowSocket);
+    }
   }
 }
 

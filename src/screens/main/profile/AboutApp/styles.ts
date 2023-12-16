@@ -14,17 +14,17 @@ const useStyles = makeStyles(({colors}) => ({
     width: '90%',
     height: normalize(90),
     borderBottomWidth: normalize(1),
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
     marginStart: normalize(24),
     borderColor: '#6F6969',
   },
   name: {
     fontSize: normalize(34),
-    letterSpacing: normalize(0.5),
+    letterSpacing: normalize(1),
     fontStyle: 'normal',
     fontFamily: fontFamilySetup.bold,
-    color: colors.black,
+    color: colors.primary,
   },
   colorBlack: {
     color: colors.black,
@@ -44,6 +44,11 @@ const useStyles = makeStyles(({colors}) => ({
   },
   iconLeftStyle: {
     color: colors.black,
+  },
+  listContent: {
+    flex: 1,
+    paddingHorizontal: normalize(15),
+    paddingVertical: normalize(20),
   },
 }));
 export default useStyles;

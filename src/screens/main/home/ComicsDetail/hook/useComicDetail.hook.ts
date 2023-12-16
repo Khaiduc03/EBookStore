@@ -2,10 +2,10 @@ import {ScrollView, Linking} from 'react-native';
 import {
   ComicActions,
   ComicType,
-  getUuidPostFavorite,
+  getDataPostFavorite,
 } from '../../../../../redux';
 import {useRoute} from '@react-navigation/native';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../../../hooks';
 import {NavigationService} from '../../../../../navigation';
 import {RatingActions} from '../../../../../redux/reducer/rating.reducer';
@@ -14,6 +14,10 @@ import Share from 'react-native-share';
 import dynamicLinks from '@react-native-firebase/dynamic-links';
 import {err} from 'react-native-svg/lib/typescript/xml';
 
+import {UserAction} from '../../../../../redux/reducer/user.reducer';
+import {getAllUser} from '../../../../../redux/selectors/user.selector';
+import {BottomSheetMethods} from '../../../../../components/shared/BottomSheer/components/BottomSheetFlatList';
+
 interface RouteParamsIdComic {
   data: ComicType;
   scrollRef: React.RefObject<ScrollView>;
@@ -21,9 +25,11 @@ interface RouteParamsIdComic {
 export const useComicDetail = () => {
   const dispatch = useAppDispatch();
   const route = useRoute();
-  const uuidPost = useAppSelector(getUuidPostFavorite);
+  const dataPostFavorite = useAppSelector(getDataPostFavorite);
   const dataChart = useAppSelector(getChartRating);
+  const dataUser = useAppSelector(getAllUser);
   const [visible2, setVisible2] = useState(false);
+  const bottomSheetRef4 = useRef<BottomSheetMethods>(null);
 
   const data = (route.params as RouteParamsIdComic).data;
   const scrollRef = (route.params as RouteParamsIdComic).scrollRef;
@@ -35,13 +41,20 @@ export const useComicDetail = () => {
     dispatch(ComicActions.getListByTopicMore({name: data.topics}));
   }, [data]);
 
+  useEffect(() => {
+    dispatch(UserAction.getListUser());
+
+    return () => {};
+  }, []);
+
   const postFavorite = () => {
-    if (uuidPost) {
-      dispatch(ComicActions.deleteFavorite(uuidPost));
-    } else {
-      dispatch(ComicActions.postFavorite(data.comic_uuid || data.uuid));
-    }
+    dispatch(ComicActions.postFavorite(data.comic_uuid || data.uuid));
   };
+
+  const pressHandler4 = useCallback(() => {
+    bottomSheetRef4.current?.expand();
+    setVisible2(false);
+  }, []);
 
   const handlePressBack = () => {
     NavigationService.goBack();
@@ -64,14 +77,18 @@ export const useComicDetail = () => {
             forcedRedirectEnabled: true,
           },
         },
+
         dynamicLinks.ShortLinkType.DEFAULT,
       );
-      console.log('LINK', link);
+
       return link;
     } catch (error) {
-      console.log(error);
+      return '';
     }
   };
+
+  const link = generateLink();
+  const custumDataUser = async () => {};
 
   const onShare = async () => {
     const getLink = await generateLink();
@@ -97,6 +114,10 @@ export const useComicDetail = () => {
     dataChart,
     visible2,
     setVisible2,
-    uuidPost,
+    dataPostFavorite,
+    pressHandler4,
+    bottomSheetRef4,
+    dataUser,
+    link,
   };
 };

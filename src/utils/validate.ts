@@ -1,4 +1,5 @@
 import {format, isSameDay, isSameMonth, isSameYear} from 'date-fns';
+import { MessageType } from '../redux';
 export const isValidEmail = (email: string) => {
   if (email === '') {
     return false;
@@ -31,3 +32,14 @@ export function formatTime(receivedTime: any) {
     return format(receivedDate, 'dd-MM');
   }
 }
+
+export function isLink(input: string): boolean {
+  const isLink = /^https?:\/\//i.test(input);
+
+  return isLink;
+}
+
+
+
+
+
