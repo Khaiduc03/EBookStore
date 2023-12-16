@@ -87,6 +87,7 @@ const PostContent: React.FC<PostContentProps> = ({
             {item && (
               <>
                 <FBCollage
+                  key={index}
                   images={[{uri: item}] as any}
                   style={{
                     flex: 1,
