@@ -35,6 +35,8 @@ import {useModalPostDetail} from './hook/useModalPostDetail.hook';
 import {ItemComment} from '../../../../home/CommentComic/components';
 import Awesome from '../../../../../../components/customs/Awesome';
 import {getAuthUserProfile} from '../../../../../../redux';
+import FBCollage from 'react-native-fb-collage';
+import {data} from '../../../../home/Notifications/types';
 interface PostDataDeatilRoute {
   post_uuid: string;
 }
@@ -65,6 +67,8 @@ const PostDetail = () => {
   const handlePressGoback = () => {
     backScreen();
   };
+
+  console.log(postData);
 
   const {width, height} = Dimensions.get('window');
 
@@ -106,6 +110,22 @@ const PostDetail = () => {
     }
   };
 
+  const getTimeElapsed = () => {
+    const now = moment();
+    const postTime = moment(postData?.created_at);
+    const duration = moment.duration(now.diff(postTime));
+
+    if (duration.asMinutes() < 1) {
+      return 'Just now';
+    } else if (duration.asHours() < 1) {
+      return `${Math.floor(duration.asMinutes())}m ago`;
+    } else if (duration.asDays() < 1) {
+      return `${Math.floor(duration.asHours())}h ago`;
+    } else {
+      return `${Math.floor(duration.asDays())}d ago`;
+    }
+  };
+
   return (
     <ScrollView style={styles.container}>
       <HeaderCustom
@@ -141,11 +161,7 @@ const PostDetail = () => {
                       styles.viewImageText,
                       styles.marginTopDate,
                     ]}>
-                    <Text style={styles.createAt}>
-                      {moment(postData && postData.created_at).format(
-                        'YYYY-MM-DD [at] HH:mm',
-                      )}
-                    </Text>
+                    <Text style={styles.createAt}>{getTimeElapsed()}</Text>
                     <Icon
                       name="public"
                       type="material"
@@ -192,24 +208,31 @@ const PostDetail = () => {
           <View>
             <FlatList
               data={postData && postData.images}
-              renderItem={item => {
-                if (item.item === '' || item.item == null) {
-                  return <View />;
-                }
+              renderItem={({item, index}) => {
                 return (
                   <View style={styles.imageContainer}>
-                    <Pressable onPress={() => onPressOpenModal(item)}>
-                      <AutoHeightImage
-                        key={item.index.toString()}
-                        source={{
-                          uri:
-                            item.item ||
-                            'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
-                        }}
-                        progressiveRenderingEnabled
-                        width={screenWidth}
-                      />
-                    </Pressable>
+                    {item && (
+                      <>
+                        <FBCollage
+                          images={[{uri: item}] as any}
+                          style={{
+                            flex: 1,
+                            width: screenWidth,
+                            height: screenWidth,
+                          }}
+                          borderRadius={6}
+                          imageOnPress={() => onPressOpenModal(index)}
+                        />
+                        {postData.images && (
+                          <View style={styles.viewImagesLength}>
+                            <Text style={styles.textImagesLength}>
+                              {postData.images ? index + 1 : 0}/
+                              {postData.images.length}
+                            </Text>
+                          </View>
+                        )}
+                      </>
+                    )}
 
                     <Modal
                       visible={showModal}
@@ -250,19 +273,6 @@ const PostDetail = () => {
               horizontal
               showsHorizontalScrollIndicator={false}
             />
-            {postData &&
-              postData.images &&
-              postData &&
-              postData.images.some(image => image !== null) && (
-                <View style={styles.viewImagesLengh}>
-                  <Text style={styles.textImagesLengh}>
-                    {activeIndices[postData && postData.uuid]
-                      ? activeIndices[postData && postData.uuid] + 1
-                      : 1}
-                    /{postData && postData.images.length + 0}
-                  </Text>
-                </View>
-              )}
           </View>
 
           <View style={{flex: 1}}>
@@ -280,7 +290,7 @@ const PostDetail = () => {
                 </View>
                 <View style={styles.iconText}>
                   <Text style={styles.textLikeBlur}>
-                    {postData && postData.comment_count}
+                    {postData.comment_count}
                   </Text>
                   <Text style={styles.textLikeBlur}>comment</Text>
                 </View>
@@ -304,9 +314,12 @@ const PostDetail = () => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.iconText}
-                onPress={() =>
-                  NavigationService.navigate(routes.COMMENT_FORUM)
-                }>
+                onPress={() => {
+                  NavigationService.navigate(routes.COMMENT_FORUM, {
+                    uuid: postData.uuid,
+                    comment_count: postData.comment_count,
+                  });
+                }}>
                 <IconFontAwesome5
                   name="comment"
                   color={styles.colorIconHeartBlur.color}
