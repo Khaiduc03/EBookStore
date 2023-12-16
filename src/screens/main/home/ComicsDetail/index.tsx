@@ -24,6 +24,7 @@ const ComicsDetail = () => {
     scrollRef,
     setVisible2,
     visible2,
+    link,
 
     pressHandler4,
     bottomSheetRef4,
@@ -31,32 +32,32 @@ const ComicsDetail = () => {
     dataPostFavorite,
   } = useComicDetail();
 
-  const generateLink = async () => {
-    try {
-      const link = await dynamicLinks().buildShortLink(
-        {
-          link: `https://comicverse2.page.link/V9Hh/comicdetail?comic_uuid=${data?.uuid}`,
-          domainUriPrefix: 'https://comicverse2.page.link',
-          android: {
-            packageName: 'com.comicverse',
-          },
-          analytics: {
-            campaign: 'comicdetail',
-          },
-          navigation: {
-            // Lấy đường dẫn của màn hình chi tiết truyện tranh
-            forcedRedirectEnabled: true,
-          },
-        },
-        dynamicLinks.ShortLinkType.DEFAULT,
-      );
-      console.log('LINK', link);
-      return link;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const generateLink = async () => {
+  //   try {
+  //     const link = await dynamicLinks().buildShortLink(
+  //       {
+  //         link: `https://comicverse2.page.link/V9Hh/comicdetail?comic_uuid=${data?.uuid}`,
+  //         domainUriPrefix: 'https://comicverse2.page.link',
+  //         android: {
+  //           packageName: 'com.comicverse',
+  //         },
+  //         analytics: {
+  //           campaign: 'comicdetail',
+  //         },
+  //         navigation: {
+  //           // Lấy đường dẫn của màn hình chi tiết truyện tranh
+  //           forcedRedirectEnabled: true,
+  //         },
+  //       },
 
+  //       dynamicLinks.ShortLinkType.DEFAULT,
+  //     );
+  //     setVisible2(false), console.log('LINK', link);
+  //     return link;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   // const onShare = async () => {
   //   const getLink = await generateLink();
   //   // const initialUrl = await Linking.getInitialURL();
@@ -120,7 +121,7 @@ const ComicsDetail = () => {
         ref={bottomSheetRef4}
         data={dataUser}
         renderItem={({item, index}) => {
-          return <ItemShare {...item} key={index} />;
+          return <ItemShare data={item} link={link} key={index} />;
         }}
         snapTo={'70%'}
         backgroundColor={styles.bottomSheetStyle.backgroundColor}

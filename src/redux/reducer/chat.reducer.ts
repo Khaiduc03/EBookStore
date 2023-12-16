@@ -7,6 +7,7 @@ import {
   RequestAddMessageI,
   RequestCreateConversationI,
   RequestJoinConversationI,
+  ShareLinkI,
 } from '../types';
 
 const initialState: ListConversationStateI = {
@@ -115,6 +116,13 @@ export const reducer = createSlice({
         ...state,
         messages: [],
       };
+    },
+
+    handleShareLink: (
+      state: ListConversationStateI,
+      _: PayloadAction<ShareLinkI>,
+    ) => {
+      return state;
     },
   },
 });

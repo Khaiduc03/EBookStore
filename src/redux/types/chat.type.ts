@@ -18,6 +18,16 @@ export interface ConversationI {
   is_seen: boolean | null;
 }
 
+export interface ShareLinkI {
+  joined_uuid: string;
+  message: any;
+}
+
+export interface ShareLink2I {
+  joined_uuid: string;
+ 
+}
+
 export interface MessageI {
   uuid: string;
   conversation_uuid: string;

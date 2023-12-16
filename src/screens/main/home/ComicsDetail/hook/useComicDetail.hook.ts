@@ -80,12 +80,15 @@ export const useComicDetail = () => {
 
         dynamicLinks.ShortLinkType.DEFAULT,
       );
-      setVisible2(false), console.log('LINK', link);
+
       return link;
     } catch (error) {
-      console.log(error);
+      return '';
     }
   };
+
+  const link = generateLink();
+  const custumDataUser = async () => {};
 
   const onShare = async () => {
     const getLink = await generateLink();
@@ -115,5 +118,6 @@ export const useComicDetail = () => {
     pressHandler4,
     bottomSheetRef4,
     dataUser,
+    link,
   };
 };

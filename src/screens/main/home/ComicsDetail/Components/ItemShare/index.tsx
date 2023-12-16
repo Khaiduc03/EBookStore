@@ -1,13 +1,26 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {Avatar} from '@rneui/themed';
 import React, {FunctionComponent} from 'react';
-import useStyles from './styles';
-import {UserI} from '../../../../../../redux';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {UserType} from '../../../../../../redux/types/user.type';
-import {Avatar, Icon} from '@rneui/themed';
+import useStyles from './styles';
+import {useAppDispatch} from '../../../../../../hooks';
+import {ChatActions} from '../../../../../../redux/reducer/chat.reducer';
 
-const ItemShare: FunctionComponent<UserType> = props => {
-  const {email, image_url, fullname, status, phone} = props;
+interface RouteParamsIdComic {
+  data: UserType;
+  link: Promise<string>;
+}
+
+const ItemShare: FunctionComponent<RouteParamsIdComic> = props => {
+  const {email, image_url, fullname, status, phone, uuid, links} = props.data;
+  const dispatch = useAppDispatch();
+  const handleCreateRoom = () => {
+    dispatch(
+      ChatActions.handleShareLink({joined_uuid: uuid, message: props.link}),
+    );
+  };
   const styles = useStyles();
+
   return (
     <View style={styles.container}>
       <TouchableOpacity>
@@ -35,7 +48,7 @@ const ItemShare: FunctionComponent<UserType> = props => {
           </Text>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.sendStyle}>
+      <TouchableOpacity style={styles.sendStyle} onPress={handleCreateRoom}>
         <Text style={styles.textSend}>Send</Text>
       </TouchableOpacity>
     </View>
