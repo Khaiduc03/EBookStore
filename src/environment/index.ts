@@ -25,7 +25,8 @@ export const ENDPOINTS = {
 
   IMAGE: Config.IMAGE,
   UPLOAD_IMAGES: Config.UPLOAD_IMAGES,
-
+  //Change password
+  UPLOAD_PASSWORD: Config.UPLOAD_PASSWORD,
   TOPIC: Config.TOPIC,
   GET_TOPIC_BY_UUID: Config.GET_TOPIC_BY_UUID,
   UPDATE_TOPIC: Config.UPDATE_TOPIC,

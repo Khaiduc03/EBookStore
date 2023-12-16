@@ -46,3 +46,8 @@ export type ItemFollowType = uuid & {
   is_following: boolean;
   is_follower: boolean;
 };
+// Change password
+export interface ChangePasswordType {
+  oldPassword: string;
+  newPassword: string;
+}

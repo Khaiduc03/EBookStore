@@ -1,21 +1,24 @@
 import {CheckBox} from '@rneui/themed';
 import React, {useEffect, useState} from 'react';
 import {
+  Alert,
   Keyboard,
   Text,
   TouchableWithoutFeedback,
   View,
-  Alert,
 } from 'react-native';
 import {BigButton, HeaderCustom} from '../../../../components';
 import InputCustomV1 from '../../../../components/customs/InputCustomV1';
+import {useAppDispatch} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
+import {UserAction} from '../../../../redux/reducer/user.reducer';
 import useStyles from './styles';
 
 const ChangePassWord: React.FC = () => {
   const styles = useStyles();
+  const dispatch = useAppDispatch();
   const [oldPassword, setoldPassword] = useState('');
-  const [password, setPassword] = useState('');
+  const [newPassword, setnewPassword] = useState('');
   const [confirmpassword, setConfirmpassword] = useState('');
 
   const [isCheckValidateOldPassword, setIsCheckValidateOldPassword] =
@@ -27,48 +30,43 @@ const ChangePassWord: React.FC = () => {
 
   useEffect(() => {
     if (
-      oldPassword == password &&
-      password !== null &&
-      confirmpassword !== null
+      oldPassword !== null &&
+      newPassword !== null &&
+      confirmpassword == newPassword
     ) {
       setIsCheckValidateOldPassword(true);
       setIsCheckValidatePassword(true);
       setIsCheckValidateConfirmPassword(true);
     }
-  }, [oldPassword, password, confirmpassword]);
+  }, [oldPassword, newPassword, confirmpassword]);
 
   const [checked, setChecked] = React.useState<boolean>(false);
 
+  console.log(
+    'oldPassword ',
+    oldPassword,
+    '\nconfirmpassword: ',
+    confirmpassword,
+  );
+
   const toggleCheckbox = () => setChecked(!checked);
-  const validateOldPassword = (inputValue: string) => {
-    return inputValue === oldPassword;
-  };
 
   const validateInputs = () => {
     return (
       oldPassword.length > 0 &&
-      password.length > 0 &&
+      newPassword.length > 0 &&
       confirmpassword.length > 0
     );
   };
 
   const handleChangePassword = () => {
-    if (validateOldPassword(oldPassword)) {
-      setIsCheckValidateOldPassword(true);
-      if (oldPassword !== password) {
-        setIsCheckValidatePassword(true);
-        if (password === confirmpassword) {
-          setIsCheckValidateConfirmPassword(true);
-          Alert.alert('Change password successfully.');
-        } else {
-          setIsCheckValidateConfirmPassword(false);
-        }
-      } else {
-        setIsCheckValidatePassword(false);
-      }
-    } else {
-      setIsCheckValidateOldPassword(false);
-    }
+    dispatch(
+      UserAction.changePassword({
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+        confirmPassword: newPassword,
+      }),
+    );
   };
 
   const handleInputChange = () => {
@@ -120,8 +118,8 @@ const ChangePassWord: React.FC = () => {
                 <InputCustomV1
                   placeholder="Enter your password"
                   secure={true}
-                  value={password}
-                  onChangeText={text => setPassword(text)}
+                  value={newPassword}
+                  onChangeText={text => setnewPassword(text)}
                 />
               </View>
             ) : (
@@ -130,8 +128,8 @@ const ChangePassWord: React.FC = () => {
                 <InputCustomV1
                   placeholder="Enter your password"
                   secure={true}
-                  value={password}
-                  onChangeText={text => setPassword(text)}
+                  value={newPassword}
+                  onChangeText={text => setnewPassword(text)}
                   errorMessage="Password must be longer than 6 characters."
                 />
               </View>

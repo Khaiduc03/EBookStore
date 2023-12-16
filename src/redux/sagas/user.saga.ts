@@ -5,6 +5,8 @@ import {UserAction} from '../reducer/user.reducer';
 import {AuthActions, LoadingActions} from '../reducer';
 import {NavigationService} from '../../navigation';
 import {routes} from '../../constants';
+import {ChangePasswordType} from '../types/user.type';
+import { da } from 'date-fns/locale';
 
 function* postFollowSaga(action: PayloadAction<any>): Generator {
   try {
@@ -30,7 +32,6 @@ function* postFollwRandom(action: PayloadAction<any>): Generator {
     const {data}: any = yield call(UserService.postFollow, action.payload);
     if (data.code == 200) {
       yield put(UserAction.handleSuccerFollowRandom(action.payload));
-      yield put(AuthActions.getUserInfo());
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');
@@ -216,6 +217,26 @@ function* getListUserRandomSaga(action: PayloadAction<any>): Generator {
     yield put(LoadingActions.hideLoading());
   }
 }
+// Change password
+function* changePasswordSaga(
+  action: any,
+): Generator {
+  yield put(LoadingActions.showLoading());
+  try {
+    console.log('run===========>');
+    const {data}: any = yield call(UserService.changePassword, action.payload);
+    console.log('data =================', data)
+    if (data.code == 200) {
+      NavigationService.navigate(routes.MYPROFILE);
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
+  }
+}
 
 export default function* watchUserSaga() {
   yield takeLatest(UserAction.postFollow.type, postFollowSaga);
@@ -236,4 +257,5 @@ export default function* watchUserSaga() {
     UserAction.postFollowListFollower,
     postFollowListFollowerSaga,
   );
+  yield takeLatest(UserAction.changePassword.type, changePasswordSaga);
 }

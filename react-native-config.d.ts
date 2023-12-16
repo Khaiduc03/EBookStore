@@ -20,6 +20,9 @@ declare module 'react-native-config' {
     IMAGE: string;
     UPLOAD_IMAGES: string;
 
+    // change password
+    UPLOAD_PASSWORD: string;
+
     TOPIC: string;
     GET_TOPIC_BY_UUID: string;
     UPDATE_TOPIC: string;
