@@ -22,7 +22,7 @@ const useStyles = makeStyles(({ colors }) => ({
   nameStyle: {
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
-    color: colors.nameUserComment,
+    color: colors.black,
   },
   day: {
     fontSize: normalize(10),
@@ -39,18 +39,17 @@ const useStyles = makeStyles(({ colors }) => ({
   repContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: normalize(8),
+    paddingTop: normalize(8),
   },
   like: {
     width: normalize(WIDTH * 0.2),
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: normalize(60),
+    marginLeft: normalize(40),
   },
   rep: {
     flexDirection: 'row',
     alignItems: 'center',
-    margin: normalize(5),
   },
   numberRepStyle: {
     paddingLeft: normalize(5),

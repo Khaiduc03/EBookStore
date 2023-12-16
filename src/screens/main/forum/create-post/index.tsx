@@ -51,6 +51,13 @@ const CreatePost: React.FC<ForumType> = props => {
   }
 
   const handleSendPost = () => {
+    if (
+      !textInputValue.trim() &&
+      (!selectedImages || selectedImages.length === 0)
+    ) {
+      showToastError('Failed! Please enter text or select images.');
+      return;
+    }
     // Create a new FormData
     const formData = new FormData();
     formData.append('status', status);
@@ -72,14 +79,9 @@ const CreatePost: React.FC<ForumType> = props => {
         }
       });
     }
-
     // Dispatch the action with formData
     dispatch(ForumActions.handleCreatePostSuccess(formData));
-
-    // Show success message and reset textInputValue
-    showToastSuccess('Success! Post sent successfully!');
     setTextInputValue('');
-    NavigationService.goBack();
   };
 
   const handleImagesSelected = async (images: Asset[]) => {
@@ -127,47 +129,47 @@ const CreatePost: React.FC<ForumType> = props => {
 
   return (
     <View style={styles.container}>
-      <HeaderCustom
-        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
-        title="Create Your Post"
-        rightIconRight={{name: 'checkmark', type: 'ionicon'}}
-        onPressLeftIcon={() => NavigationService.goBack()}
-        onPressRightIconRight={handleSendPost}
-      />
-      <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={styles.header}>
-          <View style={{flexDirection: 'row'}}>
-            {user.image_url && (
-              <Image style={styles.image} source={{uri: user.image_url}} />
-            )}
+      <View style={{flex: 1}}>
+        <HeaderCustom
+          leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
+          title="Create Your Post"
+          rightIconRight={{name: 'checkmark', type: 'ionicon'}}
+          onPressLeftIcon={() => NavigationService.goBack()}
+          onPressRightIconRight={handleSendPost}
+        />
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <View style={styles.header}>
+            <View style={{flexDirection: 'row'}}>
+              {user.image_url && (
+                <Image style={styles.image} source={{uri: user.image_url}} />
+              )}
 
-            <View style={styles.viewStatus}>
-              <Text style={styles.nameUser}>{user.fullname}</Text>
-              <View style={styles.buttonClick}>
-                <SelectDropdown
-                  data={['Public', 'Private']}
-                  onSelect={handleDropdown(setStatus, formData)}
-                  buttonStyle={styles.buttonSelect}
-                  dropdownOverlayColor="nothing"
-                  renderDropdownIcon={renderDropdownIcon}
-                  rowTextStyle={styles.textrowSelect}
-                  buttonTextStyle={styles.textButtonSelect}
-                  defaultButtonText={status ? 'Public' : 'Private'}
-                  rowStyle={styles.viewbackgroundColor}
-                  onFocus={() => setCheckSelectDropdown(!checkSelectDropdown)}
-                />
-                <AddPicture onImagesSelected={handleImagesSelected} />
+              <View style={styles.viewStatus}>
+                <Text style={styles.nameUser}>{user.fullname}</Text>
+                <View style={styles.buttonClick}>
+                  <SelectDropdown
+                    data={['Public', 'Private']}
+                    onSelect={handleDropdown(setStatus, formData)}
+                    buttonStyle={styles.buttonSelect}
+                    dropdownOverlayColor="nothing"
+                    renderDropdownIcon={renderDropdownIcon}
+                    rowTextStyle={styles.textrowSelect}
+                    buttonTextStyle={styles.textButtonSelect}
+                    defaultButtonText={status ? 'Public' : 'Private'}
+                    rowStyle={styles.viewbackgroundColor}
+                    onFocus={() => setCheckSelectDropdown(!checkSelectDropdown)}
+                  />
+                  <AddPicture onImagesSelected={handleImagesSelected} />
+                </View>
               </View>
             </View>
           </View>
-        </View>
-      </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
 
-      <View style={styles.viewBorder} />
+        <View style={styles.viewBorder} />
 
-      <View style={styles.viewInput}>
         <TextInput
-          placeholder="What do you think today?"
+          placeholder="What are you thinking?"
           placeholderTextColor={styles.placeHolderColor.color}
           multiline
           textAlignVertical="top"
@@ -177,7 +179,11 @@ const CreatePost: React.FC<ForumType> = props => {
         />
       </View>
 
-      {selectedImages.length > 0 && <SelectedImages images={selectedImages} />}
+      <View style={{flex: 1}}>
+        {selectedImages.length > 0 && (
+          <SelectedImages images={selectedImages} />
+        )}
+      </View>
     </View>
   );
 };

@@ -11,9 +11,9 @@ const useStyles = makeStyles(({ colors }) => ({
   },
   parentCommentStyle: {
     flexDirection: 'row',
-    borderBottomWidth: 10,
     paddingHorizontal: normalize(16),
     paddingVertical: normalize(16),
+    borderBottomWidth: 10,
     borderColor: '#F1F1F3',
   },
   inputStyle: {
@@ -38,7 +38,7 @@ const useStyles = makeStyles(({ colors }) => ({
   nameStyle: {
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
-    color: colors.nameUserComment,
+    color: colors.black,
   },
   day: {
     fontSize: normalize(10),
@@ -61,7 +61,7 @@ const useStyles = makeStyles(({ colors }) => ({
     width: normalize(WIDTH * 0.2),
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: normalize(60),
+    marginLeft: normalize(40),
   },
   rep: {
     flexDirection: 'row',

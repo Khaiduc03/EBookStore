@@ -1,18 +1,16 @@
-import React, {useEffect, useState} from 'react';
+import {Icon} from '@rneui/themed';
+import React, {useRef, useState} from 'react';
 import {
-  View,
-  Text,
+  Dimensions,
   FlatList,
-  TouchableOpacity,
   Modal,
-  Image,
-  ActivityIndicator,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import AutoHeightImage from 'react-native-auto-height-image';
-import useStyles from './styles';
-import {Dimensions} from 'react-native';
-import {Pressable} from 'react-native';
-import {Icon} from '@rneui/themed';
+import FBCollage from 'react-native-fb-collage';
 import {
   GestureHandlerRootView,
   PinchGestureHandler,
@@ -20,9 +18,11 @@ import {
 } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedGestureHandler,
+  useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
+import useStyles from './styles';
 
 interface PostContentProps {
   content: string;
@@ -45,11 +45,6 @@ const PostContent: React.FC<PostContentProps> = ({
 }) => {
   const styles = useStyles();
 
-  const screenWidth = Dimensions.get('window').width;
-  const screenHeight = Dimensions.get('window').height;
-
-  console.log('image: =========', images);
-
   const scale = useSharedValue(1);
   const translationX = useSharedValue(0);
   const translationY = useSharedValue(0);
@@ -67,15 +62,18 @@ const PostContent: React.FC<PostContentProps> = ({
 
   const tapHandler = useAnimatedGestureHandler({
     onActive: event => {
+      console.log('Double tap detected!');
       scale.value = withSpring(1);
     },
   });
 
-  const calculateImageHeight = (aspectRatio: number) => {
-    const imageWidth = screenWidth;
-    const imageHeight = imageWidth / aspectRatio;
-    return imageHeight;
-  };
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{scale: scale.value}],
+    };
+  });
+
+  const screenWidth = Dimensions.get('window').width;
 
   return (
     <View>
@@ -86,18 +84,28 @@ const PostContent: React.FC<PostContentProps> = ({
         data={images}
         renderItem={({item, index}) => (
           <View>
-            <Pressable onPress={() => onImagePress(index)}>
-              {item && (
-                <AutoHeightImage source={{uri: item}} width={screenWidth} />
-              )}
-              {images && (
-                <View style={styles.viewImagesLength}>
-                  <Text style={styles.textImagesLength}>
-                    {images ? index + 1 : 0}/{images.length}
-                  </Text>
-                </View>
-              )}
-            </Pressable>
+            {item && (
+              <>
+                <FBCollage
+                  images={[{uri: item}] as any}
+                  style={{
+                    flex: 1,
+                    width: screenWidth,
+                    height: screenWidth,
+                  }}
+                  borderRadius={6}
+                  imageOnPress={() => onImagePress(index)}
+                />
+                {images && (
+                  <View style={styles.viewImagesLength}>
+                    <Text style={styles.textImagesLength}>
+                      {images ? index + 1 : 0}/{images.length}
+                    </Text>
+                  </View>
+                )}
+              </>
+            )}
+
             <Modal
               visible={showModal}
               transparent={true}
@@ -117,16 +125,13 @@ const PostContent: React.FC<PostContentProps> = ({
               <View style={styles.viewModalImage}>
                 <GestureHandlerRootView>
                   <PinchGestureHandler onGestureEvent={pinchHandler}>
-                    <Animated.View style={{transform: [{scale: scale}]}}>
+                    <Animated.View style={animatedStyle}>
                       <TapGestureHandler
                         numberOfTaps={2}
                         onGestureEvent={tapHandler}>
                         <Animated.View>
                           <AutoHeightImage
-                            key={selectedImage}
-                            source={{
-                              uri: selectedImage,
-                            }}
+                            source={{uri: selectedImage}}
                             width={screenWidth}
                           />
                         </Animated.View>
@@ -138,8 +143,8 @@ const PostContent: React.FC<PostContentProps> = ({
             </Modal>
           </View>
         )}
-        pagingEnabled
         horizontal
+        pagingEnabled
         showsHorizontalScrollIndicator={false}
       />
     </View>

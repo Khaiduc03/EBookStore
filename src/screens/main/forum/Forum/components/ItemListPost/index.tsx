@@ -5,6 +5,7 @@ import {
   FlatList,
   Image,
   RefreshControl,
+  StatusBar,
   Text,
   TouchableOpacity,
   View,
@@ -26,6 +27,8 @@ import PostContent from '../ItemPostContent';
 import PostHeader from '../ItemPostFooter';
 import PostFooter from '../ItemPostHeader';
 import useStyles from './styles';
+import {CommentForumType} from '../../../../../../redux/types/comment.forum.type';
+import {useRoute} from '@react-navigation/native';
 
 interface ForumDataProps {
   data?: ForumType;
@@ -43,7 +46,7 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
   const isLoading = useAppSelector(getIsLoadingForum);
 
   const [showModal, setShowModal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null) as any;
+  const [selectedImage, setSelectedImage] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = () => {
@@ -104,7 +107,13 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
 
   const styles = useStyles();
 
-  const renderItem = ({item}: {item: ForumType}) => {
+  const renderItem = ({
+    item,
+    comment,
+  }: {
+    item: ForumType;
+    comment?: CommentForumType;
+  }) => {
     const handleLike_UnlikePress = (forum_uuid: any) => {
       if (item.is_liked) {
         dispatch(ForumActions.deleteLikeForum(forum_uuid));
@@ -140,12 +149,12 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
           likeCount={item.like_count}
           commentCount={item.comment_count}
           onLikePress={() => handleLike_UnlikePress(item.uuid)}
-          onCommentPress={() =>
+          onCommentPress={() => {
             NavigationService.navigate(routes.COMMENT_FORUM, {
               uuid: item.uuid,
               comment_count: item.comment_count,
-            })
-          }
+            });
+          }}
           onSharePress={onShare}
         />
       </View>
@@ -184,7 +193,9 @@ const ItemListPost: React.FC<ForumDataProps> = props => {
             <TouchableOpacity
               style={styles.buttonHeader}
               onPress={() => NavigationService.navigate(routes.CREATE_POST)}>
-              <Text style={styles.textButtonHeader}>Bạn đang nghĩ gì?</Text>
+              <Text style={styles.textButtonHeader}>
+                What are you thinking?
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => NavigationService.navigate(routes.CREATE_POST)}>

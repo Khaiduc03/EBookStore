@@ -1,11 +1,11 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../../../../utils';
-import {fontFamilySetup} from '../../../../../../utils/font';
+import { makeStyles, normalize } from '@rneui/themed';
+import { Device } from '../../../../../../utils';
+import { fontFamilySetup } from '../../../../../../utils/font';
 const WIDTH = Device.getDeviceWidth();
 
-const useStyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({ colors }) => ({
   container: {
     width: '100%',
     height: normalize(55),
@@ -26,7 +26,7 @@ const useStyles = makeStyles(({colors}) => ({
     fontSize: normalize(18),
     fontFamily: fontFamilySetup.bold,
   },
-  iconStylle: {
+  iconStyle: {
     color: colors.black,
   },
   viewPDR: {

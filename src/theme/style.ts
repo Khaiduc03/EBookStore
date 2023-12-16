@@ -1,6 +1,6 @@
-import {createTheme} from '@rneui/themed';
-import {useAppSelector} from '../hooks';
-import {getMode} from '../redux/selectors/thems.selector';
+import { createTheme } from '@rneui/themed';
+import { useAppSelector } from '../hooks';
+import { getMode } from '../redux/selectors/thems.selector';
 
 const mode = useAppSelector(getMode);
 

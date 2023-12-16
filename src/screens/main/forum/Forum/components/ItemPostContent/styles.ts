@@ -30,8 +30,8 @@ const useStyles = makeStyles(({ colors }) => ({
     borderWidth: normalize(0.6),
     borderColor: colors.whiteDefault,
     position: 'absolute',
-    top: normalize(10),
-    right: normalize(10),
+    top: normalize(16),
+    right: normalize(16),
   },
   textImagesLength: {
     color: colors.whiteDefault,

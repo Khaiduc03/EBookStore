@@ -6,6 +6,8 @@ import AwesomeAlert from 'react-native-awesome-alerts';
 import {useAppSelector} from '../../../../../../hooks';
 import {getAuthUserProfile} from '../../../../../../redux';
 import useStyles from './styles';
+import {NavigationService} from '../../../../../../navigation';
+import {routes} from '../../../../../../constants';
 
 interface PostHeaderProps {
   userUUID: any;
@@ -44,18 +46,30 @@ const PostHeader: React.FC<PostHeaderProps> = ({
     }
   };
 
+  const handlePressUser = () => {
+    NavigationService.navigate(routes.PROFILEUSER, {
+      userUUID,
+      userFullName,
+      userAvatar,
+    });
+  };
+
   return (
     <View style={styles.viewRow}>
-      <Image
-        style={styles.imageTitle}
-        source={{
-          uri:
-            userAvatar ||
-            'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
-        }}
-      />
+      <TouchableOpacity>
+        <Image
+          style={styles.imageTitle}
+          source={{
+            uri:
+              userAvatar ||
+              'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
+          }}
+        />
+      </TouchableOpacity>
       <View style={styles.viewTextPost}>
-        <Text style={styles.name}>{userFullName || 'Anonymous'}</Text>
+        <TouchableOpacity>
+          <Text style={styles.name}>{userFullName || 'Anonymous'}</Text>
+        </TouchableOpacity>
         <View style={[styles.viewRow, styles.viewCreateAt]}>
           <Text style={styles.createAt}>{getTimeElapsed()} •</Text>
           <Icon name="public" type="material" size={14} color={'#b3b3b3'} />

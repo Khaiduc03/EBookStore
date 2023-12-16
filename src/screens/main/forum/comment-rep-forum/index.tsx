@@ -5,15 +5,18 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
+  Keyboard,
   SafeAreaView,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import FastImage from 'react-native-fast-image';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {getAuthUserProfile} from '../../../../redux';
 import {CommentForumAction} from '../../../../redux/reducer/comment.forum.reducer';
 import {
   getCurrenPageRepCommentForum,
@@ -23,10 +26,9 @@ import {
 import {getIsLoadingPage} from '../../../../redux/selectors/loading.selector';
 import {CommentForumType} from '../../../../redux/types/comment.forum.type';
 import {HeaderRepComment} from './components';
-import ItemRepCommnent from './components/ItemComment';
+import ItemRepCommnent from './components/ItemRepComment';
 import useStyles from './styles';
-import AwesomeAlert from 'react-native-awesome-alerts';
-import {getAuthUserProfile} from '../../../../redux';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 interface ParentsUuidComment {
   parents_comment_uuid: string;
@@ -218,7 +220,7 @@ const CommentRepForum = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <FlatList
         data={dataRepComment}
         keyExtractor={item => item.uuid}
@@ -229,7 +231,9 @@ const CommentRepForum = () => {
               <FastImage
                 style={styles.avatarStyle}
                 source={{
-                  uri: user_avatar,
+                  uri: user_avatar
+                    ? user_avatar
+                    : 'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
                 }}
               />
               <View style={styles.content}>
@@ -239,8 +243,8 @@ const CommentRepForum = () => {
                 <View style={styles.repContent}>
                   <View style={styles.viewItemBtn}>
                     <Icon
-                      name="chatbox-outline"
-                      type="ionicon"
+                      name="comment"
+                      type="font-awesome-5"
                       color={styles.iconStyleBlur.color}
                       size={15}
                     />
@@ -292,6 +296,9 @@ const CommentRepForum = () => {
                             setShowAlert(false);
                             onPressDeleteComment();
                           }}
+                          onDismiss={() => {
+                            setShowAlert(false);
+                          }}
                           titleStyle={styles.textTitleAlert}
                           messageStyle={styles.textMessageAlert}
                           cancelButtonTextStyle={styles.textCancelAlert}
@@ -317,7 +324,7 @@ const CommentRepForum = () => {
             'size scroll',
             contentOffset.y + layoutMeasurement.height,
           );
-          console.log('sỉze content', sizeContent);
+          console.log('size content', sizeContent);
 
           if (isNearBottom) {
             loadMoreComic();
@@ -343,7 +350,7 @@ const CommentRepForum = () => {
       </View>
 
       <HeaderRepComment currentRepCommentCount={dataRepComment?.length ?? 0} />
-    </SafeAreaView>
+    </View>
   );
 };
 
