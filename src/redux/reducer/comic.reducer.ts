@@ -13,6 +13,7 @@ import {
   PayloadHttpListTopView,
   AddFavoriteType,
   PayloadHttp,
+  PayloadHttpFavotite,
 } from '../types';
 import {PayloadHttpList} from '../../types';
 
@@ -249,14 +250,12 @@ const reducer = createSlice({
     },
     setPostFavorite: (
       state: ComicState,
-      action: PayloadAction<PayloadHttp<AddFavoriteType>>,
+      action: PayloadAction<PayloadHttpFavotite>,
     ) => {
       return {
         ...state,
         dataPostFavorite: {
-          data: action.payload.data,
-          code: action.payload.code,
-          message: action.payload.message,
+          ...action.payload,
         },
       };
     },

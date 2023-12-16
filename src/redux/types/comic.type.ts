@@ -31,6 +31,12 @@ export interface PayloadHttp<T> {
   data?: T;
 }
 
+export interface PayloadHttpFavotite {
+  code?: number;
+  message?: string;
+  data?: boolean;
+}
+
 export interface PayloadHttpListComicData<T> {
   totalData?: number;
   totalPage?: number;
@@ -59,7 +65,7 @@ export type ComicState = Partial<{
   listTopView: PayloadHttpListTopView<ComicType>;
   listTopRating: PayloadHttpListTopView<ComicType>;
   listTopFavorite: PayloadHttpListTopView<ComicType>;
-  dataPostFavorite: PayloadHttp<AddFavoriteType>;
+  dataPostFavorite: PayloadHttpFavotite;
   listFavorite: PayloadHttpListComicData<ComicType>;
   listHistoryComic: PayloadHttpListComicData<ComicType>;
 }>;

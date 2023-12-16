@@ -24,10 +24,11 @@ const ComicsDetail = () => {
     scrollRef,
     setVisible2,
     visible2,
-    uuidPost,
+
     pressHandler4,
     bottomSheetRef4,
     dataUser,
+    dataPostFavorite,
   } = useComicDetail();
 
   const generateLink = async () => {
@@ -81,7 +82,7 @@ const ComicsDetail = () => {
         leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         rightIconleft={{
           name: 'bookmark',
-          color: uuidPost ? '#F89300' : '',
+          color: dataPostFavorite ? '#F89300' : '',
           type: 'ionicon',
         }}
         onPressRightIconLeft={postFavorite}
