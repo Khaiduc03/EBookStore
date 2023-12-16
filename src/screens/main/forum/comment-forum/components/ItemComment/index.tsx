@@ -2,16 +2,16 @@ import {Icon} from '@rneui/base';
 import moment from 'moment';
 import React, {useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import FastImage from 'react-native-fast-image';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {routes} from '../../../../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {NavigationService} from '../../../../../../navigation';
+import {getAuthUserProfile} from '../../../../../../redux';
 import {CommentForumAction} from '../../../../../../redux/reducer/comment.forum.reducer';
 import {CommentForumType} from '../../../../../../redux/types/comment.forum.type';
 import useStyles from './styles';
-import {getAuthUserProfile} from '../../../../../../redux';
-import AwesomeAlert from 'react-native-awesome-alerts';
 
 interface CommentDataProps {
   data: Partial<CommentForumType>;
@@ -40,9 +40,8 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
 
   const dispatch = useAppDispatch();
 
-  const [showAlert, setShowAlert] = useState(false);
-
   const user = useAppSelector(getAuthUserProfile);
+  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const onPressLikeComment = () => {
     if (is_like) {
@@ -90,9 +89,9 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
       <FastImage
         style={styles.avatarStyle}
         source={{
-          uri:
-            user_avatar ||
-            'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
+          uri: user_avatar
+            ? user_avatar
+            : 'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
         }}
       />
       <View style={styles.content}>
@@ -166,6 +165,9 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
                   onConfirmPressed={() => {
                     setShowAlert(false);
                     onPressDeleteComment();
+                  }}
+                  onDismiss={() => {
+                    setShowAlert(false);
                   }}
                   titleStyle={styles.textTitleAlert}
                   messageStyle={styles.textMessageAlert}

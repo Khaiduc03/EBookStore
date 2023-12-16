@@ -39,7 +39,7 @@ const useStyles = makeStyles(({ colors }) => ({
   repContent: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: normalize(8),
+    paddingTop: normalize(8),
   },
   like: {
     width: normalize(WIDTH * 0.2),
@@ -50,7 +50,6 @@ const useStyles = makeStyles(({ colors }) => ({
   rep: {
     flexDirection: 'row',
     alignItems: 'center',
-    margin: normalize(5),
   },
   numberRepStyle: {
     paddingLeft: normalize(5),

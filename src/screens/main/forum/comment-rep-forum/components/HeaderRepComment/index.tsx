@@ -7,14 +7,13 @@ import {backScreen} from '../../../../../../utils';
 import useStyles from './styles';
 
 interface HeaderRepCommentProps {
-  currentRepCommentCount: number; // new prop
+  currentRepCommentCount: number;
 }
 
 const HeaderRepComment: React.FC<HeaderRepCommentProps> = ({
   currentRepCommentCount,
 }) => {
   const styles = useStyles();
-  const route = useRoute();
 
   return (
     <View style={styles.container}>
@@ -23,7 +22,7 @@ const HeaderRepComment: React.FC<HeaderRepCommentProps> = ({
           name="arrow-back-outline"
           size={24}
           type="ionicon"
-          color={styles.iconStylle.color}
+          color={styles.iconStyle.color}
         />
       </TouchableOpacity>
       <Text style={styles.textHeader}>

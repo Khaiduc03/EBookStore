@@ -101,6 +101,9 @@ const useStyles = makeStyles(({ colors }) => ({
   },
   contentContainerStyle: {
     backgroundColor: colors.black1,
+  },
+  viewRow: {
+    flexDirection: 'row',
   }
 }));
 

@@ -1,6 +1,6 @@
 import {Icon} from '@rneui/base';
 import React, {useState} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Keyboard, Pressable, Text, TouchableOpacity, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import useStyles from './styles';
 import moment from 'moment';
@@ -10,6 +10,7 @@ import {CommentForumAction} from '../../../../../../redux/reducer/comment.forum.
 import {CommentForumType} from '../../../../../../redux/types/comment.forum.type';
 import {getAuthUserProfile} from '../../../../../../redux';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 interface CommentDataProps {
   data: CommentForumType;
@@ -68,7 +69,6 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
   const onPressRep = (text: string) => {
     props.setUserRep(text);
     props.setOpen();
-    setShowAlert(false);
   };
 
   const getTimeElapsed = () => {
@@ -92,7 +92,9 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
       <FastImage
         style={styles.avatarStyle}
         source={{
-          uri: user_avatar,
+          uri: user_avatar
+            ? user_avatar
+            : 'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
         }}
       />
       <View style={styles.content}>
@@ -173,6 +175,9 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
                   onConfirmPressed={() => {
                     setShowAlert(false);
                     onPressDeleteComment();
+                  }}
+                  onDismiss={() => {
+                    setShowAlert(false);
                   }}
                   titleStyle={styles.textTitleAlert}
                   messageStyle={styles.textMessageAlert}

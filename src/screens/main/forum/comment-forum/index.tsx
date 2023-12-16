@@ -19,6 +19,7 @@ import {CommentForumType} from '../../../../redux/types/comment.forum.type';
 import {HeaderComment} from './components';
 import ItemCommnent from './components/ItemComment';
 import useStyles from './styles';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 const CommentForum: React.FC = () => {
   const styles = useStyles();
@@ -32,7 +33,6 @@ const CommentForum: React.FC = () => {
   const [value, setvalue] = useState('');
   const isLoading = useAppSelector(getIsLoadingPage);
   const flatListRef = useRef<FlatList<CommentForumType>>();
-
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
 
@@ -98,7 +98,7 @@ const CommentForum: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <FlatList
         key={dataComment?.length}
         data={dataComment}
@@ -138,7 +138,7 @@ const CommentForum: React.FC = () => {
       </View>
 
       <HeaderComment currentCommentCount={dataComment?.length ?? 0} />
-    </SafeAreaView>
+    </View>
   );
 };
 
