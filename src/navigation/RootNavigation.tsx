@@ -1,3 +1,4 @@
+import dynamicLinks from '@react-native-firebase/dynamic-links';
 import {NavigationContainer} from '@react-navigation/native';
 import {makeStyles, useThemeMode} from '@rneui/themed';
 import React, {useEffect} from 'react';
@@ -8,13 +9,11 @@ import {getMode} from '../redux/selectors/thems.selector';
 import {NavigationService, linking, navigationRef} from './NavigationService';
 import AppNavigator from './navigators/AppNavigator';
 import AuthNavigator from './navigators/AuthNavigator';
-import dynamicLinks from '@react-native-firebase/dynamic-links';
 
-import {ComicService} from '../redux';
 import {routes} from '../constants';
+import {ComicService} from '../redux';
 
 import {CustomToastBottom} from '../utils';
-import BottomSheetScreenScroll from '../components/shared/BottomSheer/BottomSheetScreenScroll';
 
 const RootNavigation = () => {
   const enableSignIn: boolean = useAppSelector(getAuthEnableSignIn);
@@ -42,6 +41,7 @@ const RootNavigation = () => {
         if (enableSignIn) {
           const uuid = link.url.split('comic_uuid=')[1];
           const {data} = await ComicService.getComicById(uuid);
+
           if (data.code === 200) {
             NavigationService.navigate(routes.COMICDETAIL, {
               data: data.data[0],
@@ -56,6 +56,7 @@ const RootNavigation = () => {
 
   useEffect(() => {
     dynamicLinks().getInitialLink().then(handleDynamicLink);
+    return () => {};
   }, []);
 
   useEffect(() => {

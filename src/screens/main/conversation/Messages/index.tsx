@@ -1,6 +1,6 @@
 import {useRoute} from '@react-navigation/native';
 import {Icon, Text} from '@rneui/base';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {
   FlatList,
   Keyboard,
@@ -12,17 +12,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {MessageI, RequestAddMessageI, getAuthUserUuid} from '../../../../redux';
-import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import EmojiSelector, {Categories} from 'react-native-emoji-selector';
-import {getListMessage} from '../../../../redux/selectors/chat.selector';
-import {ChatActions} from '../../../../redux/reducer/chat.reducer';
-import {NavigationService} from '../../../../navigation';
 import {HeaderCustom} from '../../../../components';
+import {routes} from '../../../../constants';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {NavigationService} from '../../../../navigation';
+import {MessageI, MessageType, RequestAddMessageI} from '../../../../redux';
+import {ChatActions} from '../../../../redux/reducer/chat.reducer';
+import {getListMessage} from '../../../../redux/selectors/chat.selector';
+import {isLink} from '../../../../utils';
 import {ChatBubble} from './components/ChatBubbleItem';
 import useStyles from './styles';
-import {routes} from '../../../../constants';
-import dynamicLinks from '@react-native-firebase/dynamic-links';
 const MessageScreen: React.FC = () => {
   const {params} = useRoute() as any;
   const [selectedEmojis, setSelectedEmojis] = useState<string[]>([]);
@@ -34,6 +34,7 @@ const MessageScreen: React.FC = () => {
   const [newMessage, setNewMessage] = useState<string>('');
   const dispatch = useAppDispatch();
   const listMessage: MessageI[] = useAppSelector(getListMessage);
+  const memoizedListMessage = useMemo(() => listMessage, [listMessage]);
 
   useEffect(() => {
     scrollViewRef.current?.scrollToOffset({animated: true, offset: 0});
@@ -84,10 +85,18 @@ const MessageScreen: React.FC = () => {
   }, [isShowEmoji]);
 
   const handleSendMessage = () => {
+    let type: MessageType;
+    if (isLink(newMessage)) {
+      type = MessageType.LINK;
+    } else {
+      type = MessageType.MESSAGE;
+    }
+    console.log(type);
     if (newMessage.trim() !== '') {
       const newMessageItem: RequestAddMessageI = {
         conversation_uuid: params.uuid,
         message: newMessage,
+        type: type,
       };
 
       dispatch(ChatActions.handleAddMessage(newMessageItem));
@@ -101,8 +110,6 @@ const MessageScreen: React.FC = () => {
     Keyboard.dismiss();
     setIsShowEmoji(isShowEmoji);
   };
-
-  console.log(isShowEmoji);
 
   const handleFocus = () => {
     setIsShowEmoji(false);
@@ -171,7 +178,7 @@ const MessageScreen: React.FC = () => {
         <FlatList
           overScrollMode="never"
           showsVerticalScrollIndicator={false}
-          data={listMessage}
+          data={memoizedListMessage}
           renderItem={RenderItem}
           keyExtractor={item => item.uuid.toString()}
           inverted={true}
@@ -252,3 +259,5 @@ const MessageScreen: React.FC = () => {
 };
 
 export default MessageScreen;
+
+// Kết quả sẽ là true nếu chuỗi thoả mãn cả hai điều kiện
