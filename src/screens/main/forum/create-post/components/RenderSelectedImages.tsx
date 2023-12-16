@@ -34,6 +34,7 @@ const SelectedImages: React.FC<SelectedImagesProps> = props => {
             {item && (
               <>
                 <FBCollage
+                  key={index}
                   images={[{uri: item.uri}] as any}
                   style={{
                     flex: 1,
