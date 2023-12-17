@@ -2,7 +2,7 @@ import {useCallback, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../../../../../hooks';
 import {getPostById} from '../../../../../../../redux/selectors/user.selector';
 import {UserAction} from '../../../../../../../redux/reducer/user.reducer';
-import {ForumActions} from '../../../../../../../redux';
+import {AuthActions, ForumActions} from '../../../../../../../redux';
 import {ForumType} from '../../../../../../../redux/types/forum.type';
 
 type UseGetPostDetailType = {
@@ -44,6 +44,7 @@ export const useGetPostDetail = (props: UseGetPostDetailType) => {
   const handleDeletePost = (forum_uuid: any) => {
     dispatch(ForumActions.deletePost({forum_uuid: forum_uuid}));
     dispatch(UserAction.deletePost(forum_uuid));
+    dispatch(AuthActions.getUserInfo());
     setShowAlert(false);
   };
 
