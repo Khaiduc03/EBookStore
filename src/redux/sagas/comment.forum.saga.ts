@@ -1,8 +1,9 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { ForumActions, LoadingActions } from '../reducer';
+import { ForumActions } from '../reducer';
 import { CommentForumAction } from '../reducer/comment.forum.reducer';
 import { CommentForumService } from '../services/comment.forum.service';
+import { da } from 'date-fns/locale';
 
 function* postCommentSaga(action: PayloadAction<any>): Generator {
   try {
@@ -109,7 +110,6 @@ function* deleteLikeCommentSaga(action: PayloadAction<any>): Generator {
 }
 
 function* postRepCommentSaga(action: PayloadAction<any>): Generator {
-  // yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
     const { data }: any = yield call(
@@ -126,12 +126,10 @@ function* postRepCommentSaga(action: PayloadAction<any>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    // yield put(LoadingActions.hideLoading());
   }
 }
 
 function* getRepCommentForumSaga(action: PayloadAction<any>): Generator {
-  yield put(LoadingActions.showLoadingPage());
   try {
     console.log('run===========>');
     const { data }: any = yield call(
@@ -147,7 +145,6 @@ function* getRepCommentForumSaga(action: PayloadAction<any>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoadingPage());
   }
 }
 
@@ -157,7 +154,6 @@ function* deleteCommentSaga(action: PayloadAction<any>): Generator {
       CommentForumService.deleteCommentForum,
       action.payload,
     );
-
     if (data.code == 200) {
       yield put(CommentForumAction.handleDeleteCommentSuccess(action.payload));
     } else {
@@ -166,7 +162,6 @@ function* deleteCommentSaga(action: PayloadAction<any>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    // Any cleanup code if needed
   }
 }
 

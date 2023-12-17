@@ -46,14 +46,6 @@ const PostHeader: React.FC<PostHeaderProps> = ({
     }
   };
 
-  const handlePressUser = () => {
-    NavigationService.navigate(routes.PROFILEUSER, {
-      userUUID,
-      userFullName,
-      userAvatar,
-    });
-  };
-
   return (
     <View style={styles.viewRow}>
       <TouchableOpacity>

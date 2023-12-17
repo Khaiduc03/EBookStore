@@ -1,8 +1,8 @@
+import {Icon} from '@rneui/themed';
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import useStyles from './styles';
-import {Icon} from '@rneui/themed';
 
 interface PostFooterProps {
   isLiked: boolean;

@@ -1,7 +1,7 @@
-import {PayloadAction, createSlice} from '@reduxjs/toolkit';
-import {Redux} from '../types';
-import {PayloadHttpListCommentData} from '../types/comment.chapter.type';
-import {CommentForumState, CommentForumType} from '../types/comment.forum.type';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { Redux } from '../types';
+import { PayloadHttpListCommentData } from '../types/comment.chapter.type';
+import { CommentForumState, CommentForumType } from '../types/comment.forum.type';
 
 const initialState: CommentForumState = {};
 

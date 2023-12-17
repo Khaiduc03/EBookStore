@@ -1,9 +1,9 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { call, delay, put, takeLatest } from 'redux-saga/effects';
+import { NavigationService } from '../../navigation';
 import { CustomToastBottom, showToastSuccess } from '../../utils';
 import { ForumActions, LoadingActions } from '../reducer';
 import { ForumService } from '../services/forum.service';
-import { NavigationService } from '../../navigation';
 
 function* getListDataForumSaga(action: PayloadAction<number>): Generator {
   if (action.payload === 1) {

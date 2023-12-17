@@ -76,6 +76,8 @@ const PostContent: React.FC<PostContentProps> = ({
   const screenHeight = Dimensions.get('window').height;
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  console.log('🤔 ', images);
+
   return (
     <View>
       <View style={styles.description}>
@@ -150,7 +152,7 @@ const PostContent: React.FC<PostContentProps> = ({
           pagingEnabled
         />
 
-        {images && (
+        {images.length > 1 && (
           <View style={styles.viewImagesLength}>
             <Text style={styles.textImagesLength}>
               {images ? currentIndex + 1 : 0}/{images.length}

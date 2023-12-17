@@ -12,6 +12,7 @@ import {getAuthUserProfile} from '../../../../../../redux';
 import {CommentForumAction} from '../../../../../../redux/reducer/comment.forum.reducer';
 import {CommentForumType} from '../../../../../../redux/types/comment.forum.type';
 import useStyles from './styles';
+import CustomAwesomeAlert from '../AwesomeAlertProps/CustomAwesomeAlert';
 
 interface CommentDataProps {
   data: Partial<CommentForumType>;
@@ -130,7 +131,11 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
                 }
                 size={15}
               />
-              <Text style={styles.numberRepStyle}>
+              <Text
+                style={[
+                  styles.numberRepStyle,
+                  {color: is_like ? '#F89300' : styles.iconStyleBlur.color},
+                ]}>
                 {like_count ? like_count : '0'}
               </Text>
             </TouchableOpacity>
@@ -146,34 +151,14 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
                   size={15}
                   color={styles.iconStyleBlur.color}
                 />
-                <AwesomeAlert
-                  show={showAlert}
-                  showProgress={false}
+                <CustomAwesomeAlert
+                  showAlert={showAlert}
+                  setShowAlert={showAlert => setShowAlert(showAlert)}
                   title="Delete Your Comment 😕"
                   message="Are you sure you want to delete your comment?"
-                  closeOnTouchOutside={true}
-                  closeOnHardwareBackPress={false}
-                  showCancelButton={true}
-                  showConfirmButton={true}
                   cancelText="No, cancel"
-                  cancelButtonColor="blue"
                   confirmText="Yes, delete it"
-                  confirmButtonColor="red"
-                  onCancelPressed={() => {
-                    setShowAlert(false);
-                  }}
-                  onConfirmPressed={() => {
-                    setShowAlert(false);
-                    onPressDeleteComment();
-                  }}
-                  onDismiss={() => {
-                    setShowAlert(false);
-                  }}
-                  titleStyle={styles.textTitleAlert}
-                  messageStyle={styles.textMessageAlert}
-                  cancelButtonTextStyle={styles.textCancelAlert}
-                  confirmButtonTextStyle={styles.textConfirmAlert}
-                  contentContainerStyle={styles.contentContainerStyle}
+                  onPressConfirm={onPressDeleteComment}
                 />
               </TouchableOpacity>
             )}

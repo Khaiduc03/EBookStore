@@ -1,17 +1,17 @@
-import {PayloadAction, createAction, createSlice} from '@reduxjs/toolkit';
-import {Redux} from '../types';
+import { PayloadAction, createAction, createSlice } from '@reduxjs/toolkit';
+import { Redux } from '../types';
 import {
   ForumState,
   ForumType,
   PayloadHttpListForumData,
 } from '../types/forum.type';
-import {produce} from 'immer';
+import { produce } from 'immer';
 
 const initialState: ForumState = {};
 
 const reducer = createSlice({
   name: Redux.forum,
-  initialState: {...initialState},
+  initialState: { ...initialState },
   reducers: {
     clearListData: (state: ForumState) => {
       return {
@@ -140,6 +140,20 @@ const reducer = createSlice({
         state.listDataForum.data.forEach(forum => {
           if (forum.uuid === uuid) {
             forum.comment_count = forum.comment_count + 1;
+          }
+        });
+      }
+
+      return state;
+    },
+
+    handleDecreaseCount: (state: ForumState, action: PayloadAction<string>) => {
+      const uuid = action.payload;
+
+      if (state.listDataForum && state.listDataForum.data) {
+        state.listDataForum.data.forEach(forum => {
+          if (forum.uuid === uuid) {
+            forum.comment_count = forum.comment_count - 1;
           }
         });
       }
