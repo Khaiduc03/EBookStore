@@ -52,7 +52,8 @@ const useStyles = makeStyles(({colors}) => ({
     borderRadius: normalize(15),
     paddingHorizontal: normalize(12),
     borderColor: colors.black,
-    color: colors.black,
+    color: colors.blackDefault,
+    backgroundColor: colors.white,
   },
   viewstar: {
     paddingVertical: normalize(30),
@@ -66,14 +67,14 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
   },
   textTitleAlert: {
-    color: colors.black,
+    color: colors.blackDefault,
     fontSize: normalize(19),
     fontFamily: fontFamilySetup.bold,
     lineHeight: normalize(21),
     textAlign: 'center',
   },
   textMessageAlert: {
-    color: colors.black,
+    color: colors.blackDefault,
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
     textAlign: 'center',

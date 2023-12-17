@@ -44,7 +44,7 @@ const ItemRating: React.FC = () => {
       <View style={styles.content}>
         <View style={styles.viewRating1}>
           <Text style={styles.numberRating}>
-            {dataChart?.average_rating.toFixed(1)}
+            {dataChart?.average_rating.toFixed(1) || 0}
           </Text>
           <AirbnbRating
             isDisabled={true}
@@ -55,7 +55,9 @@ const ItemRating: React.FC = () => {
             showRating={false}
             size={20}
           />
-          <Text style={styles.numberReviews}>( 6.8k reviews )</Text>
+          <Text style={styles.numberReviews}>
+            ( {dataChart?.total_rating || 0} reviews )
+          </Text>
         </View>
         <View style={styles.line} />
         <View style={styles.viewRating2}>
