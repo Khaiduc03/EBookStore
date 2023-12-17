@@ -3,7 +3,6 @@ import {Icon} from '@rneui/themed';
 import moment from 'moment';
 import React, {useState} from 'react';
 import {
-  Animated,
   Dimensions,
   FlatList,
   Image,
@@ -12,15 +11,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import FastImage from 'react-native-fast-image';
 import FBCollage from 'react-native-fb-collage';
 import {
-  GestureEvent,
   GestureHandlerRootView,
   PinchGestureHandler,
   ScrollView,
-  State,
+  TapGestureHandler,
 } from 'react-native-gesture-handler';
+import Animated, {
+  useAnimatedGestureHandler,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 import Share from 'react-native-share';
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -34,6 +37,7 @@ import {backScreen} from '../../../../../../utils';
 import {useGetPostDetail} from './hook/useGetPostDetail.hook';
 import {useModalPostDetail} from './hook/useModalPostDetail.hook';
 import useStyles from './styles';
+import FastImage from 'react-native-fast-image';
 interface PostDataDeatilRoute {
   post_uuid: string;
 }
@@ -67,33 +71,8 @@ const PostDetail = () => {
 
   console.log(postData);
 
-  const {width, height} = Dimensions.get('window');
-
   const screenWidth = Dimensions.get('window').width;
   const screenHeight = Dimensions.get('window').height;
-
-  const [activeIndices, setActiveIndices] = useState({}) as any;
-
-  const scale = new Animated.Value(1);
-
-  const onGestureEvent = Animated.event([{nativeEvent: {scale: scale}}], {
-    useNativeDriver: true,
-  });
-
-  const onHandleState = (event: GestureEvent) => {
-    if (event.nativeEvent.oldState == State.ACTIVE) {
-      Animated.spring(scale, {
-        toValue: 1,
-        useNativeDriver: true,
-      }).start();
-    }
-  };
-
-  const handleScroll = (id: any) => (event: any) => {
-    const scrollPosition = event.nativeEvent.contentOffset.x;
-    const index = Math.round(scrollPosition / width);
-    setActiveIndices((prevIndices: any) => ({...prevIndices, [id]: index}));
-  };
 
   const onShare = async () => {
     const options: any = {
@@ -123,6 +102,33 @@ const PostDetail = () => {
       return `${Math.floor(duration.asDays())}d ago`;
     }
   };
+
+  const scale = useSharedValue(1);
+  const translationX = useSharedValue(0);
+  const translationY = useSharedValue(0);
+  const pinchHandler = useAnimatedGestureHandler({
+    onActive: (event: any) => {
+      scale.value = event.scale < 1 ? 1 : event.scale;
+      translationX.value = withSpring(0);
+      translationY.value = withSpring(0);
+    },
+    onEnd: () => {
+      scale.value = withSpring(scale.value);
+    },
+  });
+
+  const tapHandler = useAnimatedGestureHandler({
+    onActive: (event: any) => {
+      console.log('Double tap detected!');
+      scale.value = withSpring(1);
+    },
+  });
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{scale: scale.value}],
+    };
+  });
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -210,19 +216,19 @@ const PostDetail = () => {
               data={postData && postData.images}
               renderItem={({item, index}) => {
                 return (
-                  <View style={styles.imageContainer}>
+                  <View>
                     {item && (
                       <>
                         <FBCollage
-                          key={index}
+                          key={0}
                           images={[{uri: item}] as any}
                           style={{
                             flex: 1,
                             width: screenWidth,
-                            height: screenWidth,
+                            height: screenHeight / 2,
                           }}
                           borderRadius={6}
-                          imageOnPress={() => onPressOpenModal(index)}
+                          imageOnPress={() => onPressOpenModal(item)}
                         />
                       </>
                     )}
@@ -231,36 +237,27 @@ const PostDetail = () => {
                       visible={showModal}
                       transparent={true}
                       onRequestClose={onPressCloseModal}>
-                      <View style={styles.viewIconClose}>
-                        <TouchableOpacity onPress={onPressCloseModal}>
-                          <Icon
-                            name="close-circle"
-                            size={30}
-                            color="white"
-                            type="ionicon"
-                            style={styles.iconClose}
-                          />
-                        </TouchableOpacity>
-                      </View>
-
                       <View style={styles.viewModalImage}>
                         <GestureHandlerRootView>
-                          <PinchGestureHandler
-                            onGestureEvent={onGestureEvent}
-                            onHandlerStateChange={onHandleState}>
-                            <Animated.View style={{transform: [{scale}]}}>
-                              <FastImage
-                                key={index}
-                                source={{
-                                  uri: selectedImage.uri,
-                                  priority: FastImage.priority.normal,
-                                }}
-                                style={{
-                                  width: screenWidth,
-                                  height: screenHeight,
-                                }}
-                                resizeMode={FastImage.resizeMode.contain}
-                              />
+                          <PinchGestureHandler onGestureEvent={pinchHandler}>
+                            <Animated.View style={animatedStyle}>
+                              <TapGestureHandler
+                                numberOfTaps={2}
+                                onGestureEvent={tapHandler}>
+                                <Animated.View>
+                                  <FastImage
+                                    source={{
+                                      uri: selectedImage,
+                                      priority: FastImage.priority.normal,
+                                    }}
+                                    style={{
+                                      width: screenWidth,
+                                      height: screenHeight,
+                                    }}
+                                    resizeMode={FastImage.resizeMode.contain}
+                                  />
+                                </Animated.View>
+                              </TapGestureHandler>
                             </Animated.View>
                           </PinchGestureHandler>
                         </GestureHandlerRootView>

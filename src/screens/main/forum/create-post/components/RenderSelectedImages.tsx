@@ -75,7 +75,7 @@ const SelectedImages: React.FC<SelectedImagesProps> = props => {
               {item && (
                 <>
                   <FBCollage
-                    key={index}
+                    key={0}
                     images={[{uri: item.uri}] as any}
                     borderRadius={6}
                     imageOnPress={() => openModal(item.uri)}
@@ -135,7 +135,7 @@ const SelectedImages: React.FC<SelectedImagesProps> = props => {
           height: screenHeight / 2,
         }}
       />
-      {props.images && (
+      {props.images.length > 1 && (
         <View style={styles.viewImagesLength}>
           <Text style={styles.textImagesLength}>
             {props.images ? currentIndex + 1 : 0}/{props.images.length}

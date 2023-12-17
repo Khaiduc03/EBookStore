@@ -208,9 +208,6 @@ const useStyles = makeStyles(({ colors }) => ({
     borderRadius: normalize(100),
     backgroundColor: colors.primary,
   },
-  imageContainer: {
-    position: 'relative',
-  },
   imageAspect: {
     width: '100%',
     height: undefined,
@@ -221,7 +218,7 @@ const useStyles = makeStyles(({ colors }) => ({
     alignItems: 'flex-end',
   },
   iconClose: {
-    position: 'relative',
+    position: 'absolute',
     marginTop: normalize(10),
     marginRight: normalize(10),
     zIndex: normalize(1000),
@@ -230,7 +227,8 @@ const useStyles = makeStyles(({ colors }) => ({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.blackDefault,
+    backgroundColor: colors.black1,
+    position: 'absolute',
   },
   viewImagesLengh: {
     width: normalize(46),

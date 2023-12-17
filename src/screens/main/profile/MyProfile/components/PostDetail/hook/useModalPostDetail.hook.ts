@@ -1,18 +1,16 @@
 import { useState } from 'react';
 
-type UseModalPostDetailType = {};
-
 export const useModalPostDetail = () => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState('') as any;
+  const [selectedImage, setSelectedImage] = useState([]) as any;
 
-  const onPressOpenModal = (image: any) => {
+  const onPressOpenModal = (image: string) => {
     setShowModal(true);
     setSelectedImage(image);
   };
   const onPressCloseModal = () => {
     setShowModal(false);
-    setSelectedImage('');
+    setSelectedImage([]);
   };
 
   return {

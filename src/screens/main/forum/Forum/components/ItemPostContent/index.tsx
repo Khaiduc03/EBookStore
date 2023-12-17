@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import FastImage from 'react-native-fast-image';
 import FBCollage from 'react-native-fb-collage';
 import {
   GestureHandlerRootView,
@@ -22,6 +21,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import useStyles from './styles';
+import FastImage from 'react-native-fast-image';
 
 interface PostContentProps {
   content: string;
@@ -45,7 +45,6 @@ const PostContent: React.FC<PostContentProps> = ({
   const styles = useStyles();
 
   const scale = useSharedValue(1);
-
   const translationX = useSharedValue(0);
   const translationY = useSharedValue(0);
 
@@ -132,10 +131,7 @@ const PostContent: React.FC<PostContentProps> = ({
                                 uri: selectedImage,
                                 priority: FastImage.priority.normal,
                               }}
-                              style={{
-                                width: screenWidth,
-                                height: screenHeight,
-                              }}
+                              style={{width: screenWidth, height: screenHeight}}
                               resizeMode={FastImage.resizeMode.contain}
                             />
                           </Animated.View>
