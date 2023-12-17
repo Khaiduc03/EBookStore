@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import AutoHeightImage from 'react-native-auto-height-image';
+import FastImage from 'react-native-fast-image';
 import FBCollage from 'react-native-fb-collage';
 import {
   GestureHandlerRootView,
@@ -45,6 +45,7 @@ const PostContent: React.FC<PostContentProps> = ({
   const styles = useStyles();
 
   const scale = useSharedValue(1);
+
   const translationX = useSharedValue(0);
   const translationY = useSharedValue(0);
 
@@ -75,8 +76,6 @@ const PostContent: React.FC<PostContentProps> = ({
   const screenWidth = Dimensions.get('window').width;
   const screenHeight = Dimensions.get('window').height;
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  console.log('🤔 ', images);
 
   return (
     <View>
@@ -128,9 +127,16 @@ const PostContent: React.FC<PostContentProps> = ({
                           numberOfTaps={2}
                           onGestureEvent={tapHandler}>
                           <Animated.View>
-                            <AutoHeightImage
-                              source={{uri: selectedImage}}
-                              width={screenWidth}
+                            <FastImage
+                              source={{
+                                uri: selectedImage,
+                                priority: FastImage.priority.normal,
+                              }}
+                              style={{
+                                width: screenWidth,
+                                height: screenHeight,
+                              }}
+                              resizeMode={FastImage.resizeMode.contain}
                             />
                           </Animated.View>
                         </TapGestureHandler>

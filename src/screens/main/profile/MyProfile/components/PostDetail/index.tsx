@@ -8,12 +8,12 @@ import {
   FlatList,
   Image,
   Modal,
-  Pressable,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import AutoHeightImage from 'react-native-auto-height-image';
+import FastImage from 'react-native-fast-image';
+import FBCollage from 'react-native-fb-collage';
 import {
   GestureEvent,
   GestureHandlerRootView,
@@ -25,18 +25,15 @@ import Share from 'react-native-share';
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {HeaderCustom} from '../../../../../../components';
+import Awesome from '../../../../../../components/customs/Awesome';
 import {routes} from '../../../../../../constants';
-import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
+import {useAppSelector} from '../../../../../../hooks';
 import {NavigationService} from '../../../../../../navigation';
+import {getAuthUserProfile} from '../../../../../../redux';
 import {backScreen} from '../../../../../../utils';
 import {useGetPostDetail} from './hook/useGetPostDetail.hook';
-import useStyles from './styles';
 import {useModalPostDetail} from './hook/useModalPostDetail.hook';
-import {ItemComment} from '../../../../home/CommentComic/components';
-import Awesome from '../../../../../../components/customs/Awesome';
-import {getAuthUserProfile} from '../../../../../../redux';
-import FBCollage from 'react-native-fb-collage';
-import {data} from '../../../../home/Notifications/types';
+import useStyles from './styles';
 interface PostDataDeatilRoute {
   post_uuid: string;
 }
@@ -73,6 +70,7 @@ const PostDetail = () => {
   const {width, height} = Dimensions.get('window');
 
   const screenWidth = Dimensions.get('window').width;
+  const screenHeight = Dimensions.get('window').height;
 
   const [activeIndices, setActiveIndices] = useState({}) as any;
 
@@ -126,6 +124,8 @@ const PostDetail = () => {
     }
   };
 
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   return (
     <ScrollView style={styles.container}>
       <HeaderCustom
@@ -155,27 +155,27 @@ const PostDetail = () => {
                   <Text style={styles.name}>
                     {(postData && postData.user_fullname) || 'Anonymus'}
                   </Text>
-                  <View
-                    style={[
-                      styles.viewRow,
-                      styles.viewImageText,
-                      styles.marginTopDate,
-                    ]}>
-                    <Text style={styles.createAt}>{getTimeElapsed()}</Text>
+                  <View style={[styles.viewRow, styles.viewCreateAt]}>
+                    <Text style={styles.createAt}>{getTimeElapsed()} •</Text>
                     <Icon
                       name="public"
                       type="material"
-                      size={16}
-                      color={'#626162'}
+                      size={14}
+                      color={'#b3b3b3'}
                     />
                   </View>
                 </View>
               </View>
 
-              <View style={styles.viewIconPost}>
+              <View>
                 {user.uuid == postData.user_uuid ? (
                   <TouchableOpacity onPress={() => setShowAlert(!showAlert)}>
-                    <Icon name="close-outline" type="ionicon" size={28} />
+                    <Icon
+                      name="close-outline"
+                      type="ionicon"
+                      size={24}
+                      color={'#626162'}
+                    />
                   </TouchableOpacity>
                 ) : (
                   <View />
@@ -214,6 +214,7 @@ const PostDetail = () => {
                     {item && (
                       <>
                         <FBCollage
+                          key={index}
                           images={[{uri: item}] as any}
                           style={{
                             flex: 1,
@@ -223,14 +224,6 @@ const PostDetail = () => {
                           borderRadius={6}
                           imageOnPress={() => onPressOpenModal(index)}
                         />
-                        {postData.images && (
-                          <View style={styles.viewImagesLength}>
-                            <Text style={styles.textImagesLength}>
-                              {postData.images ? index + 1 : 0}/
-                              {postData.images.length}
-                            </Text>
-                          </View>
-                        )}
                       </>
                     )}
 
@@ -239,14 +232,15 @@ const PostDetail = () => {
                       transparent={true}
                       onRequestClose={onPressCloseModal}>
                       <View style={styles.viewIconClose}>
-                        <Icon
-                          name="close-circle"
-                          size={30}
-                          color="white"
-                          type="ionicon"
-                          onPress={onPressCloseModal}
-                          style={styles.iconClose}
-                        />
+                        <TouchableOpacity onPress={onPressCloseModal}>
+                          <Icon
+                            name="close-circle"
+                            size={30}
+                            color="white"
+                            type="ionicon"
+                            style={styles.iconClose}
+                          />
+                        </TouchableOpacity>
                       </View>
 
                       <View style={styles.viewModalImage}>
@@ -255,10 +249,17 @@ const PostDetail = () => {
                             onGestureEvent={onGestureEvent}
                             onHandlerStateChange={onHandleState}>
                             <Animated.View style={{transform: [{scale}]}}>
-                              <AutoHeightImage
-                                key={selectedImage?.index.toString()}
-                                source={{uri: selectedImage?.item}}
-                                width={screenWidth}
+                              <FastImage
+                                key={index}
+                                source={{
+                                  uri: selectedImage.uri,
+                                  priority: FastImage.priority.normal,
+                                }}
+                                style={{
+                                  width: screenWidth,
+                                  height: screenHeight,
+                                }}
+                                resizeMode={FastImage.resizeMode.contain}
                               />
                             </Animated.View>
                           </PinchGestureHandler>
@@ -269,10 +270,23 @@ const PostDetail = () => {
                 );
               }}
               pagingEnabled
-              onScroll={handleScroll(postData && postData.uuid)}
               horizontal
               showsHorizontalScrollIndicator={false}
+              onMomentumScrollEnd={ev => {
+                const newIndex = Math.floor(
+                  ev.nativeEvent.contentOffset.x / screenWidth,
+                );
+                setCurrentIndex(newIndex);
+              }}
             />
+            {postData.images && (
+              <View style={styles.viewImagesLength}>
+                <Text style={styles.textImagesLength}>
+                  {postData.images ? currentIndex + 1 : 0}/
+                  {postData.images.length}
+                </Text>
+              </View>
+            )}
           </View>
 
           <View style={{flex: 1}}>
@@ -328,7 +342,7 @@ const PostDetail = () => {
                 <Text style={styles.textLikeBlur}>Comment</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.iconText} onPress={onShare}>
-                <Icon name="share-social-outline" type="ionicon" size={22} />
+                <Icon name="arrow-redo-outline" type="ionicon" size={22} />
                 <Text style={styles.textLikeBlur}>Share</Text>
               </TouchableOpacity>
             </View>

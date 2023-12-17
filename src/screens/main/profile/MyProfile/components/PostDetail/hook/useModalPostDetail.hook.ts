@@ -1,10 +1,10 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 type UseModalPostDetailType = {};
 
 export const useModalPostDetail = () => {
   const [showModal, setShowModal] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null) as any;
+  const [selectedImage, setSelectedImage] = useState('') as any;
 
   const onPressOpenModal = (image: any) => {
     setShowModal(true);
@@ -12,7 +12,7 @@ export const useModalPostDetail = () => {
   };
   const onPressCloseModal = () => {
     setShowModal(false);
-    setSelectedImage(null);
+    setSelectedImage('');
   };
 
   return {

@@ -1,22 +1,20 @@
 import React, {useState} from 'react';
-import {Dimensions, FlatList, Modal, Pressable, Text, View} from 'react-native';
+import {Dimensions, FlatList, Modal, Text, View} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import FBCollage from 'react-native-fb-collage';
-import {Asset} from 'react-native-image-picker';
-import useStyles from '../styles';
 import {
   GestureHandlerRootView,
   PinchGestureHandler,
   TapGestureHandler,
-  TouchableOpacity,
 } from 'react-native-gesture-handler';
-import {Icon} from '@rneui/themed';
+import {Asset} from 'react-native-image-picker';
 import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
-import AutoHeightImage from 'react-native-auto-height-image';
+import useStyles from '../styles';
 
 interface SelectedImagesProps {
   images: Asset[];
@@ -101,10 +99,17 @@ const SelectedImages: React.FC<SelectedImagesProps> = props => {
                           numberOfTaps={2}
                           onGestureEvent={tapHandler}>
                           <Animated.View>
-                            <AutoHeightImage
+                            <FastImage
                               key={index}
-                              source={{uri: selectedImage}}
-                              width={screenWidth}
+                              source={{
+                                uri: selectedImage,
+                                priority: FastImage.priority.normal,
+                              }}
+                              style={{
+                                width: screenWidth,
+                                height: screenHeight,
+                              }}
+                              resizeMode={FastImage.resizeMode.contain}
                             />
                           </Animated.View>
                         </TapGestureHandler>

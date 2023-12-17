@@ -23,6 +23,8 @@ const PostFooter: React.FC<PostFooterProps> = ({
 }) => {
   const styles = useStyles();
 
+  console.log('🤔 ', commentCount);
+
   return (
     <View style={styles.viewLikeComment}>
       <View style={styles.viewNumberCount}>
@@ -41,7 +43,9 @@ const PostFooter: React.FC<PostFooterProps> = ({
         </TouchableOpacity>
         <TouchableOpacity onPress={onCommentPress}>
           <View style={styles.iconText}>
-            <Text style={styles.textBlur}>{commentCount}</Text>
+            <Text style={styles.textBlur}>
+              {commentCount ? commentCount : 0}
+            </Text>
             <Text style={styles.textBlur}>comment</Text>
           </View>
         </TouchableOpacity>
