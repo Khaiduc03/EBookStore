@@ -16,6 +16,7 @@ interface CommentDataProps {
   data: CommentForumType;
   setOpen: () => void;
   setUserRep: (text: string) => void;
+  setCountRepComment: () => void;
 }
 
 const ItemRepCommnent: React.FC<CommentDataProps> = props => {
@@ -29,6 +30,8 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
     uuid,
     is_like,
     user_uuid,
+    forum_uuid,
+    parents_comment_uuid,
   } = props.data || {};
 
   const styles = useStyles();
@@ -43,7 +46,14 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
   const textBeforeFullname = comment.slice(0, fullnameIndex);
 
   const onPressDeleteComment = () => {
-    dispatch(CommentForumAction.deleteCommentForum({comment_uuid: uuid}));
+    dispatch(
+      CommentForumAction.deleteRepCommentForum({
+        comment_uuid: uuid,
+        forum_uuid: forum_uuid,
+        parents_comment_uuid: parents_comment_uuid,
+      }),
+    );
+    props.setCountRepComment();
   };
 
   const onPressLikeComment = () => {

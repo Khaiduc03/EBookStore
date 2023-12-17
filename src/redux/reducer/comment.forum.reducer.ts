@@ -1,7 +1,7 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { Redux } from '../types';
-import { PayloadHttpListCommentData } from '../types/comment.chapter.type';
-import { CommentForumState, CommentForumType } from '../types/comment.forum.type';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
+import {Redux} from '../types';
+import {PayloadHttpListCommentData} from '../types/comment.chapter.type';
+import {CommentForumState, CommentForumType} from '../types/comment.forum.type';
 
 const initialState: CommentForumState = {};
 
@@ -64,6 +64,9 @@ const reducer = createSlice({
             currentPage: state.listRepComment?.currentPage,
             totalData: (state.listRepComment?.totalData || 0) + 1,
             data: [action.payload, ...(state.listRepComment?.data || [])],
+          },
+          listComment: {
+            ...updatedListComment,
           },
         };
       }
@@ -233,6 +236,15 @@ const reducer = createSlice({
       };
     },
 
+    deleteRepCommentForum: (
+      state: CommentForumState,
+      _: PayloadAction<any>,
+    ) => {
+      return {
+        ...state,
+      };
+    },
+
     handleDeleteCommentSuccess: (
       state: CommentForumState,
       action: PayloadAction<any>,
@@ -247,6 +259,50 @@ const reducer = createSlice({
             ) || [],
         },
       };
+    },
+
+    handleDeleteRepCommentSuccess: (
+      state: CommentForumState,
+      action: PayloadAction<any>,
+    ) => {
+      return {
+        ...state,
+        listRepComment: {
+          ...state.listRepComment,
+          data:
+            state.listRepComment?.data?.filter(
+              comment => comment.uuid !== action.payload.comment_uuid,
+            ) || [],
+        },
+      };
+    },
+
+    reduceCountRep: (state: CommentForumState, action: PayloadAction<any>) => {
+      const uuid = action.payload.parents_comment_uuid;
+      if (state.listComment && state.listComment.data) {
+        const updatedListComment = {
+          ...state.listComment,
+          data: state.listComment.data.map(comment => {
+            if (comment.uuid === uuid) {
+              // Tìm thấy comment cần cập nhật
+              const updatedRepCount = comment.re_comment_count - 1;
+
+              return {
+                ...comment,
+                re_comment_count: updatedRepCount,
+              };
+            }
+            return comment;
+          }),
+        };
+
+        return {
+          ...state,
+          listComment: {
+            ...updatedListComment,
+          },
+        };
+      }
     },
   },
 });

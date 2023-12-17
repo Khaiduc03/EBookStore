@@ -16,6 +16,8 @@ import CustomAwesomeAlert from '../AwesomeAlertProps/CustomAwesomeAlert';
 
 interface CommentDataProps {
   data: Partial<CommentForumType>;
+
+  setReduce: () => void;
 }
 
 const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
@@ -59,14 +61,13 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
   };
 
   const onPressDeleteComment = () => {
-    dispatch(CommentForumAction.deleteCommentForum({comment_uuid: uuid}));
-
     dispatch(
-      CommentForumAction.getCommentForum({
+      CommentForumAction.deleteCommentForum({
+        comment_uuid: uuid,
         forum_uuid: forum_uuid,
-        page: 1,
       }),
     );
+    props.setReduce();
   };
 
   const getTimeElapsed = () => {

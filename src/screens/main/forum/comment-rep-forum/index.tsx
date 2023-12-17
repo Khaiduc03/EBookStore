@@ -52,9 +52,7 @@ const CommentRepForum = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [showAlert, setShowAlert] = useState(false);
   const user = useAppSelector(getAuthUserProfile);
-  console.log('======>', open);
-  console.log('canNext', canNext);
-  console.log('isLoading', isLoading);
+
   const TextInputRef = useRef<TextInput>(null);
   const {
     comment,
@@ -92,6 +90,10 @@ const CommentRepForum = () => {
     setOpen(!open);
   };
 
+  const setCountRepComment = () => {
+    setCountComment(countComment - 1);
+  };
+
   const setUserRep = (text: string) => {
     setvalue('Reply ' + '@' + text + ': ');
   };
@@ -114,10 +116,6 @@ const CommentRepForum = () => {
         '\nparents_comment_uuid:  ' +
         forum_uuid,
     );
-  };
-
-  const onPressDeleteComment = () => {
-    dispatch(CommentForumAction.deleteCommentForum({comment_uuid: uuid}));
   };
 
   const loadMoreComic = () => {
@@ -183,6 +181,7 @@ const CommentRepForum = () => {
           setUserRep={setUserRep}
           setOpen={openInput}
           data={item}
+          setCountRepComment={setCountRepComment}
         />
       </View>
     );
@@ -260,29 +259,6 @@ const CommentRepForum = () => {
                         {countLike}
                       </Text>
                     </TouchableOpacity>
-
-                    {user.uuid === user_uuid && (
-                      <TouchableOpacity
-                        onPress={() => {
-                          setShowAlert(!showAlert);
-                        }}>
-                        <Icon
-                          name="trash-outline"
-                          type="ionicon"
-                          size={15}
-                          color={styles.iconStyleBlur.color}
-                        />
-                        <CustomAwesomeAlert
-                          showAlert={showAlert}
-                          setShowAlert={showAlert => setShowAlert(showAlert)}
-                          title="Delete Your Comment 😕"
-                          message="Are you sure you want to delete your comment?"
-                          cancelText="No, cancel"
-                          confirmText="Yes, delete it"
-                          onPressConfirm={onPressDeleteComment}
-                        />
-                      </TouchableOpacity>
-                    )}
                   </View>
                 </View>
               </View>
