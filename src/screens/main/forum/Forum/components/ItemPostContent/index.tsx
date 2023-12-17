@@ -1,10 +1,9 @@
 import {Icon} from '@rneui/themed';
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import {
   Dimensions,
   FlatList,
   Modal,
-  Pressable,
   Text,
   TouchableOpacity,
   View,
@@ -50,7 +49,7 @@ const PostContent: React.FC<PostContentProps> = ({
   const translationY = useSharedValue(0);
 
   const pinchHandler = useAnimatedGestureHandler({
-    onActive: event => {
+    onActive: (event: any) => {
       scale.value = event.scale < 1 ? 1 : event.scale;
       translationX.value = withSpring(0);
       translationY.value = withSpring(0);
@@ -61,7 +60,7 @@ const PostContent: React.FC<PostContentProps> = ({
   });
 
   const tapHandler = useAnimatedGestureHandler({
-    onActive: event => {
+    onActive: (event: any) => {
       console.log('Double tap detected!');
       scale.value = withSpring(1);
     },
@@ -74,80 +73,91 @@ const PostContent: React.FC<PostContentProps> = ({
   });
 
   const screenWidth = Dimensions.get('window').width;
+  const screenHeight = Dimensions.get('window').height;
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
     <View>
       <View style={styles.description}>
         {content && <Text style={styles.textDescription}>{content}</Text>}
       </View>
-      <FlatList
-        data={images}
-        renderItem={({item, index}) => (
-          <View>
-            {item && (
-              <>
-                <FBCollage
-                  key={index}
-                  images={[{uri: item}] as any}
-                  style={{
-                    flex: 1,
-                    width: screenWidth,
-                    height: screenWidth,
-                  }}
-                  borderRadius={6}
-                  imageOnPress={() => onImagePress(index)}
-                />
-                {images && (
-                  <View style={styles.viewImagesLength}>
-                    <Text style={styles.textImagesLength}>
-                      {images ? index + 1 : 0}/{images.length}
-                    </Text>
-                  </View>
-                )}
-              </>
-            )}
+      <View>
+        <FlatList
+          data={images}
+          renderItem={({item, index}) => (
+            <View>
+              {item && (
+                <>
+                  <FBCollage
+                    key={index}
+                    images={[{uri: item}] as any}
+                    borderRadius={6}
+                    imageOnPress={() => onImagePress(index)}
+                    style={{
+                      flex: 1,
+                      width: screenWidth,
+                      height: screenHeight / 2,
+                    }}
+                  />
+                </>
+              )}
 
-            <Modal
-              visible={showModal}
-              transparent={true}
-              onRequestClose={onClosePress}>
-              <TouchableOpacity
-                style={styles.viewIconClose}
-                onPress={onClosePress}>
-                <Icon
-                  name="close-circle"
-                  size={30}
-                  color={styles.colorIconClose.color}
-                  type="ionicon"
-                  style={styles.iconClose}
-                />
-              </TouchableOpacity>
+              <Modal
+                visible={showModal}
+                transparent={true}
+                onRequestClose={onClosePress}>
+                <TouchableOpacity
+                  style={styles.viewIconClose}
+                  onPress={onClosePress}>
+                  <Icon
+                    name="close-circle"
+                    size={30}
+                    color={styles.colorIconClose.color}
+                    type="ionicon"
+                    style={styles.iconClose}
+                  />
+                </TouchableOpacity>
 
-              <View style={styles.viewModalImage}>
-                <GestureHandlerRootView>
-                  <PinchGestureHandler onGestureEvent={pinchHandler}>
-                    <Animated.View style={animatedStyle}>
-                      <TapGestureHandler
-                        numberOfTaps={2}
-                        onGestureEvent={tapHandler}>
-                        <Animated.View>
-                          <AutoHeightImage
-                            source={{uri: selectedImage}}
-                            width={screenWidth}
-                          />
-                        </Animated.View>
-                      </TapGestureHandler>
-                    </Animated.View>
-                  </PinchGestureHandler>
-                </GestureHandlerRootView>
-              </View>
-            </Modal>
+                <View style={styles.viewModalImage}>
+                  <GestureHandlerRootView>
+                    <PinchGestureHandler onGestureEvent={pinchHandler}>
+                      <Animated.View style={animatedStyle}>
+                        <TapGestureHandler
+                          numberOfTaps={2}
+                          onGestureEvent={tapHandler}>
+                          <Animated.View>
+                            <AutoHeightImage
+                              source={{uri: selectedImage}}
+                              width={screenWidth}
+                            />
+                          </Animated.View>
+                        </TapGestureHandler>
+                      </Animated.View>
+                    </PinchGestureHandler>
+                  </GestureHandlerRootView>
+                </View>
+              </Modal>
+            </View>
+          )}
+          onMomentumScrollEnd={ev => {
+            const newIndex = Math.floor(
+              ev.nativeEvent.contentOffset.x / screenWidth,
+            );
+            setCurrentIndex(newIndex);
+          }}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+        />
+
+        {images && (
+          <View style={styles.viewImagesLength}>
+            <Text style={styles.textImagesLength}>
+              {images ? currentIndex + 1 : 0}/{images.length}
+            </Text>
           </View>
         )}
-        horizontal
-        pagingEnabled
-        showsHorizontalScrollIndicator={false}
-      />
+      </View>
     </View>
   );
 };

@@ -10,8 +10,8 @@ const screenWidth = Dimensions.get('window').width;
 
 const useStyles = makeStyles(({ colors }) => ({
   description: {
-    padding: normalize(10),
-    paddingBottom: normalize(9),
+    paddingLeft: normalize(10),
+    paddingTop: normalize(10),
     marginLeft: normalize(3),
   },
   textDescription: {

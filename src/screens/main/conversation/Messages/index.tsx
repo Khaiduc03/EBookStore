@@ -108,7 +108,7 @@ const MessageScreen: React.FC = () => {
 
   const handleTouchableWithoutFeedback = () => {
     Keyboard.dismiss();
-    setIsShowEmoji(isShowEmoji);
+    setIsShowEmoji(false);
   };
 
   const handleFocus = () => {
@@ -173,7 +173,6 @@ const MessageScreen: React.FC = () => {
           onPressLeftIcon={() => NavigationService.goBack()}
         />
       </View>
-      {/* <FooterMessage /> */}
       <View style={styles.container}>
         <FlatList
           overScrollMode="never"
@@ -190,28 +189,30 @@ const MessageScreen: React.FC = () => {
           <View style={styles.viewRow}>
             <View style={styles.leftContainer}>
               <View>
-                <Icon name="attach-outline" type="ionicon" size={30} />
+                <Icon name="attach-outline" type="ionicon" size={26} />
               </View>
             </View>
 
-            <TextInput
-              style={[styles.textInput]}
-              placeholder="Write your message"
-              value={newMessage}
-              onChangeText={text => setNewMessage(text)}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              multiline={true}
-            />
+            <View>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Write your message"
+                value={newMessage}
+                onChangeText={text => setNewMessage(text)}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                multiline={true}
+              />
+            </View>
 
             <View style={styles.rightIconLeft}>
               <Pressable onPress={handleIconEmojiPress}>
-                <Icon name="happy" type="ionicon" size={30} />
+                <Icon name="smile" type="font-awesome-5" size={26} solid />
               </Pressable>
             </View>
             <View style={styles.rightIconRight}>
               <TouchableOpacity onPress={handleSendMessage}>
-                <Icon name="send" type="ionicon" size={30} />
+                <Icon name="send" type="ionicon" size={26} />
               </TouchableOpacity>
             </View>
           </View>
