@@ -138,6 +138,25 @@ const useStyles = makeStyles(({ colors }) => ({
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.bold,
   },
+  viewIconClose: {
+    position: 'absolute',
+    bottom: normalize(30),
+    right: normalize(10),
+    zIndex: normalize(1000),
+    alignItems: 'flex-end',
+  },
+  iconClose: {
+    position: 'relative',
+  },
+  colorIconClose: {
+    color: colors.primary,
+  },
+  viewModalImage: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: colors.black1,
+  },
 }));
 
 export default useStyles;
