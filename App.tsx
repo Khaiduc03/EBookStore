@@ -13,6 +13,7 @@ import Slider from './src/screens/auth/onboard';
 import LoadingMain from './src/components/shared/LoadingMain';
 import LoadingStart from './src/components/shared/LoadingStart';
 import LoadingHome from './src/components/shared/LoadingHome';
+import LoadingMyProfile from './src/components/shared/LoadingMyProfile';
 
 const App: FunctionComponent = () => {
   useEffect(() => {
@@ -33,6 +34,7 @@ const App: FunctionComponent = () => {
           <LoadingMain />
           <LoadingStart />
           <LoadingHome />
+          <LoadingMyProfile />
 
           {/* <BottomSheetCustomScreen /> */}
           {/* MAIN APP */}

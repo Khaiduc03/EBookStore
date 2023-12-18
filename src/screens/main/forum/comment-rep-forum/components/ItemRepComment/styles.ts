@@ -23,7 +23,7 @@ const useStyles = makeStyles(({ colors }) => ({
   nameStyle: {
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
-    color: colors.nameUserComment,
+    color: colors.black,
   },
   day: {
     fontSize: normalize(10),
@@ -46,7 +46,7 @@ const useStyles = makeStyles(({ colors }) => ({
     width: normalize(WIDTH * 0.2),
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: normalize(60),
+    marginLeft: normalize(40),
   },
   rep: {
     flexDirection: 'row',
@@ -56,13 +56,13 @@ const useStyles = makeStyles(({ colors }) => ({
     paddingLeft: normalize(5),
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
-    color: '#A5A6AA',
+    color: colors.black,
   },
   iconStyleFocus: {
     color: colors.primary,
   },
   iconStyleBlur: {
-    color: '#A5A6AA',
+    color: colors.black,
   },
   viewItemBtn: {
     width: normalize(WIDTH / 2 - 20),
@@ -101,6 +101,9 @@ const useStyles = makeStyles(({ colors }) => ({
   },
   contentContainerStyle: {
     backgroundColor: colors.black1,
+  },
+  viewRow: {
+    flexDirection: 'row',
   }
 }));
 

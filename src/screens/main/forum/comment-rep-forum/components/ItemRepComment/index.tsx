@@ -1,20 +1,22 @@
 import {Icon} from '@rneui/base';
+import moment from 'moment';
 import React, {useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import FastImage from 'react-native-fast-image';
-import useStyles from './styles';
-import moment from 'moment';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
+import {getAuthUserProfile} from '../../../../../../redux';
 import {CommentForumAction} from '../../../../../../redux/reducer/comment.forum.reducer';
 import {CommentForumType} from '../../../../../../redux/types/comment.forum.type';
-import {getAuthUserProfile} from '../../../../../../redux';
-import AwesomeAlert from 'react-native-awesome-alerts';
+import useStyles from './styles';
+import CustomAwesomeAlert from '../AwesomeAlertProps/CustomAwesomeAlert';
 
 interface CommentDataProps {
   data: CommentForumType;
   setOpen: () => void;
   setUserRep: (text: string) => void;
+  setCountRepComment: () => void;
 }
 
 const ItemRepCommnent: React.FC<CommentDataProps> = props => {
@@ -28,27 +30,31 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
     uuid,
     is_like,
     user_uuid,
+    forum_uuid,
+    parents_comment_uuid,
   } = props.data || {};
 
   const styles = useStyles();
 
   const dispatch = useAppDispatch();
-
   const [showAlert, setShowAlert] = useState(false);
-
   const user = useAppSelector(getAuthUserProfile);
-
   const [like, setLike] = useState<Boolean>(is_like);
   const [countLike, setCountLike] = useState<number>(like_count);
-
-  const onPressDeleteComment = () => {
-    dispatch(CommentForumAction.deleteCommentForum({comment_uuid: uuid}));
-  };
-
   const commentIncludesFullname = comment.includes(fullname);
   const fullnameIndex = comment.indexOf(fullname);
-
   const textBeforeFullname = comment.slice(0, fullnameIndex);
+
+  const onPressDeleteComment = () => {
+    dispatch(
+      CommentForumAction.deleteRepCommentForum({
+        comment_uuid: uuid,
+        forum_uuid: forum_uuid,
+        parents_comment_uuid: parents_comment_uuid,
+      }),
+    );
+    props.setCountRepComment();
+  };
 
   const onPressLikeComment = () => {
     if (like) {
@@ -73,7 +79,6 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
   const onPressRep = (text: string) => {
     props.setUserRep(text);
     props.setOpen();
-    setShowAlert(false);
   };
 
   const getTimeElapsed = () => {
@@ -97,7 +102,9 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
       <FastImage
         style={styles.avatarStyle}
         source={{
-          uri: user_avatar,
+          uri: user_avatar
+            ? user_avatar
+            : 'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
         }}
       />
       <View style={styles.content}>
@@ -122,8 +129,8 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
               onPress={() => onPressRep(fullname)}
               style={styles.rep}>
               <Icon
-                name="chatbox-outline"
-                type="ionicon"
+                name="comment"
+                type="font-awesome-5"
                 color={styles.iconStyleBlur.color}
                 size={15}
               />
@@ -143,7 +150,11 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
                 }
                 size={15}
               />
-              <Text style={styles.numberRepStyle}>
+              <Text
+                style={[
+                  styles.numberRepStyle,
+                  {color: like ? '#F89300' : styles.iconStyleBlur.color},
+                ]}>
                 {countLike ? countLike : '0'}
               </Text>
             </TouchableOpacity>
@@ -159,31 +170,14 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
                   size={15}
                   color={styles.iconStyleBlur.color}
                 />
-                <AwesomeAlert
-                  show={showAlert}
-                  showProgress={false}
+                <CustomAwesomeAlert
+                  showAlert={showAlert}
+                  setShowAlert={showAlert => setShowAlert(showAlert)}
                   title="Delete Your Comment 😕"
                   message="Are you sure you want to delete your comment?"
-                  closeOnTouchOutside={true}
-                  closeOnHardwareBackPress={false}
-                  showCancelButton={true}
-                  showConfirmButton={true}
                   cancelText="No, cancel"
-                  cancelButtonColor="blue"
                   confirmText="Yes, delete it"
-                  confirmButtonColor="red"
-                  onCancelPressed={() => {
-                    setShowAlert(false);
-                  }}
-                  onConfirmPressed={() => {
-                    setShowAlert(false);
-                    onPressDeleteComment();
-                  }}
-                  titleStyle={styles.textTitleAlert}
-                  messageStyle={styles.textMessageAlert}
-                  cancelButtonTextStyle={styles.textCancelAlert}
-                  confirmButtonTextStyle={styles.textConfirmAlert}
-                  contentContainerStyle={styles.contentContainerStyle}
+                  onPressConfirm={onPressDeleteComment}
                 />
               </TouchableOpacity>
             )}

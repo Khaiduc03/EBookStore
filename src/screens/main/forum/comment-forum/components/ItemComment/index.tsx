@@ -2,19 +2,22 @@ import {Icon} from '@rneui/base';
 import moment from 'moment';
 import React, {useState} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
+import AwesomeAlert from 'react-native-awesome-alerts';
 import FastImage from 'react-native-fast-image';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {routes} from '../../../../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
 import {NavigationService} from '../../../../../../navigation';
+import {getAuthUserProfile} from '../../../../../../redux';
 import {CommentForumAction} from '../../../../../../redux/reducer/comment.forum.reducer';
 import {CommentForumType} from '../../../../../../redux/types/comment.forum.type';
 import useStyles from './styles';
-import {getAuthUserProfile} from '../../../../../../redux';
-import AwesomeAlert from 'react-native-awesome-alerts';
+import CustomAwesomeAlert from '../AwesomeAlertProps/CustomAwesomeAlert';
 
 interface CommentDataProps {
   data: Partial<CommentForumType>;
+
+  setReduce: () => void;
 }
 
 const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
@@ -40,9 +43,8 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
 
   const dispatch = useAppDispatch();
 
-  const [showAlert, setShowAlert] = useState(false);
-
   const user = useAppSelector(getAuthUserProfile);
+  const [showAlert, setShowAlert] = useState<boolean>(false);
 
   const onPressLikeComment = () => {
     if (is_like) {
@@ -59,14 +61,13 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
   };
 
   const onPressDeleteComment = () => {
-    dispatch(CommentForumAction.deleteCommentForum({comment_uuid: uuid}));
-
     dispatch(
-      CommentForumAction.getCommentForum({
+      CommentForumAction.deleteCommentForum({
+        comment_uuid: uuid,
         forum_uuid: forum_uuid,
-        page: 1,
       }),
     );
+    props.setReduce();
   };
 
   const getTimeElapsed = () => {
@@ -90,9 +91,9 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
       <FastImage
         style={styles.avatarStyle}
         source={{
-          uri:
-            user_avatar ||
-            'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
+          uri: user_avatar
+            ? user_avatar
+            : 'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
         }}
       />
       <View style={styles.content}>
@@ -111,8 +112,8 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
               }}
               style={styles.rep}>
               <Icon
-                name="chatbox-outline"
-                type="ionicon"
+                name="comment"
+                type="font-awesome-5"
                 color={styles.iconStyleBlur.color}
                 size={15}
               />
@@ -131,7 +132,11 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
                 }
                 size={15}
               />
-              <Text style={styles.numberRepStyle}>
+              <Text
+                style={[
+                  styles.numberRepStyle,
+                  {color: is_like ? '#F89300' : styles.iconStyleBlur.color},
+                ]}>
                 {like_count ? like_count : '0'}
               </Text>
             </TouchableOpacity>
@@ -147,31 +152,14 @@ const ItemCommnent: React.FunctionComponent<CommentDataProps> = props => {
                   size={15}
                   color={styles.iconStyleBlur.color}
                 />
-                <AwesomeAlert
-                  show={showAlert}
-                  showProgress={false}
+                <CustomAwesomeAlert
+                  showAlert={showAlert}
+                  setShowAlert={showAlert => setShowAlert(showAlert)}
                   title="Delete Your Comment 😕"
                   message="Are you sure you want to delete your comment?"
-                  closeOnTouchOutside={true}
-                  closeOnHardwareBackPress={false}
-                  showCancelButton={true}
-                  showConfirmButton={true}
                   cancelText="No, cancel"
-                  cancelButtonColor="blue"
                   confirmText="Yes, delete it"
-                  confirmButtonColor="red"
-                  onCancelPressed={() => {
-                    setShowAlert(false);
-                  }}
-                  onConfirmPressed={() => {
-                    setShowAlert(false);
-                    onPressDeleteComment();
-                  }}
-                  titleStyle={styles.textTitleAlert}
-                  messageStyle={styles.textMessageAlert}
-                  cancelButtonTextStyle={styles.textCancelAlert}
-                  confirmButtonTextStyle={styles.textConfirmAlert}
-                  contentContainerStyle={styles.contentContainerStyle}
+                  onPressConfirm={onPressDeleteComment}
                 />
               </TouchableOpacity>
             )}

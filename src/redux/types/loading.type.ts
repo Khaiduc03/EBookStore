@@ -6,4 +6,5 @@ export type LoadingState = {
   isLoadingForum: boolean;
   isLoadingStart: boolean;
   isLoadingHome: boolean;
+  isLoadingMyProfile: boolean;
 };

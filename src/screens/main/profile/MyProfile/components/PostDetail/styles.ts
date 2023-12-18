@@ -1,14 +1,32 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {fontFamilySetup} from '../../../../../../utils/font';
-import {Device} from '../../../../../../utils';
+import { makeStyles, normalize } from '@rneui/themed';
+import { fontFamilySetup } from '../../../../../../utils/font';
+import { Device } from '../../../../../../utils';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
-const useStyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({ colors }) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+  viewImagesLength: {
+    width: normalize(46),
+    height: normalize(24),
+    backgroundColor: colors.blackDefault,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: normalize(26),
+    borderWidth: normalize(0.6),
+    borderColor: colors.whiteDefault,
+    position: 'absolute',
+    top: normalize(16),
+    right: normalize(16),
+  },
+  textImagesLength: {
+    color: colors.whiteDefault,
+    fontSize: normalize(12),
+    fontFamily: fontFamilySetup.bold,
   },
   image: {
     width: normalize(42),
@@ -52,7 +70,7 @@ const useStyles = makeStyles(({colors}) => ({
     marginTop: normalize(3),
   },
   name: {
-    fontSize: normalize(18),
+    fontSize: normalize(16),
     fontFamily: fontFamilySetup.bold,
     color: colors.black,
     lineHeight: normalize(21),
@@ -65,8 +83,8 @@ const useStyles = makeStyles(({colors}) => ({
   createAt: {
     fontSize: normalize(13),
     fontFamily: fontFamilySetup.regular,
-    color: colors.grey8,
-    marginEnd: normalize(6),
+    color: '#666666',
+    marginEnd: normalize(3),
   },
   viewCenter: {
     justifyContent: 'center',
@@ -80,11 +98,12 @@ const useStyles = makeStyles(({colors}) => ({
     flexDirection: 'row',
   },
   description: {
-    padding: normalize(10),
+    paddingLeft: normalize(10),
+    paddingTop: normalize(10),
     marginLeft: normalize(3),
   },
   textDescription: {
-    fontSize: normalize(16),
+    fontSize: normalize(13.9),
     fontFamily: fontFamilySetup.regular,
     color: colors.black,
     lineHeight: normalize(21),
@@ -189,9 +208,6 @@ const useStyles = makeStyles(({colors}) => ({
     borderRadius: normalize(100),
     backgroundColor: colors.primary,
   },
-  imageContainer: {
-    position: 'relative',
-  },
   imageAspect: {
     width: '100%',
     height: undefined,
@@ -202,7 +218,7 @@ const useStyles = makeStyles(({colors}) => ({
     alignItems: 'flex-end',
   },
   iconClose: {
-    position: 'relative',
+    position: 'absolute',
     marginTop: normalize(10),
     marginRight: normalize(10),
     zIndex: normalize(1000),
@@ -211,7 +227,8 @@ const useStyles = makeStyles(({colors}) => ({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.blackDefault,
+    backgroundColor: colors.black1,
+    position: 'absolute',
   },
   viewImagesLengh: {
     width: normalize(46),
@@ -237,6 +254,11 @@ const useStyles = makeStyles(({colors}) => ({
   },
   iconFooter: {
     color: colors.black,
+  },
+  viewCreateAt: {
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginTop: normalize(WIDTH * 0.01),
   },
 }));
 

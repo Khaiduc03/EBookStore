@@ -3,38 +3,41 @@ import {Icon} from '@rneui/themed';
 import moment from 'moment';
 import React, {useState} from 'react';
 import {
-  Animated,
   Dimensions,
   FlatList,
   Image,
   Modal,
-  Pressable,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import AutoHeightImage from 'react-native-auto-height-image';
+import FBCollage from 'react-native-fb-collage';
 import {
-  GestureEvent,
   GestureHandlerRootView,
   PinchGestureHandler,
   ScrollView,
-  State,
+  TapGestureHandler,
 } from 'react-native-gesture-handler';
+import Animated, {
+  useAnimatedGestureHandler,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from 'react-native-reanimated';
 import Share from 'react-native-share';
 import IconFontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {HeaderCustom} from '../../../../../../components';
+import Awesome from '../../../../../../components/customs/Awesome';
 import {routes} from '../../../../../../constants';
-import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
+import {useAppSelector} from '../../../../../../hooks';
 import {NavigationService} from '../../../../../../navigation';
+import {getAuthUserProfile} from '../../../../../../redux';
 import {backScreen} from '../../../../../../utils';
 import {useGetPostDetail} from './hook/useGetPostDetail.hook';
-import useStyles from './styles';
 import {useModalPostDetail} from './hook/useModalPostDetail.hook';
-import {ItemComment} from '../../../../home/CommentComic/components';
-import Awesome from '../../../../../../components/customs/Awesome';
-import {getAuthUserProfile} from '../../../../../../redux';
+import useStyles from './styles';
+import FastImage from 'react-native-fast-image';
 interface PostDataDeatilRoute {
   post_uuid: string;
 }
@@ -66,32 +69,10 @@ const PostDetail = () => {
     backScreen();
   };
 
-  const {width, height} = Dimensions.get('window');
+  console.log(postData);
 
   const screenWidth = Dimensions.get('window').width;
-
-  const [activeIndices, setActiveIndices] = useState({}) as any;
-
-  const scale = new Animated.Value(1);
-
-  const onGestureEvent = Animated.event([{nativeEvent: {scale: scale}}], {
-    useNativeDriver: true,
-  });
-
-  const onHandleState = (event: GestureEvent) => {
-    if (event.nativeEvent.oldState == State.ACTIVE) {
-      Animated.spring(scale, {
-        toValue: 1,
-        useNativeDriver: true,
-      }).start();
-    }
-  };
-
-  const handleScroll = (id: any) => (event: any) => {
-    const scrollPosition = event.nativeEvent.contentOffset.x;
-    const index = Math.round(scrollPosition / width);
-    setActiveIndices((prevIndices: any) => ({...prevIndices, [id]: index}));
-  };
+  const screenHeight = Dimensions.get('window').height;
 
   const onShare = async () => {
     const options: any = {
@@ -105,6 +86,51 @@ const PostDetail = () => {
       console.log(error);
     }
   };
+
+  const getTimeElapsed = () => {
+    const now = moment();
+    const postTime = moment(postData?.created_at);
+    const duration = moment.duration(now.diff(postTime));
+
+    if (duration.asMinutes() < 1) {
+      return 'Just now';
+    } else if (duration.asHours() < 1) {
+      return `${Math.floor(duration.asMinutes())}m ago`;
+    } else if (duration.asDays() < 1) {
+      return `${Math.floor(duration.asHours())}h ago`;
+    } else {
+      return `${Math.floor(duration.asDays())}d ago`;
+    }
+  };
+
+  const scale = useSharedValue(1);
+  const translationX = useSharedValue(0);
+  const translationY = useSharedValue(0);
+  const pinchHandler = useAnimatedGestureHandler({
+    onActive: (event: any) => {
+      scale.value = event.scale < 1 ? 1 : event.scale;
+      translationX.value = withSpring(0);
+      translationY.value = withSpring(0);
+    },
+    onEnd: () => {
+      scale.value = withSpring(scale.value);
+    },
+  });
+
+  const tapHandler = useAnimatedGestureHandler({
+    onActive: (event: any) => {
+      console.log('Double tap detected!');
+      scale.value = withSpring(1);
+    },
+  });
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{scale: scale.value}],
+    };
+  });
+
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
     <ScrollView style={styles.container}>
@@ -135,31 +161,27 @@ const PostDetail = () => {
                   <Text style={styles.name}>
                     {(postData && postData.user_fullname) || 'Anonymus'}
                   </Text>
-                  <View
-                    style={[
-                      styles.viewRow,
-                      styles.viewImageText,
-                      styles.marginTopDate,
-                    ]}>
-                    <Text style={styles.createAt}>
-                      {moment(postData && postData.created_at).format(
-                        'YYYY-MM-DD [at] HH:mm',
-                      )}
-                    </Text>
+                  <View style={[styles.viewRow, styles.viewCreateAt]}>
+                    <Text style={styles.createAt}>{getTimeElapsed()} •</Text>
                     <Icon
                       name="public"
                       type="material"
-                      size={16}
-                      color={'#626162'}
+                      size={14}
+                      color={'#b3b3b3'}
                     />
                   </View>
                 </View>
               </View>
 
-              <View style={styles.viewIconPost}>
+              <View>
                 {user.uuid == postData.user_uuid ? (
                   <TouchableOpacity onPress={() => setShowAlert(!showAlert)}>
-                    <Icon name="close-outline" type="ionicon" size={28} />
+                    <Icon
+                      name="close-outline"
+                      type="ionicon"
+                      size={24}
+                      color={'#626162'}
+                    />
                   </TouchableOpacity>
                 ) : (
                   <View />
@@ -192,51 +214,50 @@ const PostDetail = () => {
           <View>
             <FlatList
               data={postData && postData.images}
-              renderItem={item => {
-                if (item.item === '' || item.item == null) {
-                  return <View />;
-                }
+              renderItem={({item, index}) => {
                 return (
-                  <View style={styles.imageContainer}>
-                    <Pressable onPress={() => onPressOpenModal(item)}>
-                      <AutoHeightImage
-                        key={item.index.toString()}
-                        source={{
-                          uri:
-                            item.item ||
-                            'https://cdn3d.iconscout.com/3d/premium/thumb/colombian-people-9437719-7665524.png?f=webp',
-                        }}
-                        progressiveRenderingEnabled
-                        width={screenWidth}
-                      />
-                    </Pressable>
+                  <View>
+                    {item && (
+                      <>
+                        <FBCollage
+                          key={0}
+                          images={[{uri: item}] as any}
+                          style={{
+                            flex: 1,
+                            width: screenWidth,
+                            height: screenHeight / 2,
+                          }}
+                          borderRadius={6}
+                          imageOnPress={() => onPressOpenModal(item)}
+                        />
+                      </>
+                    )}
 
                     <Modal
                       visible={showModal}
                       transparent={true}
                       onRequestClose={onPressCloseModal}>
-                      <View style={styles.viewIconClose}>
-                        <Icon
-                          name="close-circle"
-                          size={30}
-                          color="white"
-                          type="ionicon"
-                          onPress={onPressCloseModal}
-                          style={styles.iconClose}
-                        />
-                      </View>
-
                       <View style={styles.viewModalImage}>
                         <GestureHandlerRootView>
-                          <PinchGestureHandler
-                            onGestureEvent={onGestureEvent}
-                            onHandlerStateChange={onHandleState}>
-                            <Animated.View style={{transform: [{scale}]}}>
-                              <AutoHeightImage
-                                key={selectedImage?.index.toString()}
-                                source={{uri: selectedImage?.item}}
-                                width={screenWidth}
-                              />
+                          <PinchGestureHandler onGestureEvent={pinchHandler}>
+                            <Animated.View style={animatedStyle}>
+                              <TapGestureHandler
+                                numberOfTaps={2}
+                                onGestureEvent={tapHandler}>
+                                <Animated.View>
+                                  <FastImage
+                                    source={{
+                                      uri: selectedImage,
+                                      priority: FastImage.priority.normal,
+                                    }}
+                                    style={{
+                                      width: screenWidth,
+                                      height: screenHeight,
+                                    }}
+                                    resizeMode={FastImage.resizeMode.contain}
+                                  />
+                                </Animated.View>
+                              </TapGestureHandler>
                             </Animated.View>
                           </PinchGestureHandler>
                         </GestureHandlerRootView>
@@ -246,23 +267,23 @@ const PostDetail = () => {
                 );
               }}
               pagingEnabled
-              onScroll={handleScroll(postData && postData.uuid)}
               horizontal
               showsHorizontalScrollIndicator={false}
+              onMomentumScrollEnd={ev => {
+                const newIndex = Math.floor(
+                  ev.nativeEvent.contentOffset.x / screenWidth,
+                );
+                setCurrentIndex(newIndex);
+              }}
             />
-            {postData &&
-              postData.images &&
-              postData &&
-              postData.images.some(image => image !== null) && (
-                <View style={styles.viewImagesLengh}>
-                  <Text style={styles.textImagesLengh}>
-                    {activeIndices[postData && postData.uuid]
-                      ? activeIndices[postData && postData.uuid] + 1
-                      : 1}
-                    /{postData && postData.images.length + 0}
-                  </Text>
-                </View>
-              )}
+            {postData.images && (
+              <View style={styles.viewImagesLength}>
+                <Text style={styles.textImagesLength}>
+                  {postData.images ? currentIndex + 1 : 0}/
+                  {postData.images.length}
+                </Text>
+              </View>
+            )}
           </View>
 
           <View style={{flex: 1}}>
@@ -280,7 +301,7 @@ const PostDetail = () => {
                 </View>
                 <View style={styles.iconText}>
                   <Text style={styles.textLikeBlur}>
-                    {postData && postData.comment_count}
+                    {postData.comment_count}
                   </Text>
                   <Text style={styles.textLikeBlur}>comment</Text>
                 </View>
@@ -304,9 +325,12 @@ const PostDetail = () => {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.iconText}
-                onPress={() =>
-                  NavigationService.navigate(routes.COMMENT_FORUM)
-                }>
+                onPress={() => {
+                  NavigationService.navigate(routes.COMMENT_FORUM, {
+                    uuid: postData.uuid,
+                    comment_count: postData.comment_count,
+                  });
+                }}>
                 <IconFontAwesome5
                   name="comment"
                   color={styles.colorIconHeartBlur.color}
@@ -315,7 +339,7 @@ const PostDetail = () => {
                 <Text style={styles.textLikeBlur}>Comment</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.iconText} onPress={onShare}>
-                <Icon name="share-social-outline" type="ionicon" size={22} />
+                <Icon name="arrow-redo-outline" type="ionicon" size={22} />
                 <Text style={styles.textLikeBlur}>Share</Text>
               </TouchableOpacity>
             </View>

@@ -14,3 +14,6 @@ export const getIsLoadingStart = (state: RootState) =>
 
 export const getIsLoadingHome = (state: RootState) =>
   state.loading.isLoadingHome;
+
+export const getIsLoadingMyProfile = (state: RootState) =>
+  state.loading.isLoadingMyProfile;

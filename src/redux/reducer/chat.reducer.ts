@@ -7,6 +7,7 @@ import {
   RequestAddMessageI,
   RequestCreateConversationI,
   RequestJoinConversationI,
+  ShareLinkI,
 } from '../types';
 
 const initialState: ListConversationStateI = {
@@ -18,6 +19,13 @@ export const reducer = createSlice({
   initialState,
   name: 'chat',
   reducers: {
+    handleGetStatus: (
+      state: ListConversationStateI,
+      _: PayloadAction<Boolean>,
+    ) => {
+      return state;
+    },
+
     //get list conversation
     handleGetListConversation: (
       state: ListConversationStateI,
@@ -108,6 +116,13 @@ export const reducer = createSlice({
         ...state,
         messages: [],
       };
+    },
+
+    handleShareLink: (
+      state: ListConversationStateI,
+      _: PayloadAction<ShareLinkI>,
+    ) => {
+      return state;
     },
   },
 });

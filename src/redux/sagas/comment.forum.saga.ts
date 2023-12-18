@@ -1,12 +1,12 @@
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeLatest} from 'redux-saga/effects';
-import {ComicActions, ForumActions, LoadingActions} from '../reducer';
+import {ForumActions, LoadingActions} from '../reducer';
 import {CommentForumAction} from '../reducer/comment.forum.reducer';
 import {CommentForumService} from '../services/comment.forum.service';
 
 function* postCommentSaga(action: PayloadAction<any>): Generator {
-  // yield put(LoadingActions.showLoading());
   try {
+    yield put(LoadingActions.showLoading());
     console.log('run===========>');
     const {data}: any = yield call(
       CommentForumService.postCommentForum,
@@ -16,6 +16,7 @@ function* postCommentSaga(action: PayloadAction<any>): Generator {
       console.log('postCommentSaga: ======================>', data.data);
       yield put(CommentForumAction.postCommentForumSucces(data.data));
       yield put(ForumActions.handleSuccessCount(action.payload.forum_uuid));
+      yield put(ForumActions.incrementCountComment());
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');
@@ -23,7 +24,7 @@ function* postCommentSaga(action: PayloadAction<any>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    // yield put(LoadingActions.hideLoading());
+    yield put(LoadingActions.hideLoading());
   }
 }
 
@@ -111,8 +112,8 @@ function* deleteLikeCommentSaga(action: PayloadAction<any>): Generator {
 }
 
 function* postRepCommentSaga(action: PayloadAction<any>): Generator {
-  // yield put(LoadingActions.showLoading());
   try {
+    yield put(LoadingActions.showLoading());
     console.log('run===========>');
     const {data}: any = yield call(
       CommentForumService.postRepCommentForum,
@@ -121,6 +122,8 @@ function* postRepCommentSaga(action: PayloadAction<any>): Generator {
     console.log('postRepCommentSaga: ======================>', action.payload);
     if (data.code == 200) {
       yield put(CommentForumAction.postRepCommentForumSucces(data.data));
+      yield put(ForumActions.handleSuccessCount(action.payload.forum_uuid));
+      yield put(ForumActions.incrementCountComment());
       console.log('run push tookit');
     } else {
       console.log('Server errol !!!');
@@ -128,12 +131,11 @@ function* postRepCommentSaga(action: PayloadAction<any>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    // yield put(LoadingActions.hideLoading());
+    yield put(LoadingActions.hideLoading());
   }
 }
 
 function* getRepCommentForumSaga(action: PayloadAction<any>): Generator {
-  yield put(LoadingActions.showLoadingPage());
   try {
     console.log('run===========>');
     const {data}: any = yield call(
@@ -149,26 +151,55 @@ function* getRepCommentForumSaga(action: PayloadAction<any>): Generator {
   } catch (error) {
     console.log(error);
   } finally {
-    yield put(LoadingActions.hideLoadingPage());
   }
 }
 
 function* deleteCommentSaga(action: PayloadAction<any>): Generator {
   try {
+    yield put(LoadingActions.showLoading());
     const {data}: any = yield call(
       CommentForumService.deleteCommentForum,
       action.payload,
     );
-
     if (data.code == 200) {
-      yield put(CommentForumAction.handleDeleteCommentSuccess(action.payload));
+      yield put(
+        CommentForumAction.handleDeleteCommentSuccess(
+          action.payload.comment_uuid,
+        ),
+      );
+      yield put(ForumActions.handleDecreaseCount(action.payload.forum_uuid));
+      yield put(ForumActions.reducerCountComment());
     } else {
       console.log('Server error !!!');
     }
   } catch (error) {
     console.log(error);
   } finally {
-    // Any cleanup code if needed
+    yield put(LoadingActions.hideLoading());
+  }
+}
+
+function* deleteRepCommentSaga(action: PayloadAction<any>): Generator {
+  try {
+    yield put(LoadingActions.showLoading());
+    const {data}: any = yield call(
+      CommentForumService.deleteCommentForum,
+      action.payload,
+    );
+    if (data.code == 200) {
+      yield put(
+        CommentForumAction.handleDeleteRepCommentSuccess(action.payload),
+      );
+      yield put(CommentForumAction.reduceCountRep(action.payload));
+      yield put(ForumActions.handleDecreaseCount(action.payload.forum_uuid));
+      yield put(ForumActions.reducerCountComment());
+    } else {
+      console.log('Server error !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    yield put(LoadingActions.hideLoading());
   }
 }
 
@@ -193,4 +224,8 @@ export default function* watchCommentForumSaga() {
   );
 
   yield takeLatest(CommentForumAction.deleteCommentForum, deleteCommentSaga);
+  yield takeLatest(
+    CommentForumAction.deleteRepCommentForum,
+    deleteRepCommentSaga,
+  );
 }

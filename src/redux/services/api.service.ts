@@ -2,6 +2,8 @@ import axios from 'axios';
 import {BASE_URL, ENDPOINTS} from '../../environment';
 import {AuthActions} from '../reducer';
 import {store} from '../store';
+import {el} from 'date-fns/locale';
+import {CustomToastBottom} from '../../utils';
 
 const apiService = axios.create({
   baseURL: BASE_URL,
@@ -47,12 +49,14 @@ apiService.interceptors.response.use(
           }),
         );
         return apiService(originalRequest);
+      } else {
+        store.dispatch(AuthActions.handleLogout());
+        return Promise.reject(error);
       }
-    } else {
-      store.dispatch(AuthActions.handleLogout());
+    } else if (error.response.status === 500) {
+      CustomToastBottom('Server have error, please try again later');
       return Promise.reject(error);
     }
-
     return Promise.reject(error);
   },
 );

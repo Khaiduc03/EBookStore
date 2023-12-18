@@ -15,6 +15,7 @@ export const useRating = () => {
 
   useEffect(() => {
     setDisplayedData(dataRating);
+    handleRatingClick(selectedRating);
     return () => {};
   }, [dataRating]);
 
@@ -42,6 +43,7 @@ export const useRating = () => {
   const onPressDeleteRating = (uuid: string) => {
     console.log('===========>', uuid);
     dispatch(RatingActions.deleteRating(uuid));
+    handleRatingClick(selectedRating);
     setShow(false);
   };
 

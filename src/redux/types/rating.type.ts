@@ -24,11 +24,11 @@ export interface PayloadHttpListChart<T> {
 }
 
 export type RatingChart = {
-  average_rating: number;
-  total_rating: number;
-  rating_1: number;
-  rating_2: number;
-  rating_3: number;
-  rating_4: number;
-  rating_5: number;
+  average_rating: number | undefined;
+  total_rating: number | undefined;
+  rating_1: number | undefined;
+  rating_2: number | undefined;
+  rating_3: number | undefined;
+  rating_4: number | undefined;
+  rating_5: number | undefined;
 };

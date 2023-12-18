@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {View} from 'react-native';
 import {HeaderCustom} from '../../../../components';
 import {ItemListPost} from './components';
@@ -32,10 +32,7 @@ const Forum: React.FC = () => {
         leftIconStyle={styles.leftIcon}
         title="Forum"
       />
-
-      <View style={styles.container}>
-        <ItemListPost />
-      </View>
+      <ItemListPost />
     </View>
   );
 };

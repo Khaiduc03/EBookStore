@@ -2,7 +2,7 @@ import {ScrollView, Linking} from 'react-native';
 import {
   ComicActions,
   ComicType,
-  getUuidPostFavorite,
+  getDataPostFavorite,
 } from '../../../../../redux';
 import {useRoute} from '@react-navigation/native';
 import {useCallback, useEffect, useRef, useState} from 'react';
@@ -25,7 +25,7 @@ interface RouteParamsIdComic {
 export const useComicDetail = () => {
   const dispatch = useAppDispatch();
   const route = useRoute();
-  const uuidPost = useAppSelector(getUuidPostFavorite);
+  const dataPostFavorite = useAppSelector(getDataPostFavorite);
   const dataChart = useAppSelector(getChartRating);
   const dataUser = useAppSelector(getAllUser);
   const [visible2, setVisible2] = useState(false);
@@ -48,11 +48,7 @@ export const useComicDetail = () => {
   }, []);
 
   const postFavorite = () => {
-    if (uuidPost) {
-      dispatch(ComicActions.deleteFavorite(uuidPost));
-    } else {
-      dispatch(ComicActions.postFavorite(data.comic_uuid || data.uuid));
-    }
+    dispatch(ComicActions.postFavorite(data.comic_uuid || data.uuid));
   };
 
   const pressHandler4 = useCallback(() => {
@@ -84,12 +80,15 @@ export const useComicDetail = () => {
 
         dynamicLinks.ShortLinkType.DEFAULT,
       );
-      setVisible2(false), console.log('LINK', link);
+
       return link;
     } catch (error) {
-      console.log(error);
+      return '';
     }
   };
+
+  const link = generateLink();
+  const custumDataUser = async () => {};
 
   const onShare = async () => {
     const getLink = await generateLink();
@@ -115,9 +114,10 @@ export const useComicDetail = () => {
     dataChart,
     visible2,
     setVisible2,
-    uuidPost,
+    dataPostFavorite,
     pressHandler4,
     bottomSheetRef4,
     dataUser,
+    link,
   };
 };

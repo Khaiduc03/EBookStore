@@ -16,8 +16,12 @@ import {
 } from '../../../../redux/selectors/comment.forum.selector';
 import {getIsLoadingPage} from '../../../../redux/selectors/loading.selector';
 import {CommentForumType} from '../../../../redux/types/comment.forum.type';
-import {HeaderComment, ItemComment} from './components';
+import {HeaderComment} from './components';
+import ItemCommnent from './components/ItemComment';
 import useStyles from './styles';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import {ForumActions, commentCountForum} from '../../../../redux';
+import {getCountComment} from '../../../../redux/selectors/comic.selector';
 
 const CommentForum: React.FC = () => {
   const styles = useStyles();
@@ -25,15 +29,19 @@ const CommentForum: React.FC = () => {
 
   const uuid = (route.params as {uuid?: CommentForumType})?.uuid;
 
+  const countCount = (route.params as {comment_count?: any})?.comment_count;
+
   const dataComment = useAppSelector(getListCommentForum);
+  const countComment = useAppSelector(commentCountForum);
+
   const canNext = useAppSelector(getNextPageCommentForum);
   const currentPage = useAppSelector(getCurrenPageCommentForum);
   const [value, setvalue] = useState('');
   const isLoading = useAppSelector(getIsLoadingPage);
   const flatListRef = useRef<FlatList<CommentForumType>>();
-
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
+  const [count, setCount] = useState<number>(0);
 
   const dispatch = useAppDispatch();
 
@@ -44,9 +52,16 @@ const CommentForum: React.FC = () => {
         page: 1,
       }),
     );
+    dispatch(ForumActions.getPostById(uuid));
   }, []);
 
+  useEffect(() => {
+    console.log('==========>aaaaaaaaaaaaaaa');
+    setCount(countComment!);
+  }, [countComment]);
+
   const onPressPostComment = () => {
+    setIncrease();
     dispatch(
       CommentForumAction.postCommentForum({
         forum_uuid: uuid,
@@ -67,6 +82,14 @@ const CommentForum: React.FC = () => {
       );
       setSize(true);
     }
+  };
+
+  const setIncrease = () => {
+    setCount(count + 1);
+  };
+
+  const setReduce = () => {
+    setCount(count - 1);
   };
   const onContentSizeChange = useCallback(
     (contentWidth: number, contentHeight: number) => {
@@ -93,11 +116,11 @@ const CommentForum: React.FC = () => {
     item: CommentForumType;
     index: number;
   }) => {
-    return <ItemComment data={item} />;
+    return <ItemCommnent setReduce={setReduce} data={item} />;
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <FlatList
         key={dataComment?.length}
         data={dataComment}
@@ -136,8 +159,8 @@ const CommentForum: React.FC = () => {
         />
       </View>
 
-      <HeaderComment currentCommentCount={dataComment?.length ?? 0} />
-    </SafeAreaView>
+      <HeaderComment currentCommentCount={count} />
+    </View>
   );
 };
 

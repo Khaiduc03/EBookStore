@@ -1,7 +1,7 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {fontFamilySetup} from '../../../../../utils/font';
+import { makeStyles, normalize } from '@rneui/themed';
+import { fontFamilySetup } from '../../../../../utils/font';
 
-const useStyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({ colors }) => ({
   container_item: {
     marginVertical: normalize(8),
     flexDirection: 'row',
@@ -10,11 +10,10 @@ const useStyles = makeStyles(({colors}) => ({
     borderRadius: normalize(100),
     width: normalize(18),
     height: normalize(18),
-
     position: 'absolute',
-    bottom: normalize(2),
+    bottom: normalize(-4),
     right: normalize(2),
-    borderColor: colors.white,
+    borderColor: colors.statusBorderColor,
     borderWidth: normalize(3),
   },
   status_offline: {
@@ -23,24 +22,23 @@ const useStyles = makeStyles(({colors}) => ({
   status_online: {
     backgroundColor: colors.green,
   },
-
   avatarStyle: {},
   contentStyle: {
     flex: 1,
     marginLeft: normalize(12),
-    //backgroundColor: colors.red,
     paddingVertical: normalize(4),
   },
   nameStyle: {
     fontFamily: fontFamilySetup.medium,
     fontSize: normalize(15),
-    color: colors.chatText,
+    color: colors.black,
   },
   container_message: {
     flexDirection: 'row',
     marginTop: normalize(4),
   },
   lastmessageStyle: {
+    marginTop: normalize(3),
     fontFamily: fontFamilySetup.regular,
     fontSize: normalize(14),
     color: colors.chatText,
@@ -48,12 +46,12 @@ const useStyles = makeStyles(({colors}) => ({
   timeStyle: {
     fontFamily: fontFamilySetup.regular,
     fontSize: normalize(10),
+    fontStyle: 'italic',
     color: colors.chatText,
-    marginLeft: normalize(8),
-    position: 'absolute',
-    right: normalize(5),
+    paddingBottom: normalize(4),
   },
   messageStyle: {
+    marginTop: normalize(4),
     paddingRight: normalize(8),
     flexWrap: 'wrap',
   },
@@ -61,6 +59,13 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.unRead,
     fontFamily: fontFamilySetup.bold,
   },
+  viewTime: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginLeft: normalize(8),
+    position: 'absolute',
+    right: normalize(3),
+  }
 }));
 
 export default useStyles;

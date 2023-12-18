@@ -1,8 +1,11 @@
-import {PayloadAction} from '@reduxjs/toolkit';
-import {call, delay, put, takeLatest} from 'redux-saga/effects';
-import {CustomToastBottom} from '../../utils';
-import {ForumActions, LoadingActions} from '../reducer';
-import {ForumService} from '../services/forum.service';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { call, delay, put, takeLatest } from 'redux-saga/effects';
+import { NavigationService } from '../../navigation';
+import { CustomToastBottom, showToastSuccess } from '../../utils';
+import { ForumActions, LoadingActions } from '../reducer';
+import { ForumService } from '../services/forum.service';
+import { UserService } from '../services';
+import { UserAction } from '../reducer/user.reducer';
 
 function* getListDataForumSaga(action: PayloadAction<number>): Generator {
   if (action.payload === 1) {
@@ -12,7 +15,7 @@ function* getListDataForumSaga(action: PayloadAction<number>): Generator {
   }
   try {
     console.log('run');
-    const {data}: any = yield call(ForumService.getAllForum, action.payload);
+    const { data }: any = yield call(ForumService.getAllForum, action.payload);
     if (data.code == 200) {
       console.log('run push tookit');
       yield put(ForumActions.setListData(data.data));
@@ -38,7 +41,7 @@ function* postLikeForumSaga(
 
   try {
     console.log('run');
-    const {data}: any = yield call(ForumService.postLikeForum, uuid);
+    const { data }: any = yield call(ForumService.postLikeForum, uuid);
     if (data.code == 200) {
       console.log(data);
       yield put(ForumActions.handleLike_UnlikeSuccess(uuid));
@@ -58,7 +61,7 @@ function* deleteLikeForumSaga(
 
   try {
     console.log('run');
-    const {data}: any = yield call(ForumService.deleteLikeForum, uuid);
+    const { data }: any = yield call(ForumService.deleteLikeForum, uuid);
     if (data.code == 200) {
       console.log(data);
       yield put(ForumActions.handleLike_UnlikeSuccess(uuid));
@@ -73,15 +76,22 @@ function* deleteLikeForumSaga(
 function* postCreatePostForumSaga(
   action: PayloadAction<FormData>,
 ): Generator<any, void, any> {
+  yield put(LoadingActions.showLoading());
+  yield delay(1000);
   try {
     console.log('run');
     console.log('sagaaaaaa: ', action.payload);
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       ForumService.postCreatePostForum,
       action.payload,
     );
+    console.log('==============', data);
     if (data.code == 200) {
       yield put(ForumActions.postCreatePost(data.data));
+      yield put(UserAction.postForumProfile(data.data));
+      NavigationService.goBack();
+      showToastSuccess('Success! Post sent successfully!');
+      yield put(LoadingActions.hideLoading());
     } else {
       console.log('Server errol !!!');
     }
@@ -97,7 +107,7 @@ function* deletePostForumSaga(
   try {
     console.log(action.payload.forum_uuid);
     // yield put(ForumActions.deletePostRefesh(action.payload.forum_uuid));
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       ForumService.deletePostForum,
       action.payload,
     );
@@ -113,6 +123,21 @@ function* deletePostForumSaga(
   }
 }
 
+function* getPostByIdSaga(action: PayloadAction<string>): Generator {
+  try {
+    console.log('run===========>');
+    const { data }: any = yield call(UserService.getPostById, action.payload);
+    if (data.code == 200) {
+      yield put(ForumActions.setPostById(data.data));
+    } else {
+      console.log('Server errol !!!');
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+  }
+}
+
 export default function* watchForumSaga() {
   yield takeLatest(ForumActions.getListData, getListDataForumSaga);
   yield takeLatest(ForumActions.postLikeForum, postLikeForumSaga);
@@ -122,4 +147,6 @@ export default function* watchForumSaga() {
     postCreatePostForumSaga,
   );
   yield takeLatest(ForumActions.deletePost, deletePostForumSaga);
+
+  yield takeLatest(ForumActions.getPostById, getPostByIdSaga);
 }

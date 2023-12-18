@@ -1,18 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  Modal,
-  Image,
-  ActivityIndicator,
-} from 'react-native';
-import AutoHeightImage from 'react-native-auto-height-image';
-import useStyles from './styles';
-import {Dimensions} from 'react-native';
-import {Pressable} from 'react-native';
 import {Icon} from '@rneui/themed';
+import React, {useState} from 'react';
+import {
+  Dimensions,
+  FlatList,
+  Modal,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import FBCollage from 'react-native-fb-collage';
 import {
   GestureHandlerRootView,
   PinchGestureHandler,
@@ -20,9 +16,12 @@ import {
 } from 'react-native-gesture-handler';
 import Animated, {
   useAnimatedGestureHandler,
+  useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
+import useStyles from './styles';
+import FastImage from 'react-native-fast-image';
 
 interface PostContentProps {
   content: string;
@@ -34,28 +33,15 @@ interface PostContentProps {
   selectedImage: any;
 }
 
-const PostContent: React.FC<PostContentProps> = ({
-  content,
-  images,
-  onImagePress,
-  onClosePress,
-  showModal,
-  setShowModal,
-  selectedImage,
-}) => {
+const PostContent: React.FC<PostContentProps> = ({content, images}) => {
   const styles = useStyles();
-
-  const screenWidth = Dimensions.get('window').width;
-  const screenHeight = Dimensions.get('window').height;
-
-  console.log('image: =========', images);
 
   const scale = useSharedValue(1);
   const translationX = useSharedValue(0);
   const translationY = useSharedValue(0);
 
   const pinchHandler = useAnimatedGestureHandler({
-    onActive: event => {
+    onActive: (event: any) => {
       scale.value = event.scale < 1 ? 1 : event.scale;
       translationX.value = withSpring(0);
       translationY.value = withSpring(0);
@@ -66,82 +52,121 @@ const PostContent: React.FC<PostContentProps> = ({
   });
 
   const tapHandler = useAnimatedGestureHandler({
-    onActive: event => {
+    onActive: (event: any) => {
+      console.log('Double tap detected!');
       scale.value = withSpring(1);
     },
   });
 
-  const calculateImageHeight = (aspectRatio: number) => {
-    const imageWidth = screenWidth;
-    const imageHeight = imageWidth / aspectRatio;
-    return imageHeight;
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{scale: scale.value}],
+    };
+  });
+
+  const [showModalItem, setShowModalItem] = useState(false);
+
+  const openModal = () => {
+    setShowModalItem(true);
   };
+
+  const closeModal = () => {
+    setShowModalItem(false);
+  };
+
+  const screenWidth = Dimensions.get('window').width;
+  const screenHeight = Dimensions.get('window').height;
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
     <View>
       <View style={styles.description}>
         {content && <Text style={styles.textDescription}>{content}</Text>}
       </View>
-      <FlatList
-        data={images}
-        renderItem={({item, index}) => (
-          <View>
-            <Pressable onPress={() => onImagePress(index)}>
+      <View>
+        <FlatList
+          data={images}
+          renderItem={({item, index}) => (
+            <View>
               {item && (
-                <AutoHeightImage source={{uri: item}} width={screenWidth} />
-              )}
-              {images && (
-                <View style={styles.viewImagesLength}>
-                  <Text style={styles.textImagesLength}>
-                    {images ? index + 1 : 0}/{images.length}
-                  </Text>
-                </View>
-              )}
-            </Pressable>
-            <Modal
-              visible={showModal}
-              transparent={true}
-              onRequestClose={onClosePress}>
-              <TouchableOpacity
-                style={styles.viewIconClose}
-                onPress={onClosePress}>
-                <Icon
-                  name="close-circle"
-                  size={30}
-                  color={styles.colorIconClose.color}
-                  type="ionicon"
-                  style={styles.iconClose}
-                />
-              </TouchableOpacity>
+                <>
+                  <FBCollage
+                    imageOnPress={openModal}
+                    key={index}
+                    images={[{uri: item}] as any}
+                    borderRadius={6}
+                    style={{
+                      flex: 1,
+                      width: screenWidth,
+                      height: screenHeight / 2,
+                    }}
+                  />
 
-              <View style={styles.viewModalImage}>
-                <GestureHandlerRootView>
-                  <PinchGestureHandler onGestureEvent={pinchHandler}>
-                    <Animated.View style={{transform: [{scale: scale}]}}>
-                      <TapGestureHandler
-                        numberOfTaps={2}
-                        onGestureEvent={tapHandler}>
-                        <Animated.View>
-                          <AutoHeightImage
-                            key={selectedImage}
-                            source={{
-                              uri: selectedImage,
-                            }}
-                            width={screenWidth}
-                          />
-                        </Animated.View>
-                      </TapGestureHandler>
-                    </Animated.View>
-                  </PinchGestureHandler>
-                </GestureHandlerRootView>
-              </View>
-            </Modal>
+                  <Modal
+                    visible={showModalItem}
+                    transparent={true}
+                    onRequestClose={closeModal}>
+                    <TouchableOpacity
+                      style={styles.viewIconClose}
+                      onPress={closeModal}>
+                      <Icon
+                        name="close-circle"
+                        size={30}
+                        color={styles.colorIconClose.color}
+                        type="ionicon"
+                        style={styles.iconClose}
+                      />
+                    </TouchableOpacity>
+
+                    <View style={styles.viewModalImage}>
+                      <GestureHandlerRootView>
+                        <PinchGestureHandler onGestureEvent={pinchHandler}>
+                          <Animated.View style={animatedStyle}>
+                            <TapGestureHandler
+                              numberOfTaps={2}
+                              onGestureEvent={tapHandler}>
+                              <Animated.View>
+                                <FastImage
+                                  source={{
+                                    uri: images[currentIndex],
+                                    priority: FastImage.priority.normal,
+                                  }}
+                                  style={{
+                                    width: screenWidth,
+                                    height: screenHeight,
+                                  }}
+                                  resizeMode={FastImage.resizeMode.contain}
+                                />
+                              </Animated.View>
+                            </TapGestureHandler>
+                          </Animated.View>
+                        </PinchGestureHandler>
+                      </GestureHandlerRootView>
+                    </View>
+                  </Modal>
+                </>
+              )}
+            </View>
+          )}
+          onMomentumScrollEnd={ev => {
+            const newIndex = Math.floor(
+              ev.nativeEvent.contentOffset.x / screenWidth,
+            );
+            setCurrentIndex(newIndex);
+          }}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+        />
+
+        {images.length > 1 && (
+          <View style={styles.viewImagesLength}>
+            <Text style={styles.textImagesLength}>
+              {images ? currentIndex + 1 : 0}/{images.length}
+            </Text>
           </View>
         )}
-        pagingEnabled
-        horizontal
-        showsHorizontalScrollIndicator={false}
-      />
+      </View>
     </View>
   );
 };

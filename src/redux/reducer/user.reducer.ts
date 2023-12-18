@@ -23,10 +23,7 @@ const reducer = createSlice({
     },
 
     // Change password
-    changePassword: (
-      state: UserState,
-      _: PayloadAction<any>,
-    ) => {
+    changePassword: (state: UserState, _: PayloadAction<any>) => {
       return {
         ...state,
       };
@@ -92,6 +89,20 @@ const reducer = createSlice({
           currentPage: action.payload.currentPage,
           totalPage: action.payload.totalPage,
           totalData: action.payload.totalData,
+        },
+      };
+    },
+
+    postForumProfile: (state: UserState, action: PayloadAction<ForumType>) => {
+      return {
+        ...state,
+        listPostByUser: {
+          data: [action.payload, ...(state.listPostByUser?.data || [])],
+          canNext: state.listPostByUser?.canNext,
+          currentDataSize: state.listPostByUser?.currentDataSize,
+          currentPage: state.listPostByUser?.currentPage,
+          totalPage: state.listPostByUser?.totalPage,
+          totalData: state.listPostByUser?.totalData,
         },
       };
     },

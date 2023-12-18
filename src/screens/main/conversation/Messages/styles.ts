@@ -1,39 +1,33 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {StyleSheet} from 'react-native';
-import {Device} from '../../../../utils';
-import {fontFamilySetup} from '../../../../utils/font';
+import { makeStyles, normalize } from '@rneui/themed';
+import { StyleSheet } from 'react-native';
+import { Device } from '../../../../utils';
+import { fontFamilySetup } from '../../../../utils/font';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
-const useStyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({ colors }) => ({
   container: {
     flex: 1,
-    backgroundColor: colors.grey6,
-  },
-  wrapper: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: colors.grey6,
+    backgroundColor: colors.backgroundMessage,
   },
   body: {
     flex: 1,
-    backgroundColor: colors.grey6,
+    backgroundColor: colors.backgroundMessage,
     paddingHorizontal: normalize(12),
     paddingTop: normalize(3),
   },
   footer: {
     width: '100%',
-    // position: 'absolute',
-    // bottom: 0,
     borderTopLeftRadius: normalize(16),
     borderTopRightRadius: normalize(16),
     backgroundColor: colors.white,
+    alignSelf: 'center',
   },
   viewFLatlist: {
     width: '100%',
     height: normalize(HEIGHT * 0.84),
   },
-
   viewRow: {
     flexDirection: 'row',
   },
@@ -78,15 +72,21 @@ const useStyles = makeStyles(({colors}) => ({
     flexWrap: 'wrap',
     fontFamily: fontFamilySetup.medium,
     fontSize: normalize(12),
-    color: colors.background,
+    color: colors.blackDefault,
   },
   textNotUser: {
     width: 'auto',
     maxWidth: normalize(200),
     flexWrap: 'wrap',
-    color: colors.black,
     fontFamily: fontFamilySetup.medium,
     fontSize: normalize(12),
+    color: colors.blackDefault,
+  },
+  styleTextLink: {
+    color: colors.blue,
+    textDecorationLine: 'underline',
+    textDecorationColor: colors.blue,
+    textDecorationStyle: 'dashed',
   },
   viewTime: {
     width: 'auto',
@@ -150,39 +150,37 @@ const useStyles = makeStyles(({colors}) => ({
   leftContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: normalize(14),
+    marginHorizontal: normalize(12),
     marginVertical: normalize(16),
   },
   rightIconLeft: {
     top: normalize(HEIGHT * 0.018),
-    right: normalize(HEIGHT * 0.056),
+    right: normalize(HEIGHT * 0.048),
   },
   rightIconRight: {
     top: normalize(HEIGHT * 0.018),
-    right: normalize(HEIGHT * 0.02),
+    right: normalize(HEIGHT * 0.01),
   },
   textInput: {
-    width: normalize(WIDTH * 0.68),
+    width: normalize(WIDTH * 0.69),
+    height: normalize(HEIGHT * 0.053),
     fontSize: normalize(15),
     fontFamily: fontFamilySetup.bold,
-    paddingVertical: normalize(12),
+    paddingVertical: normalize(3),
     paddingStart: normalize(16),
     paddingEnd: normalize(48),
-    marginVertical: normalize(5),
     borderRadius: normalize(26),
     borderWidth: 1,
-  },
-  textInputHeightAuto: {
-    height: normalize(50),
+    marginTop: normalize(HEIGHT * 0.008),
   },
   textInputHeightAutoLimit: {
-    height: normalize(50),
+    height: normalize(40),
   },
   viewFocus: {
     position: 'relative',
   },
   viewBlur: {
-    height: normalize(HEIGHT * 0.069),
+    height: normalize(HEIGHT * 0.04),
   },
   viewFocusSelectImage: {
     height: normalize(HEIGHT * 0.3),
@@ -223,6 +221,10 @@ const useStyles = makeStyles(({colors}) => ({
   iconScroll: {
     color: colors.black,
   },
+
+  emojiSelector: {
+    backgroundColor: colors.black,
+  }
 }));
 
 export default useStyles;

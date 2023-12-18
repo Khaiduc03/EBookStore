@@ -1,6 +1,6 @@
-import {createTheme} from '@rneui/themed';
-import {useAppSelector} from '../hooks';
-import {getMode} from '../redux/selectors/thems.selector';
+import { createTheme } from '@rneui/themed';
+import { useAppSelector } from '../hooks';
+import { getMode } from '../redux/selectors/thems.selector';
 
 const mode = useAppSelector(getMode);
 
@@ -38,6 +38,9 @@ declare module '@rneui/themed' {
     nameUserComment: string;
     alertTextTitleMessage: string;
     colorTopExplore: string;
+    unRead: string;
+    backgroundMessage: string;
+    statusBorderColor: string;
   }
 }
 
@@ -70,8 +73,8 @@ export const theme = createTheme({
     backgrounDetai: '#F5C38B',
     backgroundChapter: '#181A20',
     backgroundTopic: '#EEEEEE',
-    bubbleUserBackground: '#20A090',
-    bubbleNotUserBackground: '#F2F7FB',
+    bubbleUserBackground: 'rgba(255, 217, 150, 1)',
+    bubbleNotUserBackground: 'rgba(255, 255, 255, 1)',
     green: '#3BD74B',
     red: '#FF0000',
     blue: '#0075FF',
@@ -80,13 +83,16 @@ export const theme = createTheme({
     blackDefault: '#000',
     whiteDefault: '#FFF',
     black1: '#ffffff',
-    chatText: '#464951',
+    chatText: 'rgba(92, 96, 105, 1)',
     colorTextExplore: '#887C7C',
     colorDescription: 'rgba(65, 65,65, 1)',
     nameComment: '#404040',
     nameUserComment: '#737479',
     alertTextTitleMessage: '#000',
     colorTopExplore: '#F8F8F8',
+    unRead: '#000',
+    backgroundMessage: 'rgba(240, 240, 240, 1)',
+    statusBorderColor: 'rgba(240, 240, 240, 1)'
   },
   darkColors: {
     primary: '#F89300',
@@ -114,8 +120,8 @@ export const theme = createTheme({
     backgrounDetai: '#181A20',
     backgroundChapter: '#181A20',
     backgroundTopic: '#35383F',
-    bubbleUserBackground: '#F2F7FB',
-    bubbleNotUserBackground: '#20A090',
+    bubbleUserBackground: 'rgba(255, 255, 255, 1)',
+    bubbleNotUserBackground: 'rgba(248, 219, 178, 1)',
     green: '#3BD74B',
     red: '#FF0000',
     blue: '#0075FF',
@@ -125,13 +131,16 @@ export const theme = createTheme({
     whiteDefault: '#FFF',
     grayDefault: '#4E4B66',
     grey3: '#FFFFFF',
-    chatText: '#464951',
+    chatText: 'rgba(92, 96, 105, 1)',
     colorTextExplore: '#887C7C',
     colorDescription: 'rgba(255, 255, 255, 0.6)',
     nameComment: '#FFF',
     nameUserComment: '#FFF',
     alertTextTitleMessage: '#FFF',
     colorTopExplore: '#000',
+    unRead: 'rgba(255, 255, 255, 1)',
+    backgroundMessage: 'rgba(0, 0, 0, 1)',
+    statusBorderColor: 'rgba(255, 255, 255, 1)'
   },
   components: {
     Button: (props, theme) => ({
