@@ -1,30 +1,30 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../../utils';
-import {fontFamilySetup} from '../../../../utils/font';
+import { makeStyles, normalize } from '@rneui/themed';
+import { Device } from '../../../../utils';
+import { fontFamilySetup } from '../../../../utils/font';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
-const useStyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({ colors }) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+    alignItems: 'center',
   },
   viewTextBig: {
-    width: '90%',
-    height: normalize(90),
-    borderBottomWidth: normalize(1),
-    alignItems: 'flex-start',
+    width: normalize(WIDTH * 0.56),
+    height: normalize(HEIGHT * 0.06),
+    backgroundColor: colors.primary,
+    borderRadius: normalize(12),
+    marginHorizontal: normalize(24),
+    marginVertical: normalize(12),
     justifyContent: 'center',
-    marginStart: normalize(24),
-    borderColor: '#6F6969',
+    alignItems: 'center',
   },
   name: {
-    fontSize: normalize(34),
-    letterSpacing: normalize(1),
-    fontStyle: 'normal',
-    fontFamily: fontFamilySetup.bold,
-    color: colors.primary,
+    color: colors.whiteDefault,
+    fontSize: normalize(WIDTH * 0.0639),
+    fontFamily: fontFamilySetup.medium,
   },
   colorBlack: {
     color: colors.black,
@@ -36,19 +36,17 @@ const useStyles = makeStyles(({colors}) => ({
     paddingVertical: normalize(18),
   },
   text: {
-    fontSize: normalize(21),
-    letterSpacing: normalize(0.5),
-    fontStyle: 'normal',
-    fontFamily: fontFamilySetup.bold,
     color: colors.grey5,
+    fontSize: normalize(21),
+    fontFamily: fontFamilySetup.bold,
   },
   iconLeftStyle: {
     color: colors.black,
   },
   listContent: {
     flex: 1,
-    paddingHorizontal: normalize(15),
-    paddingVertical: normalize(20),
+    marginHorizontal: normalize(12),
+    paddingVertical: normalize(16),
   },
 }));
 export default useStyles;

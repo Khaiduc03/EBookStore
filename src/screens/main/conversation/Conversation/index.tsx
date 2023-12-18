@@ -51,18 +51,6 @@ const ConversationScreen: React.FC = () => {
     const durationA = moment.duration(now.diff(postTimeA));
     const durationB = moment.duration(now.diff(postTimeB));
 
-    const getTimeElapsed = (duration: any) => {
-      if (duration.asMinutes() < 1) {
-        return 'Just now';
-      } else if (duration.asHours() < 1) {
-        return `${Math.floor(duration.asMinutes())}m ago`;
-      } else if (duration.asDays() < 1) {
-        return `${Math.floor(duration.asHours())}h ago`;
-      } else {
-        return `${Math.floor(duration.asDays())}d ago`;
-      }
-    };
-
     // Compare the actual durations to determine the order
     return (
       durationA.asMilliseconds() - durationB.asMilliseconds() &&

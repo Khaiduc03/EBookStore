@@ -1,12 +1,10 @@
-import {ReactElement} from 'react';
-import {ViewProps} from 'react-native';
+import { ViewStyle } from "react-native";
 
-export type ButtonLongpros = {
-  icon_Service?: boolean;
+export type ButtonLongProps = {
   title?: string;
-  ButtonColor?: boolean;
-  icon_Facebook?: boolean;
-  icon_Discord?: boolean;
+  nameIcon?: string;
+  colorIcon?: string;
+  typeIcon?: string;
   onPressScreen?: () => void;
-
+  backgroundColor?: ViewStyle;
 };

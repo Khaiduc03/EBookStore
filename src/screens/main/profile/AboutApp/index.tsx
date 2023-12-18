@@ -1,10 +1,9 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {HeaderCustom} from '../../../../components';
-import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
-import useStyles from './styles';
 import {ItemListAbout} from './components';
+import useStyles from './styles';
 
 const AboutApp: React.FC = () => {
   const styles = useStyles();
@@ -15,7 +14,7 @@ const AboutApp: React.FC = () => {
     <View style={styles.container}>
       <HeaderCustom
         leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
-        title="About The App"
+        title="About this app"
         onPressLeftIcon={handlePressGoback}
       />
       <View style={styles.viewTextBig}>
