@@ -61,7 +61,7 @@ const CustomerService: React.FC = () => {
         </View>
       </View>
       <View style={styles.viewbtn}>
-        <BigButton textButton="Accep" onPressButton={handleAccept} />
+        <BigButton textButton="Accept" onPressButton={handleAccept} />
       </View>
     </View>
   );

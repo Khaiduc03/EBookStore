@@ -1,7 +1,11 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {fontFamilySetup} from '../../../../utils/font';
+import { makeStyles, normalize } from '@rneui/themed';
+import { fontFamilySetup } from '../../../../utils/font';
+import { Device } from '../../../../utils';
 
-const useStyles = makeStyles(({colors}) => ({
+const WIDTH = Device.getDeviceWidth();
+const HEIGHT = Device.getDeviceHeight();
+
+const useStyles = makeStyles(({ colors }) => ({
   container: {
     flex: 1,
     backgroundColor: colors.background,
@@ -10,15 +14,16 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
     fontSize: normalize(20),
     fontFamily: fontFamilySetup.bold,
-    paddingVertical: normalize(20),
+    marginVertical: normalize(12),
   },
   textInput: {
     color: colors.black,
     fontFamily: fontFamilySetup.medium,
+    textAlignVertical: 'center',
   },
   viewinput: {
     backgroundColor: colors.grey7,
-    height: normalize(55),
+    height: normalize(HEIGHT * 0.056),
     borderWidth: normalize(0.3),
     borderRadius: normalize(12),
     paddingHorizontal: normalize(10),

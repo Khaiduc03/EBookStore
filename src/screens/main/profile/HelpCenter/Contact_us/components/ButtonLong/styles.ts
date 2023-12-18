@@ -1,25 +1,13 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {fontFamilySetup} from '../../../../../../../utils/font';
+import { makeStyles, normalize } from '@rneui/themed';
+import { fontFamilySetup } from '../../../../../../../utils/font';
 
-const useStyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({ colors }) => ({
   container: {
-    flex: 1,
     backgroundColor: colors.background,
   },
-  containerButtonBig: {
+  viewCenter: {
     justifyContent: 'center',
     alignItems: 'center',
-  },
-
-  ButtonService: {
-    width: normalize(300),
-    height: normalize(50),
-    borderRadius: normalize(15),
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingHorizontal: normalize(24),
-    borderWidth: normalize(0.5),
-    backgroundColor: '#F4E4CC',
   },
   name: {
     fontSize: normalize(18),
@@ -29,25 +17,15 @@ const useStyles = makeStyles(({colors}) => ({
     marginStart: normalize(20),
     color: colors.blackDefault,
   },
-  ButtonMeta: {
+  Button: {
     width: normalize(300),
     height: normalize(50),
+    flexDirection: 'row',
     borderRadius: normalize(15),
     alignItems: 'center',
-    flexDirection: 'row',
     paddingHorizontal: normalize(24),
     borderWidth: normalize(0.5),
-    backgroundColor: '#DCF7F7',
-  },
-  ButtonGoogle: {
-    width: normalize(300),
-    height: normalize(50),
-    borderRadius: normalize(15),
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingHorizontal: normalize(24),
-    borderWidth: normalize(0.5),
-    backgroundColor: '#D2E3FC',
+    marginVertical: normalize(16),
   },
 }));
 export default useStyles;

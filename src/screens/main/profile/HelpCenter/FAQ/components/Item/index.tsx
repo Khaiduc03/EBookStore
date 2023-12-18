@@ -28,51 +28,44 @@ const ItemFAQ: React.FC = () => {
   return (
     <View style={styles.viewItem}>
       <ScrollView
-        showsHorizontalScrollIndicator={false}
-        horizontal={true}
-        style={styles.scrollViewTitle}>
-        <View style={styles.viewRow}>
-          {categories.map(category => (
-            <TouchableOpacity
-              key={category.key}
-              onPress={() => handleCategoryClick(category.key)}
-              style={[
-                styles.btnTitle,
-                {
-                  backgroundColor:
-                    selectedCategory === category.key
-                      ? styles.backgroundBtnTitleFocus.backgroundColor
-                      : styles.backgroundBtnTitleBlur.backgroundColor,
-                },
-              ]}>
-              <Text
-                style={[
-                  styles.textTitle,
-                  {
-                    color:
-                      selectedCategory === category.key
-                        ? styles.colorsTextTitleFocus.color
-                        : styles.colorsTextTitleBlur.color,
-                  },
-                ]}>
-                {category.label}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-      </ScrollView>
-
-      <ScrollView
         showsVerticalScrollIndicator={false}
         nestedScrollEnabled
         style={styles.scrollViewItem}>
+        <View style={styles.viewTitle}>
+          <View style={styles.viewRow}>
+            {categories.map(category => (
+              <TouchableOpacity
+                key={category.key}
+                onPress={() => handleCategoryClick(category.key)}
+                style={[
+                  styles.btnTitle,
+                  {
+                    backgroundColor:
+                      selectedCategory === category.key
+                        ? styles.backgroundBtnTitleFocus.backgroundColor
+                        : styles.backgroundBtnTitleBlur.backgroundColor,
+                  },
+                ]}>
+                <Text
+                  style={[
+                    styles.textTitle,
+                    {
+                      color:
+                        selectedCategory === category.key
+                          ? styles.colorsTextTitleFocus.color
+                          : styles.colorsTextTitleBlur.color,
+                    },
+                  ]}>
+                  {category.label}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
         {categories.map(category => (
           <View key={category.key}>
             {shouldShowAllItems || selectedCategory === category.key ? (
-              <View style={styles.viewAll}>
-                <View style={styles.viewText}>
-                  <Text style={styles.textApp}>{category.label}</Text>
-                </View>
+              <View>
                 {category.key === 'app' && <Toggleable_App />}
                 {category.key === 'security' && <Toggleable_Security />}
                 {category.key === 'service' && <Toggleable_Service />}

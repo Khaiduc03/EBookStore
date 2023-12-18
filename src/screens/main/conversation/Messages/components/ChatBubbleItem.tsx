@@ -19,6 +19,7 @@ import {
 import {Linking} from 'react-native';
 import {NavigationService} from '../../../../../navigation';
 import {routes} from '../../../../../constants';
+import moment from 'moment';
 
 export const ChatBubble = React.memo((props: MessageI) => {
   const styles = useStyles();
@@ -26,10 +27,8 @@ export const ChatBubble = React.memo((props: MessageI) => {
   const {params} = useRoute() as any;
   const [isUser, setIsUser] = useState(false);
   const uuid = useAppSelector(getAuthUserUuid);
-  const last_message_time_formatted = useMemo(
-    () => formatTime(props.created_at),
-    [props.created_at],
-  );
+  const last_message_time_formatted = moment(props.created_at).format('HH:mm');
+
   console.log(props);
 
   const handleUserChange = useCallback(() => {
