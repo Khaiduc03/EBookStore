@@ -177,6 +177,7 @@ function* deleteRepCommentSaga(action: PayloadAction<string>): Generator {
         CommentChapterAction.deleteRepCommentChapterSuccess(action.payload),
       );
       yield put(CommentChapterAction.reduceCountRep(action.payload));
+      yield put(ComicActions.reduceCountComment());
       console.log('run push tookit');
     } else {
       ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);

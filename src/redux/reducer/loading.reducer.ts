@@ -10,6 +10,7 @@ const initialState: LoadingState = {
   isLoadingStart: false,
   isLoadingForum: false,
   isLoadingHome: false,
+  isLoadingMyProfile: false,
 };
 
 const reducer = createSlice({
@@ -61,6 +62,13 @@ const reducer = createSlice({
     },
     hideLoadingHome: (state: LoadingState) => {
       state.isLoadingHome = false;
+    },
+
+    showLoadingMyProfile: (state: LoadingState) => {
+      state.isLoadingMyProfile = true;
+    },
+    hideLoadingMyProfile: (state: LoadingState) => {
+      state.isLoadingMyProfile = false;
     },
   },
 });

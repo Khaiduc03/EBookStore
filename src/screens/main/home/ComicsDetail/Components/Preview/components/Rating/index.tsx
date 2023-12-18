@@ -64,12 +64,16 @@ const RatingComic: React.FC = () => {
       <View style={styles.content}>
         <View style={styles.viewRating1}>
           <Text style={styles.numberRating}>
-            {dataChart ? dataChart?.average_rating.toFixed(1) : 0}
+            {dataChart?.average_rating
+              ? dataChart?.average_rating.toFixed(1)
+              : 0}
           </Text>
           <AirbnbRating
             isDisabled={true}
             defaultRating={
-              dataChart ? parseInt(dataChart.average_rating.toFixed(0)) : 4
+              dataChart?.average_rating
+                ? parseInt(dataChart.average_rating.toFixed(0))
+                : 4
             }
             selectedColor="#FFC911"
             showRating={false}
