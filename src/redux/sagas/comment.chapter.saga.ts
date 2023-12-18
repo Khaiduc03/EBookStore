@@ -1,18 +1,18 @@
-import {PayloadAction} from '@reduxjs/toolkit';
-import {call, put, takeLatest} from 'redux-saga/effects';
-import {UserService} from '../services';
-import {UserAction} from '../reducer/user.reducer';
-import {CommentChapterAction} from '../reducer/comment.chapter.reducer';
-import {CommentChapterService} from '../services/comment.chapter.service';
-import {ComicActions, LoadingActions} from '../reducer';
-import {ToastAndroid} from 'react-native';
-import {CommentForumAction} from '../reducer/comment.forum.reducer';
+import { PayloadAction } from '@reduxjs/toolkit';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { UserService } from '../services';
+import { UserAction } from '../reducer/user.reducer';
+import { CommentChapterAction } from '../reducer/comment.chapter.reducer';
+import { CommentChapterService } from '../services/comment.chapter.service';
+import { ComicActions, LoadingActions } from '../reducer';
+import { ToastAndroid } from 'react-native';
+import { CommentForumAction } from '../reducer/comment.forum.reducer';
 
 function* postCommentSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentChapterService.postCommentChapter,
       action.payload,
     );
@@ -35,7 +35,7 @@ function* postLikeCommentSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentChapterService.postLikeCommentChapter,
       action.payload,
     );
@@ -68,7 +68,7 @@ function* postUnlikeCommentSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentChapterService.postUnlikeCommentChapter,
       action.payload,
     );
@@ -102,7 +102,7 @@ function* postRepCommentSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoading());
   try {
     console.log('run===========>');
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentChapterService.postRepCommentChapter,
       action.payload,
     );
@@ -124,7 +124,7 @@ function* getCommentComicSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoadingPage());
   try {
     console.log('run===========>');
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentChapterService.getCommentChapter,
       action.payload,
     );
@@ -145,7 +145,7 @@ function* deleteCommentSaga(action: PayloadAction<string>): Generator {
   try {
     yield put(LoadingActions.showLoading());
     console.log('run===========>');
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentChapterService.deleteCommentChapter,
       action.payload,
     );
@@ -169,7 +169,7 @@ function* deleteRepCommentSaga(action: PayloadAction<string>): Generator {
   try {
     yield put(LoadingActions.showLoading());
     console.log('run===========>');
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentChapterService.deleteCommentRepChapter,
       action.payload,
     );
@@ -177,7 +177,8 @@ function* deleteRepCommentSaga(action: PayloadAction<string>): Generator {
       yield put(
         CommentChapterAction.deleteRepCommentChapterSuccess(action.payload),
       );
-      yield put(CommentForumAction.reduceCountRep(action.payload));
+      yield put(CommentChapterAction.reduceCountRep(action.payload));
+      yield put(ComicActions.reduceCountComment());
       console.log('run push tookit');
     } else {
       ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);
@@ -193,7 +194,7 @@ function* getRepCommentComicSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoadingPage());
   try {
     console.log('run===========>');
-    const {data}: any = yield call(
+    const { data }: any = yield call(
       CommentChapterService.getRepCommentChapter,
       action.payload,
     );

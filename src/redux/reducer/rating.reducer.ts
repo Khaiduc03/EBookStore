@@ -103,16 +103,27 @@ const reducer = createSlice({
     },
 
     deleteRatingSucces: (state: RatingState, action: PayloadAction<string>) => {
-      if (state.listAllRating && state.listAllRating.data) {
-        const updateRating = state.listAllRating.data.filter(
+      if (state.listAllRating?.data) {
+        const updatedListAllRating = state.listAllRating.data.filter(
           ratingItem => ratingItem.uuid !== action.payload,
         );
+
+        const updatedRatingChart = state.ratingChart?.data
+          ? {
+              ...state.ratingChart.data,
+              total_rating: (state.ratingChart.data.total_rating || 0) - 1,
+            }
+          : state.ratingChart?.data;
 
         return {
           ...state,
           listAllRating: {
-            ...state,
-            data: updateRating,
+            ...state.listAllRating,
+            data: updatedListAllRating,
+          },
+          ratingChart: {
+            ...state.ratingChart,
+            data: updatedRatingChart,
           },
         };
       }
@@ -123,11 +134,22 @@ const reducer = createSlice({
       state: RatingState,
       action: PayloadAction<RatingType>,
     ) => {
+      const updatedRatingChart = state.ratingChart?.data
+        ? {
+            ...state.ratingChart.data,
+            total_rating: (state.ratingChart.data.total_rating || 0) + 1,
+          }
+        : state.ratingChart?.data;
+
       return {
         ...state,
         listAllRating: {
           ...state.listAllRating,
           data: [action.payload, ...(state.listAllRating?.data || [])],
+        },
+        ratingChart: {
+          ...state.ratingChart,
+          data: updatedRatingChart,
         },
       };
     },

@@ -5,6 +5,7 @@ import { CustomToastBottom, showToastSuccess } from '../../utils';
 import { ForumActions, LoadingActions } from '../reducer';
 import { ForumService } from '../services/forum.service';
 import { UserService } from '../services';
+import { UserAction } from '../reducer/user.reducer';
 
 function* getListDataForumSaga(action: PayloadAction<number>): Generator {
   if (action.payload === 1) {
@@ -87,6 +88,7 @@ function* postCreatePostForumSaga(
     console.log('==============', data);
     if (data.code == 200) {
       yield put(ForumActions.postCreatePost(data.data));
+      yield put(UserAction.postForumProfile(data.data));
       NavigationService.goBack();
       showToastSuccess('Success! Post sent successfully!');
       yield put(LoadingActions.hideLoading());
