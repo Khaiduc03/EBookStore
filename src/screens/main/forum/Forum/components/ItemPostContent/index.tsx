@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import AutoHeightImage from 'react-native-auto-height-image';
 import FBCollage from 'react-native-fb-collage';
 import {
   GestureHandlerRootView,
@@ -22,6 +21,7 @@ import Animated, {
   withSpring,
 } from 'react-native-reanimated';
 import useStyles from './styles';
+import FastImage from 'react-native-fast-image';
 
 interface PostContentProps {
   content: string;
@@ -33,15 +33,7 @@ interface PostContentProps {
   selectedImage: any;
 }
 
-const PostContent: React.FC<PostContentProps> = ({
-  content,
-  images,
-  onImagePress,
-  onClosePress,
-  showModal,
-  setShowModal,
-  selectedImage,
-}) => {
+const PostContent: React.FC<PostContentProps> = ({content, images}) => {
   const styles = useStyles();
 
   const scale = useSharedValue(1);
@@ -72,6 +64,16 @@ const PostContent: React.FC<PostContentProps> = ({
     };
   });
 
+  const [showModalItem, setShowModalItem] = useState(false);
+
+  const openModal = () => {
+    setShowModalItem(true);
+  };
+
+  const closeModal = () => {
+    setShowModalItem(false);
+  };
+
   const screenWidth = Dimensions.get('window').width;
   const screenHeight = Dimensions.get('window').height;
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -89,54 +91,61 @@ const PostContent: React.FC<PostContentProps> = ({
               {item && (
                 <>
                   <FBCollage
+                    imageOnPress={openModal}
                     key={index}
                     images={[{uri: item}] as any}
                     borderRadius={6}
-                    imageOnPress={() => onImagePress(index)}
                     style={{
                       flex: 1,
                       width: screenWidth,
                       height: screenHeight / 2,
                     }}
                   />
+
+                  <Modal
+                    visible={showModalItem}
+                    transparent={true}
+                    onRequestClose={closeModal}>
+                    <TouchableOpacity
+                      style={styles.viewIconClose}
+                      onPress={closeModal}>
+                      <Icon
+                        name="close-circle"
+                        size={30}
+                        color={styles.colorIconClose.color}
+                        type="ionicon"
+                        style={styles.iconClose}
+                      />
+                    </TouchableOpacity>
+
+                    <View style={styles.viewModalImage}>
+                      <GestureHandlerRootView>
+                        <PinchGestureHandler onGestureEvent={pinchHandler}>
+                          <Animated.View style={animatedStyle}>
+                            <TapGestureHandler
+                              numberOfTaps={2}
+                              onGestureEvent={tapHandler}>
+                              <Animated.View>
+                                <FastImage
+                                  source={{
+                                    uri: images[currentIndex],
+                                    priority: FastImage.priority.normal,
+                                  }}
+                                  style={{
+                                    width: screenWidth,
+                                    height: screenHeight,
+                                  }}
+                                  resizeMode={FastImage.resizeMode.contain}
+                                />
+                              </Animated.View>
+                            </TapGestureHandler>
+                          </Animated.View>
+                        </PinchGestureHandler>
+                      </GestureHandlerRootView>
+                    </View>
+                  </Modal>
                 </>
               )}
-
-              <Modal
-                visible={showModal}
-                transparent={true}
-                onRequestClose={onClosePress}>
-                <TouchableOpacity
-                  style={styles.viewIconClose}
-                  onPress={onClosePress}>
-                  <Icon
-                    name="close-circle"
-                    size={30}
-                    color={styles.colorIconClose.color}
-                    type="ionicon"
-                    style={styles.iconClose}
-                  />
-                </TouchableOpacity>
-
-                <View style={styles.viewModalImage}>
-                  <GestureHandlerRootView>
-                    <PinchGestureHandler onGestureEvent={pinchHandler}>
-                      <Animated.View style={animatedStyle}>
-                        <TapGestureHandler
-                          numberOfTaps={2}
-                          onGestureEvent={tapHandler}>
-                          <Animated.View>
-                            <AutoHeightImage
-                              source={{uri: selectedImage}}
-                              width={screenWidth}
-                            />
-                          </Animated.View>
-                        </TapGestureHandler>
-                      </Animated.View>
-                    </PinchGestureHandler>
-                  </GestureHandlerRootView>
-                </View>
-              </Modal>
             </View>
           )}
           onMomentumScrollEnd={ev => {
@@ -150,7 +159,7 @@ const PostContent: React.FC<PostContentProps> = ({
           pagingEnabled
         />
 
-        {images && (
+        {images.length > 1 && (
           <View style={styles.viewImagesLength}>
             <Text style={styles.textImagesLength}>
               {images ? currentIndex + 1 : 0}/{images.length}

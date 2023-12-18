@@ -47,6 +47,7 @@ export type DetailForumType = Timestamp & {
 export type ForumState = Partial<{
   listDataForum: PayloadHttpListForumData<ForumType>;
   listDetail: PayloadHttpDetailForum<DetailForumType>;
+  postById: ForumType;
 }>;
 
 export interface ForumType extends uuid, Timestamp {
