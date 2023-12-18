@@ -79,12 +79,12 @@ const HeaderDetail: React.FC<Comic> = props => {
         <View style={styles.interactItem}>
           <View style={styles.rate}>
             <Text style={styles.numberInteract}>
-              {rating ? rating.toFixed(1) : 0}
+              {rating ? rating.toFixed(1) : 0 || 0}
             </Text>
             <Icon name="star" type="ionicon" size={20} color={'grey'} />
           </View>
           <Text style={styles.titleInteracItem}>
-            {dataChart?.total_rating ? dataChart.total_rating : 0} reviews
+            {dataChart?.total_rating ? dataChart.total_rating : 0 || 0} reviews
             Reviews
           </Text>
         </View>
