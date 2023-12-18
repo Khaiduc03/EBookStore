@@ -6,6 +6,7 @@ import {CommentChapterAction} from '../reducer/comment.chapter.reducer';
 import {CommentChapterService} from '../services/comment.chapter.service';
 import {ComicActions, LoadingActions} from '../reducer';
 import {ToastAndroid} from 'react-native';
+import {CommentForumAction} from '../reducer/comment.forum.reducer';
 
 function* postCommentSaga(action: PayloadAction<any>): Generator {
   yield put(LoadingActions.showLoading());
@@ -176,7 +177,7 @@ function* deleteRepCommentSaga(action: PayloadAction<string>): Generator {
       yield put(
         CommentChapterAction.deleteRepCommentChapterSuccess(action.payload),
       );
-      yield put(CommentChapterAction.reduceCountRep(action.payload));
+      yield put(CommentForumAction.reduceCountRep(action.payload));
       console.log('run push tookit');
     } else {
       ToastAndroid.show('Error 😖😖!!!', ToastAndroid.SHORT);

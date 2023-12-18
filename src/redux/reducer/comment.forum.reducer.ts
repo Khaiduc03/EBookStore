@@ -62,7 +62,7 @@ const reducer = createSlice({
           listRepComment: {
             canNext: state.listRepComment?.canNext,
             currentPage: state.listRepComment?.currentPage,
-            totalData: (state.listRepComment?.totalData || 0) + 1,
+            totalData: state.listRepComment?.totalData,
             data: [action.payload, ...(state.listRepComment?.data || [])],
           },
           listComment: {

@@ -34,7 +34,6 @@ const CommentForum: React.FC = () => {
   const dataComment = useAppSelector(getListCommentForum);
   const countComment = useAppSelector(commentCountForum);
 
-  console.log(countComment);
   const canNext = useAppSelector(getNextPageCommentForum);
   const currentPage = useAppSelector(getCurrenPageCommentForum);
   const [value, setvalue] = useState('');
@@ -57,6 +56,7 @@ const CommentForum: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    console.log('==========>aaaaaaaaaaaaaaa');
     setCount(countComment!);
   }, [countComment]);
 
