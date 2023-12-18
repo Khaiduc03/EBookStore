@@ -11,3 +11,6 @@ export const getCurrentPageForum = (state: RootState) =>
 
 export const getNextForum = (state: RootState) =>
   state.forum.listDataForum?.canNext;
+
+export const commentCountForum = (state: RootState) =>
+  state.forum.postById?.comment_count;

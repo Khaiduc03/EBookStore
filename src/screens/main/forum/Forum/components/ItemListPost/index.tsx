@@ -1,11 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {
   ActivityIndicator,
-  Dimensions,
   FlatList,
   Image,
   RefreshControl,
-  StatusBar,
   Text,
   TouchableOpacity,
   View,
@@ -22,13 +20,12 @@ import {
   getNextForum,
 } from '../../../../../../redux/selectors/forum.selector';
 import {getIsLoadingForum} from '../../../../../../redux/selectors/loading.selector';
+import {CommentForumType} from '../../../../../../redux/types/comment.forum.type';
 import {ForumType} from '../../../../../../redux/types/forum.type';
 import PostContent from '../ItemPostContent';
 import PostHeader from '../ItemPostFooter';
 import PostFooter from '../ItemPostHeader';
 import useStyles from './styles';
-import {CommentForumType} from '../../../../../../redux/types/comment.forum.type';
-import {useRoute} from '@react-navigation/native';
 
 interface ForumDataProps {
   data?: ForumType;

@@ -71,13 +71,13 @@ const useStyles = makeStyles(({ colors }) => ({
     paddingLeft: normalize(5),
     fontSize: normalize(12),
     fontFamily: fontFamilySetup.medium,
-    color: '#A5A6AA',
+    color: colors.black,
   },
   iconStyleFocus: {
     color: colors.primary,
   },
   iconStyleBlur: {
-    color: '#A5A6AA',
+    color: colors.black,
   },
   viewTextInput: {
     width: '100%',

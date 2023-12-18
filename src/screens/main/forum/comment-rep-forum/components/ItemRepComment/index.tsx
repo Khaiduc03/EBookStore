@@ -1,21 +1,22 @@
 import {Icon} from '@rneui/base';
-import React, {useState} from 'react';
-import {Keyboard, Pressable, Text, TouchableOpacity, View} from 'react-native';
-import FastImage from 'react-native-fast-image';
-import useStyles from './styles';
 import moment from 'moment';
+import React, {useState} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
+import AwesomeAlert from 'react-native-awesome-alerts';
+import FastImage from 'react-native-fast-image';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {useAppDispatch, useAppSelector} from '../../../../../../hooks';
+import {getAuthUserProfile} from '../../../../../../redux';
 import {CommentForumAction} from '../../../../../../redux/reducer/comment.forum.reducer';
 import {CommentForumType} from '../../../../../../redux/types/comment.forum.type';
-import {getAuthUserProfile} from '../../../../../../redux';
-import AwesomeAlert from 'react-native-awesome-alerts';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import useStyles from './styles';
+import CustomAwesomeAlert from '../AwesomeAlertProps/CustomAwesomeAlert';
 
 interface CommentDataProps {
   data: CommentForumType;
   setOpen: () => void;
   setUserRep: (text: string) => void;
+  setCountRepComment: () => void;
 }
 
 const ItemRepCommnent: React.FC<CommentDataProps> = props => {
@@ -29,6 +30,8 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
     uuid,
     is_like,
     user_uuid,
+    forum_uuid,
+    parents_comment_uuid,
   } = props.data || {};
 
   const styles = useStyles();
@@ -43,7 +46,14 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
   const textBeforeFullname = comment.slice(0, fullnameIndex);
 
   const onPressDeleteComment = () => {
-    dispatch(CommentForumAction.deleteCommentForum({comment_uuid: uuid}));
+    dispatch(
+      CommentForumAction.deleteRepCommentForum({
+        comment_uuid: uuid,
+        forum_uuid: forum_uuid,
+        parents_comment_uuid: parents_comment_uuid,
+      }),
+    );
+    props.setCountRepComment();
   };
 
   const onPressLikeComment = () => {
@@ -140,7 +150,11 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
                 }
                 size={15}
               />
-              <Text style={styles.numberRepStyle}>
+              <Text
+                style={[
+                  styles.numberRepStyle,
+                  {color: like ? '#F89300' : styles.iconStyleBlur.color},
+                ]}>
                 {countLike ? countLike : '0'}
               </Text>
             </TouchableOpacity>
@@ -156,34 +170,14 @@ const ItemRepCommnent: React.FC<CommentDataProps> = props => {
                   size={15}
                   color={styles.iconStyleBlur.color}
                 />
-                <AwesomeAlert
-                  show={showAlert}
-                  showProgress={false}
+                <CustomAwesomeAlert
+                  showAlert={showAlert}
+                  setShowAlert={showAlert => setShowAlert(showAlert)}
                   title="Delete Your Comment 😕"
                   message="Are you sure you want to delete your comment?"
-                  closeOnTouchOutside={true}
-                  closeOnHardwareBackPress={false}
-                  showCancelButton={true}
-                  showConfirmButton={true}
                   cancelText="No, cancel"
-                  cancelButtonColor="blue"
                   confirmText="Yes, delete it"
-                  confirmButtonColor="red"
-                  onCancelPressed={() => {
-                    setShowAlert(false);
-                  }}
-                  onConfirmPressed={() => {
-                    setShowAlert(false);
-                    onPressDeleteComment();
-                  }}
-                  onDismiss={() => {
-                    setShowAlert(false);
-                  }}
-                  titleStyle={styles.textTitleAlert}
-                  messageStyle={styles.textMessageAlert}
-                  cancelButtonTextStyle={styles.textCancelAlert}
-                  confirmButtonTextStyle={styles.textConfirmAlert}
-                  contentContainerStyle={styles.contentContainerStyle}
+                  onPressConfirm={onPressDeleteComment}
                 />
               </TouchableOpacity>
             )}

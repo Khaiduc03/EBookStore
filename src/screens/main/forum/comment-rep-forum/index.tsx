@@ -29,6 +29,7 @@ import {HeaderRepComment} from './components';
 import ItemRepCommnent from './components/ItemRepComment';
 import useStyles from './styles';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import CustomAwesomeAlert from './components/AwesomeAlertProps/CustomAwesomeAlert';
 
 interface ParentsUuidComment {
   parents_comment_uuid: string;
@@ -36,12 +37,10 @@ interface ParentsUuidComment {
 }
 
 const CommentRepForum = () => {
+  const styles = useStyles();
   const route = useRoute();
-
   const data = (route.params as ParentsUuidComment).data;
-
   const [value, setvalue] = useState('');
-
   const dispatch = useAppDispatch();
   const dataRepComment = useAppSelector(getListRepCommentForum);
   const isLoading = useAppSelector(getIsLoadingPage);
@@ -51,19 +50,10 @@ const CommentRepForum = () => {
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
-
   const [showAlert, setShowAlert] = useState(false);
-
   const user = useAppSelector(getAuthUserProfile);
 
-  console.log('======>', open);
-
-  console.log('canNext', canNext);
-  console.log('isLoading', isLoading);
   const TextInputRef = useRef<TextInput>(null);
-
-  const styles = useStyles();
-
   const {
     comment,
     created_at,
@@ -72,9 +62,7 @@ const CommentRepForum = () => {
     user_avatar,
     like_count,
     user_uuid,
-    parents_comment_uuid,
     forum_uuid,
-    type,
     uuid,
     is_like,
   } = data;
@@ -91,6 +79,7 @@ const CommentRepForum = () => {
       }),
     );
   }, []);
+
   useEffect(() => {
     if (open) {
       TextInputRef.current?.focus();
@@ -99,6 +88,10 @@ const CommentRepForum = () => {
 
   const openInput = () => {
     setOpen(!open);
+  };
+
+  const setCountRepComment = () => {
+    setCountComment(countComment - 1);
   };
 
   const setUserRep = (text: string) => {
@@ -122,16 +115,6 @@ const CommentRepForum = () => {
         value +
         '\nparents_comment_uuid:  ' +
         forum_uuid,
-    );
-  };
-
-  const onPressDeleteComment = () => {
-    dispatch(CommentForumAction.deleteCommentForum({comment_uuid: uuid}));
-    dispatch(
-      CommentForumAction.getRepCommentForum({
-        parents_comment_uuid: forum_uuid,
-        page: currentPage ? currentPage + 1 : 1,
-      }),
     );
   };
 
@@ -198,6 +181,7 @@ const CommentRepForum = () => {
           setUserRep={setUserRep}
           setOpen={openInput}
           data={item}
+          setCountRepComment={setCountRepComment}
         />
       </View>
     );
@@ -222,8 +206,9 @@ const CommentRepForum = () => {
   return (
     <View style={styles.container}>
       <FlatList
+        key={dataRepComment?.length}
         data={dataRepComment}
-        keyExtractor={item => item.uuid}
+        renderItem={renderItem}
         initialNumToRender={21}
         ListHeaderComponent={() => {
           return (
@@ -262,51 +247,18 @@ const CommentRepForum = () => {
                         }
                         size={15}
                       />
-                      <Text style={styles.numberRepStyle}>{countLike}</Text>
+                      <Text
+                        style={[
+                          styles.numberRepStyle,
+                          {
+                            color: like
+                              ? '#F89300'
+                              : styles.iconStyleBlur.color,
+                          },
+                        ]}>
+                        {countLike}
+                      </Text>
                     </TouchableOpacity>
-
-                    {user.uuid === user_uuid && (
-                      <TouchableOpacity
-                        onPress={() => {
-                          setShowAlert(!showAlert);
-                        }}>
-                        <Icon
-                          name="trash-outline"
-                          type="ionicon"
-                          size={15}
-                          color={styles.iconStyleBlur.color}
-                        />
-                        <AwesomeAlert
-                          show={showAlert}
-                          showProgress={false}
-                          title="Delete Your Comment 😕"
-                          message="Are you sure you want to delete your comment?"
-                          closeOnTouchOutside={true}
-                          closeOnHardwareBackPress={false}
-                          showCancelButton={true}
-                          showConfirmButton={true}
-                          cancelText="No, cancel"
-                          cancelButtonColor="blue"
-                          confirmText="Yes, delete it"
-                          confirmButtonColor="red"
-                          onCancelPressed={() => {
-                            setShowAlert(false);
-                          }}
-                          onConfirmPressed={() => {
-                            setShowAlert(false);
-                            onPressDeleteComment();
-                          }}
-                          onDismiss={() => {
-                            setShowAlert(false);
-                          }}
-                          titleStyle={styles.textTitleAlert}
-                          messageStyle={styles.textMessageAlert}
-                          cancelButtonTextStyle={styles.textCancelAlert}
-                          confirmButtonTextStyle={styles.textConfirmAlert}
-                          contentContainerStyle={styles.contentContainerStyle}
-                        />
-                      </TouchableOpacity>
-                    )}
                   </View>
                 </View>
               </View>
@@ -332,7 +284,6 @@ const CommentRepForum = () => {
         }}
         ListFooterComponent={isLoading ? listFooterComponent() : <View />}
         showsVerticalScrollIndicator={false}
-        renderItem={renderItem}
         contentContainerStyle={{paddingVertical: 65}}
       />
 
