@@ -1,20 +1,13 @@
 import {CheckBox} from '@rneui/themed';
 import React, {useEffect, useState} from 'react';
-import {
-  Alert,
-  Keyboard,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import {Keyboard, Text, TouchableWithoutFeedback, View} from 'react-native';
+import Toast from 'react-native-toast-message';
 import {BigButton, HeaderCustom} from '../../../../components';
 import InputCustomV1 from '../../../../components/customs/InputCustomV1';
 import {useAppDispatch} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
 import {UserAction} from '../../../../redux/reducer/user.reducer';
 import useStyles from './styles';
-import {AlertActions} from '../../../../redux/reducer/alert.reducer';
-import Toast from 'react-native-toast-message';
 
 const ChangePassWord: React.FC = () => {
   const styles = useStyles();
@@ -48,9 +41,9 @@ const ChangePassWord: React.FC = () => {
 
   const validateInputs = () => {
     return (
-      oldPassword.length > 0 &&
-      newPassword.length > 0 &&
-      confirmpassword.length > 0
+      oldPassword.length >= 6 &&
+      newPassword.length >= 6 &&
+      confirmpassword === newPassword
     );
   };
 
@@ -59,7 +52,7 @@ const ChangePassWord: React.FC = () => {
       UserAction.changePassword({
         oldPassword: oldPassword,
         newPassword: newPassword,
-        confirmPassword: confirmpassword,
+        confirmPassword: newPassword,
       }),
     );
   };
@@ -70,38 +63,37 @@ const ChangePassWord: React.FC = () => {
       Toast.show({
         type: 'success',
         text1: 'Change password successfully!',
-        visibilityTime: 2000,
+        visibilityTime: 4000,
       });
     } else {
-      setIsCheckValidateOldPassword(true);
+      // setIsCheckValidateOldPassword(true);
       setIsCheckValidatePassword(true);
-      setIsCheckValidateConfirmPassword(true);
-      if (oldPassword.length === 0) {
-        setIsCheckValidateOldPassword(false);
+      // setIsCheckValidateConfirmPassword(true);
+      if (newPassword === confirmpassword) {
+        setIsCheckValidatePassword(true);
         Toast.show({
           type: 'error',
           text1: 'Please enter the old password',
-          visibilityTime: 2000,
+          visibilityTime: 4000,
         });
-      }
-      if (newPassword.length !== 0) {
+      } else if (newPassword != confirmpassword) {
         setIsCheckValidatePassword(false);
         Toast.show({
           type: 'error',
           text1: 'Please enter the new password',
-          visibilityTime: 2000,
+          visibilityTime: 4000,
         });
-      }
-      if (confirmpassword !== newPassword) {
-        setIsCheckValidateConfirmPassword(false);
+      } else if (confirmpassword === newPassword) {
+        setIsCheckValidateConfirmPassword(true);
         Toast.show({
-          type: 'error',
-          text1: 'Passwords do not match',
+          type: 'successfully',
+          text1: 'Psuccessfully',
           visibilityTime: 2000,
         });
       }
     }
   };
+  console.log('password', newPassword);
 
   return (
     <TouchableWithoutFeedback
