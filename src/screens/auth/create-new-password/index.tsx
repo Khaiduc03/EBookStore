@@ -35,8 +35,6 @@ const CreateNewPasswordScreen: React.FC = () => {
   const [isCheckValidateConfirmPassword, setIsCheckValidateConfirmPassword] =
     useState<boolean>(true);
 
-  const {email} = useAppSelector(getAuthUserProfile);
-
   useEffect(() => {
     if (password !== null && confirmpassword !== null) {
       setIsCheckValidatePassword(true);
@@ -59,6 +57,7 @@ const CreateNewPasswordScreen: React.FC = () => {
         AuthActions.handleUpdatePassword({
           email: params.email,
           password: password,
+          isOTP: params.isOTP || false,
         }),
       );
     }

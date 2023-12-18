@@ -26,6 +26,8 @@ import {ItemFollowType, UserType} from '../../../../redux/types/user.type';
 import {UserAction} from '../../../../redux/reducer/user.reducer';
 import {getIsLoadingTopic} from '../../../../redux/selectors/loading.selector';
 import {ActivityIndicator} from 'react-native';
+import {ChatActions} from '../../../../redux/reducer/chat.reducer';
+import {CustomToastBottom} from '../../../../utils';
 interface RouteParamsProfile {
   data?: UserType;
   dataFollow?: ItemFollowType;
@@ -39,7 +41,6 @@ const ProfileUser: React.FC = props => {
   const dataFollwer = (route.params as RouteParamsProfile).dataFollwer;
   const dataList = useAppSelector(getAllPostByIdUser);
   const dispatch = useAppDispatch();
-
   const isLoading = useAppSelector(getIsLoadingTopic);
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
@@ -116,7 +117,13 @@ const ProfileUser: React.FC = props => {
     NavigationService.goBack();
   };
   const handlePressMessage = () => {
-    NavigationService.navigate(routes.MESSAGE);
+    if (dataUser?.uuid) {
+      dispatch(
+        ChatActions.handleCreateConversation({joined_uuid: dataUser.uuid}),
+      );
+    } else {
+      CustomToastBottom('Server have error, please try again later');
+    }
   };
 
   const handleFollowButtonClick = () => {
