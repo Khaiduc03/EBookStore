@@ -1,5 +1,5 @@
 import {Text} from '@rneui/base';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Keyboard,
   TouchableOpacity,
@@ -53,7 +53,7 @@ const SendOTPScreen: React.FC = () => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     let id: NodeJS.Timeout | null = null;
     if (isCounting && countdown > 0) {
       id = setInterval(() => {

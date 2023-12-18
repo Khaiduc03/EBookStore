@@ -1,11 +1,6 @@
 import {Text} from '@rneui/base';
 import React, {useState} from 'react';
-import {
-  Keyboard,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import {Keyboard, TouchableWithoutFeedback, View} from 'react-native';
 import {BigButton, Headers} from '../../../components';
 import AuthHeaderV1 from '../../../components/customs/AuthHeaderV1';
 import InputCustomV1 from '../../../components/customs/InputCustomV1';
