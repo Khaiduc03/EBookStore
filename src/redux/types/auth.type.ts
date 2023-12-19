@@ -21,6 +21,7 @@ export type LoginPayload = {
 export type NewPasswordPayload = {
   email: string;
   password: string;
+  isOTP?: boolean;
 };
 
 export type SendOTPPayload = {

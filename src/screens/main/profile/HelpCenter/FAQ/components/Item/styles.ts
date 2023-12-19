@@ -1,11 +1,11 @@
-import {makeStyles, normalize} from '@rneui/themed';
-import {Device} from '../../../../../../../utils';
-import {fontFamilySetup} from '../../../../../../../utils/font';
+import { makeStyles, normalize } from '@rneui/themed';
+import { Device } from '../../../../../../../utils';
+import { fontFamilySetup } from '../../../../../../../utils/font';
 
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
-const useStyles = makeStyles(({colors}) => ({
+const useStyles = makeStyles(({ colors }) => ({
   viewItem: {
     backgroundColor: colors.background,
     justifyContent: 'center',
@@ -13,20 +13,20 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewRow: {
     flexDirection: 'row',
+  },
+  viewTitle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     paddingVertical: normalize(10),
   },
-
-  scrollViewTitle: {
-    width: normalize(WIDTH * 0.9),
-    height: normalize(HEIGHT * 0.09),
-  },
   scrollViewItem: {
-    width: normalize(WIDTH * 0.9),
-    height: normalize(HEIGHT * 1),
+    width: normalize(WIDTH),
+    height: normalize(HEIGHT * 0.86),
+    paddingHorizontal: normalize(12),
   },
-
   textTitle: {
-    fontSize: normalize(14),
+    fontSize: normalize(13),
     fontFamily: fontFamilySetup.bold,
   },
   colorsTextTitleFocus: {
@@ -35,10 +35,9 @@ const useStyles = makeStyles(({colors}) => ({
   colorsTextTitleBlur: {
     color: colors.primary,
   },
-
   btnTitle: {
-    width: normalize(WIDTH * 0.25),
-    height: normalize(HEIGHT * 0.06),
+    width: normalize(WIDTH * 0.19),
+    height: normalize(HEIGHT * 0.046),
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: normalize(26),
@@ -54,17 +53,14 @@ const useStyles = makeStyles(({colors}) => ({
   },
   textApp: {
     color: colors.primary,
-    fontSize: normalize(15),
+    fontSize: normalize(13),
     fontFamily: fontFamilySetup.bold,
   },
   viewText: {
-    paddingVertical: normalize(5),
+    paddingVertical: normalize(16),
   },
   viewItem2: {
     paddingVertical: normalize(20),
-  },
-  viewAll: {
-    gap: normalize(20),
   },
   viewSearch: {
     paddingHorizontal: normalize(25),

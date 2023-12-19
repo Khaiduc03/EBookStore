@@ -150,18 +150,18 @@ const reducer = createSlice({
       };
     },
 
-    setEmailForgotPassword: (
-      state: AuthState,
-      payload: PayloadAction<Pick<LoginPayload, 'email'>>,
-    ) => {
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          email: payload.payload.email,
-        },
-      };
-    },
+    // setEmailForgotPassword: (
+    //   state: AuthState,
+    //   payload: PayloadAction<Pick<LoginPayload, 'email'>>,
+    // ) => {
+    //   return {
+    //     ...state,
+    //     user: {
+    //       ...state.user,
+    //       email: payload.payload.email,
+    //     },
+    //   };
+    // },
 
     handleSendOTP: (
       state: AuthState,
@@ -202,8 +202,6 @@ const reducer = createSlice({
         },
       };
     },
-  
-
   },
 });
 

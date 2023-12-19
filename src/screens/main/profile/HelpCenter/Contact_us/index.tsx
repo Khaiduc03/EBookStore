@@ -7,11 +7,7 @@ const Contact_us: React.FC = () => {
   const styles = useStyles();
   return (
     <View style={styles.container}>
-      <View style={styles.viewButton}>
-        <View style={{flex: 1,alignItems:'center'}}>
-          <ItemButton />
-        </View>
-      </View>
+      <ItemButton />
     </View>
   );
 };

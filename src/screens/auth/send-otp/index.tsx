@@ -1,5 +1,5 @@
 import {Text} from '@rneui/base';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Keyboard,
   TouchableOpacity,
@@ -12,12 +12,13 @@ import {routes} from '../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {NavigationService} from '../../../navigation';
 import {AuthActions, getAuthUserProfile} from '../../../redux';
-import {showToastError} from '../../../utils';
+import {CustomToastBottom, showToastError} from '../../../utils';
 import useStyles from './styles';
+import {useRoute} from '@react-navigation/native';
 
 const SendOTPScreen: React.FC = () => {
   const styles = useStyles();
-
+  const {params} = useRoute() as any;
   const [pin1, setPin1] = React.useState('');
   const [pin2, setPin2] = React.useState('');
   const [pin3, setPin3] = React.useState('');
@@ -25,7 +26,7 @@ const SendOTPScreen: React.FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const {email} = useAppSelector(getAuthUserProfile);
+  // const {email} = useAppSelector(getAuthUserProfile);
 
   const pin1Ref = React.useRef<TextInput>(null);
   const pin2Ref = React.useRef<TextInput>(null);
@@ -42,18 +43,19 @@ const SendOTPScreen: React.FC = () => {
 
   const validateOTP = () => {
     if (pin1 === '' || pin2 === '' || pin3 === '' || pin4 === '') {
-      showToastError('Error, OTP cannot be empty !');
+      CustomToastBottom('Error, OTP cannot be empty !');
     } else {
       dispatch(
         AuthActions.handleVerifyOTP({
-          email: email || '',
+          email: params.email || '',
           otp: pin1 + pin2 + pin3 + pin4,
+          
         }),
       );
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     let id: NodeJS.Timeout | null = null;
     if (isCounting && countdown > 0) {
       id = setInterval(() => {
@@ -80,7 +82,7 @@ const SendOTPScreen: React.FC = () => {
   const startCountdown = () => {
     dispatch(
       AuthActions.handleSendOTP({
-        email: email || '',
+        email: params.email || '',
       }),
     );
     setIsCounting(true);

@@ -1,26 +1,16 @@
+import {useRoute} from '@react-navigation/native';
 import {Text} from '@rneui/base';
 import {CheckBox} from '@rneui/themed';
 import React, {useEffect, useState} from 'react';
-import {
-  Keyboard,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import {Keyboard, TouchableWithoutFeedback, View} from 'react-native';
 import {AuthHeader, BigButton, Headers} from '../../../components';
 import InputCustomV1 from '../../../components/customs/InputCustomV1';
 import {routes} from '../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {NavigationService} from '../../../navigation';
 import {AuthActions, getAuthUserProfile} from '../../../redux';
-import {
-  CustomToastBottom,
-  isValidPassword,
-  showToastError,
-} from '../../../utils';
+import {isValidPassword} from '../../../utils';
 import useStyles from './styles';
-import {useRoute} from '@react-navigation/native';
-import {el, is} from 'date-fns/locale';
 
 const CreateNewPasswordScreen: React.FC = () => {
   const styles = useStyles();
@@ -34,8 +24,6 @@ const CreateNewPasswordScreen: React.FC = () => {
     useState<boolean>(true);
   const [isCheckValidateConfirmPassword, setIsCheckValidateConfirmPassword] =
     useState<boolean>(true);
-
-  const {email} = useAppSelector(getAuthUserProfile);
 
   useEffect(() => {
     if (password !== null && confirmpassword !== null) {
@@ -59,6 +47,7 @@ const CreateNewPasswordScreen: React.FC = () => {
         AuthActions.handleUpdatePassword({
           email: params.email,
           password: password,
+          isOTP: params.isOTP || false,
         }),
       );
     }
