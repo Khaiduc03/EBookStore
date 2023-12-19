@@ -4,7 +4,7 @@ import Config from 'react-native-config';
 // //URL
 // export const BASE_URL = process.env.REACT_APP_BASE_URL;
 //export const BASE_URL = Config.BASE_URL;
-export const BASE_URL = `http://192.168.1.3:8002/`;
+export const BASE_URL = `https://comicverse.fun/`;
 export const ENDPOINTS = {
   LOGIN: Config.LOGIN,
   REGISTER: Config.REGISTER,

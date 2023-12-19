@@ -4,22 +4,21 @@ export default [
   {
     id: 1,
     img: JsonImages.onboard1,
-    title: 'NewsWave: Your Personal English Newsstand',
-    description:
-      'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+    title: 'Welcome to the \n "Comic Verse" app ',
+    description: 'An integrated forum-equipped storytelling app.',
   },
   {
     id: 2,
     img: JsonImages.news2,
-    title: 'ReadEaze: Exploring English Stories and News',
+    title: 'Welcome to the \n Comic Verse app',
     description:
-      'Enhance your language skills while staying updated on global events.',
+      'Step into the enchanting realm of Comic Verse, your go-to app for immersive storytelling. Engage in lively conversations on our integrated forum and share the magic!',
   },
   {
     id: 3,
     img: JsonImages.news3,
-    title: 'InfoPulse: Dive into English Content with Ease',
+    title: 'Welcome to the \n Comic Verse app',
     description:
-      'Elevate your English proficiency while staying connected to the world around you',
+      'Comic Verse is your gateway to a world of stories. Join the forum buzz, meet like-minded readers, and chat about your favorite tales using our messaging feature. Let the reading journey begin!',
   },
 ];
