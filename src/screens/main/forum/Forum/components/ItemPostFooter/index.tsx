@@ -102,6 +102,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({
               setShowAlert(false);
               onDeletePost();
             }}
+            onDismiss={() => setShowAlert(false)}
             titleStyle={styles.textTitleAlert}
             messageStyle={styles.textMessageAlert}
             cancelButtonTextStyle={styles.textCancelAlert}
