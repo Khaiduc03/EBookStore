@@ -52,7 +52,7 @@ const useStyles = makeStyles(({ colors }) => ({
     borderWidth: 1,
   },
   input: {
-    width: '100%',
+    width: normalize(WIDTH * 0.913),
     height: normalize(HEIGHT * 0.3),
     fontSize: normalize(16),
     fontFamily: fontFamilySetup.medium,

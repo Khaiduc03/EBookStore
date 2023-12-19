@@ -1,9 +1,8 @@
 import {Icon} from '@rneui/themed';
-import React, {Fragment, useState} from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   Keyboard,
-  Pressable,
   Text,
   TextInput,
   TouchableWithoutFeedback,
@@ -16,7 +15,7 @@ import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
 import {ForumActions, getAuthUserProfile} from '../../../../redux';
 import {ForumType} from '../../../../redux/types/forum.type';
-import {showToastError, showToastSuccess} from '../../../../utils';
+import {showToastError} from '../../../../utils';
 import AddPicture from './components/AddPicture';
 import SelectedImages from './components/RenderSelectedImages';
 import useStyles from './styles';
@@ -122,7 +121,6 @@ const CreatePost: React.FC<ForumType> = props => {
         ) : (
           <Icon name={'caret-up'} type="ionicon" />
         )}
-        {/* <Icon name={'caret-down'} type="ionicon" /> */}
       </View>
     );
   };
