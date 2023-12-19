@@ -1,19 +1,13 @@
 import {CheckBox} from '@rneui/themed';
 import React, {useEffect, useState} from 'react';
-import {
-  Alert,
-  Keyboard,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import {Keyboard, Text, TouchableWithoutFeedback, View} from 'react-native';
+import Toast from 'react-native-toast-message';
 import {BigButton, HeaderCustom} from '../../../../components';
 import InputCustomV1 from '../../../../components/customs/InputCustomV1';
 import {useAppDispatch} from '../../../../hooks';
 import {NavigationService} from '../../../../navigation';
 import {UserAction} from '../../../../redux/reducer/user.reducer';
 import useStyles from './styles';
-import Toast from 'react-native-toast-message';
 
 const ChangePassWord: React.FC = () => {
   const styles = useStyles();
@@ -43,20 +37,13 @@ const ChangePassWord: React.FC = () => {
 
   const [checked, setChecked] = React.useState<boolean>(false);
 
-  console.log(
-    'oldPassword ',
-    oldPassword,
-    '\nconfirmpassword: ',
-    confirmpassword,
-  );
-
   const toggleCheckbox = () => setChecked(!checked);
 
   const validateInputs = () => {
     return (
-      oldPassword.length > 0 &&
-      newPassword.length > 0 &&
-      confirmpassword.length > 0
+      oldPassword.length >= 6 &&
+      newPassword.length >= 6 &&
+      confirmpassword === newPassword
     );
   };
 
@@ -73,10 +60,40 @@ const ChangePassWord: React.FC = () => {
   const handleInputChange = () => {
     if (validateInputs()) {
       handleChangePassword();
+      Toast.show({
+        type: 'success',
+        text1: 'Change password successfully!',
+        visibilityTime: 4000,
+      });
     } else {
-      Alert.alert('Please fill in all fields.');
+      // setIsCheckValidateOldPassword(true);
+      setIsCheckValidatePassword(true);
+      // setIsCheckValidateConfirmPassword(true);
+      if (newPassword === confirmpassword) {
+        setIsCheckValidatePassword(true);
+        Toast.show({
+          type: 'error',
+          text1: 'Please enter the old password',
+          visibilityTime: 4000,
+        });
+      } else if (newPassword != confirmpassword) {
+        setIsCheckValidatePassword(false);
+        Toast.show({
+          type: 'error',
+          text1: 'Please enter the new password',
+          visibilityTime: 4000,
+        });
+      } else if (confirmpassword === newPassword) {
+        setIsCheckValidateConfirmPassword(true);
+        Toast.show({
+          type: 'successfully',
+          text1: 'Psuccessfully',
+          visibilityTime: 2000,
+        });
+      }
     }
   };
+  console.log('password', newPassword);
 
   return (
     <TouchableWithoutFeedback

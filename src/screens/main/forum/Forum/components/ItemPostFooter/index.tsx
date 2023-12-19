@@ -48,7 +48,10 @@ const PostHeader: React.FC<PostHeaderProps> = ({
 
   return (
     <View style={styles.viewRow}>
-      <TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          NavigationService.navigate(routes.PROFILEUSER, {uuidForum: userUUID})
+        }>
         <Image
           style={styles.imageTitle}
           source={{

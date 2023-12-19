@@ -75,7 +75,7 @@ const MyProfile: React.FC = () => {
         <Text style={styles.nameUser}>{user.fullname}</Text>
         <View style={styles.summaryContainer}>
           <Text style={styles.textBio} numberOfLines={1}>
-            {user.summary || 'I am hacker'}
+            {user.summary || ' Biography here! '}
           </Text>
           <TouchableOpacity
             onPress={() => NavigationService.navigate(routes.UPDATE_BIO)}>

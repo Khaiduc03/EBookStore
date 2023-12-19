@@ -247,15 +247,26 @@ function* forgotPasswordSaga(
       AuthService.hanleForgotPassword,
       action.payload,
     );
+    console.log(data);
     if (data.code === 200) {
-      yield put(AuthActions.setEmailForgotPassword(action.payload));
-      NavigationService.navigate(routes.SEND_OTP);
+      // yield put(AuthActions.setEmailForgotPassword(action.payload));
+      yield CustomToastBottom('Please check your email to get OTP');
+      yield NavigationService.navigate(routes.SEND_OTP, {
+        email: action.payload.email,
+      });
+    } else if (data.code === 429) {
+      yield CustomToastBottom(
+        'Need 60s to send OTP again, please use old OTP sent to your email',
+      );
+      yield NavigationService.navigate(routes.SEND_OTP, {
+        email: action.payload.email,
+      });
     } else {
       CustomToastBottom(data.message);
     }
   } catch (error: any) {
     console.log(error.message);
-    throw error;
+    CustomToastBottom('Server have error, please try again later');
   } finally {
     yield put(LoadingActions.hideLoading());
   }
@@ -283,12 +294,16 @@ function* sendOTPSaga(
 
 ///////////////////////VERIFY OTP/////////////////////////
 function* verifyOTPSaga(action: PayloadAction<SendOTPPayload>): Generator {
+  console.log(action.payload);
   yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(AuthService.handleVerifyOTP, action.payload);
     if (data.code === 200) {
       CustomToastBottom(data.message);
-      NavigationService.navigate(routes.CREATE_NEW_PASSWORD);
+      NavigationService.navigate(routes.CREATE_NEW_PASSWORD, {
+        email: action.payload.email,
+        isOTP: true,
+      });
     } else {
       CustomToastBottom(data.message);
     }
@@ -304,19 +319,24 @@ function* verifyOTPSaga(action: PayloadAction<SendOTPPayload>): Generator {
 function* UpdateNewPasswordSaga(
   action: PayloadAction<NewPasswordPayload>,
 ): Generator {
+  console.log(action.payload);
   yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(
       AuthService.handleNewPassword,
       action.payload,
     );
-    if (data.code === 200) {
+    if (data.code === 200 && action.payload.isOTP === false) {
+      yield CustomToastBottom('Update password successfull!!');
       yield put(AuthActions.UpdatePassword());
       yield call(getProfileUserSaga);
       CustomToastBottom('Login sucessfull!!');
+    } else if (data.code === 200 && action.payload.isOTP === true) {
+      yield CustomToastBottom('Update password successfull!!');
+      yield NavigationService.navigate(routes.SIGN_IN);
     } else {
-      CustomToastBottom('Server sap roi, vui long thu lai sau');
-      return NavigationService.navigate(routes.LOBBY);
+      yield CustomToastBottom('server have error, please try again later');
+      yield NavigationService.navigate(routes.LOBBY);
     }
   } catch (error: any) {
     console.log(error.message);

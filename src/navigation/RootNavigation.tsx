@@ -96,11 +96,8 @@ const RootNavigation = () => {
         backgroundColor={usestyles().Mode.backgroundColor}
         barStyle={themeMode}
       />
-      {/* <AppNavigator />  */}
-      {/* <CreateNewPasswordScreen /> */}
-      {/* <BottomSheetScreenScroll /> */}
+
       {enableSignIn ? <AppNavigator /> : <AuthNavigator />}
-      {/* <RatingComicScreen /> */}
       {/* <AppNavigator /> */}
     </NavigationContainer>
   );

@@ -26,10 +26,13 @@ import {ItemFollowType, UserType} from '../../../../redux/types/user.type';
 import {UserAction} from '../../../../redux/reducer/user.reducer';
 import {getIsLoadingTopic} from '../../../../redux/selectors/loading.selector';
 import {ActivityIndicator} from 'react-native';
+import {ChatActions} from '../../../../redux/reducer/chat.reducer';
+import {CustomToastBottom} from '../../../../utils';
 interface RouteParamsProfile {
   data?: UserType;
   dataFollow?: ItemFollowType;
   dataFollwer?: ItemFollowType;
+  uuidForum?: string;
 }
 
 const ProfileUser: React.FC = props => {
@@ -37,9 +40,9 @@ const ProfileUser: React.FC = props => {
   const dataUser = (route.params as RouteParamsProfile).data;
   const dataFollow = (route.params as RouteParamsProfile).dataFollow;
   const dataFollwer = (route.params as RouteParamsProfile).dataFollwer;
+  const uuidForum = (route.params as RouteParamsProfile).uuidForum;
   const dataList = useAppSelector(getAllPostByIdUser);
   const dispatch = useAppDispatch();
-
   const isLoading = useAppSelector(getIsLoadingTopic);
   const [sizeContent, setSizeContent] = useState<number>(0);
   const [size, setSize] = useState<boolean>(false);
@@ -57,7 +60,7 @@ const ProfileUser: React.FC = props => {
       ? dataUser.is_following
       : dataFollwer
       ? dataFollwer.is_following
-      : true,
+      : false,
   );
 
   const styles = useStyles();
@@ -67,7 +70,8 @@ const ProfileUser: React.FC = props => {
       UserAction.getUserById(
         dataUser?.uuid! ||
           dataFollow?.user_follower_uuid! ||
-          dataFollwer?.user_following_uuid!,
+          dataFollwer?.user_following_uuid! ||
+          uuidForum!,
       ),
     );
     dispatch(UserAction.clearListAllPostByUser());
@@ -77,13 +81,15 @@ const ProfileUser: React.FC = props => {
         user_uuid:
           dataUser?.uuid ||
           dataFollow?.user_follower_uuid ||
-          dataFollwer?.user_following_uuid!,
+          dataFollwer?.user_following_uuid! ||
+          uuidForum!,
       }),
     );
   }, [
     dataUser?.uuid! ||
       dataFollow?.user_follower_uuid ||
-      dataFollwer?.user_following_uuid!,
+      dataFollwer?.user_following_uuid! ||
+      uuidForum!,
   ]);
 
   const loadMoreComic = () => {
@@ -116,7 +122,15 @@ const ProfileUser: React.FC = props => {
     NavigationService.goBack();
   };
   const handlePressMessage = () => {
-    NavigationService.navigate(routes.MESSAGE);
+    if (dataUserById && dataUserById[0].uuid) {
+      dispatch(
+        ChatActions.handleCreateConversation({
+          joined_uuid: dataUserById && dataUserById[0].uuid,
+        }),
+      );
+    } else {
+      CustomToastBottom('Server have error, please try again later');
+    }
   };
 
   const handleFollowButtonClick = () => {
@@ -124,7 +138,8 @@ const ProfileUser: React.FC = props => {
       UserAction.postFollowRandom(
         dataUser?.uuid ||
           dataFollow?.user_follower_uuid ||
-          dataFollwer?.user_following_uuid,
+          dataFollwer?.user_following_uuid ||
+          uuidForum,
       ),
     );
     setIsFollowed(!isFollowed);
@@ -163,7 +178,7 @@ const ProfileUser: React.FC = props => {
           title={(dataUserById && dataUserById[0].fullname) || 'Anonymo'}
         />
         <Text style={styles.textBio} numberOfLines={1}>
-          {(dataUserById && dataUserById[0].summary) || 'I am hacker'}
+          {(dataUserById && dataUserById[0].summary) || 'Biography here!'}
         </Text>
       </View>
       <View style={styles.viewbtnFollow}>
