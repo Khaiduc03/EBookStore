@@ -5,7 +5,7 @@
 This project was created to build a story reading application that integrates forum and chatapp
 
 ## Demo
-[![Demo Video](https://img.youtube.com/vi/your_video_id/0.jpg)](https://www.youtube.com/watch?v=W4SsePWrvio)
+[![Demo Video](https://i9.ytimg.com/vi/oyK7vIb5uFM/mq2.jpg?sqp=CLinqqwG&rs=AOn4CLB73rHFKqk6rLNpy5W8fNyDdpCWVA)](https://www.youtube.com/watch?v=oyK7vIb5uFM)
 
 ## How To Run
 
