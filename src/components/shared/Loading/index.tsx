@@ -17,7 +17,10 @@ import {useAppSelector} from '../../../hooks';
 import useStyles from './styles';
 
 import {JsonImages} from '../../../assets/json';
-import {getIsLoading} from '../../../redux/selectors/loading.selector';
+import {
+  getIsLoading,
+  getIsLoadingPage,
+} from '../../../redux/selectors/loading.selector';
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
@@ -26,6 +29,7 @@ const Loading: FunctionComponent = () => {
   const styles = useStyles();
   const progress = useSharedValue(0.5);
   const isLoading: boolean = useAppSelector(getIsLoading);
+  const isLoadingPage: boolean = useAppSelector(getIsLoadingPage);
 
   const overlayStyle = useAnimatedStyle(() => {
     const background = interpolateColor(

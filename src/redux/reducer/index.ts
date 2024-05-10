@@ -4,3 +4,4 @@ export * from './app.reducer';
 export * from './theme.reducer';
 export * from './comic.reducer';
 export * from './topic.reducer';
+export * from './forum.reducer';

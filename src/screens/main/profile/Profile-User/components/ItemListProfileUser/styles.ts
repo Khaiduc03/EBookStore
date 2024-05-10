@@ -7,8 +7,8 @@ const HEIGHT = Device.getDeviceHeight();
 
 const useStyles = makeStyles(({colors}) => ({
   Squares: {
-    width: normalize(135),
-    height: normalize(145),
+    width: normalize(123),
+    height: normalize(150),
     borderRadius: normalize(10),
     borderWidth: normalize(0.8),
     borderColor: '#D6D3D3',
@@ -24,29 +24,34 @@ const useStyles = makeStyles(({colors}) => ({
     borderRadius: normalize(50),
   },
   Button: {
-    width: normalize(85),
+    width: normalize(102),
     height: normalize(25),
-    backgroundColor: '#0075FF',
     borderRadius: normalize(8),
-    top: normalize(10),
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: normalize(15),
   },
   TextButton: {
-    fontSize: normalize(14),
-    fontFamily: fontFamilySetup.bold,
+    fontSize: normalize(12),
+    fontFamily: fontFamilySetup.regular,
     color: colors.white,
   },
   title: {
-    fontSize: normalize(12),
+    fontSize: normalize(10),
     fontFamily: fontFamilySetup.bold,
-    lineHeight: normalize(15),
     color: colors.grey5,
+    letterSpacing: normalize(0.12),
   },
   name: {
     fontSize: normalize(15),
-    fontFamily: fontFamilySetup.bold,
+    fontFamily: fontFamilySetup.medium,
     color: colors.black,
+    letterSpacing: normalize(0.12),
+  },
+  iconDelete: {
+    position: 'absolute',
+    bottom: normalize(40),
+    left: normalize(33),
   },
 }));
 export default useStyles;

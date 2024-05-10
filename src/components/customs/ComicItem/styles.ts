@@ -36,6 +36,7 @@ const useStyles = makeStyles(({colors}) => ({
   rate: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   textRate: {
     color: colors.grey4,
@@ -56,6 +57,11 @@ const useStyles = makeStyles(({colors}) => ({
     color: colors.black,
     textAlign: 'center',
     fontFamily: fontFamilySetup.medium,
+  },
+  skeletonStyle: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
   },
 }));
 

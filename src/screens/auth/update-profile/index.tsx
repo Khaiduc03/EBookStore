@@ -1,43 +1,43 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, {FunctionComponent, useEffect, useState} from 'react';
 
 import DatePicker from '@react-native-community/datetimepicker';
 import {Text} from '@rneui/base';
-import {CheckBox, Icon} from '@rneui/themed';
+import {CheckBox} from '@rneui/themed';
 import {
   Keyboard,
   KeyboardAvoidingView,
   ScrollView,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {AuthHeader, BigButton, InputCustom} from '../../../components';
+import {BigButton} from '../../../components';
 import Header from '../../../components/customs/Headers';
 import {routes} from '../../../constants';
 import {NavigationService} from '../../../navigation';
 
-import {format} from 'date-fns';
+import {format, isValid, parse} from 'date-fns';
+import {CalendarImage} from '../../../assets/svg';
+import AuthHeaderV1 from '../../../components/customs/AuthHeaderV1';
 import AvatarComponets from '../../../components/customs/Avatar';
-import {Gender} from '../../../types';
-import useStyles from './styles';
+import InputCustomV1 from '../../../components/customs/InputCustomV1';
 import {useAppDispatch} from '../../../hooks';
 import {AuthActions} from '../../../redux';
+import {Gender} from '../../../types';
+import useStyles from './styles';
 
-const UpdateProfile: FunctionComponent = () => {
+const UpdateProfileScreen: FunctionComponent = () => {
   const styles = useStyles();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
-  const dispatch = useAppDispatch();
 
-  const handleUpdateProfile = () => {
-    dispatch(
-      AuthActions.handleUpdateUserProfile({
-        phone: credentials.phone_number,
-        dob: credentials.dob,
-        fullname: credentials.fullname,
-        gender: credentials.gender,
-      }),
-    );
-  };
+  const [isCheckValidateFullName, setIsCheckValidateFullName] =
+    useState<boolean>(true);
+  const [isCheckValidatePhoneNumber, setIsCheckValidatePhoneNumber] =
+    useState<boolean>(true);
+  const [isCheckValidateDoB, setIsCheckValidateDoB] = useState<boolean>(true);
+
+  const dispatch = useAppDispatch();
 
   const [credentials, setCredentials] = React.useState<{
     fullname: string;
@@ -48,8 +48,21 @@ const UpdateProfile: FunctionComponent = () => {
     fullname: '',
     phone_number: '',
     dob: '',
-    gender: Gender.MALE,
+    gender: Gender.MALE || Gender.FEMALE,
   });
+
+  useEffect(() => {
+    if (
+      credentials.fullname !== null &&
+      credentials.phone_number !== null &&
+      credentials.dob !== null
+    ) {
+      setIsCheckValidateFullName(true);
+      setIsCheckValidatePhoneNumber(true);
+      setIsCheckValidateDoB(true);
+    }
+  }, [credentials.fullname, credentials.phone_number, credentials.dob]);
+
   const handleDatePickerPress = () => {
     setShowDatePicker(true);
   };
@@ -60,8 +73,45 @@ const UpdateProfile: FunctionComponent = () => {
       setSelectedDate(selected);
       setCredentials({
         ...credentials,
-        dob: format(selected, 'yyyy-MM-dd'), // Định dạng ngày tháng
+        dob: format(selected, 'yyyy-MM-dd'),
       });
+    }
+  };
+
+  const handleUpdateProfile = () => {
+    if (
+      credentials.fullname &&
+      credentials.phone_number &&
+      credentials.dob !== null &&
+      (credentials.gender === Gender.MALE ||
+        credentials.gender === Gender.FEMALE)
+    ) {
+      dispatch(
+        AuthActions.handleUpdateUserProfile({
+          phone: credentials.phone_number,
+          dob: credentials.dob,
+          fullname: credentials.fullname,
+          gender: credentials.gender,
+        }),
+      );
+    }
+
+    if (!credentials.fullname) {
+      setIsCheckValidateFullName(false);
+    } else {
+      setIsCheckValidateFullName(true);
+    }
+
+    if (!credentials.phone_number) {
+      setIsCheckValidatePhoneNumber(false);
+    } else {
+      setIsCheckValidatePhoneNumber(true);
+    }
+
+    if (!credentials.dob) {
+      setIsCheckValidateDoB(false);
+    } else {
+      setIsCheckValidateDoB(true);
     }
   };
 
@@ -84,62 +134,125 @@ const UpdateProfile: FunctionComponent = () => {
               }}
             />
 
-            <AuthHeader
-              title="Complete Your Profile 🔐"
-              subTitle="Don’t worry, only you can see your personal
-              data. No one else will be able to see it.
-              "
-            />
+            <View style={styles.Headers}>
+              <AuthHeaderV1
+                title="Complete Your Profile"
+                subTitle="Don’t worry, only you can see your personal
+                data. No one else will be able to see it.
+                "
+              />
+            </View>
 
-            <AvatarComponets />
+            <View style={styles.viewImageProfile}>
+              <AvatarComponets />
+            </View>
 
             <View style={styles.formContainer}>
-              <Text style={styles.titleInput}>Full name</Text>
-              <InputCustom
-                placeholder="Enter your full name"
-                value={credentials.fullname}
-                onChangeText={text =>
-                  setCredentials({...credentials, fullname: text})
-                }
-              />
-              <Text style={styles.titleInput}>Phone number</Text>
-              <InputCustom
-                placeholder="Enter your phone number"
-                value={credentials.phone_number}
-                onChangeText={text =>
-                  setCredentials({...credentials, phone_number: text})
-                }
-              />
-
-              <Text style={styles.titleInput}>Date of Birth</Text>
-              <InputCustom
-                placeholder="yy-MM-dd"
-                rightIcon={
-                  <Icon
-                    type="ionicon"
-                    name={'calendar-outline'}
-                    color={'black'}
-                    size={24}
-                    onPress={() => {
-                      handleDatePickerPress();
-                    }}
+              {isCheckValidateFullName ? (
+                <View>
+                  <Text style={styles.titleInput}>Full Name</Text>
+                  <InputCustomV1
+                    placeholder="Enter your full name"
+                    value={credentials.fullname}
+                    onChangeText={text =>
+                      setCredentials({...credentials, fullname: text})
+                    }
                   />
-                }
-                value={credentials.dob}
-                onChangeText={text =>
-                  setCredentials({...credentials, dob: text})
-                }
-              />
+                </View>
+              ) : (
+                <View style={styles.marginError}>
+                  <Text style={styles.titleInput}>Full Name</Text>
+                  <InputCustomV1
+                    placeholder="Enter your full name"
+                    value={credentials.fullname}
+                    onChangeText={text =>
+                      setCredentials({...credentials, fullname: text})
+                    }
+                    errorMessage="Full name cannot be empty !"
+                  />
+                </View>
+              )}
+
+              {isCheckValidatePhoneNumber ? (
+                <View>
+                  <Text style={styles.titleInput}>Phone Number</Text>
+                  <InputCustomV1
+                    placeholder="Enter your phone number"
+                    keyboardType="phone-pad"
+                    value={credentials.phone_number}
+                    onChangeText={text =>
+                      setCredentials({...credentials, phone_number: text})
+                    }
+                  />
+                </View>
+              ) : (
+                <View style={styles.marginError}>
+                  <Text style={styles.titleInput}>Phone Number</Text>
+                  <InputCustomV1
+                    placeholder="Enter your phone number"
+                    keyboardType="phone-pad"
+                    value={credentials.phone_number}
+                    onChangeText={text =>
+                      setCredentials({...credentials, phone_number: text})
+                    }
+                    errorMessage="Phone Number cannot be empty !"
+                  />
+                </View>
+              )}
+
+              {isCheckValidateDoB ? (
+                <View>
+                  <Text style={styles.titleInput}>Date of Birth</Text>
+                  <InputCustomV1
+                    placeholder="yyyy-MM-dd"
+                    keyboardType="decimal-pad"
+                    rightIcon={
+                      <TouchableOpacity
+                        onPress={() => {
+                          handleDatePickerPress();
+                        }}>
+                        <CalendarImage />
+                      </TouchableOpacity>
+                    }
+                    value={credentials.dob}
+                    onChangeText={text =>
+                      setCredentials({...credentials, dob: text})
+                    }
+                  />
+                </View>
+              ) : (
+                <View style={styles.marginError}>
+                  <Text style={styles.titleInput}>Date of Birth</Text>
+                  <InputCustomV1
+                    placeholder="yyyy-MM-dd"
+                    keyboardType="decimal-pad"
+                    rightIcon={
+                      <TouchableOpacity
+                        onPress={() => {
+                          handleDatePickerPress();
+                        }}>
+                        <CalendarImage />
+                      </TouchableOpacity>
+                    }
+                    value={credentials.dob}
+                    onChangeText={text =>
+                      setCredentials({...credentials, dob: text})
+                    }
+                    errorMessage="Date of Birth cannot be empty !"
+                  />
+                </View>
+              )}
+
               {showDatePicker && (
                 <DatePicker
                   value={selectedDate}
                   mode="date"
-                  display="default"
+                  display="calendar"
                   onChange={handleDateChange}
                 />
               )}
 
-              <Text style={styles.titleInput}>gender</Text>
+              <Text style={styles.titleInput}>Gender</Text>
               <View style={styles.checkBoxContainer}>
                 <View style={styles.checkBoxItem}>
                   <CheckBox
@@ -150,18 +263,18 @@ const UpdateProfile: FunctionComponent = () => {
                     checkedIcon="dot-circle-o"
                     uncheckedIcon="circle-o"
                   />
-                  <Text>Male</Text>
+                  <Text style={styles.textGender}>Male</Text>
                 </View>
                 <View style={styles.checkBoxItem}>
                   <CheckBox
-                    checked={credentials.gender === Gender.FAMALE}
+                    checked={credentials.gender === Gender.FEMALE}
                     onPress={() =>
-                      setCredentials({...credentials, gender: Gender.FAMALE})
+                      setCredentials({...credentials, gender: Gender.FEMALE})
                     }
                     checkedIcon="dot-circle-o"
                     uncheckedIcon="circle-o"
                   />
-                  <Text>Famale</Text>
+                  <Text style={styles.textGender}>Female</Text>
                 </View>
               </View>
             </View>
@@ -180,4 +293,4 @@ const UpdateProfile: FunctionComponent = () => {
   );
 };
 
-export default UpdateProfile;
+export default UpdateProfileScreen;

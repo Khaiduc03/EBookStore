@@ -49,5 +49,8 @@ const useStyles = makeStyles(({colors}) => ({
     height: normalize(40),
     borderRadius: normalize(99),
   },
+  iconLeftStyle: {
+    color: colors.black,
+  },
 }));
 export default useStyles;

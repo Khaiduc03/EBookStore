@@ -1,24 +1,33 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import useStyles from './styles';
-import {ComicItem} from '../../../../../../../../components';
+import {ComicItem, HeaderCustom} from '../../../../../../../../components';
 import {ComicType} from '../../../../../../../../redux';
 import {useAppDispatch, useAppSelector} from '../../../../../../../../hooks';
-import {getListComic} from '../../../../../../../../redux/selectors/comic.selector';
+import {
+  getDataByTopic,
+  getDataByTopicMore,
+  getDetailComic,
+  getListComic,
+} from '../../../../../../../../redux/selectors/comic.selector';
+import ItemReadMore from '../ItemReadMore';
 
 const ReadMore = () => {
   const styles = useStyles();
-  const dataComic = useAppSelector(getListComic);
+  const dataReadMore = useAppSelector(getDataByTopicMore);
+
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
-    <ComicItem data={item} index={index} />
+    <ItemReadMore data={item} index={index} />
   );
   return (
     <View style={styles.container}>
+      <HeaderCustom titleStyle={styles.textTitle} title="Read more" />
       <FlatList
+        nestedScrollEnabled
         contentContainerStyle={{gap: 5, paddingHorizontal: 10}}
         horizontal
         showsHorizontalScrollIndicator={false}
-        data={dataComic}
+        data={dataReadMore}
         renderItem={RenderItem}
       />
     </View>

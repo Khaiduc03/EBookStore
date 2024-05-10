@@ -1,8 +1,9 @@
 import axios from 'axios';
 import {BASE_URL, ENDPOINTS} from '../../environment';
-import {showToastError} from '../../utils';
 import {AuthActions} from '../reducer';
 import {store} from '../store';
+import {el} from 'date-fns/locale';
+import {CustomToastBottom} from '../../utils';
 
 const apiService = axios.create({
   baseURL: BASE_URL,
@@ -10,10 +11,11 @@ const apiService = axios.create({
     'Content-Type': 'application/json',
   },
 });
-console.log(BASE_URL);
+
 apiService.interceptors.request.use(
   config => {
     const accessToken = store.getState().auth.accessToken;
+    //console.log('aceess token', accessToken);
     if (accessToken && config.url !== ENDPOINTS.REFRESH_TOKEN) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -27,30 +29,33 @@ apiService.interceptors.request.use(
 );
 apiService.interceptors.response.use(
   response => {
-    //showToastSuccess(`Call Api Successful  ${response.request.responseURL}`);
     return response;
   },
   async error => {
     const originalRequest = error.config;
     const refreshToken = store.getState().auth.refreshToken;
 
-    if (
-      refreshToken &&
-      error.response.status === 401 &&
-      !originalRequest._retry
-    ) {
+    if (error.response.status === 401) {
       originalRequest._retry = true;
-
       const res = await apiService.post(ENDPOINTS.REFRESH_TOKEN, {
-        refreshToken,
+        refreshToken: refreshToken,
       });
-      if (res.status === 200) {
-        store.dispatch(AuthActions.refreshToken(res.data));
+      if (res.status === 201) {
+        const {access_token, refresh_token} = res['data'].data;
+        store.dispatch(
+          AuthActions.refreshToken({
+            accessToken: access_token,
+            refreshToken: refresh_token,
+          }),
+        );
         return apiService(originalRequest);
       } else {
         store.dispatch(AuthActions.handleLogout());
         return Promise.reject(error);
       }
+    } else if (error.response.status === 500) {
+      CustomToastBottom('Server have error, please try again later');
+      return Promise.reject(error);
     }
     return Promise.reject(error);
   },

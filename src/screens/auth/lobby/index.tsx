@@ -38,13 +38,13 @@ const LobbyScreen: React.FunctionComponent = () => {
         <View style={styles.body}>
           <View style={styles.viewTitle}>
             <Text style={styles.title}>
-              Welcome to
-              <Text style={[styles.title, styles.colors]}> Easy </Text>
-              <Text style={styles.title}>Rent</Text>
+              Welcome to{' '}
+              <Text style={[styles.title, styles.colors]}>Comic Verse</Text>
             </Text>
           </View>
           <Text style={styles.subTitle}>
-            Newsly is a social network that allows you to connect with friends
+            Explore comics like never before with our app.{'\n'}Your stories,
+            your way. Start reading today!
           </Text>
           <View style={styles.bottom}>
             <TouchableOpacity

@@ -10,6 +10,10 @@ import Alert from './src/components/customs/Alert';
 import Loading from './src/components/shared/Loading';
 import {toastConfig} from './src/utils/toastConfig';
 import Slider from './src/screens/auth/onboard';
+import LoadingMain from './src/components/shared/LoadingMain';
+import LoadingStart from './src/components/shared/LoadingStart';
+import LoadingHome from './src/components/shared/LoadingHome';
+import LoadingMyProfile from './src/components/shared/LoadingMyProfile';
 
 const App: FunctionComponent = () => {
   useEffect(() => {
@@ -27,6 +31,12 @@ const App: FunctionComponent = () => {
           <Alert />
           {/* LOADING API */}
           <Loading />
+          <LoadingMain />
+          <LoadingStart />
+          <LoadingHome />
+          <LoadingMyProfile />
+
+          {/* <BottomSheetCustomScreen /> */}
           {/* MAIN APP */}
           <Slider />
           <RootNavigation />

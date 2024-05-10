@@ -9,25 +9,11 @@ const HeaderCustomV1: React.FunctionComponent<CustomHeaderProps> = props => {
     <Header
       barStyle="dark-content"
       centerComponent={
-        <TouchableOpacity
-          style={styles.viewCenterMiddle}
-          onPress={props.onPressIconMiddle}>
-          {props.iconMiddle?.name && (
-            <Icon
-              type={props.iconMiddle.type}
-              name={props.iconMiddle.name}
-              size={30}
-              color={props.iconMiddle.color || styles.centerIcon.color}
-            />
-          )}
-          <Text style={props.titleStyle || styles.textTitle}>
-            {props.title}
-          </Text>
-        </TouchableOpacity>
+        <Text style={props.titleStyle || styles.textTitle}>{props.title}</Text>
       }
       centerContainerStyle={{
         justifyContent: 'center',
-        paddingHorizontal: 0,
+        alignItems: 'center',
       }}
       containerStyle={styles.container}
       leftComponent={
@@ -69,7 +55,7 @@ const HeaderCustomV1: React.FunctionComponent<CustomHeaderProps> = props => {
               <Icon
                 type={props.rightIconRight?.type}
                 color={props.rightIconRight.color || styles.rightIcon.color}
-                size={30}
+                size={props.sizeIcon}
                 name={props.rightIconRight?.name}
               />
             )}

@@ -5,7 +5,7 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import {ComicItem, HeaderCustom} from '../../../../components';
 import useStyles from './styles';
 import {NavigationService} from '../../../../navigation';
@@ -14,41 +14,62 @@ import {backScreen} from '../../../../utils';
 import {useAppDispatch, useAppSelector} from '../../../../hooks';
 import {ComicActions, ComicType, LoadingActions} from '../../../../redux';
 import {
+  getCurrentTopic,
   getDataByTopic,
   getListComic,
+  getNextTopic,
 } from '../../../../redux/selectors/comic.selector';
-import {getIsLoading} from '../../../../redux/selectors/loading.selector';
+import {
+  getIsLoading,
+  getIsLoadingPage,
+  getIsLoadingTopic,
+} from '../../../../redux/selectors/loading.selector';
 import {useRoute} from '@react-navigation/native';
 
 interface RouteParamsIdTopic {
   uuid: string;
+  name: string;
 }
 
 const ComicByTopic = () => {
   const route = useRoute();
-  const uuidComic = (route.params as RouteParamsIdTopic).uuid;
+  const nameTopic = (route.params as RouteParamsIdTopic).name;
   const dispatch = useAppDispatch();
   const dataComic = useAppSelector(getDataByTopic) || [];
+  // console.log('========>', dataComic);
+  const nextPage = useAppSelector(getNextTopic);
+  const currentPage = useAppSelector(getCurrentTopic);
   const [numCols, setNumCols] = useState<number>(3);
-  const [data, setData] = useState<ComicType[]>([]);
-  const [page, setPage] = useState(1);
+  const isLoading = useAppSelector(getIsLoadingTopic);
+  const [sizeContent, setSizeContent] = useState<number>(0);
+  const [size, setSize] = useState<boolean>(false);
 
   useEffect(() => {
-    dispatch(ComicActions.getListByTopic({page: page, uuid: uuidComic}));
-  }, [page]);
-
-  useEffect(() => {
-    if (dataComic.length > 0) {
-      setData([...data, ...dataComic]);
-      dispatch(ComicActions.clearListDataByComic());
-    }
-  }, [dataComic]);
+    dispatch(ComicActions.getListByTopic({page: 1, name: nameTopic}));
+  }, []);
 
   const loadMoreComic = () => {
-    if (data.length > 0) {
-      setPage(page + 1);
+    if (nextPage && !isLoading) {
+      dispatch(
+        ComicActions.getListByTopic({
+          page: currentPage ? currentPage + 1 : 1,
+          name: nameTopic,
+        }),
+      );
+      setSize(true);
     }
   };
+
+  const onContentSizeChange = useCallback(
+    (contentWidth: number, contentHeight: number) => {
+      setSizeContent(contentHeight);
+      if (size) {
+        setSizeContent(sizeContent + 3000);
+        setSize(false);
+      }
+    },
+    [size, sizeContent],
+  );
 
   const RenderItem = ({item, index}: {item: ComicType; index: number}) => (
     <ComicItem
@@ -56,7 +77,6 @@ const ComicByTopic = () => {
       viewStyle={numCols == 1 ? styles.comicItem : null}
       imageStyle={numCols == 1 ? styles.imgComic : null}
       contentStyle={numCols == 1 ? styles.content : null}
-      index={index}
       topicStyle={numCols == 1 ? styles.topicsContainer : null}
     />
   );
@@ -73,17 +93,19 @@ const ComicByTopic = () => {
   const handlePressSearch = () => {
     NavigationService.navigate(routes.SEARCH);
   };
+  const listFooterComponent = useCallback(() => {
+    return <ActivityIndicator color={'#F89300'} size={'large'} />;
+  }, []);
 
   return (
     <View style={styles.container}>
       <HeaderCustom
-        title="Romance"
+        title={nameTopic}
         leftIconStyle={styles.leftIconStyle}
         leftIcon={{name: 'arrow-back', color: styles.leftIconStyle.color}}
         onPressLeftIcon={() => backScreen()}
-        rightIconleft={{name: 'search', type: 'ionicon'}}
-        onPressRightIconLeft={handlePressSearch}
-        rightIconRight={{name: 'tune'}}
+        rightIconRight={{name: 'search', type: 'ionicon'}}
+        onPressRightIconRight={handlePressSearch}
       />
 
       <FlatList
@@ -93,7 +115,7 @@ const ComicByTopic = () => {
             <HeaderCustom
               titleStyle={styles.titleHeaderStyle}
               title="Show in "
-              rightIconleft={{
+              rightIconMiddle={{
                 name: 'grid-outline',
                 type: 'ionicon',
                 color: numCols === 3 ? '#F89300' : '',
@@ -103,20 +125,39 @@ const ComicByTopic = () => {
                 type: 'ionicon',
                 color: numCols === 1 ? '#F89300' : '',
               }}
-              onPressRightIconLeft={handleGridIconPress}
+              onPressRightIconMiddle={handleGridIconPress}
               onPressRightIconRight={handleListIconPress}
             />
           );
         }}
-        columnWrapperStyle={numCols === 3 ? {gap: 5} : null}
-        data={data}
+        columnWrapperStyle={
+          numCols === 3 ? {gap: 5} : {flexDirection: 'column'}
+        }
+        data={dataComic}
         renderItem={RenderItem}
         keyExtractor={item => item.uuid.toString()}
         showsVerticalScrollIndicator={false}
-        key={numCols.toString()}
-        numColumns={numCols}
-        onEndReached={loadMoreComic}
-        onEndReachedThreshold={0}
+        numColumns={3}
+        onContentSizeChange={onContentSizeChange}
+        onScroll={({nativeEvent}) => {
+          const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
+          const numberOfPixelsFromBottomThreshold = 100;
+          const isNearBottom =
+            contentOffset.y + layoutMeasurement.height >=
+            sizeContent - numberOfPixelsFromBottomThreshold;
+          console.log(
+            'sỉze scroll',
+            contentOffset.y + layoutMeasurement.height,
+          );
+          console.log('sỉze content', sizeContent);
+
+          if (isNearBottom) {
+            loadMoreComic();
+          }
+        }}
+        ListFooterComponent={
+          isLoading ? isLoading && listFooterComponent : undefined
+        }
       />
     </View>
   );

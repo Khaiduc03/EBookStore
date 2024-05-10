@@ -12,3 +12,4 @@ export class UpdateProfileDto {
     this.gender = gender;
   }
 }
+

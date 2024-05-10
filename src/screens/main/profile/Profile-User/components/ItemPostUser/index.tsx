@@ -2,15 +2,19 @@ import React from 'react';
 import {Dimensions, Image, TouchableOpacity} from 'react-native';
 import {routes} from '../../../../../../constants';
 import {NavigationService} from '../../../../../../navigation';
+import {ForumType} from '../../../../../../redux/types/forum.type';
+import FastImage from 'react-native-fast-image';
 
 type Props = {
-  data?: any;
+  data?: ForumType;
 };
 const ItemPostUser: React.FC<Props> = props => {
   const {data} = props;
   const itemWidth = Dimensions.get('window').width / 3;
   const handleDetailClick = () => {
-    NavigationService.navigate(routes.POSTDETAILUSERS);
+    NavigationService.navigate(routes.POSTDETAIL, {
+      post_uuid: props.data?.uuid,
+    });
   };
   return (
     <TouchableOpacity
@@ -21,10 +25,15 @@ const ItemPostUser: React.FC<Props> = props => {
         backgroundColor: '#ffffff',
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: 10,
       }}>
-      <Image
-        source={data.images}
-        style={{width: itemWidth - 3, height: itemWidth - 3}}
+      <FastImage
+        source={{
+          uri: data?.images[0]
+            ? data?.images[0]
+            : 'https://demofree.sirv.com/nope-not-here.jpg',
+        }}
+        style={{width: itemWidth - 5, height: itemWidth - 5, borderRadius: 10}}
       />
     </TouchableOpacity>
   );

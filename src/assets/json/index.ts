@@ -7,4 +7,6 @@ export const JsonImages = {
   news3: require('./news3.json'),
   success: require('./success.json'),
   cat: require('./cat.json'),
+  errorSearch: require('./errorSearch.json'),
+  noSearch: require('./noSearch.json'),
 };

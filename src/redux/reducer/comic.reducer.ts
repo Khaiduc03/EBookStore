@@ -4,11 +4,16 @@ import {
   Redux,
   ComicState,
   ComicType,
-  PayloadHttpListComics,
   ComicDetailType,
   PayloadHttpListChapter,
   ChapterType,
   DetailChapterType,
+  PayloadHttpDetailChapter,
+  PayloadHttpListComicData,
+  PayloadHttpListTopView,
+  AddFavoriteType,
+  PayloadHttp,
+  PayloadHttpFavotite,
 } from '../types';
 import {PayloadHttpList} from '../../types';
 
@@ -22,7 +27,7 @@ const reducer = createSlice({
       return {
         ...state,
         listData: {
-          data: undefined,
+          data: [],
         },
       };
     },
@@ -34,12 +39,20 @@ const reducer = createSlice({
     },
     setListData: (
       state: ComicState,
-      action: PayloadAction<PayloadHttpListComics<ComicType>>,
+      action: PayloadAction<PayloadHttpListComicData<ComicType>>,
     ) => {
+      const currentData: ComicType[] = state.listData?.data || [];
+      const newData = action.payload.data || [];
+      const updatedData = [...currentData, ...newData];
       return {
         ...state,
         listData: {
-          data: action.payload.data,
+          data: updatedData,
+          canNext: action.payload.canNext,
+          currentDataSize: action.payload.currentDataSize,
+          currentPage: action.payload.currentPage,
+          totalPage: action.payload.totalPage,
+          totalData: action.payload.totalData,
         },
       };
     },
@@ -48,6 +61,14 @@ const reducer = createSlice({
     getDetailComic: (state: ComicState, _: PayloadAction<string>) => {
       return {
         ...state,
+      };
+    },
+    clearListDataDetail: (state: ComicState) => {
+      return {
+        ...state,
+        detailData: {
+          data: [],
+        },
       };
     },
     setDetailComic: (
@@ -69,13 +90,41 @@ const reducer = createSlice({
     },
     setListByTopic: (
       state: ComicState,
-      action: PayloadAction<PayloadHttpList<ComicType>>,
+      action: PayloadAction<PayloadHttpListComicData<ComicType>>,
     ) => {
+      const currentData: ComicType[] = state.listDataByTopic?.data || [];
+      const newData = action.payload.data || [];
+      const updatedData = [...currentData, ...newData];
       return {
         ...state,
         listDataByTopic: {
+          ...state.listDataByTopic,
+          data: updatedData,
+        },
+      };
+    },
+
+    getListByTopicMore: (state: ComicState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+    setListByTopicMore: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpListComicData<ComicType>>,
+    ) => {
+      return {
+        ...state,
+        listDataByTopicMore: {
           data: action.payload.data,
         },
+      };
+    },
+
+    clearListDataByTopicMore: (state: ComicState) => {
+      return {
+        ...state,
+        listDataByTopicMore: {},
       };
     },
     clearListDataByComic: (state: ComicState) => {
@@ -92,6 +141,14 @@ const reducer = createSlice({
         ...state,
       };
     },
+    clearListDataChapter: (state: ComicState) => {
+      return {
+        ...state,
+        listChapter: {
+          data: [],
+        },
+      };
+    },
     setListChapter: (
       state: ComicState,
       action: PayloadAction<PayloadHttpListChapter<ChapterType>>,
@@ -99,23 +156,248 @@ const reducer = createSlice({
       return {
         ...state,
         listChapter: {
-          chapter: action.payload.chapter,
+          data: action.payload.data,
         },
       };
     },
 
-    getListChapterDetail: (state: ComicState, _: PayloadAction<string>) => {
+    getListChapterDetail: (state: ComicState, _: PayloadAction<any>) => {
       return {
         ...state,
       };
     },
     setListChapterDetail: (
       state: ComicState,
-      action: PayloadAction<PayloadHttpList<DetailChapterType>>,
+      action: PayloadAction<PayloadHttpDetailChapter<DetailChapterType>>,
     ) => {
       return {
         ...state,
         listDetailChapter: {
+          data_chapter: action.payload.data_chapter,
+          next_chapter: action.payload.next_chapter,
+          previous_chapter: action.payload.previous_chapter,
+          totalComment: action.payload.totalComment,
+        },
+      };
+    },
+    clearListChapterDetail: (state: ComicState) => {
+      return {
+        ...state,
+        listDetailChapter: {},
+      };
+    },
+
+    getListDetailChapterNav: (state: ComicState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+
+    getListBySearch: (state: ComicState, _: PayloadAction<any>) => {
+      return {
+        ...state,
+      };
+    },
+    setListBySeacrch: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpListComicData<ComicType>>,
+    ) => {
+      const currentData: ComicType[] = state.listDataBySearch?.data || [];
+      const newData = action.payload.data || [];
+      const updatedData = [...currentData, ...newData];
+      return {
+        ...state,
+        listDataBySearch: {
+          data: updatedData,
+          canNext: action.payload.canNext,
+          currentDataSize: action.payload.currentDataSize,
+          currentPage: action.payload.currentPage,
+          totalPage: action.payload.totalPage,
+          totalData: action.payload.totalData,
+        },
+      };
+    },
+    ClearListBySearch: (state: ComicState) => {
+      return {
+        ...state,
+        listDataBySearch: {
+          data: [],
+        },
+      };
+    },
+
+    getListTopView: (state: ComicState) => {
+      return {
+        ...state,
+      };
+    },
+    setListTopView: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpListTopView<ComicType>>,
+    ) => {
+      return {
+        ...state,
+        listTopView: {
+          data: action.payload.data,
+        },
+      };
+    },
+
+    postFavorite: (state: ComicState, _: PayloadAction<string>) => {
+      return {
+        ...state,
+      };
+    },
+    setPostFavorite: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpFavotite>,
+    ) => {
+      return {
+        ...state,
+        dataPostFavorite: {
+          ...action.payload,
+        },
+      };
+    },
+    clearPostFavorite: (state: ComicState) => {
+      return {
+        ...state,
+        dataPostFavorite: {},
+      };
+    },
+
+    deleteFavorite: (state: ComicState, _: PayloadAction<string>) => {
+      return {
+        ...state,
+      };
+    },
+
+    checkFavorite: (state: ComicState, _: PayloadAction<string>) => {
+      return {
+        ...state,
+      };
+    },
+
+    getListFavorite: (state: ComicState, _: PayloadAction<number>) => {
+      return {
+        ...state,
+      };
+    },
+    setListFavorite: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpListComicData<ComicType>>,
+    ) => {
+      const currentData: ComicType[] = state.listFavorite?.data || [];
+      const newData = action.payload.data || [];
+      const uniqueNewData = newData.filter(
+        newItem =>
+          !currentData.some(
+            oldItem => oldItem.favorite_uuid === newItem.favorite_uuid,
+          ),
+      );
+      const updatedData = [...currentData, ...uniqueNewData];
+      return {
+        ...state,
+        listFavorite: {
+          data: updatedData,
+          canNext: action.payload.canNext,
+          currentDataSize: action.payload.currentDataSize,
+          currentPage: action.payload.currentPage,
+          totalPage: action.payload.totalPage,
+          totalData: action.payload.totalData,
+        },
+      };
+    },
+
+    clearListFavorite: (state: ComicState) => {
+      return {
+        ...state,
+        listFavorite: {},
+      };
+    },
+    getListHistotyComic: (state: ComicState, _: PayloadAction<number>) => {
+      return {
+        ...state,
+      };
+    },
+    setListHistotyComic: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpListComicData<ComicType>>,
+    ) => {
+      const currentData: ComicType[] = state.listHistoryComic?.data || [];
+      const newData = action.payload.data || [];
+      const uniqueNewData = newData.filter(
+        newItem => !currentData.some(oldItem => oldItem.uuid === newItem.uuid),
+      );
+      const updatedData = [...currentData, ...uniqueNewData];
+      return {
+        ...state,
+        listHistoryComic: {
+          data: updatedData,
+          canNext: action.payload.canNext,
+          currentDataSize: action.payload.currentDataSize,
+          currentPage: action.payload.currentPage,
+          totalPage: action.payload.totalPage,
+          totalData: action.payload.totalData,
+        },
+      };
+    },
+    clearListHistory: (state: ComicState) => {
+      return {
+        ...state,
+        listHistoryComic: {},
+      };
+    },
+
+    setCountComment: (state: ComicState) => {
+      return {
+        ...state,
+        listDetailChapter: {
+          ...state.listDetailChapter,
+          totalComment: (state.listDetailChapter?.totalComment || 0) + 1,
+        },
+      };
+    },
+
+    reduceCountComment: (state: ComicState) => {
+      return {
+        ...state,
+        listDetailChapter: {
+          ...state.listDetailChapter,
+          totalComment: (state.listDetailChapter?.totalComment || 0) - 1,
+        },
+      };
+    },
+
+    getListTopRating: (state: ComicState) => {
+      return {
+        ...state,
+      };
+    },
+    setListTopRating: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpListTopView<ComicType>>,
+    ) => {
+      return {
+        ...state,
+        listTopRating: {
+          data: action.payload.data,
+        },
+      };
+    },
+
+    getListTopFavorite: (state: ComicState) => {
+      return {
+        ...state,
+      };
+    },
+    setListTopFavorite: (
+      state: ComicState,
+      action: PayloadAction<PayloadHttpListTopView<ComicType>>,
+    ) => {
+      return {
+        ...state,
+        listTopFavorite: {
           data: action.payload.data,
         },
       };

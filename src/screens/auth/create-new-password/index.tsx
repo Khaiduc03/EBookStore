@@ -1,56 +1,61 @@
+import {useRoute} from '@react-navigation/native';
 import {Text} from '@rneui/base';
 import {CheckBox} from '@rneui/themed';
-import React from 'react';
-import {
-  Keyboard,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
-import {AuthHeader, Headers} from '../../../components';
+import React, {useEffect, useState} from 'react';
+import {Keyboard, TouchableWithoutFeedback, View} from 'react-native';
+import {AuthHeader, BigButton, Headers} from '../../../components';
 import InputCustomV1 from '../../../components/customs/InputCustomV1';
 import {routes} from '../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {NavigationService} from '../../../navigation';
 import {AuthActions, getAuthUserProfile} from '../../../redux';
-import {CustomToastBottom} from '../../../utils';
+import {isValidPassword} from '../../../utils';
 import useStyles from './styles';
 
-const CreateNewPassword: React.FC = () => {
+const CreateNewPasswordScreen: React.FC = () => {
+  const styles = useStyles();
   const dispatch = useAppDispatch();
-  // const [email] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [rePassword, setRePassword] = React.useState('');
+  const {params} = useRoute() as any;
+  console.log(params.email);
+  const [password, setPassword] = useState('');
+  const [confirmpassword, setConfirmpassword] = useState('');
 
-  const {email} = useAppSelector(getAuthUserProfile);
+  const [isCheckValidatePassword, setIsCheckValidatePassword] =
+    useState<boolean>(true);
+  const [isCheckValidateConfirmPassword, setIsCheckValidateConfirmPassword] =
+    useState<boolean>(true);
 
-  const isPasswordMatch = async () => {
-    if (password === '' || rePassword === '') {
-      CustomToastBottom('Error, Passwords cannot be empty!');
-      return false;
-    } else if (password !== rePassword) {
-      CustomToastBottom('Error, Passwords do not match!');
-      return false;
+  useEffect(() => {
+    if (password !== null && confirmpassword !== null) {
+      setIsCheckValidatePassword(true);
+      setIsCheckValidateConfirmPassword(true);
+    }
+  }, [password, confirmpassword]);
+
+  const handleContinue = () => {
+    console.log(confirmpassword);
+    console.log(password);
+
+    !isValidPassword(password)
+      ? setIsCheckValidatePassword(false)
+      : setIsCheckValidatePassword(true);
+
+    if (confirmpassword !== password || !isValidPassword(confirmpassword)) {
+      setIsCheckValidateConfirmPassword(false);
     } else {
-      CustomToastBottom('Success, Account created successfully!');
       dispatch(
-        AuthActions.handleNewPassword({
-          email: email || '',
+        AuthActions.handleUpdatePassword({
+          email: params.email,
           password: password,
+          isOTP: params.isOTP || false,
         }),
       );
-      return true;
     }
   };
-
-  console.log('email: ', email);
-  console.log('password: ', password);
 
   const [checked, setChecked] = React.useState<boolean>(false);
 
   const toggleCheckbox = () => setChecked(!checked);
-
-  const styles = useStyles();
 
   return (
     <TouchableWithoutFeedback
@@ -60,31 +65,68 @@ const CreateNewPassword: React.FC = () => {
         <View style={styles.body}>
           <Headers
             leftIcon={true}
-            onPressLeftIcon={() => NavigationService.navigate(routes.SEND_OTP)}
+            onPressLeftIcon={() => {
+              Keyboard.dismiss();
+              if (NavigationService.canGoBack()) {
+                return NavigationService.goBack();
+              }
+              return NavigationService.navigate(routes.SEND_OTP);
+            }}
           />
-          <AuthHeader
-            title="Create New Password 🔐"
-            subTitle="Enter your new password. If you forget it, then you have to do forgot password."
-          />
-          <View>
-            <Text style={styles.text2}>Password</Text>
-            <InputCustomV1
-              placeholder="Enter your Password"
-              value={password}
-              onChangeText={text => setPassword(text)}
-              secure
+          <View style={styles.Headers}>
+            <AuthHeader
+              title="Create New Password"
+              subTitle="Enter your new password. If you forget it, then you have to do forgot password."
             />
           </View>
-          <View>
-            <Text style={styles.text2}>Confirm Password</Text>
-            <InputCustomV1
-              placeholder="Enter your Confirm Password"
-              value={rePassword}
-              onChangeText={text => setRePassword(text)}
-              secure
-            />
-          </View>
-          <View style={styles.checkbox}>
+
+          <View style={styles.formContainer}>
+            {isCheckValidatePassword ? (
+              <View>
+                <Text style={styles.titleInput}>Password</Text>
+                <InputCustomV1
+                  placeholder="Enter your password"
+                  secure={true}
+                  value={password}
+                  onChangeText={text => setPassword(text)}
+                />
+              </View>
+            ) : (
+              <View style={styles.marginError}>
+                <Text style={styles.titleInput}>Password</Text>
+                <InputCustomV1
+                  placeholder="Enter your password"
+                  secure={true}
+                  value={password}
+                  onChangeText={text => setPassword(text)}
+                  errorMessage="Password must be longer than 6 characters."
+                />
+              </View>
+            )}
+            {isCheckValidateConfirmPassword ? (
+              <View>
+                <Text style={styles.titleInput}>Confirm Password</Text>
+                <InputCustomV1
+                  placeholder="Enter your confirm password"
+                  secure={true}
+                  value={confirmpassword}
+                  onChangeText={text => setConfirmpassword(text)}
+                />
+              </View>
+            ) : (
+              <View style={styles.marginError}>
+                <Text style={styles.titleInput}>Confirm Password</Text>
+                <InputCustomV1
+                  placeholder="Enter your confirm password"
+                  secure={true}
+                  value={confirmpassword}
+                  onChangeText={text => setConfirmpassword(text)}
+                  errorMessage="The confirm password must match the previous password."
+                />
+              </View>
+            )}
+            <View style={styles.viewCBFP}>
+              <View style={styles.checkbox}>
                 <CheckBox
                   checked={checked}
                   textStyle={styles.textCheckbox}
@@ -92,12 +134,18 @@ const CreateNewPassword: React.FC = () => {
                   title={'Remember me'}
                 />
               </View>
-          <View style={styles.viewBottom}>
-            <TouchableOpacity
-              style={styles.btnContinue}
-              onPress={isPasswordMatch}>
-              <Text style={styles.textContinue}>Continue</Text>
-            </TouchableOpacity>
+            </View>
+          </View>
+
+          <View style={styles.viewBtnLogin}>
+            <BigButton
+              textButton="Continue"
+              onPressButton={() => {
+                handleContinue();
+              }}
+              style={styles.button}
+              textStyle={{fontSize: 16}}
+            />
           </View>
         </View>
       </View>
@@ -105,4 +153,4 @@ const CreateNewPassword: React.FC = () => {
   );
 };
 
-export default CreateNewPassword;
+export default CreateNewPasswordScreen;

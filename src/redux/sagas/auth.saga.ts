@@ -1,13 +1,12 @@
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeLatest} from 'redux-saga/effects';
 import {routes} from '../../constants';
-import {navigationRef, NavigationService} from '../../navigation';
+import {NavigationService} from '../../navigation';
 import {CustomToastBottom, showToastError, showToastSuccess} from '../../utils';
 import {GoogleService} from '../../utils/google';
-import {AuthActions, ComicActions, LoadingActions} from '../reducer';
+import {AuthActions, LoadingActions} from '../reducer';
 import {AuthService, UserService} from '../services';
 import {LoginPayload, NewPasswordPayload, SendOTPPayload} from '../types';
-import {useAppDispatch} from '../../hooks';
 
 //login
 function* loginSaga(action: PayloadAction<LoginPayload>): Generator {
@@ -55,7 +54,8 @@ function* loginGoogleSaga(
     yield GoogleService.logout();
     const checkLogin = yield GoogleService.checkSignIn();
     if (!checkLogin) {
-      const {idToken}: any = yield GoogleService.login();
+      const {idToken, user}: any = yield GoogleService.login();
+      console.log(idToken);
 
       const {data}: any = yield call(AuthService.hanleGGLogin, {
         device_token: action.payload.device_token,
@@ -63,6 +63,21 @@ function* loginGoogleSaga(
       });
 
       if (data.code === 200) {
+        if (data?.data?.isUpdatePassword === false) {
+          yield put(
+            AuthActions.handleLoginSuccess({
+              accessToken: data.data.access_token,
+              refreshToken: data.data.refresh_token,
+              enableSignIn: false,
+            }),
+          );
+
+          showToastSuccess('Login success, Plesae update profile to continue');
+          return NavigationService.navigate(routes.CREATE_NEW_PASSWORD, {
+            email: user.email,
+          });
+        }
+
         yield put(
           AuthActions.handleLoginSuccess({
             accessToken: data.data.access_token,
@@ -70,7 +85,8 @@ function* loginGoogleSaga(
             enableSignIn: true,
           }),
         );
-        //  yield call(getProfileUserSaga);
+
+        yield call(getProfileUserSaga);
         showToastSuccess(data.message);
       } else if (data.code === 400) {
         showToastError(
@@ -121,10 +137,11 @@ function* createAccountSaga(
 function* getProfileUserSaga(): Generator {
   try {
     const {data}: any = yield call(UserService.getUserProfile);
+
     if (data.code === 200) {
       yield put(
         AuthActions.getUserInfoSuccess({
-          user: data.data,
+          user: data.data[0],
         }),
       );
     } else {
@@ -169,7 +186,7 @@ function* deleteAvatarUser(): Generator {
     } else if (data.code === 400) {
       showToastError(data.message);
     } else {
-      showToastError('Pless check your connection');
+      showToastError('Please check your connection');
     }
   } catch (error: any) {
     console.log('Have error at get profile saga: ' + error.message);
@@ -192,10 +209,10 @@ function* updateUserProfile(action: PayloadAction<any>): Generator {
     } else if (data.code === 400) {
       showToastError(data.message);
     } else {
-      showToastError('Pless check your connection');
+      showToastError('Please check your connection');
     }
   } catch (error: any) {
-    console.log('Pless check your connection' + error);
+    console.log('Please check your connection' + error);
   } finally {
     yield put(LoadingActions.hideLoading());
   }
@@ -230,15 +247,26 @@ function* forgotPasswordSaga(
       AuthService.hanleForgotPassword,
       action.payload,
     );
+    console.log(data);
     if (data.code === 200) {
-      yield put(AuthActions.setEmailForgotPassword(action.payload));
-      NavigationService.navigate(routes.SEND_OTP);
+      // yield put(AuthActions.setEmailForgotPassword(action.payload));
+      yield CustomToastBottom('Please check your email to get OTP');
+      yield NavigationService.navigate(routes.SEND_OTP, {
+        email: action.payload.email,
+      });
+    } else if (data.code === 429) {
+      yield CustomToastBottom(
+        'Need 60s to send OTP again, please use old OTP sent to your email',
+      );
+      yield NavigationService.navigate(routes.SEND_OTP, {
+        email: action.payload.email,
+      });
     } else {
       CustomToastBottom(data.message);
     }
   } catch (error: any) {
     console.log(error.message);
-    throw error;
+    CustomToastBottom('Server have error, please try again later');
   } finally {
     yield put(LoadingActions.hideLoading());
   }
@@ -266,12 +294,16 @@ function* sendOTPSaga(
 
 ///////////////////////VERIFY OTP/////////////////////////
 function* verifyOTPSaga(action: PayloadAction<SendOTPPayload>): Generator {
+  console.log(action.payload);
   yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(AuthService.handleVerifyOTP, action.payload);
     if (data.code === 200) {
       CustomToastBottom(data.message);
-      NavigationService.navigate(routes.CREATE_NEW_PASSWORD);
+      NavigationService.navigate(routes.CREATE_NEW_PASSWORD, {
+        email: action.payload.email,
+        isOTP: true,
+      });
     } else {
       CustomToastBottom(data.message);
     }
@@ -284,21 +316,27 @@ function* verifyOTPSaga(action: PayloadAction<SendOTPPayload>): Generator {
 }
 
 ///////////////////////NEW PASSWORD/////////////////////////
-function* newPasswordSaga(
+function* UpdateNewPasswordSaga(
   action: PayloadAction<NewPasswordPayload>,
 ): Generator {
+  console.log(action.payload);
   yield put(LoadingActions.showLoading());
   try {
     const {data}: any = yield call(
       AuthService.handleNewPassword,
       action.payload,
     );
-    console.log('data: ', data);
-    if (data.code === 200) {
-      yield put(AuthActions.setNewPassword(action.payload));
-      NavigationService.navigate(routes.SIGN_IN);
+    if (data.code === 200 && action.payload.isOTP === false) {
+      yield CustomToastBottom('Update password successfull!!');
+      yield put(AuthActions.UpdatePassword());
+      yield call(getProfileUserSaga);
+      CustomToastBottom('Login sucessfull!!');
+    } else if (data.code === 200 && action.payload.isOTP === true) {
+      yield CustomToastBottom('Update password successfull!!');
+      yield NavigationService.navigate(routes.SIGN_IN);
     } else {
-      CustomToastBottom(data.message);
+      yield CustomToastBottom('server have error, please try again later');
+      yield NavigationService.navigate(routes.LOBBY);
     }
   } catch (error: any) {
     console.log(error.message);
@@ -319,5 +357,8 @@ export default function* watchAuthSaga() {
   yield takeLatest(AuthActions.handleForgotPassword.type, forgotPasswordSaga);
   yield takeLatest(AuthActions.handleSendOTP.type, sendOTPSaga);
   yield takeLatest(AuthActions.handleVerifyOTP.type, verifyOTPSaga);
-  yield takeLatest(AuthActions.handleNewPassword.type, newPasswordSaga);
+  yield takeLatest(
+    AuthActions.handleUpdatePassword.type,
+    UpdateNewPasswordSaga,
+  );
 }

@@ -21,6 +21,7 @@ export type LoginPayload = {
 export type NewPasswordPayload = {
   email: string;
   password: string;
+  isOTP?: boolean;
 };
 
 export type SendOTPPayload = {
@@ -51,6 +52,9 @@ export type User = uuid &
     isUpdate: boolean;
     isPassword: boolean;
     wallet: string;
+    followercount: number;
+    followingcount: number;
+    post_count: string;
   };
 
 export enum USER_ROLE {

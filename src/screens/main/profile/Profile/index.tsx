@@ -1,34 +1,47 @@
 import React, {FunctionComponent} from 'react';
-import {Image, TouchableOpacity, View} from 'react-native';
-import {images} from '../../../../assets';
-import {routes} from '../../../../constants';
-import {NavigationService} from '../../../../navigation';
-import useStyles from './styles';
-import TextCustom from '../../../../components/customs/Text';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {HeaderCustom} from '../../../../components';
-import {TableofContent} from './components';
+import {routes} from '../../../../constants';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {NavigationService} from '../../../../navigation';
+import {getAuthUserProfile} from '../../../../redux';
+import {UserAction} from '../../../../redux/reducer/user.reducer';
+import {Itemlist} from './components';
+import useStyles from './styles';
 
 const Profile: FunctionComponent = () => {
+  const user = useAppSelector(getAuthUserProfile);
+  const dispatch = useAppDispatch();
+  const onPressMyProfile = () => {
+    dispatch(UserAction.clearListPostByUser());
+    NavigationService.navigate(routes.MYPROFILE);
+  };
+
   const styles = useStyles();
   return (
     <View style={styles.container}>
       <HeaderCustom
         leftIcon={{name: 'user', type: 'font-awesome'}}
-        title="My profile"
+        title="Profile"
       />
-
       <View style={styles.viewAvatar}>
-        <Image source={images.avata} style={styles.avatar} />
+        <Image
+          source={{
+            uri:
+              user.image_url ||
+              'https://static.thenounproject.com/png/5034901-200.png',
+          }}
+          style={styles.avatar}
+        />
         <TouchableOpacity
           style={styles.btnMyProfile}
-          onPress={() => NavigationService.navigate(routes.MYPROFILE)}>
-          <TextCustom textBold title="Drake Kun" />
-          <TextCustom textLight title="drake@gmail.com" />
+          onPress={onPressMyProfile}>
+          <Text style={styles.nameUser}>{user.fullname}</Text>
+          <Text style={styles.email}>{user.email}</Text>
         </TouchableOpacity>
       </View>
-
-      <View style={{flex: 1}}>
-        <TableofContent />
+      <View style={styles.viewList}>
+        <Itemlist />
       </View>
     </View>
   );

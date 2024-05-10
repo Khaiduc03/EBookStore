@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {
   CardStyleInterpolators,
@@ -9,13 +9,17 @@ import {
 import BottomNavigator from './BottomNavigator';
 
 import {routes} from '../../constants';
-import {Screen} from '../../types';
 import {
-  bookmarkScreens,
-  exploreScreens,
   homeScreens,
+  exploreScreens,
+  forumScreens,
+  messageScreens,
   profileScreens,
 } from '../../screens/main';
+import {Screen} from '../../types';
+import {UserService} from '../../redux';
+import {useAppDispatch} from '../../hooks';
+import {ChatActions} from '../../redux/reducer/chat.reducer';
 
 const AppStack = createStackNavigator();
 
@@ -30,12 +34,29 @@ const mainScreens: Screen[] = [
     component: BottomNavigator,
   },
   ...homeScreens,
-  ...profileScreens,
-  ...bookmarkScreens,
   ...exploreScreens,
+  ...forumScreens,
+  ...messageScreens,
+  ...profileScreens,
 ];
 
 const AppNavigator = () => {
+  const dispatch = useAppDispatch();
+  const getUser = async () => {
+    const {data} = await UserService.getUserProfile();
+    console.log('getUser');
+    if (data.code === 200) {
+      console.log('true1');
+      return dispatch(ChatActions.handleGetStatus(true));
+    }
+    console.log('false2');
+    return dispatch(ChatActions.handleGetStatus(false));
+  };
+
+  React.useEffect(() => {
+    getUser();
+  }, []);
+
   return (
     <AppStack.Navigator
       screenOptions={screenOption}

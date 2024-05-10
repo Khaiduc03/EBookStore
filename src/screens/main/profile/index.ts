@@ -2,19 +2,30 @@ import {routes} from '../../../constants';
 import {Screen} from '../../../types';
 import AboutApp from './AboutApp';
 import BecomeVIP from './BecomeVIP';
-import Favorite from './Favorite';
+
 import HelpCenter from './HelpCenter';
 import Contact_us from './HelpCenter/Contact_us';
 import FAQ from './HelpCenter/FAQ';
-import History from './History';
+
+import AddPayment from './AddPayment';
+import ChangePassWord from './ChangePassword';
+import CustomerService from './CustomerService';
+import DiscoverPeople from './DiscoverPeople';
+import HistoryandFavorite from './HistoryandFavorite';
+import Favorite from './HistoryandFavorite/components/Favorite';
+import History from './HistoryandFavorite/components/History';
 import MyProfile from './MyProfile';
 import {PostDetail} from './MyProfile/components';
-import Notification from './SettingNotification';
 import Payments_method from './Payment-method';
 import ProfileUser from './Profile-User';
 import {PostDetailUser} from './Profile-User/components';
 import Security from './Security';
+import SettingsNotification from './SettingNotification';
 import Update_Profile from './Update-profile';
+import UpdateBio from './UpdateBio';
+import Follow from './Follow';
+import CommentPostDetail from './MyProfile/components/PostDetail/components/Comment';
+import {CommentPostUserDetail} from './Profile-User/components/PostDetailUser/components';
 
 export {default as Profile} from './Profile';
 
@@ -32,8 +43,8 @@ export const profileScreens: Screen[] = [
     component: MyProfile,
   },
   {
-    name: routes.SETTINGNOTIFICATION,
-    component: Notification,
+    name: routes.SETTINGS_NOTIFICATION,
+    component: SettingsNotification,
   },
   {
     name: routes.PAYMENTSMETHOD,
@@ -78,5 +89,43 @@ export const profileScreens: Screen[] = [
   {
     name: routes.HISTORY,
     component: History,
+  },
+  {
+    name: routes.CHANGEPASSWORD,
+    component: ChangePassWord,
+  },
+  {
+    name: routes.DISCOVERPEOPLE,
+    component: DiscoverPeople,
+  },
+  {
+    name: routes.ADDPAYMENT,
+    component: AddPayment,
+  },
+  {
+    name: routes.CUSTOMERSERVICE,
+    component: CustomerService,
+  },
+  {
+    name: routes.HISTORYANDFAVORITE,
+    component: HistoryandFavorite,
+  },
+
+  {
+    name: routes.UPDATE_BIO,
+    component: UpdateBio,
+  },
+
+  {
+    name: routes.LIST_FOLLOW,
+    component: Follow,
+  },
+  {
+    name: routes.COMMENTPOSTDETAIL,
+    component: CommentPostDetail,
+  },
+  {
+    name: routes.COMMENTPOSTUSERDETAIL,
+    component: CommentPostUserDetail,
   },
 ];

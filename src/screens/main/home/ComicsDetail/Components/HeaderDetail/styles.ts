@@ -1,7 +1,8 @@
 import {makeStyles, normalize} from '@rneui/themed';
 import {Device} from '../../../../../../utils';
+import {StyleSheet} from 'react-native';
 import {fontFamilySetup} from '../../../../../../utils/font';
-import {color} from '@rneui/base';
+
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
@@ -10,6 +11,14 @@ const useStyles = makeStyles(({colors}) => ({
     height: HEIGHT * 0.35,
     justifyContent: 'space-around',
   },
+  overLay: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    position: 'absolute',
+    top: 0,
+  },
+
   content: {
     marginTop: normalize(16),
     flexDirection: 'row',

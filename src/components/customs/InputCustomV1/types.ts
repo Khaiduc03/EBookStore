@@ -7,6 +7,7 @@ export type InputProps = {
   rightIcon?: ReactElement;
   secure?: boolean;
   style?: ViewProps['style'];
+  errorMessage?: string;
   keyboardType?:
     | 'default'
     | 'number-pad'

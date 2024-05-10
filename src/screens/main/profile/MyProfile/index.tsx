@@ -1,178 +1,130 @@
 import React from 'react';
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  RefreshControl,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import HeaderCustom from '../../../../components/customs/HeaderCustom';
-import TextCustom from '../../../../components/customs/Text';
 import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
 import useStyles from '../MyProfile/styles';
 import {ItemFollow, ItemListMyProfile, ItemPost} from './components';
+import {useUser} from './hook/useMyProfile.hook';
 
-const MyProfile: React.FC = props => {
+const MyProfile: React.FC = () => {
   const styles = useStyles();
-  const handlePressGoback = () => {
-    NavigationService.navigate(routes.PROFILE);
-  };
-  const handlePressGoScreen = () => {
-    NavigationService.navigate(routes.UPDATE_PROFILE2);
-  };
-  const renderItem = ({item}: {item: (typeof data)[0]}) => (
-    <ItemListMyProfile {...item} />
-  );
+
+  const {
+    dataDiscover,
+    dataPost,
+    isLoading,
+    loadMoreComic,
+    onContentSizeChange,
+    sizeContent,
+    user,
+    handlePressGoback,
+    onRefresh,
+    refreshing,
+  } = useUser();
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      onContentSizeChange={onContentSizeChange}
+      nestedScrollEnabled
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+      onScroll={({nativeEvent}) => {
+        const {contentOffset, contentSize, layoutMeasurement} = nativeEvent;
+        const numberOfPixelsFromBottomThreshold = 100;
+        const isNearBottom =
+          contentOffset.y + layoutMeasurement.height >=
+          sizeContent - numberOfPixelsFromBottomThreshold;
+        console.log('sỉze scroll', contentOffset.y + layoutMeasurement.height);
+        console.log('sỉze content', sizeContent);
+
+        if (isNearBottom) {
+          loadMoreComic();
+        }
+      }}
+      style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
         title="My Profile"
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
         onPressLeftIcon={handlePressGoback}
-        rightIconleft={{name: 'plus-square', type: 'font-awesome-5'}}
-        rightIconRight={{name: 'pen', type: 'font-awesome-5'}}
-        onPressRightIconRight={handlePressGoScreen}
+        rightIconleft={{name: 'plus-square-o', type: 'font-awesome'}}
+        rightIconRight={{
+          name: 'pencil',
+          type: 'octicon',
+        }}
+        onPressRightIconLeft={() =>
+          NavigationService.navigate(routes.CREATE_POST)
+        }
+        onPressRightIconRight={() =>
+          NavigationService.navigate(routes.UPDATE_PROFILE2)
+        }
       />
       <View>
         <ItemFollow />
       </View>
-      <View style={styles.nameUser}>
-        <TextCustom textBold title="Drake Kun" />
-        <TextCustom textLight title="Biographic this here !!!!! 😎" />
+      <View style={styles.viewTextName}>
+        <Text style={styles.nameUser}>{user.fullname}</Text>
+        <View style={styles.summaryContainer}>
+          <Text style={styles.textBio} numberOfLines={1}>
+            {user.summary || ' Biography here! '}
+          </Text>
+          <TouchableOpacity
+            onPress={() => NavigationService.navigate(routes.UPDATE_BIO)}>
+            <Text style={styles.textEdit}>Edit</Text>
+          </TouchableOpacity>
+        </View>
       </View>
+
       <View style={styles.viewExplore}>
-        <TextCustom textBold title="Explore everyone" />
-        <TouchableOpacity>
-          <TextCustom textPrimary title="See all" />
+        <Text style={styles.textDiscover}>Discover People</Text>
+        <TouchableOpacity
+          onPress={() => NavigationService.navigate(routes.DISCOVERPEOPLE)}>
+          <Text style={styles.text}>See all</Text>
         </TouchableOpacity>
       </View>
-      <View>
+      <View style={{paddingVertical: 10}}>
         <FlatList
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
+          data={dataDiscover}
+          renderItem={({item}) => <ItemListMyProfile data={item} />}
+          keyExtractor={item => item.uuid}
           horizontal
           showsHorizontalScrollIndicator={false}
-          snapToAlignment="start" // Snap tới phần tử gần nhất khi cuộn
-          snapToInterval={10} // Đặt khoảng cách giữa các phần tử
-          decelerationRate={0.5} // Điều chỉnh tốc độ giảm dần của cuộn
+          snapToAlignment="start"
+          snapToInterval={10}
+          decelerationRate={0.5}
         />
       </View>
       <View style={styles.viewMyPost}>
-        <Text style={styles.textPost}>MY POST</Text>
+        <Text style={styles.textPost}>Your Post</Text>
       </View>
       <View style={{flex: 1}}>
         <FlatList
-          data={data2}
+          scrollEnabled={false}
+          data={dataPost}
           renderItem={({item}) => <ItemPost data={item} />}
           numColumns={3}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.uuid}
           showsVerticalScrollIndicator
+          ListFooterComponent={
+            isLoading ? (
+              <ActivityIndicator color={'#F89300'} size={'large'} />
+            ) : (
+              <View />
+            )
+          }
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 export default MyProfile;
-const data = [
-  {
-    id: '1',
-    avatarDummy: true,
-    name: 'Peter 1',
-    title: 'Suggestions for you',
-    button: true,
-    textButton: 'Follow',
-  },
-  {
-    id: '2',
-    avatarDummy: true,
-    name: 'Peter 2',
-    title: 'Suggestions for you',
-    button: true,
-    textButton: 'Follow',
-  },
-  {
-    id: '3',
-    avatarDummy: true,
-    name: 'Peter 3',
-    title: 'Suggestions for you',
-    button: true,
-    textButton: 'Follow',
-  },
-  {
-    id: '4',
-    avatarDummy: true,
-    name: 'Peter 4',
-    title: 'Suggestions for you',
-    button: true,
-    textButton: 'Follow',
-  },
-  {
-    id: '5',
-    avatarDummy: true,
-    name: 'Peter 5',
-    title: 'Suggestions for you',
-    button: true,
-    textButton: 'Follow',
-  },
-];
-
-const data2 = [
-  {
-    id: '1',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-  {
-    id: '2',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-  {
-    id: '3',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-  {
-    id: '4',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-  {
-    id: '5',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-  {
-    id: '6',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-  {
-    id: '7',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-  {
-    id: '8',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-  {
-    id: '9',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-  {
-    id: '10',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-  {
-    id: '11',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-  {
-    id: '12',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-  {
-    id: '13',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-  {
-    id: '14',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-  {
-    id: '15',
-    images: require('../../../../assets/images/png/avatar.jpg'),
-  },
-];

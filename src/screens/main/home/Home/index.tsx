@@ -1,127 +1,108 @@
-import {View, ScrollView, Image, FlatList} from 'react-native';
-
-import React, {FunctionComponent, useEffect, useState} from 'react';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
-import useStyles from './styles';
+import React, {FunctionComponent} from 'react';
+import {ActivityIndicator, FlatList, ScrollView, View} from 'react-native';
 import {ComicItem, HeaderCustom} from '../../../../components';
+import {routes} from '../../../../constants';
+import {NavigationService} from '../../../../navigation';
+import useStyles from './styles';
 
 import {createIcon} from '../../../../utils';
-import {TopicsHome, ComicsNew, BannerComic, TrendingComic} from './components';
-import {
-  ComicActions,
-  ComicType,
-  TopicActions,
-  getAuthEnableSignIn,
-} from '../../../../redux';
-import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {
-  getListComic,
-  getNextPage,
-  getTotalPage,
-} from '../../../../redux/selectors/comic.selector';
-import {getListTopic} from '../../../../redux/selectors/topic.selector';
+import {BannerComic, TopicsHome, TrendingComic} from './components';
+import {useComicHome} from './components/hook/useComicHome.hook';
+import OverLay from './components/OverLay';
 
 const Home: FunctionComponent = () => {
-  const dispatch = useAppDispatch();
   const styles = useStyles();
-  const [numCols, setNumCols] = useState(3);
-  const [data, setData] = useState<ComicType[]>([]);
-  const [page, setPage] = useState(1);
-  const dataComic = useAppSelector(getListComic) || [];
-  const dataTopic = useAppSelector(getListTopic);
-  const nextPage = useAppSelector(getNextPage);
 
-  useEffect(() => {
-    dispatch(ComicActions.getListData(page));
-    if (dataTopic?.length === undefined) {
-      dispatch(TopicActions.getListTopic());
-    }
-  }, [page]);
-
-  useEffect(() => {
-    if (dataComic.length > 0) {
-      setData([...data, ...dataComic]);
-    }
-  }, [dataComic]);
-
-  const loadMoreComic = () => {
-    if (nextPage) {
-      setPage(page + 1);
-    }
-  };
-
-  const handleListIconPress = () => {
-    setNumCols(1);
-  };
-  const handleGridIconPress = () => {
-    setNumCols(3);
-  };
-  const handlePressSearch = () => {
-    NavigationService.navigate(routes.SEARCH);
-  };
+  const {
+    dataComic,
+    dataTopView,
+    dataTopic,
+    handleGridIconPress,
+    handleListIconPress,
+    handlePressSearch,
+    isLoading,
+    loadMoreComic,
+    numCols,
+    current,
+    onScroll,
+    isLoadingHome,
+  } = useComicHome();
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      onScroll={e => onScroll(e.nativeEvent)}
+      nestedScrollEnabled>
+      {!isLoadingHome ? <OverLay /> : <View />}
       <HeaderCustom
         titleStyle={styles.textTitleHeader}
-        onPressRightIconLeft={handlePressSearch}
+        onPressRightIconMiddle={handlePressSearch}
         leftIconStyle={styles.leftIconStyle}
         leftIcon={{name: 'book', type: 'font-awesome'}}
         title="ComicVerse"
-        rightIconleft={{name: 'search', type: 'ionicon'}}
+        rightIconMiddle={{name: 'search', type: 'ionicon'}}
         rightIconRight={createIcon({
           name: 'notifications-outline',
           type: 'ionicon',
         })}
+        onPressRightIconRight={() =>
+          NavigationService.navigate(routes.NOTIFICATIONS)
+        }
+      />
+      <BannerComic />
+      <TopicsHome />
+      <TrendingComic />
+      <HeaderCustom
+        titleStyle={styles.textTitle}
+        title="New Comics"
+        rightIconMiddle={{
+          name: 'grid-outline',
+          type: 'ionicon',
+          color: numCols === 3 ? '#F89300' : '',
+        }}
+        rightIconRight={{
+          name: 'list-circle-outline',
+          type: 'ionicon',
+          color: numCols === 1 ? '#F89300' : '',
+        }}
+        onPressRightIconMiddle={handleGridIconPress}
+        onPressRightIconRight={handleListIconPress}
       />
 
       <FlatList
-        renderItem={({item, index}: {item: ComicType; index: number}) => (
+        ListFooterComponent={
+          isLoading ? (
+            <ActivityIndicator size={'large'} color={'#F89300'} />
+          ) : (
+            <View />
+          )
+        }
+        renderItem={({item}) => (
           <ComicItem
             data={item}
-            viewStyle={numCols == 1 ? styles.comicItem : null}
-            imageStyle={numCols == 1 ? styles.imgComic : null}
-            contentStyle={numCols == 1 ? styles.content : null}
-            index={index}
-            topicStyle={numCols == 1 ? styles.topicsContainer : null}
+            viewStyle={numCols === 1 ? styles.comicItem : undefined}
+            imageStyle={numCols === 1 ? styles.imgComic : undefined}
+            contentStyle={numCols === 1 ? styles.content : undefined}
+            topicStyle={numCols === 1 ? styles.topicsContainer : undefined}
           />
         )}
-        onEndReached={loadMoreComic}
-        onEndReachedThreshold={0.1}
-        data={data}
-        key={numCols.toString()}
+        scrollEnabled={false}
+        data={dataComic}
+        scrollEventThrottle={16}
         columnWrapperStyle={
-          numCols === 3 ? {gap: 5, paddingHorizontal: 16} : null
+          numCols == 3 ? styles.columnStyle : {flexDirection: 'column'}
         }
-        numColumns={numCols}
-        ListHeaderComponent={() => {
-          return (
-            <View>
-              <BannerComic />
-              <TopicsHome />
-              <TrendingComic />
-              <HeaderCustom
-                titleStyle={styles.textTitle}
-                title="New Comics"
-                rightIconleft={{
-                  name: 'grid-outline',
-                  type: 'ionicon',
-                  color: numCols === 3 ? '#F89300' : '',
-                }}
-                rightIconRight={{
-                  name: 'list-circle-outline',
-                  type: 'ionicon',
-                  color: numCols === 1 ? '#F89300' : '',
-                }}
-                onPressRightIconLeft={handleGridIconPress}
-                onPressRightIconRight={handleListIconPress}
-              />
-            </View>
-          );
-        }}
+        keyExtractor={item => item.uuid.toString()}
+        numColumns={3}
+        centerContent
+        scrollToOverflowEnabled
+        alwaysBounceHorizontal
+        alwaysBounceVertical
+        initialNumToRender={6}
+        updateCellsBatchingPeriod={1000}
+        maxToRenderPerBatch={6}
       />
-    </View>
+    </ScrollView>
   );
 };
 

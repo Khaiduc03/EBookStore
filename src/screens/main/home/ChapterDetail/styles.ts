@@ -10,8 +10,8 @@ const useStyles = makeStyles(({colors}) => ({
     position: 'relative',
   },
   imageStyle: {
-    width: '100%',
-    height: 300,
+    width: WIDTH,
+    height: normalize(4000),
   },
 }));
 

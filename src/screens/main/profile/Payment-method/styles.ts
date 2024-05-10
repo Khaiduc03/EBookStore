@@ -9,5 +9,8 @@ const useStyles = makeStyles(({colors}) => ({
     flex: 1,
     backgroundColor: colors.background,
   },
+  iconLeftStyle: {
+    color: colors.black,
+  },
 }));
 export default useStyles;

@@ -5,26 +5,70 @@ import {fontFamilySetup} from '../../../utils/font';
 const WIDTH = Device.getDeviceWidth();
 const HEIGHT = Device.getDeviceHeight();
 
-const usestyles = makeStyles(({colors}) => ({
-  ViewCircle: {
-    borderRadius: 50,
-    width: 64,
-    height: 64,
+const useStyles = makeStyles(({colors}) => ({
+  viewHeader: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+  },
+  viewicon: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   txtCircle: {
-    fontSize: normalize(18),
-    fontWeight: '700',
-    letterSpacing: normalize(0.6),
+    fontSize: normalize(20),
+    letterSpacing: normalize(0.12),
     fontStyle: 'normal',
     fontFamily: fontFamilySetup.bold,
     color: colors.black,
-    lineHeight: normalize(35.2),
+    lineHeight: normalize(21),
     marginStart: normalize(20),
   },
   rightIcon: {
     color: colors.black,
   },
+  leftIcon: {
+    color: colors.black,
+  },
+  outter: {
+    width: normalize(WIDTH * 0.12),
+    height: normalize(WIDTH * 0.06),
+    borderRadius: normalize(15),
+    backgroundColor: colors.grey5,
+    alignItems: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: normalize(2),
+  },
+  off: {
+    justifyContent: 'flex-start',
+    backgroundColor: '#C8C8C8',
+  },
+  on: {
+    justifyContent: 'flex-end',
+    backgroundColor: colors.primary,
+  },
+  innerOFF: {
+    width: normalize(WIDTH * 0.044),
+    height: normalize(WIDTH * 0.044),
+    backgroundColor: colors.whiteDefault,
+    borderRadius: normalize(15),
+    elevation: normalize(8),
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: normalize(0.15),
+    shadowRadius: normalize(2),
+  },
+  innerON: {
+    width: normalize(WIDTH * 0.044),
+    height: normalize(WIDTH * 0.044),
+    backgroundColor: colors.whiteDefault,
+    borderRadius: normalize(15),
+    elevation: normalize(8),
+    shadowOffset: {width: 0, height: 0},
+    shadowOpacity: normalize(0.15),
+    shadowRadius: normalize(2),
+  },
+  viewBtn: {
+    marginBottom: normalize(4),
+  },
 }));
-export default usestyles;
+export default useStyles;

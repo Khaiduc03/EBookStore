@@ -11,10 +11,16 @@ import {
   ThemeReducer,
   ComicReducer,
   TopicReducer,
+  ForumReducer,
 } from '../reducer';
 import {AlertReducer} from '../reducer/alert.reducer';
 import RootSaga from '../sagas';
 import {Redux} from '../types/redux.type';
+import {ChatReducer} from '../reducer/chat.reducer';
+import {UserReducer} from '../reducer/user.reducer';
+import {CommentChapterReducer} from '../reducer/comment.chapter.reducer';
+import {CommentForumReducer} from '../reducer/comment.forum.reducer';
+import {RatingReducer} from '../reducer/rating.reducer';
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
@@ -24,7 +30,13 @@ const persistConfig: PersistConfig<RootState> = {
   debug: true, // enable logs - default is false
   stateReconciler: autoMergeLevel2,
   whitelist: [Redux.auth, Redux.theme, Redux.app, Redux.topic],
-  blacklist: [Redux.loading, Redux.comic],
+  blacklist: [
+    Redux.loading,
+    Redux.comic,
+    Redux.chat,
+    Redux.forum,
+    Redux.rating,
+  ],
 };
 
 const rootReducers = combineReducers({
@@ -35,6 +47,12 @@ const rootReducers = combineReducers({
   theme: ThemeReducer,
   comic: ComicReducer,
   topic: TopicReducer,
+  chat: ChatReducer,
+  forum: ForumReducer,
+  user: UserReducer,
+  commetChapter: CommentChapterReducer,
+  commentForum: CommentForumReducer,
+  rating: RatingReducer,
 });
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducers);
 

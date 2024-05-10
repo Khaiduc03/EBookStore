@@ -40,8 +40,12 @@ const useStyles = makeStyles(({colors}) => ({
   },
   topicsContainer: {
     flexDirection: 'row',
-    width: '70%',
+    width: '100%',
     flexWrap: 'wrap',
+  },
+  columnStyle: {
+    paddingHorizontal: normalize(16),
+    gap: normalize(5),
   },
 }));
 

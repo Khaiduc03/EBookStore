@@ -14,41 +14,22 @@ import FastImage from 'react-native-fast-image';
 import {TouchableOpacity} from 'react-native';
 import {NavigationService} from '../../../../../../navigation';
 import {routes} from '../../../../../../constants';
+import {CarouselDataItem, carouselData, useBanner} from './hook/useBanner.hook';
+import {Skeleton} from '@rneui/base';
 
-interface CarouselDataItem {
-  id: string;
-  image: string;
-}
-
-const BannerComic: React.FC = () => {
+const BannerComic = React.memo(() => {
   const styles = useStyles();
-  const flatlistRef = useRef<FlatList | null>(null);
-  const screenWidth = Device.getDeviceWidth();
-  const [activeIndex, setActiveIndex] = useState<number>(0);
 
-  useEffect(() => {
-    let interval = setInterval(() => {
-      if (activeIndex === carouselData.length - 1) {
-        flatlistRef.current?.scrollToIndex({
-          index: 0,
-          animated: true,
-        });
-      } else {
-        flatlistRef.current?.scrollToIndex({
-          index: activeIndex + 1,
-          animated: true,
-        });
-      }
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, [activeIndex]);
-
-  const getItemLayout = (data: any, index: number) => ({
-    length: screenWidth,
-    offset: screenWidth * index,
-    index: index,
-  });
+  const {
+    activeIndex,
+    flatlistRef,
+    getItemLayout,
+    handleScroll,
+    screenWidth,
+    isLoading,
+    onLoadStart,
+    onLoadEnd,
+  } = useBanner();
 
   const renderItem = ({
     item,
@@ -59,20 +40,28 @@ const BannerComic: React.FC = () => {
   }) => {
     return (
       <TouchableOpacity
-        activeOpacity={0.5}
-        onPress={() => NavigationService.navigate(routes.COMICDETAIL)}>
+        style={{alignItems: 'center', justifyContent: 'center'}}
+        activeOpacity={0.5}>
         <FastImage
+          onLoadStart={onLoadStart}
+          onLoadEnd={onLoadEnd}
           source={{uri: item.image}}
           style={{height: screenWidth * 0.5, width: screenWidth}}
         />
+        {isLoading && (
+          <Skeleton animation="wave" style={styles.skeletonStyle}></Skeleton>
+        )}
+        {isLoading && (
+          <ActivityIndicator
+            color={'#F89300'}
+            size={'large'}
+            style={{
+              position: 'absolute',
+            }}
+          />
+        )}
       </TouchableOpacity>
     );
-  };
-
-  const handleScroll = (event: any) => {
-    const scrollPosition = event.nativeEvent.contentOffset.x;
-    const index = scrollPosition / screenWidth;
-    setActiveIndex(index);
   };
 
   return (
@@ -101,32 +90,6 @@ const BannerComic: React.FC = () => {
       </View>
     </View>
   );
-};
+});
 
 export default BannerComic;
-const carouselData: CarouselDataItem[] = [
-  {
-    id: '1',
-    image:
-      'https://gamek.mediacdn.vn/133514250583805952/2022/1/2/solo-leveling-1620917554185396197198-16410674690231914720800.jpg',
-  },
-  {
-    id: '2',
-    image:
-      'https://photo2.tinhte.vn/data/attachment-files/2021/03/5382277_Melissa-Poldebrat-And-Yuri-Elizabeth1.jpg',
-  },
-  {
-    id: '3',
-    image:
-      'https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/03/20-best-romance-manhwa-for-fans-of-manga.jpg',
-  },
-  {
-    id: '4',
-    image: 'https://wallpaperaccess.com/full/10822.jpg',
-  },
-  {
-    id: '5',
-    image:
-      'https://e0.pxfuel.com/wallpapers/463/451/desktop-wallpaper-lookism.jpg',
-  },
-];

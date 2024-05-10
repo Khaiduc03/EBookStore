@@ -3,14 +3,15 @@ import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
-import {Icon, Text, makeStyles, normalize} from '@rneui/themed';
-import React, {FunctionComponent, useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Text, makeStyles, normalize} from '@rneui/themed';
+import React, {FunctionComponent} from 'react';
+import {View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-
+import {Icon} from '@rneui/base';
 import {routes} from '../../constants';
+import {Conversation, Explore, Forum, Home, Profile} from '../../screens/main';
 import {Device} from '../../utils';
-import {Bookmark, Explore, Home, Profile} from '../../screens/main';
+import {useKeyboard} from '@react-native-community/hooks';
 
 const BottomTabs = createBottomTabNavigator();
 
@@ -27,12 +28,14 @@ const choseIcon = (route: routes) => {
       return 'home';
     case routes.EXPLORE:
       return 'id-card';
-    case routes.BOOKMARK:
-      return 'bookmarks';
+    case routes.FORUM:
+      return 'people';
+    case routes.MESSAGE:
+      return 'chatbubble-ellipses';
     case routes.PROFILE:
-      return 'person';
+      return 'person-circle';
     default:
-      return 'home';
+      return 'Home';
   }
 };
 
@@ -62,6 +65,7 @@ const useStyles = makeStyles(({colors}) => ({
 }));
 
 const BottomNavigator: FunctionComponent = () => {
+  const keyboard = useKeyboard();
   const styles = useStyles();
   const Tab = ({navigation, descriptors, state}: BottomTabBarProps) => {
     return (
@@ -113,8 +117,9 @@ const BottomNavigator: FunctionComponent = () => {
                   color: isFocused ? '#F89300' : 'gray',
                   fontSize: 10,
                   marginTop: 1,
+                  textTransform: 'capitalize',
                 }}>
-                {route.name.toLowerCase()}
+                {route.name}
               </Text>
             </TouchableOpacity>
           );
@@ -126,10 +131,13 @@ const BottomNavigator: FunctionComponent = () => {
   return (
     <BottomTabs.Navigator
       screenOptions={screenOptions}
-      tabBar={(props: BottomTabBarProps) => <Tab {...props} />}>
+      tabBar={(props: BottomTabBarProps) =>
+        !keyboard.keyboardShown && <Tab {...props} />
+      }>
       <BottomTabs.Screen name={routes.HOME} component={Home} />
       <BottomTabs.Screen name={routes.EXPLORE} component={Explore} />
-      <BottomTabs.Screen name={routes.BOOKMARK} component={Bookmark} />
+      <BottomTabs.Screen name={routes.FORUM} component={Forum} />
+      <BottomTabs.Screen name={routes.MESSAGE} component={Conversation} />
       <BottomTabs.Screen name={routes.PROFILE} component={Profile} />
     </BottomTabs.Navigator>
   );

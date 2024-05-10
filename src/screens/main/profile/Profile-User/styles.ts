@@ -28,17 +28,25 @@ const useStyles = makeStyles(({colors}) => ({
   nameUser: {
     paddingHorizontal: normalize(24),
   },
+  textBio: {
+    color: colors.black3,
+    fontFamily: fontFamilySetup.regular,
+    fontSize: normalize(15),
+    lineHeight: normalize(21),
+    letterSpacing: normalize(0.12),
+  },
+
   textPost: {
     fontSize: normalize(20),
     fontFamily: fontFamilySetup.bold,
     lineHeight: normalize(20),
     color: colors.black,
+    marginBottom: normalize(30),
   },
   viewMyPost: {
-    alignItems: 'center',
-    borderBottomWidth: normalize(0.6),
     borderColor: '#8a8a8a',
-    marginTop: normalize(25),
+    marginTop: normalize(15),
+    paddingHorizontal: normalize(24),
   },
   btnFollow: {
     width: normalize(130),
@@ -51,16 +59,29 @@ const useStyles = makeStyles(({colors}) => ({
     borderColor: 'white',
     backgroundColor: colors.grey5,
   },
+
+  btnMess: {
+    width: normalize(130),
+    height: normalize(30),
+    borderRadius: normalize(8),
+    top: normalize(10),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 0.5,
+    borderColor: 'white',
+    backgroundColor: colors.blue,
+  },
   viewbtnFollow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: normalize(24),
     paddingVertical: normalize(15),
     gap: normalize(10),
+    marginBottom: normalize(10),
   },
   textFollow: {
     fontSize: normalize(15),
-    fontFamily: fontFamilySetup.bold,
+    fontFamily: fontFamilySetup.medium,
     lineHeight: normalize(20),
     color: colors.white,
   },
@@ -77,6 +98,9 @@ const useStyles = makeStyles(({colors}) => ({
   },
   viewExplore: {
     paddingTop: normalize(18),
+  },
+  iconLeftStyle: {
+    color: colors.black,
   },
 }));
 export default useStyles;

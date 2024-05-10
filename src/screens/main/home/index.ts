@@ -1,10 +1,18 @@
 import {routes} from '../../../constants';
 import {Screen} from '../../../types';
-import Topics from './Topics';
-import Search from './Search';
+import ChapterDetail from './ChapterDetail';
 import ComicByTopic from './ComicByTopic';
 import ComicsDetail from './ComicsDetail';
-import ChapterDetail from './ChapterDetail';
+import CommentComic from './CommentComic';
+import Filters from './Filters';
+import Notifications from './Notifications';
+import RatingComicScreen from './RatingComicScreen';
+import RatingDetailComic from './RatingDetailComic';
+import CommentRepComic from './RepComments';
+import Search from './Search';
+import Settings from './Settings';
+import TopViewComic from './TopViewComic';
+import Topics from './Topics';
 
 export {default as Home} from './Home';
 export const homeScreens: Screen[] = [
@@ -27,5 +35,37 @@ export const homeScreens: Screen[] = [
   {
     name: routes.CHAPTER,
     component: ChapterDetail,
+  },
+  {
+    name: routes.COMMENT_COMIC,
+    component: CommentComic,
+  },
+  {
+    name: routes.NOTIFICATIONS,
+    component: Notifications,
+  },
+  {
+    name: routes.FILTERS,
+    component: Filters,
+  },
+  {
+    name: routes.COMMENT_REP,
+    component: CommentRepComic,
+  },
+  {
+    name: routes.TREDING_COMIC,
+    component: TopViewComic,
+  },
+  {
+    name: routes.SETTINGS,
+    component: Settings,
+  },
+  {
+    name: routes.RATINGCOMICSCREEN,
+    component: RatingComicScreen,
+  },
+  {
+    name: routes.RATINGDETAILCOMIC,
+    component: RatingDetailComic,
   },
 ];

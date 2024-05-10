@@ -30,8 +30,7 @@ const useStyles = makeStyles(({colors}) => ({
     fontSize: 20,
     fontWeight: '700',
     textAlign: 'center',
-
-    color: colors.black,
+    color: colors.blackDefault,
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',

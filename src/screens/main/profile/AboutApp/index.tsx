@@ -1,27 +1,26 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {HeaderCustom} from '../../../../components';
-import {routes} from '../../../../constants';
 import {NavigationService} from '../../../../navigation';
-import useStyles from './styles';
 import {ItemListAbout} from './components';
+import useStyles from './styles';
 
 const AboutApp: React.FC = () => {
   const styles = useStyles();
   const handlePressGoback = () => {
-    NavigationService.navigate(routes.PROFILE);
+    NavigationService.goBack();
   };
   return (
     <View style={styles.container}>
       <HeaderCustom
-        leftIcon={{name: 'arrow-left', type: 'font-awesome-5'}}
-        title="About The App"
+        leftIcon={{name: 'arrow-back', color: styles.iconLeftStyle.color}}
+        title="About this app"
         onPressLeftIcon={handlePressGoback}
       />
       <View style={styles.viewTextBig}>
-        <Text style={styles.name}>Comic Verse V9.9.9</Text>
+        <Text style={styles.name}>COMIC VERSE</Text>
       </View>
-      <View>
+      <View style={styles.listContent}>
         <ItemListAbout />
       </View>
     </View>

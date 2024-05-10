@@ -55,9 +55,7 @@ const reducer = createSlice({
         enableSignIn: false,
         accessToken: '',
         refreshToken: '',
-        enableBiometric: false,
         user: {},
-        isGoogle: false,
       };
     },
 
@@ -152,18 +150,18 @@ const reducer = createSlice({
       };
     },
 
-    setEmailForgotPassword: (
-      state: AuthState,
-      payload: PayloadAction<Pick<LoginPayload, 'email'>>,
-    ) => {
-      return {
-        ...state,
-        user: {
-          ...state.user,
-          email: payload.payload.email,
-        },
-      };
-    },
+    // setEmailForgotPassword: (
+    //   state: AuthState,
+    //   payload: PayloadAction<Pick<LoginPayload, 'email'>>,
+    // ) => {
+    //   return {
+    //     ...state,
+    //     user: {
+    //       ...state.user,
+    //       email: payload.payload.email,
+    //     },
+    //   };
+    // },
 
     handleSendOTP: (
       state: AuthState,
@@ -180,7 +178,7 @@ const reducer = createSlice({
       };
     },
 
-    handleNewPassword: (
+    handleUpdatePassword: (
       state: AuthState,
       _: PayloadAction<NewPasswordPayload>,
     ) => {
@@ -188,16 +186,19 @@ const reducer = createSlice({
         ...state,
       };
     },
-    setNewPassword: (
-      state: AuthState,
-      _: PayloadAction<NewPasswordPayload>,
-    ) => {
+    UpdatePassword: (state: AuthState) => {
+      return {
+        ...state,
+        enableSignIn: true,
+      };
+    },
+
+    handleSucessSummary: (state: AuthState, action: PayloadAction<string>) => {
       return {
         ...state,
         user: {
           ...state.user,
-          email: _.payload.email,
-          password: _.payload.password,
+          summary: action.payload,
         },
       };
     },

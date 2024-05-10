@@ -9,7 +9,11 @@ const TextCustom: React.FunctionComponent<TextCustomProps> = props => {
   return (
     <View>
       {textLight && <Text style={styles.Lighttext}>{title}</Text>}
-      {textBold && <Text style={styles.Boldtext}>{title}</Text>}
+      {textBold && (
+        <Text numberOfLines={1} style={styles.Boldtext}>
+          {title}
+        </Text>
+      )}
       {textPrimary && <Text style={styles.Primarytext}>{title}</Text>}
       {number && <Text style={styles.Boldtext}>{number}</Text>}
     </View>

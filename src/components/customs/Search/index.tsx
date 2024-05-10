@@ -1,13 +1,12 @@
 import React, {useState} from 'react';
 import {SearchBar} from '@rneui/themed';
 import {
-  View,
-  StyleSheet,
-  TouchableWithoutFeedback,
   Keyboard,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
-import {Icon} from '@rneui/base';
-import {TouchableOpacity} from 'react-native';
+import {Icon, InputProps} from '@rneui/base';
 import useStyles from './styles';
 import {SearchBarComponentProps} from './types';
 
@@ -15,12 +14,7 @@ const SearchCustom: React.FunctionComponent<
   SearchBarComponentProps
 > = props => {
   const styles = useStyles();
-  const [search, setSearch] = useState('');
   const [inputFocused, setInputFocused] = useState(false);
-
-  const handleKeyPress = () => {
-    console.log(search);
-  };
 
   const handleInputFocus = () => {
     setInputFocused(true);
@@ -50,13 +44,14 @@ const SearchCustom: React.FunctionComponent<
           color={styles.cancelIcon.color}
         />
       }
-      autoFocus={false}
+      autoFocus={props.autoFocus}
       returnKeyType="search"
       inputStyle={props.inputStyle || styles.inputStyle}
-      onSubmitEditing={props.onPress}
+      onSubmitEditing={props.onPressSearchComic}
       onBlur={handleInputBlur}
       onFocus={handleInputFocus}
       clearIcon={styles.clearIcon}
+      onPressIn={props.onPress}
     />
   );
 };

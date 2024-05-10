@@ -1,76 +1,160 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
-import {SearchCustom} from '../../../../components';
-import useStyles from './styles';
-import {NavigationService} from '../../../../navigation';
-import {routes} from '../../../../constants';
 import {Icon} from '@rneui/themed';
+import React, {useCallback} from 'react';
 import {
-  getListComic,
-  getDetailComic,
-  getDataByTopic,
-  getDataAllChapter,
-  getDataDetailChapter,
-} from '../../../../redux/selectors/comic.selector';
-import {ComicActions, TopicActions} from '../../../../redux';
-import {useAppDispatch, useAppSelector} from '../../../../hooks';
-import {backScreen} from '../../../../utils';
-import {getListTopic} from '../../../../redux/selectors/topic.selector';
-import {TopicType} from '../../../../redux';
-
+  ActivityIndicator,
+  Keyboard,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+import {FlatList} from 'react-native-gesture-handler';
+import {ComicItem, HeaderCustom} from '../../../../components';
+import SearchCustomV1 from '../../../../components/customs/SearchV1';
+import {routes} from '../../../../constants';
+import {NavigationService} from '../../../../navigation';
+import {ComicType} from '../../../../redux';
+import NoSearch from './components/NoSearch';
+import {useSearch} from './hook/useSearch.hook';
+import useStyles from './styles';
 const Search = () => {
-  const dispatch = useAppDispatch();
-  const dataComic = useAppSelector(getListComic);
-  const dataTopic = useAppSelector(getListTopic);
-  const dataComicDetail = useAppSelector(getDetailComic);
-  const dataByTopic = useAppSelector(getDataByTopic);
-
-  const dataChapter = useAppSelector(getDataAllChapter);
-
-  const dataDetailChapter = useAppSelector(getDataDetailChapter);
-
   const styles = useStyles();
-  const [search, setSearch] = useState('');
 
-  const handlePressSearch = () => {
-    NavigationService.navigate(routes.TOPICS);
-  };
-  const handlePress = (id: string) => {
-    dispatch(ComicActions.getDetailComic(id));
-  };
+  const {
+    data,
+    handleGridIconPress,
+    handleListIconPress,
+    isLoading,
+    loadMoreComic,
+    numCols,
+    onContentSizeChange,
+    onPressBackIcon,
+    onPressSearch,
+    onSearchChange,
+
+    setHightView,
+
+    search,
+    setFilterArray,
+    setLowView,
+    sizeContent,
+    highRate,
+    setHighRate,
+    lowRate,
+    setLowRate,
+  } = useSearch();
+
+  const listFooterComponent = useCallback(() => {
+    return (
+      <ActivityIndicator
+        style={{marginBottom: 10}}
+        size={'large'}
+        color={'#F89300'}
+      />
+    );
+  }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.searchContainer}>
-        <TouchableOpacity onPress={() => backScreen()}>
-          <Icon
-            name="arrow-back"
-            type="ionicon"
-            size={24}
-            color={styles.backIcon.color}
-          />
-        </TouchableOpacity>
-        <View style={styles.search}>
-          <SearchCustom
-            setValue={setSearch}
-            value={search}
-            onPress={handlePressSearch}
-          />
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <View style={styles.searchContainer}>
+          <TouchableOpacity onPress={onPressBackIcon} style={styles.iconBack}>
+            <Icon name="arrow-back" type="ionicon" />
+          </TouchableOpacity>
+          <View style={styles.search}>
+            <SearchCustomV1
+              value={search}
+              onChangeText={onSearchChange}
+              onSubmitEditing={onPressSearch}
+              autoFocus={true}
+            />
+          </View>
+          <TouchableOpacity
+            style={styles.btnFilters}
+            onPress={() => {
+              NavigationService.navigate(routes.FILTERS, {
+                setHightView,
+                setLowView,
+                setFilterArray,
+                setLowRate,
+                setHighRate,
+              });
+              Keyboard.dismiss();
+            }}>
+            <Icon
+              name="options-outline"
+              type="ionicon"
+              size={24}
+              color={styles.colorFilters.color}
+            />
+          </TouchableOpacity>
         </View>
+
+        {data?.length === 0 ? (
+          <NoSearch />
+        ) : (
+          <FlatList
+            showsVerticalScrollIndicator
+            ListFooterComponent={
+              isLoading ? isLoading && listFooterComponent : undefined
+            }
+            ListHeaderComponent={() => {
+              return (
+                <HeaderCustom
+                  titleStyle={styles.textTitle}
+                  title="Search comic"
+                  rightIconMiddle={{
+                    name: 'grid-outline',
+                    type: 'ionicon',
+                    color: numCols === 3 ? '#F89300' : '',
+                  }}
+                  rightIconRight={{
+                    name: 'list-circle-outline',
+                    type: 'ionicon',
+                    color: numCols === 1 ? '#F89300' : '',
+                  }}
+                  onPressRightIconMiddle={handleGridIconPress}
+                  onPressRightIconRight={handleListIconPress}
+                />
+              );
+            }}
+            renderItem={({item, index}: {item: ComicType; index: number}) => (
+              <ComicItem
+                data={item}
+                viewStyle={numCols == 1 ? styles.comicItem : null}
+                imageStyle={numCols == 1 ? styles.imgComic : null}
+                contentStyle={numCols == 1 ? styles.content : null}
+                topicStyle={numCols == 1 ? styles.topicsContainer : null}
+              />
+            )}
+            onContentSizeChange={onContentSizeChange}
+            onScroll={({nativeEvent}) => {
+              const {contentOffset, contentSize, layoutMeasurement} =
+                nativeEvent;
+              const numberOfPixelsFromBottomThreshold = 100;
+              const isNearBottom =
+                contentOffset.y + layoutMeasurement.height >=
+                sizeContent - numberOfPixelsFromBottomThreshold;
+              console.log(
+                'sỉze scroll',
+                contentOffset.y + layoutMeasurement.height,
+              );
+              console.log('sỉze content', sizeContent);
+
+              if (isNearBottom) {
+                loadMoreComic();
+              }
+            }}
+            data={data}
+            numColumns={3}
+            columnWrapperStyle={
+              numCols === 3
+                ? {gap: 5, paddingHorizontal: 16}
+                : {flexDirection: 'column'}
+            }
+          />
+        )}
       </View>
-      <TouchableOpacity
-        onPress={() =>
-          dispatch(
-            ComicActions.getListChapter('2b79b1a0-9251-410b-9db5-6ebc7e700c18'),
-          )
-        }>
-        <Text style={{fontSize: 40}}>GETCHAPTER</Text>
-      </TouchableOpacity>
-      {/* <TouchableOpacity onPress={() => dispatch(TopicActions.getListTopic())}>
-        <Text style={{fontSize: 40}}>GETTOPIC</Text>
-      </TouchableOpacity> */}
-      <Text>{JSON.stringify(dataChapter)}</Text>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
